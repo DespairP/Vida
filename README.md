@@ -8,6 +8,6 @@
 
 Credits:DespairP,thousvillages
 
-## 协议
+## 开源协议
 图片素材解释权归thousvillages所有
 部分代码来自于教程或模组，遵守Mit协议
