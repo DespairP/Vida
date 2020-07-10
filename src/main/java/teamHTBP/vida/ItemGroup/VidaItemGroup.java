@@ -3,6 +3,8 @@ package teamHTBP.vida.ItemGroup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import teamHTBP.vida.Item.ItemLoader;
+
 
 public class VidaItemGroup extends ItemGroup {
     public VidaItemGroup() {
@@ -11,6 +13,6 @@ public class VidaItemGroup extends ItemGroup {
 
     @Override
     public ItemStack createIcon() {
-        return new ItemStack(Items.BEEF);
+        return new ItemStack(ItemLoader.vidawand.get());
     }
 }

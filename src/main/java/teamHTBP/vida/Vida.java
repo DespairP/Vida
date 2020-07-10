@@ -2,7 +2,10 @@ package teamHTBP.vida;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import teamHTBP.vida.teamHTBP.vida.Item.ItemLoader;
+import teamHTBP.vida.Block.BlockLoader;
+import teamHTBP.vida.Item.ItemLoader;
+import teamHTBP.vida.particle.ParticleLoader;
+
 
 /**
  * @version 0.0.1
@@ -22,6 +25,8 @@ public class Vida {
    public Vida(){
     //TODO
       ItemLoader.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+      BlockLoader.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+      ParticleLoader.PARTICLE.register(FMLJavaModLoadingContext.get().getModEventBus());
    }
 
 
