@@ -6,6 +6,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import teamHTBP.vida.Vida;
 
+/**
+ * 注册方块类
+ *
+ * **/
 public class BlockLoader {
     public final static DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, Vida.modId);
     public static RegistryObject<Block> logVida = BLOCKS.register("logvida",() -> new BlockLogVida());
