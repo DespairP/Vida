@@ -5,6 +5,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import teamHTBP.vida.Block.BlockLoader;
 import teamHTBP.vida.Item.ItemLoader;
 import teamHTBP.vida.particle.ParticleLoader;
+import teamHTBP.vida.worldGen.GenLoader;
 
 
 /**
@@ -27,6 +28,7 @@ public class Vida {
       ItemLoader.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
       BlockLoader.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
       ParticleLoader.PARTICLE.register(FMLJavaModLoadingContext.get().getModEventBus());
+      GenLoader.FEATURES.register(FMLJavaModLoadingContext.get().getModEventBus());
    }
 
 
