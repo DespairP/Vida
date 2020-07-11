@@ -18,32 +18,51 @@ import net.minecraft.world.World;
 
 import java.util.stream.Stream;
 
+/**
+ * 树叶粒子类
+ * 继承SpriteTexturedParticle
+ * @Version 0.0.1
+ * **/
 public class LeafParticle extends SpriteTexturedParticle  {
+      //掉到地面上不会马上消失,所以设置一个延迟时间
       private int offsetTime = 0;
+      //最大延迟时间为20
+      private final int MAX_OFFSETTIME = 20;
+
       private boolean collidedY;
 
 
     protected LeafParticle(World worldIn, double posXIn, double posYIn, double posZIn,double xSpeedIn, double ySpeedIn, double zSpeedIn) {
         super(worldIn, posXIn, posYIn, posZIn, xSpeedIn,  ySpeedIn,  zSpeedIn);
+        //存在时间100帧
         maxAge = 100;
+        //粒子大小x0.5
         particleScale = 0.5F;
         motionX = xSpeedIn;
+        //Y轴下落速度为0.2
         motionY = -0.2f;
         motionZ = zSpeedIn;
+        //是否有碰撞体积
         this.canCollide = true;
+        //设置透明度，不透明为1
         this.setAlphaF(1.0f);
 
 
     }
 
 
-
+    /*
+    * 渲染粒子
+    * 复制自TexturedParticle
+    * */
     @Override
     public void renderParticle(IVertexBuilder buffer, ActiveRenderInfo renderInfo, float partialTicks) {
         Vec3d vec3d = renderInfo.getProjectedView();
         float f = (float)(MathHelper.lerp((double)partialTicks, this.prevPosX, this.posX) - vec3d.getX());
         float f1 = (float)(MathHelper.lerp((double)partialTicks, this.prevPosY, this.posY) - vec3d.getY());
         float f2 = (float)(MathHelper.lerp((double)partialTicks, this.prevPosZ, this.posZ) - vec3d.getZ());
+
+
         Quaternion quaternion;
         if (this.particleAngle == 0.0F) {
             quaternion = renderInfo.getRotation();
@@ -78,25 +97,30 @@ public class LeafParticle extends SpriteTexturedParticle  {
         buffer.pos((double)avector3f[3].getX(), (double)avector3f[3].getY(), (double)avector3f[3].getZ()).tex(f7, f6).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
     }
 
-
+    /*以透明渲染方式进行*/
     @Override
     public IParticleRenderType getRenderType() {
         return IParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
+    /*每一帧会运行此方法，主要是设置一些粒子的可变参数*/
     @Override
     public void tick() {
         super.tick();
-        if(this.onGround && offsetTime < 20){
+        //如果在地上的话，且还没过最大延迟时间，延迟时间++
+        if(this.onGround && offsetTime < MAX_OFFSETTIME){
               offsetTime ++;
         }else if(this.onGround){
+            //到达最大延迟时间，开始减小透明度
             this.particleAlpha -= 0.1F;
+            //透明度达到负值粒子又会出现，所以加个检测机制
             if(this.particleAlpha <= 0)
                 this.particleScale = 0;
         }
     }
 
 
+    /*从TexturedParticle复制的方法*/
     @Override
     public void move(double x, double y, double z) {
         if (!this.collidedY) {
