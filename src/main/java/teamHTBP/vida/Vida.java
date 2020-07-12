@@ -1,10 +1,12 @@
 package teamHTBP.vida;
 
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import teamHTBP.vida.Block.BlockLoader;
 import teamHTBP.vida.Item.ItemLoader;
 import teamHTBP.vida.particle.ParticleLoader;
+import teamHTBP.vida.worldGen.BiomeGenLoader;
 import teamHTBP.vida.worldGen.GenLoader;
 
 
@@ -29,6 +31,7 @@ public class Vida {
       BlockLoader.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
       ParticleLoader.PARTICLE.register(FMLJavaModLoadingContext.get().getModEventBus());
       GenLoader.FEATURES.register(FMLJavaModLoadingContext.get().getModEventBus());
+      MinecraftForge.EVENT_BUS.register(BiomeGenLoader.class);
    }
 
 

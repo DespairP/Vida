@@ -13,5 +13,6 @@ public class BlockLeavesVida extends LeavesBlock {
         //noSolid渲染碰撞材质
         super(Properties.create(Material.LEAVES).notSolid().sound(SoundType.GROUND));
         this.setDefaultState(this.stateContainer.getBaseState());
+
     }
 }
