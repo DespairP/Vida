@@ -3,8 +3,11 @@ package teamHTBP.vida;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.Block.BlockLoader;
 import teamHTBP.vida.Item.ItemLoader;
+import teamHTBP.vida.TileEntity.TileEntityLoader;
 import teamHTBP.vida.particle.ParticleLoader;
 import teamHTBP.vida.worldGen.BiomeGenLoader;
 import teamHTBP.vida.worldGen.GenLoader;
@@ -19,7 +22,7 @@ import teamHTBP.vida.worldGen.GenLoader;
  * **/
 @Mod("vida")
 public class Vida {
-
+    public  static  final Logger LOGGER = LogManager.getLogger();
    //mod的ID字符串，用于材质包获取id，或其他用途
    public static final  String modId = "vida";
 
@@ -31,7 +34,7 @@ public class Vida {
       BlockLoader.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
       ParticleLoader.PARTICLE.register(FMLJavaModLoadingContext.get().getModEventBus());
       GenLoader.FEATURES.register(FMLJavaModLoadingContext.get().getModEventBus());
-      MinecraftForge.EVENT_BUS.register(BiomeGenLoader.class);
+      TileEntityLoader.TILE_ENTITY_DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
    }
 
 

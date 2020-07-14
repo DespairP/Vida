@@ -6,6 +6,8 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import teamHTBP.vida.Block.crop.BlockSaplingVida;
+import teamHTBP.vida.Block.decoration.BlockVidaPlank;
+import teamHTBP.vida.Block.function.BlockPurfiedCauldron;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.worldGen.VidaTree;
 
@@ -18,5 +20,8 @@ public class BlockLoader {
     public static RegistryObject<Block> logVida = BLOCKS.register("logvida",() -> new BlockLogVida());
     public static RegistryObject<Block> leavesVida = BLOCKS.register("leavesvida",() -> new BlockLeavesVida());
     public static RegistryObject<Block> saplingVida = BLOCKS.register("saplingvida",() -> new BlockSaplingVida());
+    public static RegistryObject<Block> purfiedCauldron = BLOCKS.register("purfiedcauldron",() -> new BlockPurfiedCauldron());
+    public static RegistryObject<Block> plankVida = BLOCKS.register("plankvida",() -> new BlockVidaPlank());
+
 
 }

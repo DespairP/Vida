@@ -15,7 +15,7 @@ public class VidaTree extends Tree {
     public static final TreeFeatureConfig VIDATREE = (new TreeFeatureConfig.Builder(
             new SimpleBlockStateProvider(BlockLoader.logVida.get().getDefaultState()),
             new SimpleBlockStateProvider(BlockLoader.leavesVida.get().getDefaultState()),
-            new BlobFoliagePlacer(3,0))).baseHeight(10).build();
+            new BlobFoliagePlacer(3,0))).foliageHeight(3).heightRandA(2).baseHeight(10).build();
     @Nullable
     @Override
     protected ConfiguredFeature<TreeFeatureConfig, ?> getTreeFeature(Random randomIn, boolean p_225546_2_) {

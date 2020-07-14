@@ -23,32 +23,9 @@ public class GenVidaTree extends AbstractTreeFeature<TreeFeatureConfig> {
 
     }
 
-    protected boolean hasRoom(IWorldGenerationBaseReader worldIn, BlockPos leavesPos, int height){
-        boolean flag = true;
-        if (leavesPos.getY() >= 1 && leavesPos.getY() + height + 1 <= worldIn.getMaxHeight()) {
-            for(int i = 0; i <= 1 + height; ++i) {
-                int j = 2;
-                if (i == 0) {
-                    j = 1;
-                } else if (i >= 1 + height - 2) {
-                    j = 2;
-                }
-
-                for(int k = -j; k <= j && flag; ++k) {
-                    for(int l = -j; l <= j && flag; ++l) {
-                        if (leavesPos.getY() + i < 0 || leavesPos.getY() + i >= worldIn.getMaxHeight() || !canBeReplacedByLogs(worldIn, leavesPos.add(k, i, l))) {
-                            flag = false;
-                        }
-                    }
-                }
-            }
-
-            return flag;
-        } else {
-            return false;
-        }
+    protected boolean hasRoom(IWorldGenerationReader world, BlockPos pos, int height, BaseTreeFeatureConfig config) {
+        return this.isSpaceAt(world, pos, height) && this.validSoil(world, pos, config.getSapling());
     }
-
     //生成原木
     @Override
     protected boolean func_227216_a_(IWorldGenerationReader p_227216_1_, Random p_227216_2_, BlockPos p_227216_3_, Set<BlockPos> p_227216_4_, MutableBoundingBox p_227216_5_, BaseTreeFeatureConfig p_227216_6_) {
@@ -155,13 +132,57 @@ public class GenVidaTree extends AbstractTreeFeature<TreeFeatureConfig> {
     }
 
 
+
+    /**----  ----**/
+    /**
+     * returns whether or not there is space for a tree to grow at a certain position
+     */
+    private boolean isSpaceAt(IWorldGenerationBaseReader worldIn, BlockPos leavesPos, int height) {
+        boolean flag = true;
+        if (leavesPos.getY() >= 1 && leavesPos.getY() + height + 1 <= worldIn.getMaxHeight()) {
+            for(int i = 0; i <= 1 + height; ++i) {
+                int j = 2;
+                if (i == 0) {
+                    j = 1;
+                } else if (i >= 1 + height - 2) {
+                    j = 2;
+                }
+
+                for(int k = -j; k <= j && flag; ++k) {
+                    for(int l = -j; l <= j && flag; ++l) {
+                        if (leavesPos.getY() + i < 0 || leavesPos.getY() + i >= worldIn.getMaxHeight() || !canBeReplacedByLogs(worldIn, leavesPos.add(k, i, l))) {
+                            flag = false;
+                        }
+                    }
+                }
+            }
+
+            return flag;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean validSoil(IWorldGenerationReader worldIn, BlockPos pos, net.minecraftforge.common.IPlantable sapling) {
+        BlockPos blockpos = pos.down();
+        if (isSoil(worldIn, blockpos, sapling) && pos.getY() >= 2) {
+            setDirtAt(worldIn, blockpos, pos);
+            setDirtAt(worldIn, blockpos.east(), pos);
+            setDirtAt(worldIn, blockpos.south(), pos);
+            setDirtAt(worldIn, blockpos.south().east(), pos);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
     //生成树结构
     @Override
     protected boolean place(IWorldGenerationReader generationReader, Random rand, BlockPos positionIn, Set<BlockPos> Set, Set<BlockPos> p_225557_5_, MutableBoundingBox boundingBoxIn, TreeFeatureConfig configIn) {
-        System.out.println("生成！");
         int height = rand.nextInt(3) + 11;
         int baseheight = 4;
-        if(!this.hasRoom(generationReader,positionIn,15))
+        if(!this.hasRoom(generationReader,positionIn,10,configIn))
         {
             return false;
         }else{
