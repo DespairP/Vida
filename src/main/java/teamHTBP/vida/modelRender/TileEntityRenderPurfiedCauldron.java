@@ -31,6 +31,12 @@ public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEnti
 
     private static final float MIN_HEIGHT = 0.5625f;
     private static final float MAX_HEIGHT = 0.78125f;
+    private float floating = 0;
+
+    private  float rPlus = 0;
+    private  float gPlus = 0;
+    private  float bPlus = 0;
+
 
 
     public TileEntityRenderPurfiedCauldron(TileEntityRendererDispatcher rendererDispatcherIn) {
@@ -66,16 +72,25 @@ public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEnti
 
             int light = 15728880;
 
-            float a = 1.0F;
+
+            float a = 0.95F;
             float r = (color >> 16 & 0xFF) / 255.0F;
             float g = (color >> 8 & 0xFF) / 255.0F;
             float b = (color & 0xFF) / 255.0F;
 
-            //红：13、254、202
-            //蓝：173、214、12
-            //绿：173、24、142
-            //赫：173、214、142
-            //黄金：22、65、142
+
+            if(changeColor(tileEntityIn, r*255, g*255, b*255)) {
+            r=rPlus/ 255.0F;
+            g=gPlus/ 255.0f;
+            b=bPlus/255.0f;
+            }else{
+                rPlus = 63;
+                gPlus = 118;
+                bPlus = 228;
+            }
+
+
+
 
             Matrix4f matrix4f = matrixStackIn.getLast().getMatrix();
 
@@ -98,14 +113,28 @@ public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEnti
 
         if(!tileEntityIn.meltItem.isEmpty()) {
             matrixStackIn.push();
-            matrixStackIn.translate(0.5f, 0.7f, 0.75f);
+            double floatingLevel = 0.1 * Math.sin(floating);
+            matrixStackIn.translate(0.5f, 1.3f + floatingLevel, 0.55f);
             matrixStackIn.scale(0.6f, 0.6f, 0.6f);
-            matrixStackIn.rotate(new Quaternion(32, 0, 0, true));
+
+            matrixStackIn.rotate(new Quaternion(32 , 0, 0, true));
             ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
 
             IBakedModel ibakedmodel = itemRenderer.getItemModelWithOverrides(tileEntityIn.meltItem, tileEntityIn.getWorld(), null);
             itemRenderer.renderItem(tileEntityIn.meltItem, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+
+            if(floating >= 2*Math.PI){
+                floating = 0;
+            }else {
+                floating += 0.01;
+            }
             matrixStackIn.pop();
+        }
+
+        if(tileEntityIn.element == 0){
+            rPlus = 0;
+            gPlus = 0;
+            bPlus = 0;
         }
     }
 
@@ -117,6 +146,39 @@ public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEnti
         return fluid.getAttributes().getColor();
     }
 
-
+    private boolean changeColor(TileEntityPurfiedCauldron tileEntityIn,float r,float g,float b){
+        int element = tileEntityIn.element;
+        int container = tileEntityIn.container < 5000?tileEntityIn.container:5000;
+        float level = container / 5000.0f;
+        switch (element){
+            case 1:
+                    rPlus = r + (255-r) * level;
+                    gPlus = g + (243-g) * level;
+                    bPlus = b + (109-b) * level;
+                return true;
+            case 2:
+                   rPlus = r + (0-r) * level;
+                   gPlus = g + (214-g) * level;
+                   bPlus = b + (24-b) * level;
+                 return true;
+            case 3:
+                rPlus = r + (0-r) * level;
+                gPlus = g + (237-g) * level;
+                bPlus = b + (255-b) * level;
+                return true;
+            case 4:
+                rPlus = r + (255-r) * level;
+                gPlus = g + (0-g) * level;
+                bPlus = b + (8-b) * level;
+                return true;
+            case 5:
+                rPlus = r + (153-r) * level;
+                gPlus = g + (143-g) * level;
+                bPlus = b + (79 -b) * level;
+                return  true;
+            default:
+                return false;
+        }
+    }
 
 }

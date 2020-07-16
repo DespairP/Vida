@@ -28,6 +28,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.util.Constants;
 import teamHTBP.vida.TileEntity.TileEntityPurfiedCauldron;
+import teamHTBP.vida.particle.CubeParticleData;
+import teamHTBP.vida.particle.CubeParticleType;
+import teamHTBP.vida.particle.ParticleLoader;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -83,7 +86,7 @@ public class BlockPurfiedCauldron extends Block {
 
     @Override
     public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
-        if(worldIn.getBlockState(pos.down()).getBlock() == Blocks.FIRE && !worldIn.isRemote){
+        if(worldIn.getBlockState(pos.down()).getBlock() == Blocks.FIRE|| worldIn.getBlockState(pos.down()).getBlock() == Blocks.LAVA && !worldIn.isRemote){
             TileEntityPurfiedCauldron entity = (TileEntityPurfiedCauldron) worldIn.getTileEntity(pos);
             entity.isFire = true;
             worldIn.notifyBlockUpdate(pos, state, state, Constants.BlockFlags.BLOCK_UPDATE);
@@ -95,7 +98,28 @@ public class BlockPurfiedCauldron extends Block {
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
             TileEntityPurfiedCauldron entity = (TileEntityPurfiedCauldron) worldIn.getTileEntity(pos);
             if(entity!=null){
+                if(!entity.meltItem.isEmpty() && rand.nextDouble()>=0.65)
                //生成粒子
+                {
+                   double speedX =rand.nextBoolean()? 0 + rand.nextFloat()/1000.0F : 0 - rand.nextFloat()/1000.0F;
+                   double speedY =-0.025+rand.nextFloat()/1000f;
+                   double speedZ =rand.nextBoolean()? 0  + rand.nextFloat()/1000.0f :0  - rand.nextFloat()/1000.0f;
+                   double posX = rand.nextBoolean()? pos.getX() + 0.5f + rand.nextFloat()/4: pos.getX() + 0.5f - rand.nextFloat()/4;
+                   double posY = rand.nextBoolean()? pos.getY() + 1.2F + rand.nextFloat()/4: pos.getY() + 1.2F - rand.nextFloat()/4;
+                   double posZ = rand.nextBoolean()? pos.getZ() + 0.5f  + rand.nextFloat()/4:pos.getZ() + 0.5f - rand.nextFloat()/4;
+                   float r = 1;
+                   float g = 1;
+                   float b = 1;
+                   switch (entity.element){
+                       case 1: r = 255; g = 255; b = 200;break;
+                       case 2: r = 73 ; g = 175; b = 92;break;
+                       case 3: r = 73 ; g = 203; b = 255;break;
+                       case 4: r = 255; g = 30 ; b = 43 ;break;
+                       case 5: r = 186; g = 184; b = 111;break;
+                   }
+                worldIn.addParticle(new CubeParticleData( speedX, speedY,speedZ , r, g, b ,0.02f), posX, posY, posZ, 0, -0.03, 0);
+
+                }
             }
 
     }

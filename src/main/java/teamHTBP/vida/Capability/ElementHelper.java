@@ -23,7 +23,12 @@ public class ElementHelper {
     public ElementHelper(){
         map.put(Items.STONE, new mapItem(1,10,"stone"));
         map.put(Items.DIAMOND, new mapItem(1,10000,"diamond"));
-
+        map.put(Items.BEEF, new mapItem(3,10000,"diamond"));
+        map.put(Items.BONE, new mapItem(3,10000,"diamond"));
+        map.put(Items.DIRT, new mapItem(5,10000,"dirt"));
+        map.put(Items.GOLD_INGOT, new mapItem(1,10000,"diamond"));
+        map.put(Items.OAK_WOOD, new mapItem(2,10000,"diamond"));
+        map.put(Items.NETHER_WART, new mapItem(4,10000,"diamond"));
     }
 
     //获得当前Containing

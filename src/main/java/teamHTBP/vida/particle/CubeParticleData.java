@@ -12,10 +12,23 @@ public class CubeParticleData implements IParticleData {
     private double speedX;
     private double speedY;
     private double speedZ;
+    private float scale;
+    private float r;
+    private float g;
+    private float b;
     public CubeParticleData(double speedX,double speedY,double speedZ){
         this.speedX = speedX;
         this.speedY = speedY;
         this.speedZ = speedZ;
+    }
+    public CubeParticleData(double speedX,double speedY,double speedZ,float r,float g,float b,float scale){
+        this.speedX = speedX;
+        this.speedY = speedY;
+        this.speedZ = speedZ;
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        this.scale = scale;
     }
     public static final IDeserializer<CubeParticleData> DESERIALIZER = new IDeserializer<CubeParticleData>() {
 
@@ -48,6 +61,10 @@ public class CubeParticleData implements IParticleData {
         buffer.writeDouble(this.speedX);
         buffer.writeDouble(this.speedY);
         buffer.writeDouble(this.speedZ);
+        buffer.writeFloat(this.r);
+        buffer.writeFloat(this.g);
+        buffer.writeFloat(this.b);
+        buffer.writeFloat(this.scale);
     }
 
     @Override
@@ -68,6 +85,30 @@ public class CubeParticleData implements IParticleData {
                  default:
                      return 0;
         }
-
     }
+
+    //获得r,g,b,scale
+    public float getRGBS(int type) {
+        switch (type) {
+            case 0:
+                return  r;
+            case 1:
+                return  g;
+            case 2:
+                return b;
+            case 3:
+                return scale;
+            default:
+                return 0;
+        }
+    }
+
+    //得到RGBscale是否存在
+    public boolean containRGBS() {
+        if(r == 0 && g==0 && b == 0 & scale==0){
+            return false;
+        }
+        return true;
+    }
+
 }

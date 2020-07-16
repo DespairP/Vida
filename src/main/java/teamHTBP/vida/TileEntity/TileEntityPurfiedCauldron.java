@@ -1,5 +1,7 @@
 package teamHTBP.vida.TileEntity;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -121,7 +123,7 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
     @Override
     public void tick() {
         if(!world.isRemote){
-            System.out.println(containing);
+
             //如果缓冲值>0,先消耗缓冲值
             if(this.isWater && this.isFire){
             if(this.containing > 0){
@@ -136,6 +138,9 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
             generateFaintLight();
             world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 3);
         }
+            if(containing == 0){
+                meltItem = ItemStack.EMPTY;
+            }
         }
     }
 
@@ -186,7 +191,10 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
         this.containing = 0;
         this.element = 0;
         this.isWater = false;
-        this.isFire = false;
+        if(world.getBlockState(pos.down()).getBlock() == Blocks.FIRE || world.getBlockState(pos.down()).getBlock() == Blocks.LAVA )
+        this.isFire = true;
+        else
+            this.isFire = false;
         this.meltItem = ItemStack.EMPTY;
         markDirty();
     }
