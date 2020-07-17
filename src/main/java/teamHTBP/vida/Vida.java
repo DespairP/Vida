@@ -6,6 +6,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.Block.BlockLoader;
+import teamHTBP.vida.Entity.EntityLoader;
 import teamHTBP.vida.Item.ItemLoader;
 import teamHTBP.vida.TileEntity.TileEntityLoader;
 import teamHTBP.vida.particle.ParticleLoader;
@@ -35,6 +36,7 @@ public class Vida {
       ParticleLoader.PARTICLE.register(FMLJavaModLoadingContext.get().getModEventBus());
       GenLoader.FEATURES.register(FMLJavaModLoadingContext.get().getModEventBus());
       TileEntityLoader.TILE_ENTITY_DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
+      EntityLoader.ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
    }
 
 

@@ -21,6 +21,7 @@ import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeColors;
 import net.minecraftforge.client.model.data.EmptyModelData;
@@ -117,7 +118,12 @@ public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEnti
             matrixStackIn.translate(0.5f, 1.3f + floatingLevel, 0.55f);
             matrixStackIn.scale(0.6f, 0.6f, 0.6f);
 
-            matrixStackIn.rotate(new Quaternion(32 , 0, 0, true));
+            TileEntityRendererDispatcher dispatcher = this.renderDispatcher;
+            Quaternion quaternion = dispatcher.renderInfo.getRotation();
+            float f3 = MathHelper.lerp(partialTicks, 0, 0);
+            quaternion.multiply(Vector3f.XP.rotation(f3));
+
+            matrixStackIn.rotate(quaternion);
             ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
 
             IBakedModel ibakedmodel = itemRenderer.getItemModelWithOverrides(tileEntityIn.meltItem, tileEntityIn.getWorld(), null);
@@ -153,8 +159,8 @@ public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEnti
         switch (element){
             case 1:
                     rPlus = r + (255-r) * level;
-                    gPlus = g + (243-g) * level;
-                    bPlus = b + (109-b) * level;
+                    gPlus = g + (255-g) * level;
+                    bPlus = b + (137-b) * level;
                 return true;
             case 2:
                    rPlus = r + (0-r) * level;
