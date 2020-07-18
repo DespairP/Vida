@@ -12,6 +12,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
 import teamHTBP.vida.Capability.ElementHelper;
+import teamHTBP.vida.Entity.EntityFaintLight;
+import teamHTBP.vida.Entity.EntityLoader;
 
 import javax.annotation.Nullable;
 
@@ -196,6 +198,9 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
         else
             this.isFire = false;
         this.meltItem = ItemStack.EMPTY;
+        EntityFaintLight entityFaintLight = new EntityFaintLight(EntityLoader.faintLight.get(), world,element);
+        entityFaintLight.setPosition(pos.getX(), pos.up().getY(),pos.getZ()+0.5);
+        this.world.addEntity(entityFaintLight);
         markDirty();
     }
 }

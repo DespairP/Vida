@@ -3,7 +3,6 @@ package teamHTBP.vida.Entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.item.ItemFrameEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
@@ -19,13 +18,18 @@ public class EntityFaintLight extends Entity {
     public EntityFaintLight(EntityType<?> entityTypeIn, World worldIn) {
         super(entityTypeIn, worldIn);
     }
+    public EntityFaintLight(EntityType<?> entityTypeIn, World worldIn,int type) {
+        super(entityTypeIn, worldIn);this.type = type;
+    }
     private static final Logger PRIVATE_LOGGER = LogManager.getLogger();
     private static final DataParameter<Integer> TYPE = EntityDataManager.createKey(EntityFaintLight.class, DataSerializers.VARINT);
-
+    private int type = 0;
+    private int ticks = 0;
+    public int meta  =  0;
 
     @Override
     protected void registerData() {
-          this.dataManager.register(TYPE,0);
+          this.dataManager.register(TYPE,type);
     }
 
     @Override
@@ -49,10 +53,19 @@ public class EntityFaintLight extends Entity {
         return this.dataManager.get(TYPE);
     }
 
+    public void setFaintLightType(int type){
+        this.dataManager.set(TYPE, type);
+    }
+
 
     @Override
     public void tick() {
         super.tick();
+
+            this.meta = this.meta + 1 < 29?this.meta + 1 : 0 ;
+
+
+
     }
 
 }

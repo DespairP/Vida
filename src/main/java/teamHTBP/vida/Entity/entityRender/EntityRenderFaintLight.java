@@ -10,16 +10,12 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import org.lwjgl.opengl.GL11;
 import teamHTBP.vida.Entity.EntityFaintLight;
 import teamHTBP.vida.Entity.entityModel.EntityModelFaintLight;
 import teamHTBP.vida.Vida;
 
 public class EntityRenderFaintLight extends EntityRenderer<EntityFaintLight> {
     private EntityModel<EntityFaintLight> model;
-    private int prevCounter = 0;
-    private int currentCounter  = 0;
-    private int meta = 0;
 
 
     protected EntityRenderFaintLight(EntityRendererManager renderManager) {
@@ -29,39 +25,44 @@ public class EntityRenderFaintLight extends EntityRenderer<EntityFaintLight> {
 
     @Override
     public ResourceLocation getEntityTexture(EntityFaintLight entity) {
-        return new ResourceLocation(Vida.modId, "textures/model/fire_"+ meta  +".png");
+        switch(entity.getFaintLightType()){
+            case 1:
+                return new ResourceLocation(Vida.modId, "textures/model/faintlight/gold/fire_"+entity.meta +".png");
+            case 2:
+                return new ResourceLocation(Vida.modId, "textures/model/faintlight/gold/fire_"+entity.meta +".png");
+            case 3:
+                return new ResourceLocation(Vida.modId, "textures/model/faintlight/gold/fire_"+entity.meta +".png");
+            case 4:
+                return new ResourceLocation(Vida.modId, "textures/model/faintlight/gold/fire_"+entity.meta +".png");
+            case 5:
+                return new ResourceLocation(Vida.modId, "textures/model/faintlight/gold/fire_"+entity.meta +".png");
+        }
+        return new ResourceLocation(Vida.modId, "textures/model/faintlight/gold/fire_"+entity.meta +".png");
     }
 
 
-    public ResourceLocation getEntityTexture(EntityFaintLight entity,int meta) {
-        return new ResourceLocation(Vida.modId, "textures/model/fire_"+ meta  +".png");
-    }
+
 
     public void render(EntityFaintLight entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
         //super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
         matrixStackIn.push();
-
-        Quaternion quaternion = this.renderManager.info.getRotation();
-        currentCounter += 1;
-        int counter = 0;
-           if(currentCounter<=20) {
-                   counter =(int)( currentCounter + (currentCounter - prevCounter) * partialTicks);
-               }
-           else {
-                   currentCounter=0;
-               }
-        prevCounter =currentCounter;
-           if(counter == 20){
-               this.meta ++;
-               if(this.meta > 29) this.meta = 0;
-           }
-        float f3 = MathHelper.lerp(partialTicks, 0, 0);
-        quaternion.multiply(Vector3f.ZN.rotation(f3));
-        RenderHelper.disableStandardItemLighting();
+        Quaternion quaternion = this.getRenderManager().info.getRotation();
+        quaternion.multiply(Vector3f.XP.rotation(0));
+        matrixStackIn.translate(0.6, 0.6, 0);
+        //matrixStackIn.scale(0.5f, 0.5f, 0.5f);
         matrixStackIn.rotate(quaternion);
-        int j = this.getBrightnessForRender(entityIn,partialTicks);
-        IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.getText(this.getEntityTexture(entityIn,meta)));
-        this.model.render(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 0.5F);
+        float r = 1;
+        float g = 1;
+        float b = 1;
+        float a = 1;
+
+        IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.getText(this.getEntityTexture(entityIn)));
+
+
+
+
+        model.render(matrixStackIn, ivertexbuilder,packedLightIn,OverlayTexture.NO_OVERLAY,r,g,b,a/2);
+
         matrixStackIn.pop();
 
     }
