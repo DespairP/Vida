@@ -13,6 +13,6 @@ public class EntityLoader {
     public static RegistryObject<EntityType<EntityFaintLight>> faintLight = ENTITY_TYPES.register("faintlight", () -> {
         return EntityType.Builder.create((EntityType<EntityFaintLight> entityType, World world) -> {
             return new EntityFaintLight(entityType, world);
-        }, EntityClassification.MISC).size(1, 0).build("faintlight");
+        }, EntityClassification.MISC).size(1, 1).build("faintlight");
     });
 }

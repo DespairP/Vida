@@ -21,8 +21,24 @@ public class ItemLoader {
     public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, Vida.modId);
     public static  RegistryObject<Item> itemA = ITEMS.register("item_test", () -> new TestItem());
     public static  RegistryObject<Item> vidawand = ITEMS.register("vidawand",() -> new ItemVidaWand());
-    public static  RegistryObject<Item> elementCore = ITEMS.register("fireelementcore",() -> new ItemElementCore());
     public static  RegistryObject<Item> vidaBranch = ITEMS.register("vidabranch",() -> new ItemVidaBranch());
+
+    public static  RegistryObject<Item> voidElementCore = ITEMS.register("voidelementcore",() -> new ItemElementCoreVoid());
+    public static  RegistryObject<Item> goldElementCore = ITEMS.register("goldelementcore",() -> new ItemElementCore());
+    public static  RegistryObject<Item> woodElementCore = ITEMS.register("woodelementcore",() -> new ItemElementCore());
+    public static  RegistryObject<Item> aquaElementCore = ITEMS.register("aquaelementcore",() -> new ItemElementCore());
+    public static  RegistryObject<Item> fireElementCore = ITEMS.register("fireelementcore",() -> new ItemElementCore());
+    public static  RegistryObject<Item> earthElementCore = ITEMS.register("earthelementcore",() -> new ItemElementCore());
+
+
+
+    public static  RegistryObject<Item> goldFaintLight = ITEMS.register("goldfaintlight",() -> new ItemFaintLight());
+    public static  RegistryObject<Item> woodFaintLight = ITEMS.register("woodfaintlight",() -> new ItemFaintLight());
+    public static  RegistryObject<Item> aquaFaintLight = ITEMS.register("aquafaintlight",() -> new ItemFaintLight());
+    public static  RegistryObject<Item> fireFaintLight = ITEMS.register("firefaintlight",() -> new ItemFaintLight());
+    public static  RegistryObject<Item> earthFaintLight = ITEMS.register("earthfaintlight",() -> new ItemFaintLight());
+
+
     public static  RegistryObject<Item> logVida = ITEMS.register("logvida",() -> new BlockItem(BlockLoader.logVida.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> leavesVida = ITEMS.register("leavesvida",() -> new BlockItem(BlockLoader.leavesVida.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> plankvida = ITEMS.register("plankvida",() -> new BlockItem(BlockLoader.plankVida.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));

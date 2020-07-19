@@ -2,16 +2,19 @@ package teamHTBP.vida.Entity.entityRender;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import teamHTBP.vida.Entity.EntityFaintLight;
 import teamHTBP.vida.Entity.entityModel.EntityModelFaintLight;
+import teamHTBP.vida.Item.ItemLoader;
 import teamHTBP.vida.Vida;
 
 public class EntityRenderFaintLight extends EntityRenderer<EntityFaintLight> {
@@ -29,13 +32,13 @@ public class EntityRenderFaintLight extends EntityRenderer<EntityFaintLight> {
             case 1:
                 return new ResourceLocation(Vida.modId, "textures/model/faintlight/gold/fire_"+entity.meta +".png");
             case 2:
-                return new ResourceLocation(Vida.modId, "textures/model/faintlight/gold/fire_"+entity.meta +".png");
+                return new ResourceLocation(Vida.modId, "textures/model/faintlight/wood/fire_"+entity.meta +".png");
             case 3:
-                return new ResourceLocation(Vida.modId, "textures/model/faintlight/gold/fire_"+entity.meta +".png");
+                return new ResourceLocation(Vida.modId, "textures/model/faintlight/aqua/fire_"+entity.meta +".png");
             case 4:
-                return new ResourceLocation(Vida.modId, "textures/model/faintlight/gold/fire_"+entity.meta +".png");
+                return new ResourceLocation(Vida.modId, "textures/model/faintlight/fire/fire_"+entity.meta +".png");
             case 5:
-                return new ResourceLocation(Vida.modId, "textures/model/faintlight/gold/fire_"+entity.meta +".png");
+                return new ResourceLocation(Vida.modId, "textures/model/faintlight/earth/fire_"+entity.meta +".png");
         }
         return new ResourceLocation(Vida.modId, "textures/model/faintlight/gold/fire_"+entity.meta +".png");
     }
@@ -58,10 +61,7 @@ public class EntityRenderFaintLight extends EntityRenderer<EntityFaintLight> {
 
         IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.getText(this.getEntityTexture(entityIn)));
 
-
-
-
-        model.render(matrixStackIn, ivertexbuilder,packedLightIn,OverlayTexture.NO_OVERLAY,r,g,b,a/2);
+                model.render(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.NO_OVERLAY, r, g, b, a / 2);
 
         matrixStackIn.pop();
 

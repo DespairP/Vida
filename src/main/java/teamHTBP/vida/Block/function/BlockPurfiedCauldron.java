@@ -17,6 +17,8 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -41,6 +43,8 @@ public class BlockPurfiedCauldron extends Block {
 
     public BlockPurfiedCauldron() {
         super(Block.Properties.create(Material.IRON).tickRandomly().notSolid().sound(SoundType.STONE));
+        //TODO 锅的体积
+        //TODO 没有元素投入物品会消失
 
     }
 
@@ -75,6 +79,7 @@ public class BlockPurfiedCauldron extends Block {
                    player.inventory.addItemStackToInventory(new ItemStack(
                            Items.BUCKET, 1));
                    entity.isWater = true;
+                   player.playSound(SoundEvents.BLOCK_BAMBOO_FALL,1.0F,1F);
                    worldIn.notifyBlockUpdate(pos, state, state, Constants.BlockFlags.BLOCK_UPDATE);
                }
             }
@@ -129,7 +134,6 @@ public class BlockPurfiedCauldron extends Block {
     public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
         if(!worldIn.isRemote){
             if(entityIn instanceof ItemEntity){
-                System.out.println("s");
                 TileEntityPurfiedCauldron entity = (TileEntityPurfiedCauldron) worldIn.getTileEntity(pos);
                 ItemStack itemStack = ((ItemEntity)entityIn).getItem();
                 if(entity.setMeltItem(itemStack)){

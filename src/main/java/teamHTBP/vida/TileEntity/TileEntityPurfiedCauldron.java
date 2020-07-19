@@ -183,6 +183,10 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
     //生成微光
     public void generateFaintLight(){
         if (container>MAX_CONTAINER - 1){
+            EntityFaintLight entityFaintLight = new EntityFaintLight(EntityLoader.faintLight.get(), world, element);
+            entityFaintLight.setPosition(pos.getX(), pos.up().getY(),pos.getZ()+0.5);
+            entityFaintLight.setFaintLightType(element);
+            this.world.addEntity(entityFaintLight);
             clear();
         }
     }
@@ -198,9 +202,6 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
         else
             this.isFire = false;
         this.meltItem = ItemStack.EMPTY;
-        EntityFaintLight entityFaintLight = new EntityFaintLight(EntityLoader.faintLight.get(), world,element);
-        entityFaintLight.setPosition(pos.getX(), pos.up().getY(),pos.getZ()+0.5);
-        this.world.addEntity(entityFaintLight);
         markDirty();
     }
 }
