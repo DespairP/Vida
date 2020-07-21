@@ -3,6 +3,8 @@ package teamHTBP.vida.Capability;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
 
 import java.util.HashMap;
 
@@ -12,11 +14,11 @@ import java.util.HashMap;
  * **/
 public class ElementHelper {
     //五元素数值
-    public final int ELEMENT_GOLD = 1;
-    public final int ELEMENT_WOOD = 2;
-    public final int ELEMENT_AQUA = 3;
-    public final int ELEMENT_FIRE = 4;
-    public final int ELEMENT_EARTH = 5;
+    public final static int ELEMENT_GOLD = 1;
+    public final static int ELEMENT_WOOD = 2;
+    public final static int ELEMENT_AQUA = 3;
+    public final static int ELEMENT_FIRE = 4;
+    public final static int ELEMENT_EARTH = 5;
 
     static HashMap<Item,mapItem> map = new HashMap<Item,mapItem>();
 
@@ -40,6 +42,23 @@ public class ElementHelper {
 
     public static int getContainingElement(ItemStack itemStack){
         if(map.containsKey(itemStack.getItem())) return  map.get(itemStack.getItem()).element;
+        return 0;
+    }
+
+
+    public static int getBiomeElement(Biome biome){
+        if(biome == Biomes.PLAINS || biome == Biomes.FOREST || biome == Biomes.BAMBOO_JUNGLE
+        || biome == Biomes.FLOWER_FOREST || biome == Biomes.JUNGLE || biome == Biomes.BIRCH_FOREST ||
+        biome == Biomes.SAVANNA)
+            return ELEMENT_WOOD;
+        else if(biome == Biomes.MOUNTAINS || biome == Biomes.MOUNTAIN_EDGE)
+            return ELEMENT_FIRE;
+        else if(biome == Biomes.OCEAN || biome == Biomes.RIVER || biome == Biomes.SNOWY_TAIGA || biome == Biomes.COLD_OCEAN || biome == Biomes.SNOWY_TUNDRA)
+            return ELEMENT_AQUA;
+        else if(biome == Biomes.ERODED_BADLANDS || biome == Biomes.DARK_FOREST)
+            return ELEMENT_EARTH;
+        else if(biome == Biomes.DESERT || biome == Biomes.DESERT_LAKES)
+            return  ELEMENT_GOLD;
         return 0;
     }
 
