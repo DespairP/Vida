@@ -1,6 +1,11 @@
 buildscript {
     repositories {
+        maven { url = 'http://gradle.otakusaikou.com/releases' }
+        maven { url = 'http://bmclapi2.bangbang93.com/maven'}
+        maven { url = 'https://download.mcbbs.net/maven' }
         maven { url = 'https://files.minecraftforge.net/maven' }
+        maven { url = 'https://maven.aliyun.com/repository/central' }
+        maven { url = 'https://maven.aliyun.com/repository/jcenter' }
         jcenter()
         mavenCentral()
     }
@@ -18,6 +23,25 @@ group = 'teamHTBP.vida.Vida' // http://maven.apache.org/guides/mini/guide-naming
 archivesBaseName = 'vida'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+
+repositories {
+    maven {
+        // location of the maven that hosts JEI files
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.k-4u.nl"
+    }
+    maven{
+        url = "https://maven.enginehub.org/repo/"
+
+    }
+    
+}
+
 
 minecraft {
     // The mappings can be changed at any time, and must be in the following format.
@@ -107,11 +131,14 @@ dependencies {
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+    /* minecraft dependency is here */
 
-
-    implementation  fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
+    // compile against the JEI API but do not include it at runtime
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
     // at runtime, use the full JEI jar
-    implementation  fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
+    
+    
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
@@ -145,15 +172,6 @@ publishing {
         mavenCentral()
         maven {
             url "file:///${project.projectDir}/mcmodsrepo"
-        }
-
-        maven {
-            // location of the maven that hosts JEI files
-            url "https://dvs1.progwml6.com/files/maven/"
-        }
-        maven {
-            // location of a maven mirror for JEI files, as a fallback
-            url "https://modmaven.k-4u.nl"
         }
     }
 

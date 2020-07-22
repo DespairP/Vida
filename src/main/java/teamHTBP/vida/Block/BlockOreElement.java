@@ -9,6 +9,7 @@ import net.minecraft.util.math.MathHelper;
 public class BlockOreElement extends Block {
     public BlockOreElement() {
         super(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0F, 3.0F));
+
     }
 
     @Override
