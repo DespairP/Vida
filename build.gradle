@@ -90,16 +90,10 @@ dependencies {
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.15.2-31.2.0'
-
     // You may put jars on which you depend on in ./libs or you may define them like so..
     // compile "some.group:artifact:version:classifier"
     // compile "some.group:artifact:version"
 
-    compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
-    // at runtime, use the full JEI jar
-    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
-    
-    
     // Real examples
     // compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
     // compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
@@ -114,18 +108,22 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
+
+    implementation  fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
+    // at runtime, use the full JEI jar
+    implementation  fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
 jar {
     manifest {
         attributes([
-            "Specification-Title": "examplemod",
-            "Specification-Vendor": "examplemodsareus",
+            "Specification-Title": "vida",
+            "Specification-Vendor": "vida",
             "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"examplemodsareus",
+            "Implementation-Vendor" :"vida",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
@@ -133,7 +131,7 @@ jar {
 
 // Example configuration to allow publishing using the maven-publish task
 // This is the preferred method to reobfuscate your jar file
-jar.finalizedBy('reobfJar') 
+jar.finalizedBy('reobfJar')
 // However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
 //publish.dependsOn('reobfJar')
 
@@ -144,19 +142,20 @@ publishing {
         }
     }
     repositories {
+        mavenCentral()
         maven {
             url "file:///${project.projectDir}/mcmodsrepo"
         }
 
         maven {
             // location of the maven that hosts JEI files
-            name = "Progwml6 maven"
-            url = "https://dvs1.progwml6.com/files/maven/"
+            url "https://dvs1.progwml6.com/files/maven/"
         }
         maven {
             // location of a maven mirror for JEI files, as a fallback
-            name = "ModMaven"
-            url = "https://modmaven.k-4u.nl"
+            url "https://modmaven.k-4u.nl"
         }
     }
+
+
 }
