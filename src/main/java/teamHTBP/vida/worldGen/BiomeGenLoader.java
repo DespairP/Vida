@@ -49,7 +49,7 @@ public class BiomeGenLoader {
                                  new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
                                          BlockLoader.goldElementOre.get().getDefaultState(),
                                          3)
-                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(19, 0, 0, 120)))
+                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(8, 0, 0, 20)))
                  );
              }else if(element == 2) {
                  biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
@@ -57,7 +57,7 @@ public class BiomeGenLoader {
                                  new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
                                          BlockLoader.woodElementOre.get().getDefaultState(),
                                          3)
-                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(19, 0, 0, 120)))
+                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(8, 0, 0, 20)))
                  );
              }else if(element == 3) {
                  biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
@@ -65,7 +65,7 @@ public class BiomeGenLoader {
                                  new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
                                          BlockLoader.aquaElementOre.get().getDefaultState(),
                                          3)
-                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(19, 0, 0, 120)))
+                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(8, 0, 0, 20)))
                  );
              }else if(element == 4) {
                  biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
@@ -73,7 +73,7 @@ public class BiomeGenLoader {
                                  new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
                                          BlockLoader.fireElementOre.get().getDefaultState(),
                                          3)
-                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(19, 0, 0, 120)))
+                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(8, 0, 0, 20)))
                  );
              }else if(element == 5) {
                  biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
@@ -81,15 +81,43 @@ public class BiomeGenLoader {
                                  new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
                                          BlockLoader.earthElementOre.get().getDefaultState(),
                                          3)
-                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(4, 0, 0, 20)))
+                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(8, 0, 0, 20)))
                  );
              }else{
                  biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
                          Feature.ORE.withConfiguration(
                                  new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
-                                         BlockLoader.plankVida.get().getDefaultState(),
+                                         BlockLoader.goldElementOre.get().getDefaultState(),
                                          3)
-                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(4, 0, 0, 20)))
+                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(1, 0, 0, 5)))
+                 );
+                 biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
+                         Feature.ORE.withConfiguration(
+                                 new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
+                                         BlockLoader.woodElementOre.get().getDefaultState(),
+                                         3)
+                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(1, 0, 0, 5)))
+                 );
+                 biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
+                         Feature.ORE.withConfiguration(
+                                 new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
+                                         BlockLoader.aquaElementOre.get().getDefaultState(),
+                                         3)
+                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(1, 0, 0, 5)))
+                 );
+                 biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
+                         Feature.ORE.withConfiguration(
+                                 new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
+                                         BlockLoader.fireElementOre.get().getDefaultState(),
+                                         3)
+                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(1, 0, 0, 5)))
+                 );
+                 biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
+                         Feature.ORE.withConfiguration(
+                                 new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
+                                         BlockLoader.earthElementOre.get().getDefaultState(),
+                                         3)
+                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(1, 0, 0, 5)))
                  );
              }
         }

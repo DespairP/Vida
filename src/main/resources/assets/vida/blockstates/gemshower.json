@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=east,half=lower":  { "model": "vida:block/gemshower" },
+    "facing=east,half=upper":  { "model": "block/air" },
+    "facing=south,half=lower":  { "model": "vida:block/gemshower","y": 90},
+    "facing=south,half=upper":  { "model": "block/air" },
+    "facing=west,half=lower": {"model": "vida:block/gemshower","y": 180},
+    "facing=west,half=upper": {"model": "block/air"},
+    "facing=north,half=lower": {"model": "vida:block/gemshower","y": 270},
+    "facing=north,half=upper": {"model": "block/air"}
+  }
+}

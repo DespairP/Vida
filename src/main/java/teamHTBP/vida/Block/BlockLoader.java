@@ -6,6 +6,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import teamHTBP.vida.Block.crop.BlockSaplingVida;
+import teamHTBP.vida.Block.decoration.BlockGemShower;
 import teamHTBP.vida.Block.decoration.BlockVidaPlank;
 import teamHTBP.vida.Block.function.BlockPurfiedCauldron;
 import teamHTBP.vida.Vida;
@@ -28,5 +29,10 @@ public class BlockLoader {
     public static RegistryObject<Block> aquaElementOre = BLOCKS.register("aquaelementore",() -> new BlockOreElement());
     public static RegistryObject<Block> fireElementOre = BLOCKS.register("fireelementore",() -> new BlockOreElement());
     public static RegistryObject<Block> earthElementOre = BLOCKS.register("earthelementore",() -> new BlockOreElement());
+
+
+
+    public static RegistryObject<Block> gemShower = BLOCKS.register("gemshower",() -> new BlockGemShower());
+
 
 }

@@ -1,26 +1,29 @@
 package teamHTBP.vida.Block.function;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.settings.ParticleStatus;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.DebugPacketSender;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.pathfinding.PathType;
+import net.minecraft.state.IntegerProperty;
+import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BedPart;
+import net.minecraft.stats.Stats;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.tileentity.TileEntityMerger;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
@@ -28,7 +31,10 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.util.Constants;
+import teamHTBP.vida.Block.BlockLoader;
 import teamHTBP.vida.TileEntity.TileEntityPurfiedCauldron;
 import teamHTBP.vida.particle.CubeParticleData;
 import teamHTBP.vida.particle.CubeParticleType;
@@ -38,20 +44,29 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 public class BlockPurfiedCauldron extends Block {
-    protected static VoxelShape SHAPE = Block.makeCuboidShape(-2.0D, 0.0D, -2.0D, 18.0D, 2.0D, 18.0D);
-
+    private static VoxelShape SHAPE;
+    static {
+        VoxelShape base = Block.makeCuboidShape(-2, 0, -2, 18, 6, 18);
+        VoxelShape aPillar = Block.makeCuboidShape(-1, 6, -1, 2, 16, 2);//↖
+        VoxelShape bPillar = Block.makeCuboidShape(14, 6, -1, 17, 16, 2);//↗
+        VoxelShape cPillar = Block.makeCuboidShape(14, 6, 14, 17, 16, 17);//↘
+        VoxelShape dPillar = Block.makeCuboidShape(-1, 6, 14, 2,16, 17);//↙
+        VoxelShape abSurface = Block.makeCuboidShape(2,6,-0.8,14,15.4, 1.2);
+        VoxelShape bcSurface = Block.makeCuboidShape(15.1, 6, 2, 16.8,15.4,15);
+        VoxelShape cdSurface = Block.makeCuboidShape(2, 6, 14.5, 14, 15.4, 16.7);
+        VoxelShape daSurface = Block.makeCuboidShape(1.2, 6, 2, -0.8, 15.4, 17);
+        SHAPE = VoxelShapes.or(base, aPillar,bPillar,cPillar,dPillar,abSurface,bcSurface,cdSurface,daSurface);
+    }
 
     public BlockPurfiedCauldron() {
         super(Block.Properties.create(Material.IRON).tickRandomly().notSolid().sound(SoundType.STONE));
-        //TODO 锅的体积
         //TODO 没有元素投入物品会消失
-
     }
 
+    @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return SHAPE;
+            return SHAPE;
     }
-
 
     @Override
     public boolean hasTileEntity(BlockState state) {
@@ -146,4 +161,8 @@ public class BlockPurfiedCauldron extends Block {
         }
         super.onEntityCollision(state, worldIn, pos, entityIn);
     }
+
+
+
+
 }
