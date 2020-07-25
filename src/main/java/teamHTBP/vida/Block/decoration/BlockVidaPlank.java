@@ -7,10 +7,15 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.BlockNamedItem;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
@@ -21,7 +26,12 @@ public class BlockVidaPlank extends Block {
 
     public BlockVidaPlank() {
         super(Block.Properties.create(Material.WOOD).sound(SoundType.WOOD));
-        this.setDefaultState(this.getStateContainer().getBaseState().with(STATE, 0));
+        //this.setDefaultState(this.getStateContainer().getBaseState().with(STATE, 0));
+    }
+
+    public BlockVidaPlank(int state) {
+        super(Block.Properties.create(Material.WOOD).sound(SoundType.WOOD));
+        this.setDefaultState(this.getStateContainer().getBaseState().with(STATE, state));
     }
 
     @Override
@@ -32,8 +42,9 @@ public class BlockVidaPlank extends Block {
             stateInt = (stateInt>=2 ? 0:stateInt+1);
             BlockState newState = state.with(STATE, stateInt);
             worldIn.setBlockState(pos, newState);
+            return ActionResultType.SUCCESS;
         }
-        return ActionResultType.SUCCESS;
+        return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
     }
 
 
@@ -42,5 +53,4 @@ public class BlockVidaPlank extends Block {
         builder.add(STATE);
         super.fillStateContainer(builder);
     }
-
 }

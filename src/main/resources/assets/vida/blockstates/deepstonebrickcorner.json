@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=east,rotate=0":  { "model": "vida:block/deepstonebrickcorner" },
+    "facing=west,rotate=0":  { "model": "vida:block/deepstonebrickcorner", "y": 180 },
+    "facing=south,rotate=0": { "model": "vida:block/deepstonebrickcorner", "y": 90},
+    "facing=north,rotate=0": { "model": "vida:block/deepstonebrickcorner", "y": 270 }
+  }
+}

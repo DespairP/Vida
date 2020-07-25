@@ -6,6 +6,8 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import teamHTBP.vida.Block.crop.BlockSaplingVida;
+import teamHTBP.vida.Block.decoration.BlockDeepStoneBrickCorner;
+import teamHTBP.vida.Block.decoration.BlockDeepStoneBrickStraight;
 import teamHTBP.vida.Block.decoration.BlockGemShower;
 import teamHTBP.vida.Block.decoration.BlockVidaPlank;
 import teamHTBP.vida.Block.function.BlockPurfiedCauldron;
@@ -18,11 +20,17 @@ import teamHTBP.vida.worldGen.VidaTree;
  * **/
 public class BlockLoader {
     public final static DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, Vida.modId);
+    public static RegistryObject<Block> deepStone = BLOCKS.register("deepstone",() -> new BlockDeepStone());
+    public static RegistryObject<Block> deepStoneBrick_Corner = BLOCKS.register("deepstonebrickcorner",() -> new BlockDeepStoneBrickCorner());
+    public static RegistryObject<Block> deepStoneBrick_Straight = BLOCKS.register("deepstonebrickstraight",() -> new BlockDeepStoneBrickStraight());
     public static RegistryObject<Block> logVida = BLOCKS.register("logvida",() -> new BlockLogVida());
     public static RegistryObject<Block> leavesVida = BLOCKS.register("leavesvida",() -> new BlockLeavesVida());
     public static RegistryObject<Block> saplingVida = BLOCKS.register("saplingvida",() -> new BlockSaplingVida());
     public static RegistryObject<Block> purfiedCauldron = BLOCKS.register("purfiedcauldron",() -> new BlockPurfiedCauldron());
-    public static RegistryObject<Block> plankVida = BLOCKS.register("plankvida",() -> new BlockVidaPlank());
+    public static RegistryObject<Block> plankVida_0 = BLOCKS.register("plankvida0",() -> new BlockVidaPlank(0));
+    public static RegistryObject<Block> plankVida_1 = BLOCKS.register("plankvida1",() -> new BlockVidaPlank(1));
+    public static RegistryObject<Block> plankVida_2 = BLOCKS.register("plankvida2",() -> new BlockVidaPlank(2));
+
 
     public static RegistryObject<Block> goldElementOre = BLOCKS.register("goldelementore",() -> new BlockOreElement());
     public static RegistryObject<Block> woodElementOre = BLOCKS.register("woodelementore",() -> new BlockOreElement());

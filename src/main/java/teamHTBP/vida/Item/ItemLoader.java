@@ -47,7 +47,9 @@ public class ItemLoader {
 
     public static  RegistryObject<Item> logVida = ITEMS.register("logvida",() -> new BlockItem(BlockLoader.logVida.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> leavesVida = ITEMS.register("leavesvida",() -> new BlockItem(BlockLoader.leavesVida.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static  RegistryObject<Item> plankvida = ITEMS.register("plankvida",() -> new BlockItem(BlockLoader.plankVida.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> plankvida_0 = ITEMS.register("plankvida0",() -> new BlockItem(BlockLoader.plankVida_0.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> plankvida_1 = ITEMS.register("plankvida1",() -> new BlockItem(BlockLoader.plankVida_1.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> plankvida_2 = ITEMS.register("plankvida2",() -> new BlockItem(BlockLoader.plankVida_2.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> purfiedCauldron = ITEMS.register("purfiedcauldron",() -> new BlockItem(BlockLoader.purfiedCauldron.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
 
     public static  RegistryObject<Item> goldElementOre  = ITEMS.register("goldelementore",() -> new BlockItem(BlockLoader.goldElementOre.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
@@ -56,7 +58,9 @@ public class ItemLoader {
     public static  RegistryObject<Item> fireElementOre  = ITEMS.register("fireelementore",() -> new BlockItem(BlockLoader.fireElementOre.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> earthElementOre = ITEMS.register("earthelementore",() -> new BlockItem(BlockLoader.earthElementOre.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
 
-
+    public static  RegistryObject<Item> deepStone = ITEMS.register("deepstone",() -> new BlockItem(BlockLoader.deepStone.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> deepStoneBrick_Corner = ITEMS.register("deepstonebrickcorner",() -> new BlockItem(BlockLoader.deepStoneBrick_Corner.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> deepStoneBrick_Straight = ITEMS.register("deepstonebrickstraight",() -> new BlockItem(BlockLoader.deepStoneBrick_Straight.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
 
 
     public static  RegistryObject<Item> samping = ITEMS.register("saplingvida",() -> new BlockItem(BlockLoader.saplingVida.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
