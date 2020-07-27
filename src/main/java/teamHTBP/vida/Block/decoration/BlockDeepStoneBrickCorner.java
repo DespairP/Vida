@@ -46,13 +46,29 @@ public class BlockDeepStoneBrickCorner extends Block {
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if(!worldIn.isRemote)
-            if(player.inventory.getCurrentItem().getItem() == ItemLoader.vidawand.get()){
-                int stateInt = (int)state.get(STATE);
-                stateInt = (stateInt>=2 ? 0:stateInt+1);
-                BlockState newState = state.with(STATE, stateInt);
-                worldIn.setBlockState(pos, newState);
+        if(!worldIn.isRemote) {
+            if (player.inventory.getCurrentItem().getItem() == ItemLoader.vidawand.get()) {
+                Direction stateDirection = state.get(FACING);
+                System.out.println(stateDirection);
+                switch (stateDirection) {
+                    case EAST:
+                        worldIn.setBlockState(pos, state.with(FACING, Direction.SOUTH).with(STATE, 0));
+                        break;
+                    case SOUTH:
+                        worldIn.setBlockState(pos, state.with(FACING, Direction.WEST).with(STATE, 0));
+                        break;
+                    case WEST:
+                        worldIn.setBlockState(pos, state.with(FACING, Direction.NORTH).with(STATE, 0));
+                        break;
+                    case NORTH:
+                        worldIn.setBlockState(pos, state.with(FACING, Direction.EAST).with(STATE, 0));
+                        break;
+                }
+                return ActionResultType.SUCCESS;
+            }else {
+                return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
             }
+        }
         return ActionResultType.SUCCESS;
     }
 }

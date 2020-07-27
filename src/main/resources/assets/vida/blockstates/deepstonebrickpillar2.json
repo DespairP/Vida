@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "axis=y,type=0": { "model": "vida:block/deepstonebrickpillar0" },
+    "axis=z,type=0":    { "model": "vida:block/deepstonebrickpillar0", "x": 90 },
+    "axis=x,type=0":    { "model": "vida:block/deepstonebrickpillar0", "x": 90, "y": 90 },
+    "axis=y,type=1": { "model": "vida:block/deepstonebrickpillar1" },
+    "axis=z,type=1":    { "model": "vida:block/deepstonebrickpillar1", "x": 90 },
+    "axis=x,type=1":    { "model": "vida:block/deepstonebrickpillar1", "x": 90, "y": 90 },
+    "axis=y,type=2": { "model": "vida:block/deepstonebrickpillar2" },
+    "axis=z,type=2":    { "model": "vida:block/deepstonebrickpillar2", "x": 90 },
+    "axis=x,type=2":    { "model": "vida:block/deepstonebrickpillar2", "x": 90, "y": 90 }
+  }
+}

@@ -16,6 +16,7 @@ import teamHTBP.vida.Entity.EntityFaintLight;
 import teamHTBP.vida.Entity.EntityLoader;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTileEntity {
     //提炼值
@@ -54,7 +55,7 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
      * 只有在有水燃烧和火在锅中的情况下才接收物品
      * **/
     public boolean setMeltItem(ItemStack meltItem){
-        if(this.meltItem.isEmpty()&&this.isWater&&this.isFire && (element==0 || element == this.getContainingElement(meltItem))){
+        if(this.meltItem.isEmpty()&&this.isWater&&this.isFire && ElementHelper.getContainingNum(meltItem) > 0 && (element==0 || element == this.getContainingElement(meltItem))){
             this.meltItem = meltItem;
             return true;
         }
@@ -150,12 +151,12 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
 
     //消耗containing值
     public void consumeContaining(){
-        if (containing < speed * 10){
+        if (containing < speed * 2){
             container += containing;
             containing = 0;
         }else{
-            container += speed * 10;
-            containing -= speed * 10;
+            container += speed * 2;
+            containing -= speed * 2;
         }
     }
 
@@ -165,7 +166,7 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
             if(element == 0){
                element = getContainingElement(meltItem);
             }
-            containing = getContainingNum(meltItem);
+            containing = new Random().nextInt(getContainingNum(meltItem)) + 1;
         }
     }
 

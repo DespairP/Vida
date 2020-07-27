@@ -3,6 +3,14 @@
     "facing=east,rotate=0":  { "model": "vida:block/deepstonebrickcorner" },
     "facing=west,rotate=0":  { "model": "vida:block/deepstonebrickcorner", "y": 180 },
     "facing=south,rotate=0": { "model": "vida:block/deepstonebrickcorner", "y": 90},
-    "facing=north,rotate=0": { "model": "vida:block/deepstonebrickcorner", "y": 270 }
+    "facing=north,rotate=0": { "model": "vida:block/deepstonebrickcorner", "y": 270 },
+    "facing=east,rotate=1":  { "model": "vida:block/deepstonebrickcorner","x": 90},
+    "facing=west,rotate=1":  { "model": "vida:block/deepstonebrickcorner", "y": 180,"x": 90},
+    "facing=south,rotate=1": { "model": "vida:block/deepstonebrickcorner", "y": 90,"x": 90},
+    "facing=north,rotate=1": { "model": "vida:block/deepstonebrickcorner", "y": 270,"x": 90},
+    "facing=east,rotate=2":  { "model": "vida:block/deepstonebrickcorner_2","y": 270,"x": 90},
+    "facing=west,rotate=2":  { "model": "vida:block/deepstonebrickcorner", "y": 90,"x": 90},
+    "facing=south,rotate=2": { "model": "vida:block/deepstonebrickcorner_2", "y": 0,"x": 90},
+    "facing=north,rotate=2": { "model": "vida:block/deepstonebrickcorner", "y": 180,"x": 90}
   }
 }

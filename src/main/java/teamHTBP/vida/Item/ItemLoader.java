@@ -10,6 +10,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import teamHTBP.vida.Block.BlockLoader;
+import teamHTBP.vida.Item.armor.TestHelmet;
 import teamHTBP.vida.Item.staff.ItemVidaWand;
 import teamHTBP.vida.ItemGroup.ItemGroupLoader;
 import teamHTBP.vida.Vida;
@@ -43,6 +44,8 @@ public class ItemLoader {
     public static  RegistryObject<Item> aquaElementGem = ITEMS.register("aquaelementgem",() -> new ItemGemElement());
     public static  RegistryObject<Item> fireElementGem = ITEMS.register("fireelementgem",() -> new ItemGemElement());
     public static  RegistryObject<Item> earthElementGem = ITEMS.register("earthelementgem",() -> new ItemGemElement());
+    public static  RegistryObject<Item> armor_test = ITEMS.register("testaromor",() -> new TestHelmet());
+
 
 
     public static  RegistryObject<Item> logVida = ITEMS.register("logvida",() -> new BlockItem(BlockLoader.logVida.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
@@ -61,7 +64,10 @@ public class ItemLoader {
     public static  RegistryObject<Item> deepStone = ITEMS.register("deepstone",() -> new BlockItem(BlockLoader.deepStone.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> deepStoneBrick_Corner = ITEMS.register("deepstonebrickcorner",() -> new BlockItem(BlockLoader.deepStoneBrick_Corner.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> deepStoneBrick_Straight = ITEMS.register("deepstonebrickstraight",() -> new BlockItem(BlockLoader.deepStoneBrick_Straight.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-
+    public static  RegistryObject<Item> deepStoneBrick_Core = ITEMS.register("deepstonebrickcore",() -> new BlockItem(BlockLoader.deepStoneBrick_Core.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> deepStoneBrick_Pillar_0 = ITEMS.register("deepstonebrickpillar0",() -> new BlockItem(BlockLoader.deepStoneBrick_Pillar_0.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> deepStoneBrick_Pillar_1 = ITEMS.register("deepstonebrickpillar1",() -> new BlockItem(BlockLoader.deepStoneBrick_Pillar_1.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> deepStoneBrick_Pillar_2 = ITEMS.register("deepstonebrickpillar2",() -> new BlockItem(BlockLoader.deepStoneBrick_Pillar_2.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
 
     public static  RegistryObject<Item> samping = ITEMS.register("saplingvida",() -> new BlockItem(BlockLoader.saplingVida.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
 
