@@ -151,4 +151,6 @@ public class CubeParticle extends SpriteTexturedParticle {
             this.particleScale = 0;
 
     }
+
+
 }

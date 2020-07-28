@@ -22,6 +22,11 @@ public class TileEntityLoader {
                     return new TileEntityPurfiedCauldron();},
                 BlockLoader.purfiedCauldron.get()).build(null);
     });
+    public static RegistryObject<TileEntityType<TileEntityGemShower>> TileEntityGemShower = TILE_ENTITY_DEFERRED_REGISTER.register("tegemshower", () -> {
+        return TileEntityType.Builder.create(() -> {
+                    return new TileEntityGemShower();},
+                BlockLoader.gemShower.get()).build(null);
+    });
 
 
 }

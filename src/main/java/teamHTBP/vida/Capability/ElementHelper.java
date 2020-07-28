@@ -5,6 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
+import teamHTBP.vida.Item.ItemLoader;
 
 import java.util.HashMap;
 
@@ -80,6 +81,7 @@ public class ElementHelper {
             map.put(Items.ANDESITE, new mapItem(1, 50, "andesite"));  //闪长岩
             map.put(Items.SAND, new mapItem(1, 2, "sand"));  //沙子
             map.put(Items.SANDSTONE, new mapItem(1, 8, "sandstone"));  //砂岩
+
 
            isGenerate = true;
         }
