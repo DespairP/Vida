@@ -6,11 +6,10 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import teamHTBP.vida.Entity.armormodel.TestArmorModel;
+import teamHTBP.vida.modelRender.armormodel.TestArmorModel;
 import teamHTBP.vida.ItemGroup.ItemGroupLoader;
 
 import javax.annotation.Nullable;

@@ -19,7 +19,7 @@ import teamHTBP.vida.Vida;
 
 public class TileEntityRenderGemShower extends TileEntityRenderer<TileEntityGemShower> {
     float r=1,g=1,b=1,a=1;
-    float rotation = 0.0f;
+    double height = 0.0f;
 
     public TileEntityRenderGemShower(TileEntityRendererDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
@@ -28,10 +28,11 @@ public class TileEntityRenderGemShower extends TileEntityRenderer<TileEntityGemS
     @Override
     public void render(TileEntityGemShower tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
           if(!tileEntityIn.gemItem.isEmpty()){
-              Minecraft.getInstance().getTextureManager().bindTexture(getGemResource(tileEntityIn.gemItem));
-              TextureAtlasSprite textureAtlasSprite = Minecraft.getInstance().getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE).apply(RenderLoader.gemLocation);
-              rotation += 1;
-              if(rotation >= 360.0f) this.rotation = 0.0f;
+              //Minecraft.getInstance().getTextureManager().bindTexture(getGemResource(tileEntityIn.gemItem));
+              TextureAtlasSprite textureAtlasSprite = Minecraft.getInstance().getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE).apply(this.getGemResource(tileEntityIn.gemItem));
+              double floatHeight = Math.sin(height) * 0.1;
+              this.height += 0.01;
+              if(height >= Math.PI * 2) this.height = 0.0f;
 
               float uMin = textureAtlasSprite.getMinU();
               float uMax = textureAtlasSprite.getMaxU();
@@ -56,7 +57,7 @@ public class TileEntityRenderGemShower extends TileEntityRenderer<TileEntityGemS
               matrixStackIn.rotate(this.renderDispatcher.renderInfo.getRotation());
               matrixStackIn.translate(-.5F, -0.9F, -.5F);
               Matrix4f matrix4f = matrixStackIn.getLast().getMatrix();
-              float f7 = uMin,f8 = uMax,f5 = vMin,f6 = vMax;
+              //float f7 = uMin,f8 = uMax,f5 = vMin,f6 = vMax;
 
               int light = this.getBrightnessForRender(tileEntityIn, partialTicks);
               buffer.pos(matrix4f, 0, 1,   1).color(r, g, b, a).tex(uMin, vMin).lightmap(0,240).normal(0, 1, 0).endVertex();
@@ -91,7 +92,27 @@ public class TileEntityRenderGemShower extends TileEntityRenderer<TileEntityGemS
               buffer.pos(matrix4f, 1, 0, 1).color(r, g, b, a).tex(uMax, vMin).lightmap(0,240).normal(0, 1, 0).endVertex();
 
 
+              matrixStackIn.pop();
 
+
+              textureAtlasSprite = Minecraft.getInstance().getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE).apply(this.getlogoResource(tileEntityIn.gemItem));
+              uMin = textureAtlasSprite.getMinU();
+              uMax = textureAtlasSprite.getMaxU();
+              vMin = textureAtlasSprite.getMinV();
+              vMax = textureAtlasSprite.getMaxV();
+              //draw logo
+              matrixStackIn.push();
+              IVertexBuilder bufferLogo = bufferIn.getBuffer(RenderType.getCutout());
+              matrixStackIn.translate(0.5f,1.9F + floatHeight,0.5f);
+              matrixStackIn.rotate(this.renderDispatcher.renderInfo.getRotation());
+              matrixStackIn.scale(0.5f, 0.5f, 0.5f);
+              matrixStackIn.translate(-0.5f,-0.5,-0.5f);
+
+              Matrix4f matrix4flogo = matrixStackIn.getLast().getMatrix();
+              bufferLogo.pos(matrix4flogo, 0, 1, 0.5F).color(r, g, b, a).tex(uMin, vMin).lightmap(0,240).normal(0, 1, 0).endVertex();
+              bufferLogo.pos(matrix4flogo, 1, 1, 0.5F).color(r, g, b, a).tex(uMin, vMax).lightmap(0,240).normal(0, 1, 0).endVertex();
+              bufferLogo.pos(matrix4flogo, 1, 0, 0.5F).color(r, g, b, a).tex(uMax, vMax).lightmap(0,240).normal(0, 1, 0).endVertex();
+              bufferLogo.pos(matrix4flogo, 0, 0, 0.5F).color(r, g, b, a).tex(uMax, vMin).lightmap(0,240).normal(0, 1, 0).endVertex();
 
               matrixStackIn.pop();
 
@@ -100,14 +121,32 @@ public class TileEntityRenderGemShower extends TileEntityRenderer<TileEntityGemS
 
     public ResourceLocation getGemResource(ItemStack itemStack){
         Item putGemItem = itemStack.getItem();
-        if(putGemItem == ItemLoader.fireElementGem.get() || putGemItem == ItemLoader.goldElementGem.get() ||
-                putGemItem == ItemLoader.woodElementGem.get() || putGemItem == ItemLoader.aquaElementGem.get()||
-                putGemItem == ItemLoader.earthElementGem.get()){
-            return new ResourceLocation(Vida.modId, "textures/model/goldgem");
-
+        if(putGemItem == ItemLoader.fireElementGem.get()){
+            return RenderLoader.firegemLocation;
+        }else if(putGemItem == ItemLoader.goldElementGem.get()){
+            return RenderLoader.goldgemLocation;
+        }else if( putGemItem == ItemLoader.woodElementGem.get()){
+            return RenderLoader.woodgemLocation;
+        }else if(putGemItem == ItemLoader.aquaElementGem.get()){
+            return RenderLoader.aquagemLocation;
+        }else{
+            return RenderLoader.earthgemLocation;
         }
+    }
 
-        return null;
+    public ResourceLocation getlogoResource(ItemStack itemStack){
+        Item putGemItem = itemStack.getItem();
+        if(putGemItem == ItemLoader.fireElementGem.get()){
+            return RenderLoader.firelogoLocation;
+        }else if(putGemItem == ItemLoader.goldElementGem.get()){
+            return RenderLoader.goldlogoLocation;
+        }else if( putGemItem == ItemLoader.woodElementGem.get()){
+            return RenderLoader.woodlogoLocation;
+        }else if(putGemItem == ItemLoader.aquaElementGem.get()){
+            return RenderLoader.aqualogoLocation;
+        }else{
+            return RenderLoader.earthlogoLocation;
+        }
     }
 
     protected int getBrightnessForRender(TileEntityGemShower tileEntityGemShower,float partialTick) {

@@ -62,22 +62,19 @@ public class TileEntityGemShower extends TileEntity implements ITickableTileEnti
     public boolean setGem(ItemStack itemStack){
         if(!gemItem.isEmpty())
             return false;
-        else
-        {
+        else {
             Item putGemItem =itemStack.getItem();
             if(putGemItem == ItemLoader.fireElementGem.get() || putGemItem == ItemLoader.goldElementGem.get() ||
                putGemItem == ItemLoader.woodElementGem.get() || putGemItem == ItemLoader.aquaElementGem.get()||
             putGemItem == ItemLoader.earthElementGem.get())
                 gemItem = new ItemStack(itemStack.getItem(), 1);
+            return true;
         }
-
-
-        return false;
     }
 
     @Override
     public void tick(){
-        this.gemItem = new ItemStack(ItemLoader.goldElementGem.get(), 1 );
+
     }
 
 }

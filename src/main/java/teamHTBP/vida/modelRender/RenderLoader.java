@@ -17,7 +17,17 @@ import teamHTBP.vida.Vida;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class RenderLoader {
 
-    public static ResourceLocation gemLocation = new ResourceLocation(Vida.modId, "model/goldgem");
+    public static ResourceLocation goldgemLocation = new ResourceLocation(Vida.modId, "model/goldgem");
+    public static ResourceLocation woodgemLocation = new ResourceLocation(Vida.modId, "model/woodgem");
+    public static ResourceLocation aquagemLocation = new ResourceLocation(Vida.modId, "model/aquagem");
+    public static ResourceLocation firegemLocation = new ResourceLocation(Vida.modId, "model/firegem");
+    public static ResourceLocation earthgemLocation = new ResourceLocation(Vida.modId, "model/earthgem");
+
+    public static ResourceLocation  goldlogoLocation = new ResourceLocation(Vida.modId,  "model/goldlogo");
+    public static ResourceLocation  woodlogoLocation = new ResourceLocation(Vida.modId,  "model/woodlogo");
+    public static ResourceLocation  aqualogoLocation = new ResourceLocation(Vida.modId,  "model/aqualogo");
+    public static ResourceLocation  firelogoLocation = new ResourceLocation(Vida.modId,  "model/firelogo");
+    public static ResourceLocation earthlogoLocation = new ResourceLocation(Vida.modId, "model/earthlogo");
     @SubscribeEvent
     public static void onRenderTypeSetup(FMLClientSetupEvent event) {
         RenderTypeLookup.setRenderLayer(BlockLoader.saplingVida.get(), RenderType.getCutout());
@@ -46,7 +56,18 @@ public class RenderLoader {
        }
 
 
-       event.addSprite(gemLocation);
+       event.addSprite(goldgemLocation);
+       event.addSprite(woodgemLocation);
+       event.addSprite(aquagemLocation);
+       event.addSprite(firegemLocation);
+       event.addSprite(earthgemLocation);
+       event.addSprite(goldlogoLocation);
+       event.addSprite(woodlogoLocation);
+       event.addSprite(aqualogoLocation);
+       event.addSprite(firelogoLocation);
+       event.addSprite(earthlogoLocation);
+
+
    }
 
 
