@@ -166,7 +166,7 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
             if(element == 0){
                element = getContainingElement(meltItem);
             }
-            containing = new Random().nextInt(getContainingNum(meltItem)) + 1;
+            containing = new Random().nextInt(getContainingNum(meltItem)) * 3+ 1;
         }
     }
 

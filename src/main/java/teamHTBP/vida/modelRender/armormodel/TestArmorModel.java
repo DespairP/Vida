@@ -61,7 +61,7 @@ public class TestArmorModel<T extends Entity> extends BipedModel<ArmorStandEntit
     }
 
     protected Iterable<ModelRenderer> getHeadParts() {
-        this.field_78116_c.copyModelAngles(this.bipedHead);
+        //this.field_78116_c.copyModelAngles(this.bipedHead);
         return ImmutableList.of(this.field_78116_c);
     }
 

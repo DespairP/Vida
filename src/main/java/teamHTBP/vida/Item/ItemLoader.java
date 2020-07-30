@@ -2,20 +2,14 @@ package teamHTBP.vida.Item;
 
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import teamHTBP.vida.Block.BlockLoader;
-import teamHTBP.vida.Item.armor.TestHelmet;
+import teamHTBP.vida.Item.armor.*;
 import teamHTBP.vida.Item.staff.ItemVidaWand;
 import teamHTBP.vida.ItemGroup.ItemGroupLoader;
 import teamHTBP.vida.Vida;
-
-import java.rmi.registry.Registry;
 
 //注册item的类
 public class ItemLoader {
@@ -44,9 +38,32 @@ public class ItemLoader {
     public static  RegistryObject<Item> aquaElementGem = ITEMS.register("aquaelementgem",() -> new ItemGemElement());
     public static  RegistryObject<Item> fireElementGem = ITEMS.register("fireelementgem",() -> new ItemGemElement());
     public static  RegistryObject<Item> earthElementGem = ITEMS.register("earthelementgem",() -> new ItemGemElement());
+
+
     public static  RegistryObject<Item> armor_test = ITEMS.register("testaromor",() -> new TestHelmet());
+    public static  RegistryObject<Item> armor_gold_helmet = ITEMS.register("goldhelmetarmor",() -> new ItemArmorElementHelmet(1));
+    public static  RegistryObject<Item> armor_wood_helmet = ITEMS.register("woodhelmetarmor",() -> new ItemArmorElementHelmet(2));
+    public static  RegistryObject<Item> armor_fire_helmet = ITEMS.register("aquahelmetarmor",() -> new ItemArmorElementHelmet(3));
+    public static  RegistryObject<Item> armor_aqua_helmet = ITEMS.register("firehelmetarmor",() -> new ItemArmorElementHelmet(4));
+    public static  RegistryObject<Item> armor_earth_helmet = ITEMS.register("earthhelmetarmor",() -> new ItemArmorElementHelmet(5));
 
+    public static  RegistryObject<Item> armor_gold_chestplates = ITEMS.register("goldchestplatesarmor",() -> new ItemArmorElementChestplates(1));
+    public static  RegistryObject<Item> armor_wood_chestplates = ITEMS.register("woodchestplatesarmor",() -> new ItemArmorElementChestplates(2));
+    public static  RegistryObject<Item> armor_aqua_chestplates = ITEMS.register("aquachestplatesarmor",() -> new ItemArmorElementChestplates(3));
+    public static  RegistryObject<Item> armor_fire_chestplates = ITEMS.register("firechestplatesarmor",() -> new ItemArmorElementChestplates(4));
+    public static  RegistryObject<Item> armor_earth_chestplates = ITEMS.register("earthchestplatesarmor",() -> new ItemArmorElementChestplates(5));
 
+    public static  RegistryObject<Item> armor_gold_leggings = ITEMS.register("goldleggingssarmor",() -> new ItemArmorElementLeggings(1));
+    public static  RegistryObject<Item> armor_wood_leggings = ITEMS.register("woodleggingssarmor",() -> new ItemArmorElementLeggings(2));
+    public static  RegistryObject<Item> armor_aqua_leggings = ITEMS.register("aqualeggingssarmor",() -> new ItemArmorElementLeggings(3));
+    public static  RegistryObject<Item> armor_fire_leggings = ITEMS.register("fireleggingssarmor",() -> new ItemArmorElementLeggings(4));
+    public static  RegistryObject<Item> armor_earth_leggings = ITEMS.register("earthleggingssarmor",() -> new ItemArmorElementLeggings(5));
+
+    public static  RegistryObject<Item> armor_gold_boots    = ITEMS.register("goldbootsarmor", () -> new ItemArmorElementBoots(1));
+    public static  RegistryObject<Item> armor_wood_boots    = ITEMS.register("woodbootsarmor", () -> new ItemArmorElementBoots(2));
+    public static  RegistryObject<Item> armor_aqua_boots    = ITEMS.register("aquabootsarmor", () -> new ItemArmorElementBoots(3));
+    public static  RegistryObject<Item> armor_fire_boots    = ITEMS.register("firebootsarmor", () -> new ItemArmorElementBoots(4));
+    public static  RegistryObject<Item> armor_earth_boots    = ITEMS.register("earthbootsarmor", () -> new ItemArmorElementBoots(5));
 
     public static  RegistryObject<Item> logVida = ITEMS.register("logvida",() -> new BlockItem(BlockLoader.logVida.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> leavesVida = ITEMS.register("leavesvida",() -> new BlockItem(BlockLoader.leavesVida.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
