@@ -12,7 +12,7 @@ public class ArmorModelFireChestplates extends ArmorModelElementChestplates{
         this.field_178723_h.addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, 0.0F, 0.0F, 0.0F);
         this.part18 = new ModelRenderer(this, 0, 40);
         this.part18.mirror = true;
-        this.part18.setRotationPoint(-5.0F, -2.0F, 0.0F);
+        this.part18.setRotationPoint(-5.0F, -0.0F, 0.0F);
         this.part18.addBox(6.5F, -1.0F, -1.5F, 2.0F, 4.0F, 3.0F, 0.0F, 0.0F, 0.0F);
         this.setRotateAngle(part18, 0.0F, 0.0F, -0.08726646259971647F);
         this.part20 = new ModelRenderer(this, 0, 48);
@@ -26,7 +26,7 @@ public class ArmorModelFireChestplates extends ArmorModelElementChestplates{
         this.setRotateAngle(part21, 0.0F, 0.0F, -0.05235987755982988F);
         this.field_78115_e = new ModelRenderer(this, 16, 16);
         this.field_78115_e.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.field_78115_e.addBox(-4.0F, 0.0F, -2.0F, 8.0F, 11.0F, 4.0F, 0.0F, 0.0F, 0.0F);
+        this.field_78115_e.addBox(-3.6F, -0.2F, -2.1F, 8.0F, 11.2F, 4.4F, 0.0F, 0.0F, 0.0F);
         this.field_178724_i = new ModelRenderer(this, 40, 16);
         this.field_178724_i.mirror = true;
         this.field_178724_i.setRotationPoint(5.0F, 2.0F, 0.0F);

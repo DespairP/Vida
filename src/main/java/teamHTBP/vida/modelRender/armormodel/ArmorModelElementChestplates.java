@@ -43,7 +43,7 @@ public class ArmorModelElementChestplates<T extends Entity> extends BipedModel<A
     }
 
     protected ModelRenderer getArmForSide(HandSide side) {
-        return side == HandSide.LEFT ? this.field_78115_e : this.field_178723_h;
+       return super.getArmForSide(side);
     }
 
 
@@ -67,7 +67,7 @@ public class ArmorModelElementChestplates<T extends Entity> extends BipedModel<A
 
     public void setVisible(boolean visible) {
         this.bipedHead.showModel = false;
-        this.bipedHeadwear.showModel = false;
+        this.bipedHeadwear.showModel =  true;
         this.bipedBody.showModel = true;
         this.bipedRightArm.showModel = true;
         this.bipedLeftArm.showModel = true;

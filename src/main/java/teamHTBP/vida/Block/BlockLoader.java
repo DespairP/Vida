@@ -7,6 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import teamHTBP.vida.Block.crop.BlockSaplingVida;
 import teamHTBP.vida.Block.decoration.*;
+import teamHTBP.vida.Block.function.BlockElementCoreAltar;
 import teamHTBP.vida.Block.function.BlockPurfiedCauldron;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.worldGen.VidaTree;
@@ -42,6 +43,6 @@ public class BlockLoader {
 
 
     public static RegistryObject<Block> gemShower = BLOCKS.register("gemshower",() -> new BlockGemShower());
-
+    public static RegistryObject<Block> elementcoreAltar = BLOCKS.register("elementcorealtar",() -> new BlockElementCoreAltar());
 
 }

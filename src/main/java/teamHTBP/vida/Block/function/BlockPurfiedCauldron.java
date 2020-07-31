@@ -60,7 +60,6 @@ public class BlockPurfiedCauldron extends Block {
 
     public BlockPurfiedCauldron() {
         super(Block.Properties.create(Material.IRON).tickRandomly().notSolid().sound(SoundType.STONE));
-        //TODO 没有元素投入物品会消失
     }
 
     @Override

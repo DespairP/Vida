@@ -32,7 +32,7 @@ public class RenderLoader {
     public static void onRenderTypeSetup(FMLClientSetupEvent event) {
         RenderTypeLookup.setRenderLayer(BlockLoader.saplingVida.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(BlockLoader.purfiedCauldron.get(), RenderType.getCutout());
-
+        RenderTypeLookup.setRenderLayer(BlockLoader.elementcoreAltar.get(), RenderType.getCutout());
     }
 
     @SubscribeEvent
