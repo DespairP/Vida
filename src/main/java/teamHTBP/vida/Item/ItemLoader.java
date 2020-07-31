@@ -78,6 +78,12 @@ public class ItemLoader {
     public static  RegistryObject<Item> fireElementOre  = ITEMS.register("fireelementore",() -> new BlockItem(BlockLoader.fireElementOre.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> earthElementOre = ITEMS.register("earthelementore",() -> new BlockItem(BlockLoader.earthElementOre.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
 
+    public static  RegistryObject<Item> goldEnergyGemFragment = ITEMS.register(  "goldenegygemfragment",() -> new ItemEnergyElementFragment());
+    public static  RegistryObject<Item> woodEnergyGemFragment = ITEMS.register(  "woodenegygemfragment",() -> new ItemEnergyElementFragment());
+    public static  RegistryObject<Item> aquaEnergyGemFragment = ITEMS.register(  "aquaenegygemfragment",() -> new ItemEnergyElementFragment());
+    public static  RegistryObject<Item> fireEnergyGemFragment = ITEMS.register(  "fireenegygemfragment",() -> new ItemEnergyElementFragment());
+    public static  RegistryObject<Item> earthEnergyGemFragment = ITEMS.register("earthenegygemfragment",() -> new ItemEnergyElementFragment());
+
     public static  RegistryObject<Item> deepStone = ITEMS.register("deepstone",() -> new BlockItem(BlockLoader.deepStone.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> deepStoneBrick_Corner = ITEMS.register("deepstonebrickcorner",() -> new BlockItem(BlockLoader.deepStoneBrick_Corner.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> deepStoneBrick_Straight = ITEMS.register("deepstonebrickstraight",() -> new BlockItem(BlockLoader.deepStoneBrick_Straight.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
@@ -87,6 +93,11 @@ public class ItemLoader {
     public static  RegistryObject<Item> deepStoneBrick_Pillar_2 = ITEMS.register("deepstonebrickpillar2",() -> new BlockItem(BlockLoader.deepStoneBrick_Pillar_2.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
 
     public static  RegistryObject<Item> samping = ITEMS.register("saplingvida",() -> new BlockItem(BlockLoader.saplingVida.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+
+    public static  RegistryObject<Item> dimrockBrick = ITEMS.register("dimrockbrick",() -> new BlockItem(BlockLoader.dimRockBrick.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> dimrockBrickdeco_0 = ITEMS.register("dimrockbrickdeco0",() -> new BlockItem(BlockLoader.dimRockBrickdeco_0.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> dimrockBrickdeco_1 = ITEMS.register("dimrockbrickdeco1",() -> new BlockItem(BlockLoader.dimRockBrickdeco_1.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+
 
     public static  RegistryObject<Item> gemShower = ITEMS.register("gemshower",() -> new BlockItem(BlockLoader.gemShower.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> elementcoreAltar = ITEMS.register("elementcorealtar",() -> new BlockItem(BlockLoader.elementcoreAltar.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));

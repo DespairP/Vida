@@ -40,6 +40,10 @@ public class BlockLoader {
     public static RegistryObject<Block> fireElementOre = BLOCKS.register("fireelementore",() -> new BlockOreElement());
     public static RegistryObject<Block> earthElementOre = BLOCKS.register("earthelementore",() -> new BlockOreElement());
 
+    public static RegistryObject<Block> dimRockBrick = BLOCKS.register("dimrockbrick",() -> new BlockDimRockBrick());
+    public static RegistryObject<Block> dimRockBrickdeco_0 = BLOCKS.register("dimrockbrickdeco0",() -> new BlockDimRockBrickDeco());
+    public static RegistryObject<Block> dimRockBrickdeco_1 = BLOCKS.register("dimrockbrickdeco1",() -> new BlockDimRockBrickDeco());
+
 
 
     public static RegistryObject<Block> gemShower = BLOCKS.register("gemshower",() -> new BlockGemShower());

@@ -23,7 +23,7 @@ public class TileEntityGemShower extends TileEntity implements ITickableTileEnti
 
     public void read(CompoundNBT compound) { ;
         if(compound.contains("gemItem"))
-            gemItem = ItemStack.read(compound.getCompound("meltItem"));
+            gemItem = ItemStack.read(compound.getCompound("gemItem"));
         super.read(compound);
     }
 
@@ -58,6 +58,8 @@ public class TileEntityGemShower extends TileEntity implements ITickableTileEnti
         else
             gemItem = ItemStack.EMPTY;
     }
+
+
 
     public boolean setGem(ItemStack itemStack){
         if(!gemItem.isEmpty())

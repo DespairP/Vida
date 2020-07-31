@@ -28,5 +28,9 @@ public class TileEntityLoader {
                 BlockLoader.gemShower.get()).build(null);
     });
 
-
+    public static RegistryObject<TileEntityType<TileEntityElementCoreAltar>> TileEntityElementCoreAltar = TILE_ENTITY_DEFERRED_REGISTER.register("teelementcorealtar", () -> {
+        return TileEntityType.Builder.create(() -> {
+                    return new TileEntityElementCoreAltar();},
+                BlockLoader.elementcoreAltar.get()).build(null);
+    });
 }
