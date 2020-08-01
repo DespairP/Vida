@@ -27,9 +27,9 @@ public class ArmorModelElementLeggings<T extends Entity> extends BipedModel<Armo
 
     @Override
     public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-        if(this.field_78115_e!=null){
-            this.field_78115_e.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
-        }
+        this.field_78115_e.showModel = true;
+        this.field_78115_e.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+
     }
 
 
@@ -43,10 +43,12 @@ public class ArmorModelElementLeggings<T extends Entity> extends BipedModel<Armo
     public void setVisible(boolean visible) {
         this.bipedHead.showModel = false;
         this.bipedHeadwear.showModel = false;
-        this.bipedBody.showModel = false;
+        this.bipedBody.showModel = true;
         this.bipedRightArm.showModel = false;
         this.bipedLeftArm.showModel = false;
-        this.bipedRightLeg.showModel = false;
+        this.bipedRightLeg.showModel = true;
         this.bipedLeftLeg.showModel = true;
     }
+
+
 }

@@ -3,7 +3,6 @@ package teamHTBP.vida.modelRender;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.texture.AtlasTexture;
-import net.minecraft.client.renderer.texture.TextureAtlasSpriteStitcher;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -44,6 +43,11 @@ public class RenderLoader {
         ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityGemShower.get(), (tileEntityRendererDispatcher -> {
             return new TileEntityRenderGemShower(tileEntityRendererDispatcher);
         }));
+
+        ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityElementCoreAltar.get(), (tileEntityRendererDispatcher -> {
+            return new TileEntityRenderElementCoreAltar(tileEntityRendererDispatcher);
+        }));
+
     }
 
    @SubscribeEvent
@@ -69,6 +73,7 @@ public class RenderLoader {
 
 
    }
+
 
 
 }

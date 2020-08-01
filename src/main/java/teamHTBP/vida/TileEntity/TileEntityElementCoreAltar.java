@@ -15,9 +15,9 @@ import javax.annotation.Nullable;
 
 public class TileEntityElementCoreAltar extends TileEntity implements ITickableTileEntity {
     //核心物品
-    ItemStack coreItem = ItemStack.EMPTY;
+    public ItemStack coreItem = ItemStack.EMPTY;
     //祭坛物品（最多4个）
-    ItemStack altarItem[] = {ItemStack.EMPTY,ItemStack.EMPTY, ItemStack.EMPTY,ItemStack.EMPTY};
+    public ItemStack altarItem[] = {ItemStack.EMPTY,ItemStack.EMPTY, ItemStack.EMPTY,ItemStack.EMPTY};
     //额外的祭坛物品,最大可以存10个物品
     ItemStack extraItem[] = new ItemStack[10];
     //是否正在仪式
@@ -131,13 +131,13 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
 
     public boolean setAltarItemStack(ItemStack itemStack){
         for(int i=0; i < 4;i ++){
-            if(this.altarItem[i] == ItemStack.EMPTY) { this.altarItem[i] = itemStack; return true;}
+            if(this.altarItem[i] == ItemStack.EMPTY || this.altarItem[i].isEmpty()) { this.altarItem[i] = itemStack; return true;}
         }
         return false;
     }
 
     public boolean setCoreItemStack(ItemStack itemStack){
-        if(itemStack.getItem().getItem() == ItemLoader.goldElementCore.get() && this.coreItem == ItemStack.EMPTY){
+        if(itemStack.getItem().getItem() == ItemLoader.goldElementCore.get() && (this.coreItem == ItemStack.EMPTY||this.coreItem.isEmpty())){
            this.coreItem = itemStack;
            return true;
         }
@@ -146,7 +146,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
 
     public ItemStack getAltarItemStack(){
         for(int i = 0; i < 4 ;i++){
-        if(this.altarItem[i] != ItemStack.EMPTY) return this.altarItem[i];
+        if(this.altarItem[i] != ItemStack.EMPTY && !this.altarItem[i].isEmpty()) { return this.altarItem[i];}
         }
         if(this.coreItem != ItemStack.EMPTY) return this.coreItem;
         return ItemStack.EMPTY;
@@ -161,6 +161,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
 
     @Override
     public void tick() {
-
+      // System.out.println(this.altarItem[0] + "  " + this.altarItem[1] +"   " +this.altarItem[2]  +"   " +this.altarItem[3]);
+      //System.out.println(this.coreItem);
     }
 }

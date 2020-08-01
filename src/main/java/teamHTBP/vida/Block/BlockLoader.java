@@ -44,6 +44,18 @@ public class BlockLoader {
     public static RegistryObject<Block> dimRockBrickdeco_0 = BLOCKS.register("dimrockbrickdeco0",() -> new BlockDimRockBrickDeco());
     public static RegistryObject<Block> dimRockBrickdeco_1 = BLOCKS.register("dimrockbrickdeco1",() -> new BlockDimRockBrickDeco());
 
+    public static RegistryObject<Block> fertileSoilBrick =       BLOCKS.register("fertilesoilbrick",     () -> new BlockFertileSoilBrick());
+    public static RegistryObject<Block> fertileSoilBrickdeco_0 = BLOCKS.register("fertilesoilbrickdeco0",() -> new BlockFertileSoilBrickDeco());
+    public static RegistryObject<Block> fertileSoilBrickdeco_1 = BLOCKS.register("fertilesoilbrickdeco1",() -> new BlockFertileSoilBrickDeco());
+    public static RegistryObject<Block> netherFireBrick =        BLOCKS.register("netherfirebrick",      () -> new BlockDimRockBrick());
+    public static RegistryObject<Block> netherFireBrickdeco_0 =  BLOCKS.register("netherfirebrickdeco0",      () -> new BlockNetherfireBrick());
+    public static RegistryObject<Block> netherFireBrickdeco_1 =  BLOCKS.register("netherfirebrickdeco1", () -> new BlockNetherfireBrickDeco());
+    public static RegistryObject<Block> platinumBrick =          BLOCKS.register("platinumbrick",        () -> new BlockPlatinumBrick());
+    public static RegistryObject<Block> platinumBrickdeco_0 =    BLOCKS.register("platinumbrickdeco0",   () -> new BlockPlatinumBrickDeco());
+    public static RegistryObject<Block> platinumBrickdeco_1 =    BLOCKS.register("platinumbrickdeco1",   () -> new BlockPlatinumBrickDeco());
+    public static RegistryObject<Block> verdantBrick =           BLOCKS.register("verdantbrick",         () -> new BlockVerdantBrick());
+    public static RegistryObject<Block> verdantBrickDeco_0   =   BLOCKS.register("verdantbrickdeco0",    () -> new BlockVerdantBrickDeco());
+    public static RegistryObject<Block> verdantBrickDeco_1   =   BLOCKS.register("verdantbrickdeco1",    () -> new BlockVerdantBrickDeco());
 
 
     public static RegistryObject<Block> gemShower = BLOCKS.register("gemshower",() -> new BlockGemShower());

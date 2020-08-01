@@ -45,6 +45,12 @@ public class ItemArmorElementBoots extends ArmorItem {  //盔甲属于什么元�
                 model = new ArmorModelEarthBoots();break;
         }
 
+        model.bipedLeftLeg.showModel = true;
+        model.bipedRightLeg.showModel = true;
+        model.field_178722_k.showModel = true;
+        model.field_178721_j.showModel = true;
+
+
         model.isChild = _default.isChild;
         model.isSneak = _default.isSneak;
         model.isSitting = _default.isSitting;
@@ -72,5 +78,7 @@ public class ItemArmorElementBoots extends ArmorItem {  //盔甲属于什么元�
         }
         return null;
     }
+
+
 
 }

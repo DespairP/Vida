@@ -47,6 +47,11 @@ public class ItemArmorElementChestplates extends ArmorItem {
                 model = new ArmorModelEarthChestplates();break;
         }
 
+        model.setVisible(true);
+        model.field_178723_h.showModel = true;
+        model.field_178724_i.showModel = true;
+        model.field_78115_e.showModel = true;
+
 
 
         model.isChild = _default.isChild;
