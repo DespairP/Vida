@@ -30,9 +30,13 @@ public class TileEntityRenderElementCoreAltar extends TileEntityRenderer<TileEnt
 
         if(tileEntityIn.coreItem != ItemStack.EMPTY || !tileEntityIn.coreItem.isEmpty()){
             matrixStackIn.push();
-            matrixStackIn.translate(0.5f, 0.7f, 0.5f);
+            float degree = tileEntityIn.moveup * 90.0f / 0.8f;
+            matrixStackIn.translate(0.5f, 0.7f + tileEntityIn.moveup + tileEntityIn.floating, 0.5f);
             matrixStackIn.scale(0.5f, 0.5f, 0.5f);
-            matrixStackIn.rotate(new Quaternion(90,0,0,true));
+            if(tileEntityIn.moveup < 0.8f)
+            matrixStackIn.rotate(new Quaternion(90 - degree,0,0,true));
+            else
+                matrixStackIn.rotate(this.renderDispatcher.renderInfo.getRotation());
             ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
             IBakedModel ibakedmodel = itemRenderer.getItemModelWithOverrides(tileEntityIn.coreItem, tileEntityIn.getWorld(), null);
             itemRenderer.renderItem(tileEntityIn.coreItem, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
@@ -44,12 +48,12 @@ public class TileEntityRenderElementCoreAltar extends TileEntityRenderer<TileEnt
                 if(randomRotationZ[i] == 0) this.randomRotationZ[i] = rand.nextInt();
                 matrixStackIn.push();
                 switch (i){
-                    case 0: matrixStackIn.translate(0.2,0.7 , 0.5); break;
-                    case 1: matrixStackIn.translate(0.5, 0.7, 0.2); break;
-                    case 2: matrixStackIn.translate(0.5, 0.7, 0.8); break;
-                    case 3: matrixStackIn.translate(0.8, 0.7, 0.5); break;
+                    case 0: matrixStackIn.translate(0.2,0.7 + tileEntityIn.moveup/4.0 - tileEntityIn.floating/2, 0.5); break;
+                    case 1: matrixStackIn.translate(0.5, 0.7+ tileEntityIn.moveup/4.0 - tileEntityIn.floating/2, 0.2); break;
+                    case 2: matrixStackIn.translate(0.5, 0.7+ tileEntityIn.moveup/4.0 - tileEntityIn.floating/2, 0.8); break;
+                    case 3: matrixStackIn.translate(0.8, 0.7+ tileEntityIn.moveup/4.0 - tileEntityIn.floating/2, 0.5); break;
                 }
-                matrixStackIn.rotate(new Quaternion(90, this.randomRotationY[i],0,true));
+                matrixStackIn.rotate(new Quaternion(90, 0 ,this.randomRotationZ[i],true));
                 matrixStackIn.scale(0.3f, 0.3f, 0.3f);
                 ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
                 IBakedModel ibakedmodel = itemRenderer.getItemModelWithOverrides(tileEntityIn.altarItem[i], tileEntityIn.getWorld(), null);

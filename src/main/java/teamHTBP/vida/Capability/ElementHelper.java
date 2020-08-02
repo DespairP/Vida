@@ -8,6 +8,7 @@ import net.minecraft.world.biome.Biomes;
 import teamHTBP.vida.Item.ItemLoader;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * 主要用于元素的计算
@@ -117,6 +118,14 @@ public class ElementHelper {
         return 0;
     }
 
+
+    //查询祭坛物品是否符合该元素所需的物品
+    public static boolean beganAltarProgress(ItemStack coreItem,List<Item> list,int element){
+        switch (element){
+            case ELEMENT_GOLD: if(coreItem.getItem() == ItemLoader.goldElementCore.get() && list.contains(Items.GOLD_INGOT) && list.contains(Items.DIAMOND) && list.contains(Items.SAND) && list.contains(Items.IRON_INGOT)) return true;
+        }
+        return false;
+    }
 }
 class mapItem{
     //所处的元素

@@ -6,6 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
@@ -14,11 +15,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolType;
+import teamHTBP.vida.Item.ItemLoader;
 import teamHTBP.vida.TileEntity.TileEntityElementCoreAltar;
 import teamHTBP.vida.TileEntity.TileEntityPurfiedCauldron;
+import teamHTBP.vida.particle.CubeParticleData;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 /*元素祭坛
 @Version 0.0.1*/
@@ -45,7 +51,9 @@ public class BlockElementCoreAltar extends Block {
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (!worldIn.isRemote) {
             TileEntityElementCoreAltar tileEntityElementCoreAltar = (TileEntityElementCoreAltar) worldIn.getTileEntity(pos);
-            if (handIn == Hand.MAIN_HAND && !player.isSneaking()) {
+            Item handItem = player.inventory.getCurrentItem().getItem();
+            boolean handItemResult = (handItem == ItemLoader.vidawand.get());
+            if (handIn == Hand.MAIN_HAND && !player.isSneaking() && !handItemResult) {
                 if (player.inventory.getCurrentItem() != ItemStack.EMPTY) {
                     //先检测是不是核心物品
                     boolean result = tileEntityElementCoreAltar.setCoreItemStack(new ItemStack(player.inventory.getCurrentItem().getItem(), 1));
@@ -60,24 +68,29 @@ public class BlockElementCoreAltar extends Block {
                             this.decreasePlayerItem(player);
                             worldIn.notifyBlockUpdate(pos, state, state, 3);
                             return ActionResultType.SUCCESS;
-                        }else
+                        } else
                             return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
                     }
                 }
                 //拿到祭坛中的物品
-            }else if(handIn == Hand.MAIN_HAND && player.isSneaking()){
+            }else if (handIn == Hand.MAIN_HAND && player.isSneaking() && !handItemResult) {
                 ItemStack itemStack = tileEntityElementCoreAltar.getAltarItemStack();
-                if(itemStack != ItemStack.EMPTY){
+                if (itemStack != ItemStack.EMPTY) {
                     player.inventory.addItemStackToInventory(itemStack);
                     itemStack = ItemStack.EMPTY;
                     worldIn.notifyBlockUpdate(pos, state, state, 3);
-                }else
-                    return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+                }
+            }else if (!player.isSneaking() && handItemResult) {
+                //如果法杖右键的话，开始检测
+                tileEntityElementCoreAltar.isVidaWandCilck = true;
+                worldIn.notifyBlockUpdate(pos, state, state, 3);
+                return ActionResultType.SUCCESS;
             }else
-            return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+                return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
         }
-        return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+            return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
     }
+
 
 
     public void decreasePlayerItem(PlayerEntity player){
@@ -89,6 +102,36 @@ public class BlockElementCoreAltar extends Block {
         }
     }
 
+
+    @OnlyIn(Dist.CLIENT)
+    public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+        if(rand.nextBoolean()){
+            TileEntityElementCoreAltar tileEntityElementCoreAltar = (TileEntityElementCoreAltar) worldIn.getTileEntity(pos);
+            if(tileEntityElementCoreAltar != null && tileEntityElementCoreAltar.isProgressing && tileEntityElementCoreAltar.moveup >= 0.8f){
+                int element = tileEntityElementCoreAltar.element;
+                if(rand.nextFloat() >= 0.65D){
+                    double speedX =rand.nextBoolean()? 0 - rand.nextFloat()/1000.0F : 0 + rand.nextFloat()/1000.0F;
+                    double speedY =0.010+rand.nextFloat()/1000f;
+                    double speedZ =rand.nextBoolean()? 0  + rand.nextFloat()/1000.0f :0  - rand.nextFloat()/1000.0f;
+                    double posX = rand.nextBoolean()? pos.getX() + 0.5f + rand.nextFloat()/4: pos.getX() + 0.5f - rand.nextFloat()/4;
+                    double posY = rand.nextBoolean()? pos.getY() + 1.2F + rand.nextFloat()/4: pos.getY() + 1.2F - rand.nextFloat()/4;
+                    double posZ = rand.nextBoolean()? pos.getZ() + 0.5f  + rand.nextFloat()/4:pos.getZ() + 0.5f - rand.nextFloat()/4;
+                    float r = 1;
+                    float g = 1;
+                    float b = 1;
+                    switch (element){
+                        case 1: r = 255; g = 255; b = rand.nextInt(30)+180;break;
+                        case 2: r = 73 ; g = 175; b = 92;break;
+                        case 3: r = 73 ; g = 203; b = 255;break;
+                        case 4: r = 255; g = 30 ; b = 43 ;break;
+                        case 5: r = 186; g = 184; b = 111;break;
+                    }
+                    worldIn.addParticle(new CubeParticleData( speedX, speedY,speedZ , r, g, b ,0.03f), posX, posY, posZ, 0, -0.03, 0);
+                }
+            }
+        }
+
+    }
 }
 
 
