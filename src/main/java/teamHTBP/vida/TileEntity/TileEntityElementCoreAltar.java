@@ -10,6 +10,7 @@ import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
+import teamHTBP.vida.Block.BlockLoader;
 import teamHTBP.vida.Capability.ElementHelper;
 import teamHTBP.vida.Item.ItemLoader;
 
@@ -182,7 +183,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
 
     @Override
     public void tick() {
-      // System.out.println(this.altarItem[0] + "  " + this.altarItem[1] +"   " +this.altarItem[2]  +"   " +this.altarItem[3]);
+       //System.out.println(this.altarItem[0] + "  " + this.altarItem[1] +"   " +this.altarItem[2]  +"   " +this.altarItem[3]);
       //System.out.println(this.coreItem);
         if(!world.isRemote){
             //如果右键则开始进行
@@ -192,6 +193,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
                   world.notifyBlockUpdate(pos, getBlockState(),getBlockState(), 3);
                   this.isVidaWandCilck = false;
              }
+
         }
         //渲染
         if(this.isProgressing){
@@ -203,13 +205,14 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         }
         if(this.isProgressing && this.progress<=MAX_PROGRESS){
             this.progress += 15;
-        }else if(this.isProgressing){
-
         }
         if(world.getBlockState(this.getPos().up()).getBlock() == Blocks.AIR){
-            this.isBlockOver = true;
-        }else{
             this.isBlockOver = false;
+        }else{
+            this.isBlockOver = true;
+        }
+        if(this.isProgressing && this.progress>=this.MAX_PROGRESS){
+            this.generateCrystal();
         }
     }
 
@@ -228,5 +231,43 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
             return true;
         }
         return false;
+    }
+
+    //清除掉entity的仪式进行状态
+    public void clear(){
+        this.progress = 0;
+        this.isProgressing = false;
+        //清除仪式物品
+        for(int i = 0;i<4;i++)
+            this.altarItem[i] = ItemStack.EMPTY;
+        //清除额外物品
+        this.extraItem = new ItemStack[10];
+        //清除核心物品
+        this.coreItem = ItemStack.EMPTY;
+        world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 3);
+    }
+
+    //生成水晶
+    public void generateCrystal(){
+        if(!this.isBlockOver){
+            this.clear();
+            switch (this.element) {
+                case 1:
+                     world.setBlockState(this.pos.up(), BlockLoader.elementCrystalGold.get().getDefaultState());
+                     break;
+                case 2:
+                     world.setBlockState(this.pos.up(), BlockLoader.elementCrystalWood.get().getDefaultState());
+                     break;
+                case 3:
+                    world.setBlockState(this.pos.up(), BlockLoader.elementCrystalAqua.get().getDefaultState());
+                    break;
+                case 4:
+                    world.setBlockState(this.pos.up(), BlockLoader.elementCrystalFire.get().getDefaultState());
+                    break;
+                case 5:
+                    world.setBlockState(this.pos.up(), BlockLoader.elementCrystalEarth.get().getDefaultState());
+            }
+        }
+
     }
 }

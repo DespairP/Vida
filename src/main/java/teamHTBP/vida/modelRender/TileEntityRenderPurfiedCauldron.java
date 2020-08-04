@@ -25,6 +25,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeColors;
 import net.minecraftforge.client.model.data.EmptyModelData;
+import net.minecraftforge.fluids.FluidAttributes;
 import org.lwjgl.opengl.GL11;
 import teamHTBP.vida.TileEntity.TileEntityPurfiedCauldron;
 
@@ -99,12 +100,12 @@ public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEnti
 
             matrixStackIn.translate(0, 0.5F + level, 0);
 
-            IVertexBuilder buffer = bufferIn.getBuffer(RenderType.getText(textureAtlasSprite.getAtlasTexture().getTextureLocation()));
+            IVertexBuilder buffer = bufferIn.getBuffer(RenderType.getTranslucent());
 
-            buffer.pos(matrix4f, 0, 0, 0).color(r, g, b, a).tex(uMin, vMin).normal(0, 1, 0).lightmap(light).endVertex();
-            buffer.pos(matrix4f, 0, 0, 1).color(r, g, b, a).tex(uMin, vMax).normal(0, 1, 0).lightmap(light).endVertex();
-            buffer.pos(matrix4f, 1, 0, 1).color(r, g, b, a).tex(uMax, vMax).normal(0, 1, 0).lightmap(light).endVertex();
-            buffer.pos(matrix4f, 1, 0, 0).color(r, g, b, a).tex(uMax, vMin).normal(0, 1, 0).lightmap(light).endVertex();
+            buffer.pos(matrix4f, 0, 0, 0).color(r, g, b, a).tex(uMin, vMin).overlay(0,0).lightmap(light).normal(0, 1, 0).endVertex();
+            buffer.pos(matrix4f, 0, 0, 1).color(r, g, b, a).tex(uMin, vMax).overlay(0,0).lightmap(light).normal(0, 1, 0).endVertex();
+            buffer.pos(matrix4f, 1, 0, 1).color(r, g, b, a).tex(uMax, vMax).overlay(0,0).lightmap(light).normal(0, 1, 0).endVertex();
+            buffer.pos(matrix4f, 1, 0, 0).color(r, g, b, a).tex(uMax, vMin).overlay(0,0).lightmap(light).normal(0, 1, 0).endVertex();
 
             Minecraft.getInstance().getProfiler().endSection();
             matrixStackIn.pop();

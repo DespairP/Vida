@@ -44,7 +44,7 @@ public class CubeParticle extends SpriteTexturedParticle {
         this.particleBlue = b/255.0f;
         this.rotationType = new Random().nextInt(10) + 1;
         if(this.particleScale == 0.03f){
-            this.particleAlpha = 0.5f;
+            this.particleAlpha = 0.7f;
         }
     }
 

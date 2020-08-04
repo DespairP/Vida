@@ -100,20 +100,39 @@ public class ItemLoader {
     public static  RegistryObject<Item> fertileSoilBrick        = ITEMS.register("fertilesoilbrick",     () -> new BlockItem(BlockLoader.fertileSoilBrick      .get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> fertileSoilBrickdeco_0  = ITEMS.register("fertilesoilbrickdeco0",() -> new BlockItem(BlockLoader.fertileSoilBrickdeco_0.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> fertileSoilBrickdeco_1  = ITEMS.register("fertilesoilbrickdeco1",() -> new BlockItem(BlockLoader.fertileSoilBrickdeco_1.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> fertileSoilBrickdeco_2  = ITEMS.register("fertilesoilbrickdeco2",() -> new BlockItem(BlockLoader.fertileSoilBrickdeco_2.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> fertileSoilBrickdeco_3  = ITEMS.register("fertilesoilbrickdeco3",() -> new BlockItem(BlockLoader.fertileSoilBrickdeco_3.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> fertileSoilBrickdeco_4  = ITEMS.register("fertilesoilbrickdeco4",() -> new BlockItem(BlockLoader.fertileSoilBrickdeco_4.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> netherFireBrick         = ITEMS.register("netherfirebrick",      () -> new BlockItem(BlockLoader.netherFireBrick       .get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> netherFireBrickdeco_0   = ITEMS.register("netherfirebrickdeco0",      () -> new BlockItem(BlockLoader.netherFireBrickdeco_0 .get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> netherFireBrickdeco_1   = ITEMS.register("netherfirebrickdeco1", () -> new BlockItem(BlockLoader.netherFireBrickdeco_1 .get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> netherFireBrickdeco_2   = ITEMS.register("netherfirebrickdeco2", () -> new BlockItem(BlockLoader.netherFireBrickdeco_2 .get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> netherFireBrickdeco_3   = ITEMS.register("netherfirebrickdeco3", () -> new BlockItem(BlockLoader.netherFireBrickdeco_3 .get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> netherFireBrickdeco_4   = ITEMS.register("netherfirebrickdeco4", () -> new BlockItem(BlockLoader.netherFireBrickdeco_4 .get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> platinumBrick           = ITEMS.register("platinumbrick",        () -> new BlockItem(BlockLoader.platinumBrick         .get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> platinumBrickdeco_0     = ITEMS.register("platinumbrickdeco0",   () -> new BlockItem(BlockLoader.platinumBrickdeco_0   .get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> platinumBrickdeco_1     = ITEMS.register("platinumbrickdeco1",   () -> new BlockItem(BlockLoader.platinumBrickdeco_1   .get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> platinumBrickdeco_2     = ITEMS.register("platinumbrickdeco2",   () -> new BlockItem(BlockLoader.platinumBrickdeco_2   .get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> platinumBrickdeco_3     = ITEMS.register("platinumbrickdeco3",   () -> new BlockItem(BlockLoader.platinumBrickdeco_3   .get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> platinumBrickdeco_4     = ITEMS.register("platinumbrickdeco4",   () -> new BlockItem(BlockLoader.platinumBrickdeco_4   .get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> verdantBrick            = ITEMS.register("verdantbrick",         () -> new BlockItem(BlockLoader.verdantBrick          .get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> verdantBrickDeco_0      = ITEMS.register("verdantbrickdeco0",    () -> new BlockItem(BlockLoader.verdantBrickDeco_0    .get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> verdantBrickDeco_1      = ITEMS.register("verdantbrickdeco1",    () -> new BlockItem(BlockLoader.verdantBrickDeco_1    .get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> verdantBrickDeco_2      = ITEMS.register("verdantbrickdeco2",    () -> new BlockItem(BlockLoader.verdantBrickDeco_2    .get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> verdantBrickDeco_3      = ITEMS.register("verdantbrickdeco3",    () -> new BlockItem(BlockLoader.verdantBrickDeco_3    .get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> verdantBrickDeco_4      = ITEMS.register("verdantbrickdeco4",    () -> new BlockItem(BlockLoader.verdantBrickDeco_4    .get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+
 
 
     public static  RegistryObject<Item> gemShower = ITEMS.register("gemshower",() -> new BlockItem(BlockLoader.gemShower.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> elementcoreAltar = ITEMS.register("elementcorealtar",() -> new BlockItem(BlockLoader.elementcoreAltar.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> prismTable = ITEMS.register("prismtable", () -> new BlockItem(BlockLoader.prismTable.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup).maxStackSize(1)));
 
+    public static  RegistryObject<Item> goldElementCrystal = ITEMS.register("goldelementcrystal",() -> new BlockItem(BlockLoader.elementCrystalGold.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> woodElementCrystal = ITEMS.register("woodelementcrystal",() -> new BlockItem(BlockLoader.elementCrystalWood.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> aquaElementCrystal = ITEMS.register("aquaelementcrystal",() -> new BlockItem(BlockLoader.elementCrystalAqua.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> fireElementCrystal = ITEMS.register("fireelementcrystal",() -> new BlockItem(BlockLoader.elementCrystalFire.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> earthElementCrystal = ITEMS.register("earthelementcrystal",() -> new BlockItem(BlockLoader.elementCrystalEarth.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
 
 
 

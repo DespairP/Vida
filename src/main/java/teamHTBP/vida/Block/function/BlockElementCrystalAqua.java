@@ -1,4 +1,4 @@
 package teamHTBP.vida.Block.function;
 
-public class BlockElementCrystalAqua {
+public class BlockElementCrystalAqua extends BlockElementCrystal {
 }

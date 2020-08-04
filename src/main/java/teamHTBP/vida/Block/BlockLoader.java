@@ -7,8 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import teamHTBP.vida.Block.crop.BlockSaplingVida;
 import teamHTBP.vida.Block.decoration.*;
-import teamHTBP.vida.Block.function.BlockElementCoreAltar;
-import teamHTBP.vida.Block.function.BlockPurfiedCauldron;
+import teamHTBP.vida.Block.function.*;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.worldGen.VidaTree;
 
@@ -47,18 +46,36 @@ public class BlockLoader {
     public static RegistryObject<Block> fertileSoilBrick =       BLOCKS.register("fertilesoilbrick",     () -> new BlockFertileSoilBrick());
     public static RegistryObject<Block> fertileSoilBrickdeco_0 = BLOCKS.register("fertilesoilbrickdeco0",() -> new BlockFertileSoilBrickDeco());
     public static RegistryObject<Block> fertileSoilBrickdeco_1 = BLOCKS.register("fertilesoilbrickdeco1",() -> new BlockFertileSoilBrickDeco());
+    public static RegistryObject<Block> fertileSoilBrickdeco_2 = BLOCKS.register("fertilesoilbrickdeco2",() -> new BlockFertileSoilBrickDeco());
+    public static RegistryObject<Block> fertileSoilBrickdeco_3 = BLOCKS.register("fertilesoilbrickdeco3",() -> new BlockFertileSoilBrickDeco());
+    public static RegistryObject<Block> fertileSoilBrickdeco_4 = BLOCKS.register("fertilesoilbrickdeco4",() -> new BlockFertileSoilBrickDeco());
     public static RegistryObject<Block> netherFireBrick =        BLOCKS.register("netherfirebrick",      () -> new BlockDimRockBrick());
     public static RegistryObject<Block> netherFireBrickdeco_0 =  BLOCKS.register("netherfirebrickdeco0",      () -> new BlockNetherfireBrick());
     public static RegistryObject<Block> netherFireBrickdeco_1 =  BLOCKS.register("netherfirebrickdeco1", () -> new BlockNetherfireBrickDeco());
+    public static RegistryObject<Block> netherFireBrickdeco_2 =  BLOCKS.register("netherfirebrickdeco2", () -> new BlockNetherfireBrickDeco());
+    public static RegistryObject<Block> netherFireBrickdeco_3 =  BLOCKS.register("netherfirebrickdeco3", () -> new BlockNetherfireBrickDeco());
+    public static RegistryObject<Block> netherFireBrickdeco_4 =  BLOCKS.register("netherfirebrickdeco4", () -> new BlockNetherfireBrickDeco());
     public static RegistryObject<Block> platinumBrick =          BLOCKS.register("platinumbrick",        () -> new BlockPlatinumBrick());
     public static RegistryObject<Block> platinumBrickdeco_0 =    BLOCKS.register("platinumbrickdeco0",   () -> new BlockPlatinumBrickDeco());
     public static RegistryObject<Block> platinumBrickdeco_1 =    BLOCKS.register("platinumbrickdeco1",   () -> new BlockPlatinumBrickDeco());
+    public static RegistryObject<Block> platinumBrickdeco_2 =    BLOCKS.register("platinumbrickdeco2",   () -> new BlockPlatinumBrickDeco());
+    public static RegistryObject<Block> platinumBrickdeco_3 =    BLOCKS.register("platinumbrickdeco3",   () -> new BlockPlatinumBrickDeco());
+    public static RegistryObject<Block> platinumBrickdeco_4 =    BLOCKS.register("platinumbrickdeco4",   () -> new BlockPlatinumBrickDeco());
     public static RegistryObject<Block> verdantBrick =           BLOCKS.register("verdantbrick",         () -> new BlockVerdantBrick());
     public static RegistryObject<Block> verdantBrickDeco_0   =   BLOCKS.register("verdantbrickdeco0",    () -> new BlockVerdantBrickDeco());
     public static RegistryObject<Block> verdantBrickDeco_1   =   BLOCKS.register("verdantbrickdeco1",    () -> new BlockVerdantBrickDeco());
+    public static RegistryObject<Block> verdantBrickDeco_2   =   BLOCKS.register("verdantbrickdeco2",    () -> new BlockVerdantBrickDeco());
+    public static RegistryObject<Block> verdantBrickDeco_3   =   BLOCKS.register("verdantbrickdeco3",    () -> new BlockVerdantBrickDeco());
+    public static RegistryObject<Block> verdantBrickDeco_4   =   BLOCKS.register("verdantbrickdeco4",    () -> new BlockVerdantBrickDeco());
+
+    public static RegistryObject<Block> elementCrystalGold =       BLOCKS.register("goldelementcrystal",     () -> new BlockElementCrystalGold());
+    public static RegistryObject<Block> elementCrystalWood =       BLOCKS.register("woodelementcrystal",     () -> new BlockElementCrystalWood());
+    public static RegistryObject<Block> elementCrystalAqua =       BLOCKS.register("aquaelementcrystal",     () -> new BlockElementCrystalAqua());
+    public static RegistryObject<Block> elementCrystalFire =       BLOCKS.register("fireelementcrystal",     () -> new BlockElementCrystalFire());
+    public static RegistryObject<Block> elementCrystalEarth =      BLOCKS.register("earthelementcrystal",     () -> new BlockElementCrystalEarth());
 
 
     public static RegistryObject<Block> gemShower = BLOCKS.register("gemshower",() -> new BlockGemShower());
     public static RegistryObject<Block> elementcoreAltar = BLOCKS.register("elementcorealtar",() -> new BlockElementCoreAltar());
-
+    public static RegistryObject<Block> prismTable = BLOCKS.register("prismtable",()->new BlockPrismTable());
 }

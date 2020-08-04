@@ -10,6 +10,7 @@ import teamHTBP.vida.Entity.EntityLoader;
 import teamHTBP.vida.Item.ItemElementCoreVoid;
 import teamHTBP.vida.Item.ItemLoader;
 import teamHTBP.vida.TileEntity.TileEntityLoader;
+import teamHTBP.vida.gui.GUI.ContainerTypeLoader;
 import teamHTBP.vida.particle.ParticleLoader;
 import teamHTBP.vida.worldGen.BiomeGenLoader;
 import teamHTBP.vida.worldGen.GenLoader;
@@ -38,6 +39,7 @@ public class Vida {
       GenLoader.FEATURES.register(FMLJavaModLoadingContext.get().getModEventBus());
       TileEntityLoader.TILE_ENTITY_DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
       EntityLoader.ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
+      ContainerTypeLoader.CONTAINER_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
       MinecraftForge.EVENT_BUS.register(ItemElementCoreVoid.class);
    }
 

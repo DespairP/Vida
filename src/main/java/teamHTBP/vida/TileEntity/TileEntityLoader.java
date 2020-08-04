@@ -33,4 +33,10 @@ public class TileEntityLoader {
                     return new TileEntityElementCoreAltar();},
                 BlockLoader.elementcoreAltar.get()).build(null);
     });
+
+    public static RegistryObject<TileEntityType<TileEntityPrismTable>> TileEntityPrismTable = TILE_ENTITY_DEFERRED_REGISTER.register("teprismtable", () -> {
+        return TileEntityType.Builder.create(() -> {
+                    return new TileEntityPrismTable();},
+                BlockLoader.prismTable.get()).build(null);
+    });
 }
