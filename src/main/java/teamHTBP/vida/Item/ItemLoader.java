@@ -78,6 +78,13 @@ public class ItemLoader {
     public static  RegistryObject<Item> fireElementOre  = ITEMS.register("fireelementore",() -> new BlockItem(BlockLoader.fireElementOre.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> earthElementOre = ITEMS.register("earthelementore",() -> new BlockItem(BlockLoader.earthElementOre.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
 
+    public static  RegistryObject<Item>  goldArtificialElementGem  = ITEMS.register("goldartificialelementgem",() -> new ItemArtificialElementGem());
+    public static  RegistryObject<Item>  woodArtificialElementGem  = ITEMS.register("woodartificialelementgem",() -> new ItemArtificialElementGem());
+    public static  RegistryObject<Item>  aquaArtificialElementGem  = ITEMS.register("aquaartificialelementgem",() -> new ItemArtificialElementGem());
+    public static  RegistryObject<Item>  fireArtificialElementGem  = ITEMS.register("fireartificialelementgem",() -> new ItemArtificialElementGem());
+    public static  RegistryObject<Item> earthArtificialElementGem = ITEMS.register("earthartificialelementgem",() -> new ItemArtificialElementGem());
+
+
     public static  RegistryObject<Item> goldEnergyGemFragment = ITEMS.register(  "goldenegygemfragment",() -> new ItemEnergyElementFragment());
     public static  RegistryObject<Item> woodEnergyGemFragment = ITEMS.register(  "woodenegygemfragment",() -> new ItemEnergyElementFragment());
     public static  RegistryObject<Item> aquaEnergyGemFragment = ITEMS.register(  "aquaenegygemfragment",() -> new ItemEnergyElementFragment());

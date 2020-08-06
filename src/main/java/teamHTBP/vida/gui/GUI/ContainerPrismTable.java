@@ -17,7 +17,7 @@ import javax.annotation.Nullable;
 
 public class ContainerPrismTable extends Container {
     private PrismTableArray array ;
-    private TileEntityPrismTable tileEntityPrismTable;
+    public TileEntityPrismTable tileEntityPrismTable;
 
     public ContainerPrismTable(int winId, PlayerInventory inventory, BlockPos pos, World world, PrismTableArray array) {
         super(ContainerTypeLoader.prismTable.get(), winId);

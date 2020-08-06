@@ -83,6 +83,12 @@ public class ElementHelper {
             map.put(Items.SAND, new mapItem(1, 2, "sand"));  //沙子
             map.put(Items.SANDSTONE, new mapItem(1, 8, "sandstone"));  //砂岩
 
+            map.put(ItemLoader.goldEnergyGemFragment.get(), new mapItem(1, 500, "goldartificialelementgem"));
+            map.put(ItemLoader.woodEnergyGemFragment.get(), new mapItem(2, 500, "woodartificialelementgem"));
+            map.put(ItemLoader.aquaEnergyGemFragment.get(), new mapItem(3, 500, "aquaartificialelementgem"));
+            map.put(ItemLoader.fireEnergyGemFragment.get(), new mapItem(4, 500, "fireartificialelementgem"));
+            map.put(ItemLoader.earthEnergyGemFragment.get(), new mapItem(5, 500,"earthartificialelementgem"));
+
 
            isGenerate = true;
         }
