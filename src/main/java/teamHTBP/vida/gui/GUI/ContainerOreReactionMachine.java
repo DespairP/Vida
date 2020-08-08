@@ -6,36 +6,35 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import teamHTBP.vida.TileEntity.SlotNumberArray.OreReactionMachineArray;
 import teamHTBP.vida.TileEntity.SlotNumberArray.PrismTableArray;
-import teamHTBP.vida.TileEntity.TileEntityPrismTable;
+import teamHTBP.vida.TileEntity.TileEntityOreReationMachine;
+import teamHTBP.vida.recipe.OreReactionMachineRecipe;
 
 import javax.annotation.Nullable;
 
-public class ContainerPrismTable extends Container {
-    private PrismTableArray array ;
-    public TileEntityPrismTable tileEntityPrismTable;
-
-    public ContainerPrismTable(int winId, PlayerInventory inventory, BlockPos pos, World world, PrismTableArray array) {
-        //TODO shift+右键slot会导致崩溃
-        super(ContainerTypeLoader.prismTable.get(), winId);
-        this.array = array;
-        this.tileEntityPrismTable = (TileEntityPrismTable) world.getTileEntity(pos);
-        this.addSlot(new Slot(tileEntityPrismTable.getSlot(),0,10,16));
-        this.addSlot(new Slot(tileEntityPrismTable.getSlot(),1,28,16));
-        this.addSlot(new fobiddenSlot(tileEntityPrismTable.getSlot(),2,44,59));
-        layoutPlayerInventorySlots(inventory,8,84);
+public class ContainerOreReactionMachine extends Container {
+    public ContainerOreReactionMachine(int winId, PlayerInventory inventory, BlockPos pos, World world, OreReactionMachineArray array) {
+        super(ContainerTypeLoader.oreReaction.get(), winId);
+        TileEntityOreReationMachine oreReationMachine = (TileEntityOreReationMachine) world.getTileEntity(pos);
+        this.addSlot(new Slot(oreReationMachine.getSmeltSlot(),0,75,39));
+        this.addSlot(new Slot(oreReationMachine.getSmeltSlot(),1,120,46));
+        this.addSlot(new Slot(oreReationMachine.getSmeltSlot(),2,120,46));
+        this.addSlot(new Slot(oreReationMachine.getSmeltSlot(),3,120,46));
+        this.addSlot(new Slot(oreReationMachine.fuel,0,91,65));
+        this.addSlot(new fobiddenSlot(oreReationMachine.getCompleteSlot(),0,75,90));
+        //this.addSlot(new Slot(oreReationMachine.getSmeltSlot(),1,120,46));
+        layoutPlayerInventorySlots(inventory,8,129);
     }
+
+
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
         return true;
     }
-
-
 
     /**-------以下代码均来自neutrino教程-------**/
     private int addSlotRange(IInventory inventory, int index, int x, int y, int amount, int dx) {
@@ -65,17 +64,5 @@ public class ContainerPrismTable extends Container {
         // Hotbar
         topRow += 58;
         addSlotRange(inventory, 0, leftCol, topRow, 9, 18);
-    }
-
-
-}
-class fobiddenSlot extends Slot{
-
-    public fobiddenSlot(IInventory inventoryIn, int index, int xPosition, int yPosition) {
-        super(inventoryIn, index, xPosition, yPosition);
-    }
-
-    public boolean isItemValid(ItemStack stack) {
-        return false;
     }
 }

@@ -10,6 +10,7 @@ import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import teamHTBP.vida.TileEntity.SlotNumberArray.OreReactionMachineArray;
 import teamHTBP.vida.TileEntity.SlotNumberArray.PrismTableArray;
 import teamHTBP.vida.Vida;
 
@@ -21,5 +22,12 @@ public class ContainerTypeLoader {
             return new ContainerPrismTable(id, inventory, buffer.readBlockPos(), Minecraft.getInstance().world,new PrismTableArray());
         });
     });
+
+    public static RegistryObject<ContainerType<ContainerOreReactionMachine>> oreReaction = CONTAINER_TYPES.register("container_orereactionmachine", () ->{
+        return IForgeContainerType.create((int id, PlayerInventory inventory, PacketBuffer buffer)->{
+            return new ContainerOreReactionMachine(id, inventory, buffer.readBlockPos(), Minecraft.getInstance().world,new OreReactionMachineArray());
+        });
+    });
+
 
 }

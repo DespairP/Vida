@@ -14,6 +14,9 @@ public class GuiLoader {
         ScreenManager.registerFactory(ContainerTypeLoader.prismTable.get(), (ContainerPrismTable screenContainer, PlayerInventory inv, ITextComponent titleIn) -> {
             return new ContainerScreenPrismTable(screenContainer, inv, titleIn);
         });
+        ScreenManager.registerFactory(ContainerTypeLoader.oreReaction.get(), (ContainerOreReactionMachine screenContainer, PlayerInventory inv, ITextComponent titleIn) -> {
+            return new ContainerScreenOreReactionMachine(screenContainer, inv, titleIn);
+        });
     }
 
 }

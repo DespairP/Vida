@@ -32,6 +32,7 @@ public class RenderLoader {
         RenderTypeLookup.setRenderLayer(BlockLoader.saplingVida.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(BlockLoader.purfiedCauldron.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(BlockLoader.elementcoreAltar.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockLoader.prismTable.get(), RenderType.getTranslucent());
     }
 
     @SubscribeEvent
@@ -46,6 +47,10 @@ public class RenderLoader {
 
         ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityElementCoreAltar.get(), (tileEntityRendererDispatcher -> {
             return new TileEntityRenderElementCoreAltar(tileEntityRendererDispatcher);
+        }));
+
+        ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityPrismTable.get(), (tileEntityRendererDispatcher -> {
+            return new TileEntityRenderPrismTable(tileEntityRendererDispatcher);
         }));
 
     }

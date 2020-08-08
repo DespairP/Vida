@@ -134,6 +134,9 @@ public class ItemLoader {
     public static  RegistryObject<Item> gemShower = ITEMS.register("gemshower",() -> new BlockItem(BlockLoader.gemShower.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> elementcoreAltar = ITEMS.register("elementcorealtar",() -> new BlockItem(BlockLoader.elementcoreAltar.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> prismTable = ITEMS.register("prismtable", () -> new BlockItem(BlockLoader.prismTable.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup).maxStackSize(1)));
+    public static  RegistryObject<Item> oreReactionMachine = ITEMS.register("orereactionmachine",() -> new BlockItem(BlockLoader.oreReactionMachine.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+
+
 
     public static  RegistryObject<Item> goldElementCrystal = ITEMS.register("goldelementcrystal",() -> new BlockItem(BlockLoader.elementCrystalGold.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> woodElementCrystal = ITEMS.register("woodelementcrystal",() -> new BlockItem(BlockLoader.elementCrystalWood.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));

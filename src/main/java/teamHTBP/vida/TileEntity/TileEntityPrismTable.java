@@ -57,6 +57,7 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
         array.set(3, compound.getInt("mirrorY"));
         isGem = compound.getBoolean("isGem");
         isMirror = compound.getBoolean("isMirror");
+        isFire = compound.getBoolean("isFire");
         super.read(compound);
     }
 
@@ -74,6 +75,7 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
         compound.putInt("mirrorY", array.get(3));
         compound.putBoolean("isGem",isGem);
         compound.putBoolean("isMirror", isMirror);
+        compound.putBoolean("isFire", isFire);
         return super.write(compound);
     }
 
@@ -104,6 +106,7 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
         array.set(3, tag.getInt("mirrorY"));
         isGem = tag.getBoolean("isGem");
         isMirror = tag.getBoolean("isMirror");
+        isFire = tag.getBoolean("isFire");
         super.read(tag);
     }
 
@@ -124,8 +127,11 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
 
     @Override
     public void tick() {
-        if(this.slot.getStackInSlot(1).getItem() == ItemLoader.itemA.get()){
+        if(this.slot.getStackInSlot(1).getItem() == ItemLoader.itemA.get() ){
             this.isMirror = true;
+           // world.notifyBlockUpdate(pos, getBlockState(),getBlockState(),3);
+        }else{
+            this.isMirror = false;
         }
         if(this.slot.getStackInSlot(0) == ItemStack.EMPTY && !(this.slot.getStackInSlot(0).getItem() instanceof ItemEnergyElementFragment)){
             //如果没有任何东西的话
@@ -146,8 +152,18 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
                this.isClick = false;
             }
         }
-
+        this.scanFire();
+        //System.out.println(this.isFire);
         //System.out.println(array.get(0) + " " + array.get(1));
+    }
+
+    public void clearPrismTable(){
+        this.isGem = false;
+        this.array.set(0, 0);
+        this.array.set(1, 0);
+        this.array.set(2, 0);
+        this.array.set(3, 0);
+        world.notifyBlockUpdate(pos,getBlockState(),getBlockState(),3);
     }
 
     //磨制人工水晶
@@ -160,20 +176,22 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
             int offset1 = Math.abs(mirrorX + 3 - fireX - 6);
             int offset2 = Math.abs(mirrorY + 3 - fireY - 17);
             System.out.println(offset1 + " "  +offset2);
-            if(offset1 < 7 && offset2 < 7){
+            if(offset1 < 10 && offset2 < 10){
                 ElementHelper elementHelper = new ElementHelper();
                 ItemStack itemStack = this.slot.getStackInSlot(0);
                 int element = elementHelper.getContainingElement(itemStack);
 
-                if(this.slot.getStackInSlot(2) == ItemStack.EMPTY || !this.slot.getStackInSlot(0).isEmpty()){
+                if(this.slot.getStackInSlot(2) == ItemStack.EMPTY || this.slot.getStackInSlot(0).isEmpty()){
                     this.slot.setInventorySlotContents(2, this.getItemGemFromElement(element));
                     int count = this.slot.getStackInSlot(0).getCount();
                     this.slot.getStackInSlot(0).setCount(count - 1);
-                }else if(this.slot.getStackInSlot(2).getItem() == this.getItemGemFromElement(element).getItem()){
+                    clearPrismTable();
+                }else if(this.slot.getStackInSlot(2).getItem() == this.getItemGemFromElement(element).getItem() && this.slot.getStackInSlot(2).getCount() < 64){
                     int count = this.slot.getStackInSlot(2).getCount();
                     this.slot.getStackInSlot(2).setCount(count + 1);
                     count = this.slot.getStackInSlot(0).getCount();
                     this.slot.getStackInSlot(0).setCount(count - 1);
+                    clearPrismTable();
                 }
 
 
@@ -181,6 +199,7 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
         }
     }
 
+    //检测是否有宝石在里面，如果有生成火焰
     public void gemInside(){
         //检测是否格子0中有宝石
         Item item = null; //宝石的item
@@ -195,6 +214,7 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
         }
     }
 
+    //从放入的宝石得到会polish的宝石
     public ItemStack getItemGemFromElement(int element){
         switch (element){
             case 1:
@@ -209,5 +229,14 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
                 return new ItemStack(ItemLoader.earthArtificialElementGem.get(), 1);
         }
         return ItemStack.EMPTY;
+    }
+
+    //检测火是否生成在正确的位置
+    public void scanFire(){
+        if(this.isFire){
+            if(this.array.get(0) == 0 && this.array.get(1) == 0){
+                this.isFire = false;
+            }
+        }
     }
 }

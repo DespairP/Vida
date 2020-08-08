@@ -11,24 +11,20 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.NetworkHooks;
+import teamHTBP.vida.TileEntity.TileEntityOreReationMachine;
 import teamHTBP.vida.TileEntity.TileEntityPrismTable;
-import teamHTBP.vida.TileEntity.TileEntityPurfiedCauldron;
 
 import javax.annotation.Nullable;
 
-public class BlockPrismTable extends Block {
-    private final VoxelShape SHAPE =Block.makeCuboidShape(0, 0, 0, 16, 13, 16);
-
-    public BlockPrismTable() {
-        super(Properties.create(Material.WOOD).hardnessAndResistance(3.0f, 3.0f).harvestTool(ToolType.PICKAXE).notSolid());
+public class BlockOreReactionMachine extends Block {
+    public BlockOreReactionMachine() {
+        super(Properties.create(Material.ROCK).hardnessAndResistance(4.0f, 4.0f));
     }
+
+
     @Override
     public boolean hasTileEntity(BlockState state) {
         return true;
@@ -37,21 +33,17 @@ public class BlockPrismTable extends Block {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new TileEntityPrismTable();
+        return new TileEntityOreReationMachine();
     }
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (!worldIn.isRemote && handIn == Hand.MAIN_HAND) {
-            TileEntityPrismTable tileEntityPrismTable = (TileEntityPrismTable) worldIn.getTileEntity(pos);
-            NetworkHooks.openGui((ServerPlayerEntity) player, tileEntityPrismTable, (PacketBuffer packerBuffer) -> {
-                packerBuffer.writeBlockPos(tileEntityPrismTable.getPos());
+            TileEntityOreReationMachine tileEntityOreReationMachine = (TileEntityOreReationMachine) worldIn.getTileEntity(pos);
+            NetworkHooks.openGui((ServerPlayerEntity) player, tileEntityOreReationMachine, (PacketBuffer packerBuffer) -> {
+                packerBuffer.writeBlockPos(tileEntityOreReationMachine.getPos());
             });
         }
         return ActionResultType.SUCCESS;
-    }
-
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return SHAPE;
     }
 }

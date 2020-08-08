@@ -39,4 +39,10 @@ public class TileEntityLoader {
                     return new TileEntityPrismTable();},
                 BlockLoader.prismTable.get()).build(null);
     });
+
+    public static RegistryObject<TileEntityType<TileEntityOreReationMachine>> TileEntityOreReationMachine = TILE_ENTITY_DEFERRED_REGISTER.register("teorereactionmachine", () -> {
+        return TileEntityType.Builder.create(() -> {
+                    return new TileEntityOreReationMachine();},
+                BlockLoader.oreReactionMachine.get()).build(null);
+    });
 }
