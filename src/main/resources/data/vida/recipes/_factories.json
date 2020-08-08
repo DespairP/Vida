@@ -1,0 +1,5 @@
+{
+  "recipes" : {
+    "orereaction_recipe": "vida.recipe.OreReactionMachineRecipe.Serializer"
+  }
+}

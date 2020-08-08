@@ -1,0 +1,10 @@
+{
+  "type": "vida:orereaction_recipe",
+  "ingredient": {
+    "item": "minecraft:stick"
+  },
+  "result": {
+    "item": "minecraft:acacia_planks"
+  },
+  "maxOutput": 2
+}
