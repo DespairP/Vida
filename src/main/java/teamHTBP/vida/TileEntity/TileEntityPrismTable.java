@@ -175,13 +175,13 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
             int mirrorY = this.array.get(3);
             int offset1 = Math.abs(mirrorX + 3 - fireX - 6);
             int offset2 = Math.abs(mirrorY + 3 - fireY - 17);
-            System.out.println(offset1 + " "  +offset2);
+           // System.out.println(offset1 + " "  +offset2);
             if(offset1 < 10 && offset2 < 10){
                 ElementHelper elementHelper = new ElementHelper();
                 ItemStack itemStack = this.slot.getStackInSlot(0);
                 int element = elementHelper.getContainingElement(itemStack);
 
-                if(this.slot.getStackInSlot(2) == ItemStack.EMPTY || this.slot.getStackInSlot(0).isEmpty()){
+                if(this.slot.getStackInSlot(2) == ItemStack.EMPTY || this.slot.getStackInSlot(2).isEmpty()){
                     this.slot.setInventorySlotContents(2, this.getItemGemFromElement(element));
                     int count = this.slot.getStackInSlot(0).getCount();
                     this.slot.getStackInSlot(0).setCount(count - 1);

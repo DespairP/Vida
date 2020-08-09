@@ -16,17 +16,19 @@ import teamHTBP.vida.recipe.OreReactionMachineRecipe;
 import javax.annotation.Nullable;
 
 public class ContainerOreReactionMachine extends Container {
+    protected TileEntityOreReationMachine machine;
     public ContainerOreReactionMachine(int winId, PlayerInventory inventory, BlockPos pos, World world, OreReactionMachineArray array) {
         super(ContainerTypeLoader.oreReaction.get(), winId);
         TileEntityOreReationMachine oreReationMachine = (TileEntityOreReationMachine) world.getTileEntity(pos);
-        this.addSlot(new Slot(oreReationMachine.getSmeltSlot(),0,75,39));
-        this.addSlot(new Slot(oreReationMachine.getSmeltSlot(),1,120,46));
-        this.addSlot(new Slot(oreReationMachine.getSmeltSlot(),2,120,46));
-        this.addSlot(new Slot(oreReationMachine.getSmeltSlot(),3,120,46));
-        this.addSlot(new Slot(oreReationMachine.fuel,0,91,65));
-        this.addSlot(new fobiddenSlot(oreReationMachine.getCompleteSlot(),0,75,90));
+        this.addSlot(new Slot(oreReationMachine.getSmeltSlot(),0,75,39 - 30));
+        this.addSlot(new Slot(oreReationMachine.getSmeltSlot(),1,120,46 - 30));
+        this.addSlot(new Slot(oreReationMachine.getSmeltSlot(),2,120,65 - 30));
+        this.addSlot(new Slot(oreReationMachine.getSmeltSlot(),3,120,84 - 30));
+        this.addSlot(new Slot(oreReationMachine.fuel,0,91,65 - 30));
+        this.addSlot(new fobiddenSlot(oreReationMachine.getCompleteSlot(),0,75,90 - 30));
         //this.addSlot(new Slot(oreReationMachine.getSmeltSlot(),1,120,46));
-        layoutPlayerInventorySlots(inventory,8,129);
+        layoutPlayerInventorySlots(inventory,8,129 - 30);
+        this.machine = oreReationMachine;
     }
 
 

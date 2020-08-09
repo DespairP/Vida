@@ -17,6 +17,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import teamHTBP.vida.Item.armor.ItemArmorElementBoots;
 import teamHTBP.vida.TileEntity.SlotNumberArray.OreReactionMachineArray;
 import teamHTBP.vida.gui.GUI.ContainerOreReactionMachine;
 import teamHTBP.vida.gui.GUI.ContainerPrismTable;
@@ -56,7 +57,7 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
         this.smeltSlot.setInventorySlotContents(3,ItemStack.read(compound.getCompound("smeltslot3")));
         this.fuel.setInventorySlotContents(0,ItemStack.read(compound.getCompound("fuel")));
         this.completeSlot.setInventorySlotContents(0, ItemStack.read(compound.getCompound("completeSlot")));
-        array.set(0, compound.getInt("burnTime"));
+        array.set(0, compound.getInt("burnTime1"));
         array.set(1, compound.getInt("cookTime"));
         super.read(compound);
     }
@@ -75,7 +76,7 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
         compound.put("fuel", fuel.serializeNBT());
         ItemStack completeSlot = this.completeSlot.getStackInSlot(0);
         compound.put("completeSlot", completeSlot.serializeNBT());
-        compound.putInt("burnTime", array.get(0));
+        compound.putInt("burnTime1", array.get(0));
         compound.putInt("cookTime", array.get(1));
         return super.write(compound);
     }
@@ -107,7 +108,7 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
         this.smeltSlot.setInventorySlotContents(3,ItemStack.read(tag.getCompound("smeltslot3")));
         this.fuel.setInventorySlotContents(0,ItemStack.read(tag.getCompound("fuel")));
         this.completeSlot.setInventorySlotContents(0, ItemStack.read(tag.getCompound("completeSlot")));
-        array.set(0, tag.getInt("burnTime"));
+        array.set(0, tag.getInt("burnTime1"));
         array.set(1, tag.getInt("cookTime"));
         super.read(tag);
     }
@@ -151,6 +152,9 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
         return this.array.get(1) > 0;
     }
 
+    //重置cook
+    //是否在烧炼
+    public void resetCooking(){ this.array.set(1, 0); }
 
 
     //得到燃烧值
@@ -171,16 +175,17 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
             return net.minecraftforge.common.ForgeHooks.getBurnTime(fuel.getStackInSlot(0)) > 0;
     }
 
-    //烧炼新燃料
-    protected void burnNewFuel(){
+    //烧炼新燃料,返回是否有新燃料可以烧
+    protected boolean burnNewFuel(){
         //如果不在燃烧且有燃料时
         if(!isBurning() && isFuel()){
             //设置燃烧值
             array.set(0, this.getFuelBurnTime());
             //设置
             this.fuel.getStackInSlot(0).shrink(1);
+            return true;
         }else
-          return;
+          return false;
     }
 
     //继续燃烧
@@ -200,9 +205,14 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
         return world.getRecipeManager().getRecipe(OreReactionMachineRecipe.RECIPE_TYPE , this.smeltSlot, world);
     }
 
+    protected Optional<ItemStack> getOutPutItemStack(ItemStack stack){
+        Inventory inv =  new Inventory(stack);
+        return world.getRecipeManager().getRecipe(OreReactionMachineRecipe.RECIPE_TYPE , inv, world).map(recipe -> recipe.getCraftingResult(inv));
+    }
+
     protected boolean canSmelt(){
-        ItemStack stack = getRecipe().get().getRecipeOutput();
-        if(stack == ItemStack.EMPTY || stack.isEmpty()){
+        ItemStack stack = getOutPutItemStack(this.smeltSlot.getStackInSlot(0)).orElse(ItemStack.EMPTY);
+        if(stack == ItemStack.EMPTY || stack.isEmpty() || this.outPutItemStack != ItemStack.EMPTY || !this.outPutItemStack.isEmpty()){
             return false;
         }else{
             ItemStack stack1 = completeSlot.getStackInSlot(0);
@@ -215,6 +225,32 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
         }
     }
 
+    //设置烧炼
+    protected void setSmelt(boolean canSmelt){
+        if(canSmelt && isBurning()){
+            this.outPutItemStack =  this.smeltSlot.getStackInSlot(0).copy();
+            this.outPutItemStack.setCount(1);
+            this.smeltSlot.getStackInSlot(0).shrink(1);
+            this.array.set(1, 1);
+        }else{
+            return;
+        }
+    }
+
+    protected void smelt(){
+        ItemStack itemStack = getOutPutItemStack(this.outPutItemStack).orElse(ItemStack.EMPTY);
+        if(this.completeSlot.getStackInSlot(0).isEmpty()){
+            this.completeSlot.setInventorySlotContents(0, itemStack.copy());
+        }else{
+            this.completeSlot.getStackInSlot(0).grow(itemStack.getCount());
+        }
+        this.outPutItemStack = ItemStack.EMPTY;
+    }
+
+    public boolean isItemIn(){
+        return !(this.smeltSlot.getStackInSlot(0) == ItemStack.EMPTY || this.smeltSlot.getStackInSlot(0).isEmpty());
+    }
+
 
     @Override
     public void tick() {
@@ -223,23 +259,36 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
             this.burn();
         }
         if(!world.isRemote){
-             if(this.smeltSlot.getStackInSlot(0) != ItemStack.EMPTY){
-                 System.out.println(getResult(this.smeltSlot.getStackInSlot(0)).orElse(ItemStack.EMPTY));
-             }
+            //如果不在烧炼东西且有东西可以烧的时候,且在燃烧的时候
+              if(isItemIn() &&!isCooking() && canSmelt() && isBurning()){
+                  this.setSmelt(true);
+                  flag = true;
+              }
+              //如果cook值>MAXCook值，产出东西
+              if(isBurning() && this.getArrayCookTime() >= this.MAX_COOKTIME){
+                  this.array.set(1, 1);
+                  smelt();
+                  flag = true;
+              }
+              //如果熔炉不在燃烧,添加燃料，否则cook值变为0
+              if(!isBurning()){
+                  if(!burnNewFuel())
+                  {
+                      this.resetCooking();
+                      flag = true;
+                  }
+              }
+              //熔炉检测机制
+            if(!this.isBurning() && this.outPutItemStack != ItemStack.EMPTY && !this.outPutItemStack.isEmpty()){
+                this.array.set(1, 1);
+                flag = true;
+            }
         }
         if(flag){
             world.notifyBlockUpdate(pos,getBlockState(),getBlockState(),3);
+            this.markDirty();
         }
-
-    }
-    private Optional<OreReactionMachineRecipe> getRecipe(final IInventory inventory) {
-        return world.getRecipeManager().getRecipe(OreReactionMachineRecipe.RECIPE_TYPE , inventory, world);
-    }
-
-
-    private Optional<ItemStack> getResult(final ItemStack input) {
-        final Inventory inventory = new Inventory(input);
-        return getRecipe(inventory).map(recipe -> recipe.getCraftingResult(inventory));
+       // resetCooking();
     }
 
 

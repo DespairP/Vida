@@ -54,7 +54,7 @@ public class ContainerScreenPrismTable extends ContainerScreen<ContainerPrismTab
         this.minecraft.getTextureManager().bindTexture(Gui);
         int i = (this.width - this.xSize) / 2 ;
         int j = (this.height - this.ySize) / 2 ;
-        blit(i, j, 0, 0,176, 166, 256, 256);
+        blit(i , j, 0, 0,176, 166, 256, 256);
         drawFire(i,j);
         drawMirror(i, j);
     }
