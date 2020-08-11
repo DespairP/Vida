@@ -1,0 +1,10 @@
+{
+  "type": "vida:orereaction_recipe",
+  "ingredient": {
+    "item": "minecraft:redstone_ore"
+  },
+  "result": {
+    "item": "minecraft:redstone"
+  },
+  "maxOutput": 5
+}

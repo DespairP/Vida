@@ -1,0 +1,10 @@
+{
+  "type": "vida:orereaction_recipe",
+  "ingredient": {
+    "item": "minecraft:gold_ore"
+  },
+  "result": {
+    "item": "minecraft:gold_ingot"
+  },
+  "maxOutput": 4
+}

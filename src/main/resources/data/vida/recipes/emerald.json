@@ -1,0 +1,10 @@
+{
+  "type": "vida:orereaction_recipe",
+  "ingredient": {
+    "item": "minecraft:emerald_ore"
+  },
+  "result": {
+    "item": "minecraft:emerald"
+  },
+  "maxOutput": 3
+}

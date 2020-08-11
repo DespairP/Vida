@@ -1,0 +1,10 @@
+{
+  "type": "vida:orereaction_recipe",
+  "ingredient": {
+    "item": "minecraft:diamond_ore"
+  },
+  "result": {
+    "item": "minecraft:diamond"
+  },
+  "maxOutput": 3
+}
