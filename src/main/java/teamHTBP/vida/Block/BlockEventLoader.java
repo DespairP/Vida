@@ -35,6 +35,9 @@ public class BlockEventLoader {
         if (Minecraft.getInstance().player == null ) {
             return;
         }
+        if( Minecraft.getInstance().world == null){
+            return;
+        }
         PlayerEntity player = Minecraft.getInstance().player;
         RayTraceResult objectMouseOver = Minecraft.getInstance().objectMouseOver;
         BlockPos pos = new BlockPos(objectMouseOver.getHitVec());

@@ -45,4 +45,10 @@ public class TileEntityLoader {
                     return new TileEntityOreReationMachine();},
                 BlockLoader.oreReactionMachine.get()).build(null);
     });
+
+    public static RegistryObject<TileEntityType<TileEntityCollector>> TileEntityCollector = TILE_ENTITY_DEFERRED_REGISTER.register("tecollector", () -> {
+        return TileEntityType.Builder.create(() -> {
+                    return new TileEntityCollector();},
+                BlockLoader.collector.get()).build(null);
+    });
 }

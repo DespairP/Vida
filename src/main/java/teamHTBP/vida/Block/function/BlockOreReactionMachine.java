@@ -21,7 +21,7 @@ import javax.annotation.Nullable;
 
 public class BlockOreReactionMachine extends Block {
     public BlockOreReactionMachine() {
-        super(Properties.create(Material.ROCK).hardnessAndResistance(4.0f, 4.0f));
+        super(Properties.create(Material.ROCK).notSolid().hardnessAndResistance(4.0f, 4.0f));
     }
 
 

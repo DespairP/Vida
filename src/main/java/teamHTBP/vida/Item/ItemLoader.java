@@ -135,6 +135,7 @@ public class ItemLoader {
     public static  RegistryObject<Item> elementcoreAltar = ITEMS.register("elementcorealtar",() -> new BlockItem(BlockLoader.elementcoreAltar.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> prismTable = ITEMS.register("prismtable", () -> new BlockItem(BlockLoader.prismTable.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup).maxStackSize(1)));
     public static  RegistryObject<Item> oreReactionMachine = ITEMS.register("orereactionmachine",() -> new BlockItem(BlockLoader.oreReactionMachine.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> collector = ITEMS.register("collector",() -> new BlockItem(BlockLoader.collector.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
 
 
 

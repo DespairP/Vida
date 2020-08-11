@@ -21,6 +21,7 @@ public class PurfiedCauldronHUD extends AbstractGui {
     }
 
     public void render(){
+        if(tileEntityPurfiedCauldron == null) return;
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.minecraft.getTextureManager().bindTexture(HUD);
         int screenWidth =this.width / 2 - 6;

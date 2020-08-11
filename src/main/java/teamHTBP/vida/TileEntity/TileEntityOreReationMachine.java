@@ -8,6 +8,7 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
@@ -182,7 +183,10 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
             //设置燃烧值
             array.set(0, this.getFuelBurnTime());
             //设置
-            this.fuel.getStackInSlot(0).shrink(1);
+            if(this.fuel.getStackInSlot(0).getItem() != Items.LAVA_BUCKET)
+                 this.fuel.getStackInSlot(0).shrink(1);
+            else
+                 this.fuel.setInventorySlotContents(0, new ItemStack(Items.BUCKET,1));
             return true;
         }else
           return false;
@@ -251,6 +255,10 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
         return !(this.smeltSlot.getStackInSlot(0) == ItemStack.EMPTY || this.smeltSlot.getStackInSlot(0).isEmpty());
     }
 
+    public boolean hasOutPutItem(){
+        return !(this.outPutItemStack == ItemStack.EMPTY || this.outPutItemStack.isEmpty());
+    }
+
 
     @Override
     public void tick() {
@@ -266,20 +274,20 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
               }
               //如果cook值>MAXCook值，产出东西
               if(isBurning() && this.getArrayCookTime() >= this.MAX_COOKTIME){
-                  this.array.set(1, 1);
+                  resetCooking();
                   smelt();
                   flag = true;
               }
               //如果熔炉不在燃烧,添加燃料，否则cook值变为0
               if(!isBurning()){
-                  if(!burnNewFuel())
+                  if(!burnNewFuel() && !hasOutPutItem())
                   {
                       this.resetCooking();
                       flag = true;
                   }
               }
               //熔炉检测机制
-            if(!this.isBurning() && this.outPutItemStack != ItemStack.EMPTY && !this.outPutItemStack.isEmpty()){
+            if(!this.isBurning() && this.isCooking() && this.getArrayCookTime() != 1 && hasOutPutItem()){
                 this.array.set(1, 1);
                 flag = true;
             }

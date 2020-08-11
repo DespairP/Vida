@@ -12,6 +12,7 @@ import net.minecraftforge.common.util.JsonUtils;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class OreReactionMachineRecipe implements IRecipe<IInventory> {
 
@@ -33,7 +34,9 @@ public class OreReactionMachineRecipe implements IRecipe<IInventory> {
 
     @Override
     public ItemStack getCraftingResult(IInventory inv) {
-        return this.output.copy();
+        ItemStack stack =this.output.copy();
+        stack.setCount(new Random().nextInt(this.maxOutPut)+1);
+       return stack;
     }
 
     @Override

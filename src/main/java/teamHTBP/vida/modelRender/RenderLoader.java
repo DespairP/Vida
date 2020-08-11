@@ -53,6 +53,10 @@ public class RenderLoader {
             return new TileEntityRenderPrismTable(tileEntityRendererDispatcher);
         }));
 
+        ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityCollector.get(), (tileEntityRendererDispatcher -> {
+            return new TileEntityRenderCollector(tileEntityRendererDispatcher);
+        }));
+
     }
 
    @SubscribeEvent

@@ -27,7 +27,7 @@ public class BlockPrismTable extends Block {
     private final VoxelShape SHAPE =Block.makeCuboidShape(0, 0, 0, 16, 13, 16);
 
     public BlockPrismTable() {
-        super(Properties.create(Material.WOOD).hardnessAndResistance(3.0f, 3.0f).harvestTool(ToolType.PICKAXE).notSolid());
+        super(Properties.create(Material.WOOD).hardnessAndResistance(3.0f, 3.0f).notSolid().harvestTool(ToolType.PICKAXE).notSolid());
     }
     @Override
     public boolean hasTileEntity(BlockState state) {
