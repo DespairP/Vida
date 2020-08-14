@@ -35,6 +35,7 @@ public class ItemElementCoreVoid extends Item {
     }
     @SubscribeEvent
     public static void interact(PlayerInteractEvent.EntityInteractSpecific event){
+        if(event.getWorld() == null) return;
         if(event.getPlayer().inventory.getCurrentItem().getItem() == ItemLoader.voidElementCore.get().getItem() && !event.getWorld().isRemote && event.getHand() == Hand.MAIN_HAND ){
             int x = event.getPos().getX();
             int y = event.getPos().getY();

@@ -59,6 +59,9 @@ public class ItemLoader {
     public static  RegistryObject<Item> armor_fire_leggings = ITEMS.register("fireleggingssarmor",() -> new ItemArmorElementLeggings(4));
     public static  RegistryObject<Item> armor_earth_leggings = ITEMS.register("earthleggingssarmor",() -> new ItemArmorElementLeggings(5));
 
+    public static  RegistryObject<Item> armor_gold_leggings_Withbottle = ITEMS.register("goldleggingssarmorwithbottle",() -> new ItemArmorElementLegginsWithBottles(1));
+
+
     public static  RegistryObject<Item> armor_gold_boots    = ITEMS.register("goldbootsarmor", () -> new ItemArmorElementBoots(1));
     public static  RegistryObject<Item> armor_wood_boots    = ITEMS.register("woodbootsarmor", () -> new ItemArmorElementBoots(2));
     public static  RegistryObject<Item> armor_aqua_boots    = ITEMS.register("aquabootsarmor", () -> new ItemArmorElementBoots(3));

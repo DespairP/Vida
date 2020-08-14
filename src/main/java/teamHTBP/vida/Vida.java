@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import teamHTBP.vida.Block.BlockEventLoaderServer;
 import teamHTBP.vida.Block.BlockLoader;
 import teamHTBP.vida.Entity.EntityLoader;
 import teamHTBP.vida.Item.ItemElementCoreVoid;
@@ -46,6 +47,7 @@ public class Vida {
       EntityLoader.ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
       ContainerTypeLoader.CONTAINER_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
       MinecraftForge.EVENT_BUS.register(ItemElementCoreVoid.class);
+      MinecraftForge.EVENT_BUS.register(BlockEventLoaderServer.class);
       RecipeLoader.RECIPES.register(FMLJavaModLoadingContext.get().getModEventBus());
       registerType(OREACTION, OreReactionMachineRecipe.RECIPE_TYPE);
    }

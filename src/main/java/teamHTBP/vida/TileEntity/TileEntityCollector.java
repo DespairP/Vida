@@ -22,7 +22,7 @@ public class TileEntityCollector extends TileEntity implements ITickableTileEnti
     //是否在收集
     public boolean isCollect = false;
     //最大收集值
-    public final int MAX_COLLECTION = 50000;
+    public final int MAX_COLLECTION = 20000;
     //收集的元素的元素核心
     public ItemStack coreItem = ItemStack.EMPTY;
 
@@ -77,6 +77,7 @@ public class TileEntityCollector extends TileEntity implements ITickableTileEnti
         collection = tag.getInt("collection");
         element = tag.getInt("element");
         super.handleUpdateTag(tag);
+        super.read(tag);
     }
 
 
@@ -126,6 +127,12 @@ public class TileEntityCollector extends TileEntity implements ITickableTileEnti
 
 
     }
+
+
+    public int getCollection() {
+        return collection;
+    }
+
 
     @Override
     public void tick() {

@@ -17,6 +17,9 @@ public class GuiLoader {
         ScreenManager.registerFactory(ContainerTypeLoader.oreReaction.get(), (ContainerOreReactionMachine screenContainer, PlayerInventory inv, ITextComponent titleIn) -> {
             return new ContainerScreenOreReactionMachine(screenContainer, inv, titleIn);
         });
+        ScreenManager.registerFactory(ContainerTypeLoader.bottles.get(), (ContainerBottles bottles,PlayerInventory inv, ITextComponent titleIn) -> {
+            return new ContainerScreenBottles(bottles, inv, titleIn);
+        });
     }
 
 }

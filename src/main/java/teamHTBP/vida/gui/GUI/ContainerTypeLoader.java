@@ -29,5 +29,10 @@ public class ContainerTypeLoader {
         });
     });
 
+    public static RegistryObject<ContainerType<ContainerBottles>> bottles = CONTAINER_TYPES.register("container_bottles", () ->{
+        return IForgeContainerType.create((int id, PlayerInventory inventory, PacketBuffer buffer)->{
+            return new ContainerBottles(id, inventory, buffer.readItemStack());
+        });
+    });
 
 }

@@ -15,7 +15,7 @@ import teamHTBP.vida.modelRender.armormodel.*;
 import javax.annotation.Nullable;
 
 public class ItemArmorElementLeggings extends ArmorItem {
-    protected int element = 1;
+    public int element = 1;
 
     public ItemArmorElementLeggings() {
         super(ArmorMaterial.DIAMOND, EquipmentSlotType.LEGS, new Properties().group(ItemGroupLoader.vidaItemGroup));
