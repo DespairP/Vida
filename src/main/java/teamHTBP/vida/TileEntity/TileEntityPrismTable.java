@@ -127,7 +127,7 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
 
     @Override
     public void tick() {
-        if(this.slot.getStackInSlot(1).getItem() == ItemLoader.itemA.get() ){
+        if(this.slot.getStackInSlot(1).getItem() == ItemLoader.prism.get() ){
             this.isMirror = true;
            // world.notifyBlockUpdate(pos, getBlockState(),getBlockState(),3);
         }else{

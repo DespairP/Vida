@@ -8,6 +8,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import teamHTBP.vida.Block.BlockLoader;
 import teamHTBP.vida.Item.armor.*;
 import teamHTBP.vida.Item.staff.ItemElementPickaxe;
+import teamHTBP.vida.Item.staff.ItemElementSword;
+import teamHTBP.vida.Item.staff.ItemPrism;
 import teamHTBP.vida.Item.staff.ItemVidaWand;
 import teamHTBP.vida.ItemGroup.ItemGroupLoader;
 import teamHTBP.vida.Vida;
@@ -18,6 +20,9 @@ public class ItemLoader {
     public static  RegistryObject<Item> itemA = ITEMS.register("item_test", () -> new TestItem());
     public static  RegistryObject<Item> vidawand = ITEMS.register("vidawand",() -> new ItemVidaWand());
     public static  RegistryObject<Item> vidaBranch = ITEMS.register("vidabranch",() -> new ItemVidaBranch());
+    public static  RegistryObject<Item> prism = ITEMS.register("prism",() -> new ItemPrism());
+    public static  RegistryObject<Item> elementBottle = ITEMS.register("elementbottle",() -> new ItemElementBottle());
+
 
     public static  RegistryObject<Item> voidElementCore = ITEMS.register("voidelementcore",() -> new ItemElementCoreVoid());
     public static  RegistryObject<Item> goldElementCore = ITEMS.register("goldelementcore",() -> new ItemElementCore());
@@ -160,5 +165,10 @@ public class ItemLoader {
     public static  RegistryObject<Item> fireElementPickaxe = ITEMS.register("fireelementpickaxe",() -> new ItemElementPickaxe(4));
     public static  RegistryObject<Item> earthElementPickaxe = ITEMS.register("earthelementpickaxe",() -> new ItemElementPickaxe(5));
 
+    public static  RegistryObject<Item> goldElementSword = ITEMS.register("goldelementsword",() -> new ItemElementSword(1));
+    public static  RegistryObject<Item> woodElementSword = ITEMS.register("woodelementsword",() -> new ItemElementSword(2));
+    public static  RegistryObject<Item> aquaElementSword = ITEMS.register("aquaelementsword",() -> new ItemElementSword(3));
+    public static  RegistryObject<Item> fireElementSword = ITEMS.register("fireelementsword",() -> new ItemElementSword(4));
+    public static  RegistryObject<Item> earthElementSword = ITEMS.register("earthelementsword",() -> new ItemElementSword(5));
 
 }
