@@ -12,6 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import teamHTBP.vida.Block.BlockLoader;
 import teamHTBP.vida.Capability.ElementHelper;
+import teamHTBP.vida.Item.ItemElementCore;
 import teamHTBP.vida.Item.ItemLoader;
 
 import javax.annotation.Nullable;
@@ -92,16 +93,16 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         compound.putBoolean("isMultiComplete", isMultiComplete);
         compound.putBoolean("isVidaWandClick", isVidaWandCilck);
         for(int i = 0; i < 4 ; i ++){
-            if(this.altarItem[i] != ItemStack.EMPTY){
+            if(this.altarItem[i] != null){
                 compound.put("altarItem"+i,this.altarItem[i].serializeNBT());
             }
         }
-        if(this.coreItem != ItemStack.EMPTY){
+        if(this.coreItem != null){
             compound.put("coreItem", coreItem.serializeNBT());
         }
         ListNBT listNBT = new ListNBT();
         for(int j = 0;j < this.extraItem.length;j++){
-            if(this.extraItem[j] != null && this.extraItem[j] != ItemStack.EMPTY){
+            if(this.extraItem[j] != null){
                 listNBT.set(j, this.extraItem[j].serializeNBT());
             }
         }
@@ -144,6 +145,8 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         for(int i = 0;i < 4;i++){
             if(tag.contains("altarItem" + i)){
                 altarItem[i] =ItemStack.read( tag.getCompound("altarItem" + i));
+            }else{
+                altarItem[i] =ItemStack.EMPTY;
             }
         }
         this.extraItem = new ItemStack[10];
@@ -182,7 +185,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
     public boolean setCoreItemStack(ItemStack itemStack){
         //如果在进行仪式，不能放物品
         if(this.isProgressing) return false;
-        if(itemStack.getItem().getItem() == ItemLoader.goldElementCore.get() && (this.coreItem == ItemStack.EMPTY||this.coreItem.isEmpty())){
+        if(itemStack.getItem().getItem() instanceof ItemElementCore && (this.coreItem == ItemStack.EMPTY||this.coreItem.isEmpty())){
            this.coreItem = itemStack;
            return true;
         }
@@ -204,7 +207,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
 
     //仪式确认，元素和开始
     public boolean progressStart(){
-        return false;
+        return this.isProgressing;
     }
 
     public ItemStack getStack(int i){
@@ -219,7 +222,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         if(!world.isRemote){
             //如果右键则开始进行
               if(this.isVidaWandCilck && !this.isProgressing){
-                  System.out.println("s");
+                  //System.out.println("s");
                   this.isProgressing = this.judAltarItem();
                   world.notifyBlockUpdate(pos, getBlockState(),getBlockState(), 3);
                   this.isVidaWandCilck = false;
@@ -259,6 +262,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         itemList.add(this.altarItem[j].getItem());
         }
         int element = helper.getContainingElement(this.getAltarItemStack());
+        System.out.println(this.getAltarItemStack());
         if(ElementHelper.beganAltarProgress(this.coreItem,itemList, element)){
             this.element = element;
             return true;

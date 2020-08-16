@@ -23,18 +23,18 @@ import teamHTBP.vida.Block.function.BlockPurfiedCauldron;
 import teamHTBP.vida.Input.KeyBoardBottle;
 import teamHTBP.vida.Input.KeyBoardLoader;
 import teamHTBP.vida.Item.armor.ItemArmorElementLegginsWithBottles;
+import teamHTBP.vida.Item.staff.ItemElementPickaxe;
 import teamHTBP.vida.TileEntity.TileEntityCollector;
 import teamHTBP.vida.TileEntity.TileEntityElementCoreAltar;
 import teamHTBP.vida.TileEntity.TileEntityPurfiedCauldron;
-import teamHTBP.vida.gui.HUD.BottleHUD;
-import teamHTBP.vida.gui.HUD.CollectorHUD;
-import teamHTBP.vida.gui.HUD.ElementCoreAltarHUD;
-import teamHTBP.vida.gui.HUD.PurfiedCauldronHUD;
+import teamHTBP.vida.gui.HUD.*;
 
 
 @Mod.EventBusSubscriber(Dist.CLIENT)
 public class BlockEventLoader {
-
+    public static int alpha = 0;
+    public static int level_up_alpha = 0;
+    public static ItemStack itemStack = ItemStack.EMPTY;
     //锅的HUD
     @SubscribeEvent
     public static void onOverlayRender(RenderGameOverlayEvent event) {
@@ -88,6 +88,25 @@ public class BlockEventLoader {
             hud.render();
         }
         }
+        if(player.inventory.getCurrentItem().getItem() instanceof ItemElementPickaxe){
+            if(alpha < 100)alpha += 2;
+            itemStack = player.inventory.getCurrentItem();
+        }
+        else{
+            if(alpha > 0)alpha-=2;
+        }
+
+        if(alpha > 0 && itemStack != ItemStack.EMPTY && !itemStack.isEmpty()){
+            //ItemStack stack = player.inventory.getCurrentItem();
+            ElementPickaxeHUD hud = new ElementPickaxeHUD(itemStack, alpha);
+            hud.render();
+        }
+
+        if(alpha == 0){
+            itemStack = ItemStack.EMPTY;
+        }
+
+
     }
 
 

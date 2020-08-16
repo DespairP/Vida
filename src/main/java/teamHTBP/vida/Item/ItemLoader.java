@@ -7,6 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import teamHTBP.vida.Block.BlockLoader;
 import teamHTBP.vida.Item.armor.*;
+import teamHTBP.vida.Item.staff.ItemElementPickaxe;
 import teamHTBP.vida.Item.staff.ItemVidaWand;
 import teamHTBP.vida.ItemGroup.ItemGroupLoader;
 import teamHTBP.vida.Vida;
@@ -152,6 +153,12 @@ public class ItemLoader {
     public static  RegistryObject<Item> fireElementCrystal = ITEMS.register("fireelementcrystal",() -> new BlockItem(BlockLoader.elementCrystalFire.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> earthElementCrystal = ITEMS.register("earthelementcrystal",() -> new BlockItem(BlockLoader.elementCrystalEarth.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
 
+
+    public static  RegistryObject<Item> goldElementPickaxe = ITEMS.register("goldelementpickaxe",() -> new ItemElementPickaxe(1));
+    public static  RegistryObject<Item> woodElementPickaxe = ITEMS.register("woodelementpickaxe",() -> new ItemElementPickaxe(2));
+    public static  RegistryObject<Item> aquaElementPickaxe = ITEMS.register("aquaelementpickaxe",() -> new ItemElementPickaxe(3));
+    public static  RegistryObject<Item> fireElementPickaxe = ITEMS.register("fireelementpickaxe",() -> new ItemElementPickaxe(4));
+    public static  RegistryObject<Item> earthElementPickaxe = ITEMS.register("earthelementpickaxe",() -> new ItemElementPickaxe(5));
 
 
 }

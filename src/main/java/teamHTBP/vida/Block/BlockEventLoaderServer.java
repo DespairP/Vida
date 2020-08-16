@@ -1,21 +1,26 @@
 package teamHTBP.vida.Block;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.OreBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.Hand;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
 import teamHTBP.vida.Item.armor.ItemArmorElementLegginsWithBottles;
+import teamHTBP.vida.Item.staff.ItemElementPickaxe;
+import teamHTBP.vida.gui.HUD.ElementPickaxeHUD;
 
 import java.util.Random;
 
 
 public class BlockEventLoaderServer {
-
     @SubscribeEvent
     public static void kill(LivingDeathEvent event) {
         //System.out.println("SSSS");
@@ -40,5 +45,47 @@ public class BlockEventLoaderServer {
                 }
              }
         }
+    }
+
+    @SubscribeEvent
+    public static void block_break(BlockEvent.BreakEvent event){
+        //System.out.println("sss");
+        PlayerEntity playerEntity = event.getPlayer();
+        if(playerEntity != null){
+            ItemStack itemStack = playerEntity.getHeldItem(Hand.MAIN_HAND);
+            if(itemStack.getItem() instanceof ItemElementPickaxe) {
+                CompoundNBT nbt = itemStack.getOrCreateTag();
+                Block block = event.getState().getBlock();
+                Random random = new Random();
+                int level = nbt.getInt("level");
+                if(block instanceof OreBlock && level < 30){
+                      int exp = nbt.getInt("pickaxeEXP");
+                      nbt.putInt("pickaxeEXP",exp + random.nextInt(5) + 5);
+                      levelupTool(exp, level,itemStack);
+                }else if(block instanceof Block && level < 30){
+                    int exp = nbt.getInt("pickaxeEXP");
+                    //System.out.println(exp);
+                    nbt.putInt("pickaxeEXP",exp + random.nextInt(2));
+                    levelupTool(exp, level,itemStack);
+                }
+            }
+        }
+    }
+
+    public static boolean levelupTool(int exp,int level,ItemStack stack){
+        if(level * 500 <= exp){
+            CompoundNBT nbt = stack.getOrCreateTag();
+            int newEXP = exp - level * 500;
+            if(level + 1 < 30) {
+                nbt.putInt("level", level + 1);
+                nbt.putInt("pickaxeEXP", newEXP);
+            }else{
+                nbt.putInt("level", 30);
+                nbt.putInt("exp", -1);
+            }
+            stack.setDamage(0);
+            return true;
+        }
+        return false;
     }
 }
