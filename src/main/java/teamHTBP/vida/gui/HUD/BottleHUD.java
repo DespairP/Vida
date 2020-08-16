@@ -35,6 +35,7 @@ public class BottleHUD extends AbstractGui {
     public void render(){
         ItemStack stack1 = ItemStack.EMPTY;
         ItemStack stack2 = ItemStack.EMPTY;
+        ItemStack stack3 = ItemStack.EMPTY;
         if(itemStack == ItemStack.EMPTY) return;
         RenderSystem.pushMatrix();
         RenderSystem.color4f(alpha, alpha, alpha, alpha);
@@ -55,7 +56,7 @@ public class BottleHUD extends AbstractGui {
                 int containDraw = (int)(10.0f * progress / 100.0f);
                 if(containDraw >= 10) containDraw = 10;
                 blit(screenWidth + 19, screenHeight + 40, 0, 16, 81, 10, 15, 128, 128);
-                blit(screenWidth + 19, screenHeight + 40 + 15 - containDraw, 0, 32, 86, 10, containDraw, 128, 128);
+                blit(screenWidth + 19, screenHeight + 40 + 15 - containDraw, 0, 32, 86 + 10 - containDraw, 10, containDraw, 128, 128);
 
             }
         }
@@ -67,7 +68,7 @@ public class BottleHUD extends AbstractGui {
                 int containDraw = (int)(10.0f * progress / 100.0f);
                 if(containDraw >= 10) containDraw = 10;
                 blit(screenWidth + 78, screenHeight + 40, 0, 16, 81, 10, 15, 128, 128);
-                blit(screenWidth + 78, screenHeight + 40 + 15 - containDraw, 0, 32, 86, 10, containDraw, 128, 128);
+                blit(screenWidth + 78, screenHeight + 40 + 15 - containDraw, 0, 32, 86 + 10 - containDraw, 10, containDraw, 128, 128);
 
             }
         }
@@ -76,7 +77,20 @@ public class BottleHUD extends AbstractGui {
         element= ((ItemArmorElementLegginsWithBottles)itemStack.getItem()).element;
         if(element != 2)
             blit(screenWidth + 48, screenHeight + 12, 0, 0, 83, 10, 13, 128, 128);
+         else{
+            if(nbt.getCompound("bottle3") !=null){
+                ItemStack stack = ItemStack.read(nbt.getCompound("bottle3"));
+                if(stack != ItemStack.EMPTY && !stack.isEmpty()){
+                    stack3 = stack;
+                    int progress = nbt.getInt("bottle3Num");
+                    int containDraw = (int)(10.0f * progress / 100.0f);
+                    if(containDraw >= 10) containDraw = 10;
+                    blit(screenWidth + 48, screenHeight + 10, 0, 16, 81, 10, 15, 128, 128);
+                    blit(screenWidth + 48, screenHeight + 10 + 15 - containDraw, 0, 32, 86 + 10 - containDraw, 10, containDraw, 128, 128);
 
+                }
+            }
+        }
 
 
         if(stack1 != ItemStack.EMPTY && !stack1.isEmpty()){
@@ -105,6 +119,20 @@ public class BottleHUD extends AbstractGui {
                 drawCenteredString(minecraft.fontRenderer,itextcomponent.getFormattedText(),screenWidth + 85,screenHeight + 30,120010 | (int)alpha * 100);
             }
             minecraft.fontRenderer.drawString(progress+"%",screenWidth + 76,screenHeight + 56,300010 | (int)alpha * 100);
+            RenderSystem.popMatrix();
+        }
+
+        if(stack3 != ItemStack.EMPTY && !stack3.isEmpty()){
+            int progress = itemStack.getTag().getInt("bottle3Num");
+            RenderSystem.pushMatrix();
+            RenderSystem.enableBlend();
+            List<EffectInstance> list =  PotionUtils.getEffectsFromStack(stack3);
+            ITextComponent itextcomponent;
+            for(EffectInstance effectinstance : list) {
+                itextcomponent = new TranslationTextComponent(effectinstance.getEffectName());
+                drawCenteredString(minecraft.fontRenderer,itextcomponent.getFormattedText(),screenWidth + 53,screenHeight - 1,120010 | (int)alpha * 100);
+            }
+            minecraft.fontRenderer.drawString(progress+"%",screenWidth + 45,screenHeight + 29,300010 | (int)alpha * 100);
             RenderSystem.popMatrix();
         }
 

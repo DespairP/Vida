@@ -18,7 +18,7 @@ import teamHTBP.vida.ItemGroup.ItemGroupLoader;
  * **/
 public class BlockLogVida extends RotatedPillarBlock {
     public BlockLogVida() {
-        super(Properties.create(Material.WOOD));
+        super(Properties.create(Material.WOOD).hardnessAndResistance(2.0f));
     }
 
 

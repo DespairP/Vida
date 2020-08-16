@@ -59,7 +59,7 @@ public class BlockPurfiedCauldron extends Block {
     }
 
     public BlockPurfiedCauldron() {
-        super(Block.Properties.create(Material.IRON).tickRandomly().notSolid().sound(SoundType.STONE));
+        super(Block.Properties.create(Material.IRON).tickRandomly().notSolid().sound(SoundType.STONE).hardnessAndResistance(4.0f,4.0f));
     }
 
     @Override

@@ -3,8 +3,10 @@ package teamHTBP.vida.Block.function;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
@@ -18,6 +20,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.NetworkHooks;
+import teamHTBP.vida.TileEntity.TileEntityElementCoreAltar;
 import teamHTBP.vida.TileEntity.TileEntityPrismTable;
 import teamHTBP.vida.TileEntity.TileEntityPurfiedCauldron;
 
@@ -49,6 +52,17 @@ public class BlockPrismTable extends Block {
             });
         }
         return ActionResultType.SUCCESS;
+    }
+
+    @Override
+    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+        TileEntityPrismTable tileEntityPrismTable = (TileEntityPrismTable) worldIn.getTileEntity(pos);
+        if(tileEntityPrismTable != null){
+            worldIn.addEntity(new ItemEntity(worldIn,pos.getX(),pos.getY(),pos.getZ(),tileEntityPrismTable.getSlot().getStackInSlot(0)));
+            worldIn.addEntity(new ItemEntity(worldIn,pos.getX(),pos.getY(),pos.getZ(),tileEntityPrismTable.getSlot().getStackInSlot(1)));
+            worldIn.addEntity(new ItemEntity(worldIn,pos.getX(),pos.getY(),pos.getZ(),tileEntityPrismTable.getSlot().getStackInSlot(2)));
+        }
+        super.onBlockHarvested(worldIn, pos, state, player);
     }
 
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {

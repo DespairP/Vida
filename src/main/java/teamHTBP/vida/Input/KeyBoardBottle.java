@@ -40,7 +40,7 @@ public class KeyBoardBottle {
             KeyConflictContext.IN_GAME,
             KeyModifier.ALT,
             InputMappings.Type.KEYSYM,
-            GLFW.GLFW_KEY_D,
+            GLFW.GLFW_KEY_W,
             "key.category.vida");
     @SubscribeEvent
     public static void onKeyboardInput(InputEvent.KeyInputEvent event) {
@@ -48,7 +48,6 @@ public class KeyBoardBottle {
             //alpha += 2;
         }
         if (MESSAGE_KEY_1.isPressed()){
-            System.out.println("ssss");
             PacketChannel.INSTANCE.sendToServer(new PacketBottles(1));
         }
         if( MESSAGE_KEY_2.isPressed()){

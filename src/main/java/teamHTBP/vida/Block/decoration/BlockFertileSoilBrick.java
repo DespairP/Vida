@@ -7,6 +7,6 @@ import net.minecraftforge.common.ToolType;
 
 public class BlockFertileSoilBrick extends Block {
     public BlockFertileSoilBrick() {
-        super(Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE).hardnessAndResistance(2.0f, 2.0f));
+        super(Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE).hardnessAndResistance(2.0f, 6.0f));
     }
 }

@@ -6,7 +6,7 @@ import net.minecraftforge.common.ToolType;
 
 public class BlockDeepStoneBrick extends Block {
     public BlockDeepStoneBrick() {
-        super(Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).hardnessAndResistance(3.0f, 3.0f));
+        super(Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.0f, 6.0f));
     }
 
 

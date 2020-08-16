@@ -15,6 +15,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
 import teamHTBP.vida.Item.ItemLoader;
 
 import javax.annotation.Nullable;
@@ -24,7 +25,7 @@ public class BlockDeepStoneBrickStraight extends Block {
 
 
     public BlockDeepStoneBrickStraight() {
-        super(Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(3.0F,3.0F));
+        super(Properties.create(Material.ROCK).hardnessAndResistance(2.0f, 6.0f).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE));
     }
 
     @Nullable

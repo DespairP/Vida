@@ -132,6 +132,35 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         handleUpdateTag(pkt.getNbtCompound());
     }
 
+    @Override
+    public void handleUpdateTag(CompoundNBT tag) {
+        isProgressing = tag.getBoolean("isProgressing");
+        progress = tag.getInt("progress");
+        isBlockOver = tag.getBoolean("isBlockOver");
+        isElementOver = tag.getBoolean("isElementOver");
+        isMultiComplete = tag.getBoolean("isMutiComplete");
+        isVidaWandCilck = tag.getBoolean("isVidaWandClick");
+        element = tag.getInt("element");
+        for(int i = 0;i < 4;i++){
+            if(tag.contains("altarItem" + i)){
+                altarItem[i] =ItemStack.read( tag.getCompound("altarItem" + i));
+            }
+        }
+        this.extraItem = new ItemStack[10];
+        ListNBT nbtlist = tag.getList("extraItemList", 10);
+        if(nbtlist != null){
+            for(int j = 0; j< nbtlist.size();j++){
+                CompoundNBT nbt = nbtlist.getCompound(j);
+                if(nbt != null)   this.extraItem[j] = ItemStack.read(nbt);
+            }
+        }
+        if(tag.contains("coreItem")){
+            this.coreItem =ItemStack.read( tag.getCompound("coreItem") );
+        }
+        super.handleUpdateTag(tag);
+
+    }
+
     //获取祭坛中还有的空余物品栈
     public int getEmptyAltarItemStackNum(){
         int empty = 0;
@@ -144,7 +173,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
     public boolean setAltarItemStack(ItemStack itemStack){
         //如果在进行仪式，不能放物品
         if(this.isProgressing) return false;
-        for(int i=0; i < 4;i ++){
+        for(int i = 0; i < 4;i ++){
             if(this.altarItem[i] == ItemStack.EMPTY || this.altarItem[i].isEmpty()) { this.altarItem[i] = itemStack; return true;}
         }
         return false;
@@ -164,7 +193,9 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         //如果在进行仪式，不能拿取物品
         if(this.isProgressing == true) return ItemStack.EMPTY;
         for(int i = 0; i < 4 ;i++){
-        if(this.altarItem[i] != ItemStack.EMPTY && !this.altarItem[i].isEmpty()) { return this.altarItem[i];}
+        if(this.altarItem[i] != ItemStack.EMPTY && !this.altarItem[i].isEmpty()) {
+            return this.altarItem[i];
+        }
         }
         if(this.coreItem != ItemStack.EMPTY) return this.coreItem;
         return ItemStack.EMPTY;
@@ -214,6 +245,8 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         if(this.isProgressing && this.progress>=this.MAX_PROGRESS){
             this.generateCrystal();
         }
+
+        //world.notifyBlockUpdate(pos,getBlockState(),getBlockState(),3);
     }
 
     public boolean judAltarItem(){

@@ -8,6 +8,6 @@ import net.minecraftforge.common.ToolType;
 public class BlockNetherfireBrick extends Block {
 
     public BlockNetherfireBrick() {
-        super(Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE).hardnessAndResistance(2.0f, 2.0f));
+        super(Properties.create(Material.ROCK).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE).hardnessAndResistance(3.0f, 6.0f));
     }
 }

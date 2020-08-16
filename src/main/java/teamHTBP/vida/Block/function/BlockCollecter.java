@@ -3,6 +3,7 @@ package teamHTBP.vida.Block.function;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -12,9 +13,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
 import teamHTBP.vida.Item.ItemElementCoreVoid;
 import teamHTBP.vida.Item.ItemLoader;
 import teamHTBP.vida.TileEntity.TileEntityCollector;
+import teamHTBP.vida.TileEntity.TileEntityElementCoreAltar;
 import teamHTBP.vida.TileEntity.TileEntityOreReationMachine;
 import teamHTBP.vida.TileEntity.TileEntityPurfiedCauldron;
 import teamHTBP.vida.particle.CubeParticleData;
@@ -25,7 +28,7 @@ import java.util.Random;
 
 public class BlockCollecter extends Block {
     public BlockCollecter() {
-        super(Properties.create(Material.WOOD).notSolid().hardnessAndResistance(3.0f,3.0f));
+        super(Properties.create(Material.WOOD).notSolid().hardnessAndResistance(3.5f));
     }
 
     @Override
@@ -64,6 +67,15 @@ public class BlockCollecter extends Block {
             }
         }
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+    }
+
+    @Override
+    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+        TileEntityCollector tileEntityCollector = (TileEntityCollector) worldIn.getTileEntity(pos);
+        if(tileEntityCollector != null && !worldIn.isRemote){
+            worldIn.addEntity(new ItemEntity(worldIn,pos.getX(),pos.getY(),pos.getZ(),tileEntityCollector.coreItem));
+        }
+        super.onBlockHarvested(worldIn, pos, state, player);
     }
 
 

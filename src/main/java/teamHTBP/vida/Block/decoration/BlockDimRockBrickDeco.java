@@ -7,6 +7,6 @@ import net.minecraftforge.common.ToolType;
 
 public class BlockDimRockBrickDeco extends Block {
     public BlockDimRockBrickDeco() {
-        super(Properties.create(Material.ROCK).hardnessAndResistance(3.0f, 3.0f).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE));
+        super(Properties.create(Material.ROCK).hardnessAndResistance(2.0f, 6.0f).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE));
     }
 }

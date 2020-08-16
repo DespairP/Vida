@@ -34,7 +34,7 @@ public class TileEntityCollector extends TileEntity implements ITickableTileEnti
         if(compound.contains("coreItem"))
             coreItem = ItemStack.read(compound.getCompound("coreItem"));
         isCollect = compound.getBoolean("isCollect");
-        collection = compound.getInt("collection");
+        collection = compound.getInt("collectionU");
         element = compound.getInt("element");
         super.read(compound);
     }
@@ -42,7 +42,7 @@ public class TileEntityCollector extends TileEntity implements ITickableTileEnti
     public CompoundNBT write(CompoundNBT compound) {
         if(coreItem != ItemStack.EMPTY || !coreItem.isEmpty())
             compound.put("coreItem", coreItem.serializeNBT());
-        compound.putInt("collection", collection);
+        compound.putInt("collectionU", collection);
         compound.putBoolean("isCollect", isCollect);
         compound.putInt("element", element);
         return super.write(compound);
@@ -74,7 +74,7 @@ public class TileEntityCollector extends TileEntity implements ITickableTileEnti
             coreItem = ItemStack.EMPTY;
 
         isCollect = tag.getBoolean("isCollect");
-        collection = tag.getInt("collection");
+        collection = tag.getInt("collectionU");
         element = tag.getInt("element");
         super.handleUpdateTag(tag);
         super.read(tag);
@@ -137,7 +137,7 @@ public class TileEntityCollector extends TileEntity implements ITickableTileEnti
     @Override
     public void tick() {
         boolean flag = false;
-        if(world.isRemote){
+        if(!world.isRemote){
             if(!isCollect && hasEmptyElementCore()){
                 this.isCollect = true;
                 this.element = ElementHelper.getBiomeElement(world.getBiome(pos));
@@ -154,7 +154,7 @@ public class TileEntityCollector extends TileEntity implements ITickableTileEnti
             if((this.coreItem == ItemStack.EMPTY || this.coreItem.isEmpty()) && this.collection > 0){
                 this.element = 0;
                 this.isCollect = false;
-                this.collection = 0;
+               this.collection = 0;
                 flag = true;
             }
         }

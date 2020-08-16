@@ -50,6 +50,18 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
         super(TileEntityLoader.TileEntityOreReationMachine.get());
     }
 
+    public Inventory getSmeltSlotInv(){
+        return this.smeltSlot;
+    }
+
+    public Inventory getFuelInv(){
+        return this.fuel;
+    }
+
+    public Inventory getCompleteInv(){
+        return this.completeSlot;
+    }
+
     @Override
     public void read(CompoundNBT compound) {
         this.smeltSlot.setInventorySlotContents(0,ItemStack.read(compound.getCompound("smeltslot0")));

@@ -46,7 +46,7 @@ public class BlockGemShower extends Block {
 
 
     public BlockGemShower() {
-        super(Properties.create(Material.WOOD).sound(SoundType.WOOD).notSolid().hardnessAndResistance(3.0f, 3.0f).harvestTool(ToolType.AXE));
+        super(Properties.create(Material.WOOD).sound(SoundType.WOOD).notSolid().hardnessAndResistance(2.0f, 3.0f).harvestTool(ToolType.AXE));
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(HALF, DoubleBlockHalf.LOWER));
 
     }

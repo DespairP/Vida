@@ -5,6 +5,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -56,14 +58,18 @@ public class BlockElementCoreAltar extends Block {
             if (handIn == Hand.MAIN_HAND && !player.isSneaking() && !handItemResult) {
                 if (player.inventory.getCurrentItem() != ItemStack.EMPTY) {
                     //先检测是不是核心物品
-                    boolean result = tileEntityElementCoreAltar.setCoreItemStack(new ItemStack(player.inventory.getCurrentItem().getItem(), 1));
+                    ItemStack stack = player.inventory.getCurrentItem().copy();
+                    stack.setCount(1);
+                    boolean result = tileEntityElementCoreAltar.setCoreItemStack(stack);
                     if (result) {
                         this.decreasePlayerItem(player);
                         worldIn.notifyBlockUpdate(pos, state, state, 3);
                         return ActionResultType.SUCCESS;
                     } else {
                         //不是的话放入祭坛物品中
-                        result = tileEntityElementCoreAltar.setAltarItemStack(new ItemStack(player.inventory.getCurrentItem().getItem(), 1));
+                        stack = player.inventory.getCurrentItem().copy();
+                        stack.setCount(1);
+                        result = tileEntityElementCoreAltar.setAltarItemStack(stack);
                         if (result) {
                             this.decreasePlayerItem(player);
                             worldIn.notifyBlockUpdate(pos, state, state, 3);
@@ -75,11 +81,10 @@ public class BlockElementCoreAltar extends Block {
                 //拿到祭坛中的物品
             }else if (handIn == Hand.MAIN_HAND && player.isSneaking() && !handItemResult) {
                 ItemStack itemStack = tileEntityElementCoreAltar.getAltarItemStack();
-                if (itemStack != ItemStack.EMPTY) {
+                if (itemStack != ItemStack.EMPTY || !itemStack.isEmpty()) {
                     player.inventory.addItemStackToInventory(itemStack);
-                    itemStack = ItemStack.EMPTY;
-                    worldIn.notifyBlockUpdate(pos, state, state, 3);
                 }
+                worldIn.notifyBlockUpdate(pos, state, state, 3);
             }else if (!player.isSneaking() && handItemResult) {
                 //如果法杖右键的话，开始检测
                 tileEntityElementCoreAltar.isVidaWandCilck = true;
@@ -97,9 +102,26 @@ public class BlockElementCoreAltar extends Block {
         if(player.isCreative()){
             return;
         }else{
-            int count = player.inventory.getCurrentItem().getCount();
-            player.inventory.getCurrentItem().setCount(count - 1);
+            player.inventory.getCurrentItem().shrink(1);
         }
+    }
+
+    @Override
+    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+        TileEntityElementCoreAltar tileEntityElementCoreAltar = (TileEntityElementCoreAltar) worldIn.getTileEntity(pos);
+        if(tileEntityElementCoreAltar != null && !worldIn.isRemote){
+           for(int i = 0; i< 4;i++) {
+               ItemStack stack = tileEntityElementCoreAltar.altarItem[i];
+               if(stack != ItemStack.EMPTY && !stack.isEmpty()){
+                   worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack));
+               }
+               stack = ItemStack.EMPTY;
+           }
+           if(tileEntityElementCoreAltar.coreItem!=ItemStack.EMPTY &&!tileEntityElementCoreAltar.coreItem.isEmpty())
+            worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityElementCoreAltar.coreItem));
+
+        }
+        super.onBlockHarvested(worldIn, pos, state, player);
     }
 
 

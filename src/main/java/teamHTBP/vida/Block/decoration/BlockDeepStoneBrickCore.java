@@ -6,6 +6,6 @@ import net.minecraft.block.material.Material;
 
 public class BlockDeepStoneBrickCore extends Block {
     public BlockDeepStoneBrickCore() {
-        super(Properties.create(Material.ROCK).hardnessAndResistance(3.0f, 3.0f).sound(SoundType.STONE));
+        super(Properties.create(Material.ROCK).hardnessAndResistance(2.0f, 6.0f).sound(SoundType.STONE));
     }
 }

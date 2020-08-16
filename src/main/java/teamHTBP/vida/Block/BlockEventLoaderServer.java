@@ -8,6 +8,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.IForgeRegistry;
 import teamHTBP.vida.Item.armor.ItemArmorElementLegginsWithBottles;
 
 import java.util.Random;
@@ -28,7 +29,12 @@ public class BlockEventLoaderServer {
                         ItemStack stack1 = ItemStack.read(nbt.getCompound("bottle" + i));
                         if (stack1 != ItemStack.EMPTY && !stack1.isEmpty()) {
                             int progress = nbt.getInt("bottle"+ i +"Num");
-                            if (progress < 100) nbt.putInt("bottle"+i+"Num", progress + new Random().nextInt(3) + 1);
+                            if (progress < 100 && ((ItemArmorElementLegginsWithBottles) stack.getItem()).element != 4) {nbt.putInt("bottle"+i+"Num", progress + new Random().nextInt(3) + 1);
+                            if(((ItemArmorElementLegginsWithBottles)(stack.getItem())).element == 1){
+                                    if(new Random().nextFloat() > 0.85D)
+                                        nbt.putInt("bottle"+(new Random().nextInt(3)+1)+"Num",100);
+                                }
+                            } else if(progress < 200 && ((ItemArmorElementLegginsWithBottles) stack.getItem()).element ==4) {nbt.putInt("bottle"+i+"Num", progress + new Random().nextInt(3) + 1);}
                         }
                     }
                 }

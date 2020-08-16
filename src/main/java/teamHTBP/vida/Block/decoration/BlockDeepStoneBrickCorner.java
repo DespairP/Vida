@@ -17,6 +17,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
 import teamHTBP.vida.Item.ItemLoader;
 
 import javax.annotation.Nullable;
@@ -27,7 +28,7 @@ public class BlockDeepStoneBrickCorner extends Block {
 
 
     public BlockDeepStoneBrickCorner() {
-        super( Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0f, 3.0f).sound(SoundType.STONE));
+        super( Block.Properties.create(Material.ROCK).hardnessAndResistance(2.0f, 6.0f).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE));
         this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.NORTH).with(STATE,0));
     }
 

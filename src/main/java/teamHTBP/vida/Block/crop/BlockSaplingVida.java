@@ -22,7 +22,7 @@ public class BlockSaplingVida extends BushBlock implements IGrowable {
     private Tree tree;
 
     public BlockSaplingVida() {
-        super(Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().notSolid().sound(SoundType.GROUND));
+        super(Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().tickRandomly().notSolid().hardnessAndResistance(0.5f).sound(SoundType.GROUND));
         this.tree = new VidaTree();
 
     }

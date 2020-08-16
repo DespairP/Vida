@@ -5,6 +5,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.tileentity.TileEntity;
@@ -50,7 +51,13 @@ public class PacketBottles {
                 if(progress >= 100 && stack1 != ItemStack.EMPTY && !stack1.isEmpty()){
                  List<EffectInstance> list = PotionUtils.getEffectsFromStack(stack1);
                  for(EffectInstance instance : list){
+                     if(((ItemArmorElementLegginsWithBottles) stack.getItem()).element == 5)
+                     entity.addPotionEffect(new EffectInstance(instance.getPotion(),instance.getDuration() * 2,instance.getAmplifier()));
+                     else
                      entity.addPotionEffect(new EffectInstance(instance));
+                 }
+                 if(((ItemArmorElementLegginsWithBottles) stack.getItem()).element == 3){
+                     entity.addPotionEffect(new EffectInstance(Effect.get(10),10));
                  }
                     switch (this.mode){
                         case 1:

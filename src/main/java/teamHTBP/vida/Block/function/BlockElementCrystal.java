@@ -14,7 +14,7 @@ public abstract class BlockElementCrystal extends Block {
     public  VoxelShape SHAPE;
 
     public BlockElementCrystal() {
-        super(Properties.create(Material.GLASS).hardnessAndResistance(3.5F, 5.0F).notSolid().sound(SoundType.GLASS).lightValue(15));
+        super(Properties.create(Material.GLASS).hardnessAndResistance(1.0F).notSolid().sound(SoundType.GLASS).lightValue(15));
     }
 
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {

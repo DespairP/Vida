@@ -3,8 +3,10 @@ package teamHTBP.vida.Block.function;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
@@ -13,7 +15,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.NetworkHooks;
+import teamHTBP.vida.TileEntity.TileEntityElementCoreAltar;
 import teamHTBP.vida.TileEntity.TileEntityOreReationMachine;
 import teamHTBP.vida.TileEntity.TileEntityPrismTable;
 
@@ -28,6 +32,19 @@ public class BlockOreReactionMachine extends Block {
     @Override
     public boolean hasTileEntity(BlockState state) {
         return true;
+    }
+
+    @Override
+    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+        TileEntityOreReationMachine tileEntityOreReationMachine = (TileEntityOreReationMachine) worldIn.getTileEntity(pos);
+        if(tileEntityOreReationMachine != null){
+            for(int i = 0 ;i < 4;i++)
+            worldIn.addEntity(new ItemEntity(worldIn,pos.getX(),pos.getY(),pos.getZ(),tileEntityOreReationMachine.getSmeltSlotInv().getStackInSlot(i)));
+            worldIn.addEntity(new ItemEntity(worldIn,pos.getX(),pos.getY(),pos.getZ(), tileEntityOreReationMachine.getFuelInv().getStackInSlot(0)));
+            worldIn.addEntity(new ItemEntity(worldIn,pos.getX(),pos.getY(),pos.getZ(),tileEntityOreReationMachine.getCompleteSlot().getStackInSlot(0)));
+
+        }
+        super.onBlockHarvested(worldIn, pos, state, player);
     }
 
     @Nullable
