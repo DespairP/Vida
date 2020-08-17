@@ -112,10 +112,17 @@
   "block.vida.dimrockbrickdeco1": "Decorated Dimrock Brick 2",
   "block.vida.dimrockbrickdeco2": "Decorated Dimrock Brick 3",
   "desc.picklevel.level": "LEVEL：",
+  "desc.swordlevel.level": "LEVEL：",
   "item.vida.goldelementpickaxe": "Shiny Metal Pickaxe",
   "item.vida.woodelementpickaxe": "Greenwood Pickaxe",
   "item.vida.aquaelementpickaxe": "Aquamarine Pickaxe",
   "item.vida.fireelementpickaxe": "Burstflame Pickaxe",
-  "item.vida.earthelementpickaxe": "Earthcore Pickaxe"
-
+  "item.vida.earthelementpickaxe": "Earthcore Pickaxe",
+  "item.vida.goldelementsword": "Shiny Metal Sword",
+  "item.vida.woodelementsword": "Greenwood Sword",
+  "item.vida.aquaelementsword": "Aquamarine Sword",
+  "item.vida.fireelementsword": "Burstflame Sword",
+  "item.vida.earthelementsword": "Earthcore Sword",
+  "item.vida.prism": "Prism",
+  "item.vida.elementbottle": "Element Bottle"
 }

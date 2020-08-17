@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#O#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "vida:logvida"
+    },
+    "O": {
+      "item": "minecraft:cauldron"
+    }
+  },
+  "result": {
+    "item": "vida:purfiedcauldron"
+  }
+}

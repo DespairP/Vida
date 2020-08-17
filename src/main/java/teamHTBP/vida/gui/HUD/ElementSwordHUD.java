@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import teamHTBP.vida.Item.staff.ItemElementPickaxe;
+import teamHTBP.vida.Item.staff.ItemElementSword;
 import teamHTBP.vida.Vida;
 
 public class ElementSwordHUD extends AbstractGui {
@@ -32,11 +33,11 @@ public class ElementSwordHUD extends AbstractGui {
         RenderSystem.enableBlend();
         int screenWidth =this.width / 2 - 210;
         int screenHeight = this.height/2 + 60;
-        int pixel_element = ((ItemElementPickaxe)itemStack.getItem()).element;
+        int pixel_element = ((ItemElementSword)itemStack.getItem()).element;
         CompoundNBT nbt = itemStack.getOrCreateTag();
         int level = nbt.getInt("level");
         int exp = nbt.getInt("swordEXP");
-        int progress = (int)(exp * 16.0f/(level * 500.0f));
+        int progress = (int)(exp * 16.0f/(level  * 200 + level * 13));
         if(progress >= 16) progress = 16;
         RenderSystem.scaled(1.2f, 1.2f, 1.2f);
         this.minecraft.getTextureManager().bindTexture(HUD);

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "vidabrach",
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "vida:plankvida2"
+    }
+  },
+  "result": {
+    "item": "vida:vidabranch",
+    "count": 4
+  }
+}

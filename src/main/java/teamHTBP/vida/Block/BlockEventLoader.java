@@ -24,6 +24,7 @@ import teamHTBP.vida.Input.KeyBoardBottle;
 import teamHTBP.vida.Input.KeyBoardLoader;
 import teamHTBP.vida.Item.armor.ItemArmorElementLegginsWithBottles;
 import teamHTBP.vida.Item.staff.ItemElementPickaxe;
+import teamHTBP.vida.Item.staff.ItemElementSword;
 import teamHTBP.vida.TileEntity.TileEntityCollector;
 import teamHTBP.vida.TileEntity.TileEntityElementCoreAltar;
 import teamHTBP.vida.TileEntity.TileEntityPurfiedCauldron;
@@ -33,8 +34,9 @@ import teamHTBP.vida.gui.HUD.*;
 @Mod.EventBusSubscriber(Dist.CLIENT)
 public class BlockEventLoader {
     public static int alpha = 0;
-    public static int level_up_alpha = 0;
+    public static int sword_alpha = 0;
     public static ItemStack itemStack = ItemStack.EMPTY;
+    public static ItemStack itemStack1 = ItemStack.EMPTY;
     //锅的HUD
     @SubscribeEvent
     public static void onOverlayRender(RenderGameOverlayEvent event) {
@@ -104,6 +106,20 @@ public class BlockEventLoader {
 
         if(alpha == 0){
             itemStack = ItemStack.EMPTY;
+        }
+
+        if(player.inventory.getCurrentItem().getItem() instanceof ItemElementSword){
+            if(sword_alpha < 100)sword_alpha += 2;
+            itemStack1 = player.inventory.getCurrentItem();
+        }
+        else{
+            if(sword_alpha > 0)sword_alpha-=2;
+        }
+
+        if(sword_alpha > 0 && itemStack1 != ItemStack.EMPTY && !itemStack1.isEmpty()){
+            //ItemStack stack = player.inventory.getCurrentItem();
+            ElementSwordHUD hud = new ElementSwordHUD(itemStack1, sword_alpha);
+            hud.render();
         }
 
 

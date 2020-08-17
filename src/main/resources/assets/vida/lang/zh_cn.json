@@ -112,9 +112,17 @@
   "block.vida.dimrockbrickdeco1": "饰纹黯淡石砖",
   "block.vida.dimrockbrickdeco2": "饰纹黯淡石砖",
   "desc.picklevel.level": "等级：",
+  "desc.swordlevel.level": "等级：",
   "item.vida.goldelementpickaxe": "闪金镐",
   "item.vida.woodelementpickaxe": "朽木镐",
   "item.vida.aquaelementpickaxe": "海蓝镐",
   "item.vida.fireelementpickaxe": "烈焰镐",
-  "item.vida.earthelementpickaxe": "地核镐"
+  "item.vida.earthelementpickaxe": "地核镐",
+  "item.vida.goldelementsword": "闪金剑",
+  "item.vida.woodelementsword": "朽木剑",
+  "item.vida.aquaelementsword": "海蓝剑",
+  "item.vida.fireelementsword": "烈焰剑",
+  "item.vida.earthelementsword": "地核剑",
+  "item.vida.prism": "棱镜",
+  "item.vida.elementbottle": "元素之瓶"
 }

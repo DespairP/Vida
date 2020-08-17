@@ -2,12 +2,14 @@ package teamHTBP.vida.Block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.OreBlock;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Hand;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -15,6 +17,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
 import teamHTBP.vida.Item.armor.ItemArmorElementLegginsWithBottles;
 import teamHTBP.vida.Item.staff.ItemElementPickaxe;
+import teamHTBP.vida.Item.staff.ItemElementSword;
 import teamHTBP.vida.gui.HUD.ElementPickaxeHUD;
 
 import java.util.Random;
@@ -87,5 +90,34 @@ public class BlockEventLoaderServer {
             return true;
         }
         return false;
+    }
+
+    @SubscribeEvent
+    public static void hitEntity(LivingAttackEvent event){
+        Entity entity = event.getSource().getImmediateSource();
+        if(entity instanceof PlayerEntity){
+            PlayerEntity playerEntity = (PlayerEntity)entity;
+            ItemStack stack = playerEntity.getHeldItem(Hand.MAIN_HAND);
+            if(stack.getItem() instanceof ItemElementSword){
+                CompoundNBT nbt = stack.getOrCreateTag();
+                int level = nbt.getInt("level");
+                int exp = nbt.getInt("swordEXP");
+                if(level < 30){
+                    nbt.putInt("swordEXP", exp + new Random().nextInt(3) + 3);
+                    level_up_sword(level, exp, stack);
+                }
+            }
+        }
+    }
+
+
+    public static boolean level_up_sword(int level,int exp,ItemStack stack){
+        if(level  * 200 + level * 13 <= exp){
+            CompoundNBT nbt = stack.getOrCreateTag();
+            nbt.putInt("level", level + 1);
+            nbt.putInt("swordEXP", exp - (level  * 200 + level * 13));
+            return true;
+        }
+        return  false;
     }
 }
