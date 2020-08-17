@@ -42,7 +42,7 @@
   "item.vida.aquabootsarmor": "海洋靴子",
   "item.vida.woodbootsarmor": "朽木靴子",
   "item.vida.goldbootsarmor": "闪金靴子",
-  "item.vida.earthbootsearmor": "地核靴子",
+  "item.vida.earthbootsarmor": "地核靴子",
   "item.vida.goldenegygemfragment": "闪金之魂",
   "item.vida.woodenegygemfragment": "朽木之魂",
   "item.vida.aquaenegygemfragment": "海蓝之魂",
@@ -124,5 +124,10 @@
   "item.vida.fireelementsword": "烈焰剑",
   "item.vida.earthelementsword": "地核剑",
   "item.vida.prism": "棱镜",
-  "item.vida.elementbottle": "元素之瓶"
+  "item.vida.elementbottle": "元素之瓶",
+  "key.bottle1.use": "元素瓶[左]使用",
+  "key.bottle2.use": "元素瓶[右]使用",
+  "key.bottle3.use": "元素瓶[中]使用",
+  "key.bottles": "元素瓶装填显示",
+  "key.category.vida": "'生命'键位设置"
 }

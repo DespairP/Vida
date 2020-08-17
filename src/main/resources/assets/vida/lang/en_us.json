@@ -124,5 +124,10 @@
   "item.vida.fireelementsword": "Burstflame Sword",
   "item.vida.earthelementsword": "Earthcore Sword",
   "item.vida.prism": "Prism",
-  "item.vida.elementbottle": "Element Bottle"
+  "item.vida.elementbottle": "Element Bottle",
+  "key.bottle1.use": "Element Bottle[Left]use",
+  "key.bottle2.use": "Element Bottle[Right]use",
+  "key.bottle3.use": "Element Bottle[Middle]use",
+  "key.bottles": "Show Element Bottle Condition[%]",
+  "key.category.vida": "Vida Settings"
 }
