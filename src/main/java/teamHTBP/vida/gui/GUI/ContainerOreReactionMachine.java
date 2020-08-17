@@ -6,6 +6,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import teamHTBP.vida.TileEntity.SlotNumberArray.OreReactionMachineArray;
@@ -66,5 +67,46 @@ public class ContainerOreReactionMachine extends Container {
         // Hotbar
         topRow += 58;
         addSlotRange(inventory, 0, leftCol, topRow, 9, 18);
+    }
+
+    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
+        ItemStack itemstack = ItemStack.EMPTY;
+        Slot slot = this.inventorySlots.get(index);
+        if (slot != null && slot.getHasStack()) {
+            ItemStack itemstack1 = slot.getStack();
+            itemstack = itemstack1.copy();
+            if (index <= 5) {
+                if (!this.mergeItemStack(itemstack1, 6, 41, true)) {
+                    return ItemStack.EMPTY;
+                }
+                slot.onSlotChange(itemstack1, itemstack);
+            } else if (this.mergeItemStack(itemstack1, 0, 5, false)) {
+                return ItemStack.EMPTY;
+            } else if (index >= 6 && index < 33) {
+                if (!this.mergeItemStack(itemstack1, 33, 41, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (index >= 33 && index < 41) {
+                if (!this.mergeItemStack(itemstack1, 6, 41, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (!this.mergeItemStack(itemstack1, 6, 41, false)) {
+                return ItemStack.EMPTY;
+            }
+
+            if (itemstack1.isEmpty()) {
+                slot.putStack(ItemStack.EMPTY);
+            } else {
+                slot.onSlotChanged();
+            }
+
+            if (itemstack1.getCount() == itemstack.getCount()) {
+                return ItemStack.EMPTY;
+            }
+
+            slot.onTake(playerIn, itemstack1);
+        }
+
+        return itemstack;
     }
 }
