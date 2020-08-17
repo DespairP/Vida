@@ -19,13 +19,13 @@ public class ContainerTypeLoader {
 
     public static RegistryObject<ContainerType<ContainerPrismTable>> prismTable = CONTAINER_TYPES.register("container_prismtable", () ->{
         return IForgeContainerType.create((int id, PlayerInventory inventory, PacketBuffer buffer)->{
-            return new ContainerPrismTable(id, inventory, buffer.readBlockPos(), Minecraft.getInstance().world,new PrismTableArray());
+            return new ContainerPrismTable(id, inventory, buffer.readBlockPos(), inventory.player.world,new PrismTableArray());
         });
     });
 
     public static RegistryObject<ContainerType<ContainerOreReactionMachine>> oreReaction = CONTAINER_TYPES.register("container_orereactionmachine", () ->{
         return IForgeContainerType.create((int id, PlayerInventory inventory, PacketBuffer buffer)->{
-            return new ContainerOreReactionMachine(id, inventory, buffer.readBlockPos(), Minecraft.getInstance().world,new OreReactionMachineArray());
+            return new ContainerOreReactionMachine(id, inventory, buffer.readBlockPos(), inventory.player.world,new OreReactionMachineArray());
         });
     });
 
