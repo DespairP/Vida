@@ -7,18 +7,13 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Hand;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.IForgeRegistry;
 import teamHTBP.vida.Item.armor.ItemArmorElementLegginsWithBottles;
 import teamHTBP.vida.Item.staff.ItemElementPickaxe;
 import teamHTBP.vida.Item.staff.ItemElementSword;
-import teamHTBP.vida.gui.HUD.ElementPickaxeHUD;
 
 import java.util.Random;
 

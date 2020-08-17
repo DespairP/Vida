@@ -1,8 +1,6 @@
 package teamHTBP.vida.worldGen;
 
-import net.minecraft.block.Block;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.HugeTreeFeatureConfig;
+import net.minecraft.world.gen.feature.Feature;;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;

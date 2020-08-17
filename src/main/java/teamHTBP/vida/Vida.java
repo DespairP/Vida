@@ -18,7 +18,6 @@ import teamHTBP.vida.gui.GUI.ContainerTypeLoader;
 import teamHTBP.vida.particle.ParticleLoader;
 import teamHTBP.vida.recipe.OreReactionMachineRecipe;
 import teamHTBP.vida.recipe.RecipeLoader;
-import teamHTBP.vida.worldGen.BiomeGenLoader;
 import teamHTBP.vida.worldGen.GenLoader;
 
 
