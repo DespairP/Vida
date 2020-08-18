@@ -2,7 +2,6 @@ package teamHTBP.vida.TileEntity;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
@@ -10,22 +9,16 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.AbstractCookingRecipe;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import teamHTBP.vida.Item.armor.ItemArmorElementBoots;
 import teamHTBP.vida.TileEntity.SlotNumberArray.OreReactionMachineArray;
 import teamHTBP.vida.gui.GUI.ContainerOreReactionMachine;
-import teamHTBP.vida.gui.GUI.ContainerPrismTable;
-import teamHTBP.vida.recipe.OreReactionMachineRecipe;
-import teamHTBP.vida.recipe.RecipeLoader;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -231,11 +224,11 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
 
     protected boolean canSmelt(){
         ItemStack stack = getOutPutItemStack(this.smeltSlot.getStackInSlot(0)).orElse(ItemStack.EMPTY);
-
         if(stack == ItemStack.EMPTY || stack.isEmpty() || this.outPutItemStack != ItemStack.EMPTY || !this.outPutItemStack.isEmpty()){
             return false;
         }else{
             ItemStack stack1 = completeSlot.getStackInSlot(0);
+            stack1.setCount(2);
             if(stack1 == ItemStack.EMPTY || stack1.isEmpty())
                 return true;
             else if(stack.getItem() == stack1.getItem())
@@ -260,9 +253,10 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
     protected void smelt(){
         ItemStack itemStack = getOutPutItemStack(this.outPutItemStack).orElse(ItemStack.EMPTY);
         if(this.completeSlot.getStackInSlot(0).isEmpty()){
+            itemStack.setCount(2);
             this.completeSlot.setInventorySlotContents(0, itemStack.copy());
         }else{
-            this.completeSlot.getStackInSlot(0).grow(itemStack.getCount());
+            this.completeSlot.getStackInSlot(0).grow(2);
         }
         this.outPutItemStack = ItemStack.EMPTY;
     }

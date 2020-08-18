@@ -25,6 +25,7 @@ public class OreReactionMachineRecipe implements IRecipe<IInventory> {
     };
     public OreReactionMachineRecipe(ResourceLocation id){
         this.id = id;
+
     }
     @Override
     public boolean matches(IInventory inv, World worldIn) {
@@ -83,15 +84,15 @@ public class OreReactionMachineRecipe implements IRecipe<IInventory> {
         public OreReactionMachineRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
             OreReactionMachineRecipe recipe = new OreReactionMachineRecipe(recipeId);
             recipe.output = buffer.readItemStack();
+            recipe.maxOutPut = buffer.readInt();
             recipe.ingredient = Ingredient.read(buffer);
-            //recipe.maxOutPut = buffer.readVarInt();
             return recipe;
         }
 
         @Override
         public void write(PacketBuffer buffer, OreReactionMachineRecipe recipe) {
-            buffer.writeVarInt(recipe.maxOutPut);
             buffer.writeItemStack(recipe.output);
+            buffer.writeInt(recipe.maxOutPut);
             recipe.ingredient.write(buffer);
         }
     }
