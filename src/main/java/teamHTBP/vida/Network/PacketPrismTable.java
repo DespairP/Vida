@@ -9,12 +9,12 @@ import teamHTBP.vida.TileEntity.TileEntityPrismTable;
 import java.util.function.Supplier;
 
 public class PacketPrismTable {
-    private int mirrorX;
-    private int mirrorY;
-    private boolean isClick;
-    private int x;
-    private int y;
-    private int z;
+    private int mirrorX = 0;
+    private int mirrorY = 0;
+    private boolean isClick = false;
+    private int x =0;
+    private int y =0;
+    private int z =0;
     public PacketPrismTable(PacketBuffer buffer) {
         mirrorX = buffer.readInt();
         mirrorY = buffer.readInt();
@@ -44,6 +44,7 @@ public class PacketPrismTable {
 
     public void handler(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(()->{
+            if(ctx.get().getSender() == null) return;
             TileEntity tileEntity = ctx.get().getSender().world.getTileEntity(new BlockPos(x,y,z));
             if(tileEntity instanceof TileEntityPrismTable){
                 TileEntityPrismTable tileEntityPrismTable = (TileEntityPrismTable)tileEntity;
@@ -52,6 +53,7 @@ public class PacketPrismTable {
                 tileEntityPrismTable.isClick = true;
             }
         });
+        ctx.get().setPacketHandled(true);
     }
 
 }

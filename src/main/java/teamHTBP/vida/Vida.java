@@ -47,8 +47,8 @@ public class Vida {
       ContainerTypeLoader.CONTAINER_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
       MinecraftForge.EVENT_BUS.register(ItemElementCoreVoid.class);
       MinecraftForge.EVENT_BUS.register(BlockEventLoaderServer.class);
-      RecipeLoader.RECIPES.register(FMLJavaModLoadingContext.get().getModEventBus());
-      registerType(OREACTION, OreReactionMachineRecipe.RECIPE_TYPE);
+      //RecipeLoader.RECIPES.register(FMLJavaModLoadingContext.get().getModEventBus());
+      //registerType(OREACTION, OreReactionMachineRecipe.RECIPE_TYPE);
    }
 
 

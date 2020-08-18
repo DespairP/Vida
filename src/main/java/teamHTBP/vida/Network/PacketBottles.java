@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class PacketBottles {
-    private int mode;
+    private int mode = 0;
     public PacketBottles(PacketBuffer buffer){
         mode = buffer.readInt();
     }
@@ -32,8 +32,10 @@ public class PacketBottles {
     }
 
 
+
     public void handler(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(()->{
+            if(ctx.get().getSender() == null) return;
             PlayerEntity entity = ctx.get().getSender();
             ItemStack stack = entity.inventory.armorInventory.get(1);
             if(stack.getItem() instanceof ItemArmorElementLegginsWithBottles){
@@ -73,5 +75,6 @@ public class PacketBottles {
                }
             }
         );
+        ctx.get().setPacketHandled(true);
     }
 }

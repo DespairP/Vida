@@ -9,7 +9,9 @@ import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.crafting.AbstractCookingRecipe;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
@@ -62,6 +64,7 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
         return this.completeSlot;
     }
 
+    IRecipeType<? extends AbstractCookingRecipe> recipeTypeIn = IRecipeType.SMELTING;
     @Override
     public void read(CompoundNBT compound) {
         this.smeltSlot.setInventorySlotContents(0,ItemStack.read(compound.getCompound("smeltslot0")));
@@ -217,17 +220,18 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
     }
 
     //得到合成表
-    protected Optional<OreReactionMachineRecipe> getRecipe(){
-        return world.getRecipeManager().getRecipe(OreReactionMachineRecipe.RECIPE_TYPE , this.smeltSlot, world);
+    protected Optional<AbstractCookingRecipe> getRecipe(){
+        return world.getRecipeManager().getRecipe((IRecipeType<AbstractCookingRecipe>)recipeTypeIn, this.smeltSlot, world);
     }
 
     protected Optional<ItemStack> getOutPutItemStack(ItemStack stack){
         Inventory inv =  new Inventory(stack);
-        return world.getRecipeManager().getRecipe(OreReactionMachineRecipe.RECIPE_TYPE , inv, world).map(recipe -> recipe.getCraftingResult(inv));
+        return world.getRecipeManager().getRecipe(recipeTypeIn, inv, world).map(recipe -> recipe.getCraftingResult(inv));
     }
 
     protected boolean canSmelt(){
         ItemStack stack = getOutPutItemStack(this.smeltSlot.getStackInSlot(0)).orElse(ItemStack.EMPTY);
+
         if(stack == ItemStack.EMPTY || stack.isEmpty() || this.outPutItemStack != ItemStack.EMPTY || !this.outPutItemStack.isEmpty()){
             return false;
         }else{
