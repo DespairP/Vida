@@ -28,6 +28,12 @@ public class RenderLoader {
     public static ResourceLocation  aqualogoLocation = new ResourceLocation(Vida.modId,  "model/aqualogo");
     public static ResourceLocation  firelogoLocation = new ResourceLocation(Vida.modId,  "model/firelogo");
     public static ResourceLocation earthlogoLocation = new ResourceLocation(Vida.modId, "model/earthlogo");
+
+    public static ResourceLocation  goldCrystalLocation = new ResourceLocation(Vida.modId,  "model/goldelementcrystal_animate");
+    public static ResourceLocation  woodCrystalLocation = new ResourceLocation(Vida.modId,  "model/woodelementcrystal_animate");
+    public static ResourceLocation  aquaCrystalLocation = new ResourceLocation(Vida.modId,  "model/aquaelementcrystal_animate");
+    public static ResourceLocation  fireCrystalLocation = new ResourceLocation(Vida.modId,  "model/fireelementcrystal_animate");
+    public static ResourceLocation  earthCrystalLocation= new ResourceLocation(Vida.modId,  "model/earthelementcrystal_animate");
     @SubscribeEvent
     public static void onRenderTypeSetup(FMLClientSetupEvent event) {
         RenderTypeLookup.setRenderLayer(BlockLoader.saplingVida.get(), RenderType.getCutout());
@@ -58,6 +64,25 @@ public class RenderLoader {
             return new TileEntityRenderCollector(tileEntityRendererDispatcher);
         }));
 
+        ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityCrystalGold.get(), (tileEntityRendererDispatcher -> {
+            return new TileEntityRenderGoldCrystal(tileEntityRendererDispatcher,1);
+        }));
+
+        ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityCrystalWood.get(), (tileEntityRendererDispatcher -> {
+            return new TileEntityRenderWoodCrystal(tileEntityRendererDispatcher,2);
+        }));
+
+        ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityCrystalAqua.get(), (tileEntityRendererDispatcher -> {
+            return new TileEntityRenderLoaderAquaCrystal(tileEntityRendererDispatcher,3);
+        }));
+
+        ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityCrystalFire.get(), (tileEntityRendererDispatcher -> {
+            return new TileEntityRenderFireCrystal(tileEntityRendererDispatcher,4);
+        }));
+
+        ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityCrystalEarth.get(), (tileEntityRendererDispatcher -> {
+            return new TileEntityRenderEarthCrystal(tileEntityRendererDispatcher,5);
+        }));
     }
 
    @SubscribeEvent
@@ -81,6 +106,11 @@ public class RenderLoader {
        event.addSprite(firelogoLocation);
        event.addSprite(earthlogoLocation);
 
+       event.addSprite(goldCrystalLocation);
+       event.addSprite(woodCrystalLocation);
+       event.addSprite(aquaCrystalLocation);
+       event.addSprite(fireCrystalLocation);
+       event.addSprite(earthCrystalLocation);
 
    }
 

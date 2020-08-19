@@ -45,4 +45,32 @@ public class TileEntityLoader {
                     return new TileEntityCollector();},
                 BlockLoader.collector.get()).build(null);
     });
+
+    public static RegistryObject<TileEntityType<TileEntityGoldElementCrystal>> TileEntityCrystalGold = TILE_ENTITY_DEFERRED_REGISTER.register("teelementcrystal_gold", () -> {
+        return TileEntityType.Builder.create(() -> {
+                    return new TileEntityGoldElementCrystal(1);},
+                BlockLoader.elementCrystalGold.get()).build(null);
+    });
+
+    public static RegistryObject<TileEntityType<TileEntityWoodElementCrystal>> TileEntityCrystalWood = TILE_ENTITY_DEFERRED_REGISTER.register("teelementcrystal_wood", () -> {
+        return TileEntityType.Builder.create(() -> {
+                    return new TileEntityWoodElementCrystal(2);},
+                BlockLoader.elementCrystalWood.get()).build(null);
+    });
+    public static RegistryObject<TileEntityType<TileEntityAquaElementCrystal>> TileEntityCrystalAqua = TILE_ENTITY_DEFERRED_REGISTER.register("teelementcrystal_fire", () -> {
+        return TileEntityType.Builder.create(() -> {
+                    return new TileEntityAquaElementCrystal(3);},
+                BlockLoader.elementCrystalAqua.get()).build(null);
+    });
+    public static RegistryObject<TileEntityType<TileEntityFireElementCrystal>> TileEntityCrystalFire = TILE_ENTITY_DEFERRED_REGISTER.register("teelementcrystal_aqua", () -> {
+        return TileEntityType.Builder.create(() -> {
+                    return new TileEntityFireElementCrystal(4);},
+                BlockLoader.elementCrystalFire.get()).build(null);
+    });
+    public static RegistryObject<TileEntityType<TileEntityEarthElementCrystal>> TileEntityCrystalEarth = TILE_ENTITY_DEFERRED_REGISTER.register("teelementcrystal_earth", () -> {
+        return TileEntityType.Builder.create(() -> {
+                    return new TileEntityEarthElementCrystal(5);},
+                BlockLoader.elementCrystalEarth.get()).build(null);
+    });
+
 }
