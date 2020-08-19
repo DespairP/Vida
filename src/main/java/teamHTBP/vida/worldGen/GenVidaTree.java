@@ -187,8 +187,8 @@ public class GenVidaTree extends AbstractTreeFeature<TreeFeatureConfig> {
             return false;
         }else{
             BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
-            System.out.println("生成！");
-            System.out.println(positionIn.getX() + "  " + positionIn.getY() + "  " + positionIn.getZ());
+            //System.out.println("Vida Tree has generated:");
+            //System.out.println(positionIn.getX() + "  " + positionIn.getY() + "  " + positionIn.getZ());
             for(int i = 0; i < height ; ++i) {
                 //24
                 //13
