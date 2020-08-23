@@ -59,9 +59,9 @@ public class TileEntityRenderGoldCrystal extends TileEntityRenderer<TileEntityGo
         matrixStackIn.rotate(new Quaternion(0, angle, 0, true));
         matrixStackIn.translate(-0.5, -0.5f, -0.5);
         float Minu = atlasTexture.getMinU();
-        float Maxu = atlasTexture.getMaxU() -  (atlasTexture.getMaxU() - atlasTexture.getMinU())/ 4.0f;
+        float Maxu = atlasTexture.getMaxU();
         float MinV = atlasTexture.getMinV();
-        float MaxV =atlasTexture.getMaxV() - (atlasTexture.getMaxV() - atlasTexture.getMinV()) / 4.0f;
+        float MaxV =atlasTexture.getMaxV();
 
         float length = 0.25f;
 

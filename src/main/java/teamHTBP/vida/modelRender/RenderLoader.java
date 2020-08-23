@@ -34,6 +34,14 @@ public class RenderLoader {
     public static ResourceLocation  aquaCrystalLocation = new ResourceLocation(Vida.modId,  "model/aquaelementcrystal_animate");
     public static ResourceLocation  fireCrystalLocation = new ResourceLocation(Vida.modId,  "model/fireelementcrystal_animate");
     public static ResourceLocation  earthCrystalLocation= new ResourceLocation(Vida.modId,  "model/earthelementcrystal_animate");
+
+    public static ResourceLocation  goldFaintLightLocation = new ResourceLocation(Vida.modId,  "item/faintlight_gold");
+    public static ResourceLocation  woodFaintLightLocation = new ResourceLocation(Vida.modId,  "item/faintlight_wood");
+    public static ResourceLocation  aquaFaintLightLocation = new ResourceLocation(Vida.modId,  "item/faintlight_aqua");
+    public static ResourceLocation  fireFaintLightLocation = new ResourceLocation(Vida.modId,  "item/faintlight_fire");
+    public static ResourceLocation  earthFaintLightLocation= new ResourceLocation(Vida.modId,  "item/faintlight_earth");
+
+
     @SubscribeEvent
     public static void onRenderTypeSetup(FMLClientSetupEvent event) {
         RenderTypeLookup.setRenderLayer(BlockLoader.saplingVida.get(), RenderType.getCutout());

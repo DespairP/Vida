@@ -30,7 +30,7 @@ public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnDa
         double d1 = (double)this.getPosX() + 0.5D;
         double d2 = (double)this.getPosY() + 0.5D;
         double d3 = (double)this.getPosZ() + 0.5D ;
-        this.setBoundingBox(new AxisAlignedBB(d1 - 0, d2 - 0, d3 - 0, d1 + 1, d2 + 1, d3 + 1));
+        //this.setBoundingBox(new AxisAlignedBB(d1 - 0, d2 - 0, d3 - 0, d1 + 1, d2 + 1, d3 + 1));
 
     }
     public EntityFaintLight(EntityType<?> entityTypeIn, World worldIn,int type) {
@@ -39,13 +39,12 @@ public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnDa
         double d1 = (double)this.getPosX() + 0.5D;
         double d2 = (double)this.getPosY() + 0.5D;
         double d3 = (double)this.getPosZ() + 0.5D;
-        this.setBoundingBox(new AxisAlignedBB(d1 - 0, d2 - 0, d3 - 0, d1 + 2, d2 + 2, d3 + 2));
+        //this.setBoundingBox(new AxisAlignedBB(d1 - 0, d2 - 0, d3 - 0, d1 + 2, d2 + 2, d3 + 2));
     }
     private static final Logger PRIVATE_LOGGER = LogManager.getLogger();
     private static final DataParameter<Integer> TYPE = EntityDataManager.createKey(EntityFaintLight.class, DataSerializers.VARINT);
     private int types = 0;
     private int ticks = 0;
-    public int meta  =  0;
 
     @Override
     protected void registerData() {
@@ -81,7 +80,6 @@ public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnDa
     @Override
     public void tick() {
         super.tick();
-            this.meta = this.meta + 1 < 29?this.meta + 1 : 0 ;
     }
 
     public void notifyDataManagerChange(DataParameter<?> key) {
@@ -103,7 +101,7 @@ public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnDa
 
     @Override
     public float getCollisionBorderSize() {
-        return 1.0F;
+        return 0.5F;
     }
 
     @Override

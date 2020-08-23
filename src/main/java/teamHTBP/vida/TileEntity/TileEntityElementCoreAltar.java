@@ -262,7 +262,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         itemList.add(this.altarItem[j].getItem());
         }
         int element = helper.getContainingElement(this.getAltarItemStack());
-        System.out.println(this.getAltarItemStack());
+        System.out.println(element);
         if(ElementHelper.beganAltarProgress(this.coreItem,itemList, element)){
             this.element = element;
             return true;

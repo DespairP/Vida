@@ -60,36 +60,36 @@ public class TileEntityRenderGemShower extends TileEntityRenderer<TileEntityGemS
               //float f7 = uMin,f8 = uMax,f5 = vMin,f6 = vMax;
 
               int light = this.getBrightnessForRender(tileEntityIn, partialTicks);
-              buffer.pos(matrix4f, 0, 1,   1).color(r, g, b, a).tex(uMin, vMin).lightmap(0,240).normal(0, 1, 0).endVertex();
-              buffer.pos(matrix4f, 1, 1, 0).color(r, g, b, a).tex(uMin, vMax).lightmap(0,240).normal(0, 1, 0).endVertex();
-              buffer.pos(matrix4f, 1, 1, 1).color(r, g, b, a).tex(uMax, vMax).lightmap(0,240).normal(0, 1, 0).endVertex();
-              buffer.pos(matrix4f, 0, 1, 0).color(r, g, b, a).tex(uMax, vMin).lightmap(0,240).normal(0, 1, 0).endVertex();
+              buffer.pos(matrix4f, 0, 1,   1).color(r, g, b, a).tex(uMin, vMin).lightmap(120,240).normal(0, 1, 0).endVertex();
+              buffer.pos(matrix4f, 1, 1, 0).color(r, g, b, a).tex(uMin, vMax).lightmap(120,240).normal(0, 1, 0).endVertex();
+              buffer.pos(matrix4f, 1, 1, 1).color(r, g, b, a).tex(uMax, vMax).lightmap(120,240).normal(0, 1, 0).endVertex();
+              buffer.pos(matrix4f, 0, 1, 0).color(r, g, b, a).tex(uMax, vMin).lightmap(120,240).normal(0, 1, 0).endVertex();
 
-              buffer.pos(matrix4f, 0, 0, 0).color(r, g, b, a).tex(uMin, vMin).lightmap(0,240).normal(1, 1, 1).endVertex();
-              buffer.pos(matrix4f, 1, 0, 0).color(r, g, b, a).tex(uMin, vMax).lightmap(0,240).normal(1, 1, 1).endVertex();
-              buffer.pos(matrix4f, 1, 0, 1).color(r, g, b, a).tex(uMax, vMax).lightmap(0,240).normal(1, 1, 1).endVertex();
-              buffer.pos(matrix4f, 0, 0, 1).color(r, g, b, a).tex(uMax, vMin).lightmap(0,240).normal(1, 1, 1).endVertex();
+              buffer.pos(matrix4f, 0, 0, 0).color(r, g, b, a).tex(uMin, vMin).lightmap(120,240).normal(1, 1, 1).endVertex();
+              buffer.pos(matrix4f, 1, 0, 0).color(r, g, b, a).tex(uMin, vMax).lightmap(120,240).normal(1, 1, 1).endVertex();
+              buffer.pos(matrix4f, 1, 0, 1).color(r, g, b, a).tex(uMax, vMax).lightmap(120,240).normal(1, 1, 1).endVertex();
+              buffer.pos(matrix4f, 0, 0, 1).color(r, g, b, a).tex(uMax, vMin).lightmap(120,240).normal(1, 1, 1).endVertex();
 
-              buffer.pos(matrix4f, 0, 1, 0).color(r, g, b, a).tex(uMin, vMin).lightmap(0,240).normal(1, 1, 0).endVertex();
-              buffer.pos(matrix4f, 1, 1, 0).color(r, g, b, a).tex(uMin, vMax).lightmap(0,240).normal(1, 1, 0).endVertex();
-              buffer.pos(matrix4f, 1, 0, 0).color(r, g, b, a).tex(uMax, vMax).lightmap(0,240).normal(1, 1, 0).endVertex();
-              buffer.pos(matrix4f, 0, 0, 0).color(r, g, b, a).tex(uMax, vMin).lightmap(0,240).normal(1, 1, 0).endVertex();
+              buffer.pos(matrix4f, 0, 1, 0).color(r, g, b, a).tex(uMin, vMin).lightmap(120,240).normal(1, 1, 0).endVertex();
+              buffer.pos(matrix4f, 1, 1, 0).color(r, g, b, a).tex(uMin, vMax).lightmap(120,240).normal(1, 1, 0).endVertex();
+              buffer.pos(matrix4f, 1, 0, 0).color(r, g, b, a).tex(uMax, vMax).lightmap(120,240).normal(1, 1, 0).endVertex();
+              buffer.pos(matrix4f, 0, 0, 0).color(r, g, b, a).tex(uMax, vMin).lightmap(120,240).normal(1, 1, 0).endVertex();
 
-              buffer.pos(matrix4f, 0, 1, 1).color(r, g, b, a).tex(uMin, vMin).lightmap(0,240).normal(1, 1, 0).endVertex();
-              buffer.pos(matrix4f, 0, 1, 0).color(r, g, b, a).tex(uMin, vMax).lightmap(0,240).normal(1, 1, 0).endVertex();
-              buffer.pos(matrix4f, 0, 0, 0).color(r, g, b, a).tex(uMax, vMax).lightmap(0,240).normal(1, 1, 0).endVertex();
-              buffer.pos(matrix4f, 0, 0, 1).color(r, g, b, a).tex(uMax, vMin).lightmap(0,240).normal(1, 1, 0).endVertex();
+              buffer.pos(matrix4f, 0, 1, 1).color(r, g, b, a).tex(uMin, vMin).lightmap(120,240).normal(1, 1, 0).endVertex();
+              buffer.pos(matrix4f, 0, 1, 0).color(r, g, b, a).tex(uMin, vMax).lightmap(120,240).normal(1, 1, 0).endVertex();
+              buffer.pos(matrix4f, 0, 0, 0).color(r, g, b, a).tex(uMax, vMax).lightmap(120,240).normal(1, 1, 0).endVertex();
+              buffer.pos(matrix4f, 0, 0, 1).color(r, g, b, a).tex(uMax, vMin).lightmap(120,240).normal(1, 1, 0).endVertex();
 
-              buffer.pos(matrix4f, 0, 1, 1).color(r, g, b, a).tex(uMin, vMin).lightmap(0,240).normal(1, 1, 0).endVertex();
-              buffer.pos(matrix4f, 1, 1, 1).color(r, g, b, a).tex(uMin, vMax).lightmap(0,240).normal(1, 1, 0).endVertex();
-              buffer.pos(matrix4f, 1, 0, 1).color(r, g, b, a).tex(uMax, vMax).lightmap(0,240).normal(1, 1, 0).endVertex();
-              buffer.pos(matrix4f, 0, 0, 1).color(r, g, b, a).tex(uMax, vMin).lightmap(0,240).normal(1, 1, 0).endVertex();
+              buffer.pos(matrix4f, 0, 1, 1).color(r, g, b, a).tex(uMin, vMin).lightmap(120,240).normal(1, 1, 0).endVertex();
+              buffer.pos(matrix4f, 1, 1, 1).color(r, g, b, a).tex(uMin, vMax).lightmap(120,240).normal(1, 1, 0).endVertex();
+              buffer.pos(matrix4f, 1, 0, 1).color(r, g, b, a).tex(uMax, vMax).lightmap(120,240).normal(1, 1, 0).endVertex();
+              buffer.pos(matrix4f, 0, 0, 1).color(r, g, b, a).tex(uMax, vMin).lightmap(120,240).normal(1, 1, 0).endVertex();
 
 
-              buffer.pos(matrix4f, 1, 1, 1).color(r, g, b, a).tex(uMin, vMin).lightmap(0,240).normal(0, 1, 0).endVertex();
-              buffer.pos(matrix4f, 1, 1, 0).color(r, g, b, a).tex(uMin, vMax).lightmap(0,240).normal(0, 1, 0).endVertex();
-              buffer.pos(matrix4f, 1, 0, 0).color(r, g, b, a).tex(uMax, vMax).lightmap(0,240).normal(0, 1, 0).endVertex();
-              buffer.pos(matrix4f, 1, 0, 1).color(r, g, b, a).tex(uMax, vMin).lightmap(0,240).normal(0, 1, 0).endVertex();
+              buffer.pos(matrix4f, 1, 1, 1).color(r, g, b, a).tex(uMin, vMin).lightmap(120,240).normal(0, 1, 0).endVertex();
+              buffer.pos(matrix4f, 1, 1, 0).color(r, g, b, a).tex(uMin, vMax).lightmap(120,240).normal(0, 1, 0).endVertex();
+              buffer.pos(matrix4f, 1, 0, 0).color(r, g, b, a).tex(uMax, vMax).lightmap(120,240).normal(0, 1, 0).endVertex();
+              buffer.pos(matrix4f, 1, 0, 1).color(r, g, b, a).tex(uMax, vMin).lightmap(120,240).normal(0, 1, 0).endVertex();
 
 
               matrixStackIn.pop();
@@ -109,10 +109,10 @@ public class TileEntityRenderGemShower extends TileEntityRenderer<TileEntityGemS
               matrixStackIn.translate(-0.5f,-0.5,-0.5f);
 
               Matrix4f matrix4flogo = matrixStackIn.getLast().getMatrix();
-              bufferLogo.pos(matrix4flogo, 0, 1, 0.5F).color(r, g, b, a).tex(uMin, vMin).lightmap(0,240).normal(0, 1, 0).endVertex();
-              bufferLogo.pos(matrix4flogo, 1, 1, 0.5F).color(r, g, b, a).tex(uMin, vMax).lightmap(0,240).normal(0, 1, 0).endVertex();
-              bufferLogo.pos(matrix4flogo, 1, 0, 0.5F).color(r, g, b, a).tex(uMax, vMax).lightmap(0,240).normal(0, 1, 0).endVertex();
-              bufferLogo.pos(matrix4flogo, 0, 0, 0.5F).color(r, g, b, a).tex(uMax, vMin).lightmap(0,240).normal(0, 1, 0).endVertex();
+              bufferLogo.pos(matrix4flogo, 0, 1, 0.5F).color(r, g, b, a).tex(uMin, vMin).lightmap(120,240).normal(0, 1, 0).endVertex();
+              bufferLogo.pos(matrix4flogo, 1, 1, 0.5F).color(r, g, b, a).tex(uMin, vMax).lightmap(120,240).normal(0, 1, 0).endVertex();
+              bufferLogo.pos(matrix4flogo, 1, 0, 0.5F).color(r, g, b, a).tex(uMax, vMax).lightmap(120,240).normal(0, 1, 0).endVertex();
+              bufferLogo.pos(matrix4flogo, 0, 0, 0.5F).color(r, g, b, a).tex(uMax, vMin).lightmap(120,240).normal(0, 1, 0).endVertex();
 
               matrixStackIn.pop();
 

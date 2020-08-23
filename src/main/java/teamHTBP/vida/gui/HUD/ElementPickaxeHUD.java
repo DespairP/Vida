@@ -30,8 +30,8 @@ public class ElementPickaxeHUD extends AbstractGui {
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, alpha);
         RenderSystem.pushMatrix();
         RenderSystem.enableBlend();
-        int screenWidth =this.width / 2 - 210;
-        int screenHeight = this.height/2 + 60;
+        int screenWidth = 3 ;
+        int screenHeight = (int)(this.height * 4.5F/ 6.0F) ;
         int pixel_element = ((ItemElementPickaxe)itemStack.getItem()).element;
         CompoundNBT nbt = itemStack.getOrCreateTag();
         int level = nbt.getInt("level");

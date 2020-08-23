@@ -7,7 +7,9 @@ import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -16,6 +18,7 @@ import teamHTBP.vida.Entity.EntityFaintLight;
 import teamHTBP.vida.Entity.entityModel.EntityModelFaintLight;
 import teamHTBP.vida.Item.ItemLoader;
 import teamHTBP.vida.Vida;
+import teamHTBP.vida.modelRender.RenderLoader;
 
 public class EntityRenderFaintLight extends EntityRenderer<EntityFaintLight> {
     private EntityModel<EntityFaintLight> model;
@@ -30,17 +33,17 @@ public class EntityRenderFaintLight extends EntityRenderer<EntityFaintLight> {
     public ResourceLocation getEntityTexture(EntityFaintLight entity) {
         switch(entity.getFaintLightType()){
             case 1:
-                return new ResourceLocation(Vida.modId, "textures/model/faintlight/gold/fire_"+entity.meta +".png");
+                return RenderLoader.goldFaintLightLocation;
             case 2:
-                return new ResourceLocation(Vida.modId, "textures/model/faintlight/wood/fire_"+entity.meta +".png");
+                return RenderLoader.woodFaintLightLocation;
             case 3:
-                return new ResourceLocation(Vida.modId, "textures/model/faintlight/aqua/fire_"+entity.meta +".png");
+                return RenderLoader.aquaFaintLightLocation;
             case 4:
-                return new ResourceLocation(Vida.modId, "textures/model/faintlight/fire/fire_"+entity.meta +".png");
+                return RenderLoader.fireFaintLightLocation;
             case 5:
-                return new ResourceLocation(Vida.modId, "textures/model/faintlight/earth/fire_"+entity.meta +".png");
+                return RenderLoader.earthFaintLightLocation;
         }
-        return new ResourceLocation(Vida.modId, "textures/model/faintlight/gold/fire_"+entity.meta +".png");
+        return RenderLoader.earthFaintLightLocation;
     }
 
 
@@ -54,14 +57,32 @@ public class EntityRenderFaintLight extends EntityRenderer<EntityFaintLight> {
         matrixStackIn.translate(0.6, 0.6, 0);
         //matrixStackIn.scale(0.5f, 0.5f, 0.5f);
         matrixStackIn.rotate(quaternion);
-        float r = 1;
-        float g = 1;
-        float b = 1;
-        float a = 1;
+        matrixStackIn.translate(-0.5f, -0.5F, -0.5f);
 
-        IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.getText(this.getEntityTexture(entityIn)));
+        TextureAtlasSprite atlasTexture = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(this.getEntityTexture(entityIn));
 
-                model.render(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.NO_OVERLAY, r, g, b, a / 2);
+
+        IVertexBuilder builder = bufferIn.getBuffer(RenderType.getCutout());
+
+        //model.render(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.NO_OVERLAY, r, g, b, a / 2);
+
+        float MaxU = atlasTexture.getMaxU();
+        float MinU = atlasTexture.getMinU();
+        float MaxV = atlasTexture.getMaxV();
+        float MinV = atlasTexture.getMinV();
+
+        Matrix4f matrixStack = matrixStackIn.getLast().getMatrix();
+
+        builder.pos(matrixStack, 0, 1, 0).color(1, 1, 1, 0.7f).tex(MinU, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
+        builder.pos(matrixStack, 1, 1, 0).color(1, 1, 1, 0.7f).tex(MaxU, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
+        builder.pos(matrixStack, 1, 0, 0).color(1, 1, 1, 0.7f).tex(MaxU, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
+        builder.pos(matrixStack, 0, 0, 0).color(1, 1, 1, 0.7f).tex(MinU, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
+
+        builder.pos(matrixStack, 0, 0, 0).color(1, 1, 1, 1.0f).tex(MinU, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
+        builder.pos(matrixStack, 1, 0, 0).color(1, 1, 1, 1.0f).tex(MaxU, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
+        builder.pos(matrixStack, 1, 1, 0).color(1, 1, 1, 1.0f).tex(MaxU, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
+        builder.pos(matrixStack, 0, 1, 0).color(1, 1, 1, 1.0f).tex(MinU, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
+
 
         matrixStackIn.pop();
 

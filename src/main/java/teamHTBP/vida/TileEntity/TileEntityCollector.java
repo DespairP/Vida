@@ -26,6 +26,8 @@ public class TileEntityCollector extends TileEntity implements ITickableTileEnti
     //收集的元素的元素核心
     public ItemStack coreItem = ItemStack.EMPTY;
 
+    public int extraSpeed = 1;
+
     public TileEntityCollector() {
         super(TileEntityLoader.TileEntityCollector.get());
     }
@@ -109,6 +111,7 @@ public class TileEntityCollector extends TileEntity implements ITickableTileEnti
 
     public void resetCollect(){
         this.collection = 0;
+        this.isCollect = false;
         switch(this.element){
             case 1:
                 this.coreItem = new ItemStack(ItemLoader.goldElementCore.get(),1);break;
@@ -143,7 +146,7 @@ public class TileEntityCollector extends TileEntity implements ITickableTileEnti
                 this.element = ElementHelper.getBiomeElement(world.getBiome(pos));
                 flag = true;
             }else if(isCollect && element > 0){
-                this.collection += 1;
+                this.collection += 1 * extraSpeed;
                 flag = true;
             }
 
@@ -151,12 +154,13 @@ public class TileEntityCollector extends TileEntity implements ITickableTileEnti
                 resetCollect();
             }
 
-            if((this.coreItem == ItemStack.EMPTY || this.coreItem.isEmpty()) && this.collection > 0){
+            if((this.coreItem == ItemStack.EMPTY || this.coreItem.isEmpty()) && this.collection >= 0 && this.isCollect){
                 this.element = 0;
                 this.isCollect = false;
-               this.collection = 0;
+                this.collection = 0;
                 flag = true;
             }
+
         }
 
         if(flag){

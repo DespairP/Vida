@@ -30,7 +30,7 @@ public class BlockVidaPlank extends Block {
     }
 
     public BlockVidaPlank(int state) {
-        super(Block.Properties.create(Material.WOOD).sound(SoundType.WOOD));
+        super(Block.Properties.create(Material.WOOD).sound(SoundType.WOOD).hardnessAndResistance(2.0f,3.0f));
         this.setDefaultState(this.getStateContainer().getBaseState().with(STATE, state));
     }
 

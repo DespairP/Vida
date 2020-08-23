@@ -61,6 +61,7 @@ public class BlockCollecter extends Block {
                }
             }else if(handIn == Hand.MAIN_HAND && player.isSneaking()){
                 ItemStack stack =  tileEntityCollector.getCore();
+                tileEntityCollector.coreItem = ItemStack.EMPTY;
                 player.addItemStackToInventory(stack);
                 worldIn.notifyBlockUpdate(pos,state,state,3);
                 return ActionResultType.SUCCESS;
@@ -83,7 +84,7 @@ public class BlockCollecter extends Block {
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
         TileEntityCollector entity = (TileEntityCollector) worldIn.getTileEntity(pos);
         if(entity!=null){
-            if(entity.isCollect && rand.nextDouble()>=0.1D)
+            if(entity.getCollection() > 0 && rand.nextDouble()>=0.1D)
             //生成粒子
             {
                 worldIn.addParticle(new ElementFireParticleData(-0.01F, 0, -0.01F), pos.getX() + 0.5f, pos.getY() + 1.0f, pos.getZ() + 0.5f, 0, 0, 0);

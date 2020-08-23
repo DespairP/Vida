@@ -2,12 +2,16 @@ package teamHTBP.vida.Block.function;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -28,6 +32,8 @@ import javax.annotation.Nullable;
 
 public class BlockPrismTable extends Block {
     private final VoxelShape SHAPE =Block.makeCuboidShape(0, 0, 0, 16, 13, 16);
+    public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+
 
     public BlockPrismTable() {
         super(Properties.create(Material.WOOD).hardnessAndResistance(3.0f, 3.0f).notSolid().harvestTool(ToolType.PICKAXE).notSolid());
@@ -68,4 +74,17 @@ public class BlockPrismTable extends Block {
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         return SHAPE;
     }
+
+    @Override
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+        builder.add(FACING);
+        super.fillStateContainer(builder);
+    }
+
+    @Nullable
+    public BlockState getStateForPlacement(BlockItemUseContext context) {
+        BlockPos blockpos = context.getPos();
+        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing());
+    }
+
 }
