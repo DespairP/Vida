@@ -92,7 +92,7 @@ public class ItemFaintLight extends Item {
                 blockpos1 = blockpos.offset(direction);
             }
             EntityFaintLight entityFaintLight = new EntityFaintLight(EntityLoader.faintLight.get(), world);
-            entityFaintLight.setPosition(blockpos1.getX(), blockpos1.getY(), blockpos1.getZ());
+            entityFaintLight.setPosition(blockpos1.getX() + 0.5, blockpos1.getY(), blockpos1.getZ() + 0.5);
             entityFaintLight.setFaintLightType(element);
             if (world.addEntity(entityFaintLight)) {
                 itemstack.shrink(1);

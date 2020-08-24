@@ -80,5 +80,5 @@ public class BlockLoader {
     public static RegistryObject<Block> prismTable = BLOCKS.register("prismtable",()->new BlockPrismTable());
     public static RegistryObject<Block> oreReactionMachine = BLOCKS.register("orereactionmachine",()->new BlockOreReactionMachine());
     public static RegistryObject<Block> collector = BLOCKS.register("collector",()->new BlockCollecter());
-
+    public static RegistryObject<Block> injectionTable = BLOCKS.register("injecttable",()->new BlockInjectTable());
 }

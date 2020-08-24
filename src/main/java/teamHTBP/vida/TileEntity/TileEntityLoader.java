@@ -72,5 +72,10 @@ public class TileEntityLoader {
                     return new TileEntityEarthElementCrystal(5);},
                 BlockLoader.elementCrystalEarth.get()).build(null);
     });
+    public static RegistryObject<TileEntityType<TileEntityInjectTable>> TileEntityInjectTable = TILE_ENTITY_DEFERRED_REGISTER.register("teinjecttable", () -> {
+        return TileEntityType.Builder.create(() -> {
+                    return new TileEntityInjectTable();},
+                BlockLoader.injectionTable.get()).build(null);
+    });
 
 }

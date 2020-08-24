@@ -41,6 +41,8 @@ public class RenderLoader {
     public static ResourceLocation  fireFaintLightLocation = new ResourceLocation(Vida.modId,  "item/faintlight_fire");
     public static ResourceLocation  earthFaintLightLocation= new ResourceLocation(Vida.modId,  "item/faintlight_earth");
 
+    public static ResourceLocation injectTable_top = new ResourceLocation(Vida.modId, "model/injectiontable_top");
+    public static ResourceLocation injectTable_side = new ResourceLocation(Vida.modId, "model/injectiontable_side");
 
     @SubscribeEvent
     public static void onRenderTypeSetup(FMLClientSetupEvent event) {
@@ -91,6 +93,10 @@ public class RenderLoader {
         ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityCrystalEarth.get(), (tileEntityRendererDispatcher -> {
             return new TileEntityRenderEarthCrystal(tileEntityRendererDispatcher,5);
         }));
+
+        ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityInjectTable.get(), (tileEntityRendererDispatcher -> {
+            return new TileEntityRenderInjectTable(tileEntityRendererDispatcher);
+        }));
     }
 
    @SubscribeEvent
@@ -120,6 +126,8 @@ public class RenderLoader {
        event.addSprite(fireCrystalLocation);
        event.addSprite(earthCrystalLocation);
 
+       event.addSprite(injectTable_top);
+       event.addSprite(injectTable_side);
    }
 
 

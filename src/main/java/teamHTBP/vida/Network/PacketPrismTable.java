@@ -45,6 +45,9 @@ public class PacketPrismTable {
     public void handler(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(()->{
             if(ctx.get().getSender() == null) return;
+
+
+            if(ctx.get().getSender().world.isAreaLoaded(new BlockPos(x, y, z), 1)){
             TileEntity tileEntity = ctx.get().getSender().world.getTileEntity(new BlockPos(x,y,z));
             if(tileEntity instanceof TileEntityPrismTable){
                 TileEntityPrismTable tileEntityPrismTable = (TileEntityPrismTable)tileEntity;
@@ -52,7 +55,9 @@ public class PacketPrismTable {
                 tileEntityPrismTable.array.set(3, this.mirrorY);
                 tileEntityPrismTable.isClick = true;
             }
-        });
+        }});
+
+
         ctx.get().setPacketHandled(true);
     }
 

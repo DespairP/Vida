@@ -56,7 +56,7 @@ public class TileEntityRenderFireCrystal extends TileEntityRenderer<TileEntityFi
         matrixStackIn.translate(0.6f, 0.6f + 0.03 * floatWave, 0.6f);
         matrixStackIn.scale(0.4f, 0.4f, 0.4f);
         matrixStackIn.rotate(new Quaternion(0, angle, 0, true));
-        matrixStackIn.translate(-0.5, -0.5f, -0.5);
+        matrixStackIn.translate(-0.5f, -0.5f, -0.5f);
         float Minu = atlasTexture.getMinU();
         float Maxu = atlasTexture.getMaxU();
         float MinV = atlasTexture.getMinV();
