@@ -98,7 +98,7 @@ public class BlockEventLoaderServer {
                 int level = nbt.getInt("level");
                 int exp = nbt.getInt("swordEXP");
                 if(level < 30){
-                    nbt.putInt("swordEXP", exp + new Random().nextInt(3) + 3);
+                    nbt.putInt("swordEXP", exp + new Random().nextInt(3) + 100);
                     level_up_sword(level, exp, stack);
                 }
             }

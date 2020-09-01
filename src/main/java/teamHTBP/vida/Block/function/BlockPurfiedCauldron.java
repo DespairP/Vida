@@ -14,9 +14,11 @@ import net.minecraft.item.Items;
 import net.minecraft.network.DebugPacketSender;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.PathType;
+import net.minecraft.state.IProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BedPart;
+import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.stats.Stats;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMerger;
@@ -45,6 +47,7 @@ import java.util.Random;
 
 public class BlockPurfiedCauldron extends Block {
     private static VoxelShape SHAPE;
+
     static {
         VoxelShape base = Block.makeCuboidShape(-2, 0, -2, 18, 6, 18);
         VoxelShape aPillar = Block.makeCuboidShape(-1, 6, -1, 2, 16, 2);//↖
@@ -64,24 +67,20 @@ public class BlockPurfiedCauldron extends Block {
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-            return SHAPE;
+       return SHAPE;
     }
 
     @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
-    }
+    public boolean hasTileEntity(BlockState state) { return true; }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new TileEntityPurfiedCauldron();
-    }
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) { return new TileEntityPurfiedCauldron(); }
 
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if(handIn == Hand.MAIN_HAND) {
+        if(handIn == Hand.MAIN_HAND ) {
             TileEntityPurfiedCauldron entity = (TileEntityPurfiedCauldron) worldIn.getTileEntity(pos);
             //如果是创造模式不消耗水桶
             //如果是就消耗水桶
@@ -99,8 +98,7 @@ public class BlockPurfiedCauldron extends Block {
             }
 
         }
-
-        return ActionResultType.SUCCESS;
+        return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
     }
 
     @Override
@@ -154,14 +152,10 @@ public class BlockPurfiedCauldron extends Block {
                     entityIn.remove();
                     worldIn.notifyBlockUpdate(pos, state, state, Constants.BlockFlags.BLOCK_UPDATE);
 
-
                 }
             }
         }
         super.onEntityCollision(state, worldIn, pos, entityIn);
     }
-
-
-
 
 }

@@ -1,7 +1,6 @@
 package teamHTBP.vida.Block;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.trees.Tree;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -9,7 +8,6 @@ import teamHTBP.vida.Block.crop.BlockSaplingVida;
 import teamHTBP.vida.Block.decoration.*;
 import teamHTBP.vida.Block.function.*;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.worldGen.VidaTree;
 
 /**
  * 注册方块类
@@ -81,4 +79,6 @@ public class BlockLoader {
     public static RegistryObject<Block> oreReactionMachine = BLOCKS.register("orereactionmachine",()->new BlockOreReactionMachine());
     public static RegistryObject<Block> collector = BLOCKS.register("collector",()->new BlockCollecter());
     public static RegistryObject<Block> injectionTable = BLOCKS.register("injecttable",()->new BlockInjectTable());
+    public static RegistryObject<Block> altarcubeMaker = BLOCKS.register("altarcubemaker",()->new BlockAltarCubeMaker());
+
 }

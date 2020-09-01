@@ -150,6 +150,7 @@ public class ItemLoader {
     public static  RegistryObject<Item> oreReactionMachine = ITEMS.register("orereactionmachine",() -> new BlockItem(BlockLoader.oreReactionMachine.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> collector = ITEMS.register("collector",() -> new BlockItem(BlockLoader.collector.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> injectionTable = ITEMS.register("injecttable",() -> new BlockItem(BlockLoader.injectionTable.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> altarcubeMaker = ITEMS.register("altarcubemaker",() -> new BlockItem(BlockLoader.altarcubeMaker.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
 
 
 

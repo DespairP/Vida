@@ -31,6 +31,7 @@ public class ItemElementSword extends SwordItem {
         ItemStack stack = new ItemStack(this);
         stack.getOrCreateTag().putInt("swordEXP", 0);
         stack.getOrCreateTag().putInt("level", 1);
+        stack.getOrCreateTag().putInt("ToolElement", element);
         if (this.isInGroup(group)) {
             items.add(stack);
         }
@@ -40,6 +41,7 @@ public class ItemElementSword extends SwordItem {
         CompoundNBT nbt = stack.getOrCreateTag();
         nbt.putInt("swordExp", 0);
         nbt.putInt("level", 1);
+        nbt.putInt("ToolElement", element);
     }
 
     @OnlyIn(Dist.CLIENT)

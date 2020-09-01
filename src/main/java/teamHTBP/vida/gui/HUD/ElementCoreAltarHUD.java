@@ -13,6 +13,7 @@ public class ElementCoreAltarHUD extends AbstractGui {
     private final int height;
     private final Minecraft minecraft;
     private final ResourceLocation HUD = new ResourceLocation(Vida.modId, "textures/gui/altar_hud.png");
+    private final ResourceLocation HUDHELPER = new ResourceLocation(Vida.modId, "textures/gui/altar_hud.png");
     private TileEntityElementCoreAltar tileEntityElementCoreAltar ;
     public ElementCoreAltarHUD(TileEntityElementCoreAltar tileEntityElementCoreAltar){
         width = Minecraft.getInstance().getMainWindow().getScaledWidth();

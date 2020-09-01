@@ -44,6 +44,7 @@ public class RenderLoader {
     public static ResourceLocation injectTable_top = new ResourceLocation(Vida.modId, "model/injectiontable_top");
     public static ResourceLocation injectTable_side = new ResourceLocation(Vida.modId, "model/injectiontable_side");
 
+
     @SubscribeEvent
     public static void onRenderTypeSetup(FMLClientSetupEvent event) {
         RenderTypeLookup.setRenderLayer(BlockLoader.saplingVida.get(), RenderType.getCutout());

@@ -1,5 +1,9 @@
 package teamHTBP.vida.TileEntity;
 
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolItem;
@@ -9,11 +13,14 @@ import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import teamHTBP.vida.Vida;
+import teamHTBP.vida.gui.GUI.ContainerInjectTable;
 
 import javax.annotation.Nullable;
 
-public class TileEntityInjectTable extends TileEntity implements ITickableTileEntity {
+public class TileEntityInjectTable extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
     //将要被注魔的剑
     ItemStack swordStack = ItemStack.EMPTY;
     //渲染需要的度数
@@ -98,6 +105,22 @@ public class TileEntityInjectTable extends TileEntity implements ITickableTileEn
             sinWave += 0.1;
             if(sinWave >= Math.PI * 2) sinWave = 0;
         }
-        //System.out.println(swordStack);
+
+        CompoundNBT nbt = swordStack.getOrCreateTag();
+        //int luck = nbt.getInt("luckIEXP");
+        //nbt.putInt("luckIEXP", luck+10);
+        world.notifyBlockUpdate(getPos(),getBlockState(),getBlockState(),3);
+        //System.out.println(luck);
+    }
+
+    @Override
+    public ITextComponent getDisplayName() {
+        return new StringTextComponent("OreReactionMachine");
+    }
+
+    @Nullable
+    @Override
+    public Container createMenu(int p_createMenu_1_, PlayerInventory p_createMenu_2_, PlayerEntity p_createMenu_3_) {
+        return new ContainerInjectTable(p_createMenu_1_,getSwordStack(),pos,world);
     }
 }

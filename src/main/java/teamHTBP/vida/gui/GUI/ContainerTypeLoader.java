@@ -1,6 +1,7 @@
 package teamHTBP.vida.gui.GUI;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
@@ -34,4 +35,9 @@ public class ContainerTypeLoader {
         });
     });
 
+    public static RegistryObject<ContainerType<ContainerInjectTable>> inject = CONTAINER_TYPES.register("container_inject", () ->{
+        return IForgeContainerType.create((int id, PlayerInventory inventory, PacketBuffer buffer)->{
+            return new ContainerInjectTable(id, buffer.readItemStack(),buffer.readBlockPos(),inventory.player.world);
+        });
+    });
 }

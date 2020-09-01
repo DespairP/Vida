@@ -20,6 +20,9 @@ public class GuiLoader {
         ScreenManager.registerFactory(ContainerTypeLoader.bottles.get(), (ContainerBottles bottles,PlayerInventory inv, ITextComponent titleIn) -> {
             return new ContainerScreenBottles(bottles, inv, titleIn);
         });
+        ScreenManager.registerFactory(ContainerTypeLoader.inject.get(), (ContainerInjectTable injectTable,PlayerInventory inv, ITextComponent titleIn) -> {
+            return new ContainerScreenInjectTable(injectTable, inv, titleIn);
+        });
     }
 
 }

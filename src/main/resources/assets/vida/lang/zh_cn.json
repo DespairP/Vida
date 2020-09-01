@@ -130,5 +130,9 @@
   "key.bottle2.use": "元素瓶[右]使用",
   "key.bottle3.use": "元素瓶[中]使用",
   "key.bottles": "元素瓶装填显示",
-  "key.category.vida": "'生命'键位设置"
+  "key.category.vida": "'生命'键位设置",
+  "desc.luckI.skill": "少量几率造成额外伤害",
+  "name.luckI.skill": "幸运I",
+  "name.lightUp.skill": "地爆天星",
+  "desc.need.skill": "需要的前置技能："
 }

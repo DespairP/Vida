@@ -56,8 +56,10 @@ public class BlockEventLoader {
         Block block = player.world.getBlockState(pos).getBlock();
         if(block instanceof BlockPurfiedCauldron){
             TileEntityPurfiedCauldron tileEntityPurfiedCauldron = (TileEntityPurfiedCauldron)player.world.getTileEntity(pos);
-            PurfiedCauldronHUD purfiedCauldronHUD = new PurfiedCauldronHUD(tileEntityPurfiedCauldron);
-            purfiedCauldronHUD.render();
+            if(tileEntityPurfiedCauldron != null){
+                  PurfiedCauldronHUD purfiedCauldronHUD = new PurfiedCauldronHUD(tileEntityPurfiedCauldron);
+                  purfiedCauldronHUD.render();
+            }
             return;
         }
         Vec3d vec3d = player.getLook(event.getPartialTicks());
@@ -70,11 +72,13 @@ public class BlockEventLoader {
             TileEntityElementCoreAltar tileEntityElementCoreAltar  = (TileEntityElementCoreAltar)player.world.getTileEntity(newpos);
             ElementCoreAltarHUD elementCoreAltarHUD = new ElementCoreAltarHUD(tileEntityElementCoreAltar);
             elementCoreAltarHUD.render();
+            return;
         }
         if(block instanceof BlockCollecter){
             TileEntityCollector tileEntityCollector = (TileEntityCollector)player.world.getTileEntity(newpos);
             CollectorHUD collectorHUD = new CollectorHUD(tileEntityCollector);
             collectorHUD.render();
+            return;
         }
 
         //others
