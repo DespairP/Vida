@@ -50,15 +50,7 @@ public class ItemArmorElementHelmet extends ArmorItem {
         }
 
         model.field_78116_c.showModel = armorSlot == EquipmentSlotType.HEAD;
-        model.bipedHeadwear.showModel = armorSlot == EquipmentSlotType.HEAD;
-        model.bipedBody.showModel = (armorSlot == EquipmentSlotType.CHEST)
-                || (armorSlot == EquipmentSlotType.CHEST);
-        model.bipedRightArm.showModel = armorSlot == EquipmentSlotType.CHEST;
-        model.bipedLeftArm.showModel = armorSlot == EquipmentSlotType.CHEST;
-        model.bipedRightLeg.showModel = (armorSlot == EquipmentSlotType.LEGS)
-                || (armorSlot == EquipmentSlotType.FEET);
-        model.bipedLeftLeg.showModel = (armorSlot == EquipmentSlotType.LEGS)
-                || (armorSlot == EquipmentSlotType.FEET);
+        //model.bipedHeadwear.showModel = armorSlot == EquipmentSlotType.HEAD;
 
         model.isChild = _default.isChild;
         model.isSneak = _default.isSneak;

@@ -14,11 +14,7 @@ import net.minecraft.util.math.MathHelper;
 
 public class ArmorModelElementHelmet<T extends Entity> extends BipedModel {
     public ModelRenderer field_78116_c;
-    public ModelRenderer part19;
-    public ModelRenderer part15;
-    public ModelRenderer part16;
-    public ModelRenderer part17;
-    public ModelRenderer part21;
+
 
     private float remainingItemUseTime;
 
@@ -47,15 +43,7 @@ public class ArmorModelElementHelmet<T extends Entity> extends BipedModel {
     }
 
 
-    public void setVisible(boolean visible) {
-        this.bipedHead.showModel = true;
-        this.bipedHeadwear.showModel = true;
-        this.bipedBody.showModel = false;
-        this.bipedRightArm.showModel = false;
-        this.bipedLeftArm.showModel = false;
-        this.bipedRightLeg.showModel = false;
-        this.bipedLeftLeg.showModel = false;
-    }
+
 
 
     public void setRotationAngles(LivingEntity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {

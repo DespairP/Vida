@@ -10,7 +10,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import teamHTBP.vida.Block.BlockLoader;
+import teamHTBP.vida.block.BlockLoader;
 import teamHTBP.vida.TileEntity.TileEntityLoader;
 import teamHTBP.vida.Vida;
 
@@ -48,9 +48,16 @@ public class RenderLoader {
     @SubscribeEvent
     public static void onRenderTypeSetup(FMLClientSetupEvent event) {
         RenderTypeLookup.setRenderLayer(BlockLoader.saplingVida.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockLoader.crimsonCrest.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockLoader.sweetCyanReed.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockLoader.sullenHydrangea.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockLoader.nitriteThorns.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockLoader.plamStem.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockLoader.heartOfWal.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(BlockLoader.purfiedCauldron.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(BlockLoader.elementcoreAltar.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(BlockLoader.prismTable.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(BlockLoader.steleLife.get(), RenderType.getTranslucent());
     }
 
     @SubscribeEvent

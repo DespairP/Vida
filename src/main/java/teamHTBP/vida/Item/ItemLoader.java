@@ -5,7 +5,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import teamHTBP.vida.Block.BlockLoader;
+import teamHTBP.vida.block.BlockLoader;
 import teamHTBP.vida.Item.armor.*;
 import teamHTBP.vida.Item.staff.ItemElementPickaxe;
 import teamHTBP.vida.Item.staff.ItemElementSword;
@@ -151,6 +151,7 @@ public class ItemLoader {
     public static  RegistryObject<Item> collector = ITEMS.register("collector",() -> new BlockItem(BlockLoader.collector.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> injectionTable = ITEMS.register("injecttable",() -> new BlockItem(BlockLoader.injectionTable.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> altarcubeMaker = ITEMS.register("altarcubemaker",() -> new BlockItem(BlockLoader.altarcubeMaker.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> steleLife      = ITEMS.register("lifestele",() -> new BlockItem(BlockLoader.steleLife.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
 
 
 
@@ -172,5 +173,12 @@ public class ItemLoader {
     public static  RegistryObject<Item> aquaElementSword = ITEMS.register("aquaelementsword",() -> new ItemElementSword(3));
     public static  RegistryObject<Item> fireElementSword = ITEMS.register("fireelementsword",() -> new ItemElementSword(4));
     public static  RegistryObject<Item> earthElementSword = ITEMS.register("earthelementsword",() -> new ItemElementSword(5));
+
+    public static  RegistryObject<Item> crimsonCrest = ITEMS.register("crop_crimsoncrest",() -> new BlockItem(BlockLoader.crimsonCrest.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> heartOfWal = ITEMS.register("crop_heartofwal",() -> new BlockItem(BlockLoader.heartOfWal.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> nitriteThorns = ITEMS.register("crop_nitritethorns",() -> new BlockItem(BlockLoader.nitriteThorns.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> plamStem = ITEMS.register("crop_plamstem",() -> new BlockItem(BlockLoader.plamStem.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> sullenHydrangea = ITEMS.register("crop_sullenhydrangea",() -> new BlockItem(BlockLoader.sullenHydrangea.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> sweetCyanReed = ITEMS.register("crop_sweetcyanreed",() -> new BlockItem(BlockLoader.sweetCyanReed.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
 
 }

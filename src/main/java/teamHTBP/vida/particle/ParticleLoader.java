@@ -1,5 +1,6 @@
 package teamHTBP.vida.particle;
 
+import net.minecraft.particles.BasicParticleType;
 import net.minecraft.particles.ParticleType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -11,4 +12,6 @@ public class ParticleLoader {
     public static RegistryObject<ParticleType<LeafParticleData>> leafParticle = PARTICLE.register("leafparticle", () -> new LeafParticleType());
     public static RegistryObject<ParticleType<CubeParticleData>> cubeParticle = PARTICLE.register("cubeparticle", () -> new CubeParticleType());
     public static RegistryObject<ParticleType<ElementFireParticleData>> elementFireParticle = PARTICLE.register("elementfireparticle", () -> new ElementFireParticleType());
+    public static RegistryObject<ParticleType<CuboidParticleData>> cuboidParticle = PARTICLE.register("cuboidparticle", () -> new CuboidParticleType());
+
 }

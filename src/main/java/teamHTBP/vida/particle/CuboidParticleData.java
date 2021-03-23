@@ -1,0 +1,116 @@
+package teamHTBP.vida.particle;
+
+import com.mojang.brigadier.StringReader;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.particles.IParticleData;
+import net.minecraft.particles.ParticleType;
+
+import java.util.Locale;
+
+public class CuboidParticleData implements IParticleData {
+    private double speedX;
+    private double speedY;
+    private double speedZ;
+    private float scale;
+    private float r;
+    private float g;
+    private float b;
+    private int age;
+
+    public CuboidParticleData(double speedX,double speedY,double speedZ,float r,float g,float b,float scale,int age){
+        this.speedX = speedX;
+        this.speedY = speedY;
+        this.speedZ = speedZ;
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        this.scale = scale;
+        this.age = age;
+        this.scale = scale;
+    }
+    public static final IDeserializer<CuboidParticleData> DESERIALIZER = new IDeserializer<CuboidParticleData>() {
+
+        @Override
+        public CuboidParticleData deserialize(ParticleType<CuboidParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
+            reader.expect(' ');
+            double speedX = reader.readDouble();
+            reader.expect(' ');
+            double speedY = reader.readDouble();
+            reader.expect(' ');
+            double speedZ = reader.readDouble();
+            reader.expect(' ');
+            float r = reader.readFloat();
+            reader.expect(' ');
+            float g = reader.readFloat();
+            reader.expect(' ');
+            float b = reader.readFloat();
+            reader.expect(' ');
+            float scale = reader.readFloat();
+            reader.expect(' ');
+            int age = reader.readInt();
+            return new CuboidParticleData(speedX, speedY, speedZ,r,g,b,scale,age);
+        }
+
+        @Override
+        public CuboidParticleData read(ParticleType<CuboidParticleData> particleTypeIn, PacketBuffer buffer) {
+            double speedX = buffer.readDouble();
+            double speedY = buffer.readDouble();
+            double speedZ = buffer.readDouble();
+            float r = buffer.readFloat();
+            float g = buffer.readFloat();
+            float b = buffer.readFloat();
+            float scale = buffer.readFloat();
+            int age = buffer.readInt();
+            return new CuboidParticleData(speedX, speedY, speedZ,r,g,b,scale,age);
+        }
+    };
+    @Override
+    public ParticleType<?> getType() {
+        return ParticleLoader.cuboidParticle.get();
+    }
+
+    @Override
+    public void write(PacketBuffer buffer) {
+        buffer.writeDouble(this.speedX);
+        buffer.writeDouble(this.speedY);
+        buffer.writeDouble(this.speedZ);
+        buffer.writeFloat(this.r);
+        buffer.writeFloat(this.g);
+        buffer.writeFloat(this.b);
+        buffer.writeFloat(this.scale);
+        buffer.writeInt(age);
+    }
+
+    @Override
+    public String getParameters() {
+        return String.format(Locale.ROOT, "%s %.2d %.2d %.2d %f %f %f %f %d",
+                this.getType().getRegistryName(), speedX, speedY, speedZ,r,g,b,scale,age);
+    }
+
+    //获得x,y,z速度
+    public double getInformation(int type) {
+        switch (type) {
+            case 0:
+                return  speedX;
+            case 1:
+                return  speedY;
+            case 2:
+                return speedZ;
+            case 3:
+                return r;
+            case 4:
+                return g;
+            case 5:
+                return b;
+            case 6:
+                return scale;
+            case 7:
+                return age;
+            default:
+                return 0;
+        }
+    }
+
+
+}

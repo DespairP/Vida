@@ -131,8 +131,8 @@
   "key.bottle3.use": "元素瓶[中]使用",
   "key.bottles": "元素瓶装填显示",
   "key.category.vida": "'生命'键位设置",
-  "desc.luckI.skill": "少量几率造成额外伤害",
-  "name.luckI.skill": "幸运I",
-  "name.lightUp.skill": "地爆天星",
-  "desc.need.skill": "需要的前置技能："
+  "skill.vida.luck.name": "幸运",
+  "skill.vida.luck.desc": "在击杀时有几率增加伤害 \n *随着等级增加伤害会增强",
+  "skill.vida.requiredSkill.anno": "需要解锁的技能："
+
 }

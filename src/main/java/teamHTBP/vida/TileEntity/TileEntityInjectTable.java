@@ -76,8 +76,10 @@ public class TileEntityInjectTable extends TileEntity implements ITickableTileEn
             }
         } }catch (NullPointerException ex){
             Vida.LOGGER.error("In TileEntity Inject Table:NULL POINTER EXCEPTION");
+            ex.printStackTrace();
             return false;
         }catch (Exception ex){
+            ex.printStackTrace();
             return false;
         }
         return false;
@@ -105,12 +107,9 @@ public class TileEntityInjectTable extends TileEntity implements ITickableTileEn
             sinWave += 0.1;
             if(sinWave >= Math.PI * 2) sinWave = 0;
         }
-
+        //
         CompoundNBT nbt = swordStack.getOrCreateTag();
-        //int luck = nbt.getInt("luckIEXP");
-        //nbt.putInt("luckIEXP", luck+10);
         world.notifyBlockUpdate(getPos(),getBlockState(),getBlockState(),3);
-        //System.out.println(luck);
     }
 
     @Override

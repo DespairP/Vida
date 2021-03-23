@@ -34,6 +34,10 @@ public class ContainerScreenOreReactionMachine extends ContainerScreen<Container
             int progress =(int)(tileEntityOreReationMachine.array.get(0) * 72.0f/( tileEntityOreReationMachine.MAX_BURNTIME * 1.0f ));
             blit(i + 52, j + 37 + 72 - progress, 0,248, 0 + 72 - progress , 8, progress, 256, 256);
         }
+        if(tileEntityOreReationMachine.getGoldEnergy() > 0){
+            int progress =(int)(tileEntityOreReationMachine.getGoldEnergy() * 72.0f/( tileEntityOreReationMachine.MAX_GOLDENERGY * 1.0f ));
+            blit(i + 32, j + 37 + 72 - progress, 0, 240, 0 + 72 - progress, 8, progress, 256, 256);
+        }
     }
 
     @Override

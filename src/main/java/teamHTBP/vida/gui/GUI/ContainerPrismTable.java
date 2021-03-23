@@ -20,7 +20,6 @@ public class ContainerPrismTable extends Container {
     public TileEntityPrismTable tileEntityPrismTable;
 
     public ContainerPrismTable(int winId, PlayerInventory inventory, BlockPos pos, World world, PrismTableArray array) {
-        //TODO shift+右键slot会导致崩溃
         super(ContainerTypeLoader.prismTable.get(), winId);
         this.array = array;
         this.tileEntityPrismTable = (TileEntityPrismTable) world.getTileEntity(pos);

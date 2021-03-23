@@ -12,8 +12,6 @@ import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
-import teamHTBP.vida.Block.function.BlockPrismTable;
 import teamHTBP.vida.TileEntity.TileEntityPrismTable;
 
 import java.util.Random;

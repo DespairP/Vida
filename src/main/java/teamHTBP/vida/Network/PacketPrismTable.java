@@ -46,9 +46,8 @@ public class PacketPrismTable {
         ctx.get().enqueueWork(()->{
             if(ctx.get().getSender() == null) return;
 
-
             if(ctx.get().getSender().world.isAreaLoaded(new BlockPos(x, y, z), 1)){
-            TileEntity tileEntity = ctx.get().getSender().world.getTileEntity(new BlockPos(x,y,z));
+                TileEntity tileEntity = ctx.get().getSender().world.getTileEntity(new BlockPos(x,y,z));
             if(tileEntity instanceof TileEntityPrismTable){
                 TileEntityPrismTable tileEntityPrismTable = (TileEntityPrismTable)tileEntity;
                 tileEntityPrismTable.array.set(2, this.mirrorX);

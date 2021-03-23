@@ -38,6 +38,10 @@ public class ArmorModelElementChestplates<T extends Entity> extends BipedModel {
         super(1.0f, 0, 64, 64);
     }
 
+    public ArmorModelElementChestplates(int textureWidth,int textureHeight) {
+        super(1.0f, 0, textureWidth, textureHeight);
+    }
+
     protected ModelRenderer getArmForSide(HandSide side) {
         return side == HandSide.LEFT ? this.field_178724_i : this.field_178723_h;
     }

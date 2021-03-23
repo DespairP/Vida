@@ -3,6 +3,11 @@ package teamHTBP.vida.modelRender.armormodel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 
 public class ArmorModelEarthHelmet extends ArmorModelElementHelmet {
+    public ModelRenderer part19;
+    public ModelRenderer part15;
+    public ModelRenderer part16;
+    public ModelRenderer part17;
+    public ModelRenderer part21;
 
     public ArmorModelEarthHelmet(){
         super(1.0F,0,64,64);

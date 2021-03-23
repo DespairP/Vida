@@ -27,6 +27,12 @@ public class ArmorModelElementBoots<T extends Entity> extends BipedModel {
         //this.setVisible(true);
     }
 
+    public ArmorModelElementBoots(int textureWidth,int textureHeight) {
+        super(1.0f,0,128,128);
+        //this.setVisible(true);
+    }
+
+
     @Override
     public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
         //this.field_178721_j.copyModelAngles(this.bipedLeftLeg);

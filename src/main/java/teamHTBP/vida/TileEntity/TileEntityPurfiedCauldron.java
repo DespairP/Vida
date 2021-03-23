@@ -1,19 +1,15 @@
 package teamHTBP.vida.TileEntity;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.math.BlockPos;
-import teamHTBP.vida.Capability.ElementHelper;
-import teamHTBP.vida.Entity.EntityFaintLight;
-import teamHTBP.vida.Entity.EntityLoader;
+import teamHTBP.vida.capability.ElementHelper;
+import teamHTBP.vida.entity.EntityFaintLight;
+import teamHTBP.vida.entity.EntityLoader;
 
 import javax.annotation.Nullable;
 import java.util.Random;

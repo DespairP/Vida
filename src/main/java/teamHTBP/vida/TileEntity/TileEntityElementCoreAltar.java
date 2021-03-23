@@ -9,11 +9,9 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import teamHTBP.vida.Block.BlockLoader;
-import teamHTBP.vida.Capability.ElementHelper;
+import teamHTBP.vida.block.BlockLoader;
+import teamHTBP.vida.capability.ElementHelper;
 import teamHTBP.vida.Item.ItemElementCore;
-import teamHTBP.vida.Item.ItemLoader;
 
 import javax.annotation.Nullable;
 import java.util.LinkedList;
@@ -185,7 +183,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
     public boolean setCoreItemStack(ItemStack itemStack){
         //如果在进行仪式，不能放物品
         if(this.isProgressing) return false;
-        if(itemStack.getItem().getItem() instanceof ItemElementCore && (this.coreItem == ItemStack.EMPTY||this.coreItem.isEmpty())){
+        if(itemStack.getItem() instanceof ItemElementCore && (this.coreItem == ItemStack.EMPTY||this.coreItem.isEmpty())){
            this.coreItem = itemStack;
            return true;
         }
@@ -261,8 +259,8 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         for(int j=0;j < 4;j++){
         itemList.add(this.altarItem[j].getItem());
         }
-        int element = helper.getContainingElement(this.getAltarItemStack());
-        System.out.println(element);
+        int element = helper.getContainingElement(this.coreItem);
+        //System.out.println(element);
         if(ElementHelper.beganAltarProgress(this.coreItem,itemList, element)){
             this.element = element;
             return true;

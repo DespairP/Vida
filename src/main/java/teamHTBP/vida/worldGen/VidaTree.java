@@ -5,8 +5,7 @@ import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliageplacer.BlobFoliagePlacer;
-import net.minecraft.world.gen.foliageplacer.FoliagePlacer;
-import teamHTBP.vida.Block.BlockLoader;
+import teamHTBP.vida.block.BlockLoader;
 
 import javax.annotation.Nullable;
 import java.util.Random;

@@ -31,6 +31,9 @@ public class LeafParticle extends SpriteTexturedParticle  {
 
       private boolean collidedY;
 
+      private double xSpin = 0;
+      private double zSpin = 0;
+
 
     protected LeafParticle(World worldIn, double posXIn, double posYIn, double posZIn,double xSpeedIn, double ySpeedIn, double zSpeedIn) {
         super(worldIn, posXIn, posYIn, posZIn, xSpeedIn,  ySpeedIn,  zSpeedIn);
@@ -38,13 +41,16 @@ public class LeafParticle extends SpriteTexturedParticle  {
         maxAge = 100;
         //粒子大小x0.5
         particleScale = 0.5F;
+
         motionX = xSpeedIn;
-        //Y轴下落速度为0.2
-        motionY = -0.2f;
+        motionY = ySpeedIn;
         motionZ = zSpeedIn;
         //是否有碰撞体积
         this.canCollide = true;
         //设置透明度，不透明为1
+
+        this.xSpin = posXIn;
+        this.zSpin = posZIn;
         this.setAlphaF(1.0f);
 
 
@@ -106,52 +112,18 @@ public class LeafParticle extends SpriteTexturedParticle  {
     /*每一帧会运行此方法，主要是设置一些粒子的可变参数*/
     @Override
     public void tick() {
-        super.tick();
-        //如果在地上的话，且还没过最大延迟时间，延迟时间++
-        if(this.onGround && offsetTime < MAX_OFFSETTIME){
-              offsetTime ++;
-        }else if(this.onGround){
-            //到达最大延迟时间，开始减小透明度
-            this.particleAlpha -= 0.1F;
-            //透明度达到负值粒子又会出现，所以加个检测机制
-            if(this.particleAlpha <= 0)
-                this.particleScale = 0;
-        }
-    }
 
-
-    /*从TexturedParticle复制的方法*/
-    @Override
-    public void move(double x, double y, double z) {
-        if (!this.collidedY) {
-            double d0 = x;
-            double d1 = y;
-            double origZ = z;
-            if (this.canCollide && (x != 0.0D || y != 0.0D || z != 0.0D)) {
-                Vec3d vec3d = Entity.collideBoundingBoxHeuristically((Entity) null, new Vec3d(x, y, z), this.getBoundingBox(), this.world, ISelectionContext.dummy(), new ReuseableStream<>(Stream.empty()));
-                x = vec3d.x;
-                y = vec3d.y;
-                z = vec3d.z;
-            }
-
-            if (x != 0.0D || y != 0.0D || z != 0.0D) {
-                this.setBoundingBox(this.getBoundingBox().offset(x, y, z));
-                this.resetPositionToBB();
-            }
-
-            if (Math.abs(d1) >= (double) 1.0E-0F && Math.abs(y) < (double) 1.0E-0F) {
-                this.collidedY = true;
-            }
-
-            this.onGround = d1 != y && d1 < 0.0D;
-            if (d0 != x) {
-                this.motionX = 0.0D;
-            }
-
-            if (origZ != z) {
-                this.motionZ = 0.0D;
-            }
+        this.prevPosX = this.posX;
+        this.prevPosY = this.posY;
+        this.prevPosZ = this.posZ;
+        if (this.age++ >= this.maxAge) {
+            this.setExpired();
+        } else {
+            this.posY += this.motionY;
+            this.posX = xSpin + MathHelper.sin((float)(this.motionX + this.motionZ + this.posY * 5))*0.3;
+            this.posZ = zSpin + MathHelper.cos((float)(this.motionX + this.motionZ + this.posY * 5))*0.3;
 
         }
     }
+
 }

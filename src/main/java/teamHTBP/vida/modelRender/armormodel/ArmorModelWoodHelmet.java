@@ -3,6 +3,7 @@ package teamHTBP.vida.modelRender.armormodel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 
 public class ArmorModelWoodHelmet extends  ArmorModelElementHelmet {
+    public ModelRenderer part21;
 
     public ArmorModelWoodHelmet(){
         super(1.0f,0,64,64);

@@ -3,6 +3,9 @@ package teamHTBP.vida.modelRender.armormodel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 
 public class ArmorModelAquaHelmet extends ArmorModelElementHelmet{
+    public ModelRenderer part15;
+
+
     public ArmorModelAquaHelmet() {
         super(1.0f, 0, 64, 64);
         this.textureWidth = 64;

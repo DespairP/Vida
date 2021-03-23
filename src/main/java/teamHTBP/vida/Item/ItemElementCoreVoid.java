@@ -11,8 +11,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import teamHTBP.vida.Entity.EntityFaintLight;
-import teamHTBP.vida.Entity.EntityLoader;
+import teamHTBP.vida.entity.EntityFaintLight;
+import teamHTBP.vida.entity.EntityLoader;
 import teamHTBP.vida.ItemGroup.ItemGroupLoader;
 
 import java.util.List;

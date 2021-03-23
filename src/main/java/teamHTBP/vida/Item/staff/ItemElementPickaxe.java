@@ -21,6 +21,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolType;
 import teamHTBP.vida.Item.ItemLoader;
 import teamHTBP.vida.ItemGroup.ItemGroupLoader;
+import teamHTBP.vida.capability.EnumElements;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -83,6 +84,11 @@ public class ItemElementPickaxe extends ToolItem implements IElementTools {
     @Override
     public ToolType getToolType() {
         return this.getToolType();
+    }
+
+    @Override
+    public EnumElements getElementType() throws IndexOutOfBoundsException{
+        return EnumElements.values()[element];
     }
 }
 class ElementItemTier implements IItemTier{

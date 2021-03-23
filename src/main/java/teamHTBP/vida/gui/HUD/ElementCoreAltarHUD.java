@@ -32,30 +32,35 @@ public class ElementCoreAltarHUD extends AbstractGui {
         blit(screenWidth + 4 , screenHeight + 80, 0, 0, 75, 48, 4, 80, 80);
         float length = (tileEntityElementCoreAltar.progress / 30000.0f) * 48.0f;
         blit(screenWidth + 4 , screenHeight + 80, 0, 0, 71, (int)length, 4, 80, 80);
+        //绘制四个方向的物品
         for(int i = 0;i<4;i++){
+            GuiPosition position = GuiPosition.values()[i];
             ItemStack stack = tileEntityElementCoreAltar.altarItem[i];
             if(stack != ItemStack.EMPTY && !stack.isEmpty()){
-                switch (i){
-                    case 0:
-                         Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack, screenWidth + 1  , screenHeight + 19);
+                switch (position){
+                    case LEFT:
+                         Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack, screenWidth + 1  , screenHeight + 20);
                          break;
-                    case 1:
-                        Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack, screenWidth + 20  , screenHeight );
+                    case TOP:
+                        Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack, screenWidth + 20  , screenHeight + 1 );
                         break;
-                    case 2:
+                    case RIGHT:
                         Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack, screenWidth + 39  , screenHeight + 20);
                         break;
-                    case 3:
+                    case BOTTOM:
                         Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack,screenWidth + 20 , screenHeight + 39);
                         break;
                 }
 
             }
         }
-
+        //绘制核心
         ItemStack stack = tileEntityElementCoreAltar.coreItem;
         Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack,screenWidth + 20 , screenHeight + 20);
+    }
 
 
+    enum GuiPosition{
+        LEFT,RIGHT,TOP,BOTTOM
     }
 }

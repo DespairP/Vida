@@ -1,8 +1,8 @@
 {
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "vida:model/altarcubeMaker",
-		"particle": "vida:model/altarcubeMaker"
+		"0": "vida:model/altarcubemaker",
+		"particle": "vida:model/altarcubemaker"
 	},
 	"elements": [
 		{

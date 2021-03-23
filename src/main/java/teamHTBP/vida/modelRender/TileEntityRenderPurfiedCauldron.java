@@ -30,16 +30,10 @@ import org.lwjgl.opengl.GL11;
 import teamHTBP.vida.TileEntity.TileEntityPurfiedCauldron;
 
 public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEntityPurfiedCauldron> {
-
-    private static final float MIN_HEIGHT = 0.5625f;
-    private static final float MAX_HEIGHT = 0.78125f;
-    private float floating = 0;
-
-    private  float rPlus = 0;
-    private  float gPlus = 0;
-    private  float bPlus = 0;
-
-
+    private float floating = 0; //物品悬浮增量
+    private float rPlus = 0; //r变色增量
+    private float gPlus = 0; //b变色增量
+    private float bPlus = 0; //g变色增量
 
     public TileEntityRenderPurfiedCauldron(TileEntityRendererDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
@@ -49,7 +43,7 @@ public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEnti
     public void render(TileEntityPurfiedCauldron tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
         if(tileEntityIn.isWater) {
             matrixStackIn.push();
-            float level = tileEntityIn.container/85714.2f;
+            //获取水的贴图
             Fluid fluid = Fluids.WATER.getStillFluid();
             BlockRendererDispatcher blockRenderer = Minecraft.getInstance().getBlockRendererDispatcher();
             ResourceLocation resourceLocation;
@@ -64,23 +58,20 @@ public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEnti
                 resourceLocation = Fluids.WATER.getAttributes().getStillTexture();
                 color = getFluidColor(tileEntityIn.getWorld(), tileEntityIn.getPos(), Fluids.WATER);
             }
-
             TextureAtlasSprite textureAtlasSprite = Minecraft.getInstance().getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE).apply(resourceLocation);
-
+            //获取水贴图在精灵图中的最大/小u,v位置
             float uMin = textureAtlasSprite.getMinU();
             float uMax = textureAtlasSprite.getMaxU();
             float vMin = textureAtlasSprite.getMinV();
             float vMax = textureAtlasSprite.getMaxV();
-
+            //环境光，默认为最高光亮
             int light = 15728880;
-
-
+            //设置基础argb
             float a = 0.95F;
             float r = (color >> 16 & 0xFF) / 255.0F;
             float g = (color >> 8 & 0xFF) / 255.0F;
             float b = (color & 0xFF) / 255.0F;
-
-
+            //进行变色
             if(changeColor(tileEntityIn, r*255, g*255, b*255)) {
             r=rPlus/ 255.0F;
             g=gPlus/ 255.0f;
@@ -90,27 +81,21 @@ public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEnti
                 gPlus = 118;
                 bPlus = 228;
             }
-
-
-
-
+            //开始绘制水贴图
             Matrix4f matrix4f = matrixStackIn.getLast().getMatrix();
-
-            float y = MIN_HEIGHT + (2) * (MAX_HEIGHT - MIN_HEIGHT);
-
-            matrixStackIn.translate(0, 0.5F + level, 0);
-
+            //首先获取水位高度
+            float waterlevel = tileEntityIn.container/110814.2f;
+            matrixStackIn.translate(0, 0.3F + waterlevel, 0);
+            //设置贴图绘制方式
             IVertexBuilder buffer = bufferIn.getBuffer(RenderType.getTranslucent());
-
-            buffer.pos(matrix4f, 0, 0, 0).color(r, g, b, a).tex(uMin, vMin).overlay(0,0).lightmap(light).normal(0, 1, 0).endVertex();
-            buffer.pos(matrix4f, 0, 0, 1).color(r, g, b, a).tex(uMin, vMax).overlay(0,0).lightmap(light).normal(0, 1, 0).endVertex();
-            buffer.pos(matrix4f, 1, 0, 1).color(r, g, b, a).tex(uMax, vMax).overlay(0,0).lightmap(light).normal(0, 1, 0).endVertex();
-            buffer.pos(matrix4f, 1, 0, 0).color(r, g, b, a).tex(uMax, vMin).overlay(0,0).lightmap(light).normal(0, 1, 0).endVertex();
-
+            //绘制
+            buffer.pos(matrix4f, 0.1F, 0.1F, 0.1F).color(r, g, b, a).tex(uMin, vMin).overlay(0,0).lightmap(light).normal(0, 1, 0).endVertex();
+            buffer.pos(matrix4f, 0.1F, 0.1F, 0.9F).color(r, g, b, a).tex(uMin, vMax).overlay(0,0).lightmap(light).normal(0, 1, 0).endVertex();
+            buffer.pos(matrix4f, 0.9F, 0.1F, 0.9F).color(r, g, b, a).tex(uMax, vMax).overlay(0,0).lightmap(light).normal(0, 1, 0).endVertex();
+            buffer.pos(matrix4f, 0.9F, 0.1F, 0.1F).color(r, g, b, a).tex(uMax, vMin).overlay(0,0).lightmap(light).normal(0, 1, 0).endVertex();
+            //结束绘制
             Minecraft.getInstance().getProfiler().endSection();
             matrixStackIn.pop();
-
-
         }
 
         if(!tileEntityIn.meltItem.isEmpty()) {

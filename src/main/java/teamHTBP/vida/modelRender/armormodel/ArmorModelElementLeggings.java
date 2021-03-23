@@ -25,6 +25,9 @@ public class ArmorModelElementLeggings<T extends Entity> extends BipedModel<Armo
         super(1.0f,0,64,64);
     }
 
+    public ArmorModelElementLeggings(int textureWidth,int textureHeight) {
+        super(1.0f,0, textureWidth, textureHeight);
+    }
     @Override
     public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
         this.field_78115_e.showModel = true;

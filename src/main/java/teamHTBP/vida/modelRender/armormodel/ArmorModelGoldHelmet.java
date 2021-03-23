@@ -9,7 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ArmorStandEntity;
 
 public class ArmorModelGoldHelmet<T extends Entity> extends ArmorModelElementHelmet {
-
+    public ModelRenderer part19;
 
 
     public ArmorModelGoldHelmet() {
