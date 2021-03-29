@@ -1,5 +1,8 @@
 package teamHTBP.vida.block;
 
+import com.google.common.collect.ImmutableBiMap;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.SetMultimap;
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -10,6 +13,11 @@ import teamHTBP.vida.block.function.*;
 import teamHTBP.vida.Helper.ColorHelper;
 import teamHTBP.vida.Item.ItemLoader;
 import teamHTBP.vida.Vida;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.function.Supplier;
 
 /**
  * 注册方块类
@@ -66,7 +74,7 @@ public class BlockLoader {
     public static RegistryObject<Block> verdantBrickDeco_1   =   BLOCKS.register("verdantbrickdeco1",    () -> new BlockVerdantBrickDeco());
     public static RegistryObject<Block> verdantBrickDeco_2   =   BLOCKS.register("verdantbrickdeco2",    () -> new BlockVerdantBrickDeco());
     public static RegistryObject<Block> verdantBrickDeco_3   =   BLOCKS.register("verdantbrickdeco3",    () -> new BlockVerdantBrickDeco());
-    public static RegistryObject<Block> verdantBrickDeco_4   =   BLOCKS.register("verdantbrickdeco4",    () -> new BlockVerdantBrickDeco());
+    public static RegistryObject<Block> verdantBrickDeco_4   =   BLOCKS.register("verdantbrickdeco4",    () -> new BlockDecoFactory().createBuilder().build().produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
 
     public static RegistryObject<Block> elementCrystalGold =       BLOCKS.register("goldelementcrystal",     () -> new BlockElementCrystalGold());
     public static RegistryObject<Block> elementCrystalWood =       BLOCKS.register("woodelementcrystal",     () -> new BlockElementCrystalWood());
@@ -83,6 +91,7 @@ public class BlockLoader {
     public static RegistryObject<Block> injectionTable = BLOCKS.register("injecttable",()->new BlockInjectTable());
     public static RegistryObject<Block> altarcubeMaker = BLOCKS.register("altarcubemaker",()->new BlockAltarCubeMaker());
     public static RegistryObject<Block> steleLife      = BLOCKS.register("lifestele",()->new BlockSteleLife());
+    public static RegistryObject<Block> blueprintDesigner      = BLOCKS.register("blueprintdesigner",()->new BlockBlueprintDesigner());
 
 
     public static RegistryObject<Block> crimsonCrest = BLOCKS.register("crop_crimsoncrest",() -> new BlockElementCropParticle(5, 4, () -> {return ItemLoader.crimsonCrest.get();}, ColorHelper.DARK_RED));
@@ -91,5 +100,4 @@ public class BlockLoader {
     public static RegistryObject<Block> plamStem = BLOCKS.register("crop_plamstem",() -> new BlockElementCropParticle(5, 3,()->{return ItemLoader.plamStem.get();},ColorHelper.DARK_BLUE));
     public static RegistryObject<Block> sullenHydrangea = BLOCKS.register("crop_sullenhydrangea",() -> new BlockElementCropParticle(5, 3,()->{return ItemLoader.sullenHydrangea.get();},ColorHelper.PURPLR));
     public static RegistryObject<Block> sweetCyanReed = BLOCKS.register("crop_sweetcyanreed",() -> new BlockElementCropParticle(5, 2, ()->{return ItemLoader.sweetCyanReed.get();},ColorHelper.CYAN_GREEN));
-
 }

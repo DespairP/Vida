@@ -5,6 +5,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import teamHTBP.vida.Item.Potion.ItemCreativeElementPotion;
 import teamHTBP.vida.block.BlockLoader;
 import teamHTBP.vida.Item.armor.*;
 import teamHTBP.vida.Item.staff.ItemElementPickaxe;
@@ -13,6 +14,7 @@ import teamHTBP.vida.Item.staff.ItemPrism;
 import teamHTBP.vida.Item.staff.ItemVidaWand;
 import teamHTBP.vida.ItemGroup.ItemGroupLoader;
 import teamHTBP.vida.Vida;
+import teamHTBP.vida.capability.EnumElements;
 
 //注册item的类
 public class ItemLoader {
@@ -45,6 +47,11 @@ public class ItemLoader {
     public static  RegistryObject<Item> fireElementGem = ITEMS.register("fireelementgem",() -> new ItemGemElement());
     public static  RegistryObject<Item> earthElementGem = ITEMS.register("earthelementgem",() -> new ItemGemElement());
 
+    public static  RegistryObject<Item> goldElementPotion = ITEMS.register("goldelementpotion",() -> new ItemCreativeElementPotion(EnumElements.GOLD));
+    public static  RegistryObject<Item> woodElementPotion = ITEMS.register("woodelementpotion",() -> new ItemCreativeElementPotion(EnumElements.WOOD));
+    public static  RegistryObject<Item> aquaElementPotion = ITEMS.register("aquaelementpotion",() -> new ItemCreativeElementPotion(EnumElements.AQUA));
+    public static  RegistryObject<Item> fireElementPotion = ITEMS.register("fireelementpotion",() -> new ItemCreativeElementPotion(EnumElements.FIRE));
+    public static  RegistryObject<Item> earthElementPotion = ITEMS.register("earthelementpotion",() -> new ItemCreativeElementPotion(EnumElements.EARTH));
 
     public static  RegistryObject<Item> armor_test = ITEMS.register("testaromor",() -> new TestHelmet());
     public static  RegistryObject<Item> armor_gold_helmet = ITEMS.register("goldhelmetarmor",() -> new ItemArmorElementHelmet(1));
@@ -70,6 +77,7 @@ public class ItemLoader {
     public static  RegistryObject<Item> armor_aqua_leggings_Withbottle = ITEMS.register("aqualeggingsarmorwithbottles",() -> new ItemArmorElementLegginsWithBottles(3));
     public static  RegistryObject<Item> armor_fire_leggings_Withbottle = ITEMS.register("fireleggingsarmorwithbottles",() -> new ItemArmorElementLegginsWithBottles(4));
     public static  RegistryObject<Item> armor_earth_leggings_Withbottle = ITEMS.register("earthleggingsarmorwithbottles",() -> new ItemArmorElementLegginsWithBottles(5));
+    public static  RegistryObject<Item> bluePrint_belt = ITEMS.register("blueprintbelt",() -> new ItemArmorBelt());
 
 
     public static  RegistryObject<Item> armor_gold_boots    = ITEMS.register("goldbootsarmor", () -> new ItemArmorElementBoots(1));
@@ -117,7 +125,7 @@ public class ItemLoader {
     public static  RegistryObject<Item> dimrockBrick = ITEMS.register("dimrockbrick",() -> new BlockItem(BlockLoader.dimRockBrick.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> dimrockBrickdeco_0 = ITEMS.register("dimrockbrickdeco0",() -> new BlockItem(BlockLoader.dimRockBrickdeco_0.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> dimrockBrickdeco_1 = ITEMS.register("dimrockbrickdeco1",() -> new BlockItem(BlockLoader.dimRockBrickdeco_1.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static  RegistryObject<Item> fertileSoilBrick        = ITEMS.register("fertilesoilbrick",     () -> new BlockItem(BlockLoader.fertileSoilBrick      .get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> fertileSoilBrick        = ITEMS.register("fertilesoilbrick",     () -> new BlockItem(BlockLoader.fertileSoilBrick.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> fertileSoilBrickdeco_0  = ITEMS.register("fertilesoilbrickdeco0",() -> new BlockItem(BlockLoader.fertileSoilBrickdeco_0.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> fertileSoilBrickdeco_1  = ITEMS.register("fertilesoilbrickdeco1",() -> new BlockItem(BlockLoader.fertileSoilBrickdeco_1.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> fertileSoilBrickdeco_2  = ITEMS.register("fertilesoilbrickdeco2",() -> new BlockItem(BlockLoader.fertileSoilBrickdeco_2.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
@@ -152,6 +160,7 @@ public class ItemLoader {
     public static  RegistryObject<Item> injectionTable = ITEMS.register("injecttable",() -> new BlockItem(BlockLoader.injectionTable.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> altarcubeMaker = ITEMS.register("altarcubemaker",() -> new BlockItem(BlockLoader.altarcubeMaker.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> steleLife      = ITEMS.register("lifestele",() -> new BlockItem(BlockLoader.steleLife.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static  RegistryObject<Item> blueprintDesigner      = ITEMS.register("blueprintdesigner",() -> new BlockItem(BlockLoader.blueprintDesigner.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
 
 
 

@@ -7,6 +7,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import teamHTBP.vida.Item.Potion.ItemCreativeElementPotion;
 import teamHTBP.vida.capability.ElementHelper;
 import teamHTBP.vida.entity.EntityFaintLight;
 import teamHTBP.vida.entity.EntityLoader;
@@ -56,6 +57,14 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
             return true;
         }
         return false;
+    }
+
+    /**
+     * 设置物品融入速度
+     * 初始速度：1
+     * */
+    public void setMeltSpeed(){
+          this.speed = this.meltItem.getItem() instanceof ItemCreativeElementPotion?100:1;
     }
 
     public void read(CompoundNBT compound) {
@@ -122,7 +131,6 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
     @Override
     public void tick() {
         if(!world.isRemote){
-
             //如果缓冲值>0,先消耗缓冲值
             if(this.isWater && this.isFire){
             if(this.containing > 0){
@@ -162,6 +170,7 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
             if(element == 0){
                element = getContainingElement(meltItem);
             }
+            //
             containing = new Random().nextInt(getContainingNum(meltItem)) * 3+ 1;
         }
     }

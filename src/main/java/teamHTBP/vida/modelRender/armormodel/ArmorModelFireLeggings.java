@@ -12,13 +12,13 @@ public class ArmorModelFireLeggings extends  ArmorModelElementLeggings {
 
     public ArmorModelFireLeggings(){
         super(128,128);
-        field_78115_e = new ModelRenderer(this);
-        field_78115_e.setRotationPoint(0.0F, 24.0F, 0.0F);
-        field_78115_e.setTextureOffset(0, 45).addBox(-4.0F, -15.0F, -2.0F, 8.0F, 3.0F, 4.0F, 0.2F, false);
+        body_low = new ModelRenderer(this);
+        body_low.setRotationPoint(0.0F, 24.0F, 0.0F);
+        body_low.setTextureOffset(0, 45).addBox(-4.0F, -15.0F, -2.0F, 8.0F, 3.0F, 4.0F, 0.2F, false);
 
         bone13 = new ModelRenderer(this);
         bone13.setRotationPoint(-3.0F, -12.0F, -2.0F);
-        field_78115_e.addChild(bone13);
+        body_low.addChild(bone13);
         bone13.setTextureOffset(24, 47).addBox(1.5F, -2.5F, 3.5F, 3.0F, 4.0F, 1.0F, 0.0F, false);
 
         cube_r1 = new ModelRenderer(this);

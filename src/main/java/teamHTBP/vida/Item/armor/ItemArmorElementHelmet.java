@@ -49,7 +49,7 @@ public class ItemArmorElementHelmet extends ArmorItem {
                 model = new ArmorModelEarthHelmet();break;
         }
 
-        model.field_78116_c.showModel = armorSlot == EquipmentSlotType.HEAD;
+        model.head.showModel = armorSlot == EquipmentSlotType.HEAD;
         //model.bipedHeadwear.showModel = armorSlot == EquipmentSlotType.HEAD;
 
         model.isChild = _default.isChild;

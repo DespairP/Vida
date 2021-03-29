@@ -13,15 +13,15 @@ public class ArmorModelFireBoots extends ArmorModelElementBoots {
 
     public ArmorModelFireBoots(){
         super(128,128);
-        field_178721_j = new ModelRenderer(this);
-        field_178721_j.setRotationPoint(-2.0F, 12.0F, 0.0F);
-        field_178721_j.setTextureOffset(0, 60).addBox(-2.0F, 6.75F, -2.0F, 4.0F, 5.0F, 4.0F, 0.2F, true);
-        field_178721_j.setTextureOffset(0, 52).addBox(-2.0F, 4.25F, -2.0F, 4.0F, 1.0F, 4.0F, 0.2F, true);
-        field_178721_j.setTextureOffset(0, 57).addBox(-1.5F, 3.75F, -2.5F, 3.0F, 2.0F, 1.0F, 0.0F, true);
+        leg_right = new ModelRenderer(this);
+        leg_right.setRotationPoint(-2.0F, 12.0F, 0.0F);
+        leg_right.setTextureOffset(0, 60).addBox(-2.0F, 6.75F, -2.0F, 4.0F, 5.0F, 4.0F, 0.2F, true);
+        leg_right.setTextureOffset(0, 52).addBox(-2.0F, 4.25F, -2.0F, 4.0F, 1.0F, 4.0F, 0.2F, true);
+        leg_right.setTextureOffset(0, 57).addBox(-1.5F, 3.75F, -2.5F, 3.0F, 2.0F, 1.0F, 0.0F, true);
 
         bone2 = new ModelRenderer(this);
         bone2.setRotationPoint(0.0F, 0.0F, 0.0F);
-        field_178721_j.addChild(bone2);
+        leg_right.addChild(bone2);
 
 
         cube_r1 = new ModelRenderer(this);
@@ -36,15 +36,15 @@ public class ArmorModelFireBoots extends ArmorModelElementBoots {
         setRotateAngle(cube_r2, -0.0873F, 0.0F, 0.0F);
         cube_r2.setTextureOffset(16, 65).addBox(-0.5F, -1.75F, -0.5F, 3.0F, 2.0F, 1.0F, 0.0F, true);
 
-        field_178722_k = new ModelRenderer(this);
-        field_178722_k.setRotationPoint(2.0F, 12.0F, 0.0F);
-        field_178722_k.setTextureOffset(0, 60).addBox(-2.0F, 6.75F, -2.0F, 4.0F, 5.0F, 4.0F, 0.2F, false);
-        field_178722_k.setTextureOffset(0, 52).addBox(-2.0F, 4.25F, -2.0F, 4.0F, 1.0F, 4.0F, 0.2F, false);
-        field_178722_k.setTextureOffset(0, 57).addBox(-1.5F, 3.75F, -2.5F, 3.0F, 2.0F, 1.0F, 0.0F, false);
+        leg_left = new ModelRenderer(this);
+        leg_left.setRotationPoint(2.0F, 12.0F, 0.0F);
+        leg_left.setTextureOffset(0, 60).addBox(-2.0F, 6.75F, -2.0F, 4.0F, 5.0F, 4.0F, 0.2F, false);
+        leg_left.setTextureOffset(0, 52).addBox(-2.0F, 4.25F, -2.0F, 4.0F, 1.0F, 4.0F, 0.2F, false);
+        leg_left.setTextureOffset(0, 57).addBox(-1.5F, 3.75F, -2.5F, 3.0F, 2.0F, 1.0F, 0.0F, false);
 
         bone14 = new ModelRenderer(this);
         bone14.setRotationPoint(0.0F, 0.0F, 0.0F);
-        field_178722_k.addChild(bone14);
+        leg_left.addChild(bone14);
 
 
         cube_r3 = new ModelRenderer(this);

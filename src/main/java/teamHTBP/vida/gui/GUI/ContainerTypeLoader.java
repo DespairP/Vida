@@ -35,6 +35,12 @@ public class ContainerTypeLoader {
         });
     });
 
+    public static RegistryObject<ContainerType<ContainerBluePrint>> bluePrints = CONTAINER_TYPES.register("container_blueprint", () ->{
+        return IForgeContainerType.create((int id, PlayerInventory inventory, PacketBuffer buffer)->{
+            return new ContainerBluePrint(id, inventory, buffer);
+        });
+    });
+
     public static RegistryObject<ContainerType<ContainerInjectTable>> inject = CONTAINER_TYPES.register("container_inject", () ->{
         return IForgeContainerType.create((int id, PlayerInventory inventory, PacketBuffer buffer)->{
             return new ContainerInjectTable(id, buffer.readItemStack(),buffer.readBlockPos(),inventory.player.world);

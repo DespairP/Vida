@@ -70,7 +70,7 @@ public class TileEntityInjectTable extends TileEntity implements ITickableTileEn
     public boolean setSwordItem(ItemStack itemStack){
         try{
         if(itemStack.getItem() instanceof SwordItem || itemStack.getItem() instanceof ToolItem){
-            if(this.swordStack == ItemStack.EMPTY && this.swordStack.isEmpty()){
+            if(this.swordStack == ItemStack.EMPTY || this.swordStack.isEmpty()){
                 swordStack = itemStack.copy();
                 return true;
             }

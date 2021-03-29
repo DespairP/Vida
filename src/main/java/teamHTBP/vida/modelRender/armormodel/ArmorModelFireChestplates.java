@@ -25,17 +25,15 @@ public class ArmorModelFireChestplates extends ArmorModelElementChestplates{
 
     public ArmorModelFireChestplates(){
         super(128,128);
-        textureWidth = 128;
-        textureHeight = 128;
 
-        field_178724_i = new ModelRenderer(this);
-        field_178724_i.setRotationPoint(-4.0F, 2.0F, 0.0F);
-        field_178724_i.setTextureOffset(0, 28).addBox(-0.5F, -2.0F, -2.0F, 5.0F, 4.0F, 4.0F, 0.2F, true);
-        field_178724_i.setTextureOffset(0, 36).addBox(-1.0F, 5.0F, -2.0F, 4.0F, 5.0F, 4.0F, 0.2F, true);
+        arm_left = new ModelRenderer(this);
+        arm_left.setRotationPoint(-4.0F, 2.0F, 0.0F);
+        arm_left.setTextureOffset(0, 28).addBox(-0.5F, -2.0F, -2.0F, 5.0F, 4.0F, 4.0F, 0.2F, true);
+        arm_left.setTextureOffset(0, 36).addBox(-1.0F, 5.0F, -2.0F, 4.0F, 5.0F, 4.0F, 0.2F, true);
 
         bone6 = new ModelRenderer(this);
         bone6.setRotationPoint(0.0F, 0.0F, 0.0F);
-        field_178724_i.addChild(bone6);
+        arm_left.addChild(bone6);
 
 
         cube_r1 = new ModelRenderer(this);
@@ -58,7 +56,7 @@ public class ArmorModelFireChestplates extends ArmorModelElementChestplates{
 
         bone12 = new ModelRenderer(this);
         bone12.setRotationPoint(0.0F, 0.0F, 0.0F);
-        field_178724_i.addChild(bone12);
+        arm_left.addChild(bone12);
         bone12.setTextureOffset(16, 37).addBox(2.25F, 8.0F, -1.5F, 1.0F, 1.0F, 3.0F, 0.0F, true);
         bone12.setTextureOffset(0, 36).addBox(2.5F, 5.25F, -0.5F, 1.0F, 3.0F, 1.0F, 0.0F, true);
 
@@ -74,14 +72,14 @@ public class ArmorModelFireChestplates extends ArmorModelElementChestplates{
         setRotateAngle(cube_r5, -0.1745F, 0.0F, 0.0F);
         cube_r5.setTextureOffset(0, 36).addBox(-9.5F, -2.5F, -0.5F, 1.0F, 3.0F, 1.0F, 0.0F, true);
 
-        field_178723_h = new ModelRenderer(this);
-        field_178723_h.setRotationPoint(-4.0F, 2.0F, 0.0F);
-        field_178723_h.setTextureOffset(0, 28).addBox(-4.5F, -2.0F, -2.0F, 5.0F, 4.0F, 4.0F, 0.2F, false);
-        field_178723_h.setTextureOffset(0, 36).addBox(-3.0F, 5.0F, -2.0F, 4.0F, 5.0F, 4.0F, 0.2F, false);
+        arm_right = new ModelRenderer(this);
+        arm_right.setRotationPoint(-4.0F, 2.0F, 0.0F);
+        arm_right.setTextureOffset(0, 28).addBox(-4.5F, -2.0F, -2.0F, 5.0F, 4.0F, 4.0F, 0.2F, false);
+        arm_right.setTextureOffset(0, 36).addBox(-3.0F, 5.0F, -2.0F, 4.0F, 5.0F, 4.0F, 0.2F, false);
 
         bone3 = new ModelRenderer(this);
         bone3.setRotationPoint(0.0F, 0.0F, 0.0F);
-        field_178723_h.addChild(bone3);
+        arm_right.addChild(bone3);
 
 
         cube_r6 = new ModelRenderer(this);
@@ -104,7 +102,7 @@ public class ArmorModelFireChestplates extends ArmorModelElementChestplates{
 
         bone4 = new ModelRenderer(this);
         bone4.setRotationPoint(0.0F, 0.0F, 0.0F);
-        field_178723_h.addChild(bone4);
+        arm_right.addChild(bone4);
         bone4.setTextureOffset(16, 37).addBox(-3.25F, 8.0F, -1.5F, 1.0F, 1.0F, 3.0F, 0.0F, false);
         bone4.setTextureOffset(0, 36).addBox(-3.5F, 5.25F, -0.5F, 1.0F, 3.0F, 1.0F, 0.0F, false);
 
@@ -120,16 +118,16 @@ public class ArmorModelFireChestplates extends ArmorModelElementChestplates{
         setRotateAngle(cube_r10, -0.1745F, 0.0F, 0.0F);
         cube_r10.setTextureOffset(0, 36).addBox(0.5F, -2.5F, -0.5F, 1.0F, 3.0F, 1.0F, 0.0F, false);
 
-        field_78115_e = new ModelRenderer(this);
-        field_78115_e.setRotationPoint(0.0F, 0.0F, 0.0F);
-        field_78115_e.setTextureOffset(0, 16).addBox(-4.0F, 0.25F, -2.0F, 8.0F, 7.0F, 4.0F, 0.2F, false);
-        field_78115_e.setTextureOffset(30, 19).addBox(-1.0F, 1.2F, -2.65F, 2.0F, 3.0F, 1.0F, 0.0F, false);
-        field_78115_e.setTextureOffset(36, 16).addBox(3.0F, -0.5F, -2.5F, 2.0F, 6.0F, 5.0F, 0.0F, false);
-        field_78115_e.setTextureOffset(36, 16).addBox(-5.0F, -0.5F, -2.5F, 2.0F, 6.0F, 5.0F, 0.0F, true);
+        body = new ModelRenderer(this);
+        body.setRotationPoint(0.0F, 0.0F, 0.0F);
+        body.setTextureOffset(0, 16).addBox(-4.0F, 0.25F, -2.0F, 8.0F, 7.0F, 4.0F, 0.2F, false);
+        body.setTextureOffset(30, 19).addBox(-1.0F, 1.2F, -2.65F, 2.0F, 3.0F, 1.0F, 0.0F, false);
+        body.setTextureOffset(36, 16).addBox(3.0F, -0.5F, -2.5F, 2.0F, 6.0F, 5.0F, 0.0F, false);
+        body.setTextureOffset(36, 16).addBox(-5.0F, -0.5F, -2.5F, 2.0F, 6.0F, 5.0F, 0.0F, true);
 
         bone5 = new ModelRenderer(this);
         bone5.setRotationPoint(0.0F, 0.0F, 0.0F);
-        field_78115_e.addChild(bone5);
+        body.addChild(bone5);
 
 
         cube_r11 = new ModelRenderer(this);

@@ -9,17 +9,7 @@ import net.minecraft.entity.item.ArmorStandEntity;
 
 public class ArmorModelElementLeggings<T extends Entity> extends BipedModel<ArmorStandEntity> {
 
-    public ModelRenderer field_78115_e;
-    public ModelRenderer part21;
-    public ModelRenderer part20;
-    public ModelRenderer part22;
-    public ModelRenderer part23;
-    public ModelRenderer part25;
-    public ModelRenderer part19;
-    public ModelRenderer part16;
-    public ModelRenderer part17;
-    public ModelRenderer part24;
-    public ModelRenderer part26;
+    public ModelRenderer body_low;
 
     public ArmorModelElementLeggings() {
         super(1.0f,0,64,64);
@@ -30,9 +20,8 @@ public class ArmorModelElementLeggings<T extends Entity> extends BipedModel<Armo
     }
     @Override
     public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-        this.field_78115_e.showModel = true;
-        this.field_78115_e.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
-
+        this.body_low.showModel = true;
+        this.body_low.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
     }
 
 
@@ -46,11 +35,11 @@ public class ArmorModelElementLeggings<T extends Entity> extends BipedModel<Armo
     public void setVisible(boolean visible) {
         this.bipedHead.showModel = false;
         this.bipedHeadwear.showModel = false;
-        this.bipedBody.showModel = true;
         this.bipedRightArm.showModel = false;
         this.bipedLeftArm.showModel = false;
         this.bipedRightLeg.showModel = true;
         this.bipedLeftLeg.showModel = true;
+        this.body_low.showModel = true;
     }
 
 

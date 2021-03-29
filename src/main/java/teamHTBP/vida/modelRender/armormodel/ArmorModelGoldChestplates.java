@@ -4,41 +4,63 @@ import net.minecraft.client.renderer.model.ModelRenderer;
 
 public class ArmorModelGoldChestplates extends ArmorModelElementChestplates {
 
+    private final ModelRenderer cube_r1;
+    private final ModelRenderer cube_r2;
+    private final ModelRenderer cube_r3;
+    private final ModelRenderer cube_r4;
+
     public ArmorModelGoldChestplates(){
-        super();
-        this.textureWidth = 64;
-        this.textureHeight = 64;
-        this.part16 = new ModelRenderer(this, 0, 32);
-        this.part16.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.part16.addBox(-4.0F, -1.5F, -2.5F, 5.0F, 4.0F, 5.0F, 0.0F, 0.0F, 0.0F);
-        this.field_178723_h = new ModelRenderer(this, 40, 16);
-        this.field_178723_h.setRotationPoint(-5.0F, 2.0F, 0.0F);
-        this.field_178723_h.addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, 0.0F, 0.0F, 0.0F);
-        this.part18 = new ModelRenderer(this, 0, 41);
-        this.part18.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.part18.addBox(-3.5F, -5.0F, -2.0F, 4.0F, 5.0F, 4.0F, 0.0F, 0.0F, 0.0F);
-        this.part15 = new ModelRenderer(this, 0, 32);
-        this.part15.mirror = true;
-        this.part15.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.part15.addBox(-1.0F, -1.5F, -2.5F, 5.0F, 4.0F, 5.0F, 0.0F, 0.0F, 0.0F);
-        this.field_178724_i = new ModelRenderer(this, 40, 16);
-        this.field_178724_i.mirror = true;
-        this.field_178724_i.setRotationPoint(5.0F, 2.0F, 0.0F);
-        this.field_178724_i.addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, 0.0F, 0.0F, 0.0F);
-        this.field_78115_e = new ModelRenderer(this, 16, 16);
-        this.field_78115_e.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.field_78115_e.addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, 0.0F, 0.0F, 0.0F);
-        this.part24 = new ModelRenderer(this, 16, 41);
-        this.part24.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.part24.addBox(-4.0F, 1.0F, -3.0F, 8.0F, 5.0F, 1.0F, 0.0F, 0.0F, 0.0F);
-        this.part17 = new ModelRenderer(this, 0, 41);
-        this.part17.mirror = true;
-        this.part17.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.part17.addBox(-0.5F, -5.0F, -2.0F, 4.0F, 5.0F, 4.0F, 0.0F, 0.0F, 0.0F);
-        this.field_178723_h.addChild(this.part16);
-        this.field_178723_h.addChild(this.part18);
-        this.field_178724_i.addChild(this.part15);
-        this.field_78115_e.addChild(this.part24);
-        this.field_178724_i.addChild(this.part17);
+        super(128,128);
+        arm_right = new ModelRenderer(this);
+        arm_right.setRotationPoint(-4.0F, 1.0F, 0.0F);
+        arm_right.setTextureOffset(0, 28).addBox(-4.0F, -1.0F, -2.0F, 4.0F, 5.0F, 4.0F, 0.0F, true);
+        arm_right.setTextureOffset(0, 37).addBox(-4.0F, 6.0F, -2.0F, 4.0F, 5.0F, 4.0F, 0.0F, true);
+        arm_right.setTextureOffset(48, 34).addBox(-5.0F, 5.0F, -2.5F, 1.0F, 7.0F, 5.0F, 0.0F, true);
+        arm_right.setTextureOffset(38, 37).addBox(-2.0F, -3.15F, -1.5F, 2.0F, 6.0F, 3.0F, 0.0F, true);
+
+        cube_r1 = new ModelRenderer(this);
+        cube_r1.setRotationPoint(-3.0F, 2.75F, -0.5F);
+        arm_right.addChild(cube_r1);
+        setRotationAngle(cube_r1, 0.0F, 0.0F, -0.48F);
+        cube_r1.setTextureOffset(16, 38).addBox(-1.5F, -5.0F, -0.5F, 3.0F, 6.0F, 2.0F, 0.0F, true);
+
+        cube_r2 = new ModelRenderer(this);
+        cube_r2.setRotationPoint(-3.0F, 2.0F, 0.0F);
+        arm_right.addChild(cube_r2);
+        setRotationAngle(cube_r2, 0.0F, 0.0F, -0.0873F);
+        cube_r2.setTextureOffset(26, 37).addBox(-1.5F, -5.0F, -1.5F, 3.0F, 6.0F, 3.0F, 0.0F, true);
+
+        arm_left = new ModelRenderer(this);
+        arm_left.setRotationPoint(4.0F, 1.0F, 0.0F);
+        arm_left.setTextureOffset(0, 28).addBox(0.0F, -1.0F, -2.0F, 4.0F, 5.0F, 4.0F, 0.0F, false);
+        arm_left.setTextureOffset(0, 37).addBox(0.0F, 6.0F, -2.0F, 4.0F, 5.0F, 4.0F, 0.0F, false);
+        arm_left.setTextureOffset(48, 34).addBox(4.0F, 5.0F, -2.5F, 1.0F, 7.0F, 5.0F, 0.0F, false);
+        arm_left.setTextureOffset(38, 37).addBox(0.0F, -3.15F, -1.5F, 2.0F, 6.0F, 3.0F, 0.0F, false);
+
+        cube_r3 = new ModelRenderer(this);
+        cube_r3.setRotationPoint(3.0F, 2.75F, -0.5F);
+        arm_left.addChild(cube_r3);
+        setRotationAngle(cube_r3, 0.0F, 0.0F, 0.48F);
+        cube_r3.setTextureOffset(16, 38).addBox(-1.5F, -5.0F, -0.5F, 3.0F, 6.0F, 2.0F, 0.0F, false);
+
+        cube_r4 = new ModelRenderer(this);
+        cube_r4.setRotationPoint(3.0F, 2.0F, 0.0F);
+        arm_left.addChild(cube_r4);
+        setRotationAngle(cube_r4, 0.0F, 0.0F, 0.0873F);
+        cube_r4.setTextureOffset(26, 37).addBox(-1.5F, -5.0F, -1.5F, 3.0F, 6.0F, 3.0F, 0.0F, false);
+
+        body = new ModelRenderer(this);
+        body.setRotationPoint(0.0F, 0.0F, 0.0F);
+        body.setTextureOffset(0, 16).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 7.0F, 4.0F, 0.0F, false);
+        body.setTextureOffset(42, 19).addBox(-3.0F, 3.5F, -2.5F, 6.0F, 4.0F, 1.0F, 0.0F, false);
+        body.setTextureOffset(42, 19).addBox(-3.0F, 3.5F, 1.5F, 6.0F, 4.0F, 1.0F, 0.0F, false);
+        body.setTextureOffset(24, 19).addBox(-4.0F, 0.0F, -3.0F, 8.0F, 4.0F, 1.0F, 0.0F, false);
+        body.setTextureOffset(24, 19).addBox(-4.0F, 0.0F, 2.0F, 8.0F, 4.0F, 1.0F, 0.0F, false);
+    }
+
+    public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+        modelRenderer.rotateAngleX = x;
+        modelRenderer.rotateAngleY = y;
+        modelRenderer.rotateAngleZ = z;
     }
 }

@@ -12,8 +12,8 @@ import net.minecraft.item.CrossbowItem;
 import net.minecraft.util.HandSide;
 import net.minecraft.util.math.MathHelper;
 
-public class ArmorModelElementHelmet<T extends Entity> extends BipedModel {
-    public ModelRenderer field_78116_c;
+public abstract class ArmorModelElementHelmet<T extends Entity> extends BipedModel {
+    public ModelRenderer head;  //头盔模型主要部分
 
 
     private float remainingItemUseTime;
@@ -22,19 +22,19 @@ public class ArmorModelElementHelmet<T extends Entity> extends BipedModel {
         super(modelSize, yOffsetIn, textureWidthIn, textureHeightIn);
     }
 
+    protected ArmorModelElementHelmet(int textureWidthIn, int textureHeightIn) {
+        super(1.0f, 0, textureWidthIn, textureHeightIn);
+    }
+
 
     @Override
     public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-        //this.field_78116_c.copyModelAngles(this.bipedHead);
         super.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
     }
 
     public Iterable<ModelRenderer> getHeadParts() {
-        //this.field_78116_c.copyModelAngles(this.bipedHead);
-        return ImmutableList.of(this.field_78116_c);
+        return ImmutableList.of(this.head);
     }
-
-
 
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
@@ -43,23 +43,20 @@ public class ArmorModelElementHelmet<T extends Entity> extends BipedModel {
     }
 
 
-
-
-
     public void setRotationAngles(LivingEntity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         boolean flag = entityIn.getTicksElytraFlying() > 4;
         boolean flag1 = entityIn.isActualySwimming();
-        this.field_78116_c.rotateAngleY = netHeadYaw * ((float)Math.PI / 180F);
+        this.head.rotateAngleY = netHeadYaw * ((float)Math.PI / 180F);
         if (flag) {
-            this.field_78116_c.rotateAngleX = (-(float)Math.PI / 4F);
+            this.head.rotateAngleX = (-(float)Math.PI / 4F);
         } else if (this.swimAnimation > 0.0F) {
             if (flag1) {
-                this.field_78116_c.rotateAngleX = this.rotLerpRad(this.field_78116_c.rotateAngleX, (-(float)Math.PI / 4F), this.swimAnimation);
+                this.head.rotateAngleX = this.rotLerpRad(this.head.rotateAngleX, (-(float)Math.PI / 4F), this.swimAnimation);
             } else {
-                this.field_78116_c.rotateAngleX = this.rotLerpRad(this.field_78116_c.rotateAngleX, headPitch * ((float)Math.PI / 180F), this.swimAnimation);
+                this.head.rotateAngleX = this.rotLerpRad(this.head.rotateAngleX, headPitch * ((float)Math.PI / 180F), this.swimAnimation);
             }
         } else {
-            this.field_78116_c.rotateAngleX = headPitch * ((float)Math.PI / 180F);
+            this.head.rotateAngleX = headPitch * ((float)Math.PI / 180F);
         }
 
         this.bipedBody.rotateAngleY = 0.0F;
@@ -157,7 +154,7 @@ public class ArmorModelElementHelmet<T extends Entity> extends BipedModel {
             f1 = f1 * f1;
             f1 = 1.0F - f1;
             float f2 = MathHelper.sin(f1 * (float)Math.PI);
-            float f3 = MathHelper.sin(this.swingProgress * (float)Math.PI) * -(this.field_78116_c.rotateAngleX - 0.7F) * 0.75F;
+            float f3 = MathHelper.sin(this.swingProgress * (float)Math.PI) * -(this.head.rotateAngleX - 0.7F) * 0.75F;
             modelrenderer.rotateAngleX = (float)((double)modelrenderer.rotateAngleX - ((double)f2 * 1.2D + (double)f3));
             modelrenderer.rotateAngleY += this.bipedBody.rotateAngleY * 2.0F;
             modelrenderer.rotateAngleZ += MathHelper.sin(this.swingProgress * (float)Math.PI) * -0.4F;
@@ -171,7 +168,7 @@ public class ArmorModelElementHelmet<T extends Entity> extends BipedModel {
             this.bipedLeftLeg.rotationPointZ = 4.0F;
             this.bipedRightLeg.rotationPointY = 12.2F;
             this.bipedLeftLeg.rotationPointY = 12.2F;
-            this.field_78116_c.rotationPointY = 4.2F;
+            this.head.rotationPointY = 4.2F;
             this.bipedBody.rotationPointY = 3.2F;
             this.bipedLeftArm.rotationPointY = 5.2F;
             this.bipedRightArm.rotationPointY = 5.2F;
@@ -181,7 +178,7 @@ public class ArmorModelElementHelmet<T extends Entity> extends BipedModel {
             this.bipedLeftLeg.rotationPointZ = 0.1F;
             this.bipedRightLeg.rotationPointY = 12.0F;
             this.bipedLeftLeg.rotationPointY = 12.0F;
-            this.field_78116_c.rotationPointY = 0.0F;
+            this.head.rotationPointY = 0.0F;
             this.bipedBody.rotationPointY = 0.0F;
             this.bipedLeftArm.rotationPointY = 2.0F;
             this.bipedRightArm.rotationPointY = 2.0F;
@@ -192,15 +189,15 @@ public class ArmorModelElementHelmet<T extends Entity> extends BipedModel {
         this.bipedRightArm.rotateAngleX += MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
         this.bipedLeftArm.rotateAngleX -= MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
         if (this.rightArmPose == BipedModel.ArmPose.BOW_AND_ARROW) {
-            this.bipedRightArm.rotateAngleY = -0.1F + this.field_78116_c.rotateAngleY;
-            this.bipedLeftArm.rotateAngleY = 0.1F + this.field_78116_c.rotateAngleY + 0.4F;
-            this.bipedRightArm.rotateAngleX = (-(float)Math.PI / 2F) + this.field_78116_c.rotateAngleX;
-            this.bipedLeftArm.rotateAngleX = (-(float)Math.PI / 2F) + this.field_78116_c.rotateAngleX;
+            this.bipedRightArm.rotateAngleY = -0.1F + this.head.rotateAngleY;
+            this.bipedLeftArm.rotateAngleY = 0.1F + this.head.rotateAngleY + 0.4F;
+            this.bipedRightArm.rotateAngleX = (-(float)Math.PI / 2F) + this.head.rotateAngleX;
+            this.bipedLeftArm.rotateAngleX = (-(float)Math.PI / 2F) + this.head.rotateAngleX;
         } else if (this.leftArmPose == BipedModel.ArmPose.BOW_AND_ARROW && this.rightArmPose != BipedModel.ArmPose.THROW_SPEAR && this.rightArmPose != BipedModel.ArmPose.BLOCK) {
-            this.bipedRightArm.rotateAngleY = -0.1F + this.field_78116_c.rotateAngleY - 0.4F;
-            this.bipedLeftArm.rotateAngleY = 0.1F + this.field_78116_c.rotateAngleY;
-            this.bipedRightArm.rotateAngleX = (-(float)Math.PI / 2F) + this.field_78116_c.rotateAngleX;
-            this.bipedLeftArm.rotateAngleX = (-(float)Math.PI / 2F) + this.field_78116_c.rotateAngleX;
+            this.bipedRightArm.rotateAngleY = -0.1F + this.head.rotateAngleY - 0.4F;
+            this.bipedLeftArm.rotateAngleY = 0.1F + this.head.rotateAngleY;
+            this.bipedRightArm.rotateAngleX = (-(float)Math.PI / 2F) + this.head.rotateAngleX;
+            this.bipedLeftArm.rotateAngleX = (-(float)Math.PI / 2F) + this.head.rotateAngleX;
         }
 
         float f4 = (float) CrossbowItem.getChargeTime(entityIn.getActiveItemStack());
@@ -221,15 +218,15 @@ public class ArmorModelElementHelmet<T extends Entity> extends BipedModel {
         }
 
         if (this.rightArmPose == BipedModel.ArmPose.CROSSBOW_HOLD && this.swingProgress <= 0.0F) {
-            this.bipedRightArm.rotateAngleY = -0.3F + this.field_78116_c.rotateAngleY;
-            this.bipedLeftArm.rotateAngleY = 0.6F + this.field_78116_c.rotateAngleY;
-            this.bipedRightArm.rotateAngleX = (-(float)Math.PI / 2F) + this.field_78116_c.rotateAngleX + 0.1F;
-            this.bipedLeftArm.rotateAngleX = -1.5F + this.field_78116_c.rotateAngleX;
+            this.bipedRightArm.rotateAngleY = -0.3F + this.head.rotateAngleY;
+            this.bipedLeftArm.rotateAngleY = 0.6F + this.head.rotateAngleY;
+            this.bipedRightArm.rotateAngleX = (-(float)Math.PI / 2F) + this.head.rotateAngleX + 0.1F;
+            this.bipedLeftArm.rotateAngleX = -1.5F + this.head.rotateAngleX;
         } else if (this.leftArmPose == BipedModel.ArmPose.CROSSBOW_HOLD) {
-            this.bipedRightArm.rotateAngleY = -0.6F + this.field_78116_c.rotateAngleY;
-            this.bipedLeftArm.rotateAngleY = 0.3F + this.field_78116_c.rotateAngleY;
-            this.bipedRightArm.rotateAngleX = -1.5F + this.field_78116_c.rotateAngleX;
-            this.bipedLeftArm.rotateAngleX = (-(float)Math.PI / 2F) + this.field_78116_c.rotateAngleX + 0.1F;
+            this.bipedRightArm.rotateAngleY = -0.6F + this.head.rotateAngleY;
+            this.bipedLeftArm.rotateAngleY = 0.3F + this.head.rotateAngleY;
+            this.bipedRightArm.rotateAngleX = -1.5F + this.head.rotateAngleX;
+            this.bipedLeftArm.rotateAngleX = (-(float)Math.PI / 2F) + this.head.rotateAngleX + 0.1F;
         }
 
         if (this.swimAnimation > 0.0F) {
@@ -266,7 +263,7 @@ public class ArmorModelElementHelmet<T extends Entity> extends BipedModel {
             this.bipedRightLeg.rotateAngleX = MathHelper.lerp(this.swimAnimation, this.bipedRightLeg.rotateAngleX, 0.3F * MathHelper.cos(limbSwing * 0.33333334F));
         }
 
-        this.bipedHeadwear.copyModelAngles(this.field_78116_c);
+        this.bipedHeadwear.copyModelAngles(this.head);
     }
 
     protected float rotLerpRad(float angleIn, float maxAngleIn, float mulIn) {

@@ -61,7 +61,7 @@ public class ContainerScreenInjectTable extends ContainerScreen<ContainerInjectT
     /**能量条透明度*/
     private float selectSkillProgressAlpha = 0.0f;
     public int selectSkillProgressLength = 0;
-
+    /**能量条上方的技能名的透明度*/
     private int selectSkillNameAlpha  = 0;
     /**该工具的所有可用技能储存在这个hashmap中*/
     LinkedHashMap<String, SkillSurface> skills;

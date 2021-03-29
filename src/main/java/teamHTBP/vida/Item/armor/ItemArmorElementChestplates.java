@@ -48,9 +48,9 @@ public class ItemArmorElementChestplates extends ArmorItem {
         }
 
         model.setVisible(true);
-        model.field_178723_h.showModel = true;
-        model.field_178724_i.showModel = true;
-        model.field_78115_e.showModel = true;
+        model.arm_left.showModel = true;
+        model.arm_right.showModel = true;
+        model.body.showModel = true;
 
 
 

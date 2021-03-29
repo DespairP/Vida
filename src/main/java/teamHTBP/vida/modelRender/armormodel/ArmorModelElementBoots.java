@@ -14,29 +14,22 @@ import net.minecraft.util.math.MathHelper;
 
 public class ArmorModelElementBoots<T extends Entity> extends BipedModel {
 
-    public ModelRenderer field_178721_j;
-    public ModelRenderer field_178722_k;
-    public ModelRenderer part28;
-    public ModelRenderer part29;
-    public ModelRenderer part25;
-    public ModelRenderer part24;
+    public ModelRenderer leg_right;
+    public ModelRenderer leg_left;
+
     private float remainingItemUseTime;
 
     public ArmorModelElementBoots() {
         super(1.0f,0,64,64);
-        //this.setVisible(true);
     }
 
     public ArmorModelElementBoots(int textureWidth,int textureHeight) {
-        super(1.0f,0,128,128);
-        //this.setVisible(true);
+        super(1.0f,0,textureWidth,textureHeight);
     }
 
 
     @Override
     public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-        //this.field_178721_j.copyModelAngles(this.bipedLeftLeg);
-        //this.field_178722_k.copyModelAngles(this.bipedRightLeg);
         super.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
     }
 
@@ -49,9 +42,7 @@ public class ArmorModelElementBoots<T extends Entity> extends BipedModel {
     }
 
     protected Iterable<ModelRenderer> getBodyParts() {
-        //this.field_178721_j.copyModelAngles(this.bipedLeftLeg);
-        //this.field_178722_k.copyModelAngles(this.bipedRightLeg);
-        return ImmutableList.of(this.bipedBody, this.bipedRightArm, this.bipedLeftArm, this.field_178721_j,this.field_178722_k, this.bipedHeadwear);
+        return ImmutableList.of(this.bipedBody, this.bipedRightArm, this.bipedLeftArm, this.leg_right,this.leg_left, this.bipedHeadwear);
     }
 
 
@@ -94,21 +85,21 @@ public class ArmorModelElementBoots<T extends Entity> extends BipedModel {
         this.bipedLeftArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 2.0F * limbSwingAmount * 0.5F / f;
         this.bipedRightArm.rotateAngleZ = 0.0F;
         this.bipedLeftArm.rotateAngleZ = 0.0F;
-        this.field_178721_j.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount / f;
-        this.field_178722_k.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount / f;
-        this.field_178721_j.rotateAngleY = 0.0F;
-        this.field_178722_k.rotateAngleY = 0.0F;
-        this.field_178721_j.rotateAngleZ = 0.0F;
-        this.field_178722_k.rotateAngleZ = 0.0F;
+        this.leg_right.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount / f;
+        this.leg_left.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount / f;
+        this.leg_right.rotateAngleY = 0.0F;
+        this.leg_left.rotateAngleY = 0.0F;
+        this.leg_right.rotateAngleZ = 0.0F;
+        this.leg_left.rotateAngleZ = 0.0F;
         if (this.isSitting) {
             this.bipedRightArm.rotateAngleX += (-(float)Math.PI / 5F);
             this.bipedLeftArm.rotateAngleX += (-(float)Math.PI / 5F);
-            this.field_178721_j.rotateAngleX = -1.4137167F;
-            this.field_178721_j.rotateAngleY = ((float)Math.PI / 10F);
-            this.field_178721_j.rotateAngleZ = 0.07853982F;
-            this.field_178722_k.rotateAngleX = -1.4137167F;
-            this.field_178722_k.rotateAngleY = (-(float)Math.PI / 10F);
-            this.field_178722_k.rotateAngleZ = -0.07853982F;
+            this.leg_right.rotateAngleX = -1.4137167F;
+            this.leg_right.rotateAngleY = ((float)Math.PI / 10F);
+            this.leg_right.rotateAngleZ = 0.07853982F;
+            this.leg_left.rotateAngleX = -1.4137167F;
+            this.leg_left.rotateAngleY = (-(float)Math.PI / 10F);
+            this.leg_left.rotateAngleZ = -0.07853982F;
         }
 
         this.bipedRightArm.rotateAngleY = 0.0F;
@@ -179,20 +170,20 @@ public class ArmorModelElementBoots<T extends Entity> extends BipedModel {
             this.bipedBody.rotateAngleX = 0.5F;
             this.bipedRightArm.rotateAngleX += 0.4F;
             this.bipedLeftArm.rotateAngleX += 0.4F;
-            this.field_178721_j.rotationPointZ = 4.0F;
-            this.field_178722_k.rotationPointZ = 4.0F;
-            this.field_178721_j.rotationPointY = 12.2F;
-            this.field_178722_k.rotationPointY = 12.2F;
+            this.leg_right.rotationPointZ = 4.0F;
+            this.leg_left.rotationPointZ = 4.0F;
+            this.leg_right.rotationPointY = 12.2F;
+            this.leg_left.rotationPointY = 12.2F;
             this.bipedHead.rotationPointY = 4.2F;
             this.bipedBody.rotationPointY = 3.2F;
             this.bipedLeftArm.rotationPointY = 5.2F;
             this.bipedRightArm.rotationPointY = 5.2F;
         } else {
             this.bipedBody.rotateAngleX = 0.0F;
-            this.field_178721_j.rotationPointZ = 0.1F;
-            this.field_178722_k.rotationPointZ = 0.1F;
-            this.field_178721_j.rotationPointY = 12.0F;
-            this.field_178722_k.rotationPointY = 12.0F;
+            this.leg_right.rotationPointZ = 0.1F;
+            this.leg_left.rotationPointZ = 0.1F;
+            this.leg_right.rotationPointY = 12.0F;
+            this.leg_left.rotationPointY = 12.0F;
             this.bipedHead.rotationPointY = 0.0F;
             this.bipedBody.rotationPointY = 0.0F;
             this.bipedLeftArm.rotationPointY = 2.0F;
@@ -274,8 +265,8 @@ public class ArmorModelElementBoots<T extends Entity> extends BipedModel {
 
             float f11 = 0.3F;
             float f12 = 0.33333334F;
-            this.field_178722_k.rotateAngleX = MathHelper.lerp(this.swimAnimation, this.field_178722_k.rotateAngleX, 0.3F * MathHelper.cos(limbSwing * 0.33333334F + (float)Math.PI));
-            this.field_178721_j.rotateAngleX = MathHelper.lerp(this.swimAnimation, this.field_178721_j.rotateAngleX, 0.3F * MathHelper.cos(limbSwing * 0.33333334F));
+            this.leg_left.rotateAngleX = MathHelper.lerp(this.swimAnimation, this.leg_left.rotateAngleX, 0.3F * MathHelper.cos(limbSwing * 0.33333334F + (float)Math.PI));
+            this.leg_right.rotateAngleX = MathHelper.lerp(this.swimAnimation, this.leg_right.rotateAngleX, 0.3F * MathHelper.cos(limbSwing * 0.33333334F));
         }
 
         this.bipedHeadwear.copyModelAngles(this.bipedHead);
