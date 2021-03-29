@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "vida:block/plant_sweetcyanreed_2"
+  }
+}
