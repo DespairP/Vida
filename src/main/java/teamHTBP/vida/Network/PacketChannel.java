@@ -6,7 +6,7 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
 import teamHTBP.vida.Vida;
 
 public class PacketChannel {
-    private static final String PROTOCOL_VERSION = "1";
+    private static final String PROTOCOL_VERSION = "1.1";
     public static final SimpleChannel INSTANCE = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(Vida.modId, "main"),
             () -> PROTOCOL_VERSION,
@@ -18,5 +18,6 @@ public class PacketChannel {
         int id = 0;
         INSTANCE.registerMessage(id++, PacketPrismTable.class, PacketPrismTable::toBytes,PacketPrismTable::new,PacketPrismTable::handler );
         INSTANCE.registerMessage(id++, PacketBottles.class,PacketBottles::toBytes,PacketBottles::new,PacketBottles::handler);
+        INSTANCE.registerMessage(id++, PacketMessage.class,PacketMessage::toBytes,PacketMessage::new,PacketMessage::handler);
     }
 }

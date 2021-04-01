@@ -23,6 +23,9 @@ public class GuiLoader {
         ScreenManager.registerFactory(ContainerTypeLoader.inject.get(), (ContainerInjectTable injectTable,PlayerInventory inv, ITextComponent titleIn) -> {
             return new ContainerScreenInjectTable(injectTable, inv, titleIn);
         });
+        ScreenManager.registerFactory(ContainerTypeLoader.bluePrints.get(), (ContainerBluePrint print,PlayerInventory inv, ITextComponent titleIn) -> {
+            return new ContainerScreenBluePrint(print, inv, titleIn);
+        });
     }
 
 }

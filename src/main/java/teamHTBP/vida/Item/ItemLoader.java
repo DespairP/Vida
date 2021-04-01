@@ -24,6 +24,7 @@ public class ItemLoader {
     public static  RegistryObject<Item> vidaBranch = ITEMS.register("vidabranch",() -> new ItemVidaBranch());
     public static  RegistryObject<Item> prism = ITEMS.register("prism",() -> new ItemPrism());
     public static  RegistryObject<Item> elementBottle = ITEMS.register("elementbottle",() -> new ItemElementBottle());
+    public static  RegistryObject<Item> bluePrint = ITEMS.register("blueprint",() -> new ItemBluePrint(1));
 
 
     public static  RegistryObject<Item> voidElementCore = ITEMS.register("voidelementcore",() -> new ItemElementCoreVoid());

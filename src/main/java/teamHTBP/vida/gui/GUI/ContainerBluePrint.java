@@ -7,25 +7,27 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
+import teamHTBP.vida.Item.ItemBluePrint;
 
 import javax.annotation.Nullable;
 
 public class ContainerBluePrint extends Container {
     public final int[][] slotPositions = {{83,41},{108,41},{71,64},{96,64},{121,64},{83,87},{108,87}};
 
-    protected ContainerBluePrint(int id, PlayerInventory inventory, PacketBuffer buffer) {
+    public ContainerBluePrint(int id, PlayerInventory inventory, ItemStack stack) {
         super(ContainerTypeLoader.bluePrints.get(),id);
 
-        CompoundNBT nbt = buffer.readCompoundTag();
+        CompoundNBT nbt = stack.getOrCreateTag();
         int index = 0;
         for (int i = 0; i < slotPositions.length;i++){
-            addSlot(new BluePrintSlot(new Inventory(ItemStack.read(nbt.getCompound("bluePrintSlot"+ i))),index++,slotPositions[i][0],slotPositions[i][1]));
+            addSlot(new BluePrintSlot(new Inventory(ItemStack.read(nbt.getCompound("bluePrintSlot"+ i))),0,slotPositions[i][0] - 28,slotPositions[i][1] - 56));
         }
 
-        layoutPlayerInventorySlots(inventory, 24, 129);
+        layoutPlayerInventorySlots(inventory, 24 - 28, 129 - 56);
     }
 
     /**-------以下代码均来自neutrino教程-------**/
@@ -65,7 +67,7 @@ public class ContainerBluePrint extends Container {
 
     @Override
     public void onContainerClosed(PlayerEntity playerIn) {
-        super.onContainerClosed(playerIn);
+
     }
 }
 class BluePrintSlot extends Slot{
@@ -75,6 +77,14 @@ class BluePrintSlot extends Slot{
 
     @Override
     public boolean isItemValid(ItemStack stack) {
-        return true;
+        if(stack.getItem() instanceof ItemBluePrint)
+            return true;
+        else
+            return false;
+    }
+
+    @Override
+    public int getSlotStackLimit() {
+        return 1;
     }
 }

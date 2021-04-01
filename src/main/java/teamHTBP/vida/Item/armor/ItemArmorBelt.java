@@ -4,18 +4,17 @@ import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.network.NetworkHooks;
 import teamHTBP.vida.ItemGroup.ItemGroupLoader;
 import teamHTBP.vida.modelRender.armormodel.ArmorModelBelt;
 
@@ -54,10 +53,20 @@ public class ItemArmorBelt extends ArmorItem {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        ItemStack stack = playerIn.getHeldItem(handIn);
         //OPEN THE GUI
-
-        return super.onItemRightClick(worldIn, playerIn, handIn);
+        if(!worldIn.isRemote && !playerIn.isSneaking() && stack.getItem() instanceof ItemArmorBelt){
+            NetworkHooks.openGui((ServerPlayerEntity) playerIn,new ItemBluePrintBeltProvider("bluePrintBelt", stack),(buffer)->{
+                buffer.writeItemStack(stack);
+            });
+            return ActionResult.resultSuccess(stack);
+        }else if(!worldIn.isRemote && playerIn.isSneaking() && stack.getItem() instanceof ItemArmorBelt){
+            super.onItemRightClick(worldIn, playerIn, handIn);
+        }
+        return ActionResult.resultPass(stack);
     }
+
+
 }
 
 class ArmorMaterialBelt implements IArmorMaterial{

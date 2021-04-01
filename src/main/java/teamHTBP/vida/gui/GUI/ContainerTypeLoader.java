@@ -37,7 +37,7 @@ public class ContainerTypeLoader {
 
     public static RegistryObject<ContainerType<ContainerBluePrint>> bluePrints = CONTAINER_TYPES.register("container_blueprint", () ->{
         return IForgeContainerType.create((int id, PlayerInventory inventory, PacketBuffer buffer)->{
-            return new ContainerBluePrint(id, inventory, buffer);
+            return new ContainerBluePrint(id, inventory, buffer.readItemStack());
         });
     });
 
