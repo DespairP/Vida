@@ -14,7 +14,7 @@ public class BlockDecoFactory {
     /**生产方块的properties,使用createBuilder可以快速的建造一个properties {@link BlockDecoFactory#createBuilder()}*/
     private Block.Properties properties;
 
-    public PropertiesBuilder createBuilder(){
+    public static PropertiesBuilder createBuilder(){
         return new PropertiesBuilder();
     }
 

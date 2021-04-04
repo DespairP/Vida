@@ -77,10 +77,7 @@ class BluePrintSlot extends Slot{
 
     @Override
     public boolean isItemValid(ItemStack stack) {
-        if(stack.getItem() instanceof ItemBluePrint)
-            return true;
-        else
-            return false;
+        return true;
     }
 
     @Override

@@ -11,9 +11,9 @@ public class ArmorModelWoodBoots extends ArmorModelElementBoots {
 
         leg_right = new ModelRenderer(this);
         leg_right.setRotationPoint(-2.0F, 12.0F, 0.0F);
-        leg_right.setTextureOffset(0, 76).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 3.0F, 4.0F, 0.0F, true);
+        leg_right.setTextureOffset(0, 76).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 3.0F, 4.0F, 0.2F, true);
         leg_right.setTextureOffset(16, 77).addBox(-2.5F, 0.25F, -1.5F, 1.0F, 4.0F, 3.0F, 0.0F, true);
-        leg_right.setTextureOffset(24, 76).addBox(-2.0F, 7.0F, -2.0F, 4.0F, 5.0F, 4.0F, 0.0F, true);
+        leg_right.setTextureOffset(24, 76).addBox(-2.0F, 7.0F, -2.0F, 4.0F, 5.0F, 4.0F, 0.2F, true);
 
         cube_r1 = new ModelRenderer(this);
         cube_r1.setRotationPoint(0.0F, 12.0F, -2.0F);
@@ -23,9 +23,9 @@ public class ArmorModelWoodBoots extends ArmorModelElementBoots {
 
         leg_left = new ModelRenderer(this);
         leg_left.setRotationPoint(2.0F, 12.0F, 0.0F);
-        leg_left.setTextureOffset(0, 76).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 3.0F, 4.0F, 0.0F, false);
+        leg_left.setTextureOffset(0, 76).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 3.0F, 4.0F, 0.2F, false);
         leg_left.setTextureOffset(16, 77).addBox(1.5F, 0.25F, -1.5F, 1.0F, 4.0F, 3.0F, 0.0F, false);
-        leg_left.setTextureOffset(24, 76).addBox(-2.0F, 7.0F, -2.0F, 4.0F, 5.0F, 4.0F, 0.0F, false);
+        leg_left.setTextureOffset(24, 76).addBox(-2.0F, 7.0F, -2.0F, 4.0F, 5.0F, 4.0F, 0.2F, false);
 
         cube_r2 = new ModelRenderer(this);
         cube_r2.setRotationPoint(0.0F, 12.0F, -2.0F);

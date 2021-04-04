@@ -18,33 +18,33 @@ public class ArmorModelWoodChestplates extends ArmorModelElementChestplates {
 
         arm_left = new ModelRenderer(this);
         arm_left.setRotationPoint(4.0F, 1.0F, 0.0F);
-        arm_left.setTextureOffset(0, 28).addBox(0.0F, -1.0F, -2.0F, 4.0F, 4.0F, 4.0F, 0.0F, true);
-        arm_left.setTextureOffset(0, 38).addBox(0.0F, 5.0F, -2.0F, 4.0F, 6.0F, 4.0F, 0.0F, true);
-        arm_left.setTextureOffset(0, 48).addBox(3.5F, 4.5F, -1.5F, 1.0F, 7.0F, 3.0F, 0.0F, true);
+        arm_left.setTextureOffset(0, 28).addBox(0.0F, -2.0F, -2.0F, 4.0F, 4.0F, 4.0F, 0.2F, true);
+        arm_left.setTextureOffset(0, 38).addBox(-1.0F, 5.0F, -2.0F, 4.0F, 6.0F, 4.0F, 0.2F, true);
+        arm_left.setTextureOffset(0, 48).addBox(2.5F, 4.5F, -1.5F, 1.0F, 7.0F, 3.0F, 0.0F, true);
 
         bone6 = new ModelRenderer(this);
         bone6.setRotationPoint(0.0F, 0.0F, 0.0F);
         arm_left.addChild(bone6);
-        bone6.setTextureOffset(16, 28).addBox(2.75F, -1.5F, -2.5F, 1.0F, 5.0F, 5.0F, 0.0F, true);
-        bone6.setTextureOffset(16, 28).addBox(4.0F, -1.75F, -2.25F, 1.0F, 5.0F, 5.0F, 0.0F, true);
-        bone6.setTextureOffset(16, 28).addBox(1.25F, -1.75F, -2.25F, 1.0F, 5.0F, 5.0F, 0.0F, true);
+        bone6.setTextureOffset(16, 28).addBox(2.75F, -2.5F, -2.5F, 1.0F, 5.0F, 5.0F, 0.0F, true);
+        bone6.setTextureOffset(16, 28).addBox(4.0F, -2.75F, -2.25F, 1.0F, 5.0F, 5.0F, 0.0F, true);
+        bone6.setTextureOffset(16, 28).addBox(1.25F, -2.75F, -2.25F, 1.0F, 5.0F, 5.0F, 0.0F, true);
 
         arm_right = new ModelRenderer(this);
         arm_right.setRotationPoint(-4.0F, 1.0F, 0.0F);
-        arm_right.setTextureOffset(0, 28).addBox(-4.0F, -1.0F, -2.0F, 4.0F, 4.0F, 4.0F, 0.0F, false);
-        arm_right.setTextureOffset(0, 38).addBox(-4.0F, 5.0F, -2.0F, 4.0F, 6.0F, 4.0F, 0.0F, false);
-        arm_right.setTextureOffset(0, 48).addBox(-4.5F, 4.5F, -1.5F, 1.0F, 7.0F, 3.0F, 0.0F, false);
+        arm_right.setTextureOffset(0, 28).addBox(-4.0F, -2.0F, -2.0F, 4.0F, 4.0F, 4.0F, 0.2F, false);
+        arm_right.setTextureOffset(0, 38).addBox(-3.0F, 5.0F, -2.0F, 4.0F, 6.0F, 4.0F, 0.2F, false);
+        arm_right.setTextureOffset(0, 48).addBox(-3.5F, 4.5F, -1.5F, 1.0F, 7.0F, 3.0F, 0.0F, false);
 
         bone3 = new ModelRenderer(this);
         bone3.setRotationPoint(0.0F, 0.0F, 0.0F);
         arm_right.addChild(bone3);
-        bone3.setTextureOffset(16, 28).addBox(-3.75F, -1.5F, -2.5F, 1.0F, 5.0F, 5.0F, 0.0F, false);
-        bone3.setTextureOffset(16, 28).addBox(-5.0F, -1.75F, -2.25F, 1.0F, 5.0F, 5.0F, 0.0F, false);
-        bone3.setTextureOffset(16, 28).addBox(-2.25F, -1.75F, -2.25F, 1.0F, 5.0F, 5.0F, 0.0F, false);
+        bone3.setTextureOffset(16, 28).addBox(-3.75F, -2.5F, -2.5F, 1.0F, 5.0F, 5.0F, 0.0F, false);
+        bone3.setTextureOffset(16, 28).addBox(-5.0F, -2.75F, -2.25F, 1.0F, 5.0F, 5.0F, 0.0F, false);
+        bone3.setTextureOffset(16, 28).addBox(-2.25F, -2.75F, -2.25F, 1.0F, 5.0F, 5.0F, 0.0F, false);
 
         body = new ModelRenderer(this);
         body.setRotationPoint(0.0F, 0.0F, 0.0F);
-        body.setTextureOffset(0, 16).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 7.0F, 4.0F, 0.0F, false);
+        body.setTextureOffset(0, 16).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 7.0F, 4.0F, 0.2F, false);
 
         bone10 = new ModelRenderer(this);
         bone10.setRotationPoint(-3.0F, 12.0F, 0.0F);

@@ -9,6 +9,7 @@ public class ArmorModelAquaBoots extends ArmorModelElementBoots {
 
     public  ArmorModelAquaBoots(){
         super(128,128);
+
         leg_left = new ModelRenderer(this);
         leg_left.setRotationPoint(2.0F, 12.0F, 0.0F);
         leg_left.setTextureOffset(12, 73).addBox(-2.0F, 7.0F, -2.0F, 4.0F, 5.0F, 4.0F, 0.2F, false);

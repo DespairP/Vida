@@ -14,9 +14,10 @@ public class ArmorModelGoldHelmet<T extends Entity> extends ArmorModelElementHel
 
     public ArmorModelGoldHelmet() {
         super(1.0f, 0, 128, 128);
+
         head = new ModelRenderer(this);
         head.setRotationPoint(0.0F, 0.0F, 0.0F);
-        head.setTextureOffset(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.0F, false);
+        head.setTextureOffset(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.2F, false);
 
         bone = new ModelRenderer(this);
         bone.setRotationPoint(0.0F, -5.5F, -4.25F);
