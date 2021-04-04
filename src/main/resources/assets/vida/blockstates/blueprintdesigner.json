@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=east": { "model": "vida:block/blueprintdesigner" },
+    "facing=west": { "model": "vida:block/blueprintdesigner" , "y": 180},
+    "facing=south": { "model": "vida:block/blueprintdesigner", "y": 90 },
+    "facing=north": { "model": "vida:block/blueprintdesigner", "y": 270 }
+  }
+}

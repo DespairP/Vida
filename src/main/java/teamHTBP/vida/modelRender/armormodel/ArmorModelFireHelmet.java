@@ -28,13 +28,13 @@ public class ArmorModelFireHelmet<T extends Entity> extends ArmorModelElementHel
         super(1.0f, 0, 128, 128);
         this.textureWidth = 128;
         this.textureHeight = 128;
-        field_78116_c = new ModelRenderer(this);
-        field_78116_c.setRotationPoint(0.0F, 0.0F, 0.0F);
-        field_78116_c.setTextureOffset(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.2F, false);
+        head = new ModelRenderer(this);
+        head.setRotationPoint(0.0F, 0.0F, 0.0F);
+        head.setTextureOffset(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.2F, false);
 
         bone7 = new ModelRenderer(this);
         bone7.setRotationPoint(0.0F, 0.0F, 0.0F);
-        field_78116_c.addChild(bone7);
+        head.addChild(bone7);
 
 
         bone8 = new ModelRenderer(this);
@@ -90,7 +90,7 @@ public class ArmorModelFireHelmet<T extends Entity> extends ArmorModelElementHel
 
         bone11 = new ModelRenderer(this);
         bone11.setRotationPoint(-4.0F, -1.5F, 0.0F);
-        field_78116_c.addChild(bone11);
+        head.addChild(bone11);
         setRotateAngle(bone11, 0.0873F, 0.0F, 0.0F);
         bone11.setTextureOffset(32, 32).addBox(-0.5044F, -0.5F, -4.4999F, 1.0F, 1.0F, 9.0F, 0.0F, false);
         bone11.setTextureOffset(32, 32).addBox(7.4956F, -0.5F, -4.4999F, 1.0F, 1.0F, 9.0F, 0.0F, true);

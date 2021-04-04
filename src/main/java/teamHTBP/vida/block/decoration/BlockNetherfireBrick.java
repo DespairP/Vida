@@ -5,6 +5,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.ToolType;
 
+@Deprecated
 public class BlockNetherfireBrick extends Block {
 
     public BlockNetherfireBrick() {

@@ -45,9 +45,9 @@ public class BlockEventLoaderServer {
         }
     }
 
+    /**镐子升级订阅block*/
     @SubscribeEvent
-    public static void block_break(BlockEvent.BreakEvent event){
-        //System.out.println("sss");
+    public static void blockBreakEvent(BlockEvent.BreakEvent event){
         PlayerEntity playerEntity = event.getPlayer();
         if(playerEntity != null){
             ItemStack itemStack = playerEntity.getHeldItem(Hand.MAIN_HAND);
@@ -57,34 +57,42 @@ public class BlockEventLoaderServer {
                 Random random = new Random();
                 int level = nbt.getInt("level");
                 if(block instanceof OreBlock && level < 30){
-                      int exp = nbt.getInt("pickaxeEXP");
-                      nbt.putInt("pickaxeEXP",exp + random.nextInt(5) + 5);
-                      levelupTool(exp, level,itemStack);
+                    int exp = nbt.getInt("pickaxeEXP");
+                    nbt.putInt("pickaxeEXP",exp + random.nextInt(5) + 5);
+                    levelupTool(itemStack);
                 }else if(block instanceof Block && level < 30){
                     int exp = nbt.getInt("pickaxeEXP");
-                    //System.out.println(exp);
                     nbt.putInt("pickaxeEXP",exp + random.nextInt(2));
-                    levelupTool(exp, level,itemStack);
+                    levelupTool(itemStack);
                 }
             }
         }
     }
 
-    public static boolean levelupTool(int exp,int level,ItemStack stack){
-        if(level * 500 <= exp){
-            CompoundNBT nbt = stack.getOrCreateTag();
-            int newEXP = exp - level * 500;
-            if(level + 1 < 30) {
-                nbt.putInt("level", level + 1);
-                nbt.putInt("pickaxeEXP", newEXP);
-            }else{
-                nbt.putInt("level", 30);
-                nbt.putInt("exp", -1);
-            }
-            stack.setDamage(0);
-            return true;
+    /**
+     * 工具升级检测
+     * @return 工具是否升级
+     * */
+    public static boolean levelupTool(ItemStack stack){
+        CompoundNBT stackNBT = stack.getOrCreateTag();
+        int currentLevel = stackNBT.getInt("level");
+        int currentExp = stackNBT.getInt("pickaxeEXP");
+        int futureLevel = currentLevel;
+        //计算最大需求
+        int maxExpRequired = currentLevel * 500;
+        //循环至最大Exp大于当前Exp时结束
+        while(currentExp >= maxExpRequired){
+            currentExp -= maxExpRequired;
+            futureLevel += 1;
+            maxExpRequired = currentLevel * 500;
         }
-        return false;
+        //检测经验是否溢出等级需求经验
+        if(futureLevel != currentLevel){
+            stackNBT.putInt("level", futureLevel);
+            stackNBT.putInt("pickaxeEXP", currentExp);
+            return true;  //工具需要升级且升级完成
+        } else
+            return false; //默认工具不需要升级
     }
 
     @SubscribeEvent

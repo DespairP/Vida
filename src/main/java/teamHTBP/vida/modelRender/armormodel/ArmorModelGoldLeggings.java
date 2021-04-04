@@ -3,34 +3,28 @@ package teamHTBP.vida.modelRender.armormodel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 
 public class ArmorModelGoldLeggings extends ArmorModelElementLeggings{
+    private final ModelRenderer cube_1;
+    private final ModelRenderer cube_2;
+
 
     public ArmorModelGoldLeggings(){
-        this.textureWidth = 64;
-        this.textureHeight = 64;
-        this.part23 = new ModelRenderer(this, 30, 32);
-        this.part23.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.part23.addBox(-4.5F, 11.0F, -2.5F, 9.0F, 2.0F, 5.0F, 0.0F, 0.0F, 0.0F);
-        this.part20 = new ModelRenderer(this, 0, 51);
-        this.part20.mirror = true;
-        this.part20.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.part20.addBox(4.0F, 10.0F, -1.5F, 1.0F, 6.0F, 3.0F, 0.0F, 0.0F, 0.0F);
-        this.part21 = new ModelRenderer(this, 0, 51);
-        this.part21.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.part21.addBox(-5.0F, 10.0F, -1.5F, 1.0F, 6.0F, 3.0F, 0.0F, 0.0F, 0.0F);
-        this.part22 = new ModelRenderer(this, 20, 32);
-        this.part22.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.part22.addBox(-2.0F, 10.0F, -3.0F, 4.0F, 7.0F, 1.0F, 0.0F, 0.0F, 0.0F);
-        this.field_78115_e = new ModelRenderer(this, 16, 16);
-        this.field_78115_e.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.field_78115_e.addBox(-4.0F, 11.0F, -2.0F, 8.0F, 2.0F, 4.0F, 0.0F, 0.0F, 0.0F);
-        this.part25 = new ModelRenderer(this, 20, 32);
-        this.part25.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.part25.addBox(-2.0F, 10.0F, 2.0F, 4.0F, 7.0F, 1.0F, 0.0F, 0.0F, 0.0F);
-        this.field_78115_e.addChild(this.part23);
-        this.field_78115_e.addChild(this.part20);
-        this.field_78115_e.addChild(this.part21);
-        this.field_78115_e.addChild(this.part22);
-        this.field_78115_e.addChild(this.part25);
+        super(128,128);
+
+        body_low = new ModelRenderer(this);
+        body_low.setRotationPoint(0.0F, 12.0F, 0.0F);
+        body_low.setTextureOffset(0, 51).addBox(-4.0F, -2.0F, -2.0F, 8.0F, 2.0F, 4.0F, 0.2F, false);
+        body_low.setTextureOffset(0, 57).addBox(-4.75F, -2.5F, -1.5F, 1.0F, 7.0F, 3.0F, 0.0F, false);
+        body_low.setTextureOffset(0, 57).addBox(3.75F, -2.5F, -1.5F, 1.0F, 7.0F, 3.0F, 0.0F, false);
+
+        cube_1 = new ModelRenderer(this);
+        cube_1.setRotationPoint(0.0F, 0.0F, 3.75F);
+        body_low.addChild(cube_1);
+        cube_1.setTextureOffset(18, 59).addBox(-3.0F, -3.0F, -2.0F, 6.0F, 7.0F, 1.0F, 0.0F, false);
+
+        cube_2 = new ModelRenderer(this);
+        cube_2.setRotationPoint(0.0F, -0.5F, -0.75F);
+        body_low.addChild(cube_2);
+        cube_2.setTextureOffset(8, 62).addBox(-2.0F, -2.0F, -2.0F, 4.0F, 4.0F, 1.0F, 0.0F, false);
     }
 
 

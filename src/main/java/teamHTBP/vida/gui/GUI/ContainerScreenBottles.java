@@ -8,8 +8,6 @@ import net.minecraft.util.text.ITextComponent;
 import teamHTBP.vida.Vida;
 
 public class ContainerScreenBottles extends ContainerScreen<ContainerBottles> {
-    private int screenWidth,textureX = 256;
-    private int screenHeight,textureY = 256;
     ResourceLocation Gui = new ResourceLocation(Vida.modId, "textures/gui/bottles_gui.png");
 
     public ContainerScreenBottles(ContainerBottles screenContainer, PlayerInventory inv, ITextComponent titleIn) {
@@ -33,6 +31,4 @@ public class ContainerScreenBottles extends ContainerScreen<ContainerBottles> {
         super.render(mouseX, mouseY, ticks);
         renderHoveredToolTip(mouseX, mouseY);
     }
-
-
 }

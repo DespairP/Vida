@@ -67,7 +67,8 @@ public class ElementPickaxeHUD extends AbstractGui {
         }
         RenderSystem.pushMatrix();
         if(level >= 5){
-            blit(screenWidth + 16, screenHeight, 0, 80 + 6 * ((int)(level/5) - 1), 0, 6, 6, 35, 119);
+            int offsetU = ((int)(level/5) - 1) < 6?(int)(level/5) - 1:5;
+            blit(screenWidth + 16, screenHeight, 0, 80 + 6 * offsetU, 0, 6, 6, 35, 119);
         }
         RenderSystem.popMatrix();
         RenderSystem.scaled(0.95f, 0.95f,0.95f);

@@ -136,7 +136,7 @@ public class BlockPurfiedCauldron extends Block {
                 if(entity.setMeltItem(itemStack)){
                     entityIn.remove();
                     worldIn.notifyBlockUpdate(pos, state, state, Constants.BlockFlags.BLOCK_UPDATE);
-
+                    entity.setMeltSpeed();
                 }
             }
         }

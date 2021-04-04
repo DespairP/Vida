@@ -115,6 +115,12 @@ public class ElementHelper {
         map.put(ItemLoader.aquaElementCore.get(), new mapItem(3, 10000,"aquaelementcore"));
         map.put(ItemLoader.fireElementCore.get(), new mapItem(4, 10000,"fireelementcore"));
         map.put(ItemLoader.earthElementCore.get(), new mapItem(5, 10000,"earthelementcore"));
+
+        map.put(ItemLoader.goldElementPotion.get(), new mapItem(1, 500000, "goldelementpotion"));
+        map.put(ItemLoader.woodElementPotion.get(), new mapItem(2, 500000, "woodelementpotion"));
+        map.put(ItemLoader.aquaElementPotion.get(), new mapItem(3, 500000, "aquaelementpotion"));
+        map.put(ItemLoader.fireElementPotion.get(), new mapItem(4, 500000, "fireelementpotion"));
+        map.put(ItemLoader.earthElementPotion.get(), new mapItem(5, 500000,"earthelementpotion"));
     }
 
 

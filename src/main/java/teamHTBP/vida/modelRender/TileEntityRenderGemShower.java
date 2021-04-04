@@ -28,7 +28,6 @@ public class TileEntityRenderGemShower extends TileEntityRenderer<TileEntityGemS
     @Override
     public void render(TileEntityGemShower tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
           if(!tileEntityIn.gemItem.isEmpty()){
-              //Minecraft.getInstance().getTextureManager().bindTexture(getGemResource(tileEntityIn.gemItem));
               TextureAtlasSprite textureAtlasSprite = Minecraft.getInstance().getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE).apply(this.getGemResource(tileEntityIn.gemItem));
               double floatHeight = Math.sin(height) * 0.1;
               this.height += 0.01;
@@ -39,20 +38,10 @@ public class TileEntityRenderGemShower extends TileEntityRenderer<TileEntityGemS
               float vMin = textureAtlasSprite.getMinV();
               float vMax = textureAtlasSprite.getMaxV();
 
-              Vector3f[] avector3f = new Vector3f[]{
-                      new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F),
-                      new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 2.0F), new Vector3f(-1.0F, -1.0F, 2.0F),
-                      new Vector3f(-1.0F, -1.0F, 2.0F), new Vector3f(-1.0F, 1.0F, 2.0F),  new Vector3f(1.0F,   1.0F, 2.0F), new Vector3f( 1.0F,-1.0F, 2.0F),
-                      new Vector3f( 1.0F, -1.0F, 2.0F), new Vector3f( 1.0F, 1.0F, 2.0F),  new Vector3f(1.0F,   1.0F, 0.0F), new Vector3f( 1.0F,-1.0F, 0.0F),
-                      new Vector3f( -1.0F, 1.0F, 2.0F), new Vector3f( -1.0F, 1.0F, 0.0F),  new Vector3f(1.0F,   1.0F, 0.0F), new Vector3f( 1.0F,1.0F, 2.0F),
-                      new Vector3f( -1.0F, -1.0F, 2.0F), new Vector3f( -1.0F, -1.0F, 0.0F),  new Vector3f(1.0F,   -1.0F, 0.0F), new Vector3f( 1.0F,-1.0F, 2.0F)
-
-              };
               IVertexBuilder buffer = bufferIn.getBuffer(RenderType.getCutout());
 
-
               matrixStackIn.push();
-              matrixStackIn.translate(.5F, 0.9F, .5F);
+              matrixStackIn.translate(.5F, 1.06F, .5F);
               matrixStackIn.scale(0.1f, 0.1f, 0.1f);
               matrixStackIn.rotate(this.renderDispatcher.renderInfo.getRotation());
               matrixStackIn.translate(-.5F, -0.9F, -.5F);
@@ -103,7 +92,7 @@ public class TileEntityRenderGemShower extends TileEntityRenderer<TileEntityGemS
               //draw logo
               matrixStackIn.push();
               IVertexBuilder bufferLogo = bufferIn.getBuffer(RenderType.getCutout());
-              matrixStackIn.translate(0.5f,1.9F + floatHeight,0.5f);
+              matrixStackIn.translate(0.5f,2.2F + floatHeight,0.5f);
               matrixStackIn.rotate(this.renderDispatcher.renderInfo.getRotation());
               matrixStackIn.scale(0.5f, 0.5f, 0.5f);
               matrixStackIn.translate(-0.5f,-0.5,-0.5f);

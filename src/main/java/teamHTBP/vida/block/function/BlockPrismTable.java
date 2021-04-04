@@ -83,4 +83,5 @@ public class BlockPrismTable extends Block {
         return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing());
     }
 
+
 }

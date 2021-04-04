@@ -23,7 +23,7 @@ public class ItemArmorElementLegginsWithBottles extends ItemArmorElementLeggings
         if(!worldIn.isRemote){
             if(handIn == Hand.MAIN_HAND && playerIn.isSneaking()){
                 return super.onItemRightClick(worldIn, playerIn, handIn);
-            }else if(handIn == Hand.MAIN_HAND ) {
+            }else if(handIn == Hand.MAIN_HAND) {
                 ItemStack stack = playerIn.inventory.getCurrentItem();
                 ItemArmorBottlesContainerProvider provider = new ItemArmorBottlesContainerProvider(stack);
                 NetworkHooks.openGui((ServerPlayerEntity) playerIn, provider, (PacketBuffer packerBuffer) -> {
