@@ -18,7 +18,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.util.LazyOptional;
-import teamHTBP.vida.capability.Energy.ElementCapabilityLoader;
+import teamHTBP.vida.capability.VidaCapabilities;
 import teamHTBP.vida.capability.Energy.IElementEnergyCapability;
 import teamHTBP.vida.capability.EnumElements;
 import teamHTBP.vida.TileEntity.SlotNumberArray.OreReactionMachineArray;
@@ -318,7 +318,7 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
                 flag = true;
             }
             if(this.goldEnergy >= MAX_GOLDENERGY && this.world.getTileEntity(this.pos.up())!=null){
-                LazyOptional<IElementEnergyCapability> cap = this.world.getTileEntity(this.pos.up()).getCapability(ElementCapabilityLoader.elementEnergy_Capability);
+                LazyOptional<IElementEnergyCapability> cap = this.world.getTileEntity(this.pos.up()).getCapability(VidaCapabilities.elementEnergy_Capability);
                 cap.ifPresent((T) -> {
                     T.receiveEnergy(150, false, EnumElements.GOLD);
                     this.goldEnergy = 0;

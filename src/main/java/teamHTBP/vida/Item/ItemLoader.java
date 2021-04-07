@@ -6,12 +6,9 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import teamHTBP.vida.Item.Potion.ItemCreativeElementPotion;
+import teamHTBP.vida.Item.staff.*;
 import teamHTBP.vida.block.BlockLoader;
 import teamHTBP.vida.Item.armor.*;
-import teamHTBP.vida.Item.staff.ItemElementPickaxe;
-import teamHTBP.vida.Item.staff.ItemElementSword;
-import teamHTBP.vida.Item.staff.ItemPrism;
-import teamHTBP.vida.Item.staff.ItemVidaWand;
 import teamHTBP.vida.ItemGroup.ItemGroupLoader;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.capability.EnumElements;
@@ -24,8 +21,13 @@ public class ItemLoader {
     public static  RegistryObject<Item> vidaBranch = ITEMS.register("vidabranch",() -> new ItemVidaBranch());
     public static  RegistryObject<Item> prism = ITEMS.register("prism",() -> new ItemPrism());
     public static  RegistryObject<Item> elementBottle = ITEMS.register("elementbottle",() -> new ItemElementBottle());
-    public static  RegistryObject<Item> bluePrint = ITEMS.register("blueprint",() -> new ItemBluePrint(1));
+    public static  RegistryObject<Item> chisel = ITEMS.register("chisel",() -> new ItemChisel());
 
+
+    public static  RegistryObject<Item> bluePrint_normal    = ITEMS.register("blueprintnormal",() -> new ItemBluePrint(1));
+    public static  RegistryObject<Item> bluePrint_epic      = ITEMS.register("blueprintepic",() -> new ItemBluePrint(2));
+    public static  RegistryObject<Item> bluePrint_challenge = ITEMS.register("blueprintchallenge",() -> new ItemBluePrint(3));
+    public static  RegistryObject<Item> bluePrint_void      = ITEMS.register("blueprintvoid",() -> new ItemBluePrint(4));
 
     public static  RegistryObject<Item> voidElementCore = ITEMS.register("voidelementcore",() -> new ItemElementCoreVoid());
     public static  RegistryObject<Item> goldElementCore = ITEMS.register("goldelementcore",() -> new ItemElementCore());
@@ -151,6 +153,7 @@ public class ItemLoader {
     public static  RegistryObject<Item> verdantBrickDeco_3      = ITEMS.register("verdantbrickdeco3",    () -> new BlockItem(BlockLoader.verdantBrickDeco_3    .get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static  RegistryObject<Item> verdantBrickDeco_4      = ITEMS.register("verdantbrickdeco4",    () -> new BlockItem(BlockLoader.verdantBrickDeco_4    .get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
 
+    public static  RegistryObject<Item> plankLush = ITEMS.register("lushplank",() -> new BlockItem(BlockLoader.plankLush.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
 
 
     public static  RegistryObject<Item> gemShower = ITEMS.register("gemshower",() -> new BlockItem(BlockLoader.gemShower.get(),new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));

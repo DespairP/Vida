@@ -42,6 +42,8 @@ public class BlockLoader {
     public static RegistryObject<Block> plankVida_1 = BLOCKS.register("plankvida1",() -> new BlockVidaPlank(1));
     public static RegistryObject<Block> plankVida_2 = BLOCKS.register("plankvida2",() -> new BlockVidaPlank(2));
 
+    public static RegistryObject<Block> plankLush = BLOCKS.register("lushplank",() -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+
 
     public static RegistryObject<Block> goldElementOre = BLOCKS.register("goldelementore",() -> new BlockOreElement());
     public static RegistryObject<Block> woodElementOre = BLOCKS.register("woodelementore",() -> new BlockOreElement());

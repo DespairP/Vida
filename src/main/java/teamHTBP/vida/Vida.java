@@ -30,7 +30,7 @@ import teamHTBP.vida.worldGen.GenLoader;
  * **/
 @Mod("vida")
 public class Vida {
-    public  static  final Logger LOGGER = LogManager.getLogger();
+   public  static  final Logger LOGGER = LogManager.getLogger();
    //mod的ID字符串，用于材质包获取id，或其他用途
    public static final  String modId = "vida";
    public static final ResourceLocation OREACTION = rl("orereaction_recipe");

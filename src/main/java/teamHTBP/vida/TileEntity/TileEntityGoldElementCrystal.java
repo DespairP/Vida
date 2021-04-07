@@ -8,7 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
-import teamHTBP.vida.capability.Energy.ElementCapabilityLoader;
+import teamHTBP.vida.capability.VidaCapabilities;
 import teamHTBP.vida.capability.Energy.ElementEnergyCapability;
 import teamHTBP.vida.capability.Energy.IElementEnergyCapability;
 import teamHTBP.vida.capability.EnumElements;
@@ -65,7 +65,7 @@ public class TileEntityGoldElementCrystal extends TileEntity implements ITickabl
     @Override
     @Nonnull
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-         if(cap == ElementCapabilityLoader.elementEnergy_Capability){
+         if(cap == VidaCapabilities.elementEnergy_Capability){
              return energyCapability.cast();
          }else {
              return LazyOptional.empty();
@@ -81,7 +81,7 @@ public class TileEntityGoldElementCrystal extends TileEntity implements ITickabl
         if(world.isRemote)
             if(sinWave >2* Math.PI) sinWave = 0; else sinWave+=0.1f;
         if(!world.isRemote) {
-            LazyOptional<IElementEnergyCapability> cap = this.getCapability(ElementCapabilityLoader.elementEnergy_Capability);
+            LazyOptional<IElementEnergyCapability> cap = this.getCapability(VidaCapabilities.elementEnergy_Capability);
         }
         ticks += 1;
         ticks %= 31;
