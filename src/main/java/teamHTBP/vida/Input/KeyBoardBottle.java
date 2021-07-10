@@ -1,10 +1,7 @@
 package teamHTBP.vida.Input;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.InputMappings;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.settings.KeyConflictContext;
@@ -12,8 +9,8 @@ import net.minecraftforge.client.settings.KeyModifier;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.glfw.GLFW;
-import teamHTBP.vida.Network.PacketBottles;
-import teamHTBP.vida.Network.PacketChannel;
+import teamHTBP.vida.network.PacketBottles;
+import teamHTBP.vida.network.PacketChannel;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
 public class KeyBoardBottle {

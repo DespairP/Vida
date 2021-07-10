@@ -18,7 +18,7 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.PlantType;
-import teamHTBP.vida.capability.ElementHelper;
+import teamHTBP.vida.helper.ElementHelper;
 
 import java.util.Random;
 

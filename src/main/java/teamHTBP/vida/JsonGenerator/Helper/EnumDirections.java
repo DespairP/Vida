@@ -1,10 +1,10 @@
 package teamHTBP.vida.JsonGenerator.Helper;
 
 public enum EnumDirections {
-    East("east",90),
-    West("west",270),
-    North("north",180),
-    South("south",0);
+    East("east",0),
+    West("west",180),
+    North("north",270),
+    South("south",90);
 
 
     public String direction;

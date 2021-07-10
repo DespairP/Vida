@@ -4,7 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.util.ResourceLocation;
-import teamHTBP.vida.capability.EnumElements;
+import teamHTBP.vida.helper.EnumElements;
 import teamHTBP.vida.TileEntity.IElementCrystal;
 import teamHTBP.vida.Vida;
 

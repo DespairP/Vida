@@ -24,6 +24,7 @@ public class BlockDeepStoneBrickPillar extends RotatedPillarBlock {
         super(Properties.create(Material.ROCK));
     }
 
+    /**state是柱子的品种*/
     public BlockDeepStoneBrickPillar(int state) {
         super(Properties.create(Material.ROCK).hardnessAndResistance(2.0f, 6.0f).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE));
         this.setDefaultState(this.getStateContainer().getBaseState().with(STATE, state).with(AXIS, Direction.Axis.Y));

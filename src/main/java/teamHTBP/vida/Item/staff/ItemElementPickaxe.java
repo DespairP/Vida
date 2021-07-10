@@ -21,7 +21,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolType;
 import teamHTBP.vida.Item.ItemLoader;
 import teamHTBP.vida.ItemGroup.ItemGroupLoader;
-import teamHTBP.vida.capability.EnumElements;
+import teamHTBP.vida.helper.EnumElements;
 
 import javax.annotation.Nullable;
 import java.util.List;

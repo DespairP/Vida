@@ -4,8 +4,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.BossInfo;
-import teamHTBP.vida.Helper.ColorHelper;
 
 public class MessageHUD extends AbstractGui {
     private final int guiLeftMid;

@@ -3,7 +3,7 @@ package teamHTBP.vida.block.crop;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import teamHTBP.vida.Helper.ColorHelper;
+import teamHTBP.vida.helper.ColorHelper;
 
 import java.util.Random;
 

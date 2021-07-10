@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=east":  { "model": "vida:block/deepsea_bricks_straight" },
+    "facing=west":  { "model": "vida:block/deepsea_bricks_straight", "y": 180 },
+    "facing=south": { "model": "vida:block/deepsea_bricks_straight", "y": 90},
+    "facing=north": { "model": "vida:block/deepsea_bricks_straight", "y": 270 }
+  }
+}

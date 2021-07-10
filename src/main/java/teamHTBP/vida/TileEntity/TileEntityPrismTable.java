@@ -14,7 +14,7 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import teamHTBP.vida.capability.ElementHelper;
+import teamHTBP.vida.helper.ElementHelper;
 import teamHTBP.vida.Item.ItemEnergyElementFragment;
 import teamHTBP.vida.Item.ItemLoader;
 import teamHTBP.vida.TileEntity.SlotNumberArray.PrismTableArray;

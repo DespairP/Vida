@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=east,rotate=0":  { "model": "vida:block/deepsea_bricks_corner" },
+    "facing=west,rotate=0":  { "model": "vida:block/deepsea_bricks_corner", "y": 180 },
+    "facing=south,rotate=0": { "model": "vida:block/deepsea_bricks_corner", "y": 90},
+    "facing=north,rotate=0": { "model": "vida:block/deepsea_bricks_corner", "y": 270 },
+    "facing=east,rotate=1":  { "model": "vida:block/deepsea_bricks_corner","x": 90},
+    "facing=west,rotate=1":  { "model": "vida:block/deepsea_bricks_corner", "y": 180,"x": 90},
+    "facing=south,rotate=1": { "model": "vida:block/deepsea_bricks_corner", "y": 90,"x": 90},
+    "facing=north,rotate=1": { "model": "vida:block/deepsea_bricks_corner", "y": 270,"x": 90},
+    "facing=east,rotate=2":  { "model": "vida:block/deepsea_bricks_corner_2","y": 270,"x": 90},
+    "facing=west,rotate=2":  { "model": "vida:block/deepsea_bricks_corner", "y": 90,"x": 90},
+    "facing=south,rotate=2": { "model": "vida:block/deepsea_bricks_corner_2", "y": 0,"x": 90},
+    "facing=north,rotate=2": { "model": "vida:block/deepsea_bricks_corner", "y": 180,"x": 90}
+  }
+}

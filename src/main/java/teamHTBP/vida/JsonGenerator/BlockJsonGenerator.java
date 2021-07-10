@@ -1,22 +1,13 @@
 package teamHTBP.vida.JsonGenerator;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import jdk.nashorn.internal.ir.Block;
-import net.minecraft.util.JSONUtils;
-import teamHTBP.vida.JsonGenerator.Helper.BlockModelWriterHelper;
-import teamHTBP.vida.JsonGenerator.Helper.BlockStateWriterHelper;
-import teamHTBP.vida.JsonGenerator.Properties.BlockModelJson;
 import teamHTBP.vida.JsonGenerator.Properties.BlockModelProperties;
 import teamHTBP.vida.JsonGenerator.impl.BlockModelImpl.FullBlockModel;
 import teamHTBP.vida.JsonGenerator.impl.BlockModelImpl.PillarBlockModel;
 import teamHTBP.vida.JsonGenerator.impl.BlockStateImpl.BasicStateWriterGenerator;
 
-import java.io.*;
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 public class BlockJsonGenerator {
@@ -32,8 +23,13 @@ public class BlockJsonGenerator {
 
     public void initialize(){
         blocks = ImmutableList.of(
-                new BlockModelProperties("lushplank", BasicStateWriterGenerator.generateNoneAxis(), new FullBlockModel())
-        );
+                new BlockModelProperties("pillarlush3", BasicStateWriterGenerator.generateRotate(), new PillarBlockModel("pillarlush1", "pillarsidelush3")),
+                new BlockModelProperties("pillarlush2", BasicStateWriterGenerator.generateRotate(), new PillarBlockModel("pillarlush1", "pillarsidelush2")),
+                new BlockModelProperties("pillarlush1", BasicStateWriterGenerator.generateRotate(), new PillarBlockModel("pillarlush1", "pillarsidelush1")),
+                new BlockModelProperties("pillarlush0", BasicStateWriterGenerator.generateRotate(), new PillarBlockModel("pillarlush0", "pillarsidelush0")),
+                new BlockModelProperties("pillarlush4", BasicStateWriterGenerator.generateRotate(), new PillarBlockModel("pillarlush0", "pillarsidelush4")),
+                new BlockModelProperties("planklushdeco0", BasicStateWriterGenerator.generateNoneAxis(),new PillarBlockModel())
+              );
     }
 
     public void write(){

@@ -28,7 +28,7 @@ public class BlockDecoFactory {
             case BASIC:
                 return new BlockDecoBasic(properties);
             case YAXIS:
-                //TODO
+                return new BlockDecoWithY(properties);
         }
         return new BlockDecoBasic(properties);
     }

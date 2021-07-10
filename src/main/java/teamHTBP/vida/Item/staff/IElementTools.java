@@ -1,7 +1,7 @@
 package teamHTBP.vida.Item.staff;
 
 import net.minecraftforge.common.ToolType;
-import teamHTBP.vida.capability.EnumElements;
+import teamHTBP.vida.helper.EnumElements;
 
 public interface IElementTools {
     public ToolType getToolType();

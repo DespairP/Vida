@@ -46,10 +46,10 @@ public class BlockStateWriterHelper {
      * "attr = index_2,facing = where" : { model : names_2 , y = int} <br/>
      * 形式的Variants，生成数量为 index数量 *4（有四个方向）
      * */
-    public static Map<String,Map<String,String>> getSpecialModelWithAxis(String attr,ImmutableList<String> index, ImmutableList<String> names) throws Exception {
+    public static Map<String,Map<String,Object>> getSpecialModelWithAxis(String attr,ImmutableList<String> index, ImmutableList<String> names) throws Exception {
         if(index == null || names == null ) throw new NullPointerException("index and names are");
         if(index.size() != names.size()) throw new Exception("BlockState: index and name length is not same!");
-        Map<String,Map<String,String>> map = new LinkedHashMap<>();
+        Map<String,Map<String,Object>> map = new LinkedHashMap<>();
         for (int i = 0; i < EnumDirections.values().length; i++) {
             EnumDirections direction = EnumDirections.values()[i];
             index.forEach(indexName -> {
@@ -66,7 +66,7 @@ public class BlockStateWriterHelper {
      * "facing = where" : { model : names_2 , y = int} <br/>
      * 形式的Variants，生成数量为 4（有四个方向）
      * */
-    public static Map<String,Map<String,String>> getRotationModel(String name) throws NullPointerException,Exception {
+    public static Map<String,Map<String,Object>> getRotationModel(String name) throws NullPointerException,Exception {
         return Arrays.stream(EnumDirections.values()).collect(Collectors.toMap(key->"facing=" + key.direction,key->getModelAttrs(MOD_ID + ":block/" + name, key)));
     }
 
@@ -74,8 +74,8 @@ public class BlockStateWriterHelper {
         return ImmutableMap.of("model", path);
     }
 
-    public static Map<String,String> getModelAttrs(String path,EnumDirections enumDirections){
-        return ImmutableMap.of("model", path,"y" , enumDirections.axisRotate + "");
+    public static Map<String,Object> getModelAttrs(String path,EnumDirections enumDirections){
+        return ImmutableMap.of("model", path,"y" , enumDirections.axisRotate);
     }
 
 }

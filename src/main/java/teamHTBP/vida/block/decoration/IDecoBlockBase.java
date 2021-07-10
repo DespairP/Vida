@@ -1,6 +1,6 @@
 package teamHTBP.vida.block.decoration;
 
-import teamHTBP.vida.capability.EnumElements;
+import teamHTBP.vida.helper.EnumElements;
 
 /**表示这是一个装饰性方块*/
 public interface IDecoBlockBase {

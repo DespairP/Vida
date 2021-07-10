@@ -14,7 +14,6 @@ public class KeyBoardLoader {
         ClientRegistry.registerKeyBinding(KeyBoardBottle.MESSAGE_KEY_1);
         ClientRegistry.registerKeyBinding(KeyBoardBottle.MESSAGE_KEY_2);
         ClientRegistry.registerKeyBinding(KeyBoardBottle.MESSAGE_KEY_3);
-
     }
 
 }

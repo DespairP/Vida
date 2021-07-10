@@ -4,10 +4,9 @@ import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.command.CommandSource;
-import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.fml.network.PacketDistributor;
-import teamHTBP.vida.Network.PacketChannel;
-import teamHTBP.vida.Network.PacketMessage;
+import teamHTBP.vida.network.PacketChannel;
+import teamHTBP.vida.network.PacketMessage;
 
 public class CommandTextTest implements Command<CommandSource> {
     @Override

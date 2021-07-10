@@ -131,5 +131,6 @@
   "key.bottle3.use": "Element Bottle[Middle]use",
   "key.bottles": "Show Element Bottle Condition[%]",
   "key.category.vida": "Vida Settings",
-  "skill.vida.luck.name": "Luck"
+  "skill.vida.luck.name": "Luck",
+  "skill.vida.requiredSkill.anno": "required Skills:"
 }

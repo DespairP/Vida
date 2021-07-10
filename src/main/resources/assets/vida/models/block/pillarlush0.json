@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "vida:block/pillarlush0",
+    "side": "vida:block/pillarsidelush0"
+  }
+}

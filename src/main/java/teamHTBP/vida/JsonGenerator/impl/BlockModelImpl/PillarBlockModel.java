@@ -1,6 +1,7 @@
 package teamHTBP.vida.JsonGenerator.impl.BlockModelImpl;
 
 import com.google.common.collect.ImmutableMap;
+import teamHTBP.vida.JsonGenerator.impl.EnumBlockModelBasic;
 import teamHTBP.vida.JsonGenerator.impl.IBlockModelJsonWriter;
 
 import java.util.Map;
@@ -22,7 +23,7 @@ public class PillarBlockModel implements IBlockModelJsonWriter {
 
     @Override
     public String getParent() {
-        return null;
+        return EnumBlockModelBasic.Pillar.parent;
     }
 
     @Override

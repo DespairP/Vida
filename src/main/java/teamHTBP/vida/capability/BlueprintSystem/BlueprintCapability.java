@@ -3,10 +3,9 @@ package teamHTBP.vida.capability.BlueprintSystem;
 import com.google.common.collect.MapDifference;
 import com.google.common.collect.Maps;
 import net.minecraft.nbt.CompoundNBT;
-import teamHTBP.vida.Helper.BlueprintHelper;
+import teamHTBP.vida.helper.BlueprintHelper;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 

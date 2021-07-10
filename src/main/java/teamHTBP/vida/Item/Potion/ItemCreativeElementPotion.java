@@ -3,7 +3,7 @@ package teamHTBP.vida.Item.Potion;
 import net.minecraft.item.Item;
 import teamHTBP.vida.Item.IElementItem;
 import teamHTBP.vida.ItemGroup.ItemGroupLoader;
-import teamHTBP.vida.capability.EnumElements;
+import teamHTBP.vida.helper.EnumElements;
 
 public class ItemCreativeElementPotion extends Item implements IElementItem {
     public final EnumElements ELEMENT_TYPE;

@@ -6,7 +6,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import teamHTBP.vida.capability.ElementHelper;
+import teamHTBP.vida.helper.ElementHelper;
 import teamHTBP.vida.Item.ItemLoader;
 
 import javax.annotation.Nullable;

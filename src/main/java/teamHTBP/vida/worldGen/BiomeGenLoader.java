@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import teamHTBP.vida.block.BlockLoader;
-import teamHTBP.vida.capability.ElementHelper;
+import teamHTBP.vida.helper.ElementHelper;
 
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)

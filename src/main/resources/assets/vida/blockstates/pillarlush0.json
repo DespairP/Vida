@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=south": {
+      "model": "vida:block/pillarlush0",
+      "y": 90
+    },
+    "facing=east": {
+      "model": "vida:block/pillarlush0",
+      "y": 0
+    },
+    "facing=north": {
+      "model": "vida:block/pillarlush0",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "vida:block/pillarlush0",
+      "y": 180
+    }
+  }
+}

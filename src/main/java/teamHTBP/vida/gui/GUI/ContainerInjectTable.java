@@ -5,12 +5,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ToolItem;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import teamHTBP.vida.capability.ElementHelper;
-import teamHTBP.vida.Item.staff.ItemElementPickaxe;
-import teamHTBP.vida.Item.staff.ItemElementSword;
+import teamHTBP.vida.helper.ElementHelper;
 import teamHTBP.vida.TileEntity.TileEntityInjectTable;
 
 public class ContainerInjectTable extends Container {
