@@ -1,11 +1,10 @@
 package teamHTBP.vida.helper;
 
-import com.google.common.collect.ImmutableList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.capability.BlueprintSystem.Blueprint;
-import teamHTBP.vida.capability.BlueprintSystem.EnumBlueprintRarity;
+import teamHTBP.vida.capability.blueprintCapability.Blueprint;
+import teamHTBP.vida.capability.blueprintCapability.EnumBlueprintRarity;
 
 import java.util.LinkedHashMap;
 import java.util.Optional;

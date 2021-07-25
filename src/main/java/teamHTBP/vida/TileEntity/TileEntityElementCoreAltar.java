@@ -11,7 +11,7 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import teamHTBP.vida.block.BlockLoader;
 import teamHTBP.vida.helper.ElementHelper;
-import teamHTBP.vida.Item.ItemElementCore;
+import teamHTBP.vida.item.ItemElementCore;
 
 import javax.annotation.Nullable;
 import java.util.LinkedList;
@@ -33,7 +33,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
     //是否有多方块结构，TODO
     boolean isMultiComplete = false;
     //法杖右键检测是否可以进行仪式
-    public boolean isVidaWandCilck = false;
+    public boolean isWAND_VIDACilck = false;
     //仪式进度
     public int progress = 0;
     //最大的仪式进度
@@ -60,7 +60,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         isBlockOver = compound.getBoolean("isBlockOver");
         isElementOver = compound.getBoolean("isElementOver");
         isMultiComplete = compound.getBoolean("isMutiComplete");
-        isVidaWandCilck = compound.getBoolean("isVidaWandClick");
+        isWAND_VIDACilck = compound.getBoolean("isWAND_VIDAClick");
         element = compound.getInt("element");
         for(int i = 0;i < 4;i++){
             if(compound.contains("altarItem" + i)){
@@ -89,7 +89,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         compound.putBoolean("isBlockOver", isBlockOver);
         //compound.putInt("isMutiComplete", isMultiComplete);
         compound.putBoolean("isMultiComplete", isMultiComplete);
-        compound.putBoolean("isVidaWandClick", isVidaWandCilck);
+        compound.putBoolean("isWAND_VIDAClick", isWAND_VIDACilck);
         for(int i = 0; i < 4 ; i ++){
             if(this.altarItem[i] != null){
                 compound.put("altarItem"+i,this.altarItem[i].serializeNBT());
@@ -138,7 +138,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         isBlockOver = tag.getBoolean("isBlockOver");
         isElementOver = tag.getBoolean("isElementOver");
         isMultiComplete = tag.getBoolean("isMutiComplete");
-        isVidaWandCilck = tag.getBoolean("isVidaWandClick");
+        isWAND_VIDACilck = tag.getBoolean("isWAND_VIDAClick");
         element = tag.getInt("element");
         for(int i = 0;i < 4;i++){
             if(tag.contains("altarItem" + i)){
@@ -219,11 +219,11 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
       //System.out.println(this.coreItem);
         if(!world.isRemote){
             //如果右键则开始进行
-              if(this.isVidaWandCilck && !this.isProgressing){
+              if(this.isWAND_VIDACilck && !this.isProgressing){
                   //System.out.println("s");
                   this.isProgressing = this.judAltarItem();
                   world.notifyBlockUpdate(pos, getBlockState(),getBlockState(), 3);
-                  this.isVidaWandCilck = false;
+                  this.isWAND_VIDACilck = false;
              }
 
         }

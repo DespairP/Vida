@@ -6,10 +6,10 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
-import teamHTBP.vida.Item.ItemLoader;
-import teamHTBP.vida.capability.Skill.ISkill;
-import teamHTBP.vida.capability.Skill.SkillCategory;
-import teamHTBP.vida.capability.Skill.SkillHelper;
+import teamHTBP.vida.item.ItemLoader;
+import teamHTBP.vida.capability.skillSystem.ISkill;
+import teamHTBP.vida.capability.skillSystem.SkillCategory;
+import teamHTBP.vida.capability.skillSystem.SkillHelper;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -102,23 +102,23 @@ public class ElementHelper {
         map.put(Items.RED_SAND, new mapItem(5,50,"red_sand"));  //红砂
         map.put(Items.RED_SANDSTONE, new mapItem(5,200,"red_sandstone"));  //红砂岩
 
-        map.put(ItemLoader.goldEnergyGemFragment.get(), new mapItem(1, 500, "goldartificialelementgem"));
-        map.put(ItemLoader.woodEnergyGemFragment.get(), new mapItem(2, 500, "woodartificialelementgem"));
-        map.put(ItemLoader.aquaEnergyGemFragment.get(), new mapItem(3, 500, "aquaartificialelementgem"));
-        map.put(ItemLoader.fireEnergyGemFragment.get(), new mapItem(4, 500, "fireartificialelementgem"));
-        map.put(ItemLoader.earthEnergyGemFragment.get(), new mapItem(5, 500,"earthartificialelementgem"));
+        map.put(ItemLoader.goldEnergyGemFragment.get(), new mapItem(1, 500, "ARTIFICIAL_ELEMENTGEM_GOLD"));
+        map.put(ItemLoader.woodEnergyGemFragment.get(), new mapItem(2, 500, "ARTIFICIAL_ELEMENTGEM_WOOD"));
+        map.put(ItemLoader.aquaEnergyGemFragment.get(), new mapItem(3, 500, "ARTIFICIAL_ELEMENTGEM_AQUA"));
+        map.put(ItemLoader.fireEnergyGemFragment.get(), new mapItem(4, 500, "ARTIFICIAL_ELEMENTGEM_FIRE"));
+        map.put(ItemLoader.earthEnergyGemFragment.get(), new mapItem(5, 500,"ARTIFICIAL_ELEMENTGEM_EARTH"));
 
-        map.put(ItemLoader.goldElementCore.get(), new mapItem(1, 10000, "goldelementcore"));
-        map.put(ItemLoader.woodElementCore.get(), new mapItem(2, 10000,"woodelementcore"));
-        map.put(ItemLoader.aquaElementCore.get(), new mapItem(3, 10000,"aquaelementcore"));
-        map.put(ItemLoader.fireElementCore.get(), new mapItem(4, 10000,"fireelementcore"));
-        map.put(ItemLoader.earthElementCore.get(), new mapItem(5, 10000,"earthelementcore"));
+        map.put(ItemLoader.ELEMENTCORE_GOLD.get(), new mapItem(1, 10000, "goldelementcore"));
+        map.put(ItemLoader.ELEMENTCORE_WOOD.get(), new mapItem(2, 10000,"woodelementcore"));
+        map.put(ItemLoader.ELEMENTCORE_AQUA.get(), new mapItem(3, 10000,"ELEMENTCORE_AQUA"));
+        map.put(ItemLoader.ELEMENTCORE_FIRE.get(), new mapItem(4, 10000,"ELEMENTCORE_FIRE"));
+        map.put(ItemLoader.ELEMENTCORE_EARTH.get(), new mapItem(5, 10000,"ELEMENTCORE_EARTH"));
 
-        map.put(ItemLoader.goldElementPotion.get(), new mapItem(1, 500000, "goldelementpotion"));
-        map.put(ItemLoader.woodElementPotion.get(), new mapItem(2, 500000, "woodelementpotion"));
-        map.put(ItemLoader.aquaElementPotion.get(), new mapItem(3, 500000, "aquaelementpotion"));
-        map.put(ItemLoader.fireElementPotion.get(), new mapItem(4, 500000, "fireelementpotion"));
-        map.put(ItemLoader.earthElementPotion.get(), new mapItem(5, 500000,"earthelementpotion"));
+        map.put(ItemLoader.CREATIVE_ELEMENTPOTION_GOLD.get(), new mapItem(1, 500000, "CREATIVE_ELEMENTPOTION_GOLD"));
+        map.put(ItemLoader.CREATIVE_ELEMENTPOTION_WOOD.get(), new mapItem(2, 500000, "CREATIVE_ELEMENTPOTION_WOOD"));
+        map.put(ItemLoader.CREATIVE_ELEMENTPOTION_AQUA.get(), new mapItem(3, 500000, "CREATIVE_ELEMENTPOTION_AQUA"));
+        map.put(ItemLoader.CREATIVE_ELEMENTPOTION_FIRE.get(), new mapItem(4, 500000, "CREATIVE_ELEMENTPOTION_FIRE"));
+        map.put(ItemLoader.CREATIVE_ELEMENTPOTION_EARTH.get(), new mapItem(5, 500000,"CREATIVE_ELEMENTPOTION_EARTH"));
     }
 
 
@@ -171,11 +171,11 @@ public class ElementHelper {
      * **/
     public static boolean beganAltarProgress(ItemStack coreItem,List<Item> list,int element){
         switch (element){
-            case ELEMENT_GOLD: if(coreItem.getItem() == ItemLoader.goldElementCore.get() && list.contains(Items.GOLD_INGOT) && list.contains(Items.DIAMOND) && list.contains(Items.REDSTONE) && list.contains(Items.IRON_INGOT)) return true;
-            case ELEMENT_WOOD: if(coreItem.getItem() == ItemLoader.woodElementCore.get() && list.contains(Items.FERN) && list.contains(Items.OAK_LOG) && list.contains(Items.COCOA_BEANS) && list.contains(Items.GREEN_DYE)) return true;
-            case ELEMENT_AQUA: if(coreItem.getItem() == ItemLoader.aquaElementCore.get() && list.contains(Items.PRISMARINE_CRYSTALS) && list.contains(Items.ICE) && list.contains(Items.SEA_LANTERN) && list.contains(Items.BRAIN_CORAL)) return true;
-            case ELEMENT_FIRE: if(coreItem.getItem() == ItemLoader.fireElementCore.get() && list.contains(Items.BLAZE_POWDER) && list.contains(Items.NETHERRACK) && list.contains(Items.NETHER_WART) && list.contains(Items.BLAZE_ROD)) return true;
-            case ELEMENT_EARTH: if(coreItem.getItem() == ItemLoader.earthElementCore.get() && list.contains(Items.DIRT) && list.contains(Items.CLAY_BALL) && list.contains(Items.SAND) && list.contains(Items.FLINT)) return true;
+            case ELEMENT_GOLD: if(coreItem.getItem() == ItemLoader.ELEMENTCORE_GOLD.get() && list.contains(Items.GOLD_INGOT) && list.contains(Items.DIAMOND) && list.contains(Items.REDSTONE) && list.contains(Items.IRON_INGOT)) return true;
+            case ELEMENT_WOOD: if(coreItem.getItem() == ItemLoader.ELEMENTCORE_WOOD.get() && list.contains(Items.FERN) && list.contains(Items.OAK_LOG) && list.contains(Items.COCOA_BEANS) && list.contains(Items.GREEN_DYE)) return true;
+            case ELEMENT_AQUA: if(coreItem.getItem() == ItemLoader.ELEMENTCORE_AQUA.get() && list.contains(Items.PRISMARINE_CRYSTALS) && list.contains(Items.ICE) && list.contains(Items.SEA_LANTERN) && list.contains(Items.BRAIN_CORAL)) return true;
+            case ELEMENT_FIRE: if(coreItem.getItem() == ItemLoader.ELEMENTCORE_FIRE.get() && list.contains(Items.BLAZE_POWDER) && list.contains(Items.NETHERRACK) && list.contains(Items.NETHER_WART) && list.contains(Items.BLAZE_ROD)) return true;
+            case ELEMENT_EARTH: if(coreItem.getItem() == ItemLoader.ELEMENTCORE_EARTH.get() && list.contains(Items.DIRT) && list.contains(Items.CLAY_BALL) && list.contains(Items.SAND) && list.contains(Items.FLINT)) return true;
 
         }
         return false;

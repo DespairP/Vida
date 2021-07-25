@@ -11,9 +11,9 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import teamHTBP.vida.Item.armor.ItemArmorElementLegginsWithBottles;
-import teamHTBP.vida.Item.staff.ItemElementPickaxe;
-import teamHTBP.vida.Item.staff.ItemElementSword;
+import teamHTBP.vida.item.armor.ItemArmorElementLegginsWithBottles;
+import teamHTBP.vida.item.staff.ItemElementPickaxe;
+import teamHTBP.vida.item.staff.ItemElementSword;
 
 import java.util.Random;
 

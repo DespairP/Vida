@@ -9,8 +9,8 @@ import net.minecraftforge.fml.network.PacketDistributor;
 import teamHTBP.vida.helper.BlueprintHelper;
 import teamHTBP.vida.network.PacketChannel;
 import teamHTBP.vida.network.PacketMessage;
-import teamHTBP.vida.capability.BlueprintSystem.Blueprint;
-import teamHTBP.vida.capability.BlueprintSystem.IBlueprintCapability;
+import teamHTBP.vida.capability.blueprintCapability.Blueprint;
+import teamHTBP.vida.capability.blueprintCapability.IBlueprintCapability;
 import teamHTBP.vida.capability.VidaCapabilities;
 
 public class CommandUnlockBluePrint implements Command<CommandSource> {

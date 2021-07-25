@@ -5,16 +5,11 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.PotionItem;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
-import teamHTBP.vida.Item.armor.ItemArmorElementLegginsWithBottles;
-
-import javax.annotation.Nullable;
+import teamHTBP.vida.item.armor.ItemArmorElementLegginsWithBottles;
 
 public class ContainerBottles extends Container {
     ItemStack stack = ItemStack.EMPTY;

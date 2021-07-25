@@ -14,7 +14,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
-import teamHTBP.vida.Item.ItemLoader;
+import teamHTBP.vida.item.ItemLoader;
 
 public class BlockVidaPlank extends Block {
     private static IntegerProperty STATE = IntegerProperty.create("type", 0, 2);
@@ -32,7 +32,7 @@ public class BlockVidaPlank extends Block {
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if(!worldIn.isRemote)
-        if(player.inventory.getCurrentItem().getItem() == ItemLoader.vidawand.get()){
+        if(player.inventory.getCurrentItem().getItem() == ItemLoader.WAND_VIDA.get()){
             int stateInt = (int)state.get(STATE);
             stateInt = (stateInt>=2 ? 0:stateInt+1);
             BlockState newState = state.with(STATE, stateInt);

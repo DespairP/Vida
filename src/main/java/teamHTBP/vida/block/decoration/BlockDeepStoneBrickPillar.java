@@ -15,7 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
-import teamHTBP.vida.Item.ItemLoader;
+import teamHTBP.vida.item.ItemLoader;
 
 public class BlockDeepStoneBrickPillar extends RotatedPillarBlock {
     private static IntegerProperty STATE = IntegerProperty.create("type", 0, 2);
@@ -33,7 +33,7 @@ public class BlockDeepStoneBrickPillar extends RotatedPillarBlock {
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if(!worldIn.isRemote){
-            if(player.inventory.getCurrentItem().getItem() == ItemLoader.vidawand.get()){
+            if(player.inventory.getCurrentItem().getItem() == ItemLoader.WAND_VIDA.get()){
                 int stateInt = (int)state.get(STATE);
                 Direction.Axis axis = state.get(AXIS);
                 stateInt = (stateInt>=2 ? 0:stateInt+1);

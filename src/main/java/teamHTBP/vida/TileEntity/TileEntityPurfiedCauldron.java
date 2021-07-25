@@ -7,7 +7,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import teamHTBP.vida.Item.Potion.ItemCreativeElementPotion;
+import teamHTBP.vida.item.Potion.ItemCreativeElementPotion;
 import teamHTBP.vida.helper.ElementHelper;
 import teamHTBP.vida.entity.EntityFaintLight;
 import teamHTBP.vida.entity.EntityLoader;

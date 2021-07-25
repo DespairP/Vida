@@ -19,7 +19,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.util.LazyOptional;
 import teamHTBP.vida.capability.VidaCapabilities;
-import teamHTBP.vida.capability.Energy.IElementEnergyCapability;
+import teamHTBP.vida.capability.energyCapability.IElementEnergyCapability;
 import teamHTBP.vida.helper.EnumElements;
 import teamHTBP.vida.TileEntity.SlotNumberArray.OreReactionMachineArray;
 import teamHTBP.vida.gui.GUI.ContainerOreReactionMachine;

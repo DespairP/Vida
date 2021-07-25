@@ -6,8 +6,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import teamHTBP.vida.block.function.blockTools.BlockMutiDouble;
-import teamHTBP.vida.block.function.blockTools.BlockMutiDoubleWithY;
+import teamHTBP.vida.helper.blockTools.BlockMutiDoubleWithY;
 
 import java.util.Random;
 

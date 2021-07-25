@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import teamHTBP.vida.Item.ItemLoader;
+import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.TileEntity.TileEntityCollector;
 import teamHTBP.vida.particle.ElementFireParticleData;
 
@@ -43,7 +43,7 @@ public class BlockCollecter extends Block {
             TileEntityCollector tileEntityCollector = (TileEntityCollector) worldIn.getTileEntity(pos);
             if(handIn == Hand.MAIN_HAND && !player.isSneaking()){
                ItemStack stack = player.inventory.getCurrentItem();
-               if(stack.getItem() == ItemLoader.voidElementCore.get())
+               if(stack.getItem() == ItemLoader.ELEMENTCORE_VOID.get())
                {
                   if(tileEntityCollector.setCore(new ItemStack(stack.getItem(),1))){
                       if(!player.isCreative()){

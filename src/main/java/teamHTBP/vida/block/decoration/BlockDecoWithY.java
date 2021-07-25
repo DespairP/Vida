@@ -1,7 +1,6 @@
 package teamHTBP.vida.block.decoration;
 
-import net.minecraft.block.Block;
-import teamHTBP.vida.block.function.blockTools.BlockSingleWithY;
+import teamHTBP.vida.helper.blockTools.BlockSingleWithY;
 
 public class BlockDecoWithY extends BlockSingleWithY {
 

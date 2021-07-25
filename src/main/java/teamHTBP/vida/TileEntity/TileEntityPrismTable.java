@@ -15,8 +15,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import teamHTBP.vida.helper.ElementHelper;
-import teamHTBP.vida.Item.ItemEnergyElementFragment;
-import teamHTBP.vida.Item.ItemLoader;
+import teamHTBP.vida.item.ItemEnergyElementFragment;
+import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.TileEntity.SlotNumberArray.PrismTableArray;
 import teamHTBP.vida.gui.GUI.ContainerPrismTable;
 
@@ -217,15 +217,15 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
     public ItemStack getItemGemFromElement(int element){
         switch (element){
             case 1:
-                return new ItemStack(ItemLoader.goldArtificialElementGem.get(), 1);
+                return new ItemStack(ItemLoader.ARTIFICIAL_ELEMENTGEM_GOLD.get(), 1);
             case 2:
-                return new ItemStack(ItemLoader.woodArtificialElementGem.get(), 1);
+                return new ItemStack(ItemLoader.ARTIFICIAL_ELEMENTGEM_WOOD.get(), 1);
             case 3:
-                return new ItemStack(ItemLoader.aquaArtificialElementGem.get(), 1);
+                return new ItemStack(ItemLoader.ARTIFICIAL_ELEMENTGEM_AQUA.get(), 1);
             case 4:
-                return new ItemStack(ItemLoader.fireArtificialElementGem.get(), 1);
+                return new ItemStack(ItemLoader.ARTIFICIAL_ELEMENTGEM_FIRE.get(), 1);
             case 5:
-                return new ItemStack(ItemLoader.earthArtificialElementGem.get(), 1);
+                return new ItemStack(ItemLoader.ARTIFICIAL_ELEMENTGEM_EARTH.get(), 1);
         }
         return ItemStack.EMPTY;
     }

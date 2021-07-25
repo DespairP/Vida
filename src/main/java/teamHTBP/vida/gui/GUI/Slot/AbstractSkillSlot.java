@@ -1,7 +1,7 @@
 package teamHTBP.vida.gui.GUI.Slot;
 
 import net.minecraft.client.gui.widget.button.AbstractButton;
-import teamHTBP.vida.capability.Skill.SkillSurface;
+import teamHTBP.vida.capability.skillSystem.SkillSurface;
 
 public abstract class AbstractSkillSlot extends AbstractButton {
     //焦点是否在这个按钮上

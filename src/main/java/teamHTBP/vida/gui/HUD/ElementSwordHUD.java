@@ -6,8 +6,7 @@ import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
-import teamHTBP.vida.Item.staff.ItemElementPickaxe;
-import teamHTBP.vida.Item.staff.ItemElementSword;
+import teamHTBP.vida.item.staff.ItemElementSword;
 import teamHTBP.vida.Vida;
 
 public class ElementSwordHUD extends AbstractGui {

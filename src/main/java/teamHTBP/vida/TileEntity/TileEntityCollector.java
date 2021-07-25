@@ -7,7 +7,7 @@ import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import teamHTBP.vida.helper.ElementHelper;
-import teamHTBP.vida.Item.ItemLoader;
+import teamHTBP.vida.item.ItemLoader;
 
 import javax.annotation.Nullable;
 
@@ -81,7 +81,7 @@ public class TileEntityCollector extends TileEntity implements ITickableTileEnti
 
 
     public boolean setCore(ItemStack itemStack){
-        if(itemStack.getItem() == ItemLoader.voidElementCore.get()){
+        if(itemStack.getItem() == ItemLoader.ELEMENTCORE_VOID.get()){
            if(this.coreItem == ItemStack.EMPTY || this.coreItem.isEmpty()){
                this.coreItem = itemStack;
                return true;
@@ -100,7 +100,7 @@ public class TileEntityCollector extends TileEntity implements ITickableTileEnti
     //是否放入的是空的ElementCore
     public boolean hasEmptyElementCore(){
         try{
-        return this.coreItem != ItemStack.EMPTY && this.coreItem.getItem() == ItemLoader.voidElementCore.get();
+        return this.coreItem != ItemStack.EMPTY && this.coreItem.getItem() == ItemLoader.ELEMENTCORE_VOID.get();
         }catch (Exception ex){
             return false;
         }
@@ -111,17 +111,17 @@ public class TileEntityCollector extends TileEntity implements ITickableTileEnti
         this.isCollect = false;
         switch(this.element){
             case 1:
-                this.coreItem = new ItemStack(ItemLoader.goldElementCore.get(),1);break;
+                this.coreItem = new ItemStack(ItemLoader.ELEMENTCORE_GOLD.get(),1);break;
             case 2:
-                this.coreItem = new ItemStack(ItemLoader.woodElementCore.get(),1);break;
+                this.coreItem = new ItemStack(ItemLoader.ELEMENTCORE_WOOD.get(),1);break;
             case 3:
-                this.coreItem = new ItemStack(ItemLoader.aquaElementCore.get(),1);break;
+                this.coreItem = new ItemStack(ItemLoader.ELEMENTCORE_AQUA.get(),1);break;
             case 4:
-                this.coreItem = new ItemStack(ItemLoader.fireElementCore.get(),1);break;
+                this.coreItem = new ItemStack(ItemLoader.ELEMENTCORE_FIRE.get(),1);break;
             case 5:
-                this.coreItem = new ItemStack(ItemLoader.earthElementCore.get(),1);break;
+                this.coreItem = new ItemStack(ItemLoader.ELEMENTCORE_EARTH.get(),1);break;
                 default:
-                    this.coreItem = new ItemStack(ItemLoader.earthElementCore.get(),1);break;
+                    this.coreItem = new ItemStack(ItemLoader.ELEMENTCORE_EARTH.get(),1);break;
         }
         this.element = 0;
 

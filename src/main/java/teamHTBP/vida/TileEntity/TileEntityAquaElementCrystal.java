@@ -6,8 +6,8 @@ import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.LazyOptional;
-import teamHTBP.vida.capability.Energy.ElementEnergyCapability;
-import teamHTBP.vida.capability.Energy.IElementEnergyCapability;
+import teamHTBP.vida.capability.energyCapability.ElementEnergyCapability;
+import teamHTBP.vida.capability.energyCapability.IElementEnergyCapability;
 import teamHTBP.vida.helper.EnumElements;
 
 import javax.annotation.Nullable;

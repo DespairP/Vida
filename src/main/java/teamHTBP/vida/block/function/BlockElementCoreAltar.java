@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolType;
-import teamHTBP.vida.Item.ItemLoader;
+import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.TileEntity.TileEntityElementCoreAltar;
 import teamHTBP.vida.particle.CubeParticleData;
 
@@ -52,7 +52,7 @@ public class BlockElementCoreAltar extends Block {
         if (!worldIn.isRemote) {
             TileEntityElementCoreAltar tileEntityElementCoreAltar = (TileEntityElementCoreAltar) worldIn.getTileEntity(pos);
             Item handItem = player.inventory.getCurrentItem().getItem();
-            boolean handItemResult = (handItem == ItemLoader.vidawand.get());
+            boolean handItemResult = (handItem == ItemLoader.WAND_VIDA.get());
             if (handIn == Hand.MAIN_HAND && !player.isSneaking() && !handItemResult) {
                 if (player.inventory.getCurrentItem() != ItemStack.EMPTY) {
                     //先检测是不是核心物品
@@ -85,7 +85,7 @@ public class BlockElementCoreAltar extends Block {
                 worldIn.notifyBlockUpdate(pos, state, state, 3);
             }else if (!player.isSneaking() && handItemResult) {
                 //如果法杖右键的话，开始检测
-                tileEntityElementCoreAltar.isVidaWandCilck = true;
+                tileEntityElementCoreAltar.isWAND_VIDACilck = true;
                 worldIn.notifyBlockUpdate(pos, state, state, 3);
                 return ActionResultType.SUCCESS;
             }else

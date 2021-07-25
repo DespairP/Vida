@@ -3,7 +3,6 @@ package teamHTBP.vida.gui.HUD;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.EffectInstance;
@@ -11,8 +10,7 @@ import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import teamHTBP.vida.Item.armor.ItemArmorElementLegginsWithBottles;
-import teamHTBP.vida.TileEntity.TileEntityCollector;
+import teamHTBP.vida.item.armor.ItemArmorElementLegginsWithBottles;
 import teamHTBP.vida.Vida;
 
 import java.util.List;

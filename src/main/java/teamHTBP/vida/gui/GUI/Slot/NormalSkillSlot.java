@@ -3,10 +3,8 @@ package teamHTBP.vida.gui.GUI.Slot;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
-import teamHTBP.vida.capability.Skill.Skill;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.capability.Skill.SkillSurface;
-import teamHTBP.vida.gui.GUI.ContainerScreenInjectTable;
+import teamHTBP.vida.capability.skillSystem.SkillSurface;
 
 public class NormalSkillSlot extends AbstractSkillSlot {
     /**基本技能框的Gui*/

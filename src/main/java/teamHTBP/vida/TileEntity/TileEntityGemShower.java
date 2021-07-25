@@ -7,8 +7,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import teamHTBP.vida.Item.ItemLoader;
+import teamHTBP.vida.item.ItemLoader;
 
 import javax.annotation.Nullable;
 
@@ -66,9 +65,9 @@ public class TileEntityGemShower extends TileEntity implements ITickableTileEnti
             return false;
         else {
             Item putGemItem =itemStack.getItem();
-            if(putGemItem == ItemLoader.fireElementGem.get() || putGemItem == ItemLoader.goldElementGem.get() ||
-               putGemItem == ItemLoader.woodElementGem.get() || putGemItem == ItemLoader.aquaElementGem.get()||
-            putGemItem == ItemLoader.earthElementGem.get())
+            if(putGemItem == ItemLoader.ELEMENTGEM_FIRE.get() || putGemItem == ItemLoader.ELEMENTGEM_GOLD.get() ||
+               putGemItem == ItemLoader.ELEMENTGEM_WOOD.get() || putGemItem == ItemLoader.ELEMENTGEM_AQUA.get()||
+            putGemItem == ItemLoader.ELEMENTGEM_EARTH.get())
                 gemItem = new ItemStack(itemStack.getItem(), 1);
             return true;
         }

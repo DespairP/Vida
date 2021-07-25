@@ -9,8 +9,8 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.capability.BlueprintSystem.BlueprintCapabilityProvider;
-import teamHTBP.vida.capability.BlueprintSystem.IBlueprintCapability;
+import teamHTBP.vida.capability.blueprintCapability.BlueprintCapabilityProvider;
+import teamHTBP.vida.capability.blueprintCapability.IBlueprintCapability;
 
 @Mod.EventBusSubscriber()
 public class CapabilityEntityLoader {

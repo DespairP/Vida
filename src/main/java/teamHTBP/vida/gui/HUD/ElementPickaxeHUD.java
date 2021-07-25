@@ -6,7 +6,7 @@ import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
-import teamHTBP.vida.Item.staff.ItemElementPickaxe;
+import teamHTBP.vida.item.staff.ItemElementPickaxe;
 import teamHTBP.vida.Vida;
 
 public class ElementPickaxeHUD extends AbstractGui {

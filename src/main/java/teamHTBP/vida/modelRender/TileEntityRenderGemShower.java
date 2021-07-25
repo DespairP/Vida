@@ -12,10 +12,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import teamHTBP.vida.Item.ItemLoader;
+import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.TileEntity.TileEntityGemShower;
-import teamHTBP.vida.TileEntity.TileEntityPurfiedCauldron;
-import teamHTBP.vida.Vida;
 
 public class TileEntityRenderGemShower extends TileEntityRenderer<TileEntityGemShower> {
     float r=1,g=1,b=1,a=1;
@@ -110,13 +108,13 @@ public class TileEntityRenderGemShower extends TileEntityRenderer<TileEntityGemS
 
     public ResourceLocation getGemResource(ItemStack itemStack){
         Item putGemItem = itemStack.getItem();
-        if(putGemItem == ItemLoader.fireElementGem.get()){
+        if(putGemItem == ItemLoader.ELEMENTGEM_FIRE.get()){
             return RenderLoader.firegemLocation;
-        }else if(putGemItem == ItemLoader.goldElementGem.get()){
+        }else if(putGemItem == ItemLoader.ELEMENTGEM_GOLD.get()){
             return RenderLoader.goldgemLocation;
-        }else if( putGemItem == ItemLoader.woodElementGem.get()){
+        }else if( putGemItem == ItemLoader.ELEMENTGEM_WOOD.get()){
             return RenderLoader.woodgemLocation;
-        }else if(putGemItem == ItemLoader.aquaElementGem.get()){
+        }else if(putGemItem == ItemLoader.ELEMENTGEM_AQUA.get()){
             return RenderLoader.aquagemLocation;
         }else{
             return RenderLoader.earthgemLocation;
@@ -125,13 +123,13 @@ public class TileEntityRenderGemShower extends TileEntityRenderer<TileEntityGemS
 
     public ResourceLocation getlogoResource(ItemStack itemStack){
         Item putGemItem = itemStack.getItem();
-        if(putGemItem == ItemLoader.fireElementGem.get()){
+        if(putGemItem == ItemLoader.ELEMENTGEM_FIRE.get()){
             return RenderLoader.firelogoLocation;
-        }else if(putGemItem == ItemLoader.goldElementGem.get()){
+        }else if(putGemItem == ItemLoader.ELEMENTGEM_GOLD.get()){
             return RenderLoader.goldlogoLocation;
-        }else if( putGemItem == ItemLoader.woodElementGem.get()){
+        }else if( putGemItem == ItemLoader.ELEMENTGEM_WOOD.get()){
             return RenderLoader.woodlogoLocation;
-        }else if(putGemItem == ItemLoader.aquaElementGem.get()){
+        }else if(putGemItem == ItemLoader.ELEMENTGEM_AQUA.get()){
             return RenderLoader.aqualogoLocation;
         }else{
             return RenderLoader.earthlogoLocation;

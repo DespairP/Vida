@@ -5,15 +5,9 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.PacketBuffer;
-import teamHTBP.vida.Item.ItemBluePrint;
-
-import javax.annotation.Nullable;
 
 public class ContainerBluePrint extends Container {
     public final int[][] slotPositions = {{83,41},{108,41},{71,64},{96,64},{121,64},{83,87},{108,87}};

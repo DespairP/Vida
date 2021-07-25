@@ -9,8 +9,8 @@ import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import teamHTBP.vida.capability.VidaCapabilities;
-import teamHTBP.vida.capability.Energy.ElementEnergyCapability;
-import teamHTBP.vida.capability.Energy.IElementEnergyCapability;
+import teamHTBP.vida.capability.energyCapability.ElementEnergyCapability;
+import teamHTBP.vida.capability.energyCapability.IElementEnergyCapability;
 import teamHTBP.vida.helper.EnumElements;
 
 import javax.annotation.Nonnull;

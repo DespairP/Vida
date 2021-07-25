@@ -4,10 +4,14 @@ import net.minecraft.block.Block;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import teamHTBP.vida.Item.ItemLoader;
+import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.block.crop.BlockElementCropParticle;
-import teamHTBP.vida.block.crop.BlockSaplingVida;
+import teamHTBP.vida.block.environment.BlockDeepStone;
+import teamHTBP.vida.block.environment.BlockLeavesVida;
+import teamHTBP.vida.block.environment.BlockLogVida;
+import teamHTBP.vida.block.environment.BlockOreElement;
+import teamHTBP.vida.block.environment.crop.BlockElementCropParticle;
+import teamHTBP.vida.block.environment.crop.BlockSaplingVida;
 import teamHTBP.vida.block.decoration.*;
 import teamHTBP.vida.block.function.*;
 import teamHTBP.vida.helper.ColorHelper;
@@ -66,33 +70,60 @@ public class BlockLoader {
     public final static RegistryObject<Block> DIM_BRICKS_DECO_1 = BLOCKS.register("dim_bricks_deco_1", BlockDimRockBrickDeco::new);
 
     //沃土砖
-    public static RegistryObject<Block> fertileSoilBrick =       BLOCKS.register("fertilesoilbrick",     () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
-    public static RegistryObject<Block> fertileSoilBrickdeco_0 = BLOCKS.register("fertilesoilbrickdeco0",() -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
-    public static RegistryObject<Block> fertileSoilBrickdeco_1 = BLOCKS.register("fertilesoilbrickdeco1",() -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
-    public static RegistryObject<Block> fertileSoilBrickdeco_2 = BLOCKS.register("fertilesoilbrickdeco2",() -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
-    public static RegistryObject<Block> fertileSoilBrickdeco_3 = BLOCKS.register("fertilesoilbrickdeco3",() -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
-    public static RegistryObject<Block> fertileSoilBrickdeco_4 = BLOCKS.register("fertilesoilbrickdeco4",() -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    @RegisterItemBlock
+    public final static RegistryObject<Block> FERTILESOIL_BRICKS =       BLOCKS.register("fertilesoil_bricks",     () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    @RegisterItemBlock
+    public final static RegistryObject<Block> FERTILESOIL_BRICKS_DECO_0 = BLOCKS.register("fertilesoil_bricks_deco_0",() -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    @RegisterItemBlock
+    public final static RegistryObject<Block> FERTILESOIL_BRICKS_DECO_1 = BLOCKS.register("fertilesoil_bricks_deco_1",() -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    @RegisterItemBlock
+    public final static RegistryObject<Block> FERTILESOIL_BRICKS_DECO_2 = BLOCKS.register("fertilesoil_bricks_deco_2",() -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    @RegisterItemBlock
+    public final static RegistryObject<Block> FERTILESOIL_BRICKS_DECO_3 = BLOCKS.register("fertilesoil_bricks_deco_3",() -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    @RegisterItemBlock
+    public final static RegistryObject<Block> FERTILESOIL_BRICKS_DECO_4 = BLOCKS.register("fertilesoil_bricks_deco_4",() -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+
     //炎狱砖
-    public static RegistryObject<Block> netherFireBrick =        BLOCKS.register("netherfirebrick",      () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
-    public static RegistryObject<Block> netherFireBrickdeco_0 =  BLOCKS.register("netherfirebrickdeco0",      () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
-    public static RegistryObject<Block> netherFireBrickdeco_1 =  BLOCKS.register("netherfirebrickdeco1", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
-    public static RegistryObject<Block> netherFireBrickdeco_2 =  BLOCKS.register("netherfirebrickdeco2", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
-    public static RegistryObject<Block> netherFireBrickdeco_3 =  BLOCKS.register("netherfirebrickdeco3", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
-    public static RegistryObject<Block> netherFireBrickdeco_4 =  BLOCKS.register("netherfirebrickdeco4", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    @RegisterItemBlock
+    public final static RegistryObject<Block> NETHERFIRE_BRICKS =         BLOCKS.register("netherfire_bricks",      () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    @RegisterItemBlock
+    public final static RegistryObject<Block> NETHERFIRE_BRICKS_DECO_0 =  BLOCKS.register("netherfire_bricks_deco_0",      () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    @RegisterItemBlock
+    public final static RegistryObject<Block> NETHERFIRE_BRICKS_DECO_1 =  BLOCKS.register("netherfire_bricks_deco_1", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    @RegisterItemBlock
+    public final static RegistryObject<Block> NETHERFIRE_BRICKS_DECO_2 =  BLOCKS.register("netherfire_bricks_deco_2", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    @RegisterItemBlock
+    public final static RegistryObject<Block> NETHERFIRE_BRICKS_DECO_3 =  BLOCKS.register("netherfire_bricks_deco_3", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    @RegisterItemBlock
+    public final static RegistryObject<Block> NETHERFIRE_BRICKS_DECO_4 =  BLOCKS.register("netherfire_bricks_deco_4", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+
     //白金砖
-    public static RegistryObject<Block> platinumBrick =          BLOCKS.register("platinumbrick",        () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
-    public static RegistryObject<Block> platinumBrickdeco_0 =    BLOCKS.register("platinumbrickdeco0",   () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
-    public static RegistryObject<Block> platinumBrickdeco_1 =    BLOCKS.register("platinumbrickdeco1",   () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
-    public static RegistryObject<Block> platinumBrickdeco_2 =    BLOCKS.register("platinumbrickdeco2",   () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
-    public static RegistryObject<Block> platinumBrickdeco_3 =    BLOCKS.register("platinumbrickdeco3",   () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
-    public static RegistryObject<Block> platinumBrickdeco_4 =    BLOCKS.register("platinumbrickdeco4",   () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    @RegisterItemBlock
+    public final static RegistryObject<Block> PLATINUM_BRICKS =          BLOCKS.register("platinum_bricks",        () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    @RegisterItemBlock
+    public final static RegistryObject<Block> PLATINUM_BRICKS_DECO_0 =    BLOCKS.register("platinum_bricks_deco_0",   () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    @RegisterItemBlock
+    public final static RegistryObject<Block> PLATINUM_BRICKS_DECO_1 =    BLOCKS.register("platinum_bricks_deco_1",   () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    @RegisterItemBlock
+    public final static RegistryObject<Block> PLATINUM_BRICKS_DECO_2 =    BLOCKS.register("platinum_bricks_deco_2",   () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    @RegisterItemBlock
+    public final static RegistryObject<Block> PLATINUM_BRICKS_DECO_3 =    BLOCKS.register("platinum_bricks_deco_3",   () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    @RegisterItemBlock
+    public final static RegistryObject<Block> PLATINUM_BRICKS_DECO_4 =    BLOCKS.register("platinum_bricks_deco_4",   () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+
     //砖
-    public static RegistryObject<Block> verdantBrick =           BLOCKS.register("verdantbrick",         () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
-    public static RegistryObject<Block> verdantBrickDeco_0   =   BLOCKS.register("verdantbrickdeco0",    () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
-    public static RegistryObject<Block> verdantBrickDeco_1   =   BLOCKS.register("verdantbrickdeco1",    () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
-    public static RegistryObject<Block> verdantBrickDeco_2   =   BLOCKS.register("verdantbrickdeco2",    () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
-    public static RegistryObject<Block> verdantBrickDeco_3   =   BLOCKS.register("verdantbrickdeco3",    () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
-    public static RegistryObject<Block> verdantBrickDeco_4   =   BLOCKS.register("verdantbrickdeco4",    () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    @RegisterItemBlock
+    public static RegistryObject<Block> VERDANT_BRICKS =           BLOCKS.register("verdant_bricks",         () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    @RegisterItemBlock
+    public static RegistryObject<Block> VERDANT_BRICKS_DECO_0   =   BLOCKS.register("verdant_bricks_deco_0",    () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    @RegisterItemBlock
+    public static RegistryObject<Block> VERDANT_BRICKS_DECO_1   =   BLOCKS.register("verdant_bricks_deco_1",    () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    @RegisterItemBlock
+    public static RegistryObject<Block> VERDANT_BRICKS_DECO_2   =   BLOCKS.register("verdant_bricks_deco_2",    () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    @RegisterItemBlock
+    public static RegistryObject<Block> VERDANT_BRICKS_DECO_3   =   BLOCKS.register("verdant_bricks_deco_3",    () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    @RegisterItemBlock
+    public static RegistryObject<Block> VERDANT_BRICKS_DECO_4   =   BLOCKS.register("verdant_bricks_deco_4",    () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
 
     //水晶
     public static RegistryObject<Block> elementCrystalGold =       BLOCKS.register("goldelementcrystal", BlockElementCrystalGold::new);

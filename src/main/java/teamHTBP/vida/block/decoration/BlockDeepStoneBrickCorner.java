@@ -17,7 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
-import teamHTBP.vida.Item.ItemLoader;
+import teamHTBP.vida.item.ItemLoader;
 
 import javax.annotation.Nullable;
 
@@ -47,7 +47,7 @@ public class BlockDeepStoneBrickCorner extends Block {
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if(!worldIn.isRemote) {
-            if (player.inventory.getCurrentItem().getItem() == ItemLoader.vidawand.get()) {
+            if (player.inventory.getCurrentItem().getItem() == ItemLoader.WAND_VIDA.get()) {
                 Direction stateDirection = state.get(FACING);
                 System.out.println(stateDirection);
                 switch (stateDirection) {
