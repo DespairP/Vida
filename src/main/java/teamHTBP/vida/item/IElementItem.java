@@ -1,8 +1,8 @@
 package teamHTBP.vida.item;
 
-import teamHTBP.vida.helper.EnumElements;
+import teamHTBP.vida.element.EnumElements;
 
 public interface IElementItem {
-    public EnumElements getItemElement();
+    EnumElements getItemElement();
 
 }

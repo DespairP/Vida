@@ -4,8 +4,8 @@ import net.minecraft.client.renderer.model.ModelRenderer;
 
 public class ArmorModelEarthChestplates extends ArmorModelElementChestplates {
 
-    public ArmorModelEarthChestplates(){
-        super(128,128);
+    public ArmorModelEarthChestplates() {
+        super(128, 128);
 
         arm_right = new ModelRenderer(this);
         arm_right.setRotationPoint(-4.0F, 1.0F, 0.0F);

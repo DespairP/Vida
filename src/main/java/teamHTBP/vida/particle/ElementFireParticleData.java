@@ -10,14 +10,6 @@ import java.util.Locale;
 
 public class ElementFireParticleData implements IParticleData {
 
-    private double speedX;
-    private double speedY;
-    private double speedZ;
-    public ElementFireParticleData(double speedX, double speedY, double speedZ){
-        this.speedX = speedX;
-        this.speedY = speedY;
-        this.speedZ = speedZ;
-    }
     public static final IDeserializer<ElementFireParticleData> DESERIALIZER = new IDeserializer<ElementFireParticleData>() {
 
         @Override
@@ -39,6 +31,16 @@ public class ElementFireParticleData implements IParticleData {
             return new ElementFireParticleData(speedX, speedY, speedZ);
         }
     };
+    private final double speedX;
+    private final double speedY;
+    private final double speedZ;
+
+    public ElementFireParticleData(double speedX, double speedY, double speedZ) {
+        this.speedX = speedX;
+        this.speedY = speedY;
+        this.speedZ = speedZ;
+    }
+
     @Override
     public ParticleType<?> getType() {
         return ParticleLoader.elementFireParticle.get();

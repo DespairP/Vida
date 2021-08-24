@@ -42,7 +42,7 @@ public class BlockDeepStoneBrickStraight extends Block {
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if(!worldIn.isRemote) {
+        if (!worldIn.isRemote) {
             if (player.inventory.getCurrentItem().getItem() == ItemLoader.WAND_VIDA.get()) {
                 Direction stateDirection = state.get(FACING);
                 System.out.println(stateDirection);
@@ -61,13 +61,12 @@ public class BlockDeepStoneBrickStraight extends Block {
                         break;
                 }
                 return ActionResultType.SUCCESS;
-            }else {
+            } else {
                 return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
             }
         }
         return ActionResultType.SUCCESS;
     }
-
 
 
 }

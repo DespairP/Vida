@@ -15,10 +15,11 @@ public class ItemBluePrintBeltProvider implements INamedContainerProvider {
     ItemStack stack = ItemStack.EMPTY;
     String providerName = "";
 
-    public ItemBluePrintBeltProvider(String providerName, ItemStack stack){
+    public ItemBluePrintBeltProvider(String providerName, ItemStack stack) {
         this.stack = stack;
         this.providerName = providerName;
     }
+
     @Override
     public ITextComponent getDisplayName() {
         return new StringTextComponent(providerName);
@@ -27,6 +28,6 @@ public class ItemBluePrintBeltProvider implements INamedContainerProvider {
     @Nullable
     @Override
     public Container createMenu(int id, PlayerInventory p_createMenu_2_, PlayerEntity p_createMenu_3_) {
-        return new ContainerBluePrint(id , p_createMenu_2_,stack);
+        return new ContainerBluePrint(id, p_createMenu_2_, stack);
     }
 }

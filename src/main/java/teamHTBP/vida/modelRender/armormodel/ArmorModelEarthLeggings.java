@@ -4,7 +4,7 @@ import net.minecraft.client.renderer.model.ModelRenderer;
 
 public class ArmorModelEarthLeggings extends ArmorModelElementLeggings {
 
-    public  ArmorModelEarthLeggings() {
+    public ArmorModelEarthLeggings() {
         super(128, 128);
 
         body_low = new ModelRenderer(this);

@@ -9,8 +9,8 @@ import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import teamHTBP.vida.modelRender.armormodel.TestArmorModel;
 import teamHTBP.vida.itemGroup.ItemGroupLoader;
+import teamHTBP.vida.modelRender.armormodel.TestArmorModel;
 
 import javax.annotation.Nullable;
 
@@ -22,8 +22,7 @@ public class TestHelmet extends ArmorItem {
 
     @OnlyIn(Dist.CLIENT)
     @Nullable
-    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default)
-    {
+    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
         TestArmorModel model = new TestArmorModel();
 
         model.field_78116_c.showModel = armorSlot == EquipmentSlotType.HEAD;
@@ -45,15 +44,13 @@ public class TestHelmet extends ArmorItem {
         model.leftArmPose = _default.leftArmPose;
 
 
-
-        return (A)model;
+        return (A) model;
     }
 
 
     @Nullable
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type)
-    {
+    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
         return "vida:textures/model/armor/test_armor.png";
     }
 

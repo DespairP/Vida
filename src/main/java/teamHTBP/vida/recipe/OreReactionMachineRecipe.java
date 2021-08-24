@@ -15,28 +15,30 @@ import java.util.Random;
 
 public class OreReactionMachineRecipe implements IRecipe<IInventory> {
 
-    protected Ingredient ingredient;
     public static final Serializer SERIALIZER = new Serializer();
-    private ItemStack output;
-    private int maxOutPut;
-    private final ResourceLocation id;
     public static final IRecipeType<OreReactionMachineRecipe> RECIPE_TYPE = new IRecipeType<OreReactionMachineRecipe>() {
 
     };
-    public OreReactionMachineRecipe(ResourceLocation id){
+    private final ResourceLocation id;
+    protected Ingredient ingredient;
+    private ItemStack output;
+    private int maxOutPut;
+
+    public OreReactionMachineRecipe(ResourceLocation id) {
         this.id = id;
 
     }
+
     @Override
     public boolean matches(IInventory inv, World worldIn) {
-            return this.ingredient.test(inv.getStackInSlot(0));
+        return this.ingredient.test(inv.getStackInSlot(0));
     }
 
     @Override
     public ItemStack getCraftingResult(IInventory inv) {
-        ItemStack stack =this.output.copy();
-        stack.setCount(new Random().nextInt(this.maxOutPut)+1);
-       return stack;
+        ItemStack stack = this.output.copy();
+        stack.setCount(new Random().nextInt(this.maxOutPut) + 1);
+        return stack;
     }
 
     @Override
@@ -64,17 +66,18 @@ public class OreReactionMachineRecipe implements IRecipe<IInventory> {
         return RECIPE_TYPE;
     }
 
-    public int getMaxOutPut(){
+    public int getMaxOutPut() {
         return this.maxOutPut;
     }
+
     public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<OreReactionMachineRecipe> {
 
 
         @Override
         public OreReactionMachineRecipe read(ResourceLocation recipeId, JsonObject json) {
             OreReactionMachineRecipe recipe = new OreReactionMachineRecipe(recipeId);
-            recipe.output = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json,"result"));
-            recipe.maxOutPut = JSONUtils.getInt(json,"maxOutput",1);
+            recipe.output = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
+            recipe.maxOutPut = JSONUtils.getInt(json, "maxOutput", 1);
             recipe.ingredient = Ingredient.deserialize(JSONUtils.getJsonObject(json, "ingredient"));
             return recipe;
         }

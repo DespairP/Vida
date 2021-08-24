@@ -2,7 +2,7 @@ package teamHTBP.vida.particle;
 
 import net.minecraft.client.particle.IParticleRenderType;
 import net.minecraft.client.particle.SpriteTexturedParticle;
-import net.minecraft.world.World;
+import net.minecraft.client.world.ClientWorld;
 
 public class ElementFireParticle extends SpriteTexturedParticle {
 
@@ -10,8 +10,8 @@ public class ElementFireParticle extends SpriteTexturedParticle {
     private final double coordY;
     private final double coordZ;
 
-    protected ElementFireParticle(World worldIn, double posXIn, double posYIn, double posZIn,double xSpeedIn, double ySpeedIn, double zSpeedIn) {
-        super(worldIn, posXIn, posYIn, posZIn, xSpeedIn,  ySpeedIn,  zSpeedIn);
+    protected ElementFireParticle(ClientWorld worldIn, double posXIn, double posYIn, double posZIn, double xSpeedIn, double ySpeedIn, double zSpeedIn) {
+        super(worldIn, posXIn, posYIn, posZIn, xSpeedIn, ySpeedIn, zSpeedIn);
 
         this.coordX = posXIn;
         this.coordY = posYIn;
@@ -28,7 +28,7 @@ public class ElementFireParticle extends SpriteTexturedParticle {
         this.posZ = this.prevPosZ;
         this.canCollide = false;
         this.particleGravity = 0.3f;
-        this.maxAge = (int)(Math.random() * 10.0D) + 30;
+        this.maxAge = (int) (Math.random() * 10.0D) + 30;
     }
 
     @Override
@@ -50,16 +50,16 @@ public class ElementFireParticle extends SpriteTexturedParticle {
                 this.motionZ *= 0.1D;
             }
 
-            this.motionX *= (double)0.36F;
-            this.motionY *= (double)0.36F;
-            this.motionZ *= (double)0.36F;
+            this.motionX *= 0.36F;
+            this.motionY *= 0.36F;
+            this.motionZ *= 0.36F;
             if (this.onGround) {
-                this.motionX *= (double)0.17F;
-                this.motionZ *= (double)0.17F;
+                this.motionX *= 0.17F;
+                this.motionZ *= 0.17F;
             }
 
         }
-        if(this.particleAlpha > 0.0)
+        if (this.particleAlpha > 0.0)
             this.particleAlpha -= 0.05f;
         //super.tick();
     }

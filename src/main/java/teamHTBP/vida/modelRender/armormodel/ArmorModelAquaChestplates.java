@@ -9,8 +9,8 @@ public class ArmorModelAquaChestplates extends ArmorModelElementChestplates {
     private final ModelRenderer bone6;
     private final ModelRenderer bone11;
 
-    public ArmorModelAquaChestplates(){
-        super(128,128);
+    public ArmorModelAquaChestplates() {
+        super(128, 128);
 
         arm_left = new ModelRenderer(this);
         arm_left.setRotationPoint(4.0F, 1.0F, 0.0F);

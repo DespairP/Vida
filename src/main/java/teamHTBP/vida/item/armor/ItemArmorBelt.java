@@ -10,7 +10,10 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -20,7 +23,9 @@ import teamHTBP.vida.modelRender.armormodel.ArmorModelBelt;
 
 import javax.annotation.Nullable;
 
-/**图纸腰带*/
+/**
+ * 图纸腰带
+ */
 public class ItemArmorBelt extends ArmorItem {
     public ItemArmorBelt() {
         super(new ArmorMaterialBelt(), EquipmentSlotType.LEGS, new Properties().group(ItemGroupLoader.vidaItemGroup));
@@ -48,19 +53,19 @@ public class ItemArmorBelt extends ArmorItem {
         armorModelBelt.isSitting = _default.isSitting;
         armorModelBelt.rightArmPose = _default.rightArmPose;
         armorModelBelt.leftArmPose = _default.leftArmPose;
-        return (A)armorModelBelt;
+        return (A) armorModelBelt;
     }
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         ItemStack stack = playerIn.getHeldItem(handIn);
         //OPEN THE GUI
-        if(!worldIn.isRemote && !playerIn.isSneaking() && stack.getItem() instanceof ItemArmorBelt){
-            NetworkHooks.openGui((ServerPlayerEntity) playerIn,new ItemBluePrintBeltProvider("bluePrintBelt", stack),(buffer)->{
+        if (!worldIn.isRemote && !playerIn.isSneaking() && stack.getItem() instanceof ItemArmorBelt) {
+            NetworkHooks.openGui((ServerPlayerEntity) playerIn, new ItemBluePrintBeltProvider("bluePrintBelt", stack), (buffer) -> {
                 buffer.writeItemStack(stack);
             });
             return ActionResult.resultSuccess(stack);
-        }else if(!worldIn.isRemote && playerIn.isSneaking() && stack.getItem() instanceof ItemArmorBelt){
+        } else if (!worldIn.isRemote && playerIn.isSneaking() && stack.getItem() instanceof ItemArmorBelt) {
             super.onItemRightClick(worldIn, playerIn, handIn);
         }
         return ActionResult.resultPass(stack);
@@ -69,7 +74,7 @@ public class ItemArmorBelt extends ArmorItem {
 
 }
 
-class ArmorMaterialBelt implements IArmorMaterial{
+class ArmorMaterialBelt implements IArmorMaterial {
 
     @Override
     public int getDurability(EquipmentSlotType slotIn) {
@@ -103,6 +108,11 @@ class ArmorMaterialBelt implements IArmorMaterial{
 
     @Override
     public float getToughness() {
+        return 0;
+    }
+
+    @Override
+    public float getKnockbackResistance() {
         return 0;
     }
 }

@@ -1,5 +1,6 @@
 package teamHTBP.vida.TileEntity;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
@@ -8,19 +9,25 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.LazyOptional;
 import teamHTBP.vida.capability.energyCapability.ElementEnergyCapability;
 import teamHTBP.vida.capability.energyCapability.IElementEnergyCapability;
-import teamHTBP.vida.helper.EnumElements;
+import teamHTBP.vida.element.EnumElements;
 
 import javax.annotation.Nullable;
 
-public class TileEntityEarthElementCrystal extends TileEntity implements ITickableTileEntity,IElementCrystal {
-    private EnumElements element;
+public class TileEntityEarthElementCrystal extends TileEntity implements ITickableTileEntity, IElementCrystal {
+    private final EnumElements element;
+    private final LazyOptional<IElementEnergyCapability> energyCapability = LazyOptional.of(this::createNewEnergyCap);
     public float sinWave = 0;
-    private LazyOptional<IElementEnergyCapability> energyCapability = LazyOptional.of(this::createNewEnergyCap);
+
+
+    public TileEntityEarthElementCrystal(int element) {
+        super(TileEntityLoader.TileEntityCrystalEarth.get());
+        this.element = EnumElements.values()[element - 1];
+    }
 
     @Override
-    public void read(CompoundNBT compound) {
-        energyCapability.ifPresent(T -> T.setEnergy(compound.getInt("energy")));
-        super.read(compound);
+    public void read(BlockState state, CompoundNBT nbt) {
+        energyCapability.ifPresent(T -> T.setEnergy(nbt.getInt("energy")));
+        super.read(state, nbt);
     }
 
     @Override
@@ -33,7 +40,7 @@ public class TileEntityEarthElementCrystal extends TileEntity implements ITickab
     @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.pos,1,this.getUpdateTag());
+        return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
     }
 
     @Override
@@ -43,28 +50,22 @@ public class TileEntityEarthElementCrystal extends TileEntity implements ITickab
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        super.onDataPacket(net,pkt);
-        handleUpdateTag(pkt.getNbtCompound());
+        super.onDataPacket(net, pkt);
+        handleUpdateTag(world.getBlockState(pos), pkt.getNbtCompound());
     }
 
     @Override
-    public void handleUpdateTag(CompoundNBT tag) {
+    public void handleUpdateTag(BlockState state, CompoundNBT tag) {
         //System.out.println(tag.getInt("energy"));
         energyCapability.ifPresent(T -> T.setEnergy(tag.getInt("energy")));
-        super.read(tag);
-    }
-
-
-
-    public TileEntityEarthElementCrystal(int element) {
-        super(TileEntityLoader.TileEntityCrystalEarth.get());
-        this.element = EnumElements.values()[element - 1];
+        super.handleUpdateTag(state, tag);
     }
 
     @Override
     public void tick() {
-        if(world.isRemote)
-            if(sinWave >2* Math.PI) sinWave = 0; else sinWave+=0.1f;
+        if (world.isRemote)
+            if (sinWave > 2 * Math.PI) sinWave = 0;
+            else sinWave += 0.1f;
     }
 
     @Override

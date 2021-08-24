@@ -17,7 +17,7 @@ public class PillarBlockModel implements IBlockModelJsonWriter {
         this.sideTexture = sideTexture;
     }
 
-    public PillarBlockModel(){
+    public PillarBlockModel() {
 
     }
 
@@ -28,8 +28,8 @@ public class PillarBlockModel implements IBlockModelJsonWriter {
 
     @Override
     public Map<String, String> getTextures(String name) {
-        if(topTexture.equals("") && sideTexture.equals(""))
-            return ImmutableMap.of("end", MOD_ID + ":block/" + name,"side",MOD_ID + ":block/" + name + "_side");
-        return ImmutableMap.of("end",MOD_ID + ":block/" + topTexture ,"side",MOD_ID + ":block/" + sideTexture);
+        if (topTexture.equals("") && sideTexture.equals(""))
+            return ImmutableMap.of("end", MOD_ID + ":block/" + name, "side", MOD_ID + ":block/" + name + "_side");
+        return ImmutableMap.of("end", MOD_ID + ":block/" + topTexture, "side", MOD_ID + ":block/" + sideTexture);
     }
 }

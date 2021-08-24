@@ -16,19 +16,17 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  */
 @OnlyIn(Dist.CLIENT)
 public class TestArmorModel<T extends Entity> extends BipedModel<ArmorStandEntity> {
+    private final boolean isChildHeadScaled = false;
+    private final float childHeadOffsetY = 5.0f;
+    private final float childHeadOffsetZ = 5.0f;
     public ModelRenderer field_78116_c;
     public ModelRenderer a4;
     public ModelRenderer a2;
     public ModelRenderer a3;
 
-    private final boolean isChildHeadScaled = false;
-    private final float childHeadOffsetY = 5.0f;
-    private final float childHeadOffsetZ = 5.0f;
-
-
 
     public TestArmorModel() {
-        super(1.0f,0,64,64);
+        super(1.0f, 0, 64, 64);
 
 
         this.textureWidth = 64;

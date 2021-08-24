@@ -9,9 +9,12 @@ import net.minecraft.state.StateContainer;
 
 import javax.annotation.Nullable;
 
-/**一个方块工具类，用于自动注册需要按Y轴旋转的Properties*/
+/**
+ * 一个方块工具类，用于自动注册需要按Y轴旋转的Properties
+ */
 public class BlockSingleWithY extends Block {
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+
     public BlockSingleWithY(Properties properties) {
         super(properties);
     }

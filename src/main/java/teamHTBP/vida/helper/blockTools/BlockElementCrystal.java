@@ -11,10 +11,11 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
 public abstract class BlockElementCrystal extends Block {
-    public  VoxelShape SHAPE;
+    public VoxelShape SHAPE;
     public int element = 0;
+
     public BlockElementCrystal(int element) {
-        super(Properties.create(Material.GLASS).hardnessAndResistance(1.0F).notSolid().sound(SoundType.GLASS).lightValue(15).notSolid());
+        super(Properties.create(Material.GLASS).hardnessAndResistance(1.0F).notSolid().sound(SoundType.GLASS).setLightLevel((state) -> 15).notSolid());
         this.element = element;
     }
 

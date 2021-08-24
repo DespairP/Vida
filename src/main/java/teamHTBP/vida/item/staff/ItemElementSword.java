@@ -1,6 +1,5 @@
 package teamHTBP.vida.item.staff;
 
-import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemGroup;
@@ -11,6 +10,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -21,6 +21,7 @@ import java.util.List;
 
 public class ItemElementSword extends SwordItem {
     public int element = 0;
+
     public ItemElementSword(int element) {
         super(new ElementItemTier(), 3, -2.4f, new Properties().group(ItemGroupLoader.vidaItemGroup));
         this.element = element;
@@ -49,15 +50,11 @@ public class ItemElementSword extends SwordItem {
         CompoundNBT nbt = stack.getOrCreateTag();
         int level = nbt.getInt("level");
         int exp = nbt.getInt("swordEXP");
-        ITextComponent iTextComponent = new StringTextComponent(I18n.format("desc.swordlevel.level")).applyTextStyle(TextFormatting.GRAY);
-        iTextComponent.appendText(level + "");
+        ITextComponent iTextComponent = new TranslationTextComponent("desc.swordlevel.level", level).mergeStyle(TextFormatting.GRAY);
         tooltip.add(iTextComponent);
-        tooltip.add(new StringTextComponent("("+exp+"/"+(level  * 200 + level * 13)+")").applyTextStyle(TextFormatting.AQUA));
+        tooltip.add(new StringTextComponent("(" + exp + "/" + (level * 200 + level * 13) + ")").mergeStyle(TextFormatting.AQUA));
         //System.out.println(iTextComponent.getFormattedText());
     }
-
-
-
 
 
 }

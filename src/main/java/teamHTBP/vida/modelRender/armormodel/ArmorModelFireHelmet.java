@@ -1,17 +1,14 @@
 package teamHTBP.vida.modelRender.armormodel;
 
-import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.ArmorStandEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class ArmorModelFireHelmet<T extends Entity> extends ArmorModelElementHelmet{
+public class ArmorModelFireHelmet<T extends Entity> extends ArmorModelElementHelmet {
 
     public ArmorModelFireHelmet() {
         super(128, 128);

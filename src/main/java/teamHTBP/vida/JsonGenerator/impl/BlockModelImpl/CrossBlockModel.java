@@ -17,6 +17,6 @@ public class CrossBlockModel implements IBlockModelJsonWriter {
 
     @Override
     public Map<String, String> getTextures(String name) {
-        return ImmutableMap.of("cross",MOD_ID + ":block/" + name);
+        return ImmutableMap.of("cross", MOD_ID + ":block/" + name);
     }
 }

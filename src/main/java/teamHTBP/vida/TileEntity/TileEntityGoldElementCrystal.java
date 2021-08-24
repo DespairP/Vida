@@ -1,5 +1,6 @@
 package teamHTBP.vida.TileEntity;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
@@ -11,24 +12,25 @@ import net.minecraftforge.common.util.LazyOptional;
 import teamHTBP.vida.capability.VidaCapabilities;
 import teamHTBP.vida.capability.energyCapability.ElementEnergyCapability;
 import teamHTBP.vida.capability.energyCapability.IElementEnergyCapability;
-import teamHTBP.vida.helper.EnumElements;
+import teamHTBP.vida.element.EnumElements;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TileEntityGoldElementCrystal extends TileEntity implements ITickableTileEntity,IElementCrystal {
-    private EnumElements element = EnumElements.GOLD;
+public class TileEntityGoldElementCrystal extends TileEntity implements ITickableTileEntity, IElementCrystal {
+    private final EnumElements element = EnumElements.GOLD;
     public float sinWave = 0;
-    private int ticks = 0;
     public LazyOptional<IElementEnergyCapability> energyCapability = LazyOptional.of(this::createNewEnergyCap);
+    private int ticks = 0;
+
     public TileEntityGoldElementCrystal(int element) {
         super(TileEntityLoader.TileEntityCrystalGold.get());
     }
 
     @Override
-    public void read(CompoundNBT compound) {
-        energyCapability.ifPresent(T -> T.setEnergy(compound.getInt("energy")));
-        super.read(compound);
+    public void read(BlockState state, CompoundNBT nbt) {
+        energyCapability.ifPresent(T -> T.setEnergy(nbt.getInt("energy")));
+        super.read(state, nbt);
     }
 
     @Override
@@ -41,7 +43,7 @@ public class TileEntityGoldElementCrystal extends TileEntity implements ITickabl
     @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.pos,1,this.getUpdateTag());
+        return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
     }
 
     @Override
@@ -51,43 +53,44 @@ public class TileEntityGoldElementCrystal extends TileEntity implements ITickabl
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        super.onDataPacket(net,pkt);
-        handleUpdateTag(pkt.getNbtCompound());
+        super.onDataPacket(net, pkt);
+        handleUpdateTag(world.getBlockState(pos), pkt.getNbtCompound());
     }
 
     @Override
-    public void handleUpdateTag(CompoundNBT tag) {
+    public void handleUpdateTag(BlockState state, CompoundNBT tag) {
         //System.out.println(tag.getInt("energy"));
         energyCapability.ifPresent(T -> T.setEnergy(tag.getInt("energy")));
-        super.read(tag);
+        super.read(state, tag);
     }
 
     @Override
     @Nonnull
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-         if(cap == VidaCapabilities.elementEnergy_Capability){
-             return energyCapability.cast();
-         }else {
-             return LazyOptional.empty();
-         }
+        if (cap == VidaCapabilities.elementEnergy_Capability) {
+            return energyCapability.cast();
+        } else {
+            return LazyOptional.empty();
+        }
     }
 
-    public IElementEnergyCapability createNewEnergyCap(){
-       return new ElementEnergyCapability(10000, 200, 200, 0 , element);
+    public IElementEnergyCapability createNewEnergyCap() {
+        return new ElementEnergyCapability(10000, 200, 200, 0, element);
     }
 
     @Override
     public void tick() {
-        if(world.isRemote)
-            if(sinWave >2* Math.PI) sinWave = 0; else sinWave+=0.1f;
-        if(!world.isRemote) {
+        if (world.isRemote)
+            if (sinWave > 2 * Math.PI) sinWave = 0;
+            else sinWave += 0.1f;
+        if (!world.isRemote) {
             LazyOptional<IElementEnergyCapability> cap = this.getCapability(VidaCapabilities.elementEnergy_Capability);
         }
         ticks += 1;
         ticks %= 31;
-        if(ticks == 30 && this.getEnergyStored() < this.getMaxEnergy()){
-        world.notifyBlockUpdate(pos,getBlockState(),getBlockState(),3);
-        this.markDirty();
+        if (ticks == 30 && this.getEnergyStored() < this.getMaxEnergy()) {
+            world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 3);
+            this.markDirty();
         }
     }
 

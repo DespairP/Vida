@@ -1,123 +1,61 @@
 package teamHTBP.vida.worldGen;
 
+import net.minecraft.block.Block;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
-import net.minecraft.world.gen.placement.*;
+import net.minecraft.world.gen.placement.ChanceConfig;
+import net.minecraft.world.gen.placement.Placement;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.registries.ForgeRegistries;
 import teamHTBP.vida.block.BlockLoader;
-import teamHTBP.vida.helper.ElementHelper;
+import teamHTBP.vida.element.EnumElements;
 
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber()
 public class BiomeGenLoader {
 
     @SubscribeEvent
-    public static void biomeGenSetup(FMLCommonSetupEvent event) {
-        for (Biome biome : ForgeRegistries.BIOMES)
-        {
-            if(biome == Biomes.FOREST || biome == Biomes.PLAINS)
-            biome.addFeature(
-                    GenerationStage.Decoration.VEGETAL_DECORATION,
-                    GenLoader.vidaTree.get().withConfiguration(VidaTree.VIDATREE).withPlacement(Placement.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceConfig(4)
-                      )));
-        }
+    public static void biomeGenSetup(BiomeLoadingEvent event) {
+        if (event.getCategory() == Biome.Category.FOREST || event.getCategory() == Biome.Category.PLAINS)
+            event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(
+                    () -> GenLoader.vidaTree.get()
+                            .withConfiguration(VidaTree.VIDATREE)
+                            .withPlacement(Placement.CHANCE.configure(new ChanceConfig(4))));
+    }
 
-
+    static void eleOreDefaultConfig(BiomeLoadingEvent event, Block block) {
+        event.getGeneration().getFeatures(GenerationStage.Decoration.UNDERGROUND_ORES).add(
+                () -> Feature.ORE.withConfiguration(
+                        new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD,
+                                block.getDefaultState(),
+                                8)
+                ).range(16).square()
+        );
     }
 
     @SubscribeEvent
-    public static void oreGenSetup(FMLCommonSetupEvent event) {
-        for (Biome biome : ForgeRegistries.BIOMES)
-        {
-
-            int element =ElementHelper.getBiomeElement(biome);
-             if(element == 1){
-                 biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
-                         Feature.ORE.withConfiguration(
-                                 new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
-                                         BlockLoader.goldElementOre.get().getDefaultState(),
-                                         3)
-                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(8, 0, 0, 20)))
-                 );
-             }else if(element == 2) {
-                 biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
-                         Feature.ORE.withConfiguration(
-                                 new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
-                                         BlockLoader.woodElementOre.get().getDefaultState(),
-                                         3)
-                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(8, 0, 0, 20)))
-                 );
-             }else if(element == 3) {
-                 biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
-                         Feature.ORE.withConfiguration(
-                                 new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
-                                         BlockLoader.aquaElementOre.get().getDefaultState(),
-                                         3)
-                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(8, 0, 0, 20)))
-                 );
-             }else if(element == 4) {
-                 biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
-                         Feature.ORE.withConfiguration(
-                                 new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
-                                         BlockLoader.fireElementOre.get().getDefaultState(),
-                                         3)
-                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(8, 0, 0, 20)))
-                 );
-             }else if(element == 5) {
-                 biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
-                         Feature.ORE.withConfiguration(
-                                 new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
-                                         BlockLoader.earthElementOre.get().getDefaultState(),
-                                         3)
-                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(8, 0, 0, 20)))
-                 );
-             }else{
-                 biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
-                         Feature.ORE.withConfiguration(
-                                 new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
-                                         BlockLoader.goldElementOre.get().getDefaultState(),
-                                         3)
-                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(1, 0, 0, 5)))
-                 );
-                 biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
-                         Feature.ORE.withConfiguration(
-                                 new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
-                                         BlockLoader.woodElementOre.get().getDefaultState(),
-                                         3)
-                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(1, 0, 0, 5)))
-                 );
-                 biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
-                         Feature.ORE.withConfiguration(
-                                 new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
-                                         BlockLoader.aquaElementOre.get().getDefaultState(),
-                                         3)
-                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(1, 0, 0, 5)))
-                 );
-                 biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
-                         Feature.ORE.withConfiguration(
-                                 new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
-                                         BlockLoader.fireElementOre.get().getDefaultState(),
-                                         3)
-                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(1, 0, 0, 5)))
-                 );
-                 biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES,
-                         Feature.ORE.withConfiguration(
-                                 new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
-                                         BlockLoader.earthElementOre.get().getDefaultState(),
-                                         3)
-                         ).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(1, 0, 0, 5)))
-                 );
-             }
+    public static void oreGenSetup(BiomeLoadingEvent event) {
+        if (EnumElements.AQUA.contains(event.getName())) {
+            eleOreDefaultConfig(event, BlockLoader.aquaElementOre.get());
         }
 
+        if (EnumElements.GOLD.contains(event.getName())) {
+            eleOreDefaultConfig(event, BlockLoader.goldElementOre.get());
+        }
 
+        if (EnumElements.FIRE.contains(event.getName())) {
+            eleOreDefaultConfig(event, BlockLoader.fireElementOre.get());
+        }
+
+        if (EnumElements.EARTH.contains(event.getName())) {
+            eleOreDefaultConfig(event, BlockLoader.earthElementOre.get());
+        }
+
+        if (EnumElements.WOOD.contains(event.getName())) {
+            eleOreDefaultConfig(event, BlockLoader.woodElementOre.get());
+        }
     }
-
-
 }

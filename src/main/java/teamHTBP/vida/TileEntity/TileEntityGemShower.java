@@ -1,5 +1,6 @@
 package teamHTBP.vida.TileEntity;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -20,14 +21,15 @@ public class TileEntityGemShower extends TileEntity implements ITickableTileEnti
         super(TileEntityLoader.TileEntityGemShower.get());
     }
 
-    public void read(CompoundNBT compound) { ;
-        if(compound.contains("gemItem"))
+    @Override
+    public void read(BlockState state, CompoundNBT compound) {
+        if (compound.contains("gemItem"))
             gemItem = ItemStack.read(compound.getCompound("gemItem"));
-        super.read(compound);
+        super.read(state, compound);
     }
 
     public CompoundNBT write(CompoundNBT compound) {
-        if(!gemItem.isEmpty())
+        if (!gemItem.isEmpty())
             compound.put("gemItem", gemItem.serializeNBT());
         return super.write(compound);
     }
@@ -35,7 +37,7 @@ public class TileEntityGemShower extends TileEntity implements ITickableTileEnti
     @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.pos,1,this.getUpdateTag());
+        return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
     }
 
     @Override
@@ -45,36 +47,34 @@ public class TileEntityGemShower extends TileEntity implements ITickableTileEnti
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        super.onDataPacket(net,pkt);
-        handleUpdateTag(pkt.getNbtCompound());
+        super.onDataPacket(net, pkt);
+        handleUpdateTag(world.getBlockState(pos), pkt.getNbtCompound());
     }
 
-
     @Override
-    public void handleUpdateTag(CompoundNBT tag) {
-        if(tag.contains("gemItem"))
+    public void handleUpdateTag(BlockState state, CompoundNBT tag) {
+        if (tag.contains("gemItem"))
             gemItem = ItemStack.read(tag.getCompound("gemItem"));
         else
             gemItem = ItemStack.EMPTY;
     }
 
 
-
-    public boolean setGem(ItemStack itemStack){
-        if(!gemItem.isEmpty())
+    public boolean setGem(ItemStack itemStack) {
+        if (!gemItem.isEmpty())
             return false;
         else {
-            Item putGemItem =itemStack.getItem();
-            if(putGemItem == ItemLoader.ELEMENTGEM_FIRE.get() || putGemItem == ItemLoader.ELEMENTGEM_GOLD.get() ||
-               putGemItem == ItemLoader.ELEMENTGEM_WOOD.get() || putGemItem == ItemLoader.ELEMENTGEM_AQUA.get()||
-            putGemItem == ItemLoader.ELEMENTGEM_EARTH.get())
+            Item putGemItem = itemStack.getItem();
+            if (putGemItem == ItemLoader.ELEMENTGEM_FIRE.get() || putGemItem == ItemLoader.ELEMENTGEM_GOLD.get() ||
+                    putGemItem == ItemLoader.ELEMENTGEM_WOOD.get() || putGemItem == ItemLoader.ELEMENTGEM_AQUA.get() ||
+                    putGemItem == ItemLoader.ELEMENTGEM_EARTH.get())
                 gemItem = new ItemStack(itemStack.getItem(), 1);
             return true;
         }
     }
 
     @Override
-    public void tick(){
+    public void tick() {
 
     }
 

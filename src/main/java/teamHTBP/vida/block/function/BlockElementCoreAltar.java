@@ -19,8 +19,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolType;
-import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.TileEntity.TileEntityElementCoreAltar;
+import teamHTBP.vida.element.EnumElements;
+import teamHTBP.vida.element.IElement;
+import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.particle.CubeParticleData;
 
 import javax.annotation.Nullable;
@@ -29,7 +31,7 @@ import java.util.Random;
 /*元素祭坛
 @Version 0.0.1*/
 public class BlockElementCoreAltar extends Block {
-    public BlockElementCoreAltar(){
+    public BlockElementCoreAltar() {
         super(Properties.create(Material.IRON).notSolid().hardnessAndResistance(5.0f, 5.0f).sound(SoundType.STONE).harvestLevel(2).harvestTool(ToolType.PICKAXE));
 
     }
@@ -44,7 +46,6 @@ public class BlockElementCoreAltar extends Block {
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
         return new TileEntityElementCoreAltar();
     }
-
 
 
     @Override
@@ -77,29 +78,28 @@ public class BlockElementCoreAltar extends Block {
                     }
                 }
                 //拿到祭坛中的物品
-            }else if (handIn == Hand.MAIN_HAND && player.isSneaking() && !handItemResult) {
+            } else if (handIn == Hand.MAIN_HAND && player.isSneaking() && !handItemResult) {
                 ItemStack itemStack = tileEntityElementCoreAltar.getAltarItemStack();
                 if (itemStack != ItemStack.EMPTY || !itemStack.isEmpty()) {
                     player.inventory.addItemStackToInventory(itemStack);
                 }
                 worldIn.notifyBlockUpdate(pos, state, state, 3);
-            }else if (!player.isSneaking() && handItemResult) {
+            } else if (!player.isSneaking() && handItemResult) {
                 //如果法杖右键的话，开始检测
                 tileEntityElementCoreAltar.isWAND_VIDACilck = true;
                 worldIn.notifyBlockUpdate(pos, state, state, 3);
                 return ActionResultType.SUCCESS;
-            }else
+            } else
                 return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
         }
-            return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+        return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
     }
 
 
-
-    public void decreasePlayerItem(PlayerEntity player){
-        if(player.isCreative()){
+    public void decreasePlayerItem(PlayerEntity player) {
+        if (player.isCreative()) {
             return;
-        }else{
+        } else {
             player.inventory.getCurrentItem().shrink(1);
         }
     }
@@ -107,16 +107,16 @@ public class BlockElementCoreAltar extends Block {
     @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
         TileEntityElementCoreAltar tileEntityElementCoreAltar = (TileEntityElementCoreAltar) worldIn.getTileEntity(pos);
-        if(tileEntityElementCoreAltar != null && !worldIn.isRemote){
-           for(int i = 0; i< 4;i++) {
-               ItemStack stack = tileEntityElementCoreAltar.altarItem[i];
-               if(stack != ItemStack.EMPTY && !stack.isEmpty()){
-                   worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack));
-               }
-               stack = ItemStack.EMPTY;
-           }
-           if(tileEntityElementCoreAltar.coreItem!=ItemStack.EMPTY &&!tileEntityElementCoreAltar.coreItem.isEmpty())
-            worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityElementCoreAltar.coreItem));
+        if (tileEntityElementCoreAltar != null && !worldIn.isRemote) {
+            for (int i = 0; i < 4; i++) {
+                ItemStack stack = tileEntityElementCoreAltar.altarItem[i];
+                if (stack != ItemStack.EMPTY && !stack.isEmpty()) {
+                    worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack));
+                }
+                stack = ItemStack.EMPTY;
+            }
+            if (tileEntityElementCoreAltar.coreItem != ItemStack.EMPTY && !tileEntityElementCoreAltar.coreItem.isEmpty())
+                worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityElementCoreAltar.coreItem));
 
         }
         super.onBlockHarvested(worldIn, pos, state, player);
@@ -125,28 +125,48 @@ public class BlockElementCoreAltar extends Block {
 
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-        if(rand.nextBoolean()){
+        if (rand.nextBoolean()) {
             TileEntityElementCoreAltar tileEntityElementCoreAltar = (TileEntityElementCoreAltar) worldIn.getTileEntity(pos);
-            if(tileEntityElementCoreAltar != null && tileEntityElementCoreAltar.isProgressing && tileEntityElementCoreAltar.moveup >= 0.8f){
-                int element = tileEntityElementCoreAltar.element;
-                if(rand.nextFloat() >= 0.65D){
-                    double speedX =rand.nextBoolean()? 0 - rand.nextFloat()/1000.0F : 0 + rand.nextFloat()/1000.0F;
-                    double speedY =0.010+rand.nextFloat()/1000f;
-                    double speedZ =rand.nextBoolean()? 0  + rand.nextFloat()/1000.0f :0  - rand.nextFloat()/1000.0f;
-                    double posX = rand.nextBoolean()? pos.getX() + 0.5f + rand.nextFloat()/4: pos.getX() + 0.5f - rand.nextFloat()/4;
-                    double posY = rand.nextBoolean()? pos.getY() + 1.2F + rand.nextFloat()/4: pos.getY() + 1.2F - rand.nextFloat()/4;
-                    double posZ = rand.nextBoolean()? pos.getZ() + 0.5f  + rand.nextFloat()/4:pos.getZ() + 0.5f - rand.nextFloat()/4;
+            if (tileEntityElementCoreAltar != null && tileEntityElementCoreAltar.isProgressing && tileEntityElementCoreAltar.moveup >= 0.8f) {
+                IElement element = tileEntityElementCoreAltar.element;
+                if (element instanceof EnumElements && rand.nextFloat() >= 0.65D) {
+                    double speedX = rand.nextBoolean() ? 0 - rand.nextFloat() / 1000.0F : 0 + rand.nextFloat() / 1000.0F;
+                    double speedY = 0.010 + rand.nextFloat() / 1000f;
+                    double speedZ = rand.nextBoolean() ? 0 + rand.nextFloat() / 1000.0f : 0 - rand.nextFloat() / 1000.0f;
+                    double posX = rand.nextBoolean() ? pos.getX() + 0.5f + rand.nextFloat() / 4 : pos.getX() + 0.5f - rand.nextFloat() / 4;
+                    double posY = rand.nextBoolean() ? pos.getY() + 1.2F + rand.nextFloat() / 4 : pos.getY() + 1.2F - rand.nextFloat() / 4;
+                    double posZ = rand.nextBoolean() ? pos.getZ() + 0.5f + rand.nextFloat() / 4 : pos.getZ() + 0.5f - rand.nextFloat() / 4;
                     float r = 1;
                     float g = 1;
                     float b = 1;
-                    switch (element){
-                        case 1: r = 255; g = 255; b = rand.nextInt(30)+180;break;
-                        case 2: r = 73 ; g = 175; b = 92;break;
-                        case 3: r = 73 ; g = 203; b = 255;break;
-                        case 4: r = 255; g = 30 ; b = 43 ;break;
-                        case 5: r = 186; g = 184; b = 111;break;
+                    switch ((EnumElements) element) {
+                        case GOLD:
+                            r = 255;
+                            g = 255;
+                            b = rand.nextInt(30) + 180;
+                            break;
+                        case WOOD:
+                            r = 73;
+                            g = 175;
+                            b = 92;
+                            break;
+                        case AQUA:
+                            r = 73;
+                            g = 203;
+                            b = 255;
+                            break;
+                        case FIRE:
+                            r = 255;
+                            g = 30;
+                            b = 43;
+                            break;
+                        case EARTH:
+                            r = 186;
+                            g = 184;
+                            b = 111;
+                            break;
                     }
-                    worldIn.addParticle(new CubeParticleData( speedX, speedY,speedZ , r, g, b ,0.03f), posX, posY, posZ, 0, -0.03, 0);
+                    worldIn.addParticle(new CubeParticleData(speedX, speedY, speedZ, r, g, b, 0.03f), posX, posY, posZ, 0, -0.03, 0);
                 }
             }
         }

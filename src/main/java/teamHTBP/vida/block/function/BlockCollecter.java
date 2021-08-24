@@ -13,8 +13,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.TileEntity.TileEntityCollector;
+import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.particle.ElementFireParticleData;
 
 import javax.annotation.Nullable;
@@ -39,25 +39,24 @@ public class BlockCollecter extends Block {
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if(!worldIn.isRemote){
+        if (!worldIn.isRemote) {
             TileEntityCollector tileEntityCollector = (TileEntityCollector) worldIn.getTileEntity(pos);
-            if(handIn == Hand.MAIN_HAND && !player.isSneaking()){
-               ItemStack stack = player.inventory.getCurrentItem();
-               if(stack.getItem() == ItemLoader.ELEMENTCORE_VOID.get())
-               {
-                  if(tileEntityCollector.setCore(new ItemStack(stack.getItem(),1))){
-                      if(!player.isCreative()){
-                          stack.shrink(1);
-                      }
-                      worldIn.notifyBlockUpdate(pos,state,state,3);
-                      return ActionResultType.SUCCESS;
-                  }
-               }
-            }else if(handIn == Hand.MAIN_HAND && player.isSneaking()){
-                ItemStack stack =  tileEntityCollector.getCore();
+            if (handIn == Hand.MAIN_HAND && !player.isSneaking()) {
+                ItemStack stack = player.inventory.getCurrentItem();
+                if (stack.getItem() == ItemLoader.ELEMENTCORE_VOID.get()) {
+                    if (tileEntityCollector.setCore(new ItemStack(stack.getItem(), 1))) {
+                        if (!player.isCreative()) {
+                            stack.shrink(1);
+                        }
+                        worldIn.notifyBlockUpdate(pos, state, state, 3);
+                        return ActionResultType.SUCCESS;
+                    }
+                }
+            } else if (handIn == Hand.MAIN_HAND && player.isSneaking()) {
+                ItemStack stack = tileEntityCollector.getCore();
                 tileEntityCollector.coreItem = ItemStack.EMPTY;
                 player.addItemStackToInventory(stack);
-                worldIn.notifyBlockUpdate(pos,state,state,3);
+                worldIn.notifyBlockUpdate(pos, state, state, 3);
                 return ActionResultType.SUCCESS;
             }
         }
@@ -67,8 +66,8 @@ public class BlockCollecter extends Block {
     @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
         TileEntityCollector tileEntityCollector = (TileEntityCollector) worldIn.getTileEntity(pos);
-        if(tileEntityCollector != null && !worldIn.isRemote){
-            worldIn.addEntity(new ItemEntity(worldIn,pos.getX(),pos.getY(),pos.getZ(),tileEntityCollector.coreItem));
+        if (tileEntityCollector != null && !worldIn.isRemote) {
+            worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityCollector.coreItem));
         }
         super.onBlockHarvested(worldIn, pos, state, player);
     }
@@ -77,8 +76,8 @@ public class BlockCollecter extends Block {
     @Override
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
         TileEntityCollector entity = (TileEntityCollector) worldIn.getTileEntity(pos);
-        if(entity!=null){
-            if(entity.getCollection() > 0 && rand.nextDouble()>=0.1D)
+        if (entity != null) {
+            if (entity.getCollection() > 0 && rand.nextDouble() >= 0.1D)
             //生成粒子
             {
                 worldIn.addParticle(new ElementFireParticleData(-0.01F, 0, -0.01F), pos.getX() + 0.5f, pos.getY() + 1.0f, pos.getZ() + 0.5f, 0, 0, 0);

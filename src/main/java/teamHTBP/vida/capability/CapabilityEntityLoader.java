@@ -15,19 +15,19 @@ import teamHTBP.vida.capability.blueprintCapability.IBlueprintCapability;
 @Mod.EventBusSubscriber()
 public class CapabilityEntityLoader {
     @SubscribeEvent
-    public static void attachPlayerCapability(AttachCapabilitiesEvent<Entity> event){
+    public static void attachPlayerCapability(AttachCapabilitiesEvent<Entity> event) {
         Entity entity = event.getObject();
-        if(entity instanceof PlayerEntity){
-            event.addCapability(new ResourceLocation(Vida.modId,"blueprints"),new BlueprintCapabilityProvider());
+        if (entity instanceof PlayerEntity) {
+            event.addCapability(new ResourceLocation(Vida.modId, "blueprints"), new BlueprintCapabilityProvider());
         }
     }
 
     @SubscribeEvent
-    public static void restoreCapability(PlayerEvent.Clone event){
-        if(event.isWasDeath()){
+    public static void restoreCapability(PlayerEvent.Clone event) {
+        if (event.isWasDeath()) {
             LazyOptional<IBlueprintCapability> old_Cap = event.getOriginal().getCapability(VidaCapabilities.blueprint_Capability);
-            event.getPlayer().getCapability(VidaCapabilities.blueprint_Capability).ifPresent((new_Cap)->{
-                old_Cap.ifPresent((old)->{
+            event.getPlayer().getCapability(VidaCapabilities.blueprint_Capability).ifPresent((new_Cap) -> {
+                old_Cap.ifPresent((old) -> {
                     new_Cap.deserializeNBT(old.serializeNBT());
                 });
             });

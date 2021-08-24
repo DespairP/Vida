@@ -5,8 +5,9 @@ import teamHTBP.vida.itemGroup.ItemGroupLoader;
 
 /**
  * 生命法杖
- * @version  0.0.2
- * **/
+ *
+ * @version 0.0.2
+ **/
 public class ItemVidaWand extends Item {
     public ItemVidaWand() {
         super(new Item.Properties().group(ItemGroupLoader.vidaItemGroup).maxStackSize(1));

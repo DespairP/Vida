@@ -9,49 +9,53 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.network.NetworkHooks;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import teamHTBP.vida.element.EnumElements;
+import teamHTBP.vida.element.IElement;
+import teamHTBP.vida.registry.VidaRegistries;
 
 public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnData {
 
+    private static final Logger PRIVATE_LOGGER = LogManager.getLogger();
+    private static final DataParameter<String> TYPE = EntityDataManager.createKey(EntityFaintLight.class, DataSerializers.STRING);
+    private final int ticks = 0;
+    private IElement types;
     public EntityFaintLight(EntityType<?> entityTypeIn, World worldIn) {
         super(entityTypeIn, worldIn);
-        types = 1;
-        double d1 = (double)this.getPosX() + 0.5D;
-        double d2 = (double)this.getPosY() + 0.5D;
-        double d3 = (double)this.getPosZ() + 0.5D ;
+        types = EnumElements.GOLD;
+        double d1 = this.getPosX() + 0.5D;
+        double d2 = this.getPosY() + 0.5D;
+        double d3 = this.getPosZ() + 0.5D;
         //this.setBoundingBox(new AxisAlignedBB(d1 - 0, d2 - 0, d3 - 0, d1 + 1, d2 + 1, d3 + 1));
 
     }
-    public EntityFaintLight(EntityType<?> entityTypeIn, World worldIn,int type) {
+    public EntityFaintLight(EntityType<?> entityTypeIn, World worldIn, IElement type) {
         super(entityTypeIn, worldIn);
         this.types = type;
-        double d1 = (double)this.getPosX() + 0.5D;
-        double d2 = (double)this.getPosY() + 0.5D;
-        double d3 = (double)this.getPosZ() + 0.5D;
+        double d1 = this.getPosX() + 0.5D;
+        double d2 = this.getPosY() + 0.5D;
+        double d3 = this.getPosZ() + 0.5D;
         //this.setBoundingBox(new AxisAlignedBB(d1 - 0, d2 - 0, d3 - 0, d1 + 2, d2 + 2, d3 + 2));
     }
-    private static final Logger PRIVATE_LOGGER = LogManager.getLogger();
-    private static final DataParameter<Integer> TYPE = EntityDataManager.createKey(EntityFaintLight.class, DataSerializers.VARINT);
-    private int types = 0;
-    private int ticks = 0;
 
     @Override
     protected void registerData() {
-          this.dataManager.register(TYPE,types);
+        this.dataManager.register(TYPE, types.getRegistryName().toString());
     }
 
     @Override
     protected void readAdditional(CompoundNBT compound) {
-        this.dataManager.set(TYPE,compound.getInt("type"));
+        this.dataManager.set(TYPE, compound.getString("type"));
     }
 
     @Override
     protected void writeAdditional(CompoundNBT compound) {
-        compound.putInt("type",this.dataManager.get(TYPE));
+        compound.putString("type", this.dataManager.get(TYPE));
     }
 
     //提醒客户端生成实体
@@ -61,12 +65,12 @@ public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnDa
     }
 
 
-    public int getFaintLightType(){
-        return this.dataManager.get(TYPE);
+    public IElement getFaintLightType() {
+        return VidaRegistries.ELEMENTS.getValue(new ResourceLocation(this.dataManager.get(TYPE)));
     }
 
-    public void setFaintLightType(int type){
-        this.dataManager.set(TYPE, type);
+    public void setFaintLightType(IElement type) {
+        this.dataManager.set(TYPE, type.getRegistryName().toString());
     }
 
 
@@ -77,8 +81,8 @@ public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnDa
 
     public void notifyDataManagerChange(DataParameter<?> key) {
         super.notifyDataManagerChange(key);
-        if(TYPE.equals(key)){
-            this.types = this.dataManager.get(TYPE);
+        if (TYPE.equals(key)) {
+            this.types = VidaRegistries.ELEMENTS.getValue(new ResourceLocation(this.dataManager.get(TYPE)));
         }
     }
 

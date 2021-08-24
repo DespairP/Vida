@@ -23,12 +23,12 @@ import javax.annotation.Nullable;
 
 public class BlockDeepStoneBrickCorner extends Block {
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
-    private static IntegerProperty STATE = IntegerProperty.create("rotate", 0, 2);
+    private static final IntegerProperty STATE = IntegerProperty.create("rotate", 0, 2);
 
 
     public BlockDeepStoneBrickCorner() {
-        super( Block.Properties.create(Material.ROCK).hardnessAndResistance(2.0f, 6.0f).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE));
-        this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.NORTH).with(STATE,0));
+        super(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.0f, 6.0f).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE));
+        this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.NORTH).with(STATE, 0));
     }
 
     @Nullable
@@ -39,14 +39,14 @@ public class BlockDeepStoneBrickCorner extends Block {
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(FACING,STATE);
+        builder.add(FACING, STATE);
         super.fillStateContainer(builder);
     }
 
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if(!worldIn.isRemote) {
+        if (!worldIn.isRemote) {
             if (player.inventory.getCurrentItem().getItem() == ItemLoader.WAND_VIDA.get()) {
                 Direction stateDirection = state.get(FACING);
                 System.out.println(stateDirection);
@@ -65,7 +65,7 @@ public class BlockDeepStoneBrickCorner extends Block {
                         break;
                 }
                 return ActionResultType.SUCCESS;
-            }else {
+            } else {
                 return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
             }
         }

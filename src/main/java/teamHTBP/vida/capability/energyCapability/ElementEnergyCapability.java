@@ -1,6 +1,6 @@
 package teamHTBP.vida.capability.energyCapability;
 
-import teamHTBP.vida.helper.EnumElements;
+import teamHTBP.vida.element.EnumElements;
 
 public class ElementEnergyCapability implements IElementEnergyCapability {
     //现有的能量
@@ -14,21 +14,22 @@ public class ElementEnergyCapability implements IElementEnergyCapability {
     //能量的元素
     protected EnumElements element;
 
-    public ElementEnergyCapability(int capacity, int maxReceive, int maxExtract, int energy) { this(capacity,maxReceive,maxExtract,energy,EnumElements.VOID); }
+    public ElementEnergyCapability(int capacity, int maxReceive, int maxExtract, int energy) {
+        this(capacity, maxReceive, maxExtract, energy, EnumElements.VOID);
+    }
 
-    public ElementEnergyCapability(int capacity, int maxReceive, int maxExtract, int energy,EnumElements element)
-    {
+    public ElementEnergyCapability(int capacity, int maxReceive, int maxExtract, int energy, EnumElements element) {
         this.capacity = capacity;
         this.maxReceive = maxReceive;
         this.maxExtract = maxExtract;
-        this.energy = Math.max(0 , Math.min(capacity, energy));
+        this.energy = Math.max(0, Math.min(capacity, energy));
         this.element = element;
     }
 
     @Override
     public int receiveEnergy(int maxReceive, boolean simulate, EnumElements element) {
         //如果不能接受返回0
-        if(!canReceive(element))
+        if (!canReceive(element))
             return 0;
         //应收取的能量，从[容量 - 能量]，[最大一次能收取的能量]，[收取的能量] 中选取最小的
         int energyReceived = Math.min(capacity - energy, Math.min(this.maxReceive, maxReceive));
@@ -42,7 +43,7 @@ public class ElementEnergyCapability implements IElementEnergyCapability {
     @Override
     public int extractEnergy(int maxExtract, boolean simulate, EnumElements element) {
         //如果不能输出返回0
-        if(!canExtract(element))
+        if (!canExtract(element))
             return 0;
         //应该输出的能量，从[现有能量],[最大输出能量],[输出能量] 中选取最小的
         int energyExtracted = Math.min(energy, Math.min(this.maxExtract, maxExtract));

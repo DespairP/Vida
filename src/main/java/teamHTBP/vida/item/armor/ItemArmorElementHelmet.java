@@ -15,8 +15,6 @@ import teamHTBP.vida.modelRender.armormodel.*;
 import javax.annotation.Nullable;
 
 
-
-
 public class ItemArmorElementHelmet extends ArmorItem {
     //盔甲属于什么元素
     protected int element = 1;
@@ -32,20 +30,24 @@ public class ItemArmorElementHelmet extends ArmorItem {
 
     @OnlyIn(Dist.CLIENT)
     @Nullable
-    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default)
-    {
+    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
         ArmorModelElementHelmet model = null;
-        switch (element){
+        switch (element) {
             case 1:
-               model = new ArmorModelGoldHelmet();break;
+                model = new ArmorModelGoldHelmet();
+                break;
             case 2:
-               model = new ArmorModelWoodHelmet();break;
+                model = new ArmorModelWoodHelmet();
+                break;
             case 3:
-                model = new ArmorModelAquaHelmet();break;
+                model = new ArmorModelAquaHelmet();
+                break;
             case 4:
-                model = new ArmorModelFireHelmet();break;
+                model = new ArmorModelFireHelmet();
+                break;
             case 5:
-                model = new ArmorModelEarthHelmet();break;
+                model = new ArmorModelEarthHelmet();
+                break;
         }
 
         //model.bipedHeadwear.showModel = armorSlot == EquipmentSlotType.HEAD;
@@ -55,25 +57,24 @@ public class ItemArmorElementHelmet extends ArmorItem {
         model.isSitting = _default.isSitting;
         model.rightArmPose = _default.rightArmPose;
         model.leftArmPose = _default.leftArmPose;
-        return (A)model;
+        return (A) model;
     }
 
 
     @Nullable
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type)
-    {
-        switch (element){
-        case 1:
-            return "vida:textures/model/armor/gold_element_armor.png";
-        case 2:
-            return "vida:textures/model/armor/wood_element_armor.png";
-        case 3:
-            return "vida:textures/model/armor/aqua_element_armor.png";
-        case 4:
-            return "vida:textures/model/armor/fire_element_armor.png";
-        case 5:
-            return "vida:textures/model/armor/earth_element_armor.png";
+    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
+        switch (element) {
+            case 1:
+                return "vida:textures/model/armor/gold_element_armor.png";
+            case 2:
+                return "vida:textures/model/armor/wood_element_armor.png";
+            case 3:
+                return "vida:textures/model/armor/aqua_element_armor.png";
+            case 4:
+                return "vida:textures/model/armor/fire_element_armor.png";
+            case 5:
+                return "vida:textures/model/armor/earth_element_armor.png";
         }
         return null;
     }

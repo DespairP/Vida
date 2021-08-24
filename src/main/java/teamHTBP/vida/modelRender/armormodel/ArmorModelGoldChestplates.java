@@ -9,8 +9,8 @@ public class ArmorModelGoldChestplates extends ArmorModelElementChestplates {
     private final ModelRenderer cube_r3;
     private final ModelRenderer cube_r4;
 
-    public ArmorModelGoldChestplates(){
-        super(128,128);
+    public ArmorModelGoldChestplates() {
+        super(128, 128);
         arm_right = new ModelRenderer(this);
         arm_right.setRotationPoint(-4.0F, 1.0F, 0.0F);
         arm_right.setTextureOffset(0, 28).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 5.0F, 4.0F, 0.2F, true);

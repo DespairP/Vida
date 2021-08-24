@@ -5,8 +5,8 @@ import net.minecraft.client.renderer.model.ModelRenderer;
 public class ArmorModelEarthHelmet extends ArmorModelElementHelmet {
 
 
-    public ArmorModelEarthHelmet(){
-        super(128,128);
+    public ArmorModelEarthHelmet() {
+        super(128, 128);
 
         head = new ModelRenderer(this);
         head.setRotationPoint(0.0F, 0.0F, 0.0F);

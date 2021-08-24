@@ -1,5 +1,6 @@
 package teamHTBP.vida.TileEntity;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -14,18 +15,20 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import teamHTBP.vida.helper.ElementHelper;
+import teamHTBP.vida.TileEntity.SlotNumberArray.PrismTableArray;
+import teamHTBP.vida.element.ElementHelper;
+import teamHTBP.vida.element.EnumElements;
+import teamHTBP.vida.element.IElement;
+import teamHTBP.vida.gui.GUI.ContainerPrismTable;
 import teamHTBP.vida.item.ItemEnergyElementFragment;
 import teamHTBP.vida.item.ItemLoader;
-import teamHTBP.vida.TileEntity.SlotNumberArray.PrismTableArray;
-import teamHTBP.vida.gui.GUI.ContainerPrismTable;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
 public class TileEntityPrismTable extends TileEntity implements INamedContainerProvider, ITickableTileEntity {
     //Slot的inventory
-    private Inventory slot = new Inventory(3);
+    private final Inventory slot = new Inventory(3);
     //prismTable所需要的数值
     public PrismTableArray array = new PrismTableArray();
     //是否有镜子
@@ -46,10 +49,10 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
 
 
     @Override
-    public void read(CompoundNBT compound) {
-        this.slot.setInventorySlotContents(0,ItemStack.read(compound.getCompound("item1")));
-        this.slot.setInventorySlotContents(1,ItemStack.read(compound.getCompound("item2")));
-        this.slot.setInventorySlotContents(2,ItemStack.read(compound.getCompound("item3")));
+    public void read(BlockState state, CompoundNBT compound) {
+        this.slot.setInventorySlotContents(0, ItemStack.read(compound.getCompound("item1")));
+        this.slot.setInventorySlotContents(1, ItemStack.read(compound.getCompound("item2")));
+        this.slot.setInventorySlotContents(2, ItemStack.read(compound.getCompound("item3")));
         array.set(0, compound.getInt("fireX"));
         array.set(1, compound.getInt("fireY"));
         array.set(2, compound.getInt("mirrorX"));
@@ -57,7 +60,7 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
         isGem = compound.getBoolean("isGem");
         isMirror = compound.getBoolean("isMirror");
         isFire = compound.getBoolean("isFire");
-        super.read(compound);
+        super.read(state, compound);
     }
 
     @Override
@@ -72,7 +75,7 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
         compound.putInt("fireY", array.get(1));
         compound.putInt("mirrorX", array.get(2));
         compound.putInt("mirrorY", array.get(3));
-        compound.putBoolean("isGem",isGem);
+        compound.putBoolean("isGem", isGem);
         compound.putBoolean("isMirror", isMirror);
         compound.putBoolean("isFire", isFire);
         return super.write(compound);
@@ -81,7 +84,7 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
     @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.pos,1,this.getUpdateTag());
+        return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
     }
 
     @Override
@@ -92,12 +95,12 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        super.onDataPacket(net,pkt);
-        handleUpdateTag(pkt.getNbtCompound());
+        super.onDataPacket(net, pkt);
+        handleUpdateTag(world.getBlockState(pos), pkt.getNbtCompound());
     }
 
     @Override
-    public void handleUpdateTag(CompoundNBT tag) {
+    public void handleUpdateTag(BlockState state, CompoundNBT tag) {
         //this.slot.addItem(ItemStack.read(tag.getCompound("item")));
         array.set(0, tag.getInt("fireX"));
         array.set(1, tag.getInt("fireY"));
@@ -106,7 +109,7 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
         isGem = tag.getBoolean("isGem");
         isMirror = tag.getBoolean("isMirror");
         isFire = tag.getBoolean("isFire");
-        super.read(tag);
+        super.read(state, tag);
     }
 
     public Inventory getSlot() {
@@ -121,34 +124,30 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
     @Nullable
     @Override
     public Container createMenu(int id, PlayerInventory p_createMenu_2_, PlayerEntity p_createMenu_3_) {
-        return new ContainerPrismTable(id,p_createMenu_2_,this.pos,this.world,this.array);
+        return new ContainerPrismTable(id, p_createMenu_2_, this.pos, this.world, this.array);
     }
 
     @Override
     public void tick() {
-        if(this.slot.getStackInSlot(1).getItem() == ItemLoader.prism.get() ){
-            this.isMirror = true;
-           // world.notifyBlockUpdate(pos, getBlockState(),getBlockState(),3);
-        }else{
-            this.isMirror = false;
-        }
-        if(this.slot.getStackInSlot(0) == ItemStack.EMPTY && !(this.slot.getStackInSlot(0).getItem() instanceof ItemEnergyElementFragment)){
+        // world.notifyBlockUpdate(pos, getBlockState(),getBlockState(),3);
+        this.isMirror = this.slot.getStackInSlot(1).getItem() == ItemLoader.prism.get();
+        if (this.slot.getStackInSlot(0) == ItemStack.EMPTY && !(this.slot.getStackInSlot(0).getItem() instanceof ItemEnergyElementFragment)) {
             //如果没有任何东西的话
             this.isGem = false;
             this.array.set(0, 0);
             this.array.set(1, 0);
         }
-        if(!world.isRemote){
+        if (!world.isRemote) {
             //如果没有宝石在里面就开始检测
-            if(!this.isGem){
+            if (!this.isGem) {
                 gemInside();
-                world.notifyBlockUpdate(pos,getBlockState(),getBlockState(),3);
+                world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 3);
                 this.markDirty();
             }
-            if(this.isClick && this.isGem){
-               // System.out.println(this.array.get(0));
-               gemPolish();
-               this.isClick = false;
+            if (this.isClick && this.isGem) {
+                // System.out.println(this.array.get(0));
+                gemPolish();
+                this.isClick = false;
             }
         }
         this.scanFire();
@@ -156,36 +155,36 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
         //System.out.println(array.get(0) + " " + array.get(1));
     }
 
-    public void clearPrismTable(){
+    public void clearPrismTable() {
         this.isGem = false;
         this.array.set(0, 0);
         this.array.set(1, 0);
         this.array.set(2, 0);
         this.array.set(3, 0);
-        world.notifyBlockUpdate(pos,getBlockState(),getBlockState(),3);
+        world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 3);
     }
 
     //磨制人工水晶
-    public void gemPolish(){
-        if(this.isMirror){
+    public void gemPolish() {
+        if (this.isMirror) {
             int fireX = this.array.get(0);
             int fireY = this.array.get(1);
             int mirrorX = this.array.get(2);
             int mirrorY = this.array.get(3);
             int offset1 = Math.abs(mirrorX + 3 - fireX - 6);
             int offset2 = Math.abs(mirrorY + 3 - fireY - 17);
-           // System.out.println(offset1 + " "  +offset2);
-            if(offset1 < 10 && offset2 < 10){
+            // System.out.println(offset1 + " "  +offset2);
+            if (offset1 < 10 && offset2 < 10) {
                 ElementHelper elementHelper = new ElementHelper();
                 ItemStack itemStack = this.slot.getStackInSlot(0);
-                int element = elementHelper.getContainingElement(itemStack);
+                IElement element = ElementHelper.getContainingElement(itemStack);
 
-                if(this.slot.getStackInSlot(2) == ItemStack.EMPTY || this.slot.getStackInSlot(2).isEmpty()){
+                if (this.slot.getStackInSlot(2) == ItemStack.EMPTY || this.slot.getStackInSlot(2).isEmpty()) {
                     this.slot.setInventorySlotContents(2, this.getItemGemFromElement(element));
                     int count = this.slot.getStackInSlot(0).getCount();
                     this.slot.getStackInSlot(0).setCount(count - 1);
                     clearPrismTable();
-                }else if(this.slot.getStackInSlot(2).getItem() == this.getItemGemFromElement(element).getItem() && this.slot.getStackInSlot(2).getCount() < 64){
+                } else if (this.slot.getStackInSlot(2).getItem() == this.getItemGemFromElement(element).getItem() && this.slot.getStackInSlot(2).getCount() < 64) {
                     int count = this.slot.getStackInSlot(2).getCount();
                     this.slot.getStackInSlot(2).setCount(count + 1);
                     count = this.slot.getStackInSlot(0).getCount();
@@ -199,41 +198,43 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
     }
 
     //检测是否有宝石在里面，如果有生成火焰
-    public void gemInside(){
+    public void gemInside() {
         //检测是否格子0中有宝石
         Item item = null; //宝石的item
         ItemStack itemStack = this.slot.getStackInSlot(0); //先获取itemStak
-        if(itemStack != null && !itemStack.isEmpty()){
+        if (itemStack != null && !itemStack.isEmpty()) {
             item = itemStack.getItem(); //获得item
         }
-        if(item instanceof ItemEnergyElementFragment){
-            this.array.set(0,rand.nextInt(80) + 80);
-            this.array.set(1, rand.nextInt(25)+ 16);
+        if (item instanceof ItemEnergyElementFragment) {
+            this.array.set(0, rand.nextInt(80) + 80);
+            this.array.set(1, rand.nextInt(25) + 16);
             this.isGem = true;
         }
     }
 
     //从放入的宝石得到会polish的宝石
-    public ItemStack getItemGemFromElement(int element){
-        switch (element){
-            case 1:
-                return new ItemStack(ItemLoader.ARTIFICIAL_ELEMENTGEM_GOLD.get(), 1);
-            case 2:
-                return new ItemStack(ItemLoader.ARTIFICIAL_ELEMENTGEM_WOOD.get(), 1);
-            case 3:
-                return new ItemStack(ItemLoader.ARTIFICIAL_ELEMENTGEM_AQUA.get(), 1);
-            case 4:
-                return new ItemStack(ItemLoader.ARTIFICIAL_ELEMENTGEM_FIRE.get(), 1);
-            case 5:
-                return new ItemStack(ItemLoader.ARTIFICIAL_ELEMENTGEM_EARTH.get(), 1);
+    public ItemStack getItemGemFromElement(IElement element) {
+        if (element instanceof EnumElements) {
+            switch ((EnumElements) element) {
+                case GOLD:
+                    return new ItemStack(ItemLoader.ARTIFICIAL_ELEMENTGEM_GOLD.get(), 1);
+                case WOOD:
+                    return new ItemStack(ItemLoader.ARTIFICIAL_ELEMENTGEM_WOOD.get(), 1);
+                case AQUA:
+                    return new ItemStack(ItemLoader.ARTIFICIAL_ELEMENTGEM_AQUA.get(), 1);
+                case FIRE:
+                    return new ItemStack(ItemLoader.ARTIFICIAL_ELEMENTGEM_FIRE.get(), 1);
+                case EARTH:
+                    return new ItemStack(ItemLoader.ARTIFICIAL_ELEMENTGEM_EARTH.get(), 1);
+            }
         }
         return ItemStack.EMPTY;
     }
 
     //检测火是否生成在正确的位置
-    public void scanFire(){
-        if(this.isFire){
-            if(this.array.get(0) == 0 && this.array.get(1) == 0){
+    public void scanFire() {
+        if (this.isFire) {
+            if (this.array.get(0) == 0 && this.array.get(1) == 0) {
                 this.isFire = false;
             }
         }

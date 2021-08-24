@@ -6,8 +6,8 @@ public class ArmorModelWoodBoots extends ArmorModelElementBoots {
     private final ModelRenderer cube_r1;
     private final ModelRenderer cube_r2;
 
-    public ArmorModelWoodBoots(){
-        super(128,128);
+    public ArmorModelWoodBoots() {
+        super(128, 128);
 
         leg_right = new ModelRenderer(this);
         leg_right.setRotationPoint(-2.0F, 12.0F, 0.0F);

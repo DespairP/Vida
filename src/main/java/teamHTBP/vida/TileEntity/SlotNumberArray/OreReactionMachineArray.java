@@ -8,25 +8,25 @@ public class OreReactionMachineArray implements IIntArray {
 
     @Override
     public int get(int index) {
-        switch (index){
+        switch (index) {
             case 0:
                 return this.burnTime;
             case 1:
-                return  this.cookTime;
+                return this.cookTime;
         }
         return 0;
     }
 
     @Override
     public void set(int index, int value) {
-         switch (index){
-             case 0:
-                 this.burnTime = value;
-                 break;
-             case 1:
-                 this.cookTime = value;
-                 break;
-         }
+        switch (index) {
+            case 0:
+                this.burnTime = value;
+                break;
+            case 1:
+                this.cookTime = value;
+                break;
+        }
     }
 
     @Override

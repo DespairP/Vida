@@ -11,8 +11,8 @@ public class ArmorModelWoodLeggings extends ArmorModelElementLeggings {
     private final ModelRenderer cube_r3;
     private final ModelRenderer cube_r4;
 
-    public ArmorModelWoodLeggings(){
-        super(128,128);
+    public ArmorModelWoodLeggings() {
+        super(128, 128);
 
         body_low = new ModelRenderer(this);
         body_low.setRotationPoint(0.0F, 24.0F, 0.0F);

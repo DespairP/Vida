@@ -6,5 +6,5 @@ public enum EnumSkillDirection {
     Left,
     Right,
     BottomLeft,
-    BottomRight;
+    BottomRight
 }

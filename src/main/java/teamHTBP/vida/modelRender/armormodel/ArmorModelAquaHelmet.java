@@ -2,7 +2,7 @@ package teamHTBP.vida.modelRender.armormodel;
 
 import net.minecraft.client.renderer.model.ModelRenderer;
 
-public class ArmorModelAquaHelmet extends ArmorModelElementHelmet{
+public class ArmorModelAquaHelmet extends ArmorModelElementHelmet {
     private final ModelRenderer bone;
     private final ModelRenderer cube_r1;
     private final ModelRenderer cube_r2;
@@ -77,6 +77,6 @@ public class ArmorModelAquaHelmet extends ArmorModelElementHelmet{
     }
 
     public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-        super.setRotateAngle(modelRenderer,x,y,z);
+        super.setRotateAngle(modelRenderer, x, y, z);
     }
 }

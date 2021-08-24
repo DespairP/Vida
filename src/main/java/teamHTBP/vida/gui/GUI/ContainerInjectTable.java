@@ -7,16 +7,17 @@ import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import teamHTBP.vida.helper.ElementHelper;
 import teamHTBP.vida.TileEntity.TileEntityInjectTable;
+import teamHTBP.vida.element.ElementHelper;
 
 public class ContainerInjectTable extends Container {
+    private final World world;
+    private final BlockPos pos;
     protected ItemStack stack = ItemStack.EMPTY;
     protected int element;
     protected TileEntityInjectTable injectTable;
-    private World world;
-    private BlockPos pos;
-    public ContainerInjectTable(int id, ItemStack itemStack,BlockPos pos, World world) {
+
+    public ContainerInjectTable(int id, ItemStack itemStack, BlockPos pos, World world) {
         super(ContainerTypeLoader.inject.get(), id);
         this.stack = ((TileEntityInjectTable) world.getTileEntity(pos)).getSwordStack();
         this.injectTable = (TileEntityInjectTable) world.getTileEntity(pos);
@@ -28,22 +29,23 @@ public class ContainerInjectTable extends Container {
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
-        if(world.isAreaLoaded(pos,1)
+        if (world.isAreaLoaded(pos, 1)
                 && world.getTileEntity(pos) instanceof TileEntityInjectTable
                 && this.stack != ItemStack.EMPTY
                 && this.stack != null) {
             stack = ((TileEntityInjectTable) world.getTileEntity(pos)).getSwordStack();
             return true;
-        }else
+        } else
             return false;
     }
 
-    protected void getElement(ItemStack stack){
+    protected void getElement(ItemStack stack) {
         element = 3;
         ElementHelper.addTip(stack);
     }
 }
-class swordSlot extends Slot{
+
+class swordSlot extends Slot {
     public swordSlot(IInventory inventoryIn, int index, int xPosition, int yPosition) {
         super(inventoryIn, index, xPosition, yPosition);
     }
