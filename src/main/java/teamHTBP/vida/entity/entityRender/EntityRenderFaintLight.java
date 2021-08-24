@@ -3,7 +3,9 @@ package teamHTBP.vida.entity.entityRender;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.model.EntityModel;
@@ -11,12 +13,16 @@ import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.vector.Matrix4f;
+import net.minecraft.util.math.vector.Quaternion;
+import net.minecraft.util.math.vector.Vector3f;
+import teamHTBP.vida.element.EnumElements;
 import teamHTBP.vida.entity.EntityFaintLight;
 import teamHTBP.vida.entity.entityModel.EntityModelFaintLight;
 import teamHTBP.vida.modelRender.RenderLoader;
 
 public class EntityRenderFaintLight extends EntityRenderer<EntityFaintLight> {
-    private EntityModel<EntityFaintLight> model;
+    private final EntityModel<EntityFaintLight> model;
 
 
     protected EntityRenderFaintLight(EntityRendererManager renderManager) {
@@ -26,24 +32,25 @@ public class EntityRenderFaintLight extends EntityRenderer<EntityFaintLight> {
 
     @Override
     public ResourceLocation getEntityTexture(EntityFaintLight entity) {
-        switch(entity.getFaintLightType()){
-            case 1:
-                return RenderLoader.goldFaintLightLocation;
-            case 2:
-                return RenderLoader.woodFaintLightLocation;
-            case 3:
-                return RenderLoader.aquaFaintLightLocation;
-            case 4:
-                return RenderLoader.fireFaintLightLocation;
-            case 5:
-                return RenderLoader.earthFaintLightLocation;
+        if (entity.getFaintLightType() instanceof EnumElements) {
+            switch ((EnumElements) entity.getFaintLightType()) {
+                case GOLD:
+                    return RenderLoader.goldFaintLightLocation;
+                case WOOD:
+                    return RenderLoader.woodFaintLightLocation;
+                case AQUA:
+                    return RenderLoader.aquaFaintLightLocation;
+                case FIRE:
+                    return RenderLoader.fireFaintLightLocation;
+                case EARTH:
+                    return RenderLoader.earthFaintLightLocation;
+            }
         }
         return RenderLoader.earthFaintLightLocation;
     }
 
 
-
-
+    @Override
     public void render(EntityFaintLight entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
         //super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
         matrixStackIn.push();
@@ -83,7 +90,7 @@ public class EntityRenderFaintLight extends EntityRenderer<EntityFaintLight> {
 
     }
 
-    protected int getBrightnessForRender(EntityFaintLight entityIn,float partialTick) {
+    protected int getBrightnessForRender(EntityFaintLight entityIn, float partialTick) {
         BlockPos blockpos = new BlockPos(entityIn.prevPosX, entityIn.prevPosY, entityIn.prevPosZ);
         return entityIn.world.isBlockLoaded(blockpos) ? WorldRenderer.getCombinedLight(entityIn.world, blockpos) : 0;
     }

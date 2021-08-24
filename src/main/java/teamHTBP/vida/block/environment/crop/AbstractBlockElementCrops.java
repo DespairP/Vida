@@ -18,21 +18,69 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.PlantType;
-import teamHTBP.vida.helper.ElementHelper;
+import teamHTBP.vida.element.ElementHelper;
+import teamHTBP.vida.element.IElement;
+import teamHTBP.vida.helper.Allelopathy;
 
 import java.util.Random;
 
 public abstract class AbstractBlockElementCrops extends BushBlock implements IGrowable {
     private final static IntegerProperty AGE = BlockStateProperties.AGE_0_5;
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D), Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D), Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D), Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D), Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 10.0D, 16.0D), Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D), Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D), Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)};
+    private final IElement element;
     private int maxStage = 5;
-    private int element = 0;
-    public AbstractBlockElementCrops(int stage,int element){
+
+    public AbstractBlockElementCrops(int stage, IElement element) {
         super(Properties.create(Material.PLANTS).doesNotBlockMovement().sound(SoundType.CROP).notSolid().hardnessAndResistance(0.5f, 0).tickRandomly());
         //AGE = IntegerProperty.create("age", 0, stage);
         this.setDefaultState(this.stateContainer.getBaseState().with(AGE, Integer.valueOf(0)));
         this.maxStage = stage;
         this.element = element;
+    }
+
+    protected static float getGrowthChance(Block blockIn, IBlockReader worldIn, BlockPos pos) {
+        float f = 1.0F;
+        BlockPos blockpos = pos.down();
+
+        for (int i = -1; i <= 1; ++i) {
+            for (int j = -1; j <= 1; ++j) {
+                float f1 = 0.0F;
+                BlockState blockstate = worldIn.getBlockState(blockpos.add(i, 0, j));
+                if (blockstate.canSustainPlant(worldIn, blockpos.add(i, 0, j), net.minecraft.util.Direction.UP, (net.minecraftforge.common.IPlantable) blockIn)) {
+                    f1 = 1.0F;
+                    if (blockstate.isFertile(worldIn, blockpos.add(i, 0, j))) {
+                        f1 = 3.0F;
+                    }
+                }
+
+                if (i != 0 || j != 0) {
+                    f1 /= 4.0F;
+                }
+
+                f += f1;
+            }
+        }
+
+        BlockPos blockpos1 = pos.north();
+        BlockPos blockpos2 = pos.south();
+        BlockPos blockpos3 = pos.west();
+        BlockPos blockpos4 = pos.east();
+        boolean flag = blockIn == worldIn.getBlockState(blockpos3).getBlock() || blockIn == worldIn.getBlockState(blockpos4).getBlock();
+        boolean flag1 = blockIn == worldIn.getBlockState(blockpos1).getBlock() || blockIn == worldIn.getBlockState(blockpos2).getBlock();
+        if (flag && flag1) {
+            f /= 2.0F;
+        } else {
+            boolean flag2 = blockIn == worldIn.getBlockState(blockpos3.north()).getBlock() || blockIn == worldIn.getBlockState(blockpos4.north()).getBlock() || blockIn == worldIn.getBlockState(blockpos4.south()).getBlock() || blockIn == worldIn.getBlockState(blockpos3.south()).getBlock();
+            if (flag2) {
+                f /= 2.0F;
+            }
+        }
+
+        return f;
+    }
+
+    public static boolean isOpaque(VoxelShape shape) {
+        return true;
     }
 
     @Override
@@ -44,7 +92,7 @@ public abstract class AbstractBlockElementCrops extends BushBlock implements IGr
      * 获取植物的AGE PROPERTY
      * @return Property
      */
-    public IntegerProperty getAgeProperties(){
+    public IntegerProperty getAgeProperties() {
         return AGE;
     }
 
@@ -56,8 +104,6 @@ public abstract class AbstractBlockElementCrops extends BushBlock implements IGr
     protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
         return state.getBlock() == Blocks.FARMLAND;
     }
-
-
 
     /***
      * 获取作物能生长的最大值
@@ -136,47 +182,6 @@ public abstract class AbstractBlockElementCrops extends BushBlock implements IGr
         return (worldIn.getLightSubtracted(pos, 0) >= 8 || worldIn.canSeeSky(pos)) && super.isValidPosition(state, worldIn, pos);
     }
 
-    protected static float getGrowthChance(Block blockIn, IBlockReader worldIn, BlockPos pos) {
-        float f = 1.0F;
-        BlockPos blockpos = pos.down();
-
-        for(int i = -1; i <= 1; ++i) {
-            for(int j = -1; j <= 1; ++j) {
-                float f1 = 0.0F;
-                BlockState blockstate = worldIn.getBlockState(blockpos.add(i, 0, j));
-                if (blockstate.canSustainPlant(worldIn, blockpos.add(i, 0, j), net.minecraft.util.Direction.UP, (net.minecraftforge.common.IPlantable)blockIn)) {
-                    f1 = 1.0F;
-                    if (blockstate.isFertile(worldIn, blockpos.add(i, 0, j))) {
-                        f1 = 3.0F;
-                    }
-                }
-
-                if (i != 0 || j != 0) {
-                    f1 /= 4.0F;
-                }
-
-                f += f1;
-            }
-        }
-
-        BlockPos blockpos1 = pos.north();
-        BlockPos blockpos2 = pos.south();
-        BlockPos blockpos3 = pos.west();
-        BlockPos blockpos4 = pos.east();
-        boolean flag = blockIn == worldIn.getBlockState(blockpos3).getBlock() || blockIn == worldIn.getBlockState(blockpos4).getBlock();
-        boolean flag1 = blockIn == worldIn.getBlockState(blockpos1).getBlock() || blockIn == worldIn.getBlockState(blockpos2).getBlock();
-        if (flag && flag1) {
-            f /= 2.0F;
-        } else {
-            boolean flag2 = blockIn == worldIn.getBlockState(blockpos3.north()).getBlock() || blockIn == worldIn.getBlockState(blockpos4.north()).getBlock() || blockIn == worldIn.getBlockState(blockpos4.south()).getBlock() || blockIn == worldIn.getBlockState(blockpos3.south()).getBlock();
-            if (flag2) {
-                f /= 2.0F;
-            }
-        }
-
-        return f;
-    }
-
     public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
         super.tick(state, worldIn, pos, rand);
         if (!worldIn.isAreaLoaded(pos, 1)) return;
@@ -184,9 +189,9 @@ public abstract class AbstractBlockElementCrops extends BushBlock implements IGr
             int i = this.getAge(state);
             //元素不为相克时才能生长
             if (i < this.getMaxStage() &&
-                    ElementHelper.getRelationShip(element, ElementHelper.getBiomeElement(worldIn.getBiome(pos))) != ElementHelper.Allelopathy.Conflict) {
+                    ElementHelper.getRelationShip(element, ElementHelper.getBiomeElement(worldIn.getBiome(pos))) != Allelopathy.Conflict) {
                 float f = getGrowthChance(this, worldIn, pos);
-                if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt((int)(25.0F / f) + 1) == 0)) {
+                if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt((int) (25.0F / f) + 1) == 0)) {
                     worldIn.setBlockState(pos, this.withAge(i + 1), 2);
                     net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
                 }
@@ -194,7 +199,6 @@ public abstract class AbstractBlockElementCrops extends BushBlock implements IGr
         }
 
     }
-
 
     public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
         return new ItemStack(this.getSeedsItem());
@@ -204,13 +208,11 @@ public abstract class AbstractBlockElementCrops extends BushBlock implements IGr
         return Items.WHEAT_SEEDS;
     }
 
-    public int getCropElement(){ return  this.element;}
-
-    public static boolean isOpaque(VoxelShape shape) {
-        return true;
+    public IElement getCropElement() {
+        return this.element;
     }
 
-    public PlantType getPlantType(IBlockReader world, BlockPos pos){
-       return PlantType.Crop;
+    public PlantType getPlantType(IBlockReader world, BlockPos pos) {
+        return PlantType.CROP;
     }
 }

@@ -28,20 +28,24 @@ public class ItemArmorElementLeggings extends ArmorItem {
 
     @OnlyIn(Dist.CLIENT)
     @Nullable
-    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default)
-    {
+    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
         ArmorModelElementLeggings model = null;
-        switch (element){
+        switch (element) {
             case 1:
-                model = new ArmorModelGoldLeggings();break;
+                model = new ArmorModelGoldLeggings();
+                break;
             case 2:
-                model = new ArmorModelWoodLeggings();break;
+                model = new ArmorModelWoodLeggings();
+                break;
             case 3:
-                model = new ArmorModelAquaLeggings();break;
+                model = new ArmorModelAquaLeggings();
+                break;
             case 4:
-                model = new ArmorModelFireLeggings();break;
+                model = new ArmorModelFireLeggings();
+                break;
             case 5:
-                model = new ArmorModelEarthLeggings();break;
+                model = new ArmorModelEarthLeggings();
+                break;
         }
 
         model.isChild = _default.isChild;
@@ -49,15 +53,14 @@ public class ItemArmorElementLeggings extends ArmorItem {
         model.isSitting = _default.isSitting;
         model.rightArmPose = _default.rightArmPose;
         model.leftArmPose = _default.leftArmPose;
-        return (A)model;
+        return (A) model;
     }
 
 
     @Nullable
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type)
-    {
-        switch (element){
+    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
+        switch (element) {
             case 1:
                 return "vida:textures/model/armor/gold_element_armor.png";
             case 2:

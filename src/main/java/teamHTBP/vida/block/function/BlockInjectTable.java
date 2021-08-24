@@ -39,28 +39,29 @@ public class BlockInjectTable extends Block {
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if(!worldIn.isRemote){
+        if (!worldIn.isRemote) {
             TileEntity tileEntity = worldIn.getTileEntity(pos);
-            if(tileEntity instanceof TileEntityInjectTable){
-                TileEntityInjectTable tileEntityInjectTable= (TileEntityInjectTable)tileEntity;
-                if(!player.isSneaking() && handIn == Hand.MAIN_HAND){
-                    if(tileEntityInjectTable.setSwordItem(player.getHeldItem(Hand.MAIN_HAND)) && player.getHeldItem(Hand.MAIN_HAND) != ItemStack.EMPTY){
+            if (tileEntity instanceof TileEntityInjectTable) {
+                TileEntityInjectTable tileEntityInjectTable = (TileEntityInjectTable) tileEntity;
+                if (!player.isSneaking() && handIn == Hand.MAIN_HAND) {
+                    if (tileEntityInjectTable.setSwordItem(player.getHeldItem(Hand.MAIN_HAND)) && player.getHeldItem(Hand.MAIN_HAND) != ItemStack.EMPTY) {
                         player.getHeldItem(Hand.MAIN_HAND).shrink(1);
-                        worldIn.notifyBlockUpdate(pos,state,state,3);
+                        worldIn.notifyBlockUpdate(pos, state, state, 3);
                         return ActionResultType.SUCCESS;
-                    }else if(tileEntityInjectTable.hasSwordItem()){
+                    } else if (tileEntityInjectTable.hasSwordItem()) {
                         NetworkHooks.openGui((ServerPlayerEntity) player, tileEntityInjectTable, (PacketBuffer packerBuffer) -> {
-                            packerBuffer.writeItemStack(tileEntityInjectTable.getSwordStack());packerBuffer.writeBlockPos(tileEntityInjectTable.getPos());
+                            packerBuffer.writeItemStack(tileEntityInjectTable.getSwordStack());
+                            packerBuffer.writeBlockPos(tileEntityInjectTable.getPos());
                         });
                         return ActionResultType.SUCCESS;
                     }
-                }else if(player.isSneaking()){
-                        player.addItemStackToInventory(tileEntityInjectTable.getSwordStackToPlayer());
-                        worldIn.notifyBlockUpdate(pos,state,state,3);
+                } else if (player.isSneaking()) {
+                    player.addItemStackToInventory(tileEntityInjectTable.getSwordStackToPlayer());
+                    worldIn.notifyBlockUpdate(pos, state, state, 3);
                     return ActionResultType.SUCCESS;
                 }
             }
-        }else{
+        } else {
             return ActionResultType.CONSUME;
         }
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);

@@ -1,5 +1,6 @@
 package teamHTBP.vida.TileEntity;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
@@ -8,14 +9,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.LazyOptional;
 import teamHTBP.vida.capability.energyCapability.ElementEnergyCapability;
 import teamHTBP.vida.capability.energyCapability.IElementEnergyCapability;
-import teamHTBP.vida.helper.EnumElements;
+import teamHTBP.vida.element.EnumElements;
 
 import javax.annotation.Nullable;
 
-public class TileEntityWoodElementCrystal extends TileEntity implements ITickableTileEntity,IElementCrystal {
-    private EnumElements element;
+public class TileEntityWoodElementCrystal extends TileEntity implements ITickableTileEntity, IElementCrystal {
+    private final EnumElements element;
+    private final LazyOptional<IElementEnergyCapability> energyCapability = LazyOptional.of(this::createNewEnergyCap);
     public float sinWave = 0;
-    private LazyOptional<IElementEnergyCapability> energyCapability = LazyOptional.of(this::createNewEnergyCap);
 
 
     public TileEntityWoodElementCrystal(int element) {
@@ -26,14 +27,15 @@ public class TileEntityWoodElementCrystal extends TileEntity implements ITickabl
 
     @Override
     public void tick() {
-        if(world.isRemote)
-            if(sinWave >2* Math.PI) sinWave = 0; else sinWave+=0.1f;
+        if (world.isRemote)
+            if (sinWave > 2 * Math.PI) sinWave = 0;
+            else sinWave += 0.1f;
     }
 
     @Override
-    public void read(CompoundNBT compound) {
+    public void read(BlockState state, CompoundNBT compound) {
         energyCapability.ifPresent(T -> T.setEnergy(compound.getInt("energy")));
-        super.read(compound);
+        super.read(state, compound);
     }
 
     @Override
@@ -46,7 +48,7 @@ public class TileEntityWoodElementCrystal extends TileEntity implements ITickabl
     @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.pos,1,this.getUpdateTag());
+        return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
     }
 
     @Override
@@ -56,15 +58,15 @@ public class TileEntityWoodElementCrystal extends TileEntity implements ITickabl
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        super.onDataPacket(net,pkt);
-        handleUpdateTag(pkt.getNbtCompound());
+        super.onDataPacket(net, pkt);
+        handleUpdateTag(world.getBlockState(pos), pkt.getNbtCompound());
     }
 
     @Override
-    public void handleUpdateTag(CompoundNBT tag) {
+    public void handleUpdateTag(BlockState state, CompoundNBT tag) {
         //System.out.println(tag.getInt("energy"));
         energyCapability.ifPresent(T -> T.setEnergy(tag.getInt("energy")));
-        super.read(tag);
+        super.read(state, tag);
     }
 
     @Override

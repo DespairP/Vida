@@ -33,11 +33,11 @@ public class BlockOreReactionMachine extends Block {
     @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
         TileEntityOreReationMachine tileEntityOreReationMachine = (TileEntityOreReationMachine) worldIn.getTileEntity(pos);
-        if(tileEntityOreReationMachine != null){
-            for(int i = 0 ;i < 4;i++)
-            worldIn.addEntity(new ItemEntity(worldIn,pos.getX(),pos.getY(),pos.getZ(),tileEntityOreReationMachine.getSmeltSlotInv().getStackInSlot(i)));
-            worldIn.addEntity(new ItemEntity(worldIn,pos.getX(),pos.getY(),pos.getZ(), tileEntityOreReationMachine.getFuelInv().getStackInSlot(0)));
-            worldIn.addEntity(new ItemEntity(worldIn,pos.getX(),pos.getY(),pos.getZ(),tileEntityOreReationMachine.getCompleteSlot().getStackInSlot(0)));
+        if (tileEntityOreReationMachine != null) {
+            for (int i = 0; i < 4; i++)
+                worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityOreReationMachine.getSmeltSlotInv().getStackInSlot(i)));
+            worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityOreReationMachine.getFuelInv().getStackInSlot(0)));
+            worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityOreReationMachine.getCompleteSlot().getStackInSlot(0)));
 
         }
         super.onBlockHarvested(worldIn, pos, state, player);

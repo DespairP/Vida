@@ -1,5 +1,5 @@
 package teamHTBP.vida.capability.blueprintCapability;
 
 public enum EnumBlueprintRarity {
-    normal,epic,challenge,Void
+    normal, epic, challenge, Void
 }

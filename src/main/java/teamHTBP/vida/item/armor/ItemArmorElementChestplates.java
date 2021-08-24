@@ -30,21 +30,25 @@ public class ItemArmorElementChestplates extends ArmorItem {
 
     @OnlyIn(Dist.CLIENT)
     @Nullable
-    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default)
-    {
+    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
         //ArmorModelElementChestplates model = new ArmorModelGoldChestplates();
         ArmorModelElementChestplates model = null;
-        switch (element){
+        switch (element) {
             case 1:
-                model = new ArmorModelGoldChestplates();break;
+                model = new ArmorModelGoldChestplates();
+                break;
             case 2:
-                model = new ArmorModelWoodChestplates();break;
+                model = new ArmorModelWoodChestplates();
+                break;
             case 3:
-                model = new ArmorModelAquaChestplates();break;
+                model = new ArmorModelAquaChestplates();
+                break;
             case 4:
-                model = new ArmorModelFireChestplates();break;
+                model = new ArmorModelFireChestplates();
+                break;
             case 5:
-                model = new ArmorModelEarthChestplates();break;
+                model = new ArmorModelEarthChestplates();
+                break;
         }
 
         model.setVisible(true);
@@ -53,21 +57,19 @@ public class ItemArmorElementChestplates extends ArmorItem {
         model.body.showModel = true;
 
 
-
         model.isChild = _default.isChild;
         model.isSneak = _default.isSneak;
         model.isSitting = _default.isSitting;
         model.rightArmPose = _default.rightArmPose;
         model.leftArmPose = _default.leftArmPose;
-        return (A)model;
+        return (A) model;
     }
 
 
     @Nullable
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type)
-    {
-        switch (element){
+    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
+        switch (element) {
             case 1:
                 return "vida:textures/model/armor/gold_element_armor.png";
             case 2:

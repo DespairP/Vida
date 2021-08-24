@@ -19,15 +19,15 @@ public class BlueprintCapabilityProvider implements ICapabilityProvider, INBTSer
     @Override
     public LazyOptional getCapability(@Nonnull Capability cap, @Nullable Direction side) {
         Vida.LOGGER.debug("getCapability");
-        if(cap == VidaCapabilities.blueprint_Capability){
-            return LazyOptional.of(()->getOrCreateCapability()).cast();
+        if (cap == VidaCapabilities.blueprint_Capability) {
+            return LazyOptional.of(() -> getOrCreateCapability()).cast();
         }
         return LazyOptional.empty();
     }
 
     @Nonnull
-    public IBlueprintCapability getOrCreateCapability(){
-        if(this.blueprintCapability == null)
+    public IBlueprintCapability getOrCreateCapability() {
+        if (this.blueprintCapability == null)
             this.blueprintCapability = new BlueprintCapability();
         return blueprintCapability;
     }

@@ -9,27 +9,6 @@ import net.minecraft.particles.ParticleType;
 import java.util.Locale;
 
 public class CubeParticleData implements IParticleData {
-    private double speedX;
-    private double speedY;
-    private double speedZ;
-    private float scale;
-    private float r;
-    private float g;
-    private float b;
-    public CubeParticleData(double speedX,double speedY,double speedZ){
-        this.speedX = speedX;
-        this.speedY = speedY;
-        this.speedZ = speedZ;
-    }
-    public CubeParticleData(double speedX,double speedY,double speedZ,float r,float g,float b,float scale){
-        this.speedX = speedX;
-        this.speedY = speedY;
-        this.speedZ = speedZ;
-        this.r = r;
-        this.g = g;
-        this.b = b;
-        this.scale = scale;
-    }
     public static final IDeserializer<CubeParticleData> DESERIALIZER = new IDeserializer<CubeParticleData>() {
 
         @Override
@@ -51,6 +30,30 @@ public class CubeParticleData implements IParticleData {
             return new CubeParticleData(speedX, speedY, speedZ);
         }
     };
+    private final double speedX;
+    private final double speedY;
+    private final double speedZ;
+    private float scale;
+    private float r;
+    private float g;
+    private float b;
+
+    public CubeParticleData(double speedX, double speedY, double speedZ) {
+        this.speedX = speedX;
+        this.speedY = speedY;
+        this.speedZ = speedZ;
+    }
+
+    public CubeParticleData(double speedX, double speedY, double speedZ, float r, float g, float b, float scale) {
+        this.speedX = speedX;
+        this.speedY = speedY;
+        this.speedZ = speedZ;
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        this.scale = scale;
+    }
+
     @Override
     public ParticleType<?> getType() {
         return ParticleLoader.cubeParticle.get();
@@ -77,13 +80,13 @@ public class CubeParticleData implements IParticleData {
     public double getSpeed(int type) {
         switch (type) {
             case 0:
-                return  speedX;
+                return speedX;
             case 1:
-                return  speedY;
+                return speedY;
             case 2:
-                 return speedZ;
-                 default:
-                     return 0;
+                return speedZ;
+            default:
+                return 0;
         }
     }
 
@@ -91,9 +94,9 @@ public class CubeParticleData implements IParticleData {
     public float getRGBS(int type) {
         switch (type) {
             case 0:
-                return  r;
+                return r;
             case 1:
-                return  g;
+                return g;
             case 2:
                 return b;
             case 3:
@@ -105,10 +108,7 @@ public class CubeParticleData implements IParticleData {
 
     //得到RGBscale是否存在
     public boolean containRGBS() {
-        if(r == 0 && g==0 && b == 0 & scale==0){
-            return false;
-        }
-        return true;
+        return r != 0 || g != 0 || !(b == 0 & scale == 0);
     }
 
 }

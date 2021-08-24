@@ -4,7 +4,7 @@ import net.minecraft.client.renderer.model.ModelRenderer;
 
 public class ArmorModelGoldBoots extends ArmorModelElementBoots {
 
-    public ArmorModelGoldBoots(){
+    public ArmorModelGoldBoots() {
         leg_right = new ModelRenderer(this);
 
         leg_right.setRotationPoint(-2.0F, 12.0F, 0.0F);

@@ -10,11 +10,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import teamHTBP.vida.block.BlockLoader;
 import teamHTBP.vida.TileEntity.TileEntityLoader;
 import teamHTBP.vida.Vida;
+import teamHTBP.vida.block.BlockLoader;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD,value = Dist.CLIENT)
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class RenderLoader {
 
     public static ResourceLocation goldgemLocation = new ResourceLocation(Vida.modId, "model/goldgem");
@@ -23,23 +23,23 @@ public class RenderLoader {
     public static ResourceLocation firegemLocation = new ResourceLocation(Vida.modId, "model/firegem");
     public static ResourceLocation earthgemLocation = new ResourceLocation(Vida.modId, "model/earthgem");
 
-    public static ResourceLocation  goldlogoLocation = new ResourceLocation(Vida.modId,  "model/goldlogo");
-    public static ResourceLocation  woodlogoLocation = new ResourceLocation(Vida.modId,  "model/woodlogo");
-    public static ResourceLocation  aqualogoLocation = new ResourceLocation(Vida.modId,  "model/aqualogo");
-    public static ResourceLocation  firelogoLocation = new ResourceLocation(Vida.modId,  "model/firelogo");
+    public static ResourceLocation goldlogoLocation = new ResourceLocation(Vida.modId, "model/goldlogo");
+    public static ResourceLocation woodlogoLocation = new ResourceLocation(Vida.modId, "model/woodlogo");
+    public static ResourceLocation aqualogoLocation = new ResourceLocation(Vida.modId, "model/aqualogo");
+    public static ResourceLocation firelogoLocation = new ResourceLocation(Vida.modId, "model/firelogo");
     public static ResourceLocation earthlogoLocation = new ResourceLocation(Vida.modId, "model/earthlogo");
 
-    public static ResourceLocation  goldCrystalLocation = new ResourceLocation(Vida.modId,  "model/goldelementcrystal_animate");
-    public static ResourceLocation  woodCrystalLocation = new ResourceLocation(Vida.modId,  "model/woodelementcrystal_animate");
-    public static ResourceLocation  aquaCrystalLocation = new ResourceLocation(Vida.modId,  "model/aquaelementcrystal_animate");
-    public static ResourceLocation  fireCrystalLocation = new ResourceLocation(Vida.modId,  "model/fireelementcrystal_animate");
-    public static ResourceLocation  earthCrystalLocation= new ResourceLocation(Vida.modId,  "model/earthelementcrystal_animate");
+    public static ResourceLocation goldCrystalLocation = new ResourceLocation(Vida.modId, "model/goldelementcrystal_animate");
+    public static ResourceLocation woodCrystalLocation = new ResourceLocation(Vida.modId, "model/woodelementcrystal_animate");
+    public static ResourceLocation aquaCrystalLocation = new ResourceLocation(Vida.modId, "model/aquaelementcrystal_animate");
+    public static ResourceLocation fireCrystalLocation = new ResourceLocation(Vida.modId, "model/fireelementcrystal_animate");
+    public static ResourceLocation earthCrystalLocation = new ResourceLocation(Vida.modId, "model/earthelementcrystal_animate");
 
-    public static ResourceLocation  goldFaintLightLocation = new ResourceLocation(Vida.modId,  "item/faintlight_gold");
-    public static ResourceLocation  woodFaintLightLocation = new ResourceLocation(Vida.modId,  "item/faintlight_wood");
-    public static ResourceLocation  aquaFaintLightLocation = new ResourceLocation(Vida.modId,  "item/faintlight_aqua");
-    public static ResourceLocation  fireFaintLightLocation = new ResourceLocation(Vida.modId,  "item/faintlight_fire");
-    public static ResourceLocation  earthFaintLightLocation= new ResourceLocation(Vida.modId,  "item/faintlight_earth");
+    public static ResourceLocation goldFaintLightLocation = new ResourceLocation(Vida.modId, "item/faintlight_gold");
+    public static ResourceLocation woodFaintLightLocation = new ResourceLocation(Vida.modId, "item/faintlight_wood");
+    public static ResourceLocation aquaFaintLightLocation = new ResourceLocation(Vida.modId, "item/faintlight_aqua");
+    public static ResourceLocation fireFaintLightLocation = new ResourceLocation(Vida.modId, "item/faintlight_fire");
+    public static ResourceLocation earthFaintLightLocation = new ResourceLocation(Vida.modId, "item/faintlight_earth");
 
     public static ResourceLocation injectTable_top = new ResourceLocation(Vida.modId, "model/injectiontable_top");
     public static ResourceLocation injectTable_side = new ResourceLocation(Vida.modId, "model/injectiontable_side");
@@ -83,23 +83,23 @@ public class RenderLoader {
         }));
 
         ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityCrystalGold.get(), (tileEntityRendererDispatcher -> {
-            return new TileEntityRenderGoldCrystal(tileEntityRendererDispatcher,1);
+            return new TileEntityRenderGoldCrystal(tileEntityRendererDispatcher, 1);
         }));
 
         ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityCrystalWood.get(), (tileEntityRendererDispatcher -> {
-            return new TileEntityRenderWoodCrystal(tileEntityRendererDispatcher,2);
+            return new TileEntityRenderWoodCrystal(tileEntityRendererDispatcher, 2);
         }));
 
         ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityCrystalAqua.get(), (tileEntityRendererDispatcher -> {
-            return new TileEntityRenderLoaderAquaCrystal(tileEntityRendererDispatcher,3);
+            return new TileEntityRenderLoaderAquaCrystal(tileEntityRendererDispatcher, 3);
         }));
 
         ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityCrystalFire.get(), (tileEntityRendererDispatcher -> {
-            return new TileEntityRenderFireCrystal(tileEntityRendererDispatcher,4);
+            return new TileEntityRenderFireCrystal(tileEntityRendererDispatcher, 4);
         }));
 
         ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityCrystalEarth.get(), (tileEntityRendererDispatcher -> {
-            return new TileEntityRenderEarthCrystal(tileEntityRendererDispatcher,5);
+            return new TileEntityRenderEarthCrystal(tileEntityRendererDispatcher, 5);
         }));
 
         ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityInjectTable.get(), (tileEntityRendererDispatcher -> {
@@ -107,37 +107,35 @@ public class RenderLoader {
         }));
     }
 
-   @SubscribeEvent
-   public static void onAltlasEvent(TextureStitchEvent.Pre event){
-       Vida.LOGGER.info("register Altlas");
-       ResourceLocation stitching = event.getMap().getTextureLocation();
-       if(!stitching.equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE))
-       {
-           return;
-       }
+    @SubscribeEvent
+    public static void onAltlasEvent(TextureStitchEvent.Pre event) {
+        Vida.LOGGER.info("register Altlas");
+        ResourceLocation stitching = event.getMap().getTextureLocation();
+        if (!stitching.equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE)) {
+            return;
+        }
 
 
-       event.addSprite(goldgemLocation);
-       event.addSprite(woodgemLocation);
-       event.addSprite(aquagemLocation);
-       event.addSprite(firegemLocation);
-       event.addSprite(earthgemLocation);
-       event.addSprite(goldlogoLocation);
-       event.addSprite(woodlogoLocation);
-       event.addSprite(aqualogoLocation);
-       event.addSprite(firelogoLocation);
-       event.addSprite(earthlogoLocation);
+        event.addSprite(goldgemLocation);
+        event.addSprite(woodgemLocation);
+        event.addSprite(aquagemLocation);
+        event.addSprite(firegemLocation);
+        event.addSprite(earthgemLocation);
+        event.addSprite(goldlogoLocation);
+        event.addSprite(woodlogoLocation);
+        event.addSprite(aqualogoLocation);
+        event.addSprite(firelogoLocation);
+        event.addSprite(earthlogoLocation);
 
-       event.addSprite(goldCrystalLocation);
-       event.addSprite(woodCrystalLocation);
-       event.addSprite(aquaCrystalLocation);
-       event.addSprite(fireCrystalLocation);
-       event.addSprite(earthCrystalLocation);
+        event.addSprite(goldCrystalLocation);
+        event.addSprite(woodCrystalLocation);
+        event.addSprite(aquaCrystalLocation);
+        event.addSprite(fireCrystalLocation);
+        event.addSprite(earthCrystalLocation);
 
-       event.addSprite(injectTable_top);
-       event.addSprite(injectTable_side);
-   }
-
+        event.addSprite(injectTable_top);
+        event.addSprite(injectTable_side);
+    }
 
 
 }

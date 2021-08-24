@@ -1,5 +1,6 @@
 package teamHTBP.vida.gui.HUD;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
@@ -14,41 +15,42 @@ public class ElementCoreAltarHUD extends AbstractGui {
     private final Minecraft minecraft;
     private final ResourceLocation HUD = new ResourceLocation(Vida.modId, "textures/gui/altar_hud.png");
     private final ResourceLocation HUDHELPER = new ResourceLocation(Vida.modId, "textures/gui/altar_hud.png");
-    private TileEntityElementCoreAltar tileEntityElementCoreAltar ;
-    public ElementCoreAltarHUD(TileEntityElementCoreAltar tileEntityElementCoreAltar){
+    private final TileEntityElementCoreAltar tileEntityElementCoreAltar;
+
+    public ElementCoreAltarHUD(TileEntityElementCoreAltar tileEntityElementCoreAltar) {
         width = Minecraft.getInstance().getMainWindow().getScaledWidth();
         height = Minecraft.getInstance().getMainWindow().getScaledHeight();
         minecraft = Minecraft.getInstance();
         this.tileEntityElementCoreAltar = tileEntityElementCoreAltar;
     }
 
-    public void render(){
-        if(tileEntityElementCoreAltar==null) return;
+    public void render(MatrixStack matrixStack) {
+        if (tileEntityElementCoreAltar == null) return;
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.minecraft.getTextureManager().bindTexture(HUD);
-        int screenWidth =this.width / 2 - 28;
+        int screenWidth = this.width / 2 - 28;
         int screenHeight = this.height / 2 - 66;
-        blit(screenWidth, screenHeight, 0, 0, 0, 56, 56, 80, 80);
-        blit(screenWidth + 4 , screenHeight + 80, 0, 0, 75, 48, 4, 80, 80);
+        blit(matrixStack, screenWidth, screenHeight, 0, 0, 0, 56, 56, 80, 80);
+        blit(matrixStack, screenWidth + 4, screenHeight + 80, 0, 0, 75, 48, 4, 80, 80);
         float length = (tileEntityElementCoreAltar.progress / 30000.0f) * 48.0f;
-        blit(screenWidth + 4 , screenHeight + 80, 0, 0, 71, (int)length, 4, 80, 80);
+        blit(matrixStack, screenWidth + 4, screenHeight + 80, 0, 0, 71, (int) length, 4, 80, 80);
         //绘制四个方向的物品
-        for(int i = 0;i<4;i++){
+        for (int i = 0; i < 4; i++) {
             GuiPosition position = GuiPosition.values()[i];
             ItemStack stack = tileEntityElementCoreAltar.altarItem[i];
-            if(stack != ItemStack.EMPTY && !stack.isEmpty()){
-                switch (position){
+            if (stack != ItemStack.EMPTY && !stack.isEmpty()) {
+                switch (position) {
                     case LEFT:
-                         Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack, screenWidth + 1  , screenHeight + 20);
-                         break;
+                        Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack, screenWidth + 1, screenHeight + 20);
+                        break;
                     case TOP:
-                        Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack, screenWidth + 20  , screenHeight + 1 );
+                        Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack, screenWidth + 20, screenHeight + 1);
                         break;
                     case RIGHT:
-                        Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack, screenWidth + 39  , screenHeight + 20);
+                        Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack, screenWidth + 39, screenHeight + 20);
                         break;
                     case BOTTOM:
-                        Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack,screenWidth + 20 , screenHeight + 39);
+                        Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack, screenWidth + 20, screenHeight + 39);
                         break;
                 }
 
@@ -56,11 +58,11 @@ public class ElementCoreAltarHUD extends AbstractGui {
         }
         //绘制核心
         ItemStack stack = tileEntityElementCoreAltar.coreItem;
-        Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack,screenWidth + 20 , screenHeight + 20);
+        Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack, screenWidth + 20, screenHeight + 20);
     }
 
 
-    enum GuiPosition{
-        LEFT,RIGHT,TOP,BOTTOM
+    enum GuiPosition {
+        LEFT, RIGHT, TOP, BOTTOM
     }
 }

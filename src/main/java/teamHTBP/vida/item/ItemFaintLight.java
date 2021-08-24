@@ -17,12 +17,14 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import teamHTBP.vida.element.EnumElements;
 import teamHTBP.vida.entity.EntityFaintLight;
 import teamHTBP.vida.entity.EntityLoader;
 import teamHTBP.vida.itemGroup.ItemGroupLoader;
 
 public class ItemFaintLight extends Item {
     public int element = 1;
+
     public ItemFaintLight() {
         super(new Properties().maxStackSize(1).group(ItemGroupLoader.vidaItemGroup));
     }
@@ -42,14 +44,14 @@ public class ItemFaintLight extends Item {
             System.out.println("sssss");
             return ActionResult.resultSuccess(itemstack);
         } else {
-            BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult)raytraceresult;
+            BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult) raytraceresult;
             BlockPos blockpos = blockraytraceresult.getPos();
             if (!(worldIn.getBlockState(blockpos).getBlock() instanceof FlowingFluidBlock)) {
                 return ActionResult.resultPass(itemstack);
             } else if (worldIn.isBlockModifiable(playerIn, blockpos) && playerIn.canPlayerEdit(blockpos, blockraytraceresult.getFace(), itemstack)) {
                 EntityFaintLight entityFaintLight = new EntityFaintLight(EntityLoader.faintLight.get(), worldIn);
                 entityFaintLight.setPosition(blockpos.getX(), blockpos.getY(), blockpos.getZ());
-                entityFaintLight.setFaintLightType(element);
+                entityFaintLight.setFaintLightType(EnumElements.values()[element]);
                 if (!worldIn.addEntity(entityFaintLight)) {
                     return ActionResult.resultPass(itemstack);
                 } else {
@@ -85,7 +87,7 @@ public class ItemFaintLight extends Item {
             }
             EntityFaintLight entityFaintLight = new EntityFaintLight(EntityLoader.faintLight.get(), world);
             entityFaintLight.setPosition(blockpos1.getX() + 0.5, blockpos1.getY(), blockpos1.getZ() + 0.5);
-            entityFaintLight.setFaintLightType(element);
+            entityFaintLight.setFaintLightType(EnumElements.values()[element]);
             if (world.addEntity(entityFaintLight)) {
                 itemstack.shrink(1);
             }

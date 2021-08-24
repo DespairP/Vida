@@ -2,13 +2,13 @@ package teamHTBP.vida.modelRender.armormodel;
 
 import net.minecraft.client.renderer.model.ModelRenderer;
 
-public class ArmorModelGoldLeggings extends ArmorModelElementLeggings{
+public class ArmorModelGoldLeggings extends ArmorModelElementLeggings {
     private final ModelRenderer cube_1;
     private final ModelRenderer cube_2;
 
 
-    public ArmorModelGoldLeggings(){
-        super(128,128);
+    public ArmorModelGoldLeggings() {
+        super(128, 128);
 
         body_low = new ModelRenderer(this);
         body_low.setRotationPoint(0.0F, 12.0F, 0.0F);
@@ -26,7 +26,6 @@ public class ArmorModelGoldLeggings extends ArmorModelElementLeggings{
         body_low.addChild(cube_2);
         cube_2.setTextureOffset(8, 62).addBox(-2.0F, -2.0F, -2.0F, 4.0F, 4.0F, 1.0F, 0.0F, false);
     }
-
 
 
 }

@@ -3,13 +3,14 @@ package teamHTBP.vida.block.environment.crop;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
+import teamHTBP.vida.element.IElement;
 
 import java.util.Random;
 
 public class AbstractBlockNightFlower extends AbstractBlockElementCrops {
 
 
-    public AbstractBlockNightFlower(int stage, int element) {
+    public AbstractBlockNightFlower(int stage, IElement element) {
         super(stage, element);
     }
 
@@ -26,8 +27,8 @@ public class AbstractBlockNightFlower extends AbstractBlockElementCrops {
                     worldIn.setBlockState(pos, this.withAge(i + 1), 2);
                     net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
                 }
-            }else if(i == getMaxStage()){
-                worldIn.setBlockState(pos,this.withAge(i - 1),2);
+            } else if (i == getMaxStage()) {
+                worldIn.setBlockState(pos, this.withAge(i - 1), 2);
             }
         }
     }

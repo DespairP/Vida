@@ -27,6 +27,7 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.ToolType;
 import teamHTBP.vida.TileEntity.TileEntityGemShower;
 
@@ -35,7 +36,7 @@ import javax.annotation.Nullable;
 public class BlockGemShower extends Block {
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
-    VoxelShape base = Block.makeCuboidShape(1,0,1, 15, 16, 15);;
+    VoxelShape base = Block.makeCuboidShape(1, 0, 1, 15, 16, 15);
     VoxelShape high = Block.makeCuboidShape(1, 0, 1, 15, 9, 15);
 
 
@@ -47,7 +48,7 @@ public class BlockGemShower extends Block {
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-       return state.get(HALF) == DoubleBlockHalf.UPPER?this.high:this.base;
+        return state.get(HALF) == DoubleBlockHalf.UPPER ? this.high : this.base;
     }
 
     @Override
@@ -70,21 +71,21 @@ public class BlockGemShower extends Block {
         BlockPos blockpos = doubleblockhalf == DoubleBlockHalf.LOWER ? pos.up() : pos.down();
         BlockState blockstate = worldIn.getBlockState(blockpos);
         TileEntity te = null;
-        if(doubleblockhalf == DoubleBlockHalf.LOWER)
-        te = worldIn.getTileEntity(pos);
+        if (doubleblockhalf == DoubleBlockHalf.LOWER)
+            te = worldIn.getTileEntity(pos);
         else
-        te = worldIn.getTileEntity(pos.down());
-        if(te instanceof TileEntityGemShower){
-            TileEntityGemShower tileEntityGemShower = (TileEntityGemShower)te;
+            te = worldIn.getTileEntity(pos.down());
+        if (te instanceof TileEntityGemShower) {
+            TileEntityGemShower tileEntityGemShower = (TileEntityGemShower) te;
             worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityGemShower.gemItem));
         }
         if (blockstate.getBlock() == this && blockstate.get(HALF) != doubleblockhalf) {
             worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
             worldIn.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
             ItemStack itemstack = player.getHeldItemMainhand();
-            if (!worldIn.isRemote && !player.isCreative() && player.canHarvestBlock(blockstate)) {
-                Block.spawnDrops(state, worldIn, pos, (TileEntity)null, player, itemstack);
-                Block.spawnDrops(blockstate, worldIn, blockpos, (TileEntity)null, player, itemstack);
+            if (!worldIn.isRemote && !player.isCreative() && ForgeHooks.canHarvestBlock(state, player, worldIn, pos)) {
+                Block.spawnDrops(state, worldIn, pos, null, player, itemstack);
+                Block.spawnDrops(blockstate, worldIn, blockpos, null, player, itemstack);
             }
         }
 
@@ -136,37 +137,42 @@ public class BlockGemShower extends Block {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-           if(state.get(HALF) == DoubleBlockHalf.LOWER) return new TileEntityGemShower();
+        if (state.get(HALF) == DoubleBlockHalf.LOWER) return new TileEntityGemShower();
         return null;
     }
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if(handIn == Hand.MAIN_HAND && !worldIn.isRemote) {
+        if (handIn == Hand.MAIN_HAND && !worldIn.isRemote) {
             TileEntityGemShower entity = null;
             BlockPos position = pos;
-            if(worldIn.getBlockState(pos).get(HALF) == DoubleBlockHalf.LOWER)
+            if (worldIn.getBlockState(pos).get(HALF) == DoubleBlockHalf.LOWER)
                 entity = (TileEntityGemShower) worldIn.getTileEntity(pos);
-            else
-            {entity = (TileEntityGemShower) worldIn.getTileEntity(pos.down());
-               position = pos.down();}
+            else {
+                entity = (TileEntityGemShower) worldIn.getTileEntity(pos.down());
+                position = pos.down();
+            }
             //如果是创造模式不消耗宝石
-            if(!player.isSneaking()){
-            if ( entity.setGem(player.inventory.getCurrentItem()) ) {
-                if (!((PlayerEntity) player).isCreative()) {
-                    ItemStack stack = player.inventory.getCurrentItem();
-                    stack.setCount(stack.getCount() - 1);
-                    worldIn.notifyBlockUpdate(position, state, state, 3);
-                }else{
-                    worldIn.notifyBlockUpdate(position, state, state, 3);
-                }}}else {
-                if(!entity.gemItem.isEmpty()){
+            if (!player.isSneaking()) {
+                if (entity.setGem(player.inventory.getCurrentItem())) {
+                    if (!player.isCreative()) {
+                        ItemStack stack = player.inventory.getCurrentItem();
+                        stack.setCount(stack.getCount() - 1);
+                        worldIn.notifyBlockUpdate(position, state, state, 3);
+                    } else {
+                        worldIn.notifyBlockUpdate(position, state, state, 3);
+                    }
+                }
+            } else {
+                if (!entity.gemItem.isEmpty()) {
                     player.inventory.addItemStackToInventory(entity.gemItem);
                     entity.gemItem = ItemStack.EMPTY;
                     worldIn.notifyBlockUpdate(position, state, state, 3);
-                } } }else{
-                return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+                }
             }
+        } else {
+            return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+        }
         return ActionResultType.SUCCESS;
     }
 

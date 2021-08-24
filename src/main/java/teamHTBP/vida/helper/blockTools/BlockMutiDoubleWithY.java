@@ -9,7 +9,7 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.util.math.BlockPos;
 
-public class BlockMutiDoubleWithY extends BlockMutiDouble{
+public class BlockMutiDoubleWithY extends BlockMutiDouble {
     //面向的方向
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 

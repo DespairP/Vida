@@ -1,9 +1,11 @@
 package teamHTBP.vida.TileEntity;
 
-import teamHTBP.vida.helper.EnumElements;
+import teamHTBP.vida.element.EnumElements;
 
 public interface IElementCrystal {
-    public abstract EnumElements getElement();
-    public abstract int getEnergyStored();
-    public abstract int getMaxEnergy();
+    EnumElements getElement();
+
+    int getEnergyStored();
+
+    int getMaxEnergy();
 }

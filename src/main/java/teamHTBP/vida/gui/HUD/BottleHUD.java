@@ -1,5 +1,6 @@
 package teamHTBP.vida.gui.HUD;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
@@ -10,8 +11,8 @@ import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import teamHTBP.vida.item.armor.ItemArmorElementLegginsWithBottles;
 import teamHTBP.vida.Vida;
+import teamHTBP.vida.item.armor.ItemArmorElementLegginsWithBottles;
 
 import java.util.List;
 
@@ -20,9 +21,10 @@ public class BottleHUD extends AbstractGui {
     private final int height;
     private final Minecraft minecraft;
     private final ResourceLocation HUD = new ResourceLocation(Vida.modId, "textures/gui/bottles_hud.png");
-    private ItemStack itemStack ;
+    private final ItemStack itemStack;
     float alpha;
-    public BottleHUD(ItemStack stack,int alpha){
+
+    public BottleHUD(ItemStack stack, int alpha) {
         width = Minecraft.getInstance().getMainWindow().getScaledWidth();
         height = Minecraft.getInstance().getMainWindow().getScaledHeight();
         minecraft = Minecraft.getInstance();
@@ -30,7 +32,7 @@ public class BottleHUD extends AbstractGui {
         this.alpha = alpha / 100.0f;
     }
 
-    public void render(){
+    public void render(MatrixStack matrixStack) {
         try {
             ItemStack stack1 = ItemStack.EMPTY;
             ItemStack stack2 = ItemStack.EMPTY;
@@ -44,7 +46,7 @@ public class BottleHUD extends AbstractGui {
             int screenWidth = this.width / 2 - 53;
             int screenHeight = this.height / 2 - 66;
             float offset = alpha * 10.0f;
-            blit(screenWidth, screenHeight, 0, 0, 0, 101, 67, 128, 128);
+            blit(matrixStack, screenWidth, screenHeight, 0, 0, 0, 101, 67, 128, 128);
 
             CompoundNBT nbt = itemStack.getOrCreateTag();
             if (nbt.getCompound("bottle1") != null) {
@@ -54,8 +56,8 @@ public class BottleHUD extends AbstractGui {
                     int progress = nbt.getInt("bottle1Num");
                     int containDraw = (int) (10.0f * progress / 100.0f);
                     if (containDraw >= 10) containDraw = 10;
-                    blit(screenWidth + 19, screenHeight + 40, 0, 16, 81, 10, 15, 128, 128);
-                    blit(screenWidth + 19, screenHeight + 40 + 15 - containDraw, 0, 32, 86 + 10 - containDraw, 10, containDraw, 128, 128);
+                    blit(matrixStack, screenWidth + 19, screenHeight + 40, 0, 16, 81, 10, 15, 128, 128);
+                    blit(matrixStack, screenWidth + 19, screenHeight + 40 + 15 - containDraw, 0, 32, 86 + 10 - containDraw, 10, containDraw, 128, 128);
 
                 }
             }
@@ -66,8 +68,8 @@ public class BottleHUD extends AbstractGui {
                     int progress = nbt.getInt("bottle2Num");
                     int containDraw = (int) (10.0f * progress / 100.0f);
                     if (containDraw >= 10) containDraw = 10;
-                    blit(screenWidth + 78, screenHeight + 40, 0, 16, 81, 10, 15, 128, 128);
-                    blit(screenWidth + 78, screenHeight + 40 + 15 - containDraw, 0, 32, 86 + 10 - containDraw, 10, containDraw, 128, 128);
+                    blit(matrixStack, screenWidth + 78, screenHeight + 40, 0, 16, 81, 10, 15, 128, 128);
+                    blit(matrixStack, screenWidth + 78, screenHeight + 40 + 15 - containDraw, 0, 32, 86 + 10 - containDraw, 10, containDraw, 128, 128);
 
                 }
             }
@@ -75,7 +77,7 @@ public class BottleHUD extends AbstractGui {
             if (itemStack.getItem() instanceof ItemArmorElementLegginsWithBottles)
                 element = ((ItemArmorElementLegginsWithBottles) itemStack.getItem()).element;
             if (element != 2)
-                blit(screenWidth + 48, screenHeight + 12, 0, 0, 83, 10, 13, 128, 128);
+                blit(matrixStack, screenWidth + 48, screenHeight + 12, 0, 0, 83, 10, 13, 128, 128);
             else {
                 if (nbt.getCompound("bottle3") != null) {
                     ItemStack stack = ItemStack.read(nbt.getCompound("bottle3"));
@@ -84,8 +86,8 @@ public class BottleHUD extends AbstractGui {
                         int progress = nbt.getInt("bottle3Num");
                         int containDraw = (int) (10.0f * progress / 100.0f);
                         if (containDraw >= 10) containDraw = 10;
-                        blit(screenWidth + 48, screenHeight + 10, 0, 16, 81, 10, 15, 128, 128);
-                        blit(screenWidth + 48, screenHeight + 10 + 15 - containDraw, 0, 32, 86 + 10 - containDraw, 10, containDraw, 128, 128);
+                        blit(matrixStack, screenWidth + 48, screenHeight + 10, 0, 16, 81, 10, 15, 128, 128);
+                        blit(matrixStack, screenWidth + 48, screenHeight + 10 + 15 - containDraw, 0, 32, 86 + 10 - containDraw, 10, containDraw, 128, 128);
 
                     }
                 }
@@ -100,9 +102,9 @@ public class BottleHUD extends AbstractGui {
                 ITextComponent itextcomponent;
                 for (EffectInstance effectinstance : list) {
                     itextcomponent = new TranslationTextComponent(effectinstance.getEffectName());
-                    drawCenteredString(minecraft.fontRenderer, itextcomponent.getFormattedText(), screenWidth + 24, screenHeight + 30, 120010 | (int) alpha * 100);
+                    drawCenteredString(matrixStack, minecraft.fontRenderer, itextcomponent.getString(), screenWidth + 24, screenHeight + 30, 120010 | (int) alpha * 100);
                 }
-                minecraft.fontRenderer.drawString(progress + "%", screenWidth + 18, screenHeight + 56, 120010 | (int) alpha * 100);
+                minecraft.fontRenderer.drawString(matrixStack, progress + "%", screenWidth + 18, screenHeight + 56, 120010 | (int) alpha * 100);
 
                 RenderSystem.popMatrix();
             }
@@ -115,9 +117,9 @@ public class BottleHUD extends AbstractGui {
                 ITextComponent itextcomponent;
                 for (EffectInstance effectinstance : list) {
                     itextcomponent = new TranslationTextComponent(effectinstance.getEffectName());
-                    drawCenteredString(minecraft.fontRenderer, itextcomponent.getFormattedText(), screenWidth + 85, screenHeight + 30, 120010 | (int) alpha * 100);
+                    drawCenteredString(matrixStack, minecraft.fontRenderer, itextcomponent.getString(), screenWidth + 85, screenHeight + 30, 120010 | (int) alpha * 100);
                 }
-                minecraft.fontRenderer.drawString(progress + "%", screenWidth + 76, screenHeight + 56, 300010 | (int) alpha * 100);
+                minecraft.fontRenderer.drawString(matrixStack, progress + "%", screenWidth + 76, screenHeight + 56, 300010 | (int) alpha * 100);
                 RenderSystem.popMatrix();
             }
 
@@ -129,16 +131,16 @@ public class BottleHUD extends AbstractGui {
                 ITextComponent itextcomponent;
                 for (EffectInstance effectinstance : list) {
                     itextcomponent = new TranslationTextComponent(effectinstance.getEffectName());
-                    drawCenteredString(minecraft.fontRenderer, itextcomponent.getFormattedText(), screenWidth + 53, screenHeight - 1, 120010 | (int) alpha * 100);
+                    drawCenteredString(matrixStack, minecraft.fontRenderer, itextcomponent.getString(), screenWidth + 53, screenHeight - 1, 120010 | (int) alpha * 100);
                 }
-                minecraft.fontRenderer.drawString(progress + "%", screenWidth + 45, screenHeight + 29, 300010 | (int) alpha * 100);
+                minecraft.fontRenderer.drawString(matrixStack, progress + "%", screenWidth + 45, screenHeight + 29, 300010 | (int) alpha * 100);
                 RenderSystem.popMatrix();
             }
 
             RenderSystem.popMatrix();
             RenderSystem.defaultBlendFunc();
             RenderSystem.defaultAlphaFunc();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             return;
         }
     }

@@ -9,26 +9,6 @@ import net.minecraft.particles.ParticleType;
 import java.util.Locale;
 
 public class CuboidParticleData implements IParticleData {
-    private double speedX;
-    private double speedY;
-    private double speedZ;
-    private float scale;
-    private float r;
-    private float g;
-    private float b;
-    private int age;
-
-    public CuboidParticleData(double speedX,double speedY,double speedZ,float r,float g,float b,float scale,int age){
-        this.speedX = speedX;
-        this.speedY = speedY;
-        this.speedZ = speedZ;
-        this.r = r;
-        this.g = g;
-        this.b = b;
-        this.scale = scale;
-        this.age = age;
-        this.scale = scale;
-    }
     public static final IDeserializer<CuboidParticleData> DESERIALIZER = new IDeserializer<CuboidParticleData>() {
 
         @Override
@@ -49,7 +29,7 @@ public class CuboidParticleData implements IParticleData {
             float scale = reader.readFloat();
             reader.expect(' ');
             int age = reader.readInt();
-            return new CuboidParticleData(speedX, speedY, speedZ,r,g,b,scale,age);
+            return new CuboidParticleData(speedX, speedY, speedZ, r, g, b, scale, age);
         }
 
         @Override
@@ -62,9 +42,30 @@ public class CuboidParticleData implements IParticleData {
             float b = buffer.readFloat();
             float scale = buffer.readFloat();
             int age = buffer.readInt();
-            return new CuboidParticleData(speedX, speedY, speedZ,r,g,b,scale,age);
+            return new CuboidParticleData(speedX, speedY, speedZ, r, g, b, scale, age);
         }
     };
+    private final double speedX;
+    private final double speedY;
+    private final double speedZ;
+    private final float r;
+    private final float g;
+    private final float b;
+    private final int age;
+    private float scale;
+
+    public CuboidParticleData(double speedX, double speedY, double speedZ, float r, float g, float b, float scale, int age) {
+        this.speedX = speedX;
+        this.speedY = speedY;
+        this.speedZ = speedZ;
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        this.scale = scale;
+        this.age = age;
+        this.scale = scale;
+    }
+
     @Override
     public ParticleType<?> getType() {
         return ParticleLoader.cuboidParticle.get();
@@ -85,16 +86,16 @@ public class CuboidParticleData implements IParticleData {
     @Override
     public String getParameters() {
         return String.format(Locale.ROOT, "%s %.2d %.2d %.2d %f %f %f %f %d",
-                this.getType().getRegistryName(), speedX, speedY, speedZ,r,g,b,scale,age);
+                this.getType().getRegistryName(), speedX, speedY, speedZ, r, g, b, scale, age);
     }
 
     //获得x,y,z速度
     public double getInformation(int type) {
         switch (type) {
             case 0:
-                return  speedX;
+                return speedX;
             case 1:
-                return  speedY;
+                return speedY;
             case 2:
                 return speedZ;
             case 3:

@@ -1,8 +1,6 @@
 package teamHTBP.vida.JsonGenerator.Properties;
 
 import com.google.gson.annotations.SerializedName;
-import com.mojang.datafixers.util.Either;
-import net.minecraft.client.renderer.model.Material;
 
 import java.util.Map;
 

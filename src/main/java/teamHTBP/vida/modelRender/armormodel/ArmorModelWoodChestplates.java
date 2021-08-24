@@ -13,8 +13,8 @@ public class ArmorModelWoodChestplates extends ArmorModelElementChestplates {
     private final ModelRenderer bone8;
     private final ModelRenderer cube_r4;
 
-    public ArmorModelWoodChestplates(){
-        super(128,128);
+    public ArmorModelWoodChestplates() {
+        super(128, 128);
 
         arm_left = new ModelRenderer(this);
         arm_left.setRotationPoint(4.0F, 1.0F, 0.0F);

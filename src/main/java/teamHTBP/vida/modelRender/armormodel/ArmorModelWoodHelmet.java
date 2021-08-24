@@ -2,8 +2,7 @@ package teamHTBP.vida.modelRender.armormodel;
 
 import net.minecraft.client.renderer.model.ModelRenderer;
 
-public class ArmorModelWoodHelmet extends  ArmorModelElementHelmet {
-    public ModelRenderer part21;
+public class ArmorModelWoodHelmet extends ArmorModelElementHelmet {
     private final ModelRenderer bone;
     private final ModelRenderer cube_r1;
     private final ModelRenderer cube_r2;
@@ -20,10 +19,11 @@ public class ArmorModelWoodHelmet extends  ArmorModelElementHelmet {
     private final ModelRenderer cube_r10;
     private final ModelRenderer cube_r11;
     private final ModelRenderer cube_r12;
+    public ModelRenderer part21;
 
 
-    public ArmorModelWoodHelmet(){
-        super(1.0f,0,128,128);
+    public ArmorModelWoodHelmet() {
+        super(1.0f, 0, 128, 128);
 
         head = new ModelRenderer(this);
         head.setRotationPoint(0.0F, 0.0F, 0.0F);

@@ -7,8 +7,8 @@ public class ArmorModelAquaBoots extends ArmorModelElementBoots {
     private final ModelRenderer cube_r2;
 
 
-    public  ArmorModelAquaBoots(){
-        super(128,128);
+    public ArmorModelAquaBoots() {
+        super(128, 128);
 
         leg_left = new ModelRenderer(this);
         leg_left.setRotationPoint(2.0F, 12.0F, 0.0F);

@@ -1,5 +1,5 @@
 {
   "variants": {
-    "":  { "model": "vida:block/injecttable"  }
+    "":  { "model": "vida:void_model"  }
   }
 }

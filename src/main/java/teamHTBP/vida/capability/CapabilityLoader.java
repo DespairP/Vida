@@ -35,7 +35,7 @@ public class CapabilityLoader {
     }
 
     @SubscribeEvent
-    public static void registerPlayerCapability(FMLCommonSetupEvent event){
+    public static void registerPlayerCapability(FMLCommonSetupEvent event) {
         CapabilityManager.INSTANCE.register(IBlueprintCapability.class, new Capability.IStorage<IBlueprintCapability>() {
 
                     @Nullable
@@ -49,7 +49,7 @@ public class CapabilityLoader {
 
                     }
                 },
-        () -> null
+                () -> null
         );
     }
 

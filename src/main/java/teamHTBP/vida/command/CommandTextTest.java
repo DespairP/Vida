@@ -11,14 +11,14 @@ import teamHTBP.vida.network.PacketMessage;
 public class CommandTextTest implements Command<CommandSource> {
     @Override
     public int run(CommandContext<CommandSource> commandContext) throws CommandSyntaxException {
-        PacketChannel.INSTANCE.send(PacketDistributor.PLAYER.with(()-> {
-                    try {
-                        return commandContext.getSource().asPlayer();
-                    } catch (CommandSyntaxException e) {
-                        e.printStackTrace();
-                    }
-                    return null;
-                }), new PacketMessage(commandContext.getArgument("message" ,String.class)));
+        PacketChannel.INSTANCE.send(PacketDistributor.PLAYER.with(() -> {
+            try {
+                return commandContext.getSource().asPlayer();
+            } catch (CommandSyntaxException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }), new PacketMessage(commandContext.getArgument("message", String.class)));
         return 0;
     }
 }

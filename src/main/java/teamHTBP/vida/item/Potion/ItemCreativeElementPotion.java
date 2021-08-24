@@ -1,9 +1,9 @@
 package teamHTBP.vida.item.Potion;
 
 import net.minecraft.item.Item;
+import teamHTBP.vida.element.EnumElements;
 import teamHTBP.vida.item.IElementItem;
 import teamHTBP.vida.itemGroup.ItemGroupLoader;
-import teamHTBP.vida.helper.EnumElements;
 
 public class ItemCreativeElementPotion extends Item implements IElementItem {
     public final EnumElements ELEMENT_TYPE;
@@ -14,6 +14,8 @@ public class ItemCreativeElementPotion extends Item implements IElementItem {
     }
 
     @Override
-    public EnumElements getItemElement(){return ELEMENT_TYPE;}
+    public EnumElements getItemElement() {
+        return ELEMENT_TYPE;
+    }
 
 }

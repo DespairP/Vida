@@ -11,10 +11,18 @@ public class ParticleFactoryLoader {
 
     @SubscribeEvent
     public static void onParticleFactoryRegistration(ParticleFactoryRegisterEvent event) {
-        Minecraft.getInstance().particles.registerFactory(ParticleLoader.leafParticle.get(), (sprite) -> { return new LeafParticleFactory(sprite);});
-        Minecraft.getInstance().particles.registerFactory(ParticleLoader.cubeParticle.get(), (sprite) -> { return new CubeParticleFactory(sprite);});
-        Minecraft.getInstance().particles.registerFactory(ParticleLoader.elementFireParticle.get(), (sprite) -> { return new ElementFireParticleFactory(sprite);});
-        Minecraft.getInstance().particles.registerFactory(ParticleLoader.cuboidParticle.get(), (sprite) -> { return new CuboidParticleFactory(sprite);});
+        Minecraft.getInstance().particles.registerFactory(ParticleLoader.leafParticle.get(), (sprite) -> {
+            return new LeafParticleFactory(sprite);
+        });
+        Minecraft.getInstance().particles.registerFactory(ParticleLoader.cubeParticle.get(), (sprite) -> {
+            return new CubeParticleFactory(sprite);
+        });
+        Minecraft.getInstance().particles.registerFactory(ParticleLoader.elementFireParticle.get(), (sprite) -> {
+            return new ElementFireParticleFactory(sprite);
+        });
+        Minecraft.getInstance().particles.registerFactory(ParticleLoader.cuboidParticle.get(), (sprite) -> {
+            return new CuboidParticleFactory(sprite);
+        });
 
     }
 }

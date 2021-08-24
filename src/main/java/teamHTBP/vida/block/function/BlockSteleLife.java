@@ -13,14 +13,13 @@ import java.util.Random;
 public class BlockSteleLife extends BlockMutiDoubleWithY {
 
     public BlockSteleLife() {
-        super(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0f,3.0f).sound(SoundType.STONE).notSolid());
+        super(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0f, 3.0f).sound(SoundType.STONE).notSolid());
     }
 
     @Override
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
         super.animateTick(stateIn, worldIn, pos, rand);
     }
-
 
 
 }

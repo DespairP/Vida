@@ -1,5 +1,6 @@
 package teamHTBP.vida.TileEntity;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -7,19 +8,27 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import teamHTBP.vida.item.Potion.ItemCreativeElementPotion;
-import teamHTBP.vida.helper.ElementHelper;
+import teamHTBP.vida.element.ElementHelper;
+import teamHTBP.vida.element.EnumElements;
+import teamHTBP.vida.element.IElement;
 import teamHTBP.vida.entity.EntityFaintLight;
 import teamHTBP.vida.entity.EntityLoader;
+import teamHTBP.vida.item.Potion.ItemCreativeElementPotion;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
 public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTileEntity {
-    //提炼值
-    public int container = 0;
     //满提炼值
     public final int MAX_CONTAINER = 30000;
+    //五元素数值
+    public final int ELEMENT_GOLD = 1;
+    public final int ELEMENT_WOOD = 2;
+    public final int ELEMENT_AQUA = 3;
+    public final int ELEMENT_FIRE = 4;
+    public final int ELEMENT_EARTH = 5;
+    //提炼值
+    public int container = 0;
     //正在提炼的缓冲值
     public int containing = 0;
     //提炼的物品
@@ -31,28 +40,22 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
     //加速熔炼速度,speed * 10 =actualSpeed
     public int speed = 1;
     //锅内的元素
-    public int element = 0;
+    public IElement element;
     //
     ElementHelper helper = new ElementHelper();
-
-
-    //五元素数值
-    public final int ELEMENT_GOLD = 1;
-    public final int ELEMENT_WOOD = 2;
-    public final int ELEMENT_AQUA = 3;
-    public final int ELEMENT_FIRE = 4;
-    public final int ELEMENT_EARTH = 5;
 
     public TileEntityPurfiedCauldron() {
         super(TileEntityLoader.TileEntityPurfiedCauldron.get());
     }
 
-    /**设置提炼物品
+    /**
+     * 设置提炼物品
+     *
      * @return 是否有其他提炼的物品正在提炼
      * 只有在有水燃烧和火在锅中的情况下才接收物品
-     * **/
-    public boolean setMeltItem(ItemStack meltItem){
-        if(this.meltItem.isEmpty()&&this.isWater&&this.isFire && ElementHelper.getContainingNum(meltItem) > 0 && (element==0 || element == this.getContainingElement(meltItem))){
+     **/
+    public boolean setMeltItem(ItemStack meltItem) {
+        if (this.meltItem.isEmpty() && this.isWater && this.isFire && ElementHelper.getContainingNum(meltItem) > 0 && (element == EnumElements.NONE || element == this.getContainingElement(meltItem))) {
             this.meltItem = meltItem;
             return true;
         }
@@ -62,21 +65,22 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
     /**
      * 设置物品融入速度
      * 初始速度：1
-     * */
-    public void setMeltSpeed(){
-          this.speed = this.meltItem.getItem() instanceof ItemCreativeElementPotion?100:1;
+     */
+    public void setMeltSpeed() {
+        this.speed = this.meltItem.getItem() instanceof ItemCreativeElementPotion ? 100 : 1;
     }
 
-    public void read(CompoundNBT compound) {
+    @Override
+    public void read(BlockState state, CompoundNBT compound) {
         containing = compound.getInt("containing");
         container = compound.getInt("container");
         isWater = compound.getBoolean("isWater");
         isFire = compound.getBoolean("isFire");
-        element = compound.getInt("element");
-        if(compound.contains("meltItem"))
-        meltItem = ItemStack.read(compound.getCompound("meltItem"));
+        element = ElementHelper.read(compound);
+        if (compound.contains("meltItem"))
+            meltItem = ItemStack.read(compound.getCompound("meltItem"));
 
-        super.read(compound);
+        super.read(state, compound);
     }
 
     public CompoundNBT write(CompoundNBT compound) {
@@ -84,9 +88,9 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
         compound.putInt("container", container);
         compound.putBoolean("isWater", isWater);
         compound.putBoolean("isFire", isFire);
-        compound.putInt("element", element);
-        if(!meltItem.isEmpty())
-        compound.put("meltItem",meltItem.serializeNBT());
+        ElementHelper.write(compound, element);
+        if (!meltItem.isEmpty())
+            compound.put("meltItem", meltItem.serializeNBT());
         return super.write(compound);
     }
 
@@ -94,7 +98,7 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
     @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.pos,1,this.getUpdateTag());
+        return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
     }
 
     //区块刚刚被加载时，服务端->客户端
@@ -107,90 +111,88 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
     //客户端接收数据包
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        super.onDataPacket(net,pkt);
-        handleUpdateTag(pkt.getNbtCompound());
+        super.onDataPacket(net, pkt);
+        handleUpdateTag(world.getBlockState(pos), pkt.getNbtCompound());
     }
 
     //客户端处理收到的数据包
     @Override
-    public void handleUpdateTag(CompoundNBT tag) {
+    public void handleUpdateTag(BlockState state, CompoundNBT tag) {
         isFire = tag.getBoolean("isFire");
         isWater = tag.getBoolean("isWater");
         container = tag.getInt("container");
         containing = tag.getInt("containing");
-        element = tag.getInt("element");
-        if(tag.contains("meltItem"))
+        element = ElementHelper.read(tag);
+        if (tag.contains("meltItem"))
             meltItem = ItemStack.read(tag.getCompound("meltItem"));
         else
             meltItem = ItemStack.EMPTY;
     }
 
 
-
     //内部逻辑实现
     @Override
     public void tick() {
-        if(!world.isRemote){
+        if (!world.isRemote) {
             //如果缓冲值>0,先消耗缓冲值
-            if(this.isWater && this.isFire){
-            if(this.containing > 0){
-                consumeContaining();
-                if(containing == 0){
-                    meltItem = ItemStack.EMPTY;
+            if (this.isWater && this.isFire) {
+                if (this.containing > 0) {
+                    consumeContaining();
+                    if (containing == 0) {
+                        meltItem = ItemStack.EMPTY;
+                    }
+                } else {
+                    getContaining();
                 }
-            }else{
-                getContaining();
+                //如果已满出，生成微光
+                generateFaintLight();
+                world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 3);
             }
-            //如果已满出，生成微光
-            generateFaintLight();
-            world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 3);
-        }
-            if(containing == 0){
+            if (containing == 0) {
                 meltItem = ItemStack.EMPTY;
             }
         }
     }
 
 
-
     //消耗containing值
-    public void consumeContaining(){
-        if (containing < speed * 2){
+    public void consumeContaining() {
+        if (containing < speed * 2) {
             container += containing;
             containing = 0;
-        }else{
+        } else {
             container += speed * 2;
             containing -= speed * 2;
         }
     }
 
-    public void getContaining(){
-        if(meltItem != ItemStack.EMPTY){
+    public void getContaining() {
+        if (meltItem != ItemStack.EMPTY) {
             //如果元素为空的话，先设置元素
-            if(element == 0){
-               element = getContainingElement(meltItem);
+            if (element == null) {
+                element = getContainingElement(meltItem);
             }
             //
-            containing = new Random().nextInt(getContainingNum(meltItem)) * 3+ 1;
+            containing = new Random().nextInt(getContainingNum(meltItem)) * 3 + 1;
         }
     }
 
 
     //获得当前Containing
-    public int getContainingNum(ItemStack itemStack){
-        return helper.getContainingNum(itemStack);
+    public int getContainingNum(ItemStack itemStack) {
+        return ElementHelper.getContainingNum(itemStack);
     }
 
     //获得投入物品的元素
-    public int getContainingElement(ItemStack itemStack){
-        return helper.getContainingElement(itemStack);
+    public IElement getContainingElement(ItemStack itemStack) {
+        return ElementHelper.getContainingElement(itemStack);
     }
 
     //生成微光
-    public void generateFaintLight(){
-        if (container>MAX_CONTAINER - 1){
+    public void generateFaintLight() {
+        if (container > MAX_CONTAINER - 1) {
             EntityFaintLight entityFaintLight = new EntityFaintLight(EntityLoader.faintLight.get(), world, element);
-            entityFaintLight.setPosition(pos.getX(), pos.up().getY(),pos.getZ()+0.5);
+            entityFaintLight.setPosition(pos.getX(), pos.up().getY(), pos.getZ() + 0.5);
             entityFaintLight.setFaintLightType(element);
             this.world.addEntity(entityFaintLight);
             clear();
@@ -198,15 +200,12 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
     }
 
     //清空
-    public void clear(){
+    public void clear() {
         this.container = 0;
         this.containing = 0;
-        this.element = 0;
+        this.element = null;
         this.isWater = false;
-        if(world.getBlockState(pos.down()).getBlock() == Blocks.FIRE || world.getBlockState(pos.down()).getBlock() == Blocks.LAVA )
-        this.isFire = true;
-        else
-            this.isFire = false;
+        this.isFire = world.getBlockState(pos.down()).getBlock() == Blocks.FIRE || world.getBlockState(pos.down()).getBlock() == Blocks.LAVA;
         this.meltItem = ItemStack.EMPTY;
         markDirty();
     }

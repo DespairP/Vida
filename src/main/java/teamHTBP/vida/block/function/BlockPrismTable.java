@@ -27,13 +27,14 @@ import teamHTBP.vida.TileEntity.TileEntityPrismTable;
 import javax.annotation.Nullable;
 
 public class BlockPrismTable extends Block {
-    private final VoxelShape SHAPE =Block.makeCuboidShape(0, 0, 0, 16, 13, 16);
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+    private final VoxelShape SHAPE = Block.makeCuboidShape(0, 0, 0, 16, 13, 16);
 
 
     public BlockPrismTable() {
         super(Properties.create(Material.WOOD).hardnessAndResistance(3.0f, 3.0f).notSolid().harvestTool(ToolType.PICKAXE).notSolid());
     }
+
     @Override
     public boolean hasTileEntity(BlockState state) {
         return true;
@@ -59,10 +60,10 @@ public class BlockPrismTable extends Block {
     @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
         TileEntityPrismTable tileEntityPrismTable = (TileEntityPrismTable) worldIn.getTileEntity(pos);
-        if(tileEntityPrismTable != null){
-            worldIn.addEntity(new ItemEntity(worldIn,pos.getX(),pos.getY(),pos.getZ(),tileEntityPrismTable.getSlot().getStackInSlot(0)));
-            worldIn.addEntity(new ItemEntity(worldIn,pos.getX(),pos.getY(),pos.getZ(),tileEntityPrismTable.getSlot().getStackInSlot(1)));
-            worldIn.addEntity(new ItemEntity(worldIn,pos.getX(),pos.getY(),pos.getZ(),tileEntityPrismTable.getSlot().getStackInSlot(2)));
+        if (tileEntityPrismTable != null) {
+            worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityPrismTable.getSlot().getStackInSlot(0)));
+            worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityPrismTable.getSlot().getStackInSlot(1)));
+            worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityPrismTable.getSlot().getStackInSlot(2)));
         }
         super.onBlockHarvested(worldIn, pos, state, player);
     }

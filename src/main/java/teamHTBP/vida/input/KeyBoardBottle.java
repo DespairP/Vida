@@ -14,7 +14,6 @@ import teamHTBP.vida.network.PacketChannel;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
 public class KeyBoardBottle {
-    public static int alpha = 0;
     public static final KeyBinding MESSAGE_KEY = new KeyBinding("key.bottles",
             KeyConflictContext.IN_GAME,
             KeyModifier.NONE,
@@ -39,22 +38,23 @@ public class KeyBoardBottle {
             InputMappings.Type.KEYSYM,
             GLFW.GLFW_KEY_W,
             "key.category.vida");
+    public static int alpha = 0;
+
     @SubscribeEvent
     public static void onKeyboardInput(InputEvent.KeyInputEvent event) {
         if (MESSAGE_KEY.isKeyDown()) {
             //alpha += 2;
         }
-        if (MESSAGE_KEY_1.isPressed()){
+        if (MESSAGE_KEY_1.isPressed()) {
             PacketChannel.INSTANCE.sendToServer(new PacketBottles(1));
         }
-        if( MESSAGE_KEY_2.isPressed()){
+        if (MESSAGE_KEY_2.isPressed()) {
             PacketChannel.INSTANCE.sendToServer(new PacketBottles(2));
         }
-        if(MESSAGE_KEY_3.isPressed()){
+        if (MESSAGE_KEY_3.isPressed()) {
             PacketChannel.INSTANCE.sendToServer(new PacketBottles(3));
         }
     }
-
 
 
 }

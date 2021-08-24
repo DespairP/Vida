@@ -4,8 +4,8 @@ import net.minecraft.client.renderer.model.ModelRenderer;
 
 public class ArmorModelAquaLeggings extends ArmorModelElementLeggings {
 
-    public ArmorModelAquaLeggings(){
-        super(128,128);
+    public ArmorModelAquaLeggings() {
+        super(128, 128);
 
         body_low = new ModelRenderer(this);
         body_low.setRotationPoint(0.0F, 24.0F, 0.0F);

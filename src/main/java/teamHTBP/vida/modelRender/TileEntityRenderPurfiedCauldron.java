@@ -1,33 +1,31 @@
 package teamHTBP.vida.modelRender;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.BlockRendererDispatcher;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
 import net.minecraft.inventory.container.PlayerContainer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.vector.Matrix4f;
+import net.minecraft.util.math.vector.Quaternion;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeColors;
-import net.minecraftforge.client.model.data.EmptyModelData;
-import net.minecraftforge.fluids.FluidAttributes;
-import org.lwjgl.opengl.GL11;
 import teamHTBP.vida.TileEntity.TileEntityPurfiedCauldron;
+import teamHTBP.vida.element.EnumElements;
+import teamHTBP.vida.element.IElement;
 
 public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEntityPurfiedCauldron> {
     private float floating = 0; //物品悬浮增量
@@ -39,9 +37,17 @@ public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEnti
         super(rendererDispatcherIn);
     }
 
+    private static int getFluidColor(World world, BlockPos pos, Fluid fluid) {
+        if (fluid.isEquivalentTo(Fluids.WATER)) {
+            return BiomeColors.getWaterColor(world, pos);
+        }
+
+        return fluid.getAttributes().getColor();
+    }
+
     @Override
     public void render(TileEntityPurfiedCauldron tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
-        if(tileEntityIn.isWater) {
+        if (tileEntityIn.isWater) {
             matrixStackIn.push();
             //获取水的贴图
             Fluid fluid = Fluids.WATER.getStillFluid();
@@ -72,11 +78,11 @@ public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEnti
             float g = (color >> 8 & 0xFF) / 255.0F;
             float b = (color & 0xFF) / 255.0F;
             //进行变色
-            if(changeColor(tileEntityIn, r*255, g*255, b*255)) {
-            r=rPlus/ 255.0F;
-            g=gPlus/ 255.0f;
-            b=bPlus/255.0f;
-            }else{
+            if (changeColor(tileEntityIn, r * 255, g * 255, b * 255)) {
+                r = rPlus / 255.0F;
+                g = gPlus / 255.0f;
+                b = bPlus / 255.0f;
+            } else {
                 rPlus = 63;
                 gPlus = 118;
                 bPlus = 228;
@@ -84,21 +90,21 @@ public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEnti
             //开始绘制水贴图
             Matrix4f matrix4f = matrixStackIn.getLast().getMatrix();
             //首先获取水位高度
-            float waterlevel = tileEntityIn.container/110814.2f;
+            float waterlevel = tileEntityIn.container / 110814.2f;
             matrixStackIn.translate(0, 0.3F + waterlevel, 0);
             //设置贴图绘制方式
             IVertexBuilder buffer = bufferIn.getBuffer(RenderType.getTranslucent());
             //绘制
-            buffer.pos(matrix4f, 0.1F, 0.1F, 0.1F).color(r, g, b, a).tex(uMin, vMin).overlay(0,0).lightmap(light).normal(0, 1, 0).endVertex();
-            buffer.pos(matrix4f, 0.1F, 0.1F, 0.9F).color(r, g, b, a).tex(uMin, vMax).overlay(0,0).lightmap(light).normal(0, 1, 0).endVertex();
-            buffer.pos(matrix4f, 0.9F, 0.1F, 0.9F).color(r, g, b, a).tex(uMax, vMax).overlay(0,0).lightmap(light).normal(0, 1, 0).endVertex();
-            buffer.pos(matrix4f, 0.9F, 0.1F, 0.1F).color(r, g, b, a).tex(uMax, vMin).overlay(0,0).lightmap(light).normal(0, 1, 0).endVertex();
+            buffer.pos(matrix4f, 0.1F, 0.1F, 0.1F).color(r, g, b, a).tex(uMin, vMin).overlay(0, 0).lightmap(light).normal(0, 1, 0).endVertex();
+            buffer.pos(matrix4f, 0.1F, 0.1F, 0.9F).color(r, g, b, a).tex(uMin, vMax).overlay(0, 0).lightmap(light).normal(0, 1, 0).endVertex();
+            buffer.pos(matrix4f, 0.9F, 0.1F, 0.9F).color(r, g, b, a).tex(uMax, vMax).overlay(0, 0).lightmap(light).normal(0, 1, 0).endVertex();
+            buffer.pos(matrix4f, 0.9F, 0.1F, 0.1F).color(r, g, b, a).tex(uMax, vMin).overlay(0, 0).lightmap(light).normal(0, 1, 0).endVertex();
             //结束绘制
             Minecraft.getInstance().getProfiler().endSection();
             matrixStackIn.pop();
         }
 
-        if(!tileEntityIn.meltItem.isEmpty()) {
+        if (!tileEntityIn.meltItem.isEmpty()) {
             matrixStackIn.push();
             double floatingLevel = 0.1 * Math.sin(floating);
             matrixStackIn.translate(0.5f, 1.3f + floatingLevel, 0.55f);
@@ -115,59 +121,54 @@ public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEnti
             IBakedModel ibakedmodel = itemRenderer.getItemModelWithOverrides(tileEntityIn.meltItem, tileEntityIn.getWorld(), null);
             itemRenderer.renderItem(tileEntityIn.meltItem, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
 
-            if(floating >= 2*Math.PI){
+            if (floating >= 2 * Math.PI) {
                 floating = 0;
-            }else {
+            } else {
                 floating += 0.01;
             }
             matrixStackIn.pop();
         }
 
-        if(tileEntityIn.element == 0){
+        if (tileEntityIn.element == EnumElements.NONE) {
             rPlus = 0;
             gPlus = 0;
             bPlus = 0;
         }
     }
 
-    private static int getFluidColor(World world, BlockPos pos, Fluid fluid) {
-        if(fluid.isEquivalentTo(Fluids.WATER)) {
-            return BiomeColors.getWaterColor(world, pos);
+    private boolean changeColor(TileEntityPurfiedCauldron tileEntityIn, float r, float g, float b) {
+        IElement element = tileEntityIn.element;
+        if (!(element instanceof EnumElements)) {
+            return false;
         }
-
-        return fluid.getAttributes().getColor();
-    }
-
-    private boolean changeColor(TileEntityPurfiedCauldron tileEntityIn,float r,float g,float b){
-        int element = tileEntityIn.element;
-        int container = tileEntityIn.container < 5000?tileEntityIn.container:5000;
+        int container = tileEntityIn.container < 5000 ? tileEntityIn.container : 5000;
         float level = container / 5000.0f;
-        switch (element){
-            case 1:
-                    rPlus = r + (255-r) * level;
-                    gPlus = g + (255-g) * level;
-                    bPlus = b + (137-b) * level;
+        switch ((EnumElements) element) {
+            case GOLD:
+                rPlus = r + (255 - r) * level;
+                gPlus = g + (255 - g) * level;
+                bPlus = b + (137 - b) * level;
                 return true;
-            case 2:
-                   rPlus = r + (0-r) * level;
-                   gPlus = g + (214-g) * level;
-                   bPlus = b + (24-b) * level;
-                 return true;
-            case 3:
-                rPlus = r + (0-r) * level;
-                gPlus = g + (237-g) * level;
-                bPlus = b + (255-b) * level;
+            case WOOD:
+                rPlus = r + (0 - r) * level;
+                gPlus = g + (214 - g) * level;
+                bPlus = b + (24 - b) * level;
                 return true;
-            case 4:
-                rPlus = r + (255-r) * level;
-                gPlus = g + (0-g) * level;
-                bPlus = b + (8-b) * level;
+            case AQUA:
+                rPlus = r + (0 - r) * level;
+                gPlus = g + (237 - g) * level;
+                bPlus = b + (255 - b) * level;
                 return true;
-            case 5:
-                rPlus = r + (153-r) * level;
-                gPlus = g + (143-g) * level;
-                bPlus = b + (79 -b) * level;
-                return  true;
+            case FIRE:
+                rPlus = r + (255 - r) * level;
+                gPlus = g + (0 - g) * level;
+                bPlus = b + (8 - b) * level;
+                return true;
+            case EARTH:
+                rPlus = r + (153 - r) * level;
+                gPlus = g + (143 - g) * level;
+                bPlus = b + (79 - b) * level;
+                return true;
             default:
                 return false;
         }

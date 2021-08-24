@@ -12,9 +12,10 @@ public class PacketPrismTable {
     private int mirrorX = 0;
     private int mirrorY = 0;
     private boolean isClick = false;
-    private int x =0;
-    private int y =0;
-    private int z =0;
+    private int x = 0;
+    private int y = 0;
+    private int z = 0;
+
     public PacketPrismTable(PacketBuffer buffer) {
         mirrorX = buffer.readInt();
         mirrorY = buffer.readInt();
@@ -24,7 +25,7 @@ public class PacketPrismTable {
         isClick = buffer.readBoolean();
     }
 
-    public PacketPrismTable(int mirrorX,int mirrorY,int x,int y,int z) {
+    public PacketPrismTable(int mirrorX, int mirrorY, int x, int y, int z) {
         this.mirrorX = mirrorX;
         this.mirrorY = mirrorY;
         this.x = x;
@@ -43,18 +44,19 @@ public class PacketPrismTable {
     }
 
     public void handler(Supplier<NetworkEvent.Context> ctx) {
-        ctx.get().enqueueWork(()->{
-            if(ctx.get().getSender() == null) return;
+        ctx.get().enqueueWork(() -> {
+            if (ctx.get().getSender() == null) return;
 
-            if(ctx.get().getSender().world.isAreaLoaded(new BlockPos(x, y, z), 1)){
-                TileEntity tileEntity = ctx.get().getSender().world.getTileEntity(new BlockPos(x,y,z));
-            if(tileEntity instanceof TileEntityPrismTable){
-                TileEntityPrismTable tileEntityPrismTable = (TileEntityPrismTable)tileEntity;
-                tileEntityPrismTable.array.set(2, this.mirrorX);
-                tileEntityPrismTable.array.set(3, this.mirrorY);
-                tileEntityPrismTable.isClick = true;
+            if (ctx.get().getSender().world.isAreaLoaded(new BlockPos(x, y, z), 1)) {
+                TileEntity tileEntity = ctx.get().getSender().world.getTileEntity(new BlockPos(x, y, z));
+                if (tileEntity instanceof TileEntityPrismTable) {
+                    TileEntityPrismTable tileEntityPrismTable = (TileEntityPrismTable) tileEntity;
+                    tileEntityPrismTable.array.set(2, this.mirrorX);
+                    tileEntityPrismTable.array.set(3, this.mirrorY);
+                    tileEntityPrismTable.isClick = true;
+                }
             }
-        }});
+        });
 
 
         ctx.get().setPacketHandled(true);

@@ -16,8 +16,8 @@ public class FullBlockModel implements IBlockModelJsonWriter {
     }
 
     @Override
-    public Map<String,String> getTextures(String name){
-        return ImmutableMap.of("all",MOD_ID + ":block/" + name);
+    public Map<String, String> getTextures(String name) {
+        return ImmutableMap.of("all", MOD_ID + ":block/" + name);
     }
 
 }

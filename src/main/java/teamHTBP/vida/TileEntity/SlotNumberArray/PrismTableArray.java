@@ -16,7 +16,7 @@ public class PrismTableArray implements IIntArray {
     }*/
     @Override
     public int get(int index) {
-        switch (index){
+        switch (index) {
             case 0:
                 return this.fireposX;
             case 1:
@@ -32,7 +32,7 @@ public class PrismTableArray implements IIntArray {
 
     @Override
     public void set(int index, int value) {
-        switch (index){
+        switch (index) {
             case 0:
                 this.fireposX = value;
                 break;

@@ -6,8 +6,8 @@ public class ArmorModelEarthBoots extends ArmorModelElementBoots {
     private final ModelRenderer bone;
     private final ModelRenderer bone2;
 
-    public ArmorModelEarthBoots(){
-        super(128,128);
+    public ArmorModelEarthBoots() {
+        super(128, 128);
 
         leg_left = new ModelRenderer(this);
         leg_left.setRotationPoint(2.0F, 12.0F, 0.0F);

@@ -28,20 +28,24 @@ public class ItemArmorElementBoots extends ArmorItem {  //盔甲属于什么元�
 
     @OnlyIn(Dist.CLIENT)
     @Nullable
-    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default)
-    {
+    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
         ArmorModelElementBoots model = null;
-        switch (element){
+        switch (element) {
             case 1:
-                model = new ArmorModelGoldBoots();break;
+                model = new ArmorModelGoldBoots();
+                break;
             case 2:
-                model = new ArmorModelWoodBoots();break;
+                model = new ArmorModelWoodBoots();
+                break;
             case 3:
-                model = new ArmorModelGoldBoots();break;
+                model = new ArmorModelGoldBoots();
+                break;
             case 4:
-                model = new ArmorModelFireBoots();break;
+                model = new ArmorModelFireBoots();
+                break;
             case 5:
-                model = new ArmorModelEarthBoots();break;
+                model = new ArmorModelEarthBoots();
+                break;
         }
 
         model.bipedLeftLeg.showModel = true;
@@ -55,15 +59,14 @@ public class ItemArmorElementBoots extends ArmorItem {  //盔甲属于什么元�
         model.isSitting = _default.isSitting;
         model.rightArmPose = _default.rightArmPose;
         model.leftArmPose = _default.leftArmPose;
-        return (A)model;
+        return (A) model;
     }
 
 
     @Nullable
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type)
-    {
-        switch (element){
+    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
+        switch (element) {
             case 1:
                 return "vida:textures/model/armor/gold_element_armor.png";
             case 2:
@@ -77,7 +80,6 @@ public class ItemArmorElementBoots extends ArmorItem {  //盔甲属于什么元�
         }
         return null;
     }
-
 
 
 }

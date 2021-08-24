@@ -1,5 +1,6 @@
 package teamHTBP.vida.gui.GUI;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
@@ -15,20 +16,20 @@ public class ContainerScreenBottles extends ContainerScreen<ContainerBottles> {
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-        this.renderBackground();
-        RenderSystem.color4f(1,1,1,1);
+    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+        this.renderBackground(matrixStack);
+        RenderSystem.color4f(1, 1, 1, 1);
         this.minecraft.getTextureManager().bindTexture(Gui);
-        blit(this.guiLeft , this.guiTop, 0, 0,176, 141, 256, 256);
-        if(container.isStack3Lock){
-            blit(this.guiLeft + 104, this.guiTop + 12, 0, 246,0,10, 13, 256, 256);
+        blit(matrixStack, this.guiLeft, this.guiTop, 0, 0, 176, 141, 256, 256);
+        if (container.isStack3Lock) {
+            blit(matrixStack, this.guiLeft + 104, this.guiTop + 12, 0, 246, 0, 10, 13, 256, 256);
         }
     }
 
     @Override
-    public void render(int mouseX, int mouseY, float ticks) {
-        this.renderBackground();
-        super.render(mouseX, mouseY, ticks);
-        renderHoveredToolTip(mouseX, mouseY);
+    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float ticks) {
+        this.renderBackground(matrixStack);
+        super.render(matrixStack, mouseX, mouseY, ticks);
+        renderHoveredTooltip(matrixStack, mouseX, mouseY);
     }
 }

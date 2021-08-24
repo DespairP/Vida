@@ -1,7 +1,6 @@
 package teamHTBP.vida.block.decoration;
 
 
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
@@ -17,28 +16,28 @@ import net.minecraft.world.World;
 import teamHTBP.vida.item.ItemLoader;
 
 public class BlockVidaPlank extends Block {
-    private static IntegerProperty STATE = IntegerProperty.create("type", 0, 2);
+    private static final IntegerProperty STATE = IntegerProperty.create("type", 0, 2);
 
     public BlockVidaPlank() {
-        super(Block.Properties.create(Material.WOOD).sound(SoundType.WOOD).hardnessAndResistance(2.0f,3.0f));
+        super(Block.Properties.create(Material.WOOD).sound(SoundType.WOOD).hardnessAndResistance(2.0f, 3.0f));
         //this.setDefaultState(this.getStateContainer().getBaseState().with(STATE, 0));
     }
 
     public BlockVidaPlank(int state) {
-        super(Block.Properties.create(Material.WOOD).sound(SoundType.WOOD).hardnessAndResistance(2.0f,3.0f));
+        super(Block.Properties.create(Material.WOOD).sound(SoundType.WOOD).hardnessAndResistance(2.0f, 3.0f));
         this.setDefaultState(this.getStateContainer().getBaseState().with(STATE, state));
     }
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if(!worldIn.isRemote)
-        if(player.inventory.getCurrentItem().getItem() == ItemLoader.WAND_VIDA.get()){
-            int stateInt = (int)state.get(STATE);
-            stateInt = (stateInt>=2 ? 0:stateInt+1);
-            BlockState newState = state.with(STATE, stateInt);
-            worldIn.setBlockState(pos, newState);
-            return ActionResultType.SUCCESS;
-        }
+        if (!worldIn.isRemote)
+            if (player.inventory.getCurrentItem().getItem() == ItemLoader.WAND_VIDA.get()) {
+                int stateInt = state.get(STATE);
+                stateInt = (stateInt >= 2 ? 0 : stateInt + 1);
+                BlockState newState = state.with(STATE, stateInt);
+                worldIn.setBlockState(pos, newState);
+                return ActionResultType.SUCCESS;
+            }
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
     }
 

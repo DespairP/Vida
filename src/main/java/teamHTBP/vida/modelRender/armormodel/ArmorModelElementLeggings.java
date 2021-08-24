@@ -12,18 +12,18 @@ public class ArmorModelElementLeggings<T extends Entity> extends BipedModel<Armo
     public ModelRenderer body_low;
 
     public ArmorModelElementLeggings() {
-        super(1.0f,0,64,64);
+        super(1.0f, 0, 64, 64);
     }
 
-    public ArmorModelElementLeggings(int textureWidth,int textureHeight) {
-        super(1.0f,0, textureWidth, textureHeight);
+    public ArmorModelElementLeggings(int textureWidth, int textureHeight) {
+        super(1.0f, 0, textureWidth, textureHeight);
     }
+
     @Override
     public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
         this.body_low.showModel = true;
         this.body_low.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
     }
-
 
 
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
