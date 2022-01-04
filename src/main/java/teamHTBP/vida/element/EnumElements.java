@@ -31,6 +31,7 @@ public enum EnumElements implements IElement {
             Biomes.SNOWY_TUNDRA),
     FIRE(1, 5,
             Biomes.MOUNTAINS,
+            Biomes.DESERT,
             Biomes.MOUNTAIN_EDGE),
     EARTH(3, 1,
             Biomes.ERODED_BADLANDS,
@@ -53,28 +54,41 @@ public enum EnumElements implements IElement {
         this.conflict = conflictIndex;
     }
 
+    /**/
     @Override
     public List<RegistryKey<Biome>> getContainsBiomes() {
         return biomes;
     }
 
+    /**/
     @Override
     public IElement getConflict() {
         return values()[conflict];
     }
 
+    /**/
     @Override
     public IElement getInterGrowth() {
         return values()[interGrowth];
     }
 
+
+    /**/
     @Override
     public IElement setRegistryName(ResourceLocation name) {
         throw new IllegalArgumentException("不允许设置registry name");
     }
 
     @Override
+    public String getElementName() {
+        return name();
+    }
+
+    /**/
+    @Override
     public ResourceLocation getRegistryName() {
         return new ResourceLocation(Vida.modId, name());
     }
+
+
 }

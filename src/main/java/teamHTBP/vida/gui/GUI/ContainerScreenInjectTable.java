@@ -473,4 +473,9 @@ public class ContainerScreenInjectTable extends ContainerScreen<ContainerInjectT
             }
         }
     }
+
+    @Override
+    protected void drawGuiContainerForegroundLayer(MatrixStack p_230451_1_, int p_230451_2_, int p_230451_3_) {
+
+    }
 }

@@ -19,12 +19,14 @@ import teamHTBP.vida.element.EnumElements;
 import teamHTBP.vida.element.IElement;
 import teamHTBP.vida.registry.VidaRegistries;
 
+import java.util.Optional;
+
 public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnData {
 
-    private static final Logger PRIVATE_LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger();
     private static final DataParameter<String> TYPE = EntityDataManager.createKey(EntityFaintLight.class, DataSerializers.STRING);
-    private final int ticks = 0;
     private IElement types;
+
     public EntityFaintLight(EntityType<?> entityTypeIn, World worldIn) {
         super(entityTypeIn, worldIn);
         types = EnumElements.GOLD;
@@ -45,7 +47,7 @@ public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnDa
 
     @Override
     protected void registerData() {
-        this.dataManager.register(TYPE, types.getRegistryName().toString());
+        this.dataManager.register(TYPE, Optional.ofNullable(types).orElseGet(()->EnumElements.NONE).getElementName());
     }
 
     @Override
@@ -66,11 +68,11 @@ public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnDa
 
 
     public IElement getFaintLightType() {
-        return VidaRegistries.ELEMENTS.getValue(new ResourceLocation(this.dataManager.get(TYPE)));
+        return EnumElements.valueOf(this.dataManager.get(TYPE));
     }
 
     public void setFaintLightType(IElement type) {
-        this.dataManager.set(TYPE, type.getRegistryName().toString());
+        this.dataManager.set(TYPE, type.getElementName());
     }
 
 
@@ -82,7 +84,7 @@ public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnDa
     public void notifyDataManagerChange(DataParameter<?> key) {
         super.notifyDataManagerChange(key);
         if (TYPE.equals(key)) {
-            this.types = VidaRegistries.ELEMENTS.getValue(new ResourceLocation(this.dataManager.get(TYPE)));
+            this.types = EnumElements.valueOf(dataManager.get(TYPE));
         }
     }
 

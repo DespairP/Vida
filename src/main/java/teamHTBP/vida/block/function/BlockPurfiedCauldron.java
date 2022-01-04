@@ -25,6 +25,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import teamHTBP.vida.TileEntity.TileEntityPurfiedCauldron;
 import teamHTBP.vida.element.EnumElements;
+import teamHTBP.vida.element.IElement;
 import teamHTBP.vida.particle.CubeParticleData;
 
 import javax.annotation.Nullable;
@@ -112,7 +113,7 @@ public class BlockPurfiedCauldron extends Block {
         TileEntityPurfiedCauldron entity = (TileEntityPurfiedCauldron) worldIn.getTileEntity(pos);
         if (entity != null) {
             //生成粒子
-            if (entity.element instanceof EnumElements && !entity.meltItem.isEmpty() && rand.nextDouble() >= 0.65) {
+            if (entity.element != null && !entity.meltItem.isEmpty() && rand.nextDouble() >= 0.65) {
                 double speedX = rand.nextBoolean() ? 0 + rand.nextFloat() / 1000.0F : 0 - rand.nextFloat() / 1000.0F;
                 double speedY = -0.025 + rand.nextFloat() / 1000f;
                 double speedZ = rand.nextBoolean() ? 0 + rand.nextFloat() / 1000.0f : 0 - rand.nextFloat() / 1000.0f;

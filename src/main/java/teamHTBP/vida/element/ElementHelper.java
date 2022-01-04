@@ -18,6 +18,8 @@ import teamHTBP.vida.registry.VidaRegistries;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 /**
@@ -30,15 +32,6 @@ public class ElementHelper {
      * 一个存放元素值-键的Hashmap
      */
     static HashMap<Item, mapItem> map = new HashMap<Item, mapItem>();
-    static List<RegistryKey<Biome>> LIST_WOOD = Arrays.asList(
-            Biomes.PLAINS,
-            Biomes.FOREST,
-            Biomes.BAMBOO_JUNGLE,
-            Biomes.FLOWER_FOREST,
-            Biomes.JUNGLE,
-            Biomes.BIRCH_FOREST,
-            Biomes.SAVANNA
-    );
 
     /*使用该类时自动将物品放入map中*/
     static {
@@ -124,16 +117,19 @@ public class ElementHelper {
         map.put(ItemLoader.CREATIVE_ELEMENTPOTION_EARTH.get(), new mapItem(EnumElements.EARTH, 500000, "CREATIVE_ELEMENTPOTION_EARTH"));
     }
 
+
+    /**NBT辅助写入*/
     public static void write(CompoundNBT nbt, IElement element) {
-        nbt.putString("element", element.getRegistryName().toString());
+        nbt.putString("element", Optional.ofNullable(element).orElseGet(()->EnumElements.NONE).getElementName());
     }
 
+    /**NBT辅助读取*/
     public static IElement read(CompoundNBT nbt) {
         if (!nbt.contains("element")) {
             return null;
         }
 
-        return VidaRegistries.ELEMENTS.getValue(new ResourceLocation(nbt.getString("element")));
+        return EnumElements.valueOf(nbt.getString("element"));
     }
 
     /**
@@ -167,7 +163,8 @@ public class ElementHelper {
      * @return 地形的元素[见上面的常量解释]
      **/
     public static EnumElements getBiomeElement(Biome biome) {
-        return (EnumElements) Arrays.stream(EnumElements.values()).filter((ele) -> ele.contains(biome)).toArray()[0];
+         final List<EnumElements> biomesElementList = Arrays.stream(EnumElements.values()).filter((element) -> element.contains(biome)).collect(Collectors.toList());
+         return biomesElementList.size() > 0 ? biomesElementList.get(0) : EnumElements.NONE;
     }
 
 

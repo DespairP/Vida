@@ -39,6 +39,7 @@ public class TileEntityRenderGemShower extends TileEntityRenderer<TileEntityGemS
             float vMin = textureAtlasSprite.getMinV();
             float vMax = textureAtlasSprite.getMaxV();
 
+            // 渲染中间的宝石块
             IVertexBuilder buffer = bufferIn.getBuffer(RenderType.getCutout());
 
             matrixStackIn.push();
@@ -47,9 +48,8 @@ public class TileEntityRenderGemShower extends TileEntityRenderer<TileEntityGemS
             matrixStackIn.rotate(this.renderDispatcher.renderInfo.getRotation());
             matrixStackIn.translate(-.5F, -0.9F, -.5F);
             Matrix4f matrix4f = matrixStackIn.getLast().getMatrix();
-            //float f7 = uMin,f8 = uMax,f5 = vMin,f6 = vMax;
 
-            int light = this.getBrightnessForRender(tileEntityIn, partialTicks);
+            //int light = this.getBrightnessForRender(tileEntityIn, partialTicks);
             buffer.pos(matrix4f, 0, 1, 1).color(r, g, b, a).tex(uMin, vMin).lightmap(120, 240).normal(0, 1, 0).endVertex();
             buffer.pos(matrix4f, 1, 1, 0).color(r, g, b, a).tex(uMin, vMax).lightmap(120, 240).normal(0, 1, 0).endVertex();
             buffer.pos(matrix4f, 1, 1, 1).color(r, g, b, a).tex(uMax, vMax).lightmap(120, 240).normal(0, 1, 0).endVertex();
@@ -84,7 +84,7 @@ public class TileEntityRenderGemShower extends TileEntityRenderer<TileEntityGemS
 
             matrixStackIn.pop();
 
-
+            // 渲染logo
             textureAtlasSprite = Minecraft.getInstance().getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE).apply(this.getlogoResource(tileEntityIn.gemItem));
             uMin = textureAtlasSprite.getMinU();
             uMax = textureAtlasSprite.getMaxU();
@@ -93,7 +93,7 @@ public class TileEntityRenderGemShower extends TileEntityRenderer<TileEntityGemS
             //draw logo
             matrixStackIn.push();
             IVertexBuilder bufferLogo = bufferIn.getBuffer(RenderType.getCutout());
-            matrixStackIn.translate(0.5f, 2.2F + floatHeight, 0.5f);
+            matrixStackIn.translate(0.5f, 2.5F + floatHeight, 0.5f);
             matrixStackIn.rotate(this.renderDispatcher.renderInfo.getRotation());
             matrixStackIn.scale(0.5f, 0.5f, 0.5f);
             matrixStackIn.translate(-0.5f, -0.5, -0.5f);

@@ -22,11 +22,11 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
     //满提炼值
     public final int MAX_CONTAINER = 30000;
     //五元素数值
-    public final int ELEMENT_GOLD = 1;
-    public final int ELEMENT_WOOD = 2;
-    public final int ELEMENT_AQUA = 3;
-    public final int ELEMENT_FIRE = 4;
-    public final int ELEMENT_EARTH = 5;
+    //public final int ELEMENT_GOLD = 1;
+    //public final int ELEMENT_WOOD = 2;
+    //public final int ELEMENT_AQUA = 3;
+    //public final int ELEMENT_FIRE = 4;
+    //public final int ELEMENT_EARTH = 5;
     //提炼值
     public int container = 0;
     //正在提炼的缓冲值
@@ -40,7 +40,7 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
     //加速熔炼速度,speed * 10 =actualSpeed
     public int speed = 1;
     //锅内的元素
-    public IElement element;
+    public IElement element = EnumElements.NONE;
     //
     ElementHelper helper = new ElementHelper();
 
@@ -83,6 +83,7 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
         super.read(state, compound);
     }
 
+    @Override
     public CompoundNBT write(CompoundNBT compound) {
         compound.putInt("containing", containing);
         compound.putInt("container", container);
@@ -169,7 +170,7 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
     public void getContaining() {
         if (meltItem != ItemStack.EMPTY) {
             //如果元素为空的话，先设置元素
-            if (element == null) {
+            if (element == EnumElements.NONE) {
                 element = getContainingElement(meltItem);
             }
             //

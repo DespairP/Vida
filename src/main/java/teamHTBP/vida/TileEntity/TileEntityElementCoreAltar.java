@@ -21,6 +21,7 @@ import teamHTBP.vida.registry.VidaRegistries;
 import javax.annotation.Nullable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 public class TileEntityElementCoreAltar extends TileEntity implements ITickableTileEntity {
     //最大的仪式进度
@@ -36,7 +37,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
     //仪式进度
     public int progress = 0;
     //元素类型
-    public IElement element;
+    public IElement element = EnumElements.NONE;
     //渲染方面的东西，悬浮数
     public double floating = 0.0f;
     public float moveup = 0.0f;
@@ -66,7 +67,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         isElementOver = compound.getBoolean("isElementOver");
         isMultiComplete = compound.getBoolean("isMutiComplete");
         isWAND_VIDACilck = compound.getBoolean("isWAND_VIDAClick");
-        element = VidaRegistries.ELEMENTS.getValue(new ResourceLocation(compound.getString("element")));
+        element = EnumElements.valueOf(compound.getString("element"));
         for (int i = 0; i < 4; i++) {
             if (compound.contains("altarItem" + i)) {
                 altarItem[i] = ItemStack.read(compound.getCompound("altarItem" + i));
@@ -85,9 +86,10 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
     }
 
     //写入NBT
+    @Override
     public CompoundNBT write(CompoundNBT compound) {
         compound.putInt("progress", progress);
-        compound.putString("element", element.getRegistryName().toString());
+        compound.putString("element", element.getElementName());
         compound.putBoolean("isProgressing", isProgressing);
         compound.putBoolean("isBlockOver", isBlockOver);
         //compound.putInt("isMutiComplete", isMultiComplete);
@@ -123,7 +125,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
     //区块刚刚被加载时，服务端->客户端
     @Override
     public CompoundNBT getUpdateTag() {
-        return this.write(new CompoundNBT());
+        return write(new CompoundNBT());
 
     }
 
@@ -142,7 +144,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         isElementOver = tag.getBoolean("isElementOver");
         isMultiComplete = tag.getBoolean("isMutiComplete");
         isWAND_VIDACilck = tag.getBoolean("isWAND_VIDAClick");
-        element = VidaRegistries.ELEMENTS.getValue(new ResourceLocation(tag.getString("element")));
+        element = EnumElements.valueOf(tag.getString("element"));
         for (int i = 0; i < 4; i++) {
             if (tag.contains("altarItem" + i)) {
                 altarItem[i] = ItemStack.read(tag.getCompound("altarItem" + i));

@@ -112,4 +112,8 @@ public class ContainerScreenBluePrint extends ContainerScreen<ContainerBluePrint
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         renderHoveredTooltip(matrixStack, mouseX, mouseY);
     }
+
+    @Override
+    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y) {
+    }
 }

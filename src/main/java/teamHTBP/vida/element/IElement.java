@@ -2,18 +2,20 @@ package teamHTBP.vida.element;
 
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import teamHTBP.vida.helper.Allelopathy;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Objects;
 
 public interface IElement extends IForgeRegistryEntry<IElement> {
     List<RegistryKey<Biome>> getContainsBiomes();
 
     default boolean contains(Biome biome) {
-        return getContainsBiomes().contains(biome);
+        return getContainsBiomes().contains(RegistryKey.getOrCreateKey(Registry.BIOME_KEY,Objects.requireNonNull(biome.getRegistryName())));
     }
 
     default boolean contains(RegistryKey<Biome> biome) {
@@ -59,4 +61,6 @@ public interface IElement extends IForgeRegistryEntry<IElement> {
     default Class<IElement> getRegistryType() {
         return IElement.class;
     }
+
+    default String getElementName(){return "EMPTY";}
 }

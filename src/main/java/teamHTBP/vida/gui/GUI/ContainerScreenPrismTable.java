@@ -124,6 +124,11 @@ public class ContainerScreenPrismTable extends ContainerScreen<ContainerPrismTab
         }
         return super.mouseDragged(p_mouseDragged_1_, p_mouseDragged_3_, p_mouseDragged_5_, p_mouseDragged_6_, p_mouseDragged_8_);
     }
+
+    @Override
+    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y) {
+
+    }
 }
 
 class button1 extends AbstractButton {
@@ -156,7 +161,6 @@ class button1 extends AbstractButton {
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, this.alpha);
         blit(matrixStack, this.x, this.y, 0, 0, 246, 5, 10, 256, 256);
     }
-
 
 }
 
@@ -219,6 +223,5 @@ class mirrorButton extends AbstractButton {
             blit(matrixStack, this.x, this.y, 0, 35, 240, 16, 16, 256, 256);
 
     }
-
 
 }

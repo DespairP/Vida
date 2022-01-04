@@ -14,6 +14,8 @@ import teamHTBP.vida.item.ItemLoader;
 
 import javax.annotation.Nullable;
 
+import static teamHTBP.vida.element.EnumElements.*;
+
 public class TileEntityCollector extends TileEntity implements ITickableTileEntity {
     //最大收集值
     public final int MAX_COLLECTION = 20000;
@@ -102,20 +104,20 @@ public class TileEntityCollector extends TileEntity implements ITickableTileEnti
         }
     }
 
-    //是否放入的是空的ElementCore
-    public boolean hasEmptyElementCore() {
-        try {
-            return this.coreItem != ItemStack.EMPTY && this.coreItem.getItem() == ItemLoader.ELEMENTCORE_VOID.get();
-        } catch (Exception ex) {
-            return false;
-        }
-    }
+    //是否放入了空核心
+    public boolean hasEmptyElementCore() {return coreItem != null && coreItem.getItem() == ItemLoader.ELEMENTCORE_VOID.get();}
 
+    //重置收集状态
     public void resetCollect() {
         this.collection = 0;
         this.isCollect = false;
+        this.element = EnumElements.NONE;
+    }
+
+    // 生成完成的核心
+    public void generateCompleteCore(){
         if (element instanceof EnumElements) {
-            switch ((EnumElements) this.element) {
+            switch ((EnumElements)element) {
                 case GOLD:
                     this.coreItem = new ItemStack(ItemLoader.ELEMENTCORE_GOLD.get(), 1);
                     break;
@@ -128,51 +130,44 @@ public class TileEntityCollector extends TileEntity implements ITickableTileEnti
                 case FIRE:
                     this.coreItem = new ItemStack(ItemLoader.ELEMENTCORE_FIRE.get(), 1);
                     break;
-                case EARTH:
-                    this.coreItem = new ItemStack(ItemLoader.ELEMENTCORE_EARTH.get(), 1);
-                    break;
                 default:
                     this.coreItem = new ItemStack(ItemLoader.ELEMENTCORE_EARTH.get(), 1);
                     break;
             }
         }
-        this.element = EnumElements.NONE;
-
-
     }
 
-
-    public int getCollection() {
-        return collection;
-    }
+    public int getCollection() {return collection;}
 
 
     @Override
     public void tick() {
-        boolean flag = false;
+        boolean flag = false; // 更新数据flag
+        // 如果是服务端的话进行逻辑判断
         if (!world.isRemote) {
+            // 如果没有在收集且有空核心时，启用收集
             if (!isCollect && hasEmptyElementCore()) {
                 this.isCollect = true;
                 this.element = ElementHelper.getBiomeElement(world.getBiome(pos));
                 flag = true;
-            } else if (isCollect && element != EnumElements.NONE) {
-                this.collection += 1 * extraSpeed;
+            }
+            // 如果正在收集，就继续收集
+            if (isCollect && element != EnumElements.NONE) {
+                this.collection += extraSpeed;
                 flag = true;
             }
-
-            if (this.collection >= this.MAX_COLLECTION) {
+            // 如果收集完成，重置状态，且生成完成品
+            if (this.collection >= this.MAX_COLLECTION) { // 先生成再重置
+                generateCompleteCore();
                 resetCollect();
             }
-
+            // 如果核心物品为空，重置状态
             if ((this.coreItem == ItemStack.EMPTY || this.coreItem.isEmpty()) && this.collection >= 0 && this.isCollect) {
-                this.element = EnumElements.NONE;
-                this.isCollect = false;
-                this.collection = 0;
+                resetCollect();
                 flag = true;
             }
-
         }
-
+        // 更新逻辑
         if (flag) {
             world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 3);
             this.markDirty();
