@@ -105,6 +105,8 @@ public class RenderLoader {
         ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityInjectTable.get(), (tileEntityRendererDispatcher -> {
             return new TileEntityRenderInjectTable(tileEntityRendererDispatcher);
         }));
+
+
     }
 
     @SubscribeEvent

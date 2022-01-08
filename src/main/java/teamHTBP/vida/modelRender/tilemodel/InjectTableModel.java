@@ -5,11 +5,13 @@ package teamHTBP.vida.modelRender.tilemodel;// Made with Blockbench 3.9.3
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.model.Model;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class InjectTableModel extends EntityModel<Entity> {
+public class InjectTableModel extends TileEntityModel {
 	private final ModelRenderer all;
 	private final ModelRenderer group;
 	public final ModelRenderer rotateCube;
@@ -17,6 +19,7 @@ public class InjectTableModel extends EntityModel<Entity> {
 	private final ModelRenderer cube_r1;
 
 	public InjectTableModel() {
+		super();
 		textureWidth = 64;
 		textureHeight = 64;
 
@@ -57,21 +60,11 @@ public class InjectTableModel extends EntityModel<Entity> {
 		cube_r1.setTextureOffset(0, 42).addBox(4.0F, -3.0F, -1.5F, 3.0F, 5.0F, 3.0F, 0.0F, false);
 	}
 
-	@Override
-	public void setRotationAngles(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch){
-		//previously the render function, render code was moved to a method below
-	}
 
 	@Override
 	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
 		group.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
 		group2.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
 		cube_r1.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
-	}
-
-	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-		modelRenderer.rotateAngleX = x;
-		modelRenderer.rotateAngleY = y;
-		modelRenderer.rotateAngleZ = z;
 	}
 }
