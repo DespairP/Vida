@@ -22,7 +22,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import teamHTBP.vida.TileEntity.SlotNumberArray.OreReactionMachineArray;
 import teamHTBP.vida.capability.VidaCapabilities;
 import teamHTBP.vida.capability.energyCapability.IElementEnergyCapability;
-import teamHTBP.vida.element.EnumElements;
+import teamHTBP.vida.helper.element.EnumElements;
 import teamHTBP.vida.gui.GUI.ContainerOreReactionMachine;
 
 import javax.annotation.Nullable;

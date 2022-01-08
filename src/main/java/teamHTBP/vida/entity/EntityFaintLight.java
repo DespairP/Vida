@@ -9,15 +9,13 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.network.NetworkHooks;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import teamHTBP.vida.element.EnumElements;
-import teamHTBP.vida.element.IElement;
-import teamHTBP.vida.registry.VidaRegistries;
+import teamHTBP.vida.helper.element.EnumElements;
+import teamHTBP.vida.helper.element.IElement;
 
 import java.util.Optional;
 

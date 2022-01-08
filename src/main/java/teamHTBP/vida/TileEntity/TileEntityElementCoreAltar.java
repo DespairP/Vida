@@ -10,18 +10,15 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 import teamHTBP.vida.block.BlockLoader;
-import teamHTBP.vida.element.ElementHelper;
-import teamHTBP.vida.element.EnumElements;
-import teamHTBP.vida.element.IElement;
+import teamHTBP.vida.helper.element.ElementHelper;
+import teamHTBP.vida.helper.element.EnumElements;
+import teamHTBP.vida.helper.element.IElement;
 import teamHTBP.vida.item.ItemElementCore;
-import teamHTBP.vida.registry.VidaRegistries;
 
 import javax.annotation.Nullable;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 public class TileEntityElementCoreAltar extends TileEntity implements ITickableTileEntity {
     //最大的仪式进度

@@ -7,7 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.block.BlockLoader;
-import teamHTBP.vida.element.EnumElements;
+import teamHTBP.vida.helper.element.EnumElements;
 import teamHTBP.vida.item.Potion.ItemCreativeElementPotion;
 import teamHTBP.vida.item.armor.*;
 import teamHTBP.vida.item.staff.*;

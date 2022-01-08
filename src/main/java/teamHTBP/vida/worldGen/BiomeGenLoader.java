@@ -11,7 +11,7 @@ import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import teamHTBP.vida.block.BlockLoader;
-import teamHTBP.vida.element.EnumElements;
+import teamHTBP.vida.helper.element.EnumElements;
 
 
 @Mod.EventBusSubscriber()

@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import teamHTBP.vida.TileEntity.TileEntityInjectTable;
-import teamHTBP.vida.element.ElementHelper;
+import teamHTBP.vida.helper.element.ElementHelper;
 
 public class ContainerInjectTable extends Container {
     private final World world;

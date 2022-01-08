@@ -1,7 +1,7 @@
 package teamHTBP.vida.item.Potion;
 
 import net.minecraft.item.Item;
-import teamHTBP.vida.element.EnumElements;
+import teamHTBP.vida.helper.element.EnumElements;
 import teamHTBP.vida.item.IElementItem;
 import teamHTBP.vida.itemGroup.ItemGroupLoader;
 

@@ -1,19 +1,15 @@
-package teamHTBP.vida.element;
+package teamHTBP.vida.helper.element;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.RegistryKey;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
 import teamHTBP.vida.capability.skillSystem.ISkill;
 import teamHTBP.vida.capability.skillSystem.SkillCategory;
 import teamHTBP.vida.capability.skillSystem.SkillHelper;
 import teamHTBP.vida.helper.Allelopathy;
 import teamHTBP.vida.item.ItemLoader;
-import teamHTBP.vida.registry.VidaRegistries;
 
 import java.util.Arrays;
 import java.util.HashMap;

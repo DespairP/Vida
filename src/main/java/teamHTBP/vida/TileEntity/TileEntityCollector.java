@@ -7,14 +7,12 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import teamHTBP.vida.element.ElementHelper;
-import teamHTBP.vida.element.EnumElements;
-import teamHTBP.vida.element.IElement;
+import teamHTBP.vida.helper.element.ElementHelper;
+import teamHTBP.vida.helper.element.EnumElements;
+import teamHTBP.vida.helper.element.IElement;
 import teamHTBP.vida.item.ItemLoader;
 
 import javax.annotation.Nullable;
-
-import static teamHTBP.vida.element.EnumElements.*;
 
 public class TileEntityCollector extends TileEntity implements ITickableTileEntity {
     //最大收集值

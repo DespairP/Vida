@@ -13,7 +13,7 @@ import teamHTBP.vida.block.environment.BlockOreElement;
 import teamHTBP.vida.block.environment.crop.BlockElementCropParticle;
 import teamHTBP.vida.block.environment.crop.BlockSaplingVida;
 import teamHTBP.vida.block.function.*;
-import teamHTBP.vida.element.EnumElements;
+import teamHTBP.vida.helper.element.EnumElements;
 import teamHTBP.vida.helper.ColorHelper;
 import teamHTBP.vida.helper.RegisterItemBlock;
 import teamHTBP.vida.item.ItemLoader;

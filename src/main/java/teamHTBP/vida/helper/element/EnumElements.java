@@ -1,4 +1,4 @@
-package teamHTBP.vida.element;
+package teamHTBP.vida.helper.element;
 
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;

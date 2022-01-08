@@ -12,7 +12,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import teamHTBP.vida.capability.VidaCapabilities;
 import teamHTBP.vida.capability.energyCapability.ElementEnergyCapability;
 import teamHTBP.vida.capability.energyCapability.IElementEnergyCapability;
-import teamHTBP.vida.element.EnumElements;
+import teamHTBP.vida.helper.element.EnumElements;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
