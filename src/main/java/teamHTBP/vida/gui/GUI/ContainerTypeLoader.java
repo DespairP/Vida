@@ -12,7 +12,7 @@ import teamHTBP.vida.TileEntity.SlotNumberArray.PrismTableArray;
 import teamHTBP.vida.Vida;
 
 public class ContainerTypeLoader {
-    public final static DeferredRegister<ContainerType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, Vida.modId);
+    public final static DeferredRegister<ContainerType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, Vida.MOD_ID);
 
     public static RegistryObject<ContainerType<ContainerPrismTable>> prismTable = CONTAINER_TYPES.register("container_prismtable", () -> {
         return IForgeContainerType.create((int id, PlayerInventory inventory, PacketBuffer buffer) -> {

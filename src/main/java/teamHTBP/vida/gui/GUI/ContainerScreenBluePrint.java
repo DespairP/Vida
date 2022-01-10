@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ContainerScreenBluePrint extends ContainerScreen<ContainerBluePrint> {
-    public final ResourceLocation GUI = new ResourceLocation(Vida.modId, "textures/gui/belt_gui.png");
+    public final ResourceLocation GUI = new ResourceLocation(Vida.MOD_ID, "textures/gui/belt_gui.png");
     private final ContainerBluePrint container;
     private ArrayList<BluePrintScreenSlot> slots;
 

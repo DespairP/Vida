@@ -13,7 +13,7 @@ public class ElementCrystalHUD extends AbstractGui {
     private final int width;
     private final int height;
     private final Minecraft minecraft;
-    private final ResourceLocation HUD = new ResourceLocation(Vida.modId, "textures/gui/crystal_hud.png");
+    private final ResourceLocation HUD = new ResourceLocation(Vida.MOD_ID, "textures/gui/crystal_hud.png");
     private final IElementCrystal tileEntityCrystal;
     //private final ResourceLocation HUDHELPER = new ResourceLocation(Vida.modId, "textures/gui/altar_hud.png");
     private int fragment_ticks = 0;

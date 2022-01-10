@@ -10,7 +10,7 @@ import teamHTBP.vida.TileEntity.TileEntityOreReationMachine;
 import teamHTBP.vida.Vida;
 
 public class ContainerScreenOreReactionMachine extends ContainerScreen<ContainerOreReactionMachine> {
-    ResourceLocation Gui = new ResourceLocation(Vida.modId, "textures/gui/orereaction_gui.png");
+    ResourceLocation Gui = new ResourceLocation(Vida.MOD_ID, "textures/gui/orereaction_gui.png");
     TileEntityOreReationMachine tileEntityOreReationMachine;
 
     public ContainerScreenOreReactionMachine(ContainerOreReactionMachine screenContainer, PlayerInventory inv, ITextComponent titleIn) {

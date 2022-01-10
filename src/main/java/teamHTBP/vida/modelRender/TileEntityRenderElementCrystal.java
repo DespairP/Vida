@@ -39,7 +39,7 @@ public class TileEntityRenderElementCrystal extends TileEntityRenderer<TileEntit
                 ELEMENT_CRYSTAL = RenderLoader.earthCrystalLocation;
                 break;
             default:
-                ELEMENT_CRYSTAL = new ResourceLocation(Vida.modId, "model/earthelementcrystal");
+                ELEMENT_CRYSTAL = new ResourceLocation(Vida.MOD_ID, "model/earthelementcrystal");
         }
     }
 

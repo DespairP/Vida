@@ -19,7 +19,7 @@ public class NormalSkillSlot extends AbstractSkillSlot {
     /**
      * 基本技能框的Gui
      */
-    ResourceLocation Gui = new ResourceLocation(Vida.modId, "textures/gui/inject_gui.png");
+    ResourceLocation Gui = new ResourceLocation(Vida.MOD_ID, "textures/gui/inject_gui.png");
     /**
      * 该技能框的基础alpha值，最大为0.4f
      */

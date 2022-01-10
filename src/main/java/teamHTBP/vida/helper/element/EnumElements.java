@@ -87,7 +87,7 @@ public enum EnumElements implements IElement {
     /**/
     @Override
     public ResourceLocation getRegistryName() {
-        return new ResourceLocation(Vida.modId, name());
+        return new ResourceLocation(Vida.MOD_ID, name());
     }
 
 

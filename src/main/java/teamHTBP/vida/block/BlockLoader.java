@@ -26,7 +26,7 @@ import java.util.List;
  * 注册方块类
  **/
 public class BlockLoader {
-    public final static DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Vida.modId);
+    public final static DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Vida.MOD_ID);
     //深潜石方块
     @RegisterItemBlock
     public final static RegistryObject<Block> DEEPSEA_STONE = BLOCKS.register("deepsea_stone", BlockDeepStone::new);

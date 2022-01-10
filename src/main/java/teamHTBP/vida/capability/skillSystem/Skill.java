@@ -42,7 +42,7 @@ public class Skill implements ISkill {
     /**
      * 所处的ResourceLocation，默认是Vida的技能图标组，可以使用Skill#setLocation来设置ResourceLocation
      */
-    protected ResourceLocation resourceLocation = new ResourceLocation(Vida.modId, "textures/gui/skills.png");
+    protected ResourceLocation resourceLocation = new ResourceLocation(Vida.MOD_ID, "textures/gui/skills.png");
 
     /***
      * 用textureIndex来确定Skill贴图的位置

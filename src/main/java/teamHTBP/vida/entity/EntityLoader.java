@@ -9,7 +9,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import teamHTBP.vida.Vida;
 
 public class EntityLoader {
-    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES, Vida.modId);
+    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES, Vida.MOD_ID);
     public static RegistryObject<EntityType<EntityFaintLight>> faintLight = ENTITY_TYPES.register("faintlight", () -> {
         return EntityType.Builder.create((EntityType<EntityFaintLight> entityType, World world) -> {
             return new EntityFaintLight(entityType, world);

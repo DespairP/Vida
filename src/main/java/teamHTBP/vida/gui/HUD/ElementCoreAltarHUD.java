@@ -13,8 +13,8 @@ public class ElementCoreAltarHUD extends AbstractGui {
     private final int width;
     private final int height;
     private final Minecraft minecraft;
-    private final ResourceLocation HUD = new ResourceLocation(Vida.modId, "textures/gui/altar_hud.png");
-    private final ResourceLocation HUDHELPER = new ResourceLocation(Vida.modId, "textures/gui/altar_hud.png");
+    private final ResourceLocation HUD = new ResourceLocation(Vida.MOD_ID, "textures/gui/altar_hud.png");
+    private final ResourceLocation HUDHELPER = new ResourceLocation(Vida.MOD_ID, "textures/gui/altar_hud.png");
     private final TileEntityElementCoreAltar tileEntityElementCoreAltar;
 
     public ElementCoreAltarHUD(TileEntityElementCoreAltar tileEntityElementCoreAltar) {

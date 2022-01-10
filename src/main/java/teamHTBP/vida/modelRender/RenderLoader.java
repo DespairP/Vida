@@ -17,32 +17,32 @@ import teamHTBP.vida.block.BlockLoader;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class RenderLoader {
 
-    public static ResourceLocation goldgemLocation = new ResourceLocation(Vida.modId, "model/goldgem");
-    public static ResourceLocation woodgemLocation = new ResourceLocation(Vida.modId, "model/woodgem");
-    public static ResourceLocation aquagemLocation = new ResourceLocation(Vida.modId, "model/aquagem");
-    public static ResourceLocation firegemLocation = new ResourceLocation(Vida.modId, "model/firegem");
-    public static ResourceLocation earthgemLocation = new ResourceLocation(Vida.modId, "model/earthgem");
+    public static ResourceLocation goldgemLocation = new ResourceLocation(Vida.MOD_ID, "model/goldgem");
+    public static ResourceLocation woodgemLocation = new ResourceLocation(Vida.MOD_ID, "model/woodgem");
+    public static ResourceLocation aquagemLocation = new ResourceLocation(Vida.MOD_ID, "model/aquagem");
+    public static ResourceLocation firegemLocation = new ResourceLocation(Vida.MOD_ID, "model/firegem");
+    public static ResourceLocation earthgemLocation = new ResourceLocation(Vida.MOD_ID, "model/earthgem");
 
-    public static ResourceLocation goldlogoLocation = new ResourceLocation(Vida.modId, "model/goldlogo");
-    public static ResourceLocation woodlogoLocation = new ResourceLocation(Vida.modId, "model/woodlogo");
-    public static ResourceLocation aqualogoLocation = new ResourceLocation(Vida.modId, "model/aqualogo");
-    public static ResourceLocation firelogoLocation = new ResourceLocation(Vida.modId, "model/firelogo");
-    public static ResourceLocation earthlogoLocation = new ResourceLocation(Vida.modId, "model/earthlogo");
+    public static ResourceLocation goldlogoLocation = new ResourceLocation(Vida.MOD_ID, "model/goldlogo");
+    public static ResourceLocation woodlogoLocation = new ResourceLocation(Vida.MOD_ID, "model/woodlogo");
+    public static ResourceLocation aqualogoLocation = new ResourceLocation(Vida.MOD_ID, "model/aqualogo");
+    public static ResourceLocation firelogoLocation = new ResourceLocation(Vida.MOD_ID, "model/firelogo");
+    public static ResourceLocation earthlogoLocation = new ResourceLocation(Vida.MOD_ID, "model/earthlogo");
 
-    public static ResourceLocation goldCrystalLocation = new ResourceLocation(Vida.modId, "model/goldelementcrystal_animate");
-    public static ResourceLocation woodCrystalLocation = new ResourceLocation(Vida.modId, "model/woodelementcrystal_animate");
-    public static ResourceLocation aquaCrystalLocation = new ResourceLocation(Vida.modId, "model/aquaelementcrystal_animate");
-    public static ResourceLocation fireCrystalLocation = new ResourceLocation(Vida.modId, "model/fireelementcrystal_animate");
-    public static ResourceLocation earthCrystalLocation = new ResourceLocation(Vida.modId, "model/earthelementcrystal_animate");
+    public static ResourceLocation goldCrystalLocation = new ResourceLocation(Vida.MOD_ID, "model/goldelementcrystal_animate");
+    public static ResourceLocation woodCrystalLocation = new ResourceLocation(Vida.MOD_ID, "model/woodelementcrystal_animate");
+    public static ResourceLocation aquaCrystalLocation = new ResourceLocation(Vida.MOD_ID, "model/aquaelementcrystal_animate");
+    public static ResourceLocation fireCrystalLocation = new ResourceLocation(Vida.MOD_ID, "model/fireelementcrystal_animate");
+    public static ResourceLocation earthCrystalLocation = new ResourceLocation(Vida.MOD_ID, "model/earthelementcrystal_animate");
 
-    public static ResourceLocation goldFaintLightLocation = new ResourceLocation(Vida.modId, "item/faintlight_gold");
-    public static ResourceLocation woodFaintLightLocation = new ResourceLocation(Vida.modId, "item/faintlight_wood");
-    public static ResourceLocation aquaFaintLightLocation = new ResourceLocation(Vida.modId, "item/faintlight_aqua");
-    public static ResourceLocation fireFaintLightLocation = new ResourceLocation(Vida.modId, "item/faintlight_fire");
-    public static ResourceLocation earthFaintLightLocation = new ResourceLocation(Vida.modId, "item/faintlight_earth");
+    public static ResourceLocation goldFaintLightLocation = new ResourceLocation(Vida.MOD_ID, "item/faintlight_gold");
+    public static ResourceLocation woodFaintLightLocation = new ResourceLocation(Vida.MOD_ID, "item/faintlight_wood");
+    public static ResourceLocation aquaFaintLightLocation = new ResourceLocation(Vida.MOD_ID, "item/faintlight_aqua");
+    public static ResourceLocation fireFaintLightLocation = new ResourceLocation(Vida.MOD_ID, "item/faintlight_fire");
+    public static ResourceLocation earthFaintLightLocation = new ResourceLocation(Vida.MOD_ID, "item/faintlight_earth");
 
-    public static ResourceLocation injectTable_top = new ResourceLocation(Vida.modId, "model/injectiontable_top");
-    public static ResourceLocation injectTable_side = new ResourceLocation(Vida.modId, "model/injectiontable_side");
+    public static ResourceLocation injectTable_top = new ResourceLocation(Vida.MOD_ID, "model/injectiontable_top");
+    public static ResourceLocation injectTable_side = new ResourceLocation(Vida.MOD_ID, "model/injectiontable_side");
 
 
     @SubscribeEvent

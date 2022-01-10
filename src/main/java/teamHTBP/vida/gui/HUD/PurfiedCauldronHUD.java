@@ -12,7 +12,7 @@ public class PurfiedCauldronHUD extends AbstractGui {
     private final int width;
     private final int height;
     private final Minecraft minecraft;
-    private final ResourceLocation HUD = new ResourceLocation(Vida.modId, "textures/gui/hud.png");
+    private final ResourceLocation HUD = new ResourceLocation(Vida.MOD_ID, "textures/gui/hud.png");
     private final TileEntityPurfiedCauldron tileEntityPurfiedCauldron;
 
     public PurfiedCauldronHUD(TileEntityPurfiedCauldron tileEntityPurfiedCauldron) {

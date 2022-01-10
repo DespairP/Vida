@@ -11,7 +11,7 @@ import teamHTBP.vida.itemGroup.ItemGroupLoader;
 
 import java.util.Objects;
 
-@Mod.EventBusSubscriber(modid = Vida.modId, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = Vida.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ItemBlockLoader {
     @SubscribeEvent
     public static void registerBlockItems(RegistryEvent.Register<Item> event) {

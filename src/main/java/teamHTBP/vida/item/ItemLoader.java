@@ -15,7 +15,7 @@ import teamHTBP.vida.itemGroup.ItemGroupLoader;
 
 //注册item的类
 public class ItemLoader {
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Vida.modId);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Vida.MOD_ID);
     //图纸
     public final static RegistryObject<Item> BLUEPRINT_NORMAL = ITEMS.register("blueprint_normal", () -> new ItemBluePrint(1));
     public final static RegistryObject<Item> BLUEPRINT_EPIC = ITEMS.register("blueprint_epic", () -> new ItemBluePrint(2));

@@ -15,6 +15,9 @@ import teamHTBP.vida.helper.element.ElementHelper;
 import teamHTBP.vida.helper.element.EnumElements;
 import teamHTBP.vida.helper.element.IElement;
 import teamHTBP.vida.item.ItemElementCore;
+import teamHTBP.vida.recipe.RecipesBase;
+import teamHTBP.vida.recipe.RecipesManager;
+import teamHTBP.vida.recipe.altar.AltarRecipe;
 
 import javax.annotation.Nullable;
 import java.util.LinkedList;
@@ -262,12 +265,14 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         for (int j = 0; j < 4; j++) {
             itemList.add(this.altarItem[j].getItem());
         }
-        IElement element = ElementHelper.getContainingElement(this.coreItem);
-        //System.out.println(element);
-        if (ElementHelper.beganAltarProgress(this.coreItem, itemList, element)) {
-            this.element = element;
+
+        RecipesBase recipe = RecipesManager.find(world, this);
+
+        if (recipe instanceof AltarRecipe) {
+            this.element = ((AltarRecipe) recipe).element;
             return true;
         }
+
         return false;
     }
 

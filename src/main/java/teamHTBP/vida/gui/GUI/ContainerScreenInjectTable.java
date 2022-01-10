@@ -61,8 +61,8 @@ public class ContainerScreenInjectTable extends ContainerScreen<ContainerInjectT
      * 刷新ticks
      */
     public int refreshTick = 0;
-    ResourceLocation Gui = new ResourceLocation(Vida.modId, "textures/gui/inject_gui.png");
-    ResourceLocation background = new ResourceLocation(Vida.modId, "textures/gui/spacestars2.png");
+    ResourceLocation Gui = new ResourceLocation(Vida.MOD_ID, "textures/gui/inject_gui.png");
+    ResourceLocation background = new ResourceLocation(Vida.MOD_ID, "textures/gui/spacestars2.png");
     /**
      * 显示的工具框
      */

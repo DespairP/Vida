@@ -163,50 +163,6 @@ public class ElementHelper {
          return biomesElementList.size() > 0 ? biomesElementList.get(0) : EnumElements.NONE;
     }
 
-
-    /**
-     * 查询祭坛物品是否符合该元素所需的物品
-     *
-     * @param coreItem 祭坛的核心（物品）
-     * @param list     祭坛物品列表
-     * @param element  举行仪式的元素
-     * @return 列表是否符合该元素所需的所有物品
-     * <p>
-     * todo 之后将element改为IElement
-     **/
-    public static boolean beganAltarProgress(ItemStack coreItem, List<Item> list, IElement element) {
-        if (element == EnumElements.GOLD && coreItem.getItem() == ItemLoader.ELEMENTCORE_GOLD.get() &&
-                list.contains(Items.GOLD_INGOT) &&
-                list.contains(Items.DIAMOND) &&
-                list.contains(Items.REDSTONE) &&
-                list.contains(Items.IRON_INGOT)) {
-            return true;
-        } else if (element == EnumElements.WOOD && coreItem.getItem() == ItemLoader.ELEMENTCORE_WOOD.get() &&
-                list.contains(Items.FERN) &&
-                list.contains(Items.OAK_LOG) &&
-                list.contains(Items.COCOA_BEANS) &&
-                list.contains(Items.GREEN_DYE)) {
-            return true;
-        } else if (element == EnumElements.AQUA && coreItem.getItem() == ItemLoader.ELEMENTCORE_AQUA.get() &&
-                list.contains(Items.PRISMARINE_CRYSTALS) &&
-                list.contains(Items.ICE) &&
-                list.contains(Items.SEA_LANTERN) &&
-                list.contains(Items.BRAIN_CORAL)) {
-            return true;
-        } else if (element == EnumElements.FIRE && coreItem.getItem() == ItemLoader.ELEMENTCORE_FIRE.get() &&
-                list.contains(Items.BLAZE_POWDER) &&
-                list.contains(Items.NETHERRACK) &&
-                list.contains(Items.NETHER_WART) &&
-                list.contains(Items.BLAZE_ROD)) {
-            return true;
-        } else return element == EnumElements.EARTH && coreItem.getItem() == ItemLoader.ELEMENTCORE_EARTH.get() &&
-                list.contains(Items.DIRT) &&
-                list.contains(Items.CLAY_BALL) &&
-                list.contains(Items.SAND) &&
-                list.contains(Items.FLINT);
-    }
-
-
     /**
      * 打开GUI时给物品时，初始化所有物品特有技能的NBT
      *

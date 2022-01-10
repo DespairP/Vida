@@ -18,7 +18,7 @@ public class CapabilityEntityLoader {
     public static void attachPlayerCapability(AttachCapabilitiesEvent<Entity> event) {
         Entity entity = event.getObject();
         if (entity instanceof PlayerEntity) {
-            event.addCapability(new ResourceLocation(Vida.modId, "blueprints"), new BlueprintCapabilityProvider());
+            event.addCapability(new ResourceLocation(Vida.MOD_ID, "blueprints"), new BlueprintCapabilityProvider());
         }
     }
 

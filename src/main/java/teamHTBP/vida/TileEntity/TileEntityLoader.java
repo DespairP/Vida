@@ -10,7 +10,7 @@ import teamHTBP.vida.block.BlockLoader;
 
 
 public class TileEntityLoader {
-    public static final DeferredRegister<TileEntityType<?>> TILE_ENTITY_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, Vida.modId);
+    public static final DeferredRegister<TileEntityType<?>> TILE_ENTITY_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, Vida.MOD_ID);
     public static RegistryObject<TileEntityType<TileEntityPurfiedCauldron>> TileEntityPurfiedCauldron = TILE_ENTITY_DEFERRED_REGISTER.register("tepurfiedcauldron", () -> {
         return TileEntityType.Builder.create(() -> {
                     return new TileEntityPurfiedCauldron();

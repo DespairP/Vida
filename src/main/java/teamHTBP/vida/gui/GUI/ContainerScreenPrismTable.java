@@ -17,7 +17,7 @@ import teamHTBP.vida.network.PacketPrismTable;
 public class ContainerScreenPrismTable extends ContainerScreen<ContainerPrismTable> {
     private final int textureX = 256;
     private final int textureY = 256;
-    ResourceLocation Gui = new ResourceLocation(Vida.modId, "textures/gui/prismtable_gui.png");
+    ResourceLocation Gui = new ResourceLocation(Vida.MOD_ID, "textures/gui/prismtable_gui.png");
     button1 button1 = new button1(this.guiLeft + 85, this.guiTop + 60);
     button2 button2 = new button2(this.guiLeft + 75, this.guiTop + 15);
     mirrorButton mirrorButton = new mirrorButton(0, 0);
@@ -132,7 +132,7 @@ public class ContainerScreenPrismTable extends ContainerScreen<ContainerPrismTab
 }
 
 class button1 extends AbstractButton {
-    ResourceLocation Gui = new ResourceLocation(Vida.modId, "textures/gui/prismtable_gui.png");
+    ResourceLocation Gui = new ResourceLocation(Vida.MOD_ID, "textures/gui/prismtable_gui.png");
 
     public button1(int xIn, int yIn) {
         super(xIn, yIn, 5, 10, new StringTextComponent(" "));
@@ -165,7 +165,7 @@ class button1 extends AbstractButton {
 }
 
 class button2 extends AbstractButton {
-    ResourceLocation Gui = new ResourceLocation(Vida.modId, "textures/gui/prismtable_gui.png");
+    ResourceLocation Gui = new ResourceLocation(Vida.MOD_ID, "textures/gui/prismtable_gui.png");
 
     public button2(int xIn, int yIn) {
         super(xIn, yIn, 10, 5, new StringTextComponent(" "));
@@ -200,7 +200,7 @@ class button2 extends AbstractButton {
 }
 
 class mirrorButton extends AbstractButton {
-    ResourceLocation Gui = new ResourceLocation(Vida.modId, "textures/gui/prismtable_gui.png");
+    ResourceLocation Gui = new ResourceLocation(Vida.MOD_ID, "textures/gui/prismtable_gui.png");
 
     public mirrorButton(int xIn, int yIn) {
         super(xIn, yIn, 16, 16, new StringTextComponent(" "));

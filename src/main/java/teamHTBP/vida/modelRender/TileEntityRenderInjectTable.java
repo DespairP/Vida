@@ -9,14 +9,10 @@ import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.texture.AtlasTexture;
-import net.minecraft.client.renderer.texture.ITickable;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.SwordItem;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.util.math.vector.Quaternion;
 import net.minecraft.util.math.vector.Vector3f;
 import teamHTBP.vida.TileEntity.TileEntityInjectTable;
@@ -25,7 +21,7 @@ import teamHTBP.vida.client.ClientTickHandler;
 import teamHTBP.vida.modelRender.tilemodel.InjectTableModel;
 
 public class TileEntityRenderInjectTable extends TileEntityRenderer<TileEntityInjectTable> {
-    public static final ResourceLocation TEXTURE = new ResourceLocation(Vida.modId, "textures/tileentity/injecttable.png");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(Vida.MOD_ID, "textures/tileentity/injecttable.png");
     public static final InjectTableModel MODEL = new InjectTableModel();
 
     float tick(float partTicks) {

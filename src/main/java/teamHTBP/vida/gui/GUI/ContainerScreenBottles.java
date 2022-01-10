@@ -9,7 +9,7 @@ import net.minecraft.util.text.ITextComponent;
 import teamHTBP.vida.Vida;
 
 public class ContainerScreenBottles extends ContainerScreen<ContainerBottles> {
-    ResourceLocation Gui = new ResourceLocation(Vida.modId, "textures/gui/bottles_gui.png");
+    ResourceLocation Gui = new ResourceLocation(Vida.MOD_ID, "textures/gui/bottles_gui.png");
 
     public ContainerScreenBottles(ContainerBottles screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
