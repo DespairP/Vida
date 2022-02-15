@@ -4,7 +4,6 @@ import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -17,9 +16,7 @@ import teamHTBP.vida.gui.GUI.ContainerTypeLoader;
 import teamHTBP.vida.item.ItemElementCoreVoid;
 import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.particle.ParticleLoader;
-import teamHTBP.vida.recipe.OreReactionMachineRecipe;
 import teamHTBP.vida.recipe.RecipeLoader;
-import teamHTBP.vida.recipe.RecipesManager;
 import teamHTBP.vida.worldGen.GenLoader;
 
 
@@ -35,7 +32,6 @@ public class Vida {
     public static final Logger LOGGER = LogManager.getLogger();
     //mod的ID字符串，用于材质包获取id，或其他用途
     public static final String MOD_ID = "vida";
-    public static final ResourceLocation OREACTION = rl("orereaction_recipe");
 
     //construct
     public Vida() {
@@ -49,11 +45,9 @@ public class Vida {
         ContainerTypeLoader.CONTAINER_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
         MinecraftForge.EVENT_BUS.register(ItemElementCoreVoid.class);
         MinecraftForge.EVENT_BUS.register(BlockEventLoaderServer.class);
-        RecipeLoader.RECIPES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        registerType(OREACTION, OreReactionMachineRecipe.RECIPE_TYPE);
-
-        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-        RecipesManager.init(bus);
+        //RecipeLoader.RECIPES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        //registerType(OREACTION, OreReactionMachineRecipe.RECIPE_TYPE);
+        RecipeLoader.init(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
 

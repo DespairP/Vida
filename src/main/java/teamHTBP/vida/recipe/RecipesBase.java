@@ -16,9 +16,14 @@ import teamHTBP.vida.recipe.altar.AltarRecipe;
 import javax.annotation.Nullable;
 
 /**
+ * Vida合成表基类
+ * RecipesBase -> ICraftingRecipe -> IRecipe
+ * A 合成表类，可以是继承此类的子类
+ * T 使用此合成表的TileEntitiy
  * @author DustW
  */
 public abstract class RecipesBase<A extends IForgeRegistryEntry<A>, T extends TileEntity> extends ForgeRegistryEntry<A> implements ICraftingRecipe, IFinishedRecipe {
+
     @Override
     public ResourceLocation getID() {
         return getRegistryName();

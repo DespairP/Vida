@@ -12,23 +12,19 @@ public class AltarRecipeList {
     public static List<AltarRecipe> getDefaultRecipeList() {
         ArrayList<AltarRecipe> result = new ArrayList<>();
 
-        result.add(new AltarRecipe(EnumElements.GOLD, ItemStack.EMPTY,
-                new AltarRecipe.Core(ItemLoader.ELEMENTCORE_GOLD.get()),
-                new AltarRecipe.Other(
-                        Items.GOLD_INGOT,
-                        Items.DIAMOND,
-                        Items.REDSTONE,
-                        Items.IRON_INGOT)));
+        result.add(AltarRecipe.builder()
+                        .element(EnumElements.GOLD)
+                        .core(ItemLoader.ELEMENTCORE_GOLD.get())
+                        .others(Items.GOLD_INGOT, Items.DIAMOND, Items.REDSTONE, Items.IRON_INGOT)
+                        .build());
 
-        result.add(new AltarRecipe(EnumElements.WOOD, ItemStack.EMPTY,
-                new AltarRecipe.Core(ItemLoader.ELEMENTCORE_WOOD.get()),
-                new AltarRecipe.Other(
-                        Items.GOLD_INGOT,
-                        Items.DIAMOND,
-                        Items.REDSTONE,
-                        Items.IRON_INGOT)));
+        result.add(AltarRecipe.builder()
+                        .element(EnumElements.GOLD)
+                        .core(ItemLoader.ELEMENTCORE_WOOD.get())
+                        .others(Items.GOLD_INGOT, Items.DIAMOND, Items.REDSTONE, Items.IRON_INGOT)
+                        .build());
 
-        result.add(new AltarRecipe(EnumElements.AQUA, ItemStack.EMPTY,
+        /*result.add(new AltarRecipe(EnumElements.AQUA, ItemStack.EMPTY,
                 new AltarRecipe.Core(ItemLoader.ELEMENTCORE_AQUA.get()),
                 new AltarRecipe.Other(
                         Items.PRISMARINE_CRYSTALS,
@@ -51,7 +47,7 @@ public class AltarRecipeList {
                         Items.CLAY_BALL,
                         Items.SAND,
                         Items.FLINT)));
-
+        */
         return result;
     }
 }

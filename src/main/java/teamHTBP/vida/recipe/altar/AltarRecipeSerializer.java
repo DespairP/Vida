@@ -30,19 +30,19 @@ public class AltarRecipeSerializer extends RecipeSerializerBase<AltarRecipe> {
         Object o3 = formJson(json.get("other").getAsJsonObject().get("item3").getAsJsonObject());
         Object o4 = formJson(json.get("other").getAsJsonObject().get("item4").getAsJsonObject());
         ItemStack result = Ingredient.deserializeItemList(json.get("result").getAsJsonObject()).getStacks().iterator().next();
-        return new AltarRecipe(element, result, new AltarRecipe.Core(core), new AltarRecipe.Other(o1, o2, o3, o4));
+        return AltarRecipe.builder().others(o1,o2,o3,o4).result(result).element(element).core(core).build();
     }
 
     @Override
     public void write(JsonObject json, AltarRecipe recipe) {
         json.addProperty("element", recipe.element.getRegistryName().toString());
         JsonObject other = new JsonObject();
-        other.add("item1", getJson(recipe.other.content.get(0)));
-        other.add("item2", getJson(recipe.other.content.get(1)));
-        other.add("item3", getJson(recipe.other.content.get(2)));
-        other.add("item4", getJson(recipe.other.content.get(3)));
+        other.add("item1", getJson(recipe.other.get(0)));
+        other.add("item2", getJson(recipe.other.get(1)));
+        other.add("item3", getJson(recipe.other.get(2)));
+        other.add("item4", getJson(recipe.other.get(3)));
         json.add("other", other);
-        json.add("core", getJson(recipe.core.recipeObject));
+        json.add("core", getJson(recipe.core));
         json.add("result", Ingredient.fromStacks(recipe.result).serialize());
     }
 }

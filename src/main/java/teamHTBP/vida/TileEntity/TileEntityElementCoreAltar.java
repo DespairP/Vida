@@ -15,8 +15,8 @@ import teamHTBP.vida.helper.element.ElementHelper;
 import teamHTBP.vida.helper.element.EnumElements;
 import teamHTBP.vida.helper.element.IElement;
 import teamHTBP.vida.item.ItemElementCore;
+import teamHTBP.vida.recipe.RecipeLoader;
 import teamHTBP.vida.recipe.RecipesBase;
-import teamHTBP.vida.recipe.RecipesManager;
 import teamHTBP.vida.recipe.altar.AltarRecipe;
 
 import javax.annotation.Nullable;
@@ -266,7 +266,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
             itemList.add(this.altarItem[j].getItem());
         }
 
-        RecipesBase recipe = RecipesManager.find(world, this);
+        RecipesBase recipe = RecipeLoader.find(world, this);
 
         if (recipe instanceof AltarRecipe) {
             this.element = ((AltarRecipe) recipe).element;
@@ -292,6 +292,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
 
     //生成水晶
     public void generateCrystal() {
+        assert world != null;
         if (!this.isBlockOver) {
             this.clear();
             if (element == EnumElements.GOLD) {

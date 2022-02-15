@@ -4,13 +4,17 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
+/**
+ * 监听clientTickEvent用于renderer使用
+ *
+ * @author DustW
+ * */
 @Mod.EventBusSubscriber(Dist.CLIENT)
 public class ClientTickHandler {
-    private static int tick = 0;
+    private static long tick = 0;
 
-    public static int tick() {
+    public static long tick() {
         return tick;
     }
 

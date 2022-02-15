@@ -17,9 +17,15 @@ import teamHTBP.vida.recipe.recipeobj.RecipeObjectType;
 
 import javax.annotation.Nullable;
 
+/**
+* 合成表序列化抽象类,一般用于网络数据流传输
+*
+* @author DustW
+* */
 public abstract class RecipeSerializerBase<A extends IRecipe<?>> extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<A> {
-    Gson gson = new GsonBuilder().create();
+    Gson gson = new GsonBuilder().create(); // gson实例，用于json的解析
 
+    /**合成表读取流*/
     @Nullable
     @Override
     public A read(ResourceLocation recipeId, PacketBuffer buffer) {
@@ -27,6 +33,7 @@ public abstract class RecipeSerializerBase<A extends IRecipe<?>> extends ForgeRe
         return read(recipeId, json);
     }
 
+    /**合成表写入流*/
     @Override
     public void write(PacketBuffer buffer, A recipe) {
         JsonObject json = new JsonObject();
