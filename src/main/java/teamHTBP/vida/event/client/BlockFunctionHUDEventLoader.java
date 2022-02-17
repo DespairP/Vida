@@ -103,6 +103,7 @@ public class BlockFunctionHUDEventLoader {
         }
 
         //渲染元素镐HUD
+        /*
         if (player.inventory.getCurrentItem().getItem() instanceof ItemElementPickaxe) {
             if (alpha < 100) alpha += 2;
             itemStack = player.inventory.getCurrentItem();
@@ -116,7 +117,7 @@ public class BlockFunctionHUDEventLoader {
         }
         if (alpha == 0) {
             itemStack = ItemStack.EMPTY;
-        }
+        }*/
 
         //渲染元素剑HUD
         if (player.inventory.getCurrentItem().getItem() instanceof ItemElementSword) {

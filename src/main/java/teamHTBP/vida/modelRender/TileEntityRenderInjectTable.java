@@ -17,7 +17,7 @@ import net.minecraft.util.math.vector.Quaternion;
 import net.minecraft.util.math.vector.Vector3f;
 import teamHTBP.vida.TileEntity.TileEntityInjectTable;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.client.ClientTickHandler;
+import teamHTBP.vida.event.client.ClientTickHandler;
 import teamHTBP.vida.modelRender.tilemodel.InjectTableModel;
 
 public class TileEntityRenderInjectTable extends TileEntityRenderer<TileEntityInjectTable> {

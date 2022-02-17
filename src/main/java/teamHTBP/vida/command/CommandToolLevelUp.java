@@ -19,7 +19,7 @@ public class CommandToolLevelUp implements Command<CommandSource> {
         if (entity.getHeldItemMainhand() != ItemStack.EMPTY) {
             ItemStack stack = entity.getHeldItemMainhand();
             if (stack.getItem() instanceof IElementTools) {
-                stack.getOrCreateTag().putInt("pickaxeEXP", exp);
+                stack.getOrCreateTag().putInt("pickaxeExp", exp);
                 BlockEventLoaderServer.levelupTool(stack);
             } else {
                 commandContext.getSource().sendErrorMessage(new StringTextComponent(I18n.format("error.tool_unsuitable.anno")));

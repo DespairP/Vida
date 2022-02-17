@@ -2,7 +2,7 @@ package teamHTBP.vida.network;
 
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
-import teamHTBP.vida.event.client.MessageHUDEventLoader;
+import teamHTBP.vida.event.client.HUDMessageEventHandler;
 
 import java.util.function.Supplier;
 
@@ -23,7 +23,7 @@ public class PacketMessage {
 
     public void handler(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            MessageHUDEventLoader.setMessage(message);
+            HUDMessageEventHandler.setMessage(message);
             ctx.get().setPacketHandled(true);
         });
     }

@@ -8,9 +8,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import teamHTBP.vida.Vida;
+import teamHTBP.vida.gui.IVidaHUD;
+import teamHTBP.vida.helper.element.EnumElements;
 import teamHTBP.vida.item.staff.ItemElementPickaxe;
 
-public class ElementPickaxeHUD extends AbstractGui {
+public class ElementPickaxeHUD extends AbstractGui implements IVidaHUD {
     private final int width;
     private final int height;
     private final Minecraft minecraft;
@@ -27,14 +29,13 @@ public class ElementPickaxeHUD extends AbstractGui {
     }
 
     public void render(MatrixStack matrixStack) {
-        //System.out.println("sss");
         if (itemStack == null) return;
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, alpha);
         RenderSystem.pushMatrix();
         RenderSystem.enableBlend();
         int screenWidth = 3;
         int screenHeight = (int) (this.height * 4.5F / 6.0F);
-        int pixel_element = ((ItemElementPickaxe) itemStack.getItem()).element;
+        EnumElements pixel_element = ((ItemElementPickaxe) itemStack.getItem()).getItemElement();
         CompoundNBT nbt = itemStack.getOrCreateTag();
         int level = nbt.getInt("level");
         int exp = nbt.getInt("pickaxeEXP");
@@ -43,37 +44,37 @@ public class ElementPickaxeHUD extends AbstractGui {
         RenderSystem.scaled(1.2f, 1.2f, 1.2f);
         this.minecraft.getTextureManager().bindTexture(HUD);
         switch (pixel_element) {
-            case 1:
+            case GOLD:
                 blit(matrixStack, screenWidth, screenHeight, 0, 0, 0, 16, 16, 35, 119);
                 break;
-            case 2:
+            case WOOD:
                 blit(matrixStack, screenWidth, screenHeight, 0, 48, 0, 16, 16, 35, 119);
                 break;
-            case 3:
+            case AQUA:
                 blit(matrixStack, screenWidth, screenHeight, 0, 32, 0, 16, 16, 35, 119);
                 break;
-            case 4:
+            case FIRE:
                 blit(matrixStack, screenWidth, screenHeight, 0, 16, 0, 16, 16, 35, 119);
                 break;
-            case 5:
+            case EARTH:
                 blit(matrixStack, screenWidth, screenHeight, 0, 64, 0, 16, 16, 35, 119);
                 break;
         }
         //System.out.println(progress);
         switch (pixel_element) {
-            case 1:
+            case GOLD:
                 blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 0, 32 - progress, 16, progress, 35, 119);
                 break;
-            case 2:
+            case WOOD:
                 blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 48, 32 - progress, 16, progress, 35, 119);
                 break;
-            case 3:
+            case AQUA:
                 blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 32, 32 - progress, 16, progress, 35, 119);
                 break;
-            case 4:
+            case FIRE:
                 blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 16, 32 - progress, 16, progress, 35, 119);
                 break;
-            case 5:
+            case EARTH:
                 blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 64, 32 - progress, 16, progress, 35, 119);
                 break;
         }

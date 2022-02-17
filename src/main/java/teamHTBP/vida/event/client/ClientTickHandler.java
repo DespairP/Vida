@@ -1,6 +1,7 @@
-package teamHTBP.vida.client;
+package teamHTBP.vida.event.client;
 
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -10,6 +11,7 @@ import net.minecraftforge.fml.common.Mod;
  *
  * @author DustW
  * */
+@OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(Dist.CLIENT)
 public class ClientTickHandler {
     private static long tick = 0;

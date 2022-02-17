@@ -257,7 +257,7 @@ public class ContainerScreenInjectTable extends ContainerScreen<ContainerInjectT
         Item itemTool = stack.getItem();
         RenderSystem.color4f(1, (float) 1, 1, 0.6f + (float) gemLightnessRenew());
         if (itemTool instanceof IElementTools) {
-            EnumElements elementType = ((IElementTools) itemTool.getItem()).getElementType();
+            EnumElements elementType = ((IElementTools) itemTool.getItem()).getItemElement();
             switch (elementType) {
                 case GOLD:
                     blit(matrixStack, this.guiLeft + backgroundXsize / 20, this.guiTop + 10, 0, 39, 241, 13, 13, 512, 512);

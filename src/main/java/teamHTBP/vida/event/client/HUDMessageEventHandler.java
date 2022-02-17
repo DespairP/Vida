@@ -12,7 +12,7 @@ import java.util.LinkedList;
 
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(Dist.CLIENT)
-public class MessageHUDEventLoader {
+public class HUDMessageEventHandler {
     public static final LinkedList<String> messageList = new LinkedList<>();
     public static boolean isMessage = false;
     public static MessageHUD currentRnederer;

@@ -2,6 +2,7 @@ package teamHTBP.vida.event.client;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -16,6 +17,13 @@ import teamHTBP.vida.TileEntity.IElementCrystal;
 import teamHTBP.vida.gui.HUD.ElementCrystalHUD;
 import teamHTBP.vida.helper.blockTools.BlockElementCrystal;
 
+import java.util.List;
+
+/**
+ * 用于渲染元素武器与工具HUD的事件侦听
+ *
+ * @author DespairP
+ * */
 @Mod.EventBusSubscriber(Dist.CLIENT)
 public class BlockEnergyCrystalHUDEventLoader {
 
@@ -25,6 +33,7 @@ public class BlockEnergyCrystalHUDEventLoader {
     private static int element_fragment_tick = 0;
     //
     private static int offset_frame = 0;
+
 
     @SubscribeEvent
     public static void onOverlayRender(RenderGameOverlayEvent event) {

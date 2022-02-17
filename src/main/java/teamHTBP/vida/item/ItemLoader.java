@@ -12,6 +12,7 @@ import teamHTBP.vida.item.Potion.ItemCreativeElementPotion;
 import teamHTBP.vida.item.armor.*;
 import teamHTBP.vida.item.staff.*;
 import teamHTBP.vida.itemGroup.ItemGroupLoader;
+import static teamHTBP.vida.helper.element.EnumElements.*;
 
 //注册item的类
 public class ItemLoader {
@@ -104,11 +105,11 @@ public class ItemLoader {
     public static RegistryObject<Item> armor_earth_boots = ITEMS.register("earthbootsarmor", () -> new ItemArmorElementBoots(5));
 
     //元素工具
-    public static RegistryObject<Item> goldElementPickaxe = ITEMS.register("goldelementpickaxe", () -> new ItemElementPickaxe(1));
-    public static RegistryObject<Item> woodElementPickaxe = ITEMS.register("woodelementpickaxe", () -> new ItemElementPickaxe(2));
-    public static RegistryObject<Item> aquaElementPickaxe = ITEMS.register("aquaelementpickaxe", () -> new ItemElementPickaxe(3));
-    public static RegistryObject<Item> fireElementPickaxe = ITEMS.register("fireelementpickaxe", () -> new ItemElementPickaxe(4));
-    public static RegistryObject<Item> earthElementPickaxe = ITEMS.register("earthelementpickaxe", () -> new ItemElementPickaxe(5));
+    public static RegistryObject<Item> goldElementPickaxe = ITEMS.register("goldelementpickaxe", () -> new ItemElementPickaxe(GOLD));
+    public static RegistryObject<Item> woodElementPickaxe = ITEMS.register("woodelementpickaxe", () -> new ItemElementPickaxe(WOOD));
+    public static RegistryObject<Item> aquaElementPickaxe = ITEMS.register("aquaelementpickaxe", () -> new ItemElementPickaxe(AQUA));
+    public static RegistryObject<Item> fireElementPickaxe = ITEMS.register("fireelementpickaxe", () -> new ItemElementPickaxe(FIRE));
+    public static RegistryObject<Item> earthElementPickaxe = ITEMS.register("earthelementpickaxe", () -> new ItemElementPickaxe(EARTH));
 
     public static RegistryObject<Item> goldElementSword = ITEMS.register("goldelementsword", () -> new ItemElementSword(1));
     public static RegistryObject<Item> woodElementSword = ITEMS.register("woodelementsword", () -> new ItemElementSword(2));

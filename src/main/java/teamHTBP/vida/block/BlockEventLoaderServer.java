@@ -62,12 +62,12 @@ public class BlockEventLoaderServer {
                 Random random = new Random();
                 int level = nbt.getInt("level");
                 if (block instanceof OreBlock && level < 30) {
-                    int exp = nbt.getInt("pickaxeEXP");
-                    nbt.putInt("pickaxeEXP", exp + random.nextInt(5) + 5);
+                    int exp = nbt.getInt("pickaxeExp");
+                    nbt.putDouble("pickaxeExp", exp + random.nextInt(5) + 5);
                     levelupTool(itemStack);
                 } else if (block instanceof Block && level < 30) {
-                    int exp = nbt.getInt("pickaxeEXP");
-                    nbt.putInt("pickaxeEXP", exp + random.nextInt(2));
+                    int exp = nbt.getInt("pickaxeExp");
+                    nbt.putDouble("pickaxeExp", exp + random.nextInt(2));
                     levelupTool(itemStack);
                 }
             }
@@ -82,7 +82,7 @@ public class BlockEventLoaderServer {
     public static boolean levelupTool(ItemStack stack) {
         CompoundNBT stackNBT = stack.getOrCreateTag();
         int currentLevel = stackNBT.getInt("level");
-        int currentExp = stackNBT.getInt("pickaxeEXP");
+        double currentExp = stackNBT.getDouble("pickaxeExp");
         int futureLevel = currentLevel;
         //计算最大需求
         int maxExpRequired = currentLevel * 500;
@@ -95,7 +95,7 @@ public class BlockEventLoaderServer {
         //检测经验是否溢出等级需求经验
         if (futureLevel != currentLevel) {
             stackNBT.putInt("level", futureLevel);
-            stackNBT.putInt("pickaxeEXP", currentExp);
+            stackNBT.putDouble("pickaxeExp", currentExp);
             return true;  //工具需要升级且升级完成
         } else
             return false; //默认工具不需要升级
