@@ -18,7 +18,7 @@ public class BlockCropPlamStem extends AbstractBlockElementCrops {
 
     @Override
     protected IItemProvider getSeedsItem() {
-        return ItemLoader.plamStem.get();
+        return ItemLoader.CROP_PLAMSTEM.get();
     }
 
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {

@@ -14,7 +14,7 @@ import teamHTBP.vida.block.BlockLoader;
 import teamHTBP.vida.helper.element.ElementHelper;
 import teamHTBP.vida.helper.element.EnumElements;
 import teamHTBP.vida.helper.element.IElement;
-import teamHTBP.vida.item.ItemElementCore;
+import teamHTBP.vida.item.function.ItemElementCore;
 import teamHTBP.vida.recipe.RecipeLoader;
 import teamHTBP.vida.recipe.RecipesBase;
 import teamHTBP.vida.recipe.altar.AltarRecipe;

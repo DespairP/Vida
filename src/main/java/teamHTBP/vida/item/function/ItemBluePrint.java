@@ -1,4 +1,4 @@
-package teamHTBP.vida.item;
+package teamHTBP.vida.item.function;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;

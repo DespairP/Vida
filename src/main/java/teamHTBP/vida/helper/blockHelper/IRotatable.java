@@ -1,4 +1,4 @@
-package teamHTBP.vida.helper.blockTools;
+package teamHTBP.vida.helper.blockHelper;
 
 /**
  * 用于修饰可被凿子旋转的方块

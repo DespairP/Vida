@@ -15,7 +15,9 @@ import java.util.concurrent.atomic.AtomicReference;
  * 图纸帮助类
  */
 public class BlueprintHelper {
+
     public static final Logger LOGGER = LogManager.getLogger();
+    // 原子类型保存blueprints
     private static final AtomicReference<LinkedHashMap<String, Blueprint>> blueprints;
     public static boolean isRefreshing = false;
 

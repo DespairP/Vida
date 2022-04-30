@@ -18,17 +18,14 @@ public class TileEntityLoader {
                 BlockLoader.purfiedCauldron.get()).build(null);
     });
     public static RegistryObject<TileEntityType<TileEntityGemShower>> TileEntityGemShower = TILE_ENTITY_DEFERRED_REGISTER.register("tegemshower", () -> {
-        return TileEntityType.Builder.create(() -> {
-                    return new TileEntityGemShower();
-                },
-                BlockLoader.gemShower.get()).build(null);
+        return TileEntityType.Builder.create(TileEntityGemShower::new, BlockLoader.GEM_STAND.get()).build(null);
     });
 
     public static RegistryObject<TileEntityType<TileEntityElementCoreAltar>> TileEntityElementCoreAltar = TILE_ENTITY_DEFERRED_REGISTER.register("teelementcorealtar", () -> {
         return TileEntityType.Builder.create(() -> {
                     return new TileEntityElementCoreAltar();
                 },
-                BlockLoader.elementcoreAltar.get()).build(null);
+                BlockLoader.CORE_ALTAR.get()).build(null);
     });
 
     public static RegistryObject<TileEntityType<TileEntityPrismTable>> TileEntityPrismTable = TILE_ENTITY_DEFERRED_REGISTER.register("teprismtable", () -> {

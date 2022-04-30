@@ -90,7 +90,7 @@ public class ItemElementPickaxe extends ToolItem implements IElementLevelTools {
     @Override
     public double getNextLevelRequiredXP(ItemStack stack) {
         CompoundNBT nbt = stack.getOrCreateTag();
-        return nbt.getDouble("pickaxeExp") * 500.0f;
+        return nbt.getDouble("level") * 500.0f;
     }
 
     @Override

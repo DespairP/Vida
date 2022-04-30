@@ -1,5 +1,10 @@
-package teamHTBP.vida.helper.util;
+package teamHTBP.vida.utils.math;
 
+/**
+ * 一个Immutable的变量类类型
+ *
+ * 将变量限制在maxValue~minValue之间
+ * */
 public class IntRange {
     private int currentValue;
     private final int maxValue;
