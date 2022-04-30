@@ -1,8 +1,11 @@
-package teamHTBP.vida.helper;
+package teamHTBP.vida.utils.color;
 
 /**
  * 颜色计算类
+ *
+ * @deprecated move to {@link RGBAColor}
  */
+@Deprecated
 public class ColorHelper {
     public static final ColorHelper DARK_BLUE = new ColorHelper(35, 202, 249);
     public static final ColorHelper DARK_RED = new ColorHelper(255, 71, 71);

@@ -10,15 +10,12 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.w3c.dom.css.RGBColor;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.event.client.ClientTickHandler;
 import teamHTBP.vida.event.client.HUDElementItemHandler;
 import teamHTBP.vida.helper.element.EnumElements;
-import teamHTBP.vida.helper.util.IntRange;
-import teamHTBP.vida.helper.util.RGBAColor;
+import teamHTBP.vida.utils.math.IntRange;
+import teamHTBP.vida.utils.color.RGBAColor;
 import teamHTBP.vida.item.staff.IElementLevelTools;
-import teamHTBP.vida.item.staff.ItemElementSword;
 
 @OnlyIn(Dist.CLIENT)
 public class ElementLevelToolsHUD extends AbstractGui {
@@ -101,9 +98,8 @@ public class ElementLevelToolsHUD extends AbstractGui {
         }
         RenderSystem.popMatrix();
         RenderSystem.pushMatrix();
-        RenderSystem.scaled(0.95f, 0.95f, 0.95f);
         // 显示工具等级
-        drawCenteredString(matrixStack, minecraft.fontRenderer, level + "", renderX + 16, renderY + 20, RGBAColor.getColorCodeFromRGBA(126,186,137,255 * alphaNum / 100));
+        drawCenteredString(matrixStack, minecraft.fontRenderer, level + "", renderX + 16, renderY + 10, RGBAColor.getColorCodeFromRGBA(126,186,137,255 * alphaNum / 100));
         RenderSystem.popMatrix();
     }
 

@@ -1,4 +1,4 @@
-package teamHTBP.vida.item;
+package teamHTBP.vida.item.function;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -15,6 +15,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import teamHTBP.vida.helper.element.EnumElements;
 import teamHTBP.vida.entity.EntityFaintLight;
 import teamHTBP.vida.entity.EntityLoader;
+import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.itemGroup.ItemGroupLoader;
 
 import java.util.List;

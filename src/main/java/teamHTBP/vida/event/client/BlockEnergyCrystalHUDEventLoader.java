@@ -2,7 +2,6 @@ package teamHTBP.vida.event.client;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -15,9 +14,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import teamHTBP.vida.TileEntity.IElementCrystal;
 import teamHTBP.vida.gui.HUD.ElementCrystalHUD;
-import teamHTBP.vida.helper.blockTools.BlockElementCrystal;
-
-import java.util.List;
+import teamHTBP.vida.helper.blockHelper.BlockElementCrystal;
 
 /**
  * 用于渲染元素武器与工具HUD的事件侦听

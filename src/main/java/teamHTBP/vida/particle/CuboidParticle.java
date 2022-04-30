@@ -36,6 +36,24 @@ public class CuboidParticle extends SpriteTexturedParticle {
         this.extraYLength = rand.nextFloat() * (rand.nextInt(4) + 3);
     }
 
+    public CuboidParticle(ClientWorld World, double posX, double posY, double posZ, double speedX, double speedY, double speedZ) {
+        super(World, posX, posY, posZ, speedX, speedY, speedZ);
+        Random rand = new Random();
+        motionX = speedX;
+        if (rand.nextFloat() > 0.95D)
+            motionY = speedY + rand.nextFloat() / 50.0f;
+        else
+            motionY = speedY;
+        motionZ = speedZ;
+        this.particleRed = 255.0f / 255.0f;
+        this.particleGreen = 255.0f / 255.0f;
+        this.particleBlue = 255.0f / 255.0f;
+        this.maxAge = 50;
+        this.spinSpeed = rand.nextInt(3);
+        this.particleScale = 0.2f;
+        this.extraYLength = rand.nextFloat() * (rand.nextInt(4) + 3);
+    }
+
     @Override
     public void renderParticle(IVertexBuilder buffer, ActiveRenderInfo renderInfo, float partialTicks) {
 

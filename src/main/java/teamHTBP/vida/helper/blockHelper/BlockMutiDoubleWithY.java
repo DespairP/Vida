@@ -1,4 +1,4 @@
-package teamHTBP.vida.helper.blockTools;
+package teamHTBP.vida.helper.blockHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

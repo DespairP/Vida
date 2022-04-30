@@ -1,4 +1,4 @@
-package teamHTBP.vida.helper;
+package teamHTBP.vida.helper.generateHelper;
 
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.registry.Registry;

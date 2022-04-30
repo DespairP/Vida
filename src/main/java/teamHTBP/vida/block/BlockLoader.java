@@ -1,6 +1,7 @@
 package teamHTBP.vida.block;
 
 import net.minecraft.block.Block;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -14,7 +15,8 @@ import teamHTBP.vida.block.environment.crop.BlockElementCropParticle;
 import teamHTBP.vida.block.environment.crop.BlockSaplingVida;
 import teamHTBP.vida.block.function.*;
 import teamHTBP.vida.helper.element.EnumElements;
-import teamHTBP.vida.helper.ColorHelper;
+import teamHTBP.vida.item.ItemBlockLoader;
+import teamHTBP.vida.utils.color.ColorHelper;
 import teamHTBP.vida.helper.RegisterItemBlock;
 import teamHTBP.vida.item.ItemLoader;
 
@@ -24,8 +26,14 @@ import java.util.List;
 
 /**
  * 注册方块类
+ *
+ * 如果方块带有@RegisterItemBlock注释,无需再注册相关的BlockItem,注册的BlockItem实例可在{@link ItemBlockLoader#registerBlockItems(RegistryEvent.Register)}中注册
+ *
  **/
 public class BlockLoader {
+    /**方块装饰工厂,用于直接获取AXIS或YAXIS轴核心的方块*/
+    public static BlockDecoFactory basicFactory = BlockDecoFactory.createBuilder().build();
+
     public final static DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Vida.MOD_ID);
     //深潜石方块
     @RegisterItemBlock
@@ -39,8 +47,6 @@ public class BlockLoader {
     public final static RegistryObject<Block> DIM_BRICKS_DECO_0 = BLOCKS.register("dim_bricks_deco_0", BlockDimRockBrickDeco::new);
     @RegisterItemBlock
     public final static RegistryObject<Block> DIM_BRICKS_DECO_1 = BLOCKS.register("dim_bricks_deco_1", BlockDimRockBrickDeco::new);
-    public static final List<RegistryObject<Block>> REGISTRY_OBJECT_LIST = new LinkedList<>();
-    public static BlockDecoFactory basicFactory = BlockDecoFactory.createBuilder().build();
     //朽木方块
     @RegisterItemBlock
     public final static RegistryObject<Block> LUSH_PLANKS_DECO = BLOCKS.register("lush_planks_deco", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
@@ -138,8 +144,12 @@ public class BlockLoader {
     public static RegistryObject<Block> fireElementOre = BLOCKS.register("fireelementore", () -> new BlockOreElement());
     public static RegistryObject<Block> earthElementOre = BLOCKS.register("earthelementore", () -> new BlockOreElement());
     //功能性方块
-    public static RegistryObject<Block> gemShower = BLOCKS.register("gemshower", BlockGemShower::new);
-    public static RegistryObject<Block> elementcoreAltar = BLOCKS.register("elementcorealtar", BlockElementCoreAltar::new);
+    /**宝石展示架*/
+    @RegisterItemBlock
+    public static RegistryObject<Block> GEM_STAND = BLOCKS.register("gemshower", BlockGemShower::new);
+    /**核心祭坛*/
+    @RegisterItemBlock
+    public static RegistryObject<Block> CORE_ALTAR = BLOCKS.register("elementcorealtar", BlockElementCoreAltar::new);
     public static RegistryObject<Block> prismTable = BLOCKS.register("prismtable", BlockPrismTable::new);
     public static RegistryObject<Block> oreReactionMachine = BLOCKS.register("orereactionmachine", BlockOreReactionMachine::new);
     public static RegistryObject<Block> collector = BLOCKS.register("collector", BlockCollecter::new);
@@ -147,37 +157,12 @@ public class BlockLoader {
     public static RegistryObject<Block> altarcubeMaker = BLOCKS.register("altarcubemaker", BlockAltarCubeMaker::new);
     public static RegistryObject<Block> steleLife = BLOCKS.register("lifestele", BlockSteleLife::new);
     public static RegistryObject<Block> blueprintDesigner = BLOCKS.register("blueprintdesigner", BlockBlueprintDesigner::new);
-    //植物
-    public static RegistryObject<Block> crimsonCrest = BLOCKS.register("crop_crimsoncrest", () -> new BlockElementCropParticle(5, EnumElements.FIRE, () -> {
-        return ItemLoader.crimsonCrest.get();
-    }, ColorHelper.DARK_RED));
-    public static RegistryObject<Block> heartOfWal = BLOCKS.register("crop_heartofwal", () -> new BlockElementCropParticle(5, EnumElements.WOOD, () -> {
-        return ItemLoader.heartOfWal.get();
-    }, ColorHelper.LIGHT_BROWN));
-    public static RegistryObject<Block> nitriteThorns = BLOCKS.register("crop_nitritethorns", () -> new BlockElementCropParticle(5, EnumElements.GOLD, () -> {
-        return ItemLoader.nitriteThorns.get();
-    }, ColorHelper.DARK_BROWN));
-    public static RegistryObject<Block> plamStem = BLOCKS.register("crop_plamstem", () -> new BlockElementCropParticle(5, EnumElements.AQUA, () -> {
-        return ItemLoader.plamStem.get();
-    }, ColorHelper.DARK_BLUE));
-    public static RegistryObject<Block> sullenHydrangea = BLOCKS.register("crop_sullenhydrangea", () -> new BlockElementCropParticle(5, EnumElements.AQUA, () -> {
-        return ItemLoader.sullenHydrangea.get();
-    }, ColorHelper.PURPLR));
-    public static RegistryObject<Block> sweetCyanReed = BLOCKS.register("crop_sweetcyanreed", () -> new BlockElementCropParticle(5, EnumElements.WOOD, () -> {
-        return ItemLoader.sweetCyanReed.get();
-    }, ColorHelper.CYAN_GREEN));
 
-    //获取所有可以被注册的字段
-    public static void init() {
-        Arrays.stream(BlockLoader.class.getDeclaredFields()).forEach(registeredBlock -> {
-            if (registeredBlock.getType() == RegistryObject.class && registeredBlock.isAnnotationPresent(RegisterItemBlock.class)) {
-                registeredBlock.setAccessible(true);
-                try {
-                    REGISTRY_OBJECT_LIST.add((RegistryObject<Block>) registeredBlock.get(null));
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+    //植物
+    public static RegistryObject<Block> CROP_CRISMCREST = BLOCKS.register("crop_crimsoncrest", () -> new BlockElementCropParticle(5, EnumElements.FIRE, () -> ItemLoader.CROP_CRISMCREST.get(), ColorHelper.DARK_RED));
+    public static RegistryObject<Block> CROP_HEARTOFWAL = BLOCKS.register("crop_heartofwal", () -> new BlockElementCropParticle(5, EnumElements.WOOD, () -> ItemLoader.CROP_HEARTOFWAL.get(), ColorHelper.LIGHT_BROWN));
+    public static RegistryObject<Block> CROP_NITRITETHORNS = BLOCKS.register("crop_nitritethorns", () -> new BlockElementCropParticle(5, EnumElements.GOLD, () -> ItemLoader.CROP_NITRITETHORNS.get(), ColorHelper.DARK_BROWN));
+    public static RegistryObject<Block> CROP_PLAMSTEM = BLOCKS.register("crop_plamstem", () -> new BlockElementCropParticle(5, EnumElements.AQUA, () -> ItemLoader.CROP_PLAMSTEM.get(), ColorHelper.DARK_BLUE));
+    public static RegistryObject<Block> CROP_SULLENHYDRANGEA = BLOCKS.register("crop_sullenhydrangea", () -> new BlockElementCropParticle(5, EnumElements.AQUA, () -> ItemLoader.CROP_SULLENHYDRANGEA.get(), ColorHelper.PURPLR));
+    public static RegistryObject<Block> CROP_SWEETCYANREED = BLOCKS.register("crop_sweetcyanreed", () -> new BlockElementCropParticle(5, EnumElements.WOOD, () -> ItemLoader.CROP_SWEETCYANREED.get(), ColorHelper.CYAN_GREEN));
 }

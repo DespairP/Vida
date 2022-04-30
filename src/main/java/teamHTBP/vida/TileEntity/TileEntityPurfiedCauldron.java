@@ -13,7 +13,7 @@ import teamHTBP.vida.helper.element.EnumElements;
 import teamHTBP.vida.helper.element.IElement;
 import teamHTBP.vida.entity.EntityFaintLight;
 import teamHTBP.vida.entity.EntityLoader;
-import teamHTBP.vida.item.Potion.ItemCreativeElementPotion;
+import teamHTBP.vida.item.potion.ItemCreativeElementPotion;
 
 import javax.annotation.Nullable;
 import java.util.Random;

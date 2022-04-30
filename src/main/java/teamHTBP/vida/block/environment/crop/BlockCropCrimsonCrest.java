@@ -18,7 +18,7 @@ public class BlockCropCrimsonCrest extends AbstractBlockElementCrops {
 
     @Override
     protected IItemProvider getSeedsItem() {
-        return ItemLoader.crimsonCrest.get();
+        return ItemLoader.CROP_CRISMCREST.get();
     }
 
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {

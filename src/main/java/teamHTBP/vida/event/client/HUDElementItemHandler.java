@@ -1,6 +1,7 @@
 package teamHTBP.vida.event.client;
 
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.entity.player.PlayerEntity;
@@ -8,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.vector.Quaternion;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -15,6 +17,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.lwjgl.opengl.GL11;
 import teamHTBP.vida.gui.HUD.ElementLevelToolsHUD;
 import teamHTBP.vida.gui.IVidaHUD;
 import teamHTBP.vida.item.staff.IElementLevelTools;
@@ -46,7 +49,6 @@ public class HUDElementItemHandler {
             final ElementLevelToolsHUD hud = new ElementLevelToolsHUD(holdItemStack);
             pushRender(hud);
         }
-
     }
 
     @SubscribeEvent
@@ -56,6 +58,7 @@ public class HUDElementItemHandler {
         if (event.getType() != RenderGameOverlayEvent.ElementType.ALL) {
             return;
         }
+
         // 遍历进行渲染
         for(int i = 0 ; i < renderQueue.size();i++){
             ElementLevelToolsHUD hud = renderQueue.get(i);
@@ -63,6 +66,11 @@ public class HUDElementItemHandler {
             if(i > 1 || !hud.isSameItemStack(holdItemStack)) hud.notifyStopRender(); // 非首个渲染元素或者不是需要渲染元素的提醒出队(alpha到0后会自动出队)
             if(hud.isSameItemStack(holdItemStack)) hud.renewItemStack(holdItemStack);
         }
+    }
+
+    @SubscribeEvent
+    public static void onOverlayRender(RenderGameOverlayEvent.Post event) {
+        //RenderSystem.colorMask(true,true,true,true);
     }
 
 

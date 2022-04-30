@@ -18,7 +18,7 @@ public class BlockCropNitriteThorns extends AbstractBlockElementCrops {
 
     @Override
     protected IItemProvider getSeedsItem() {
-        return ItemLoader.nitriteThorns.get();
+        return ItemLoader.CROP_NITRITETHORNS.get();
     }
 
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {

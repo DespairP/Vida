@@ -1,4 +1,4 @@
-package teamHTBP.vida.item.Potion;
+package teamHTBP.vida.item.potion;
 
 import net.minecraft.item.Item;
 import teamHTBP.vida.helper.element.EnumElements;

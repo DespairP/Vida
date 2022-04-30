@@ -6,7 +6,7 @@ import net.minecraft.util.IItemProvider;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import teamHTBP.vida.helper.element.IElement;
-import teamHTBP.vida.helper.ColorHelper;
+import teamHTBP.vida.utils.color.ColorHelper;
 
 import java.util.Random;
 
@@ -14,7 +14,9 @@ import java.util.Random;
  * 会产生粒子的植物
  */
 public class BlockElementCropParticle extends AbstractBlockElementCrops {
+    /**种子*/
     private final IItemProvider provider;
+    /***/
     private final ColorHelper color;
     protected boolean isMutations = false;
 
@@ -52,10 +54,7 @@ public class BlockElementCropParticle extends AbstractBlockElementCrops {
 
     @Override
     protected IItemProvider getSeedsItem() {
-        if (provider != null) {
-            return provider;
-        } else
-            return super.getSeedsItem();
+        return provider != null ? provider : super.getSeedsItem();
     }
 
     @Override

@@ -72,7 +72,7 @@ public class CubeParticleData implements IParticleData {
 
     @Override
     public String getParameters() {
-        return String.format(Locale.ROOT, "%s %.2d %.2d %.2d ",
+        return String.format(Locale.ROOT, "%s %.2f %.2f %.2f ",
                 this.getType().getRegistryName(), speedX, speedY, speedZ);
     }
 

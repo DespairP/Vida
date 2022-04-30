@@ -18,7 +18,7 @@ public class BlockCropSullenHydrangea extends AbstractBlockElementCrops {
 
     @Override
     protected IItemProvider getSeedsItem() {
-        return ItemLoader.sullenHydrangea.get();
+        return ItemLoader.CROP_SULLENHYDRANGEA.get();
     }
 
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {

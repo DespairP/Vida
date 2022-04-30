@@ -5,6 +5,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import teamHTBP.vida.Vida;
+import teamHTBP.vida.utils.color.RGBAColor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,10 +13,10 @@ import java.util.List;
 
 public enum EnumElements implements IElement {
     VOID,
-    GOLD(2, 3,
+    GOLD(2, 3, 0xFFD04A,
             Biomes.MOUNTAINS,
             Biomes.MOUNTAIN_EDGE),
-    WOOD(5, 4,
+    WOOD(5, 4, 0x80C245,
             Biomes.PLAINS,
             Biomes.FOREST,
             Biomes.BAMBOO_JUNGLE,
@@ -23,17 +24,17 @@ public enum EnumElements implements IElement {
             Biomes.JUNGLE,
             Biomes.BIRCH_FOREST,
             Biomes.SAVANNA),
-    AQUA(4, 2,
+    AQUA(4, 2, 0x43D4EE,
             Biomes.OCEAN,
             Biomes.RIVER,
             Biomes.SNOWY_TAIGA,
             Biomes.COLD_OCEAN,
             Biomes.SNOWY_TUNDRA),
-    FIRE(1, 5,
+    FIRE(1, 5, 0xF53C06,
             Biomes.MOUNTAINS,
             Biomes.DESERT,
             Biomes.MOUNTAIN_EDGE),
-    EARTH(3, 1,
+    EARTH(3, 1, 0x633800,
             Biomes.ERODED_BADLANDS,
             Biomes.DARK_FOREST),
     NONE;
@@ -41,6 +42,7 @@ public enum EnumElements implements IElement {
     List<RegistryKey<Biome>> biomes = new ArrayList<>();
     int conflict;
     int interGrowth;
+    RGBAColor elementRGBAColor = RGBAColor.BLACK;
 
     EnumElements() {
 
@@ -48,9 +50,10 @@ public enum EnumElements implements IElement {
 
     // todo 重新设计元素和群系的关系之后修改biomes
     @SafeVarargs
-    EnumElements(int conflictIndex, int interGrowthIndex, RegistryKey<Biome>... biomes) {
+    EnumElements(int conflictIndex, int interGrowthIndex,int hexColor, RegistryKey<Biome>... biomes) {
         this.biomes = Arrays.asList(biomes);
         this.interGrowth = interGrowthIndex;
+        this.elementRGBAColor = RGBAColor.fromHexRGB(hexColor);
         this.conflict = conflictIndex;
     }
 
@@ -70,6 +73,11 @@ public enum EnumElements implements IElement {
     @Override
     public IElement getInterGrowth() {
         return values()[interGrowth];
+    }
+
+    @Override
+    public RGBAColor getElementRGBAColor() {
+        return this.elementRGBAColor;
     }
 
 

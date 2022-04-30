@@ -19,8 +19,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.PlantType;
 import teamHTBP.vida.helper.element.ElementHelper;
+import teamHTBP.vida.helper.element.EnumElements;
 import teamHTBP.vida.helper.element.IElement;
-import teamHTBP.vida.helper.Allelopathy;
+import teamHTBP.vida.helper.element.Allelopathy;
 
 import java.util.Random;
 
@@ -32,8 +33,7 @@ public abstract class AbstractBlockElementCrops extends BushBlock implements IGr
 
     public AbstractBlockElementCrops(int stage, IElement element) {
         super(Properties.create(Material.PLANTS).doesNotBlockMovement().sound(SoundType.CROP).notSolid().hardnessAndResistance(0.5f, 0).tickRandomly());
-        //AGE = IntegerProperty.create("age", 0, stage);
-        this.setDefaultState(this.stateContainer.getBaseState().with(AGE, Integer.valueOf(0)));
+        this.setDefaultState(this.stateContainer.getBaseState().with(AGE, 0));
         this.maxStage = stage;
         this.element = element;
     }
@@ -135,7 +135,7 @@ public abstract class AbstractBlockElementCrops extends BushBlock implements IGr
      * @return 修改后的state
      */
     public BlockState withAge(int age) {
-        return this.getDefaultState().with(this.getAgeProperties(), Integer.valueOf(age));
+        return this.getDefaultState().with(this.getAgeProperties(), age);
     }
 
     /***
@@ -183,7 +183,6 @@ public abstract class AbstractBlockElementCrops extends BushBlock implements IGr
     }
 
     public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
-        super.tick(state, worldIn, pos, rand);
         if (!worldIn.isAreaLoaded(pos, 1)) return;
         if (worldIn.getLightSubtracted(pos, 0) >= 9) {
             int i = this.getAge(state);
@@ -214,5 +213,12 @@ public abstract class AbstractBlockElementCrops extends BushBlock implements IGr
 
     public PlantType getPlantType(IBlockReader world, BlockPos pos) {
         return PlantType.CROP;
+    }
+
+
+    /**生长逻辑接口*/
+    public interface GrowLogic{
+        /**生长逻辑*/
+        public void grow(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand, EnumElements cropElement,int maxAge);
     }
 }

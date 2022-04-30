@@ -1,4 +1,4 @@
-package teamHTBP.vida.helper;
+package teamHTBP.vida.helper.element;
 
 public enum Allelopathy {
     /**
