@@ -20,6 +20,7 @@ import teamHTBP.vida.particle.ParticleLoader;
 import teamHTBP.vida.recipe.OreReactionMachineRecipe;
 import teamHTBP.vida.recipe.RecipeLoader;
 import teamHTBP.vida.recipe.RecipesManager;
+import teamHTBP.vida.recipe.recipes.register.RecipeManager;
 import teamHTBP.vida.worldGen.GenLoader;
 
 
@@ -54,6 +55,8 @@ public class Vida {
 
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         RecipesManager.init(bus);
+
+        RecipeManager.register(bus);
     }
 
 
