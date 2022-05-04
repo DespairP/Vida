@@ -5,6 +5,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
@@ -29,9 +30,12 @@ public class RecipeLoader {
         RECIPES.register(bus);
     }
 
+    /**合成表注册*/
     private static final DeferredRegister<IRecipeSerializer<?>> RECIPES = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Vida.MOD_ID);
-
+    /**核心祭坛*/
     public static final RegistryObject<RecipeSerializerBase<AltarRecipe>> ALTAR = register("altar", AltarRecipeSerializer::new);
+
+    @Deprecated
     public static final RegistryObject<OreReactionMachineRecipe.Serializer> OREREACTION_RECIPE = RECIPES.register("orereaction_recipe", OreReactionMachineRecipe.Serializer::new);
 
 
@@ -39,8 +43,7 @@ public class RecipeLoader {
         return RECIPES.register(name, obj);
     }
 
-
-    /** 获取合成表 */
+    /**根据TileEntity获取合成表*/
     public static <R extends ICraftingRecipe> R find(World world, TileEntity tileEntity) {
         for (ICraftingRecipe recipe : world.getRecipeManager().getRecipesForType(IRecipeType.CRAFTING)) {
             if (recipe instanceof RecipesBase && ((RecipesBase) recipe).matches(tileEntity)) {

@@ -48,7 +48,7 @@ public class RenderLoader {
     @SubscribeEvent
     public static void onRenderTypeSetup(FMLClientSetupEvent event) {
         RenderTypeLookup.setRenderLayer(BlockLoader.saplingVida.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_CRISMCREST.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_CRISMCREST.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(BlockLoader.CROP_SWEETCYANREED.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(BlockLoader.CROP_SULLENHYDRANGEA.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(BlockLoader.CROP_NITRITETHORNS.get(), RenderType.getCutout());

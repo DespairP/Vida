@@ -23,7 +23,8 @@ import javax.annotation.Nullable;
 * @author DustW
 * */
 public abstract class RecipeSerializerBase<A extends IRecipe<?>> extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<A> {
-    Gson gson = new GsonBuilder().create(); // gson实例，用于json的解析
+    /**gson实例，用于json的解析*/
+    Gson gson = new GsonBuilder().create();
 
     /**合成表读取流*/
     @Nullable
@@ -48,7 +49,7 @@ public abstract class RecipeSerializerBase<A extends IRecipe<?>> extends ForgeRe
         return result;
     }
 
-    public Object formJson(JsonObject obj) {
+    public Object fromJson(JsonObject obj) {
         String type = obj.get("type").getAsString();
         return RecipeObjectType.of(new ResourceLocation(type)).apply(null).fromJson(obj.get("item").getAsJsonObject());
     }

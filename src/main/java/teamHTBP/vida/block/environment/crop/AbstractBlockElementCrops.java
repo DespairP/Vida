@@ -219,6 +219,12 @@ public abstract class AbstractBlockElementCrops extends BushBlock implements IGr
     /**生长逻辑接口*/
     public interface GrowLogic{
         /**生长逻辑*/
-        public void grow(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand, EnumElements cropElement,int maxAge);
+        public boolean grow(BlockState state,
+                            ServerWorld worldIn,
+                            BlockPos pos,
+                            Random rand,
+                            EnumElements cropElement,
+                            int currentAge,
+                            int maxAge);
     }
 }

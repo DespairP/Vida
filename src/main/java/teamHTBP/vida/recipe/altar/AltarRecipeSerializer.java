@@ -24,11 +24,11 @@ public class AltarRecipeSerializer extends RecipeSerializerBase<AltarRecipe> {
     public AltarRecipe read(ResourceLocation recipeId, JsonObject json) {
         //TODO 可能得改
         IElement element = EnumElements.valueOf(json.get("element").getAsString());
-        Object core = formJson(json.get("core").getAsJsonObject());
-        Object o1 = formJson(json.get("other").getAsJsonObject().get("item1").getAsJsonObject());
-        Object o2 = formJson(json.get("other").getAsJsonObject().get("item2").getAsJsonObject());
-        Object o3 = formJson(json.get("other").getAsJsonObject().get("item3").getAsJsonObject());
-        Object o4 = formJson(json.get("other").getAsJsonObject().get("item4").getAsJsonObject());
+        Object core = fromJson(json.get("core").getAsJsonObject());
+        Object o1 = fromJson(json.get("other").getAsJsonObject().get("item1").getAsJsonObject());
+        Object o2 = fromJson(json.get("other").getAsJsonObject().get("item2").getAsJsonObject());
+        Object o3 = fromJson(json.get("other").getAsJsonObject().get("item3").getAsJsonObject());
+        Object o4 = fromJson(json.get("other").getAsJsonObject().get("item4").getAsJsonObject());
         ItemStack result = Ingredient.deserializeItemList(json.get("result").getAsJsonObject()).getStacks().iterator().next();
         return AltarRecipe.builder().others(o1,o2,o3,o4).result(result).element(element).core(core).build();
     }

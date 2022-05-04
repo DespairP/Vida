@@ -4,8 +4,11 @@ import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonObject;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.NonNullList;
 import teamHTBP.vida.TileEntity.TileEntityElementCoreAltar;
 import teamHTBP.vida.helper.element.IElement;
+import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.recipe.RecipeLoader;
 import teamHTBP.vida.recipe.RecipesBase;
 import teamHTBP.vida.recipe.recipeobj.RecipeObject;
@@ -22,14 +25,13 @@ public class AltarRecipe extends RecipesBase<AltarRecipe, TileEntityElementCoreA
     public RecipeObject<?> core;
     /**四周物品*/
     public List<RecipeObject<?>> other;
+    /**合成元素*/
     public IElement element;
+    /**合成品*/
     public ItemStack result = ItemStack.EMPTY;
 
-    private AltarRecipe(){
+    private AltarRecipe(){}
 
-    }
-
-    @Deprecated
     public AltarRecipe(IElement element, ItemStack result, RecipeObject<?> core, List<RecipeObject<?>> other) {
         this.core = core;
         this.other = other;
@@ -37,44 +39,69 @@ public class AltarRecipe extends RecipesBase<AltarRecipe, TileEntityElementCoreA
         this.result = result;
     }
 
-
+    /**
+     * 是否合适进行合成
+     * @param width 四周格子数
+     * @param height 中心格子
+     * */
     @Override
-    public void serialize(JsonObject json) {
-        RecipeLoader.ALTAR.get().write(json, this);
+    public boolean canFit(int width, int height) {
+        return (width + height) >= 5;
     }
 
     @Override
+    public boolean matches(TileEntity tileEntity) {
+        return tileEntity instanceof TileEntityElementCoreAltar;
+    }
+
+    /**
+     *
+     * */
     public boolean matches(TileEntityElementCoreAltar altar) {
-        if (core.matches(altar.coreItem)) {
-            ArrayList<Integer> markList = new ArrayList<>();
+        if(altar == null) return false;
 
-            a :
-            for (RecipeObject<?> recipeObject : other) {
-                for (int i1 = 0; i1 < altar.altarItem.length; i1++) {
-                    if (recipeObject.matches(altar.altarItem[i1]) && !markList.contains(i1)) {
-                        markList.add(i1);
-                        continue a;
-                    }
-                }
-            }
-
-            return markList.size() == altar.altarItem.length;
-        }
+        NonNullList<ItemStack> altarItems = altar.altarItem;
+        ItemStack coreItem = altar.coreItem;
 
         return false;
     }
 
+    /**
+     * 获取合成结果
+     * */
     @Override
     public ItemStack getRecipeOutput() {
         return result.copy();
     }
 
+    /**
+     * 获取序列化读取器,用于读取/写入Json
+     * */
     @Override
     public IRecipeSerializer<?> getSerializer() {
         return RecipeLoader.ALTAR.get();
     }
 
+    /**
+     * 获取Builder，用于手动写入合成表
+     * */
     public static Builder builder(){return new Builder();}
+
+    /**
+     * 序列化Json合成表
+     * */
+    @Override
+    public void serialize(JsonObject json) {
+        RecipeLoader.ALTAR.get().write(json, this);
+    }
+
+
+
+    /**合成图标，用于JEI或合成使用*/
+    @Override
+    public ItemStack getIcon() {
+        return new ItemStack(ItemLoader.altarcubeMaker.get());
+    }
 
     /**
      * AltarRecipe建造者

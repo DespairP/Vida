@@ -34,22 +34,21 @@ public abstract class RecipesBase<A extends IForgeRegistryEntry<A>, T extends Ti
         return getID();
     }
 
-    @Override
-    public boolean canFit(int width, int height) {
-        return false;
-    }
-
+    /**获取合成结果*/
     @Override
     public ItemStack getCraftingResult(CraftingInventory inv) {
         return getRecipeOutput();
     }
 
+
+    /**有关Advancement的逻辑*/
     @Nullable
     @Override
     public JsonObject getAdvancementJson() {
         return null;
     }
 
+    /**有关Advancement的逻辑,getAdvancementJson不返回null时，此方法也不应该返回null*/
     @Nullable
     @Override
     public ResourceLocation getAdvancementID() {
@@ -61,5 +60,9 @@ public abstract class RecipesBase<A extends IForgeRegistryEntry<A>, T extends Ti
         return false;
     }
 
-    public abstract boolean matches(T altar);
+    /**
+     * 用于获取tileEntity的合成表
+     * @return 该合成表是否是TileEntity对应的合成表
+     * */
+    public abstract boolean matches(TileEntity tileEntity);
 }

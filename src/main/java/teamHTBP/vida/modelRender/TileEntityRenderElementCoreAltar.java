@@ -43,7 +43,7 @@ public class TileEntityRenderElementCoreAltar extends TileEntityRenderer<TileEnt
             matrixStackIn.pop();
         }
         for (int i = 0; i < 4; i++) {
-            if (tileEntityIn.altarItem[i] != ItemStack.EMPTY || !tileEntityIn.altarItem[i].isEmpty()) {
+            if (!tileEntityIn.getStack(i).isEmpty()) {
                 if (randomRotationY[i] == 0) this.randomRotationY[i] = rand.nextInt();
                 if (randomRotationZ[i] == 0) this.randomRotationZ[i] = rand.nextInt();
                 matrixStackIn.push();
@@ -64,8 +64,8 @@ public class TileEntityRenderElementCoreAltar extends TileEntityRenderer<TileEnt
                 matrixStackIn.rotate(new Quaternion(90, 0, this.randomRotationZ[i], true));
                 matrixStackIn.scale(0.3f, 0.3f, 0.3f);
                 ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-                IBakedModel ibakedmodel = itemRenderer.getItemModelWithOverrides(tileEntityIn.altarItem[i], tileEntityIn.getWorld(), null);
-                itemRenderer.renderItem(tileEntityIn.altarItem[i], ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                IBakedModel ibakedmodel = itemRenderer.getItemModelWithOverrides(tileEntityIn.getStack(i), tileEntityIn.getWorld(), null);
+                itemRenderer.renderItem(tileEntityIn.getStack(i), ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.pop();
             }
         }
