@@ -17,6 +17,8 @@ import teamHTBP.vida.item.function.ItemElementCoreVoid;
 import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.particle.ParticleLoader;
 import teamHTBP.vida.recipe.RecipeLoader;
+import teamHTBP.vida.recipe.RecipesManager;
+import teamHTBP.vida.recipe.recipes.register.RecipeManager;
 import teamHTBP.vida.worldGen.GenLoader;
 
 
@@ -39,9 +41,16 @@ public class Vida {
         ContainerTypeLoader.CONTAINER_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
         MinecraftForge.EVENT_BUS.register(ItemElementCoreVoid.class);
         MinecraftForge.EVENT_BUS.register(BlockEventLoaderServer.class);
+        RecipeLoader.RECIPES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        registerType(OREACTION, OreReactionMachineRecipe.RECIPE_TYPE);
+
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        RecipesManager.init(bus);
+
+        RecipeManager.register(bus);
         //RecipeLoader.RECIPES.register(FMLJavaModLoadingContext.get().getModEventBus());
         //registerType(OREACTION, OreReactionMachineRecipe.RECIPE_TYPE);
-        RecipeLoader.init(FMLJavaModLoadingContext.get().getModEventBus());
+        //RecipeLoader.init(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
     @Deprecated
