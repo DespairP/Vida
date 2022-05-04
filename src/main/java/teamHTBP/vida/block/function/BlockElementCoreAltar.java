@@ -104,21 +104,26 @@ public class BlockElementCoreAltar extends Block {
         }
     }
 
+    /**当祭坛被破坏时,内部物品掉出*/
     @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
         TileEntityElementCoreAltar tileEntityElementCoreAltar = (TileEntityElementCoreAltar) worldIn.getTileEntity(pos);
         if (tileEntityElementCoreAltar != null && !worldIn.isRemote) {
-            for (int i = 0; i < 4; i++) {
-                ItemStack stack = tileEntityElementCoreAltar.altarItem[i];
-                if (stack != ItemStack.EMPTY && !stack.isEmpty()) {
-                    worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack));
+            // 如果被破坏掉出祭坛物品
+            for(ItemStack altarItem : tileEntityElementCoreAltar.altarItem){
+                if(!altarItem.isEmpty()){
+                    worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), altarItem));
                 }
-                stack = ItemStack.EMPTY;
             }
+            // 核心物品
             if (tileEntityElementCoreAltar.coreItem != ItemStack.EMPTY && !tileEntityElementCoreAltar.coreItem.isEmpty())
                 worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityElementCoreAltar.coreItem));
 
+            // 清空祭坛内物品
+            tileEntityElementCoreAltar.altarItem.clear();
+            tileEntityElementCoreAltar.coreItem = ItemStack.EMPTY;
         }
+
         super.onBlockHarvested(worldIn, pos, state, player);
     }
 

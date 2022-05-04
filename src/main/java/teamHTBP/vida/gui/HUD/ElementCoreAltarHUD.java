@@ -37,7 +37,7 @@ public class ElementCoreAltarHUD extends AbstractGui {
         //绘制四个方向的物品
         for (int i = 0; i < 4; i++) {
             GuiPosition position = GuiPosition.values()[i];
-            ItemStack stack = tileEntityElementCoreAltar.altarItem[i];
+            ItemStack stack = tileEntityElementCoreAltar.getStack(i);
             if (stack != ItemStack.EMPTY && !stack.isEmpty()) {
                 switch (position) {
                     case LEFT:

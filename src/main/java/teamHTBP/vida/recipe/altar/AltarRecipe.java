@@ -1,99 +1,150 @@
 package teamHTBP.vida.recipe.altar;
 
+import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonObject;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.inventory.CraftingInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.ICraftingRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import net.minecraftforge.registries.ForgeRegistryEntry;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.NonNullList;
 import teamHTBP.vida.TileEntity.TileEntityElementCoreAltar;
 import teamHTBP.vida.helper.element.IElement;
-import teamHTBP.vida.recipe.ModRecipeSerializers;
+import teamHTBP.vida.item.ItemLoader;
+import teamHTBP.vida.recipe.RecipeLoader;
 import teamHTBP.vida.recipe.RecipesBase;
-import teamHTBP.vida.recipe.recipeobj.RecipeItem;
 import teamHTBP.vida.recipe.recipeobj.RecipeObject;
 import teamHTBP.vida.recipe.recipeobj.RecipeObjectType;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 /**
  * @author DustW
  */
 public class AltarRecipe extends RecipesBase<AltarRecipe, TileEntityElementCoreAltar> {
-    public Core core;
-    public Other other;
-
+    /**核心物品*/
+    public RecipeObject<?> core;
+    /**四周物品*/
+    public List<RecipeObject<?>> other;
+    /**合成元素*/
     public IElement element;
-    public ItemStack result;
+    /**合成品*/
+    public ItemStack result = ItemStack.EMPTY;
 
-    public AltarRecipe(IElement element, ItemStack result, Core core, Other other) {
+    private AltarRecipe(){}
+
+    public AltarRecipe(IElement element, ItemStack result, RecipeObject<?> core, List<RecipeObject<?>> other) {
         this.core = core;
         this.other = other;
         this.element = element;
         this.result = result;
     }
 
+    /**
+     * 是否合适进行合成
+     * @param width 四周格子数
+     * @param height 中心格子
+     * */
     @Override
-    public void serialize(JsonObject json) {
-        ModRecipeSerializers.ALTAR.get().write(json, this);
+    public boolean canFit(int width, int height) {
+        return (width + height) >= 5;
     }
 
     @Override
+    public boolean matches(TileEntity tileEntity) {
+        return tileEntity instanceof TileEntityElementCoreAltar;
+    }
+
+    /**
+     *
+     * */
     public boolean matches(TileEntityElementCoreAltar altar) {
-        if (core.recipeObject.matches(altar.coreItem)) {
-            ArrayList<Integer> markList = new ArrayList<>();
+        if(altar == null) return false;
 
-            a : for (int i = 0; i < other.content.size(); i++) {
-                for (int i1 = 0; i1 < altar.altarItem.length; i1++) {
-                    if (other.content.get(i).matches(altar.altarItem[i1]) && !markList.contains(i1)) {
-                        markList.add(i1);
-                        continue a;
-                    }
-                }
-            }
-
-            return markList.size() == altar.altarItem.length;
-        }
+        NonNullList<ItemStack> altarItems = altar.altarItem;
+        ItemStack coreItem = altar.coreItem;
 
         return false;
     }
 
+    /**
+     * 获取合成结果
+     * */
     @Override
     public ItemStack getRecipeOutput() {
         return result.copy();
     }
 
+    /**
+     * 获取序列化读取器,用于读取/写入Json
+     * */
     @Override
     public IRecipeSerializer<?> getSerializer() {
-        return ModRecipeSerializers.ALTAR.get();
+        return RecipeLoader.ALTAR.get();
     }
 
-    public static class Core {
-        public final RecipeObject<?> recipeObject;
+    /**
+     * 获取Builder，用于手动写入合成表
+     * */
+    public static Builder builder(){return new Builder();}
 
-        public Core(Object core) {
-            this.recipeObject = RecipeObjectType.of(core);
+    /**
+     * 序列化Json合成表
+     * */
+    @Override
+    public void serialize(JsonObject json) {
+        RecipeLoader.ALTAR.get().write(json, this);
+    }
+
+
+
+    /**合成图标，用于JEI或合成使用*/
+    @Override
+    public ItemStack getIcon() {
+        return new ItemStack(ItemLoader.altarcubeMaker.get());
+    }
+
+    /**
+     * AltarRecipe建造者
+     * [注意]：你必须在填入完core、element、result和others以后才能build，否则会发生问题
+     * */
+    public static class Builder{
+        private AltarRecipe recipe;
+
+        public Builder(){
+            this.recipe = new AltarRecipe();
         }
-    }
 
-    public static class Other {
-        public final List<RecipeObject<?>> content;
+        public Builder core(Object core){
+            recipe.core = RecipeObjectType.of(core);
+            return this;
+        }
 
-        public Other(Object o1, Object o2, Object o3, Object o4) {
-            content = Arrays.asList(
-                    RecipeObjectType.of(o1),
-                    RecipeObjectType.of(o2),
-                    RecipeObjectType.of(o3),
-                    RecipeObjectType.of(o4)
+        public Builder element(IElement element){
+            recipe.element = element;
+            return this;
+        }
+
+        public Builder result(ItemStack stack){
+            if(stack == null) throw new NullPointerException("RecipesBase ResultStack is Null,please check the code");
+            recipe.result = stack;
+            return this;
+        }
+
+        public Builder others(Object o1,Object o2,Object o3,Object o4){
+            recipe.other = ImmutableList.of(RecipeObjectType.of(o1),
+                                            RecipeObjectType.of(o2),
+                                            RecipeObjectType.of(o3),
+                                            RecipeObjectType.of(o4)
             );
+            return this;
+        }
+
+        public AltarRecipe build(){
+            if(recipe.other == null) throw new IllegalArgumentException("recipe no relevant data filled in: others");
+            if(recipe.element == null) throw new IllegalArgumentException("recipe no relevant data filled in:element");
+            if(recipe.core == null) throw new IllegalArgumentException("recipe no relevant data filled in:core");
+            return this.recipe;
         }
     }
+
 }

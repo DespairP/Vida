@@ -4,7 +4,6 @@ import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -14,10 +13,9 @@ import teamHTBP.vida.block.BlockEventLoaderServer;
 import teamHTBP.vida.block.BlockLoader;
 import teamHTBP.vida.entity.EntityLoader;
 import teamHTBP.vida.gui.GUI.ContainerTypeLoader;
-import teamHTBP.vida.item.ItemElementCoreVoid;
+import teamHTBP.vida.item.function.ItemElementCoreVoid;
 import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.particle.ParticleLoader;
-import teamHTBP.vida.recipe.OreReactionMachineRecipe;
 import teamHTBP.vida.recipe.RecipeLoader;
 import teamHTBP.vida.recipe.RecipesManager;
 import teamHTBP.vida.recipe.recipes.register.RecipeManager;
@@ -25,22 +23,15 @@ import teamHTBP.vida.worldGen.GenLoader;
 
 
 /**
- * @author DespairP
- * Credits： DespairP thousvillages
- * this is a description class of this mod
- * 这是一个mod介绍类（核心类）
- * @version 0.0.1
+ * Vida核心类
  **/
 @Mod("vida")
 public class Vida {
-    public static final Logger LOGGER = LogManager.getLogger();
-    //mod的ID字符串，用于材质包获取id，或其他用途
-    public static final String MOD_ID = "vida";
-    public static final ResourceLocation OREACTION = rl("orereaction_recipe");
+    public static final Logger LOGGER = LogManager.getLogger(); // logger
 
-    //construct
+    public static final String MOD_ID = "vida"; //mod的ID字符串，用于材质包获取id，或其他用途
+
     public Vida() {
-        //TODO
         ItemLoader.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         BlockLoader.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ParticleLoader.PARTICLE.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -57,13 +48,17 @@ public class Vida {
         RecipesManager.init(bus);
 
         RecipeManager.register(bus);
+        //RecipeLoader.RECIPES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        //registerType(OREACTION, OreReactionMachineRecipe.RECIPE_TYPE);
+        //RecipeLoader.init(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
-
+    @Deprecated
     private static void registerType(ResourceLocation name, IRecipeType<?> recipeType) {
         Registry.register(Registry.RECIPE_TYPE, name, recipeType);
     }
 
+    @Deprecated
     public static ResourceLocation rl(String path) {
         return new ResourceLocation(MOD_ID, path);
     }

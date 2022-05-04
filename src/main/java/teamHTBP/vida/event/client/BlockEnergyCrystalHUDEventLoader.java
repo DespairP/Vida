@@ -14,8 +14,13 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import teamHTBP.vida.TileEntity.IElementCrystal;
 import teamHTBP.vida.gui.HUD.ElementCrystalHUD;
-import teamHTBP.vida.helper.blockTools.BlockElementCrystal;
+import teamHTBP.vida.helper.blockHelper.BlockElementCrystal;
 
+/**
+ * 用于渲染元素武器与工具HUD的事件侦听
+ *
+ * @author DespairP
+ * */
 @Mod.EventBusSubscriber(Dist.CLIENT)
 public class BlockEnergyCrystalHUDEventLoader {
 
@@ -25,6 +30,7 @@ public class BlockEnergyCrystalHUDEventLoader {
     private static int element_fragment_tick = 0;
     //
     private static int offset_frame = 0;
+
 
     @SubscribeEvent
     public static void onOverlayRender(RenderGameOverlayEvent event) {

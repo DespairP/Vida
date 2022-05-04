@@ -18,7 +18,7 @@ public class BlockCropHeartOfWal extends AbstractBlockElementCrops {
 
     @Override
     protected IItemProvider getSeedsItem() {
-        return ItemLoader.heartOfWal.get();
+        return ItemLoader.CROP_HEARTOFWAL.get();
     }
 
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {

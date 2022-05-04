@@ -16,9 +16,14 @@ import teamHTBP.vida.recipe.altar.AltarRecipe;
 import javax.annotation.Nullable;
 
 /**
+ * Vida合成表基类
+ * RecipesBase -> ICraftingRecipe -> IRecipe
+ * A 合成表类，可以是继承此类的子类
+ * T 使用此合成表的TileEntitiy
  * @author DustW
  */
 public abstract class RecipesBase<A extends IForgeRegistryEntry<A>, T extends TileEntity> extends ForgeRegistryEntry<A> implements ICraftingRecipe, IFinishedRecipe {
+
     @Override
     public ResourceLocation getID() {
         return getRegistryName();
@@ -29,22 +34,21 @@ public abstract class RecipesBase<A extends IForgeRegistryEntry<A>, T extends Ti
         return getID();
     }
 
-    @Override
-    public boolean canFit(int width, int height) {
-        return false;
-    }
-
+    /**获取合成结果*/
     @Override
     public ItemStack getCraftingResult(CraftingInventory inv) {
         return getRecipeOutput();
     }
 
+
+    /**有关Advancement的逻辑*/
     @Nullable
     @Override
     public JsonObject getAdvancementJson() {
         return null;
     }
 
+    /**有关Advancement的逻辑,getAdvancementJson不返回null时，此方法也不应该返回null*/
     @Nullable
     @Override
     public ResourceLocation getAdvancementID() {
@@ -56,5 +60,9 @@ public abstract class RecipesBase<A extends IForgeRegistryEntry<A>, T extends Ti
         return false;
     }
 
-    public abstract boolean matches(T altar);
+    /**
+     * 用于获取tileEntity的合成表
+     * @return 该合成表是否是TileEntity对应的合成表
+     * */
+    public abstract boolean matches(TileEntity tileEntity);
 }

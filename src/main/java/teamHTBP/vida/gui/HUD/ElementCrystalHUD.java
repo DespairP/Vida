@@ -7,9 +7,10 @@ import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.util.ResourceLocation;
 import teamHTBP.vida.TileEntity.IElementCrystal;
 import teamHTBP.vida.Vida;
+import teamHTBP.vida.gui.IVidaHUD;
 import teamHTBP.vida.helper.element.EnumElements;
 
-public class ElementCrystalHUD extends AbstractGui {
+public class ElementCrystalHUD extends AbstractGui implements IVidaHUD{
     private final int width;
     private final int height;
     private final Minecraft minecraft;

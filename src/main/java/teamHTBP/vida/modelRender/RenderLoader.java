@@ -48,14 +48,14 @@ public class RenderLoader {
     @SubscribeEvent
     public static void onRenderTypeSetup(FMLClientSetupEvent event) {
         RenderTypeLookup.setRenderLayer(BlockLoader.saplingVida.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.crimsonCrest.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.sweetCyanReed.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.sullenHydrangea.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.nitriteThorns.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.plamStem.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.heartOfWal.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_CRISMCREST.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_SWEETCYANREED.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_SULLENHYDRANGEA.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_NITRITETHORNS.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_PLAMSTEM.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_HEARTOFWAL.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(BlockLoader.purfiedCauldron.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.elementcoreAltar.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockLoader.CORE_ALTAR.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(BlockLoader.prismTable.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(BlockLoader.steleLife.get(), RenderType.getTranslucent());
     }

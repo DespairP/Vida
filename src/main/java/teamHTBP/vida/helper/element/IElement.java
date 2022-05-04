@@ -5,7 +5,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-import teamHTBP.vida.helper.Allelopathy;
+import teamHTBP.vida.utils.color.RGBAColor;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -41,6 +41,8 @@ public interface IElement extends IForgeRegistryEntry<IElement> {
     IElement getConflict();
 
     IElement getInterGrowth();
+
+    RGBAColor getElementRGBAColor();
 
     default boolean conflict(IElement element) {
         return element != null && element == getConflict();

@@ -18,7 +18,7 @@ public class BlockCropSweetCyanReed extends AbstractBlockElementCrops {
 
     @Override
     protected IItemProvider getSeedsItem() {
-        return ItemLoader.sweetCyanReed.get();
+        return ItemLoader.CROP_SWEETCYANREED.get();
     }
 
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {

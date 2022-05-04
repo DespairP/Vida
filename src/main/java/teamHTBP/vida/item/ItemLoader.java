@@ -2,16 +2,20 @@ package teamHTBP.vida.item;
 
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.block.BlockLoader;
+import teamHTBP.vida.helper.RegisterItemBlock;
 import teamHTBP.vida.helper.element.EnumElements;
-import teamHTBP.vida.item.Potion.ItemCreativeElementPotion;
+import teamHTBP.vida.item.function.*;
+import teamHTBP.vida.item.potion.ItemCreativeElementPotion;
 import teamHTBP.vida.item.armor.*;
 import teamHTBP.vida.item.staff.*;
 import teamHTBP.vida.itemGroup.ItemGroupLoader;
+import static teamHTBP.vida.helper.element.EnumElements.*;
 
 //注册item的类
 public class ItemLoader {
@@ -95,7 +99,7 @@ public class ItemLoader {
     public static RegistryObject<Item> armor_aqua_leggings_Withbottle = ITEMS.register("aqualeggingsarmorwithbottles", () -> new ItemArmorElementLegginsWithBottles(3));
     public static RegistryObject<Item> armor_fire_leggings_Withbottle = ITEMS.register("fireleggingsarmorwithbottles", () -> new ItemArmorElementLegginsWithBottles(4));
     public static RegistryObject<Item> armor_earth_leggings_Withbottle = ITEMS.register("earthleggingsarmorwithbottles", () -> new ItemArmorElementLegginsWithBottles(5));
-    public static RegistryObject<Item> bluePrint_belt = ITEMS.register("blueprintbelt", () -> new ItemArmorBelt());
+    public static RegistryObject<Item> bluePrint_belt = ITEMS.register("blueprintbelt", ItemArmorBelt::new);
 
     public static RegistryObject<Item> armor_gold_boots = ITEMS.register("goldbootsarmor", () -> new ItemArmorElementBoots(1));
     public static RegistryObject<Item> armor_wood_boots = ITEMS.register("woodbootsarmor", () -> new ItemArmorElementBoots(2));
@@ -104,11 +108,11 @@ public class ItemLoader {
     public static RegistryObject<Item> armor_earth_boots = ITEMS.register("earthbootsarmor", () -> new ItemArmorElementBoots(5));
 
     //元素工具
-    public static RegistryObject<Item> goldElementPickaxe = ITEMS.register("goldelementpickaxe", () -> new ItemElementPickaxe(1));
-    public static RegistryObject<Item> woodElementPickaxe = ITEMS.register("woodelementpickaxe", () -> new ItemElementPickaxe(2));
-    public static RegistryObject<Item> aquaElementPickaxe = ITEMS.register("aquaelementpickaxe", () -> new ItemElementPickaxe(3));
-    public static RegistryObject<Item> fireElementPickaxe = ITEMS.register("fireelementpickaxe", () -> new ItemElementPickaxe(4));
-    public static RegistryObject<Item> earthElementPickaxe = ITEMS.register("earthelementpickaxe", () -> new ItemElementPickaxe(5));
+    public static RegistryObject<Item> goldElementPickaxe = ITEMS.register("goldelementpickaxe", () -> new ItemElementPickaxe(GOLD));
+    public static RegistryObject<Item> woodElementPickaxe = ITEMS.register("woodelementpickaxe", () -> new ItemElementPickaxe(WOOD));
+    public static RegistryObject<Item> aquaElementPickaxe = ITEMS.register("aquaelementpickaxe", () -> new ItemElementPickaxe(AQUA));
+    public static RegistryObject<Item> fireElementPickaxe = ITEMS.register("fireelementpickaxe", () -> new ItemElementPickaxe(FIRE));
+    public static RegistryObject<Item> earthElementPickaxe = ITEMS.register("earthelementpickaxe", () -> new ItemElementPickaxe(EARTH));
 
     public static RegistryObject<Item> goldElementSword = ITEMS.register("goldelementsword", () -> new ItemElementSword(1));
     public static RegistryObject<Item> woodElementSword = ITEMS.register("woodelementsword", () -> new ItemElementSword(2));
@@ -136,8 +140,10 @@ public class ItemLoader {
 
 
     //功能性方块
-    public static RegistryObject<Item> gemShower = ITEMS.register("gemshower", () -> new BlockItem(BlockLoader.gemShower.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> elementcoreAltar = ITEMS.register("elementcorealtar", () -> new BlockItem(BlockLoader.elementcoreAltar.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    @RegisterItemBlock
+    public static RegistryObject<Item> GEM_STAND;
+    @RegisterItemBlock
+    public static RegistryObject<Item> CORE_ALTAR;
     public static RegistryObject<Item> prismTable = ITEMS.register("prismtable", () -> new BlockItem(BlockLoader.prismTable.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup).maxStackSize(1)));
     public static RegistryObject<Item> oreReactionMachine = ITEMS.register("orereactionmachine", () -> new BlockItem(BlockLoader.oreReactionMachine.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static RegistryObject<Item> collector = ITEMS.register("collector", () -> new BlockItem(BlockLoader.collector.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
@@ -155,11 +161,15 @@ public class ItemLoader {
     public static RegistryObject<Item> earthElementCrystal = ITEMS.register("earthelementcrystal", () -> new BlockItem(BlockLoader.elementCrystalEarth.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
 
     //元素农作物方块
-    public static RegistryObject<Item> crimsonCrest = ITEMS.register("crop_crimsoncrest", () -> new BlockItem(BlockLoader.crimsonCrest.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> heartOfWal = ITEMS.register("crop_heartofwal", () -> new BlockItem(BlockLoader.heartOfWal.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> nitriteThorns = ITEMS.register("crop_nitritethorns", () -> new BlockItem(BlockLoader.nitriteThorns.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> plamStem = ITEMS.register("crop_plamstem", () -> new BlockItem(BlockLoader.plamStem.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> sullenHydrangea = ITEMS.register("crop_sullenhydrangea", () -> new BlockItem(BlockLoader.sullenHydrangea.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> sweetCyanReed = ITEMS.register("crop_sweetcyanreed", () -> new BlockItem(BlockLoader.sweetCyanReed.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> CROP_CRISMCREST = ITEMS.register("crop_crimsoncrest", () -> new BlockItem(BlockLoader.CROP_CRISMCREST.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> CROP_HEARTOFWAL = ITEMS.register("crop_heartofwal", () -> new BlockItem(BlockLoader.CROP_HEARTOFWAL.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> CROP_NITRITETHORNS = ITEMS.register("crop_nitritethorns", () -> new BlockItem(BlockLoader.CROP_NITRITETHORNS.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> CROP_PLAMSTEM = ITEMS.register("crop_plamstem", () -> new BlockItem(BlockLoader.CROP_PLAMSTEM.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> CROP_SULLENHYDRANGEA = ITEMS.register("crop_sullenhydrangea", () -> new BlockItem(BlockLoader.CROP_SULLENHYDRANGEA.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> CROP_SWEETCYANREED = ITEMS.register("crop_sweetcyanreed", () -> new BlockItem(BlockLoader.CROP_SWEETCYANREED.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
 
+
+    public Item getItem(RegistryObject<Item> registryObject){
+        return registryObject != null ? registryObject.orElse(Items.AIR) : Items.AIR;
+    }
 }

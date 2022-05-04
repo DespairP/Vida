@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 
+
 public class RecipeBlock extends RecipeObject<Block> {
     public RecipeBlock(Block obj) {
         super(obj);

@@ -20,7 +20,7 @@ import teamHTBP.vida.helper.element.ElementHelper;
 import teamHTBP.vida.helper.element.EnumElements;
 import teamHTBP.vida.helper.element.IElement;
 import teamHTBP.vida.gui.GUI.ContainerPrismTable;
-import teamHTBP.vida.item.ItemEnergyElementFragment;
+import teamHTBP.vida.item.function.ItemEnergyElementFragment;
 import teamHTBP.vida.item.ItemLoader;
 
 import javax.annotation.Nullable;
