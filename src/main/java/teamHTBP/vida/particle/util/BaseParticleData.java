@@ -33,54 +33,29 @@ public class BaseParticleData implements IParticleData {
 
         @Override
         public BaseParticleData deserialize(ParticleType<BaseParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
-            reader.expect(' ');
-            double speedX = reader.readDouble();
-            reader.expect(' ');
-            double speedY = reader.readDouble();
-            reader.expect(' ');
-            double speedZ = reader.readDouble();
-            reader.expect(' ');
-            int r = reader.readInt();
-            reader.expect(' ');
-            int g = reader.readInt();
-            reader.expect(' ');
-            int b = reader.readInt();
-            reader.expect(' ');
-            float scale = reader.readFloat();
-            reader.expect(' ');
-            int age = reader.readInt();
-            return new BaseParticleData(particleTypeIn, speedX, speedY, speedZ, r, g, b, scale, age);
+            return new BaseParticleData(particleTypeIn, 255, 255, 255, 1 , 100);
         }
 
         @Override
         public BaseParticleData read(ParticleType<BaseParticleData> particleTypeIn, PacketBuffer buffer) {
-            double speedX = buffer.readDouble();
-            double speedY = buffer.readDouble();
-            double speedZ = buffer.readDouble();
             int r = buffer.readInt();
             int g = buffer.readInt();
             int b = buffer.readInt();
             float scale = buffer.readFloat();
             int age = buffer.readInt();
-            return new BaseParticleData(particleTypeIn, speedX, speedY, speedZ, r, g, b, scale, age);
+            return new BaseParticleData(particleTypeIn, r, g, b, scale, age);
         }
     };
 
-    private final double speedX;
-    private final double speedY;
-    private final double speedZ;
-    private final int r;
-    private final int g;
-    private final int b;
     private final int age;
     private float scale;
+    private int r;
+    private int g;
+    private int b;
     ParticleType<BaseParticleData> particleTypeIn;
 
-    public BaseParticleData(ParticleType<BaseParticleData> particleTypeIn, double speedX, double speedY, double speedZ, int r, int g, int b, float scale, int age) {
+    public BaseParticleData(ParticleType<BaseParticleData> particleTypeIn, int r, int g, int b, float scale, int age) {
         this.particleTypeIn = particleTypeIn;
-        this.speedX = speedX;
-        this.speedY = speedY;
-        this.speedZ = speedZ;
         this.r = r;
         this.g = g;
         this.b = b;
@@ -96,9 +71,6 @@ public class BaseParticleData implements IParticleData {
 
     @Override
     public void write(PacketBuffer buffer) {
-        buffer.writeDouble(this.speedX);
-        buffer.writeDouble(this.speedY);
-        buffer.writeDouble(this.speedZ);
         buffer.writeFloat(this.r);
         buffer.writeFloat(this.g);
         buffer.writeFloat(this.b);
@@ -108,8 +80,7 @@ public class BaseParticleData implements IParticleData {
 
     @Override
     public String getParameters() {
-        return String.format(Locale.ROOT, "%s %.2d %.2d %.2d %f %f %f %f %d",
-                this.getType().getRegistryName(), speedX, speedY, speedZ, r, g, b, scale, age);
+        return String.format(Locale.ROOT, "%s", this.getType().getRegistryName());
     }
 
     public int getR() {
@@ -122,17 +93,5 @@ public class BaseParticleData implements IParticleData {
 
     public int getB() {
         return b;
-    }
-
-    public double getSpeedX() {
-        return speedX;
-    }
-
-    public double getSpeedY() {
-        return speedY;
-    }
-
-    public double getSpeedZ() {
-        return speedZ;
     }
 }

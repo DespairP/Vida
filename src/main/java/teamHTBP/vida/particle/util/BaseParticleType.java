@@ -7,7 +7,7 @@ import net.minecraft.particles.ParticleType;
 /**
  * */
 public class BaseParticleType<T extends Particle> extends ParticleType<BaseParticleData> {
-    Codec<BaseParticleData> codec = Codec.unit(new BaseParticleData(null,0, 0, 0,0,0,0,0,0));
+    Codec<BaseParticleData> codec = Codec.unit(new BaseParticleData(null,0, 0, 0,0,0));
 
     public BaseParticleType() {
        super(false,BaseParticleData.DESERIALIZER);
