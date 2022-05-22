@@ -2,29 +2,31 @@ package teamHTBP.vida.recipe.altar;
 
 import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonObject;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
 import teamHTBP.vida.TileEntity.TileEntityElementCoreAltar;
-import teamHTBP.vida.helper.element.IElement;
+import teamHTBP.vida.helper.elementHelper.IElement;
 import teamHTBP.vida.item.ItemLoader;
-import teamHTBP.vida.recipe.RecipeLoader;
-import teamHTBP.vida.recipe.RecipesBase;
-import teamHTBP.vida.recipe.recipeobj.RecipeObject;
-import teamHTBP.vida.recipe.recipeobj.RecipeObjectType;
+import teamHTBP.vida.recipe.RecipeSerializers;
+import teamHTBP.vida.recipe.RecipeTypes;
+import teamHTBP.vida.recipe.utils.base.BaseTileEntityRecipes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author DustW
  */
-public class AltarRecipe extends RecipesBase<AltarRecipe, TileEntityElementCoreAltar> {
+public class AltarRecipe extends BaseTileEntityRecipes<AltarRecipe, TileEntityElementCoreAltar> {
     /**核心物品*/
-    public RecipeObject<?> core;
+    public ItemStack core;
     /**四周物品*/
-    public List<RecipeObject<?>> other;
+    public List<ItemStack> other;
     /**合成元素*/
     public IElement element;
     /**合成品*/
@@ -32,7 +34,7 @@ public class AltarRecipe extends RecipesBase<AltarRecipe, TileEntityElementCoreA
 
     private AltarRecipe(){}
 
-    public AltarRecipe(IElement element, ItemStack result, RecipeObject<?> core, List<RecipeObject<?>> other) {
+    public AltarRecipe(IElement element, ItemStack result, ItemStack core, List<ItemStack> other) {
         this.core = core;
         this.other = other;
         this.element = element;
@@ -51,7 +53,7 @@ public class AltarRecipe extends RecipesBase<AltarRecipe, TileEntityElementCoreA
 
     @Override
     public boolean matches(TileEntity tileEntity) {
-        return tileEntity instanceof TileEntityElementCoreAltar;
+        return false;
     }
 
     /**
@@ -61,9 +63,19 @@ public class AltarRecipe extends RecipesBase<AltarRecipe, TileEntityElementCoreA
         if(altar == null) return false;
 
         NonNullList<ItemStack> altarItems = altar.altarItem;
-        ItemStack coreItem = altar.coreItem;
+        Item coreItem = Optional.of(altar.coreItem).orElse(ItemStack.EMPTY).getItem();
+        List<ItemStack> requiredItems = new ArrayList<>(altarItems);
 
-        return false;
+        if(core.getItem() != coreItem) return false;
+        for(ItemStack stack:altarItems){
+            System.out.println(stack);
+            if(!requiredItems.contains(stack)){
+                return false;
+            }
+            requiredItems.remove(stack);
+        }
+
+        return requiredItems.size() == 0;
     }
 
     /**
@@ -79,7 +91,7 @@ public class AltarRecipe extends RecipesBase<AltarRecipe, TileEntityElementCoreA
      * */
     @Override
     public IRecipeSerializer<?> getSerializer() {
-        return RecipeLoader.ALTAR.get();
+        return RecipeSerializers.ALTAR.get();
     }
 
     /**
@@ -92,7 +104,7 @@ public class AltarRecipe extends RecipesBase<AltarRecipe, TileEntityElementCoreA
      * */
     @Override
     public void serialize(JsonObject json) {
-        RecipeLoader.ALTAR.get().write(json, this);
+        RecipeSerializers.ALTAR.get().write(json, this);
     }
 
 
@@ -101,6 +113,11 @@ public class AltarRecipe extends RecipesBase<AltarRecipe, TileEntityElementCoreA
     @Override
     public ItemStack getIcon() {
         return new ItemStack(ItemLoader.altarcubeMaker.get());
+    }
+
+    @Override
+    public IRecipeType<?> getType() {
+        return RecipeTypes.ALTAR;
     }
 
     /**
@@ -114,8 +131,8 @@ public class AltarRecipe extends RecipesBase<AltarRecipe, TileEntityElementCoreA
             this.recipe = new AltarRecipe();
         }
 
-        public Builder core(Object core){
-            recipe.core = RecipeObjectType.of(core);
+        public Builder core(Item core){
+            recipe.core = new ItemStack(core);
             return this;
         }
 
@@ -130,11 +147,11 @@ public class AltarRecipe extends RecipesBase<AltarRecipe, TileEntityElementCoreA
             return this;
         }
 
-        public Builder others(Object o1,Object o2,Object o3,Object o4){
-            recipe.other = ImmutableList.of(RecipeObjectType.of(o1),
-                                            RecipeObjectType.of(o2),
-                                            RecipeObjectType.of(o3),
-                                            RecipeObjectType.of(o4)
+        public Builder others(Item o1, Item o2, Item o3, Item o4){
+            recipe.other = ImmutableList.of(new ItemStack(o1),
+                                            new ItemStack(o2),
+                                            new ItemStack(o3),
+                                            new ItemStack(o4)
             );
             return this;
         }

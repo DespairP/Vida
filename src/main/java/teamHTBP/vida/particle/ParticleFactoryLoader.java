@@ -23,7 +23,7 @@ public class ParticleFactoryLoader {
 
     @SubscribeEvent
     public static void onParticleFactoryRegistration(ParticleFactoryRegisterEvent event) {
-        Minecraft.getInstance().particles.registerFactory(ParticleLoader.leafParticle.get(), LeafParticleFactory::new);
+        Minecraft.getInstance().particles.registerFactory(ParticleLoader.leafParticle.get(),(sprite)->new BaseParticleFactory(sprite, EnumVidaParticleType.LEAF));
         Minecraft.getInstance().particles.registerFactory(ParticleLoader.cubeParticle.get(), CubeParticleFactory::new);
         Minecraft.getInstance().particles.registerFactory(ParticleLoader.elementFireParticle.get(), ElementFireParticleFactory::new);
         Minecraft.getInstance().particles.registerFactory(ParticleLoader.cuboidParticle.get(), CuboidParticleFactory::new);

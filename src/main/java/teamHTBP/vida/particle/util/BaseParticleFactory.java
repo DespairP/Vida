@@ -22,11 +22,11 @@ public class BaseParticleFactory implements IParticleFactory<BaseParticleData> {
 
     @Nullable
     @Override
-    public Particle makeParticle(BaseParticleData data,ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+    public Particle makeParticle(BaseParticleData data, ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
         try {
-            Particle p = type.getParticle(worldIn,x,y + 1,z,xSpeed,ySpeed,zSpeed);
-            if(p instanceof SpriteTexturedParticle)
-                ((SpriteTexturedParticle)p).selectSpriteRandomly(sprites);
+            Particle p = type.getParticle(worldIn, x, y + 1, z, data.getSpeedX(), data.getSpeedY(), data.getSpeedZ() , data.getR(), data.getG(), data.getB());
+            if (p instanceof SpriteTexturedParticle)
+                ((SpriteTexturedParticle) p).selectSpriteRandomly(sprites);
             return p;
         } catch (Exception e) {
             e.printStackTrace();

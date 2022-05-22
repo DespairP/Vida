@@ -2,7 +2,7 @@ package teamHTBP.vida.modelRender.armormodel;
 
 import net.minecraft.client.renderer.model.ModelRenderer;
 
-public class ArmorModelEarthBoots extends ArmorModelElementBoots {
+public class ArmorModelEarthBoots extends AbstractModelElementBoots {
     private final ModelRenderer bone;
     private final ModelRenderer bone2;
 

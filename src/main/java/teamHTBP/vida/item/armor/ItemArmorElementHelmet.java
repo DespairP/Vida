@@ -31,7 +31,7 @@ public class ItemArmorElementHelmet extends ArmorItem {
     @OnlyIn(Dist.CLIENT)
     @Nullable
     public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
-        ArmorModelElementHelmet model = null;
+        AbstractModelElementHelmet model = null;
         switch (element) {
             case 1:
                 model = new ArmorModelGoldHelmet();

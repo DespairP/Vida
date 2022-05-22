@@ -2,7 +2,7 @@ package teamHTBP.vida.modelRender.armormodel;
 
 import net.minecraft.client.renderer.model.ModelRenderer;
 
-public class ArmorModelAquaHelmet extends ArmorModelElementHelmet {
+public class ArmorModelAquaHelmet extends AbstractModelElementHelmet {
     private final ModelRenderer bone;
     private final ModelRenderer cube_r1;
     private final ModelRenderer cube_r2;

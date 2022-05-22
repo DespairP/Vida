@@ -2,7 +2,6 @@ package teamHTBP.vida.TileEntity;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
@@ -12,17 +11,14 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
 import teamHTBP.vida.block.BlockLoader;
-import teamHTBP.vida.helper.element.ElementHelper;
-import teamHTBP.vida.helper.element.EnumElements;
-import teamHTBP.vida.helper.element.IElement;
+import teamHTBP.vida.helper.elementHelper.ElementHelper;
+import teamHTBP.vida.helper.elementHelper.EnumElements;
+import teamHTBP.vida.helper.elementHelper.IElement;
 import teamHTBP.vida.item.function.ItemElementCore;
-import teamHTBP.vida.recipe.RecipeLoader;
-import teamHTBP.vida.recipe.RecipesBase;
+import teamHTBP.vida.recipe.RecipeManager;
 import teamHTBP.vida.recipe.altar.AltarRecipe;
 
 import javax.annotation.Nullable;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
 
 public class TileEntityElementCoreAltar extends TileEntity implements ITickableTileEntity {
@@ -202,7 +198,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         //如果在进行仪式，不能拿取物品
         if (this.isProgressing) return ItemStack.EMPTY;
         for (int i = 0; i < 4; i++) {
-            if (this.altarItem.get(i) != ItemStack.EMPTY) {
+            if (!this.altarItem.get(i).isEmpty()) {
                 return this.altarItem.get(i);
             }
         }
@@ -264,15 +260,11 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         for (int i = 0; i < 4; i++) {
             if (altarItem.get(i).isEmpty()) return false;
         }
-        List<Item> itemList = new LinkedList<Item>();
-        for (int j = 0; j < 4; j++) {
-            itemList.add(altarItem.get(j).getItem());
-        }
 
-        RecipesBase recipe = RecipeLoader.find(world, this);
+        AltarRecipe recipe = RecipeManager.getAltarRecipe(world,this);
 
-        if (recipe instanceof AltarRecipe) {
-            this.element = ((AltarRecipe) recipe).element;
+        if (recipe != null) {
+            this.element = recipe.element;
             return true;
         }
 

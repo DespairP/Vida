@@ -29,7 +29,7 @@ public class ItemArmorElementBoots extends ArmorItem {  //盔甲属于什么元�
     @OnlyIn(Dist.CLIENT)
     @Nullable
     public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
-        ArmorModelElementBoots model = null;
+        AbstractModelElementBoots model = null;
         switch (element) {
             case 1:
                 model = new ArmorModelGoldBoots();

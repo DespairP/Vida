@@ -1,8 +1,7 @@
 package teamHTBP.vida.recipe.altar;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import teamHTBP.vida.helper.element.EnumElements;
+import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.item.ItemLoader;
 
 import java.util.ArrayList;

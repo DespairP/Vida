@@ -9,7 +9,7 @@ import net.minecraftforge.fml.network.PacketDistributor;
 import teamHTBP.vida.capability.VidaCapabilities;
 import teamHTBP.vida.capability.blueprintCapability.Blueprint;
 import teamHTBP.vida.capability.blueprintCapability.IBlueprintCapability;
-import teamHTBP.vida.helper.BlueprintHelper;
+import teamHTBP.vida.helper.blueprintHelper.BlueprintHelper;
 import teamHTBP.vida.network.PacketChannel;
 import teamHTBP.vida.network.PacketMessage;
 
@@ -34,7 +34,7 @@ public class CommandUnlockBluePrint implements Command<CommandSource> {
                 e.printStackTrace();
             }
             return null;
-        }), new PacketMessage(blueprint.getBlueprintID() + " is unlocked!"));
+        }), new PacketMessage(blueprint.getId() + " is unlocked!"));
         return 0;
     }
 }

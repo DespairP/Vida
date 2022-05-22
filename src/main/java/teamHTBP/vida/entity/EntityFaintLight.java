@@ -14,8 +14,8 @@ import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.network.NetworkHooks;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import teamHTBP.vida.helper.element.EnumElements;
-import teamHTBP.vida.helper.element.IElement;
+import teamHTBP.vida.helper.elementHelper.EnumElements;
+import teamHTBP.vida.helper.elementHelper.IElement;
 
 import java.util.Optional;
 

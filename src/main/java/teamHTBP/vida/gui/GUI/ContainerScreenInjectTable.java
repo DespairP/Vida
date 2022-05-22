@@ -19,7 +19,7 @@ import teamHTBP.vida.Vida;
 import teamHTBP.vida.capability.skillSystem.ISkill;
 import teamHTBP.vida.capability.skillSystem.SkillHelper;
 import teamHTBP.vida.capability.skillSystem.SkillSurface;
-import teamHTBP.vida.helper.element.EnumElements;
+import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.gui.GUI.Slot.AbstractSkillSlot;
 import teamHTBP.vida.gui.GUI.Slot.NormalSkillSlot;
 import teamHTBP.vida.item.staff.IElementTools;

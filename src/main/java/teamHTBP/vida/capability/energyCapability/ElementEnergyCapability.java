@@ -1,6 +1,6 @@
 package teamHTBP.vida.capability.energyCapability;
 
-import teamHTBP.vida.helper.element.EnumElements;
+import teamHTBP.vida.helper.elementHelper.EnumElements;
 
 public class ElementEnergyCapability implements IElementEnergyCapability {
     //现有的能量

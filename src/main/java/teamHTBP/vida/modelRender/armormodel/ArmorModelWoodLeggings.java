@@ -2,7 +2,7 @@ package teamHTBP.vida.modelRender.armormodel;
 
 import net.minecraft.client.renderer.model.ModelRenderer;
 
-public class ArmorModelWoodLeggings extends ArmorModelElementLeggings {
+public class ArmorModelWoodLeggings extends AbstractModelElementLeggings {
 
     private final ModelRenderer bone11;
     private final ModelRenderer cube_r1;

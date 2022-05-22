@@ -16,6 +16,7 @@ import java.util.function.Supplier;
 public class PacketBottles {
     private int mode = 0;
 
+    /***/
     public PacketBottles(PacketBuffer buffer) {
         mode = buffer.readInt();
     }

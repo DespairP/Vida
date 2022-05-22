@@ -4,7 +4,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockReader;
 import teamHTBP.vida.TileEntity.TileEntityGoldElementCrystal;
-import teamHTBP.vida.helper.blockHelper.BlockElementCrystal;
 
 import javax.annotation.Nullable;
 

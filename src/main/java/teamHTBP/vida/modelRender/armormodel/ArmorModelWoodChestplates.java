@@ -2,7 +2,7 @@ package teamHTBP.vida.modelRender.armormodel;
 
 import net.minecraft.client.renderer.model.ModelRenderer;
 
-public class ArmorModelWoodChestplates extends ArmorModelElementChestplates {
+public class ArmorModelWoodChestplates extends AbstractModelElementChestplates {
     private final ModelRenderer bone6;
     private final ModelRenderer bone3;
     private final ModelRenderer bone10;

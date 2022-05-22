@@ -7,6 +7,7 @@ import teamHTBP.vida.Vida;
 
 public class PacketChannel {
     private static final String PROTOCOL_VERSION = "1.1";
+
     public static final SimpleChannel INSTANCE = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(Vida.MOD_ID, "main"),
             () -> PROTOCOL_VERSION,

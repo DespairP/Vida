@@ -12,7 +12,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 /**
  * PlayerModel - Either Mojang or a mod author (Taken From Memory)
- * Created using Tabula 8.0.0
  */
 @OnlyIn(Dist.CLIENT)
 public class TestArmorModel<T extends Entity> extends BipedModel<ArmorStandEntity> {

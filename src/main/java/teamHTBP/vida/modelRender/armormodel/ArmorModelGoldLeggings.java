@@ -2,7 +2,7 @@ package teamHTBP.vida.modelRender.armormodel;
 
 import net.minecraft.client.renderer.model.ModelRenderer;
 
-public class ArmorModelGoldLeggings extends ArmorModelElementLeggings {
+public class ArmorModelGoldLeggings extends AbstractModelElementLeggings {
     private final ModelRenderer cube_1;
     private final ModelRenderer cube_2;
 

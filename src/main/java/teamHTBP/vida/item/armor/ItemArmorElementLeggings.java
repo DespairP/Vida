@@ -29,7 +29,7 @@ public class ItemArmorElementLeggings extends ArmorItem {
     @OnlyIn(Dist.CLIENT)
     @Nullable
     public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
-        ArmorModelElementLeggings model = null;
+        AbstractModelElementLeggings model = null;
         switch (element) {
             case 1:
                 model = new ArmorModelGoldLeggings();
