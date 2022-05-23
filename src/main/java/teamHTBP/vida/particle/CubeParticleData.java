@@ -13,45 +13,31 @@ public class CubeParticleData implements IParticleData {
 
         @Override
         public CubeParticleData deserialize(ParticleType<CubeParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
-            reader.expect(' ');
-            double speedX = reader.readDouble();
-            reader.expect(' ');
-            double speedY = reader.readDouble();
-            reader.expect(' ');
-            double speedZ = reader.readDouble();
-            return new CubeParticleData(speedX, speedY, speedZ);
+            return new CubeParticleData(1, 1, 1 ,1);
         }
 
         @Override
         public CubeParticleData read(ParticleType<CubeParticleData> particleTypeIn, PacketBuffer buffer) {
-            double speedX = buffer.readDouble();
-            double speedY = buffer.readDouble();
-            double speedZ = buffer.readDouble();
-            return new CubeParticleData(speedX, speedY, speedZ);
+            float r = buffer.readFloat();
+            float g = buffer.readFloat();
+            float b = buffer.readFloat();
+            float scale = buffer.readFloat();
+            return new CubeParticleData(r, g, b, scale);
         }
     };
-    private final double speedX;
-    private final double speedY;
-    private final double speedZ;
-    private float scale;
+
+
     private float r;
     private float g;
     private float b;
+    private float scale;
 
-    public CubeParticleData(double speedX, double speedY, double speedZ) {
-        this.speedX = speedX;
-        this.speedY = speedY;
-        this.speedZ = speedZ;
-    }
 
-    public CubeParticleData(double speedX, double speedY, double speedZ, float r, float g, float b, float scale) {
-        this.speedX = speedX;
-        this.speedY = speedY;
-        this.speedZ = speedZ;
+    public CubeParticleData(float r, float g, float b, float scale) {
+        this.scale = scale;
         this.r = r;
         this.g = g;
         this.b = b;
-        this.scale = scale;
     }
 
     @Override
@@ -61,9 +47,6 @@ public class CubeParticleData implements IParticleData {
 
     @Override
     public void write(PacketBuffer buffer) {
-        buffer.writeDouble(this.speedX);
-        buffer.writeDouble(this.speedY);
-        buffer.writeDouble(this.speedZ);
         buffer.writeFloat(this.r);
         buffer.writeFloat(this.g);
         buffer.writeFloat(this.b);
@@ -72,43 +55,22 @@ public class CubeParticleData implements IParticleData {
 
     @Override
     public String getParameters() {
-        return String.format(Locale.ROOT, "%s %.2f %.2f %.2f ",
-                this.getType().getRegistryName(), speedX, speedY, speedZ);
+        return String.format(Locale.ROOT, "%s", this.getType().getRegistryName());
     }
 
-    //获得x,y,z速度
-    public double getSpeed(int type) {
-        switch (type) {
-            case 0:
-                return speedX;
-            case 1:
-                return speedY;
-            case 2:
-                return speedZ;
-            default:
-                return 0;
-        }
+    public float getScale() {
+        return scale;
     }
 
-    //获得r,g,b,scale
-    public float getRGBS(int type) {
-        switch (type) {
-            case 0:
-                return r;
-            case 1:
-                return g;
-            case 2:
-                return b;
-            case 3:
-                return scale;
-            default:
-                return 0;
-        }
+    public float getR() {
+        return r;
     }
 
-    //得到RGBscale是否存在
-    public boolean containRGBS() {
-        return r != 0 || g != 0 || !(b == 0 & scale == 0);
+    public float getG() {
+        return g;
     }
 
+    public float getB() {
+        return b;
+    }
 }

@@ -10,7 +10,7 @@ public class ElementFireParticle extends SpriteTexturedParticle {
     private final double coordY;
     private final double coordZ;
 
-    protected ElementFireParticle(ClientWorld worldIn, double posXIn, double posYIn, double posZIn, double xSpeedIn, double ySpeedIn, double zSpeedIn) {
+    public ElementFireParticle(ClientWorld worldIn, double posXIn, double posYIn, double posZIn, double xSpeedIn, double ySpeedIn, double zSpeedIn) {
         super(worldIn, posXIn, posYIn, posZIn, xSpeedIn, ySpeedIn, zSpeedIn);
 
         this.coordX = posXIn;
@@ -19,7 +19,6 @@ public class ElementFireParticle extends SpriteTexturedParticle {
         this.particleRed = 1;
         this.particleGreen = 1;
         this.particleBlue = 1;
-        this.canCollide = false;
         this.prevPosX = posXIn + xSpeedIn;
         this.prevPosY = posYIn + ySpeedIn;
         this.prevPosZ = posZIn + zSpeedIn;

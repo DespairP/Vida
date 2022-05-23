@@ -4,25 +4,27 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.ResourceLocation;
 import teamHTBP.vida.particle.CuboidParticle;
+import teamHTBP.vida.particle.ElementFireParticle;
 import teamHTBP.vida.particle.LeafParticle;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-public enum EnumVidaParticleType {
+public enum BaseVidaParticleType {
     CUBOID(CuboidParticle.class, ConstructorType.WITHXYZSPEED),
-    LEAF(LeafParticle.class, ConstructorType.WITHXYZSPEED);
+    LEAF(LeafParticle.class, ConstructorType.WITHXYZSPEED),
+    ELEMENT_FIRE(ElementFireParticle.class,ConstructorType.WITHXYZSPEED);
 
     public Class<?> particleClass;
     public ResourceLocation location;
     public ConstructorType type = ConstructorType.NONE;
 
-    EnumVidaParticleType(Class<?> particleClass, ConstructorType type) {
+    BaseVidaParticleType(Class<?> particleClass, ConstructorType type) {
         this.particleClass = particleClass;
         this.type = type;
     }
 
-    EnumVidaParticleType(Class<?> particleClass, ResourceLocation location, ConstructorType type) {
+    BaseVidaParticleType(Class<?> particleClass, ResourceLocation location, ConstructorType type) {
         this.particleClass = particleClass;
         this.location = location;
         this.type = type;

@@ -171,7 +171,7 @@ public class BlockElementCoreAltar extends Block {
                             b = 111;
                             break;
                     }
-                    worldIn.addParticle(new CubeParticleData(speedX, speedY, speedZ, r, g, b, 0.03f), posX, posY, posZ, 0, -0.03, 0);
+                    worldIn.addParticle(new CubeParticleData(r, g, b, 0.03f), posX, posY, posZ, speedX, speedY, speedZ);
                 }
             }
         }

@@ -15,7 +15,9 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import teamHTBP.vida.TileEntity.TileEntityCollector;
 import teamHTBP.vida.item.ItemLoader;
-import teamHTBP.vida.particle.ElementFireParticleData;
+import teamHTBP.vida.particle.ParticleFactoryLoader;
+import teamHTBP.vida.particle.ParticleLoader;
+import teamHTBP.vida.particle.util.BaseParticleData;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -80,7 +82,7 @@ public class BlockCollecter extends Block {
             if (entity.getCollection() > 0 && rand.nextDouble() >= 0.1D)
             //生成粒子
             {
-                worldIn.addParticle(new ElementFireParticleData(-0.01F, 0, -0.01F), pos.getX() + 0.5f, pos.getY() + 1.0f, pos.getZ() + 0.5f, 0, 0, 0);
+                worldIn.addParticle(new BaseParticleData(ParticleLoader.elementFireParticle.get(), 1 ,1,1,1,100), pos.getX() + 0.5f, pos.getY() + 1.0f, pos.getZ() + 0.5f, -0.01F, 0, -0.01F);
 
             }
         }

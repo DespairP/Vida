@@ -6,7 +6,7 @@ import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import teamHTBP.vida.particle.util.BaseParticleFactory;
-import teamHTBP.vida.particle.util.EnumVidaParticleType;
+import teamHTBP.vida.particle.util.BaseVidaParticleType;
 
 
 /**
@@ -23,10 +23,10 @@ public class ParticleFactoryLoader {
 
     @SubscribeEvent
     public static void onParticleFactoryRegistration(ParticleFactoryRegisterEvent event) {
-        Minecraft.getInstance().particles.registerFactory(ParticleLoader.leafParticle.get(),(sprite)->new BaseParticleFactory(sprite, EnumVidaParticleType.LEAF));
+        Minecraft.getInstance().particles.registerFactory(ParticleLoader.leafParticle.get(),(sprite)->new BaseParticleFactory(sprite, BaseVidaParticleType.LEAF));
         Minecraft.getInstance().particles.registerFactory(ParticleLoader.cubeParticle.get(), CubeParticleFactory::new);
-        Minecraft.getInstance().particles.registerFactory(ParticleLoader.elementFireParticle.get(), ElementFireParticleFactory::new);
+        Minecraft.getInstance().particles.registerFactory(ParticleLoader.elementFireParticle.get(), (sprite)->new BaseParticleFactory(sprite, BaseVidaParticleType.ELEMENT_FIRE));
         Minecraft.getInstance().particles.registerFactory(ParticleLoader.cuboidParticle.get(), CuboidParticleFactory::new);
-        Minecraft.getInstance().particles.registerFactory(ParticleLoader.particle.get(),(sprite)->new BaseParticleFactory(sprite, EnumVidaParticleType.CUBOID));
+        Minecraft.getInstance().particles.registerFactory(ParticleLoader.particle.get(),(sprite)->new BaseParticleFactory(sprite, BaseVidaParticleType.CUBOID));
     }
 }

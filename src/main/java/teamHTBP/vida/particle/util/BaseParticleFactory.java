@@ -7,14 +7,13 @@ import net.minecraft.client.particle.SpriteTexturedParticle;
 import net.minecraft.client.world.ClientWorld;
 
 import javax.annotation.Nullable;
-import java.lang.reflect.InvocationTargetException;
 
 public class BaseParticleFactory implements IParticleFactory<BaseParticleData> {
     private final IAnimatedSprite sprites;
-    private final EnumVidaParticleType type;
+    private final BaseVidaParticleType type;
 
 
-    public BaseParticleFactory(IAnimatedSprite sprite, EnumVidaParticleType type) {
+    public BaseParticleFactory(IAnimatedSprite sprite, BaseVidaParticleType type) {
         sprites = sprite;
         this.type = type;
     }
