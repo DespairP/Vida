@@ -1,4 +1,4 @@
-package teamHTBP.vida.entity.entityRender;
+package teamHTBP.vida.modelRender.entityRender;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
@@ -18,14 +18,14 @@ import net.minecraft.util.math.vector.Quaternion;
 import net.minecraft.util.math.vector.Vector3f;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.entity.EntityFaintLight;
-import teamHTBP.vida.entity.entityModel.EntityModelFaintLight;
+import teamHTBP.vida.modelRender.entityModel.EntityModelFaintLight;
 import teamHTBP.vida.modelRender.RenderLoader;
 
 public class EntityRenderFaintLight extends EntityRenderer<EntityFaintLight> {
     private final EntityModel<EntityFaintLight> model;
 
 
-    protected EntityRenderFaintLight(EntityRendererManager renderManager) {
+    public EntityRenderFaintLight(EntityRendererManager renderManager) {
         super(renderManager);
         model = new EntityModelFaintLight();
     }
@@ -54,19 +54,20 @@ public class EntityRenderFaintLight extends EntityRenderer<EntityFaintLight> {
     public void render(EntityFaintLight entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
         //super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
         matrixStackIn.push();
-        Quaternion quaternion = this.getRenderManager().info.getRotation();
-        quaternion.multiply(Vector3f.XP.rotation(0));
-        matrixStackIn.translate(0.6, 0.6, 0);
-        //matrixStackIn.scale(0.5f, 0.5f, 0.5f);
-        matrixStackIn.rotate(quaternion);
-        matrixStackIn.translate(-0.5f, -0.5F, -0.5f);
+        Quaternion quaternion = getRenderManager().info.getRotation();
+        //quaternion.multiply(Vector3f.XP.rotation(0));
+        matrixStackIn.translate(0.5, 0.5, 0);
+        //matrixStackIn.rotate(quaternion);
+        //matrixStackIn.translate(-0.5f, -0.5F, -0.5f);
+
 
         TextureAtlasSprite atlasTexture = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(this.getEntityTexture(entityIn));
 
 
-        IVertexBuilder builder = bufferIn.getBuffer(RenderType.getCutout());
+        IVertexBuilder builder = bufferIn.getBuffer(RenderType.getTranslucent());
 
         //model.render(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.NO_OVERLAY, r, g, b, a / 2);
+
 
         float MaxU = atlasTexture.getMaxU();
         float MinU = atlasTexture.getMinU();
@@ -74,16 +75,26 @@ public class EntityRenderFaintLight extends EntityRenderer<EntityFaintLight> {
         float MinV = atlasTexture.getMinV();
 
         Matrix4f matrixStack = matrixStackIn.getLast().getMatrix();
+        Vector3f[] avector3f = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
+        float f4 = 0.3f;
 
-        builder.pos(matrixStack, 0, 1, 0).color(1, 1, 1, 0.7f).tex(MinU, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 1, 0).color(1, 1, 1, 0.7f).tex(MaxU, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 0, 0).color(1, 1, 1, 0.7f).tex(MaxU, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 0, 0, 0).color(1, 1, 1, 0.7f).tex(MinU, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
+        for(int i = 0; i < 4; ++i) {
+            Vector3f vector3f = avector3f[i];
+            vector3f.transform(quaternion);
+            vector3f.mul(f4);
+            //vector3f.add(f, f1, f2);
+        }
 
-        builder.pos(matrixStack, 0, 0, 0).color(1, 1, 1, 1.0f).tex(MinU, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 0, 0).color(1, 1, 1, 1.0f).tex(MaxU, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 1, 0).color(1, 1, 1, 1.0f).tex(MaxU, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 0, 1, 0).color(1, 1, 1, 1.0f).tex(MinU, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
+        //正反面渲染
+        builder.pos(matrixStack, avector3f[0].getX(), avector3f[0].getY(), avector3f[0].getZ()).color(1, 1, 1, 0.7f).tex(MinU, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
+        builder.pos(matrixStack, avector3f[1].getX(), avector3f[1].getY(), avector3f[1].getZ()).color(1, 1, 1, 0.7f).tex(MaxU, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
+        builder.pos(matrixStack, avector3f[2].getX(), avector3f[2].getY(), avector3f[2].getZ()).color(1, 1, 1, 0.7f).tex(MaxU, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
+        builder.pos(matrixStack, avector3f[3].getX(), avector3f[3].getY(), avector3f[3].getZ()).color(1, 1, 1, 0.7f).tex(MinU, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
+
+        builder.pos(matrixStack, avector3f[3].getX(), avector3f[3].getY(), avector3f[3].getZ()).color(1, 1, 1, 0.7f).tex(MinU, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
+        builder.pos(matrixStack, avector3f[2].getX(), avector3f[2].getY(), avector3f[2].getZ()).color(1, 1, 1, 0.7f).tex(MaxU, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
+        builder.pos(matrixStack, avector3f[1].getX(), avector3f[1].getY(), avector3f[1].getZ()).color(1, 1, 1, 0.7f).tex(MaxU, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
+        builder.pos(matrixStack, avector3f[0].getX(), avector3f[0].getY(), avector3f[0].getZ()).color(1, 1, 1, 0.7f).tex(MinU, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
 
 
         matrixStackIn.pop();

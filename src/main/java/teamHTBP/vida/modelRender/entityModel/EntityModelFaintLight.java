@@ -1,11 +1,14 @@
-package teamHTBP.vida.entity.entityModel;
+package teamHTBP.vida.modelRender.entityModel;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import teamHTBP.vida.entity.EntityFaintLight;
 
+@OnlyIn(Dist.CLIENT)
 public class EntityModelFaintLight extends EntityModel<EntityFaintLight> {
     private final ModelRenderer body;
 
