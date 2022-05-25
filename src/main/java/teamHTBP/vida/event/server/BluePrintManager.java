@@ -34,6 +34,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
+/**PENDING,还未上线*/
 public class BluePrintManager extends JsonReloadListener {
     /**蓝图管理*/
     private final Map<ResourceLocation, Blueprint> blueprints = Collections.emptyMap();

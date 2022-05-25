@@ -31,6 +31,7 @@ public class RecipeManager {
         ).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
+    @Deprecated
     public static FermenterFluidRecipe getFermenterFuildRecipe(World level, ItemStack itemStack, FluidStack inputFuild) {
         return getBaseRecipe(level, RecipeTypes.FERMENTER_FLUID).stream()
                 .filter(s -> s.matches(itemStack, inputFuild)).findFirst().orElse(null);

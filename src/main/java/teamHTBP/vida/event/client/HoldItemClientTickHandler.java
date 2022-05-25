@@ -14,6 +14,8 @@ import teamHTBP.vida.helper.itemHelper.PlayerHoldData;
 
 /**
  * 主要对玩家持有的工具进行监听，包括：现在持有的工具/持有的时间
+ *
+ * TODO:主副手的监听
  * */
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(Dist.CLIENT)

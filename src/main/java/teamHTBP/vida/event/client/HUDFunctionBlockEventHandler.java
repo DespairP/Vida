@@ -28,15 +28,17 @@ import teamHTBP.vida.item.armor.ItemArmorElementLegginsWithBottles;
 import teamHTBP.vida.item.staff.ItemElementPickaxe;
 import teamHTBP.vida.item.staff.ItemElementSword;
 
+
+/**
+ * 当玩家鼠标悬浮到某个Vida特定的功能方块上
+ * 显示HUD
+ * 
+ * 
+ * */
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(Dist.CLIENT)
-public class BlockFunctionHUDEventLoader {
-    public static int alpha = 0;
-    public static int sword_alpha = 0;
-    public static ItemStack itemStack = ItemStack.EMPTY;
-    public static ItemStack itemStack1 = ItemStack.EMPTY;
+public class HUDFunctionBlockEventHandler {
 
-    //锅的HUD
     @SubscribeEvent
     public static void onOverlayRender(RenderGameOverlayEvent event) {
         if (event.getType() != RenderGameOverlayEvent.ElementType.ALL) {
@@ -46,17 +48,17 @@ public class BlockFunctionHUDEventLoader {
             return;
         }
 
+        //获取玩家对准的方块
         MatrixStack matrixStack = event.getMatrixStack();
         PlayerEntity player = Minecraft.getInstance().player;
-
         /*
             RayTraceResult objectMouseOver = Minecraft.getInstance().objectMouseOver;
             BlockPos pos = new BlockPos(objectMouseOver.getHitVec());
          */
-
         Block block = getBlockPlayerLookAt(player);
         BlockPos lookingPos = getLookingPos(player);
 
+        //渲染纯净坩埚HUD
         if (block instanceof BlockPurfiedCauldron) {
             TileEntityPurfiedCauldron tileEntityPurfiedCauldron = (TileEntityPurfiedCauldron) player.world.getTileEntity(lookingPos);
             if (tileEntityPurfiedCauldron != null) {
@@ -80,37 +82,6 @@ public class BlockFunctionHUDEventLoader {
             CollectorHUD collectorHUD = new CollectorHUD(tileEntityCollector);
             collectorHUD.render(matrixStack);
             return;
-        }
-
-        //others
-        //渲染瓶子HUD
-        if (KeyBoardBottle.MESSAGE_KEY.isKeyDown()) {
-            if (KeyBoardBottle.alpha < 100) KeyBoardBottle.alpha += 3;
-        } else {
-            if (KeyBoardBottle.alpha >= 0) {
-                KeyBoardBottle.alpha -= 2;
-            }
-        }
-        if (KeyBoardBottle.alpha >= 4) {
-            ItemStack stack = player.inventory.armorInventory.get(1);
-            if (stack.getItem() instanceof ItemArmorElementLegginsWithBottles) {
-                BottleHUD hud = new BottleHUD(stack, KeyBoardBottle.alpha);
-                hud.render(matrixStack);
-            }
-        }
-
-        //渲染元素剑HUD
-        if (player.inventory.getCurrentItem().getItem() instanceof ItemElementSword) {
-            if (sword_alpha < 100) sword_alpha += 2;
-            itemStack1 = player.inventory.getCurrentItem();
-        } else {
-            if (sword_alpha > 0) sword_alpha -= 2;
-        }
-
-        if (sword_alpha > 0 && itemStack1 != ItemStack.EMPTY && !itemStack1.isEmpty()) {
-            //ItemStack stack = player.inventory.getCurrentItem();
-            ElementSwordHUD hud = new ElementSwordHUD(itemStack1, sword_alpha);
-            hud.render(matrixStack);
         }
     }
 
