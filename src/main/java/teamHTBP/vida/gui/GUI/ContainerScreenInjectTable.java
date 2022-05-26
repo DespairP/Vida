@@ -172,7 +172,7 @@ public class ContainerScreenInjectTable extends ContainerScreen<ContainerInjectT
         CompoundNBT nbt = stack.getOrCreateTag();
         drawForegGround(matrixStack); //绘制背景
         drawSkillIntroducution(matrixStack); //绘制技能介绍
-        drawSkill(); //调整技能位置
+        drawSkill(mouseX,mouseY); //调整技能位置
         drawLevel(matrixStack, nbt, this.stack); //绘制工具等级
         drawSkillEnergy(matrixStack);
         refreshSkill(nbt, false);
@@ -195,6 +195,7 @@ public class ContainerScreenInjectTable extends ContainerScreen<ContainerInjectT
         RenderSystem.popMatrix();
     }
 
+    /**渲染tooltip*/
     @Override
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float ticks) {
         super.render(matrixStack, mouseX, mouseY, ticks);
@@ -293,13 +294,13 @@ public class ContainerScreenInjectTable extends ContainerScreen<ContainerInjectT
     /**
      * 渲染技能按钮
      **/
-    public void drawSkill() {
+    public void drawSkill(int mouseX,int mouseY) {
         RenderSystem.pushMatrix();
         RenderSystem.enableAlphaTest();
         RenderSystem.enableBlend();
         RenderSystem.color4f(1, 1, 1, alpha);
         skillSlots.forEach((slot) -> {
-            slot.updateSkillPosition(backgroundXsize, backgroundYsize, offsetX, offsetY);
+            slot.updateSkillSlotInfo(backgroundXsize, backgroundYsize, offsetX, offsetY, mouseX, mouseY);
         });
         RenderSystem.popMatrix();
     }
@@ -478,4 +479,6 @@ public class ContainerScreenInjectTable extends ContainerScreen<ContainerInjectT
     protected void drawGuiContainerForegroundLayer(MatrixStack p_230451_1_, int p_230451_2_, int p_230451_3_) {
 
     }
+
+
 }
