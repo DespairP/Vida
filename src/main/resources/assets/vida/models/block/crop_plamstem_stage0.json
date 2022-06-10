@@ -1,6 +1,5 @@
 {
-  "parent": "block/cross",
-  "textures": {
-    "cross": "vida:block/plant_plamstem_1"
-  }
+  "loader": "forge:obj",
+  "model": "vida:models/block/crop_plamstem_stage0.obj",
+  "flip-v": true
 }
