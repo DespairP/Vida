@@ -122,8 +122,6 @@ public class RenderLoader {
         if (!stitching.equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE)) {
             return;
         }
-
-
         event.addSprite(goldgemLocation);
         event.addSprite(woodgemLocation);
         event.addSprite(aquagemLocation);

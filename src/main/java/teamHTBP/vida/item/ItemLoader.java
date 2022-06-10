@@ -128,7 +128,7 @@ public class ItemLoader {
     public static RegistryObject<Item> fireElementSword = ITEMS.register("fireelementsword", () -> new ItemElementSword(4));
     public static RegistryObject<Item> earthElementSword = ITEMS.register("earthelementsword", () -> new ItemElementSword(5));
 
-    public static RegistryObject<Item> logVida = ITEMS.register("logvida", () -> new BlockItem(BlockLoader.logVida.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public final static RegistryObject<Item> logVida = ITEMS.register("logvida", () -> new BlockItem(BlockLoader.logVida.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static RegistryObject<Item> leavesVida = ITEMS.register("leavesvida", () -> new BlockItem(BlockLoader.leavesVida.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static RegistryObject<Item> plankvida_0 = ITEMS.register("plankvida0", () -> new BlockItem(BlockLoader.plankVida_0.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static RegistryObject<Item> plankvida_1 = ITEMS.register("plankvida1", () -> new BlockItem(BlockLoader.plankVida_1.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
@@ -176,6 +176,8 @@ public class ItemLoader {
     public static RegistryObject<Item> CROP_SULLENHYDRANGEA = ITEMS.register("crop_sullenhydrangea", () -> new BlockItem(BlockLoader.CROP_SULLENHYDRANGEA.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
     public static RegistryObject<Item> CROP_SWEETCYANREED = ITEMS.register("crop_sweetcyanreed", () -> new BlockItem(BlockLoader.CROP_SWEETCYANREED.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
 
+    //注册书
+    public final static RegistryObject<Item> GUIDE_BOOK = ITEMS.register("vida_guidebook", ItemGuidebook::new);
 
     public Item getItem(RegistryObject<Item> registryObject){
         return registryObject != null ? registryObject.orElse(Items.AIR) : Items.AIR;

@@ -120,6 +120,12 @@ public class AltarRecipe extends BaseTileEntityRecipes<AltarRecipe, TileEntityEl
         return RecipeTypes.ALTAR;
     }
 
+    /**不会出现在合成书中*/
+    @Override
+    public boolean isDynamic() {
+        return false;
+    }
+
     /**
      * AltarRecipe建造者
      * [注意]：你必须在填入完core、element、result和others以后才能build，否则会发生问题

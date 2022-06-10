@@ -20,5 +20,6 @@ public class PacketChannel {
         INSTANCE.registerMessage(id++, PacketPrismTable.class, PacketPrismTable::toBytes, PacketPrismTable::new, PacketPrismTable::handler);
         INSTANCE.registerMessage(id++, PacketBottles.class, PacketBottles::toBytes, PacketBottles::new, PacketBottles::handler);
         INSTANCE.registerMessage(id++, PacketMessage.class, PacketMessage::toBytes, PacketMessage::new, PacketMessage::handler);
+        INSTANCE.registerMessage(id++, PacketGuidebook.class,PacketGuidebook::toBytes,PacketGuidebook::fromBytes,  PacketGuidebook::handler);
     }
 }
