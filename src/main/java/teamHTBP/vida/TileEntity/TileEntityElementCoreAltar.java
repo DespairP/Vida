@@ -2,7 +2,6 @@ package teamHTBP.vida.TileEntity;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
@@ -10,18 +9,17 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.NonNullList;
 import teamHTBP.vida.block.BlockLoader;
-import teamHTBP.vida.helper.element.ElementHelper;
-import teamHTBP.vida.helper.element.EnumElements;
-import teamHTBP.vida.helper.element.IElement;
+import teamHTBP.vida.helper.elementHelper.ElementHelper;
+import teamHTBP.vida.helper.elementHelper.EnumElements;
+import teamHTBP.vida.helper.elementHelper.IElement;
 import teamHTBP.vida.item.function.ItemElementCore;
-import teamHTBP.vida.recipe.RecipeLoader;
-import teamHTBP.vida.recipe.RecipesBase;
+import teamHTBP.vida.recipe.RecipeManager;
 import teamHTBP.vida.recipe.altar.AltarRecipe;
 
 import javax.annotation.Nullable;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Optional;
 
 public class TileEntityElementCoreAltar extends TileEntity implements ITickableTileEntity {
     //最大的仪式进度
@@ -29,7 +27,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
     //核心物品
     public ItemStack coreItem = ItemStack.EMPTY;
     //祭坛物品（最多4个）
-    public ItemStack[] altarItem = {ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY};
+    public NonNullList<ItemStack> altarItem = NonNullList.withSize(4,ItemStack.EMPTY);
     //是否正在仪式
     public boolean isProgressing = false;
     //法杖右键检测是否可以进行仪式
@@ -65,12 +63,12 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         progress = compound.getInt("progress");
         isBlockOver = compound.getBoolean("isBlockOver");
         isElementOver = compound.getBoolean("isElementOver");
-        isMultiComplete = compound.getBoolean("isMutiComplete");
+        //isMultiComplete = compound.getBoolean("isMutiComplete");
         isWAND_VIDACilck = compound.getBoolean("isWAND_VIDAClick");
         element = EnumElements.valueOf(compound.getString("element"));
         for (int i = 0; i < 4; i++) {
             if (compound.contains("altarItem" + i)) {
-                altarItem[i] = ItemStack.read(compound.getCompound("altarItem" + i));
+                altarItem.set(i,ItemStack.read(compound.getCompound("altarItem" + i)));
             }
         }
         this.extraItem = new ItemStack[10];
@@ -96,8 +94,8 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         compound.putBoolean("isMultiComplete", isMultiComplete);
         compound.putBoolean("isWAND_VIDAClick", isWAND_VIDACilck);
         for (int i = 0; i < 4; i++) {
-            if (this.altarItem[i] != null) {
-                compound.put("altarItem" + i, this.altarItem[i].serializeNBT());
+            if (altarItem.size() > i) {
+                compound.put("altarItem" + i, Optional.ofNullable(altarItem.get(i)).orElse(ItemStack.EMPTY).serializeNBT());
             }
         }
         if (this.coreItem != null) {
@@ -142,23 +140,17 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         progress = tag.getInt("progress");
         isBlockOver = tag.getBoolean("isBlockOver");
         isElementOver = tag.getBoolean("isElementOver");
-        isMultiComplete = tag.getBoolean("isMutiComplete");
+        //isMultiComplete = tag.getBoolean("isMutiComplete");
         isWAND_VIDACilck = tag.getBoolean("isWAND_VIDAClick");
         element = EnumElements.valueOf(tag.getString("element"));
         for (int i = 0; i < 4; i++) {
-            if (tag.contains("altarItem" + i)) {
-                altarItem[i] = ItemStack.read(tag.getCompound("altarItem" + i));
-            } else {
-                altarItem[i] = ItemStack.EMPTY;
-            }
+            altarItem.set(i,tag.contains("altarItem" + i) ? ItemStack.read(tag.getCompound("altarItem" + i)) : ItemStack.EMPTY);
         }
         this.extraItem = new ItemStack[10];
         ListNBT nbtlist = tag.getList("extraItemList", 10);
-        if (nbtlist != null) {
-            for (int j = 0; j < nbtlist.size(); j++) {
-                CompoundNBT nbt = nbtlist.getCompound(j);
-                if (nbt != null) this.extraItem[j] = ItemStack.read(nbt);
-            }
+        for (int j = 0; j < nbtlist.size(); j++) {
+            CompoundNBT nbt = nbtlist.getCompound(j);
+            this.extraItem[j] = ItemStack.read(nbt);
         }
         if (tag.contains("coreItem")) {
             this.coreItem = ItemStack.read(tag.getCompound("coreItem"));
@@ -167,21 +159,21 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         super.handleUpdateTag(state, tag);
     }
 
-    //获取祭坛中还有的空余物品栈
+    /**获取祭坛中还有的空余物品栈*/
     public int getEmptyAltarItemStackNum() {
-        int empty = 0;
-        for (int i = 0; i < 4; i++) {
-            if (this.altarItem[i] != ItemStack.EMPTY) empty++;
-        }
-        return empty;
+        return altarItem.stream().reduce(0,(prev,itemstack)->prev + (itemstack.isEmpty() ? 1:0),Integer::sum);
     }
 
+    /**
+     * 放入祭坛物品
+     * @return 是否能放入
+     * */
     public boolean setAltarItemStack(ItemStack itemStack) {
         //如果在进行仪式，不能放物品
         if (this.isProgressing) return false;
         for (int i = 0; i < 4; i++) {
-            if (this.altarItem[i] == ItemStack.EMPTY || this.altarItem[i].isEmpty()) {
-                this.altarItem[i] = itemStack;
+            if (this.altarItem.get(i).isEmpty()) {
+                this.altarItem.set(i, Optional.ofNullable(itemStack).orElse(ItemStack.EMPTY));
                 return true;
             }
         }
@@ -198,12 +190,16 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         return false;
     }
 
+    /**
+     * 拿回祭坛物品
+     * @return 拿回的物品,如果不能拿回返回 {@link ItemStack#EMPTY}
+     * */
     public ItemStack getAltarItemStack() {
         //如果在进行仪式，不能拿取物品
         if (this.isProgressing) return ItemStack.EMPTY;
         for (int i = 0; i < 4; i++) {
-            if (this.altarItem[i] != ItemStack.EMPTY && !this.altarItem[i].isEmpty()) {
-                return this.altarItem[i];
+            if (!this.altarItem.get(i).isEmpty()) {
+                return this.altarItem.get(i);
             }
         }
         if (this.coreItem != ItemStack.EMPTY) return this.coreItem;
@@ -217,7 +213,9 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
     }
 
     public ItemStack getStack(int i) {
-        if (i < 4) return this.altarItem[i];
+        if (i < 4 && this.altarItem.size() > i) {
+            return this.altarItem.get(i);
+        }
         return ItemStack.EMPTY;
     }
 
@@ -256,20 +254,17 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         //world.notifyBlockUpdate(pos,getBlockState(),getBlockState(),3);
     }
 
+    /**鉴定是否能开始仪式,如果能开始赋予Element值*/
     public boolean judAltarItem() {
         //检测四个物品是否为空
         for (int i = 0; i < 4; i++) {
-            if (this.altarItem[i] == ItemStack.EMPTY || this.altarItem[i].isEmpty()) return false;
-        }
-        List<Item> itemList = new LinkedList<Item>();
-        for (int j = 0; j < 4; j++) {
-            itemList.add(this.altarItem[j].getItem());
+            if (altarItem.get(i).isEmpty()) return false;
         }
 
-        RecipesBase recipe = RecipeLoader.find(world, this);
+        AltarRecipe recipe = RecipeManager.getAltarRecipe(world,this);
 
-        if (recipe instanceof AltarRecipe) {
-            this.element = ((AltarRecipe) recipe).element;
+        if (recipe != null) {
+            this.element = recipe.element;
             return true;
         }
 
@@ -281,8 +276,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         this.progress = 0;
         this.isProgressing = false;
         //清除仪式物品
-        for (int i = 0; i < 4; i++)
-            this.altarItem[i] = ItemStack.EMPTY;
+        this.altarItem.clear();
         //清除额外物品
         this.extraItem = new ItemStack[10];
         //清除核心物品

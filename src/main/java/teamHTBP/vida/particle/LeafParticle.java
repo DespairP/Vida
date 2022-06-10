@@ -24,29 +24,32 @@ public class LeafParticle extends SpriteTexturedParticle {
 
     private boolean collidedY;
 
-    private double xSpin = 0;
-    private double zSpin = 0;
+    /**X轴圆心*/
+    private double centerX;
+    /**Y轴圆心*/
+    private double centerZ;
 
-
-    protected LeafParticle(ClientWorld worldIn, double posXIn, double posYIn, double posZIn, double xSpeedIn, double ySpeedIn, double zSpeedIn) {
+    public LeafParticle(ClientWorld worldIn, double posXIn, double posYIn, double posZIn, double xSpeedIn, double ySpeedIn, double zSpeedIn) {
         super(worldIn, posXIn, posYIn, posZIn, xSpeedIn, ySpeedIn, zSpeedIn);
-        //存在时间100帧
-        maxAge = 100;
+        //存在时间1000帧
+        maxAge = 20;
         //粒子大小x0.5
         particleScale = 0.5F;
 
+        // 设置速度
         motionX = xSpeedIn;
         motionY = ySpeedIn;
         motionZ = zSpeedIn;
+
         //是否有碰撞体积
-        this.canCollide = true;
+        this.canCollide = false;
+
         //设置透明度，不透明为1
+        this.setAlphaF(0.9f);
 
-        this.xSpin = posXIn;
-        this.zSpin = posZIn;
-        this.setAlphaF(1.0f);
-
-
+        //设置圆心位置
+        this.centerX = posXIn;
+        this.centerZ = posZIn;
     }
 
 
@@ -71,8 +74,6 @@ public class LeafParticle extends SpriteTexturedParticle {
             quaternion.multiply(Vector3f.ZP.rotation(f3));
         }
 
-        Vector3f vector3f1 = new Vector3f(-1.0F, -1.0F, 0.0F);
-        vector3f1.transform(quaternion);
         Vector3f[] avector3f = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
         float f4 = this.getScale(partialTicks);
 
@@ -102,19 +103,19 @@ public class LeafParticle extends SpriteTexturedParticle {
         return IParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
-    /*每一帧会运行此方法，主要是设置一些粒子的可变参数*/
+    /**每一帧会运行此方法，主要是设置一些粒子的可变参数*/
     @Override
     public void tick() {
-
+        System.out.println(motionX + "" + motionY + "" + motionZ);
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;
         this.prevPosZ = this.posZ;
         if (this.age++ >= this.maxAge) {
             this.setExpired();
         } else {
-            this.posY += this.motionY;
-            this.posX = xSpin + MathHelper.sin((float) (this.motionX + this.motionZ + this.posY * 5)) * 0.3;
-            this.posZ = zSpin + MathHelper.cos((float) (this.motionX + this.motionZ + this.posY * 5)) * 0.3;
+            posY += motionY;
+            posX = centerX + MathHelper.sin((float) (this.motionX + this.motionZ + this.posY * 5));
+            posZ = centerZ + MathHelper.cos((float) (this.motionX + this.motionZ + this.posY * 5));
 
         }
     }

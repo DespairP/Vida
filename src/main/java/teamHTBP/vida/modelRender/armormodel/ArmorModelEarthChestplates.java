@@ -2,7 +2,7 @@ package teamHTBP.vida.modelRender.armormodel;
 
 import net.minecraft.client.renderer.model.ModelRenderer;
 
-public class ArmorModelEarthChestplates extends ArmorModelElementChestplates {
+public class ArmorModelEarthChestplates extends AbstractModelElementChestplates {
 
     public ArmorModelEarthChestplates() {
         super(128, 128);

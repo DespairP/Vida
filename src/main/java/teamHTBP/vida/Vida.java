@@ -9,14 +9,15 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.TileEntity.TileEntityLoader;
-import teamHTBP.vida.block.BlockEventLoaderServer;
+import teamHTBP.vida.event.client.VidaClientEventHandler;
+import teamHTBP.vida.event.server.BlockEventLoaderServer;
 import teamHTBP.vida.block.BlockLoader;
 import teamHTBP.vida.entity.EntityLoader;
 import teamHTBP.vida.gui.GUI.ContainerTypeLoader;
 import teamHTBP.vida.item.function.ItemElementCoreVoid;
 import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.particle.ParticleLoader;
-import teamHTBP.vida.recipe.RecipeLoader;
+import teamHTBP.vida.recipe.RecipeManager;
 import teamHTBP.vida.worldGen.GenLoader;
 
 
@@ -30,6 +31,7 @@ public class Vida {
     public static final String MOD_ID = "vida"; //mod的ID字符串，用于材质包获取id，或其他用途
 
     public Vida() {
+        MinecraftForge.EVENT_BUS.register(VidaClientEventHandler.class);
         ItemLoader.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         BlockLoader.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ParticleLoader.PARTICLE.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -39,9 +41,12 @@ public class Vida {
         ContainerTypeLoader.CONTAINER_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
         MinecraftForge.EVENT_BUS.register(ItemElementCoreVoid.class);
         MinecraftForge.EVENT_BUS.register(BlockEventLoaderServer.class);
+        RecipeManager.register(FMLJavaModLoadingContext.get().getModEventBus());
+        //RecipeLoader.RECIPES.register(FMLJavaModLoadingContext.get().getModEventBus());
+
         //RecipeLoader.RECIPES.register(FMLJavaModLoadingContext.get().getModEventBus());
         //registerType(OREACTION, OreReactionMachineRecipe.RECIPE_TYPE);
-        RecipeLoader.init(FMLJavaModLoadingContext.get().getModEventBus());
+        //RecipeLoader.init(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
     @Deprecated

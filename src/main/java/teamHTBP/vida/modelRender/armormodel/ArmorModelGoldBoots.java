@@ -2,7 +2,7 @@ package teamHTBP.vida.modelRender.armormodel;
 
 import net.minecraft.client.renderer.model.ModelRenderer;
 
-public class ArmorModelGoldBoots extends ArmorModelElementBoots {
+public class ArmorModelGoldBoots extends AbstractModelElementBoots {
 
     public ArmorModelGoldBoots() {
         leg_right = new ModelRenderer(this);

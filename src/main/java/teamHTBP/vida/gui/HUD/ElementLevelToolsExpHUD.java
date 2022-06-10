@@ -2,14 +2,11 @@ package teamHTBP.vida.gui.HUD;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.sun.scenario.effect.Color4f;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.helper.element.EnumElements;
-import teamHTBP.vida.helper.element.IElement;
 import teamHTBP.vida.item.staff.IElementLevelTools;
 import teamHTBP.vida.utils.color.RGBAColor;
 import teamHTBP.vida.utils.math.IntRange;

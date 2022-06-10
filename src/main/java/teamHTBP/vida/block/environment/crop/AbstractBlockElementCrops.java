@@ -18,10 +18,10 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.PlantType;
-import teamHTBP.vida.helper.element.ElementHelper;
-import teamHTBP.vida.helper.element.EnumElements;
-import teamHTBP.vida.helper.element.IElement;
-import teamHTBP.vida.helper.element.Allelopathy;
+import teamHTBP.vida.helper.elementHelper.ElementHelper;
+import teamHTBP.vida.helper.elementHelper.EnumElements;
+import teamHTBP.vida.helper.elementHelper.IElement;
+import teamHTBP.vida.helper.elementHelper.Allelopathy;
 
 import java.util.Random;
 
@@ -219,6 +219,12 @@ public abstract class AbstractBlockElementCrops extends BushBlock implements IGr
     /**生长逻辑接口*/
     public interface GrowLogic{
         /**生长逻辑*/
-        public void grow(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand, EnumElements cropElement,int maxAge);
+        public boolean grow(BlockState state,
+                            ServerWorld worldIn,
+                            BlockPos pos,
+                            Random rand,
+                            EnumElements cropElement,
+                            int currentAge,
+                            int maxAge);
     }
 }

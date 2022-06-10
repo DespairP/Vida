@@ -9,7 +9,14 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import teamHTBP.vida.helper.itemHelper.PlayerHoldData;
 
+
+/**
+ * 主要对玩家持有的工具进行监听，包括：现在持有的工具/持有的时间
+ *
+ * TODO:主副手的监听
+ * */
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(Dist.CLIENT)
 public class HoldItemClientTickHandler {
@@ -58,4 +65,7 @@ public class HoldItemClientTickHandler {
     public static long getHoldItemMillSecond(){
         return currentHoldSecond - startHoldSecond;
     }
+
+    /**封装*/
+    public static PlayerHoldData toData(){return new PlayerHoldData(latestHoldItem,startHoldSecond,currentHoldSecond);}
 }

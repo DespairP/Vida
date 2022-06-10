@@ -2,7 +2,7 @@ package teamHTBP.vida.modelRender.armormodel;
 
 import net.minecraft.client.renderer.model.ModelRenderer;
 
-public class ArmorModelFireLeggings extends ArmorModelElementLeggings {
+public class ArmorModelFireLeggings extends AbstractModelElementLeggings {
 
 
     public ArmorModelFireLeggings() {

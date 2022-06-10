@@ -17,13 +17,7 @@ public class CubeParticleFactory implements IParticleFactory<CubeParticleData> {
     @Nullable
     @Override
     public Particle makeParticle(CubeParticleData typeIn, ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-        CubeParticle particle;
-        if (typeIn.containRGBS())
-            particle = new CubeParticle(worldIn, x, y, z, typeIn.getSpeed(0), typeIn.getSpeed(1), typeIn.getSpeed(2), typeIn.getRGBS(0), typeIn.getRGBS(1), typeIn.getRGBS(2), typeIn.getRGBS(3));
-        else
-            particle = new CubeParticle(worldIn, x, y, z, typeIn.getSpeed(0), typeIn.getSpeed(1), typeIn.getSpeed(2));
-
-
+        CubeParticle particle = new CubeParticle(worldIn,x,y,z,xSpeed,ySpeed,zSpeed,typeIn.getR(),typeIn.getG(),typeIn.getB(),typeIn.getScale());
         particle.selectSpriteRandomly(sprites);
         return particle;
     }

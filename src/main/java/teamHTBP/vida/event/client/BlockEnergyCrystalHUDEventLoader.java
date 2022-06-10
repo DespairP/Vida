@@ -14,7 +14,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import teamHTBP.vida.TileEntity.IElementCrystal;
 import teamHTBP.vida.gui.HUD.ElementCrystalHUD;
-import teamHTBP.vida.helper.blockHelper.BlockElementCrystal;
+import teamHTBP.vida.block.function.BlockElementCrystal;
 
 /**
  * 用于渲染元素武器与工具HUD的事件侦听

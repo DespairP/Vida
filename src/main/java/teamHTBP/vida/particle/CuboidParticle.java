@@ -33,7 +33,7 @@ public class CuboidParticle extends SpriteTexturedParticle {
         this.maxAge = age;
         this.spinSpeed = rand.nextInt(3);
         this.particleScale = scale;
-        this.extraYLength = rand.nextFloat() * (rand.nextInt(4) + 3);
+        this.extraYLength = rand.nextInt(4) + 3;
     }
 
     public CuboidParticle(ClientWorld World, double posX, double posY, double posZ, double speedX, double speedY, double speedZ) {
@@ -49,9 +49,9 @@ public class CuboidParticle extends SpriteTexturedParticle {
         this.particleGreen = 255.0f / 255.0f;
         this.particleBlue = 255.0f / 255.0f;
         this.maxAge = 50;
-        this.spinSpeed = rand.nextInt(3);
+        this.spinSpeed = rand.nextInt(5);
         this.particleScale = 0.2f;
-        this.extraYLength = rand.nextFloat() * (rand.nextInt(4) + 3);
+        this.extraYLength = rand.nextInt(5) + 3;
     }
 
     @Override
@@ -72,13 +72,20 @@ public class CuboidParticle extends SpriteTexturedParticle {
                 new Vector3f(-1.0F, -1.0F, 2.0F), new Vector3f(-1.0F, 1.0F + extraYLength, 2.0F), new Vector3f(1.0F, 1.0F + extraYLength, 2.0F), new Vector3f(1.0F, -1.0F, 2.0F),
                 new Vector3f(1.0F, -1.0F, 2.0F), new Vector3f(1.0F, 1.0F + extraYLength, 2.0F), new Vector3f(1.0F, 1.0F + extraYLength, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F),
                 new Vector3f(-1.0F, 1.0F + extraYLength, 2.0F), new Vector3f(-1.0F, 1.0F + extraYLength, 0.0F), new Vector3f(1.0F, 1.0F + extraYLength, 0.0F), new Vector3f(1.0F, 1.0F + extraYLength, 2.0F),
-                new Vector3f(-1.0F, -1.0F, 2.0F), new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 2.0F)
+                new Vector3f(-1.0F, -1.0F, 1.0F), new Vector3f(-1.0F, -1.0F, -1.0F), new Vector3f(1.0F, -1.0F, -1.0F), new Vector3f(1.0F, -1.0F, 1.0F)
+
+        };
+
+        Vector3f[] vec = new Vector3f[]{
+                //后面
+                new Vector3f(-1.0F, -1.0F, -1.0F), new Vector3f(-1.0F, 1.0F + extraYLength, -1.0F), new Vector3f(1.0F, 1.0F + extraYLength, -1.0F), new Vector3f(1.0F, -1.0F, -1.0F),
+                //前面
+                new Vector3f(-1.0F, -1.0F, 1.0F), new Vector3f(-1.0F, 1.0F + extraYLength, 1.0F), new Vector3f(1.0F, 1.0F + extraYLength, 1.0F), new Vector3f(1.0F, -1.0F, 1.0F)
 
         };
         float f4 = 0.06F;
 
-        for (int i = 0; i < 24; ++i) {
-            Vector3f vector3f = avector3f[i];
+        for (Vector3f vector3f : vec) {
             vector3f.transform(quaternion);
             vector3f.mul(f4);
             vector3f.add(f, f1, f2);
@@ -90,40 +97,40 @@ public class CuboidParticle extends SpriteTexturedParticle {
         float f6 = this.getMaxV();
         int j = this.getBrightnessForRender(partialTicks);
         //下面
-        buffer.pos(avector3f[20].getX(), avector3f[20].getY(), avector3f[20].getZ()).tex(f8, f6).color(this.particleRed * 0.5f, this.particleGreen * 0.5f, this.particleBlue * 0.5f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[21].getX(), avector3f[21].getY(), avector3f[21].getZ()).tex(f8, f5).color(this.particleRed * 0.5f, this.particleGreen * 0.5f, this.particleBlue * 0.5f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[22].getX(), avector3f[22].getY(), avector3f[22].getZ()).tex(f7, f5).color(this.particleRed * 0.5f, this.particleGreen * 0.5f, this.particleBlue * 0.5f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[23].getX(), avector3f[23].getY(), avector3f[23].getZ()).tex(f7, f6).color(this.particleRed * 0.5f, this.particleGreen * 0.5f, this.particleBlue * 0.5f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.pos(vec[4].getX(), vec[4].getY(), vec[4].getZ()).tex(f8, f6).color(this.particleRed * 0.5f, this.particleGreen * 0.5f, this.particleBlue * 0.5f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.pos(vec[0].getX(), vec[0].getY(), vec[0].getZ()).tex(f8, f5).color(this.particleRed * 0.5f, this.particleGreen * 0.5f, this.particleBlue * 0.5f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.pos(vec[3].getX(), vec[3].getY(), vec[3].getZ()).tex(f7, f5).color(this.particleRed * 0.5f, this.particleGreen * 0.5f, this.particleBlue * 0.5f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.pos(vec[7].getX(), vec[7].getY(), vec[7].getZ()).tex(f7, f6).color(this.particleRed * 0.5f, this.particleGreen * 0.5f, this.particleBlue * 0.5f, this.particleAlpha).lightmap(j).endVertex();
 
         //背面
-        buffer.pos(avector3f[0].getX(), avector3f[0].getY(), avector3f[0].getZ()).tex(f8, f6).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[1].getX(), avector3f[1].getY(), avector3f[1].getZ()).tex(f8, f5).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[2].getX(), avector3f[2].getY(), avector3f[2].getZ()).tex(f7, f5).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[3].getX(), avector3f[3].getY(), avector3f[3].getZ()).tex(f7, f6).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.pos(vec[0].getX(), vec[0].getY(), vec[0].getZ()).tex(f8, f6).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.pos(vec[1].getX(), vec[1].getY(), vec[1].getZ()).tex(f8, f5).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.pos(vec[2].getX(), vec[2].getY(), vec[2].getZ()).tex(f7, f5).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.pos(vec[3].getX(), vec[3].getY(), vec[3].getZ()).tex(f7, f6).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
 
         //左侧
-        buffer.pos(avector3f[4].getX(), avector3f[4].getY(), avector3f[4].getZ()).tex(f8, f6).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[5].getX(), avector3f[5].getY(), avector3f[5].getZ()).tex(f8, f5).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[6].getX(), avector3f[6].getY(), avector3f[6].getZ()).tex(f7, f5).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[7].getX(), avector3f[7].getY(), avector3f[7].getZ()).tex(f7, f6).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.pos(vec[5].getX(), vec[5].getY(), vec[5].getZ()).tex(f8, f6).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.pos(vec[1].getX(), vec[1].getY(), vec[1].getZ()).tex(f8, f5).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.pos(vec[0].getX(), vec[0].getY(), vec[0].getZ()).tex(f7, f5).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.pos(vec[4].getX(), vec[4].getY(), vec[4].getZ()).tex(f7, f6).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
 
         //正面
-        buffer.pos(avector3f[8].getX(), avector3f[8].getY(), avector3f[8].getZ()).tex(f8, f6).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[9].getX(), avector3f[9].getY(), avector3f[9].getZ()).tex(f8, f5).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[10].getX(), avector3f[10].getY(), avector3f[10].getZ()).tex(f7, f5).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[11].getX(), avector3f[11].getY(), avector3f[11].getZ()).tex(f7, f6).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.pos(vec[5].getX(), vec[5].getY(), vec[5].getZ()).tex(f8, f6).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.pos(vec[4].getX(), vec[4].getY(), vec[4].getZ()).tex(f8, f5).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.pos(vec[7].getX(), vec[7].getY(), vec[7].getZ()).tex(f7, f5).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.pos(vec[6].getX(), vec[6].getY(), vec[6].getZ()).tex(f7, f6).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
 
         //右侧
-        buffer.pos(avector3f[12].getX(), avector3f[12].getY(), avector3f[12].getZ()).tex(f8, f6).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[13].getX(), avector3f[13].getY(), avector3f[13].getZ()).tex(f8, f5).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[14].getX(), avector3f[14].getY(), avector3f[14].getZ()).tex(f7, f5).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[15].getX(), avector3f[15].getY(), avector3f[15].getZ()).tex(f7, f6).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.pos(vec[2].getX(), vec[2].getY(), vec[2].getZ()).tex(f8, f6).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.pos(vec[6].getX(), vec[6].getY(), vec[6].getZ()).tex(f8, f5).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.pos(vec[7].getX(), vec[7].getY(), vec[7].getZ()).tex(f7, f5).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.pos(vec[3].getX(), vec[3].getY(), vec[3].getZ()).tex(f7, f6).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
 
         //上面
-        buffer.pos(avector3f[16].getX(), avector3f[16].getY(), avector3f[16].getZ()).tex(f8, f6).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[17].getX(), avector3f[17].getY(), avector3f[17].getZ()).tex(f8, f5).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[18].getX(), avector3f[18].getY(), avector3f[18].getZ()).tex(f7, f5).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[19].getX(), avector3f[19].getY(), avector3f[19].getZ()).tex(f7, f6).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
+        buffer.pos(vec[1].getX(), vec[1].getY(), vec[1].getZ()).tex(f8, f6).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
+        buffer.pos(vec[5].getX(), vec[5].getY(), vec[5].getZ()).tex(f8, f5).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
+        buffer.pos(vec[6].getX(), vec[6].getY(), vec[6].getZ()).tex(f7, f5).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
+        buffer.pos(vec[2].getX(), vec[2].getY(), vec[2].getZ()).tex(f7, f6).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
     }
 
     @Override

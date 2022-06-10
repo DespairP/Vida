@@ -1,6 +1,5 @@
 {
-  "parent": "block/cross",
-  "textures": {
-    "cross": "vida:block/plant_heartofwal_3"
-  }
+  "loader": "forge:obj",
+  "model": "vida:models/block/crop_heartofwal_stage2.obj",
+  "flip-v": true
 }

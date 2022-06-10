@@ -1,78 +1,46 @@
 package teamHTBP.vida.capability.blueprintCapability;
 
-import net.minecraft.client.resources.I18n;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.registries.IForgeRegistryEntry;
+import teamHTBP.vida.helper.blueprintHelper.EnumBlueprintRarity;
+import teamHTBP.vida.helper.blueprintHelper.EnumBlueprintType;
+import teamHTBP.vida.helper.blueprintHelper.IBlueprint;
+import teamHTBP.vida.helper.blueprintHelper.IChallenge;
 
-import javax.annotation.Nullable;
+public class Blueprint implements IBlueprint {
+    /**图纸稀有度*/
+    private EnumBlueprintRarity rarity = EnumBlueprintRarity.NORMAL;
+    /**图纸id*/
+    private final String id;
+    /**图纸功能*/
+    private final EnumBlueprintType type;
+    /**图纸对应挑战*/
+    private final IChallenge challenge;
 
-public class Blueprint implements IForgeRegistryEntry<Blueprint> {
-    /**
-     * 图纸稀有度
-     */
-    private EnumBlueprintRarity rarity = EnumBlueprintRarity.normal;
-    /**
-     * 图纸id
-     */
-    private String blueprintID = "";
-    /**
-     * 图纸index，无实际作用
-     */
-    private int index = 0;
-    /**
-     *
-     * */
-    private ResourceLocation location;
-
-    public Blueprint(EnumBlueprintRarity rarity, String blueprintID, int index) {
+    public Blueprint(EnumBlueprintRarity rarity, String id, EnumBlueprintType type, IChallenge challenge) {
         this.rarity = rarity;
-        this.blueprintID = blueprintID;
-        this.index = index;
+        this.id = id;
+        this.type = type;
+        this.challenge = challenge;
     }
 
-    /**
-     * 获取翻译后的图纸名称
-     */
-    public String getTranslatedName() {
-        return I18n.format(blueprintID);
+
+    @Override
+    public String getId() {
+        return null;
     }
 
-    /**
-     * 获取原生名字
-     */
-    @Deprecated
-    public String getOriginName() {
-        return blueprintID;
-    }
-
-    /**
-     * 获取图纸ID
-     */
-    public String getBlueprintID() {
-        return blueprintID;
-    }
-
-    /**
-     * 获取图纸稀有度
-     */
+    /** 获取图纸稀有度 */
     public EnumBlueprintRarity getRarity() {
         return rarity;
     }
 
-
     @Override
-    public Blueprint setRegistryName(ResourceLocation name) {
-        throw new IllegalArgumentException("cannot setRegistryName by this method");
-    }
-
-    @Nullable
-    @Override
-    public ResourceLocation getRegistryName() {
-        return ResourceLocation.create("vida",':');
+    public EnumBlueprintType getType() {
+        return type;
     }
 
     @Override
-    public Class<Blueprint> getRegistryType() {
-        return Blueprint.class;
+    public IChallenge getChallenge() {
+        return challenge;
     }
+
 }

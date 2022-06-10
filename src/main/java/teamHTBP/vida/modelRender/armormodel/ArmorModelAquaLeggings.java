@@ -2,7 +2,7 @@ package teamHTBP.vida.modelRender.armormodel;
 
 import net.minecraft.client.renderer.model.ModelRenderer;
 
-public class ArmorModelAquaLeggings extends ArmorModelElementLeggings {
+public class ArmorModelAquaLeggings extends AbstractModelElementLeggings {
 
     public ArmorModelAquaLeggings() {
         super(128, 128);

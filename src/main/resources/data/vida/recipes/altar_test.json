@@ -1,0 +1,11 @@
+{
+  "type": "vida:altar",
+  "core": "vida:elementcore_wood",
+  "other": {
+    "item1": "vida:vidabranch",
+    "item2": "vida:vidabranch",
+    "item3": "vida:vidabranch",
+    "item4": "vida:vidabranch"
+  },
+  "element": "WOOD"
+}

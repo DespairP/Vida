@@ -1,13 +1,15 @@
 package teamHTBP.vida.recipe.altar;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import teamHTBP.vida.helper.element.EnumElements;
+import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.item.ItemLoader;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 默认的Altar内置合成表
+ * */
 public class AltarRecipeList {
     public static List<AltarRecipe> getDefaultRecipeList() {
         ArrayList<AltarRecipe> result = new ArrayList<>();

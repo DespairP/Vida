@@ -1,6 +1,5 @@
 {
-  "parent": "block/cross",
-  "textures": {
-    "cross": "vida:block/plant_crimsoncrest_1"
-  }
+  "loader": "forge:obj",
+  "model": "vida:models/block/crop_crimsoncrest_stage0.obj",
+  "flip-v": true
 }

@@ -1,6 +1,6 @@
 package teamHTBP.vida.TileEntity;
 
-import teamHTBP.vida.helper.element.EnumElements;
+import teamHTBP.vida.helper.elementHelper.EnumElements;
 
 public interface IElementCrystal {
     EnumElements getElement();

@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -13,7 +14,12 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import teamHTBP.vida.TileEntity.TileEntityLoader;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.block.BlockLoader;
+import teamHTBP.vida.modelRender.tileEntityModel.*;
 
+/**
+ * 注册渲染类型与精灵图
+ * */
+@OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class RenderLoader {
 
@@ -48,7 +54,7 @@ public class RenderLoader {
     @SubscribeEvent
     public static void onRenderTypeSetup(FMLClientSetupEvent event) {
         RenderTypeLookup.setRenderLayer(BlockLoader.saplingVida.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_CRISMCREST.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_CRISMCREST.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(BlockLoader.CROP_SWEETCYANREED.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(BlockLoader.CROP_SULLENHYDRANGEA.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(BlockLoader.CROP_NITRITETHORNS.get(), RenderType.getCutout());
@@ -110,14 +116,12 @@ public class RenderLoader {
     }
 
     @SubscribeEvent
-    public static void onAltlasEvent(TextureStitchEvent.Pre event) {
-        Vida.LOGGER.info("register Altlas");
+    public static void onAtlasEvent(TextureStitchEvent.Pre event) {
+        Vida.LOGGER.info("register Atlas");
         ResourceLocation stitching = event.getMap().getTextureLocation();
         if (!stitching.equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE)) {
             return;
         }
-
-
         event.addSprite(goldgemLocation);
         event.addSprite(woodgemLocation);
         event.addSprite(aquagemLocation);
@@ -128,13 +132,11 @@ public class RenderLoader {
         event.addSprite(aqualogoLocation);
         event.addSprite(firelogoLocation);
         event.addSprite(earthlogoLocation);
-
         event.addSprite(goldCrystalLocation);
         event.addSprite(woodCrystalLocation);
         event.addSprite(aquaCrystalLocation);
         event.addSprite(fireCrystalLocation);
         event.addSprite(earthCrystalLocation);
-
         event.addSprite(injectTable_top);
         event.addSprite(injectTable_side);
     }

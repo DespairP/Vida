@@ -8,7 +8,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class ArmorModelFireHelmet<T extends Entity> extends ArmorModelElementHelmet {
+public class ArmorModelFireHelmet<T extends Entity> extends AbstractModelElementHelmet {
 
     public ArmorModelFireHelmet() {
         super(128, 128);

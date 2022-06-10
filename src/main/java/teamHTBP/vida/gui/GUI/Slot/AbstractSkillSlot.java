@@ -84,7 +84,7 @@ public abstract class AbstractSkillSlot extends AbstractButton {
         }
     }
 
-    public abstract void updateSkillPosition(int InX, int InY, int offsetX, int offsetY);
+    public abstract void updateSkillSlotInfo(int InX, int InY, int offsetX, int offsetY,int mouseX,int mouseY);
 
     public abstract SkillSurface getSkillSurface();
 

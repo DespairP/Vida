@@ -94,8 +94,6 @@ public class NormalSkillSlot extends AbstractSkillSlot {
                 offsetU = 42 * 2;
                 break;
             case GOLD:
-                offsetU = 42 * 1;
-                break;
             case SILVER:
                 offsetU = 42 * 1;
                 break;
@@ -121,16 +119,21 @@ public class NormalSkillSlot extends AbstractSkillSlot {
     }
 
     /**
-     * 更新技能框在整个UI中的位置
+     * 更新技能框信息
+     * 包括：整个UI中的位置，是否有被悬浮
+     *
      *
      * @param InX     guiLeft
      * @param InY     guiRight
      * @param offsetX 偏移的X值
      * @param offsetY 偏移的Y值
+     * @param mouseX  鼠标现在的X
+     * @param mouseY  鼠标现在的Y
      */
-    public void updateSkillPosition(int InX, int InY, int offsetX, int offsetY) {
+    public void updateSkillSlotInfo(int InX, int InY, int offsetX, int offsetY,int mouseX,int mouseY) {
         this.x = skillSurface.getSkillX() - 21 + InX + offsetX;
         this.y = skillSurface.getSkillY() - 24 + InY + offsetY;
+        this.isHovered = isHovered(mouseX, mouseY);
     }
 
     @Override
@@ -166,4 +169,10 @@ public class NormalSkillSlot extends AbstractSkillSlot {
         blit(matrixStack, this.x + 13, this.y + 12, 0, 0, 170, 15, 23, 512, 512);
         RenderSystem.popMatrix();
     }
+
+    public boolean isHovered(int mouseX, int mouseY){
+        return mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
+    }
+
+
 }

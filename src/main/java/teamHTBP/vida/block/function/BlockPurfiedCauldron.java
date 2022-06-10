@@ -24,7 +24,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import teamHTBP.vida.TileEntity.TileEntityPurfiedCauldron;
-import teamHTBP.vida.helper.element.EnumElements;
+import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.particle.CubeParticleData;
 
 import javax.annotation.Nullable;
@@ -149,7 +149,7 @@ public class BlockPurfiedCauldron extends Block {
                         b = 111;
                         break;
                 }
-                worldIn.addParticle(new CubeParticleData(speedX, speedY, speedZ, r, g, b, 0.02f), posX, posY, posZ, 0, -0.03, 0);
+                worldIn.addParticle(new CubeParticleData(r, g, b, 0.02f), posX, posY, posZ, speedX, speedY, speedZ);
 
             }
         }

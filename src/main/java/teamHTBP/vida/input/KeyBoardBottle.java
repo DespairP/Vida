@@ -38,7 +38,6 @@ public class KeyBoardBottle {
             InputMappings.Type.KEYSYM,
             GLFW.GLFW_KEY_W,
             "key.category.vida");
-    public static int alpha = 0;
 
     @SubscribeEvent
     public static void onKeyboardInput(InputEvent.KeyInputEvent event) {

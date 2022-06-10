@@ -2,7 +2,7 @@ package teamHTBP.vida.modelRender.armormodel;
 
 import net.minecraft.client.renderer.model.ModelRenderer;
 
-public class ArmorModelGoldChestplates extends ArmorModelElementChestplates {
+public class ArmorModelGoldChestplates extends AbstractModelElementChestplates {
 
     private final ModelRenderer cube_r1;
     private final ModelRenderer cube_r2;

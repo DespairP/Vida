@@ -32,7 +32,7 @@ public class ItemArmorElementChestplates extends ArmorItem {
     @Nullable
     public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
         //ArmorModelElementChestplates model = new ArmorModelGoldChestplates();
-        ArmorModelElementChestplates model = null;
+        AbstractModelElementChestplates model = null;
         switch (element) {
             case 1:
                 model = new ArmorModelGoldChestplates();
@@ -41,7 +41,7 @@ public class ItemArmorElementChestplates extends ArmorItem {
                 model = new ArmorModelWoodChestplates();
                 break;
             case 3:
-                model = new ArmorModelAquaChestplates();
+                model = new AbstractModelAquaChestplates();
                 break;
             case 4:
                 model = new ArmorModelFireChestplates();

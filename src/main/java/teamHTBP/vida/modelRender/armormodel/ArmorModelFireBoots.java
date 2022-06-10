@@ -2,7 +2,7 @@ package teamHTBP.vida.modelRender.armormodel;
 
 import net.minecraft.client.renderer.model.ModelRenderer;
 
-public class ArmorModelFireBoots extends ArmorModelElementBoots {
+public class ArmorModelFireBoots extends AbstractModelElementBoots {
 
     public ArmorModelFireBoots() {
         super(128, 128);

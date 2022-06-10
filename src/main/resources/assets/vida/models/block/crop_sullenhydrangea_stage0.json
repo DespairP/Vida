@@ -1,6 +1,5 @@
 {
-  "parent": "block/cross",
-  "textures": {
-    "cross": "vida:block/plant_sullenhydrangea_1"
-  }
+  "loader": "forge:obj",
+  "model": "vida:models/block/crop_sullenhydrangea_stage0.obj",
+  "flip-v": true
 }

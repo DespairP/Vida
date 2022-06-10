@@ -8,7 +8,7 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.StringTextComponent;
-import teamHTBP.vida.block.BlockEventLoaderServer;
+import teamHTBP.vida.event.server.BlockEventLoaderServer;
 import teamHTBP.vida.item.staff.IElementTools;
 
 public class CommandToolLevelUp implements Command<CommandSource> {

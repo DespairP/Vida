@@ -13,22 +13,23 @@ public class CuboidParticleData implements IParticleData {
 
         @Override
         public CuboidParticleData deserialize(ParticleType<CuboidParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
-            reader.expect(' ');
+            reader.skipWhitespace();
             double speedX = reader.readDouble();
-            reader.expect(' ');
+            reader.skipWhitespace();
             double speedY = reader.readDouble();
-            reader.expect(' ');
+            reader.skipWhitespace();
             double speedZ = reader.readDouble();
-            reader.expect(' ');
+            reader.skipWhitespace();
             float r = reader.readFloat();
-            reader.expect(' ');
+            reader.skipWhitespace();
             float g = reader.readFloat();
-            reader.expect(' ');
+            reader.skipWhitespace();
             float b = reader.readFloat();
-            reader.expect(' ');
+            reader.skipWhitespace();
             float scale = reader.readFloat();
-            reader.expect(' ');
+            reader.skipWhitespace();
             int age = reader.readInt();
+
             return new CuboidParticleData(speedX, speedY, speedZ, r, g, b, scale, age);
         }
 
@@ -85,8 +86,7 @@ public class CuboidParticleData implements IParticleData {
 
     @Override
     public String getParameters() {
-        return String.format(Locale.ROOT, "%s %.2d %.2d %.2d %f %f %f %f %d",
-                this.getType().getRegistryName(), speedX, speedY, speedZ, r, g, b, scale, age);
+        return String.format(Locale.ROOT, "%s", this.getType().getRegistryName());
     }
 
     //获得x,y,z速度

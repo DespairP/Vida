@@ -1,7 +1,8 @@
 package teamHTBP.vida.capability.blueprintCapability;
 
 import net.minecraft.nbt.CompoundNBT;
-import teamHTBP.vida.helper.BlueprintHelper;
+import teamHTBP.vida.helper.blueprintHelper.BlueprintHelper;
+import teamHTBP.vida.helper.blueprintHelper.EnumBlueprintRarity;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -36,10 +37,10 @@ public class BlueprintCapability implements IBlueprintCapability {
         if (blueprint == null) {
             throw new NullPointerException("blueprint is NULL");
         }
-        if (unlockedBluePrint.containsValue(blueprint) || unlockedBluePrint.containsKey(blueprint.getBlueprintID())) {
+        if (unlockedBluePrint.containsValue(blueprint) || unlockedBluePrint.containsKey(blueprint.getId())) {
             return false;
         }
-        unlockedBluePrint.put(blueprint.getBlueprintID(), blueprint);
+        unlockedBluePrint.put(blueprint.getId(), blueprint);
         return true;
     }
 

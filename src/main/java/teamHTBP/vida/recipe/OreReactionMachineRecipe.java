@@ -13,6 +13,7 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 import javax.annotation.Nullable;
 import java.util.Random;
 
+@Deprecated
 public class OreReactionMachineRecipe implements IRecipe<IInventory> {
 
     public static final Serializer SERIALIZER = new Serializer();

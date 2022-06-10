@@ -1,8 +1,9 @@
 package teamHTBP.vida.modelRender.armormodel;
 
 import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.entity.player.PlayerEntity;
 
-public class ArmorModelAquaBoots extends ArmorModelElementBoots {
+public class ArmorModelAquaBoots extends AbstractModelElementBoots<PlayerEntity> {
     private final ModelRenderer cube_r1;
     private final ModelRenderer cube_r2;
 

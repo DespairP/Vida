@@ -13,12 +13,15 @@ import net.minecraftforge.registries.ForgeRegistries;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.recipe.altar.AltarRecipe;
 import teamHTBP.vida.recipe.altar.AltarRecipeSerializer;
+import teamHTBP.vida.recipe.utils.base.BaseTileEntityRecipeSerializer;
+import teamHTBP.vida.recipe.utils.base.BaseTileEntityRecipes;
 
 import java.util.function.Supplier;
 
 /**
  * Mod所含有的Recipe全部会储存在这个类中
  * */
+@Deprecated
 public class RecipeLoader {
 
     /**
@@ -29,21 +32,23 @@ public class RecipeLoader {
         RECIPES.register(bus);
     }
 
-    private static final DeferredRegister<IRecipeSerializer<?>> RECIPES = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Vida.MOD_ID);
+    /**合成表注册*/
+    public static final DeferredRegister<IRecipeSerializer<?>> RECIPES = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Vida.MOD_ID);
+    /**核心祭坛*/
+    public static final RegistryObject<BaseTileEntityRecipeSerializer<AltarRecipe>> ALTAR = register("altar", AltarRecipeSerializer::new);
 
-    public static final RegistryObject<RecipeSerializerBase<AltarRecipe>> ALTAR = register("altar", AltarRecipeSerializer::new);
+    @Deprecated
     public static final RegistryObject<OreReactionMachineRecipe.Serializer> OREREACTION_RECIPE = RECIPES.register("orereaction_recipe", OreReactionMachineRecipe.Serializer::new);
 
 
-    private static <T extends IRecipe<?>> RegistryObject<RecipeSerializerBase<T>> register(String name, Supplier<RecipeSerializerBase<T>> obj) {
+    private static <T extends IRecipe<?>> RegistryObject<BaseTileEntityRecipeSerializer<T>> register(String name, Supplier<BaseTileEntityRecipeSerializer<T>> obj) {
         return RECIPES.register(name, obj);
     }
 
-
-    /** 获取合成表 */
+    /**根据TileEntity获取合成表*/
     public static <R extends ICraftingRecipe> R find(World world, TileEntity tileEntity) {
         for (ICraftingRecipe recipe : world.getRecipeManager().getRecipesForType(IRecipeType.CRAFTING)) {
-            if (recipe instanceof RecipesBase && ((RecipesBase) recipe).matches(tileEntity)) {
+            if (recipe instanceof BaseTileEntityRecipes && ((BaseTileEntityRecipes) recipe).matches(tileEntity)) {
                 return (R) recipe;
             }
         }
