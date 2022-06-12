@@ -1,7 +1,9 @@
 package teamHTBP.vida.helper.guidebookHelper;
 
+import com.google.gson.annotations.Expose;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.gui.IGuiEventListener;
+import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.helper.guidebookHelper.components.IGuidebookComponent;
@@ -16,11 +18,16 @@ import java.util.List;
  * */
 public class GuidebookSinglePage {
     /**所属的guide*/
+    @Expose
     public String guide;
     /**处于一个第几页*/
+    @Expose
     public int page;
     /**这一页所有的可渲染组件*/
+    @Expose
     public List<IGuidebookComponent> components = new LinkedList<>();
+    /**位置*/
+    public ResourceLocation resourceLocation;
     /**Logger*/
     public final static Logger LOGGER = LogManager.getLogger();
     /**流式布局*/

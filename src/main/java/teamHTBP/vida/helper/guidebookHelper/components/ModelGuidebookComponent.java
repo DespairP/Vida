@@ -33,10 +33,13 @@ import static net.minecraft.client.gui.AbstractGui.blit;
 import static net.minecraft.client.renderer.ItemRenderer.*;
 import static teamHTBP.vida.helper.renderHelper.RenderHelper.renderTextWithTranslationKeyCenter;
 
+/**模型组件*/
 public class ModelGuidebookComponent implements IGuidebookComponent {
     /**渲染id,minecraft中命名id*/
     @Expose
     public String id;
+    @Expose
+    public final String type = "model";
     /**渲染物品*/
     @Expose
     private ItemStack renderStack = ItemStack.EMPTY;
@@ -73,7 +76,7 @@ public class ModelGuidebookComponent implements IGuidebookComponent {
 
     @Override
     public String getType() {
-        return "model";
+        return type;
     }
 
     @Override
