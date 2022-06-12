@@ -22,7 +22,7 @@ import teamHTBP.vida.network.PacketGuidebook;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
+/**datapack相关guidebook的guide处理器*/
 public class GuideBookGuideHandler extends JsonReloadListener {
     /**Handler中的所有guide,这里可能为客户端的也可能是服务端的*/
     public Map<String, Guide> guideMap = new LinkedHashMap<>();
@@ -33,7 +33,7 @@ public class GuideBookGuideHandler extends JsonReloadListener {
 
 
     public GuideBookGuideHandler() {
-        super(GSON, "guides");
+        super(GSON, "guidebook/guides");
     }
 
     /**解析data数据包*/
@@ -62,6 +62,7 @@ public class GuideBookGuideHandler extends JsonReloadListener {
         guideMap = serverGuideMap;
     }
 
+    /***/
     public void clear(){
         guideMap.clear();
     }

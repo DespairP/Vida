@@ -10,9 +10,9 @@ import net.minecraft.util.text.TranslationTextComponent;
 import teamHTBP.vida.helper.renderHelper.RenderHelper;
 import teamHTBP.vida.utils.math.IntRange;
 
-/**渲染文字的key*/
-
+/**文字渲染组件*/
 public class TextGuidebookComponent implements IGuidebookComponent {
+    public final String type = "text";
     /**渲染的x位置*/
     public int x;
     /**渲染的y位置*/
@@ -34,7 +34,7 @@ public class TextGuidebookComponent implements IGuidebookComponent {
 
     @Override
     public String getType() {
-        return "text";
+        return type;
     }
 
     @Override

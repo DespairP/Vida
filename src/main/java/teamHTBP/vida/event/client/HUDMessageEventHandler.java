@@ -33,7 +33,7 @@ public class HUDMessageEventHandler {
             currentRnederer.render(event.getMatrixStack());
         }
         if ((currentRnederer == null || currentRnederer.alpha <= 0) && messageList.size() > 0) {
-            System.out.println(currentRnederer.alpha <= 0);
+            //System.out.println(currentRnederer.alpha <= 0);
             removeMessage();
         }
         return;

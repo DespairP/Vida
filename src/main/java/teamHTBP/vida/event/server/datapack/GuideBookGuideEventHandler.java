@@ -31,8 +31,6 @@ import java.util.concurrent.ConcurrentMap;
  * 注册时会调用{@link GuideBookGuideHandler#apply(Map, IResourceManager, IProfiler)}方法进行json解析
  * 注意在服务器环境中有一{@link GuideBookGuideEventHandler#dataPackMap}用于存服务端的handler;
  *
- * <br/>
- * 其次，当客户端创建时会调用
  */
 @Mod.EventBusSubscriber(modid = Vida.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class GuideBookGuideEventHandler {
@@ -47,16 +45,13 @@ public class GuideBookGuideEventHandler {
     @SubscribeEvent
     public static void dataPackRegistry(AddReloadListenerEvent event) {
         GuideBookGuideHandler guideBookHandler = new GuideBookGuideHandler();
-        if(dataPackMap.putIfAbsent(event.getDataPackRegistries(), guideBookHandler) == null){
+        if(dataPackMap.putIfAbsent(event.getDataPackRegistries(), guideBookHandler) != null){
             LOGGER.error("duplicated datapack registries");
         }
         event.addListener(guideBookHandler);
     }
 
-    /**
-     * 当玩家进入服务器时，服务器将数据包传给客户端
-     *
-     * */
+    /**当玩家进入服务器时，服务器将数据包传给客户端*/
     @SubscribeEvent
     public static void loginSyncDataPack(PlayerEvent.PlayerLoggedInEvent event){
         PlayerEntity entity = event.getPlayer();
@@ -79,7 +74,7 @@ public class GuideBookGuideEventHandler {
 
     /**获取服务端的Handler*/
     public static GuideBookGuideHandler getServerHandler(World world){
-        if(world.getServer() == null){
+        if(world.getServer() != null){
             LOGGER.error("expected error:get server GuidebookHandler in client world");
             return null;
         }

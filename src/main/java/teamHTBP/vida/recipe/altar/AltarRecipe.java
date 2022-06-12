@@ -68,7 +68,7 @@ public class AltarRecipe extends BaseTileEntityRecipes<AltarRecipe, TileEntityEl
 
         if(core.getItem() != coreItem) return false;
         for(ItemStack stack:altarItems){
-            System.out.println(stack);
+            //System.out.println(stack);
             if(!requiredItems.contains(stack)){
                 return false;
             }

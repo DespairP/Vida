@@ -106,7 +106,7 @@ public class LeafParticle extends SpriteTexturedParticle {
     /**每一帧会运行此方法，主要是设置一些粒子的可变参数*/
     @Override
     public void tick() {
-        System.out.println(motionX + "" + motionY + "" + motionZ);
+        //System.out.println(motionX + "" + motionY + "" + motionZ);
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;
         this.prevPosZ = this.posZ;

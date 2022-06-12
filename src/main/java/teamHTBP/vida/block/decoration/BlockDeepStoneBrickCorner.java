@@ -49,7 +49,7 @@ public class BlockDeepStoneBrickCorner extends Block {
         if (!worldIn.isRemote) {
             if (player.inventory.getCurrentItem().getItem() == ItemLoader.WAND_VIDA.get()) {
                 Direction stateDirection = state.get(FACING);
-                System.out.println(stateDirection);
+                //System.out.println(stateDirection);
                 switch (stateDirection) {
                     case EAST:
                         worldIn.setBlockState(pos, state.with(FACING, Direction.SOUTH).with(STATE, 0));
