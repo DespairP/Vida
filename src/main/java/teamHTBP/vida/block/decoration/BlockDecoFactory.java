@@ -4,71 +4,21 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
+import java.util.function.Supplier;
+
 /**
  * 方块工厂类
  * 有关Block.Properties,参见：{@link Block.Properties}<br/>
  *
- * @see BlockDecoFactory.DecoBlockType
- * @see BlockDecoFactory.PropertiesBuilder
  */
 public class BlockDecoFactory {
-    /**
-     * 生产方块的properties,使用createBuilder可以快速的建造一个properties {@link BlockDecoFactory#createBuilder()}
-     */
-    private Block.Properties properties;
+    private static final Block.Properties BASIC_PROPERTIES = Block.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(3.0F);
 
-    public static PropertiesBuilder createBuilder() {
-        return new PropertiesBuilder();
+    public static Block yAxis(){
+        return  new BlockDecoWithY(BASIC_PROPERTIES);
     }
 
-    /**
-     * 根据传入的属性生产一个装饰性方块
-     *
-     * @param type 方块的属性{@link DecoBlockType}
-     * @return 生产的方块
-     */
-    public Block produceDecoBlock(DecoBlockType type) {
-        switch (type) {
-            case BASIC:
-                return new BlockDecoBasic(properties);
-            case YAXIS:
-                return new BlockDecoWithY(properties);
-        }
-        return new BlockDecoBasic(properties);
-    }
-
-    /**
-     * 方块属性  <br/>
-     * Basic为 普通方块 <br/>
-     * YAXIS 按照Y轴旋转的方块
-     */
-    public enum DecoBlockType {
-        BASIC, YAXIS
-    }
-
-    /**
-     * Properties的静态Builder
-     */
-    public static class PropertiesBuilder {
-        public float resistence = 3.0f;
-        public SoundType soundType = SoundType.STONE;
-        public Material material = Material.ROCK;
-
-        public PropertiesBuilder setResistence(float resistence) {
-            this.resistence = resistence;
-            return this;
-        }
-
-        public PropertiesBuilder setSoundType(SoundType soundType) {
-            this.soundType = soundType;
-            return this;
-        }
-
-        public BlockDecoFactory build() {
-            BlockDecoFactory factory = new BlockDecoFactory();
-            factory.properties = Block.Properties.create(material).sound(soundType).hardnessAndResistance(resistence);
-            return factory;
-        }
-
+    public static Block normal(){
+        return new BlockDecoBasic(BASIC_PROPERTIES);
     }
 }

@@ -27,9 +27,6 @@ import teamHTBP.vida.item.ItemLoader;
  *
  **/
 public class BlockLoader {
-    /**方块装饰工厂,用于直接获取AXIS或YAXIS轴核心的方块*/
-    public static BlockDecoFactory basicFactory = BlockDecoFactory.createBuilder().build();
-
     public final static DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Vida.MOD_ID);
     //深潜石方块
     @RegisterItemBlock
@@ -45,61 +42,62 @@ public class BlockLoader {
     public final static RegistryObject<Block> DIM_BRICKS_DECO_1 = BLOCKS.register("dim_bricks_deco_1", BlockDimRockBrickDeco::new);
     //朽木方块
     @RegisterItemBlock
-    public final static RegistryObject<Block> LUSH_PLANKS_DECO = BLOCKS.register("lush_planks_deco", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public final static RegistryObject<Block> LUSH_PLANKS_DECO = BLOCKS.register("lush_planks_deco", BlockDecoFactory::normal);
     @RegisterItemBlock
-    public final static RegistryObject<Block> LUSH_PILLAR_0 = BLOCKS.register("lush_pillar_0", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.YAXIS));
+    public final static RegistryObject<Block> LUSH_PILLAR_0 = BLOCKS.register("lush_pillar_0", BlockDecoFactory::yAxis);
     @RegisterItemBlock
-    public final static RegistryObject<Block> LUSH_PILLAR_1 = BLOCKS.register("lush_pillar_1", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.YAXIS));
+    public final static RegistryObject<Block> LUSH_PILLAR_1 = BLOCKS.register("lush_pillar_1", BlockDecoFactory::yAxis);
     @RegisterItemBlock
-    public final static RegistryObject<Block> LUSH_PILLAR_2 = BLOCKS.register("lush_pillar_2", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.YAXIS));
+    public final static RegistryObject<Block> LUSH_PILLAR_2 = BLOCKS.register("lush_pillar_2", BlockDecoFactory::yAxis);
     @RegisterItemBlock
-    public final static RegistryObject<Block> LUSH_PILLAR_3 = BLOCKS.register("lush_pillar_3", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.YAXIS));
+    public final static RegistryObject<Block> LUSH_PILLAR_3 = BLOCKS.register("lush_pillar_3", BlockDecoFactory::yAxis);
     @RegisterItemBlock
-    public final static RegistryObject<Block> LUSH_PILLAR_4 = BLOCKS.register("lush_pillar_4", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.YAXIS));
-    public final static RegistryObject<Block> LUSH_PLANKS = BLOCKS.register("lush_planks", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public final static RegistryObject<Block> LUSH_PILLAR_4 = BLOCKS.register("lush_pillar_4", BlockDecoFactory::yAxis);
+
+    public final static RegistryObject<Block> LUSH_PLANKS = BLOCKS.register("lush_planks", BlockDecoFactory::normal);
     //沃土砖
     @RegisterItemBlock
-    public final static RegistryObject<Block> FERTILESOIL_BRICKS = BLOCKS.register("fertilesoil_bricks", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public final static RegistryObject<Block> FERTILESOIL_BRICKS = BLOCKS.register("fertilesoil_bricks", BlockDecoFactory::normal);
     @RegisterItemBlock
-    public final static RegistryObject<Block> FERTILESOIL_BRICKS_DECO_0 = BLOCKS.register("fertilesoil_bricks_deco_0", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public final static RegistryObject<Block> FERTILESOIL_BRICKS_DECO_0 = BLOCKS.register("fertilesoil_bricks_deco_0", BlockDecoFactory::normal);
     @RegisterItemBlock
-    public final static RegistryObject<Block> FERTILESOIL_BRICKS_DECO_1 = BLOCKS.register("fertilesoil_bricks_deco_1", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public final static RegistryObject<Block> FERTILESOIL_BRICKS_DECO_1 = BLOCKS.register("fertilesoil_bricks_deco_1", BlockDecoFactory::normal);
     @RegisterItemBlock
-    public final static RegistryObject<Block> FERTILESOIL_BRICKS_DECO_2 = BLOCKS.register("fertilesoil_bricks_deco_2", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public final static RegistryObject<Block> FERTILESOIL_BRICKS_DECO_2 = BLOCKS.register("fertilesoil_bricks_deco_2", BlockDecoFactory::normal);
     @RegisterItemBlock
-    public final static RegistryObject<Block> FERTILESOIL_BRICKS_DECO_3 = BLOCKS.register("fertilesoil_bricks_deco_3", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public final static RegistryObject<Block> FERTILESOIL_BRICKS_DECO_3 = BLOCKS.register("fertilesoil_bricks_deco_3", BlockDecoFactory::normal);
     @RegisterItemBlock
-    public final static RegistryObject<Block> FERTILESOIL_BRICKS_DECO_4 = BLOCKS.register("fertilesoil_bricks_deco_4", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public final static RegistryObject<Block> FERTILESOIL_BRICKS_DECO_4 = BLOCKS.register("fertilesoil_bricks_deco_4", BlockDecoFactory::normal);
     //炎狱砖
     @RegisterItemBlock
-    public final static RegistryObject<Block> NETHERFIRE_BRICKS = BLOCKS.register("netherfire_bricks", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public final static RegistryObject<Block> NETHERFIRE_BRICKS = BLOCKS.register("netherfire_bricks", BlockDecoFactory::normal);
     @RegisterItemBlock
-    public final static RegistryObject<Block> NETHERFIRE_BRICKS_DECO_0 = BLOCKS.register("netherfire_bricks_deco_0", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public final static RegistryObject<Block> NETHERFIRE_BRICKS_DECO_0 = BLOCKS.register("netherfire_bricks_deco_0", BlockDecoFactory::normal);
     @RegisterItemBlock
-    public final static RegistryObject<Block> NETHERFIRE_BRICKS_DECO_1 = BLOCKS.register("netherfire_bricks_deco_1", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public final static RegistryObject<Block> NETHERFIRE_BRICKS_DECO_1 = BLOCKS.register("netherfire_bricks_deco_1", BlockDecoFactory::normal);
     @RegisterItemBlock
-    public final static RegistryObject<Block> NETHERFIRE_BRICKS_DECO_2 = BLOCKS.register("netherfire_bricks_deco_2", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public final static RegistryObject<Block> NETHERFIRE_BRICKS_DECO_2 = BLOCKS.register("netherfire_bricks_deco_2", BlockDecoFactory::normal);
     @RegisterItemBlock
-    public final static RegistryObject<Block> NETHERFIRE_BRICKS_DECO_3 = BLOCKS.register("netherfire_bricks_deco_3", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public final static RegistryObject<Block> NETHERFIRE_BRICKS_DECO_3 = BLOCKS.register("netherfire_bricks_deco_3", BlockDecoFactory::normal);
     @RegisterItemBlock
-    public final static RegistryObject<Block> NETHERFIRE_BRICKS_DECO_4 = BLOCKS.register("netherfire_bricks_deco_4", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public final static RegistryObject<Block> NETHERFIRE_BRICKS_DECO_4 = BLOCKS.register("netherfire_bricks_deco_4", BlockDecoFactory::normal);
     //白金砖
     @RegisterItemBlock
-    public final static RegistryObject<Block> PLATINUM_BRICKS = BLOCKS.register("platinum_bricks", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public final static RegistryObject<Block> PLATINUM_BRICKS = BLOCKS.register("platinum_bricks", BlockDecoFactory::normal);
     @RegisterItemBlock
-    public final static RegistryObject<Block> PLATINUM_BRICKS_DECO_0 = BLOCKS.register("platinum_bricks_deco_0", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public final static RegistryObject<Block> PLATINUM_BRICKS_DECO_0 = BLOCKS.register("platinum_bricks_deco_0", BlockDecoFactory::normal);
     @RegisterItemBlock
-    public final static RegistryObject<Block> PLATINUM_BRICKS_DECO_1 = BLOCKS.register("platinum_bricks_deco_1", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public final static RegistryObject<Block> PLATINUM_BRICKS_DECO_1 = BLOCKS.register("platinum_bricks_deco_1", BlockDecoFactory::normal);
     @RegisterItemBlock
-    public final static RegistryObject<Block> PLATINUM_BRICKS_DECO_2 = BLOCKS.register("platinum_bricks_deco_2", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public final static RegistryObject<Block> PLATINUM_BRICKS_DECO_2 = BLOCKS.register("platinum_bricks_deco_2", BlockDecoFactory::normal);
     @RegisterItemBlock
-    public final static RegistryObject<Block> PLATINUM_BRICKS_DECO_3 = BLOCKS.register("platinum_bricks_deco_3", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public final static RegistryObject<Block> PLATINUM_BRICKS_DECO_3 = BLOCKS.register("platinum_bricks_deco_3", BlockDecoFactory::normal);
     @RegisterItemBlock
-    public final static RegistryObject<Block> PLATINUM_BRICKS_DECO_4 = BLOCKS.register("platinum_bricks_deco_4", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public final static RegistryObject<Block> PLATINUM_BRICKS_DECO_4 = BLOCKS.register("platinum_bricks_deco_4", BlockDecoFactory::normal);
     @RegisterItemBlock
     public static RegistryObject<Block> DEEPSEA_BRICKS_STRAIGHT = BLOCKS.register("deepsea_bricks_straight", BlockDeepStoneBrickStraight::new);
     @RegisterItemBlock
-    public static RegistryObject<Block> DEEPSEA_BRICKS_CORE = BLOCKS.register("deepsea_bricks_core", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public static RegistryObject<Block> DEEPSEA_BRICKS_CORE = BLOCKS.register("deepsea_bricks_core", BlockDecoFactory::normal);
     @RegisterItemBlock
     public static RegistryObject<Block> DEEPSEA_PILLAR_0 = BLOCKS.register("deepsea_pillar_0", () -> new BlockDeepStoneBrickPillar(0));
     @RegisterItemBlock
@@ -108,17 +106,17 @@ public class BlockLoader {
     public static RegistryObject<Block> DEEPSEA_PILLAR_2 = BLOCKS.register("deepsea_pillar_2", () -> new BlockDeepStoneBrickPillar(2));
     //砖
     @RegisterItemBlock
-    public static RegistryObject<Block> VERDANT_BRICKS = BLOCKS.register("verdant_bricks", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public static RegistryObject<Block> VERDANT_BRICKS = BLOCKS.register("verdant_bricks", BlockDecoFactory::normal);
     @RegisterItemBlock
-    public static RegistryObject<Block> VERDANT_BRICKS_DECO_0 = BLOCKS.register("verdant_bricks_deco_0", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public static RegistryObject<Block> VERDANT_BRICKS_DECO_0 = BLOCKS.register("verdant_bricks_deco_0", BlockDecoFactory::normal);
     @RegisterItemBlock
-    public static RegistryObject<Block> VERDANT_BRICKS_DECO_1 = BLOCKS.register("verdant_bricks_deco_1", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public static RegistryObject<Block> VERDANT_BRICKS_DECO_1 = BLOCKS.register("verdant_bricks_deco_1", BlockDecoFactory::normal);
     @RegisterItemBlock
-    public static RegistryObject<Block> VERDANT_BRICKS_DECO_2 = BLOCKS.register("verdant_bricks_deco_2", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public static RegistryObject<Block> VERDANT_BRICKS_DECO_2 = BLOCKS.register("verdant_bricks_deco_2", BlockDecoFactory::normal);
     @RegisterItemBlock
-    public static RegistryObject<Block> VERDANT_BRICKS_DECO_3 = BLOCKS.register("verdant_bricks_deco_3", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public static RegistryObject<Block> VERDANT_BRICKS_DECO_3 = BLOCKS.register("verdant_bricks_deco_3", BlockDecoFactory::normal);
     @RegisterItemBlock
-    public static RegistryObject<Block> VERDANT_BRICKS_DECO_4 = BLOCKS.register("verdant_bricks_deco_4", () -> basicFactory.produceDecoBlock(BlockDecoFactory.DecoBlockType.BASIC));
+    public static RegistryObject<Block> VERDANT_BRICKS_DECO_4 = BLOCKS.register("verdant_bricks_deco_4", BlockDecoFactory::normal);
     //水晶
     public static RegistryObject<Block> elementCrystalGold = BLOCKS.register("goldelementcrystal", BlockElementCrystalGold::new);
     public static RegistryObject<Block> elementCrystalWood = BLOCKS.register("woodelementcrystal", BlockElementCrystalWood::new);
