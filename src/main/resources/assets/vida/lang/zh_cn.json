@@ -112,6 +112,14 @@
   "block.vida.dimrockbrickdeco0": "饰纹黯淡石砖",
   "block.vida.dimrockbrickdeco1": "饰纹黯淡石砖",
   "block.vida.dimrockbrickdeco2": "饰纹黯淡石砖",
+  "block.vida.silentforestbrick_0": "寂森石砖",
+  "block.vida.silentforestbrick_1": "饰纹寂森石砖",
+  "block.vida.silentforestbrick_2": "饰纹寂森石砖",
+  "block.vida.silentforestbrick_3": "竖纹寂森石砖",
+  "block.vida.silentforestbrick_4": "饰纹寂森石砖",
+  "block.vida.silentforestbrick_5": "饰纹寂森石砖",
+  "block.vida.silentforestbrick_6": "饰纹寂森石砖",
+  "block.vida.silentforestbrick_7": "饰纹寂森石砖",
   "desc.picklevel.level": "等级：",
   "desc.swordlevel.level": "等级：",
   "item.vida.goldelementpickaxe": "闪金镐",
@@ -133,6 +141,7 @@
   "key.category.vida": "'生命'键位设置",
   "skill.vida.luck.name": "幸运",
   "skill.vida.luck.desc": "在击杀时有几率增加伤害 \n *随着等级增加伤害会增强",
-  "skill.vida.requiredSkill.anno": "需要解锁的技能："
+  "skill.vida.requiredSkill.anno": "需要解锁的技能：",
+  "item.vida.earthbootsearmor": "Earthcore Chestplate"
 
 }
