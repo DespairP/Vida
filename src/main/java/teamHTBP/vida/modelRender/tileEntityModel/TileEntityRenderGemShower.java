@@ -94,7 +94,7 @@ public class TileEntityRenderGemShower extends TileEntityRenderer<TileEntityGemS
             //draw logo
             matrixStackIn.push();
             IVertexBuilder bufferLogo = bufferIn.getBuffer(RenderType.getCutout());
-            matrixStackIn.translate(0.5f, 2.5F + floatHeight, 0.5f);
+            matrixStackIn.translate(0.5f, 2.0F + floatHeight, 0.5f);
             matrixStackIn.rotate(this.renderDispatcher.renderInfo.getRotation());
             matrixStackIn.scale(0.5f, 0.5f, 0.5f);
             matrixStackIn.translate(-0.5f, -0.5, -0.5f);
