@@ -26,5 +26,15 @@ public class BlockDecoFactory {
         return new BlockDecoFence(BASIC_PROPERTIES);
     }
 
+    public static Block door(){
+        return new BlockDecoDoor(BASIC_PROPERTIES);
+    }
 
+    public static Block slab(){
+        return new BlockDecoSlab(BASIC_PROPERTIES);
+    }
+
+    public static Block stairs(){
+        return null;
+    }
 }
