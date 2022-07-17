@@ -159,4 +159,34 @@ public class BlockLoader {
     public static RegistryObject<Block> CROP_PLAMSTEM = BLOCKS.register("crop_plamstem", () -> new BlockElementCropParticle(5, EnumElements.AQUA, () -> ItemLoader.CROP_PLAMSTEM.get(), ColorHelper.DARK_BLUE));
     public static RegistryObject<Block> CROP_SULLENHYDRANGEA = BLOCKS.register("crop_sullenhydrangea", () -> new BlockElementCropParticle(5, EnumElements.AQUA, () -> ItemLoader.CROP_SULLENHYDRANGEA.get(), ColorHelper.PURPLR));
     public static RegistryObject<Block> CROP_SWEETCYANREED = BLOCKS.register("crop_sweetcyanreed", () -> new BlockElementCropParticle(5, EnumElements.WOOD, () -> ItemLoader.CROP_SWEETCYANREED.get(), ColorHelper.CYAN_GREEN));
+
+    //这里添加新的方块
+    //@RegisterItemBlock
+    //public static RegistryObject<Block> 方块ID = BLOCKS.register("方块ID、全小写、下划线、数字", BlockDecoFactory::normal);
+    @RegisterItemBlock
+    public static RegistryObject<Block> TEST_BRICK = BLOCKS.register("test_brick", BlockDecoFactory::normal);
+
+    @RegisterItemBlock
+    public static RegistryObject<Block> SILENTFORESTBRICK_0 = BLOCKS.register("silentforestbrick_0", BlockDecoFactory::normal);
+
+    @RegisterItemBlock
+    public static RegistryObject<Block> SILENTFORESTBRICK_1 = BLOCKS.register("silentforestbrick_1", BlockDecoFactory::normal);
+
+    @RegisterItemBlock
+    public static RegistryObject<Block> SILENTFORESTBRICK_2 = BLOCKS.register("silentforestbrick_2", BlockDecoFactory::normal);
+
+    @RegisterItemBlock
+    public static RegistryObject<Block> SILENTFORESTBRICK_3 = BLOCKS.register("silentforestbrick_3", BlockDecoFactory::normal);
+
+    @RegisterItemBlock
+    public static RegistryObject<Block> SILENTFORESTBRICK_4 = BLOCKS.register("silentforestbrick_4", BlockDecoFactory::normal);
+
+    @RegisterItemBlock
+    public static RegistryObject<Block> SILENTFORESTBRICK_5 = BLOCKS.register("silentforestbrick_5", BlockDecoFactory::normal);
+
+    @RegisterItemBlock
+    public static RegistryObject<Block> SILENTFORESTBRICK_6 = BLOCKS.register("silentforestbrick_6", BlockDecoFactory::normal);
+
+    @RegisterItemBlock
+    public static RegistryObject<Block> SILENTFORESTBRICK_7 = BLOCKS.register("silentforestbrick_7", BlockDecoFactory::normal);
 }
