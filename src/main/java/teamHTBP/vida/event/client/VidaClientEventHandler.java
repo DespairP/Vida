@@ -20,8 +20,8 @@ public class VidaClientEventHandler {
     }
 
     public static void registerComponent(){
-        GuidebookHelper.setComponent("model", ModelGuidebookComponent.class);
-        GuidebookHelper.setComponent("text", TextGuidebookComponent.class);
-        GuidebookHelper.setComponent("crafting", CraftingGuidebookComponent.class);
+        GuidebookHelper.addBookComponent("model", ModelGuidebookComponent.class);
+        GuidebookHelper.addBookComponent("text", TextGuidebookComponent.class);
+        GuidebookHelper.addBookComponent("crafting", CraftingGuidebookComponent.class);
     }
 }

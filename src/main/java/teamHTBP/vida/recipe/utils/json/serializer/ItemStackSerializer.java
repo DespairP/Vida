@@ -3,10 +3,12 @@ package teamHTBP.vida.recipe.utils.json.serializer;
 import com.google.gson.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.lang.reflect.Type;
+import java.util.Optional;
 
 /**
  * @author DustW
@@ -14,15 +16,20 @@ import java.lang.reflect.Type;
 public class ItemStackSerializer implements JsonSerializer<ItemStack>, JsonDeserializer<ItemStack> {
     @Override
     public ItemStack deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(json.getAsJsonObject().get("item").getAsString()));
-
-        if (item != null) {
-            int count = json.getAsJsonObject().get("count").getAsInt();
-
-            return new ItemStack(item, count);
+        JsonElement resourceKey = json.getAsJsonObject().get("item");
+        if(resourceKey == null || resourceKey.isJsonNull()){
+            return ItemStack.EMPTY;
         }
+        JsonElement count = json.getAsJsonObject().get("count");
+        if(count == null || count.isJsonNull()){
+            count = new JsonPrimitive(1);
+        }
+        Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(resourceKey.getAsString()));
 
-        return ItemStack.EMPTY;
+        return new ItemStack(
+                Optional.ofNullable(item).orElse(Items.AIR),
+                count.getAsInt()
+        );
     }
 
     @Override

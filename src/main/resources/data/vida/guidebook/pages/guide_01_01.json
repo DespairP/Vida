@@ -19,6 +19,23 @@
         "item": "vida:aquaelementore",
         "count": 1
       }
+    },
+    {
+      "type": "model",
+      "x": 0,
+      "y": 0,
+      "renderStack": {
+        "item": "vida:collector",
+        "count": 1
+      }
+    },
+    {
+      "type": "text",
+      "x": 0,
+      "y": 0,
+      "key": "hello world,u8129u3981u289u8192u49812u984u1289411 jdioasjdiojaoisjdoijasoiddjisaodjioasdj jdiosajidjsaiodjioajdioasdjioasjd,hello world,u8129u3981u289u8192u49812u984u1289411 jdioasjdiojaoisjdoijasoiddjisaodjioasdj jdiosajidjsaiodjioajdioasdjioasjd,hello world,u8129u3981u289u8192u49812u984u1289411 jdioasjdiojaoisjdoijasoiddjisaodjioasdj jdiosajidjsaiodjioajdioasdjioasjd,hello world,u8129u3981u289u8192u49812u984u1289411 jdioasjdiojaoisjdoijasoiddjisaodjioasdj jdiosajidjsaiodjioajdioasdjioasjd,hello world,u8129u3981u289u8192u49812u984u1289411 jdioasjdiojaoisjdoijasoiddjisaodjioasdj jdiosajidjsaiodjioajdioasdjioasjd,hello world,u8129u3981u289u8192u49812u984u1289411 jdioasjdiojaoisjdoijasoiddjisaodjioasdj jdiosajidjsaiodjioajdioasdjioasjd,hello world,u8129u3981u289u8192u49812u984u1289411 jdioasjdiojaoisjdoijasoiddjisaodjioasdj jdiosajidjsaiodjioajdioasdjioasjd,hello world,u8129u3981u289u8192u49812u984u1289411 jdioasjdiojaoisjdoijasoiddjisaodjioasdj jdiosajidjsaiodjioajdioasdjioasjd,hello world,u8129u3981u289u8192u49812u984u1289411 jdioasjdiojaoisjdoijasoiddjisaodjioasdj jdiosajidjsaiodjioajdioasdjioasjd,hello world,u8129u3981u289u8192u49812u984u1289411 jdioasjdiojaoisjdoijasoiddjisaodjioasdj jdiosajidjsaiodjioajdioasdjioasjd",
+      "autoMaxLength": false,
+      "maxHeight": 100
     }
   ]
 }

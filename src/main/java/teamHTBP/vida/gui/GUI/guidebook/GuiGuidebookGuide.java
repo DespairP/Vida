@@ -1,10 +1,14 @@
 package teamHTBP.vida.gui.GUI.guidebook;
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.IGuiEventListener;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TranslationTextComponent;
 import teamHTBP.vida.gui.components.IGuidebookPageable;
+import teamHTBP.vida.helper.guidebookHelper.GuidebookHelper;
 import teamHTBP.vida.helper.guidebookHelper.GuidebookSinglePage;
 import teamHTBP.vida.helper.guidebookHelper.components.IGuidebookComponent;
 import teamHTBP.vida.helper.guidebookHelper.components.ModelGuidebookComponent;
@@ -20,12 +24,15 @@ public class GuiGuidebookGuide extends AbstractGuiGuidebook implements IGuideboo
 
     public GuiGuidebookGuide() {
         super(new TranslationTextComponent("vida:guidebook_guide"));
-        List<IGuidebookComponent> guidebookComponents = new LinkedList<>();
-        guidebookComponents.add(ModelGuidebookComponent.create(0, 0, new ItemStack(ItemLoader.logVida.get())));
-        guidebookComponents.add(ModelGuidebookComponent.create(0, 0, new ItemStack(ItemLoader.aquaElementOre.get())));
-        guidebookComponents.add(ModelGuidebookComponent.create(0, 0, new ItemStack(ItemLoader.collector.get())));
-        guidebookComponents.add(TextGuidebookComponent.create("hello this is vida!", 0,0, 28,30));
-        singlePage.components = guidebookComponents;
+        ClientWorld world = Minecraft.getInstance().world;
+        singlePage = GuidebookHelper
+                .getGuidePageHandler(world)
+                .guideToSinglePage
+                .values()
+                .stream()
+                .findFirst()
+                .orElse(ImmutableList.of(new GuidebookSinglePage()))
+                .get(0);
     }
 
     @Override

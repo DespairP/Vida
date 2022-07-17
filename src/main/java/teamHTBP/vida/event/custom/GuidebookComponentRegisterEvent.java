@@ -30,7 +30,7 @@ public class GuidebookComponentRegisterEvent extends Event implements IModBusEve
      * @return 是否已经注册
      * */
     public boolean setComponent(String type, Class<? extends IGuidebookComponent> componentClass){
-        return GuidebookHelper.GUIDEBOOK_COMPONENTS.putIfAbsent(type, componentClass) != null;
+        return false;
     }
 
 

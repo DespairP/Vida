@@ -21,6 +21,7 @@ public class GuidebookComponentSerializer implements JsonSerializer<IGuidebookCo
     private static final Gson GSON = new GsonBuilder()
             .registerTypeAdapter(IGuidebookComponent.class, new GuidebookComponentSerializer())
             .registerTypeAdapter(ItemStack.class,new ItemStackSerializer())
+            .registerTypeAdapter(TextGuidebookComponent.class,new GuidebookTextComponentSerializer())
             .excludeFieldsWithoutExposeAnnotation()
             .create();
 
@@ -53,7 +54,8 @@ public class GuidebookComponentSerializer implements JsonSerializer<IGuidebookCo
         return jsonSerializationContext.serialize(iGuidebookComponent, componentType);
     }
 
+    /**根据type来获取组件类型*/
     public Class<? extends IGuidebookComponent> getComponentByTypeName(String type){
-        return GuidebookHelper.GUIDEBOOK_COMPONENTS.get(type);
+        return GuidebookHelper.getComponentByTypeName(type);
     }
 }

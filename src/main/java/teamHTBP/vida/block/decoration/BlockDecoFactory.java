@@ -21,4 +21,10 @@ public class BlockDecoFactory {
     public static Block normal(){
         return new BlockDecoBasic(BASIC_PROPERTIES);
     }
+
+    public static Block fence(){
+        return new BlockDecoFence(BASIC_PROPERTIES);
+    }
+
+
 }
