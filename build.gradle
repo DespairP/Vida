@@ -31,6 +31,8 @@ repositories {
     }
 }
 
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
 minecraft {
     // The mappings can be changed at any time, and must be in the following format.
     // snapshot_YYYYMMDD   Snapshot are built nightly.
@@ -55,7 +57,7 @@ minecraft {
             property 'forge.logging.console.level', 'info'
 
             mods {
-                examplemod {
+                vida {
                     source sourceSets.main
                 }
             }
@@ -71,7 +73,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                examplemod {
+                vida {
                     source sourceSets.main
                 }
             }
@@ -86,10 +88,10 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/')
+            args '--mod', 'vida', '--all', '--output', file('src/generated/resources/')
 
             mods {
-                examplemod {
+                vida {
                     source sourceSets.main
                 }
             }
@@ -127,7 +129,9 @@ dependencies {
     // at runtime, use the full JEI jar
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
     // compile against the JEI API but do not include it at runtime
-    
+
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..

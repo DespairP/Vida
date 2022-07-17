@@ -4,6 +4,7 @@ import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -13,11 +14,10 @@ import teamHTBP.vida.block.BlockEventLoaderServer;
 import teamHTBP.vida.block.BlockLoader;
 import teamHTBP.vida.entity.EntityLoader;
 import teamHTBP.vida.gui.GUI.ContainerTypeLoader;
-import teamHTBP.vida.item.function.ItemElementCoreVoid;
 import teamHTBP.vida.item.ItemLoader;
+import teamHTBP.vida.item.function.ItemElementCoreVoid;
 import teamHTBP.vida.particle.ParticleLoader;
 import teamHTBP.vida.recipe.RecipeLoader;
-import teamHTBP.vida.recipe.RecipesManager;
 import teamHTBP.vida.recipe.recipes.register.RecipeManager;
 import teamHTBP.vida.worldGen.GenLoader;
 
@@ -41,11 +41,9 @@ public class Vida {
         ContainerTypeLoader.CONTAINER_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
         MinecraftForge.EVENT_BUS.register(ItemElementCoreVoid.class);
         MinecraftForge.EVENT_BUS.register(BlockEventLoaderServer.class);
-        RecipeLoader.RECIPES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        registerType(OREACTION, OreReactionMachineRecipe.RECIPE_TYPE);
+        RecipeLoader.init(FMLJavaModLoadingContext.get().getModEventBus());
 
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-        RecipesManager.init(bus);
 
         RecipeManager.register(bus);
         //RecipeLoader.RECIPES.register(FMLJavaModLoadingContext.get().getModEventBus());

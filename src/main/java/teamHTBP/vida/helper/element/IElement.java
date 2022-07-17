@@ -4,14 +4,13 @@ import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.registries.IForgeRegistryEntry;
+import teamHTBP.vida.Vida;
 import teamHTBP.vida.utils.color.RGBAColor;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 
-public interface IElement extends IForgeRegistryEntry<IElement> {
+public interface IElement {
     List<RegistryKey<Biome>> getContainsBiomes();
 
     default boolean contains(Biome biome) {
@@ -52,17 +51,7 @@ public interface IElement extends IForgeRegistryEntry<IElement> {
         return element != null && element == getInterGrowth();
     }
 
-    @Nullable
-    @Override
-    ResourceLocation getRegistryName();
+    ResourceLocation EMPTY_NAME = new ResourceLocation(Vida.MOD_ID, "empty");
 
-    @Override
-    IElement setRegistryName(ResourceLocation name);
-
-    @Override
-    default Class<IElement> getRegistryType() {
-        return IElement.class;
-    }
-
-    default String getElementName(){return "EMPTY";}
+    default ResourceLocation getElementName(){return EMPTY_NAME;}
 }

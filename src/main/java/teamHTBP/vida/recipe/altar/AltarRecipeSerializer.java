@@ -1,20 +1,12 @@
 package teamHTBP.vida.recipe.altar;
 
 import com.google.gson.JsonObject;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.registries.ForgeRegistryEntry;
-import teamHTBP.vida.helper.element.ElementHelper;
 import teamHTBP.vida.helper.element.EnumElements;
 import teamHTBP.vida.helper.element.IElement;
 import teamHTBP.vida.recipe.RecipeSerializerBase;
-import teamHTBP.vida.recipe.recipeobj.RecipeObject;
-
-import javax.annotation.Nullable;
 
 /**
  * @author DustW
@@ -35,7 +27,7 @@ public class AltarRecipeSerializer extends RecipeSerializerBase<AltarRecipe> {
 
     @Override
     public void write(JsonObject json, AltarRecipe recipe) {
-        json.addProperty("element", recipe.element.getRegistryName().toString());
+        json.addProperty("element", recipe.element.getElementName().toString());
         JsonObject other = new JsonObject();
         other.add("item1", getJson(recipe.other.get(0)));
         other.add("item2", getJson(recipe.other.get(1)));

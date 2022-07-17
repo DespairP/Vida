@@ -1,4 +1,4 @@
-package teamHTBP.vida.recipe.recipes.json.serializer;
+package teamHTBP.vida.utils.json.serializer;
 
 import com.google.gson.*;
 import net.minecraft.item.Item;
@@ -11,7 +11,7 @@ import java.lang.reflect.Type;
 /**
  * @author DustW
  **/
-public class ItemStackSerializer implements JsonSerializer<ItemStack>, JsonDeserializer<ItemStack> {
+public class ItemStackSerializer implements BaseSerializer<ItemStack> {
     @Override
     public ItemStack deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(json.getAsJsonObject().get("item").getAsString()));

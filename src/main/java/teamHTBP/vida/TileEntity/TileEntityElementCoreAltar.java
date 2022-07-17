@@ -91,7 +91,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
     @Override
     public CompoundNBT write(CompoundNBT compound) {
         compound.putInt("progress", progress);
-        compound.putString("element", element.getElementName());
+        compound.putString("element", element.getElementName().toString());
         compound.putBoolean("isProgressing", isProgressing);
         compound.putBoolean("isBlockOver", isBlockOver);
         //compound.putInt("isMutiComplete", isMultiComplete);

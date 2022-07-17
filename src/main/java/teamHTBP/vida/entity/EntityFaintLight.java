@@ -45,7 +45,7 @@ public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnDa
 
     @Override
     protected void registerData() {
-        this.dataManager.register(TYPE, Optional.ofNullable(types).orElseGet(()->EnumElements.NONE).getElementName());
+        this.dataManager.register(TYPE, Optional.ofNullable(types).orElse(EnumElements.NONE).getElementName().toString());
     }
 
     @Override
@@ -70,7 +70,7 @@ public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnDa
     }
 
     public void setFaintLightType(IElement type) {
-        this.dataManager.set(TYPE, type.getElementName());
+        this.dataManager.set(TYPE, type.getElementName().toString());
     }
 
 
@@ -79,6 +79,7 @@ public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnDa
         super.tick();
     }
 
+    @Override
     public void notifyDataManagerChange(DataParameter<?> key) {
         super.notifyDataManagerChange(key);
         if (TYPE.equals(key)) {

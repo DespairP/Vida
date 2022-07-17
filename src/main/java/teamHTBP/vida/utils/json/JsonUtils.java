@@ -1,11 +1,15 @@
-package teamHTBP.vida.recipe.recipes.json;
+package teamHTBP.vida.utils.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import teamHTBP.vida.recipe.recipes.json.serializer.IngredientSerializer;
-import teamHTBP.vida.recipe.recipes.json.serializer.ItemStackSerializer;
+import teamHTBP.vida.helper.element.IElement;
+import teamHTBP.vida.utils.json.serializer.IElementSerializer;
+import teamHTBP.vida.utils.json.serializer.IngredientSerializer;
+import teamHTBP.vida.utils.json.serializer.ItemSerializer;
+import teamHTBP.vida.utils.json.serializer.ItemStackSerializer;
 
 /**
  * @author DustW
@@ -25,7 +29,10 @@ public enum JsonUtils {
                 .enableComplexMapKeySerialization()
                 // 注册自定义类型的序列化/反序列化器
                 .registerTypeAdapter(Ingredient.class, new IngredientSerializer())
-                .registerTypeAdapter(ItemStack.class, new ItemStackSerializer());
+                .registerTypeAdapter(ItemStack.class, new ItemStackSerializer())
+                // 注册自定义类型的序列化/反序列化器（附带子类）
+                .registerTypeHierarchyAdapter(Item.class, new ItemSerializer())
+                .registerTypeHierarchyAdapter(IElement.class, new IElementSerializer());
 
         // 无视 @Expose 注解的 Gson 实例
         noExpose = builder.create();

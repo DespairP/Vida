@@ -5,8 +5,7 @@ import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistryEntry;
-import teamHTBP.vida.recipe.RecipeSerializerBase;
-import teamHTBP.vida.recipe.recipes.json.JsonUtils;
+import teamHTBP.vida.utils.json.JsonUtils;
 
 import javax.annotation.Nullable;
 
