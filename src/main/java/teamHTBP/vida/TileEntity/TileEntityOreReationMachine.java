@@ -22,8 +22,8 @@ import net.minecraftforge.common.util.LazyOptional;
 import teamHTBP.vida.TileEntity.SlotNumberArray.OreReactionMachineArray;
 import teamHTBP.vida.capability.VidaCapabilities;
 import teamHTBP.vida.capability.energyCapability.IElementEnergyCapability;
-import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.gui.GUI.ContainerOreReactionMachine;
+import teamHTBP.vida.helper.elementHelper.EnumElements;
 
 import javax.annotation.Nullable;
 import java.util.Optional;

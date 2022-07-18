@@ -13,7 +13,7 @@ import teamHTBP.vida.helper.elementHelper.ElementHelper;
 import java.util.List;
 
 import static net.minecraftforge.common.ForgeHooks.onCropsGrowPre;
-import static teamHTBP.vida.block.environment.crop.AbstractBlockElementCrops.*;
+import static teamHTBP.vida.block.environment.crop.AbstractBlockElementCrops.GrowLogic;
 
 /**
  * 统一管理生长逻辑

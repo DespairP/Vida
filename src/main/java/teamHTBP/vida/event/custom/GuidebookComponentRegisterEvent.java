@@ -2,7 +2,6 @@ package teamHTBP.vida.event.custom;
 
 import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.fml.event.lifecycle.IModBusEvent;
 import teamHTBP.vida.helper.guidebookHelper.GuidebookHelper;
 import teamHTBP.vida.helper.guidebookHelper.components.IGuidebookComponent;

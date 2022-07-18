@@ -8,7 +8,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
-import teamHTBP.vida.gui.ClientScreenManager;
 import teamHTBP.vida.helper.guidebookHelper.GuidebookHelper;
 import teamHTBP.vida.itemGroup.ItemGroupLoader;
 

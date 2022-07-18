@@ -13,9 +13,9 @@ import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.event.client.HUDElementItemHandler;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
-import teamHTBP.vida.utils.math.IntRange;
-import teamHTBP.vida.utils.color.RGBAColor;
 import teamHTBP.vida.item.staff.IElementLevelTools;
+import teamHTBP.vida.utils.color.RGBAColor;
+import teamHTBP.vida.utils.math.IntRange;
 
 @OnlyIn(Dist.CLIENT)
 public class ElementLevelToolsHUD extends AbstractGui {

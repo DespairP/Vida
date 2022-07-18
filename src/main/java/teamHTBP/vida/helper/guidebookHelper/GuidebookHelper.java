@@ -12,9 +12,6 @@ import teamHTBP.vida.helper.guidebookHelper.components.IGuidebookComponent;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
-
-import static teamHTBP.vida.event.server.datapack.GuideBookGuideHandler.*;
 
 public class GuidebookHelper {
     /*---------------------guidebook gui管理器 工具方法-------------------------*/

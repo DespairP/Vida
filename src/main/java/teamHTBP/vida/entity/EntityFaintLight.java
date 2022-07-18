@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.network.NetworkHooks;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import teamHTBP.vida.helper.elementHelper.ElementManager;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.helper.elementHelper.IElement;
 
@@ -45,7 +46,7 @@ public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnDa
 
     @Override
     protected void registerData() {
-        this.dataManager.register(TYPE, Optional.ofNullable(types).orElseGet(()->EnumElements.NONE).getElementName());
+        this.dataManager.register(TYPE, Optional.ofNullable(types).orElse(EnumElements.NONE).getElementName().toString());
     }
 
     @Override
@@ -70,7 +71,7 @@ public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnDa
     }
 
     public void setFaintLightType(IElement type) {
-        this.dataManager.set(TYPE, type.getElementName());
+        this.dataManager.set(TYPE, type.getElementName().toString());
     }
 
 
@@ -79,10 +80,11 @@ public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnDa
         super.tick();
     }
 
+    @Override
     public void notifyDataManagerChange(DataParameter<?> key) {
         super.notifyDataManagerChange(key);
         if (TYPE.equals(key)) {
-            this.types = EnumElements.valueOf(dataManager.get(TYPE));
+            this.types = ElementManager.get(dataManager.get(TYPE));
         }
     }
 

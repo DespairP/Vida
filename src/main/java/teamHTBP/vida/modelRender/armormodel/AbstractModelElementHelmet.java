@@ -6,10 +6,6 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.CrossbowItem;
-import net.minecraft.util.HandSide;
-import net.minecraft.util.math.MathHelper;
 
 public abstract class AbstractModelElementHelmet<T extends Entity> extends BipedModel {
     public ModelRenderer head;  //头盔模型主要部分

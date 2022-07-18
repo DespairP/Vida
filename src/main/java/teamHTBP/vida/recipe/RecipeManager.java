@@ -1,22 +1,18 @@
 package teamHTBP.vida.recipe;
 
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 import teamHTBP.vida.TileEntity.TileEntityElementCoreAltar;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.recipe.altar.AltarRecipe;
-import teamHTBP.vida.recipe.utils.base.BaseRecipe;
-import teamHTBP.vida.recipe.utils.base.BaseTileEntityRecipes;
-import teamHTBP.vida.recipe.utils.recipe.FermenterFluidRecipe;
+import teamHTBP.vida.recipe.base.BaseRecipe;
+import teamHTBP.vida.recipe.recipe.AltarRecipe;
+import teamHTBP.vida.recipe.recipe.FermenterFluidRecipe;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * @author DustW
@@ -25,10 +21,8 @@ public class RecipeManager {
     public static final String MOD_ID = Vida.MOD_ID;
 
     /**获取BaseRecipe相关的合成*/
-    public static <T extends BaseRecipe<T>> List<T> getBaseRecipe(World level, IRecipeType<T> type) {
-        return level.getRecipeManager().getRecipes().stream().map(
-                r -> (r.getType() == type ? (T)r : null)
-        ).filter(Objects::nonNull).collect(Collectors.toList());
+    public static <C extends IInventory, T extends BaseRecipe<C>> List<T> getBaseRecipe(World level, IRecipeType<T> type) {
+        return level.getRecipeManager().getRecipesForType(type);
     }
 
     @Deprecated

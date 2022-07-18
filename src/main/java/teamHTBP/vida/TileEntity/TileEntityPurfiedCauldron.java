@@ -8,11 +8,11 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import teamHTBP.vida.entity.EntityFaintLight;
+import teamHTBP.vida.entity.EntityLoader;
 import teamHTBP.vida.helper.elementHelper.ElementHelper;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.helper.elementHelper.IElement;
-import teamHTBP.vida.entity.EntityFaintLight;
-import teamHTBP.vida.entity.EntityLoader;
 import teamHTBP.vida.item.potion.ItemCreativeElementPotion;
 
 import javax.annotation.Nullable;

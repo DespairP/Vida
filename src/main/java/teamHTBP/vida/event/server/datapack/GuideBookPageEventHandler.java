@@ -15,7 +15,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.network.PacketChannel;
-import teamHTBP.vida.network.PacketGuidebook;
 import teamHTBP.vida.network.PacketGuidebookPage;
 
 import java.util.concurrent.ConcurrentMap;

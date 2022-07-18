@@ -3,10 +3,6 @@ package teamHTBP.vida.gui.components;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.Map;
-
 /**上下文,当gui关闭时需要打开另一个gui并需要传递信息时,可以使用此类进行传递*/
 public class GuidebookContext {
     /**储存,使用特有的nbt进行储存,可以直接代替Map*/

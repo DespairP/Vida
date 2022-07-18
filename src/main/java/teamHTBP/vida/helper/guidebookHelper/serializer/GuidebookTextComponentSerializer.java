@@ -1,15 +1,10 @@
 package teamHTBP.vida.helper.guidebookHelper.serializer;
 
 import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
-import net.minecraft.item.ItemStack;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import teamHTBP.vida.helper.guidebookHelper.components.IGuidebookComponent;
 import teamHTBP.vida.helper.guidebookHelper.components.TextGuidebookComponent;
-import teamHTBP.vida.recipe.utils.json.serializer.ItemStackSerializer;
 
-import javax.xml.soap.Text;
 import java.lang.reflect.Type;
 
 public class GuidebookTextComponentSerializer implements JsonDeserializer<TextGuidebookComponent> {

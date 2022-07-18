@@ -3,7 +3,7 @@ package teamHTBP.vida.helper.guidebookHelper.layout;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import teamHTBP.vida.helper.guidebookHelper.components.IGuidebookComponent;
 
-import java.awt.Rectangle;
+import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
 

@@ -5,18 +5,10 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.IGuiEventListener;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TranslationTextComponent;
 import teamHTBP.vida.gui.components.IGuidebookPageable;
 import teamHTBP.vida.helper.guidebookHelper.GuidebookHelper;
 import teamHTBP.vida.helper.guidebookHelper.GuidebookSinglePage;
-import teamHTBP.vida.helper.guidebookHelper.components.IGuidebookComponent;
-import teamHTBP.vida.helper.guidebookHelper.components.ModelGuidebookComponent;
-import teamHTBP.vida.helper.guidebookHelper.components.TextGuidebookComponent;
-import teamHTBP.vida.item.ItemLoader;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**详细guide*/
 public class GuiGuidebookGuide extends AbstractGuiGuidebook implements IGuidebookPageable {

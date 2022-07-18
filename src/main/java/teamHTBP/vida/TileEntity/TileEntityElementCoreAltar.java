@@ -16,7 +16,7 @@ import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.helper.elementHelper.IElement;
 import teamHTBP.vida.item.function.ItemElementCore;
 import teamHTBP.vida.recipe.RecipeManager;
-import teamHTBP.vida.recipe.altar.AltarRecipe;
+import teamHTBP.vida.recipe.recipe.AltarRecipe;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -87,7 +87,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
     @Override
     public CompoundNBT write(CompoundNBT compound) {
         compound.putInt("progress", progress);
-        compound.putString("element", element.getElementName());
+        compound.putString("element", element.getElementName().toString());
         compound.putBoolean("isProgressing", isProgressing);
         compound.putBoolean("isBlockOver", isBlockOver);
         //compound.putInt("isMutiComplete", isMultiComplete);
@@ -142,7 +142,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         isElementOver = tag.getBoolean("isElementOver");
         //isMultiComplete = tag.getBoolean("isMutiComplete");
         isWAND_VIDACilck = tag.getBoolean("isWAND_VIDAClick");
-        element = EnumElements.valueOf(tag.getString("element"));
+        element = ElementHelper.read(tag);
         for (int i = 0; i < 4; i++) {
             altarItem.set(i,tag.contains("altarItem" + i) ? ItemStack.read(tag.getCompound("altarItem" + i)) : ItemStack.EMPTY);
         }

@@ -5,11 +5,7 @@ package teamHTBP.vida.modelRender.tilemodel;// Made with Blockbench 3.9.3
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.model.Model;
 import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 
 public class InjectTableModel extends TileEntityModel {
 	private final ModelRenderer all;

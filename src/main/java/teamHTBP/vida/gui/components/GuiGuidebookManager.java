@@ -5,12 +5,9 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import teamHTBP.vida.gui.GUI.guidebook.GuiGuidebookGuide;
-import teamHTBP.vida.gui.GUI.guidebook.GuiGuidebookList;
-import teamHTBP.vida.gui.GUI.guidebook.GuiGuidebookMain;
 
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.List;
 
 /**统一化Guidebook Gui管理器,提供基础的栈gui管理*/
 @OnlyIn(Dist.CLIENT)

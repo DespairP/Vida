@@ -1,6 +1,5 @@
 package teamHTBP.vida.item.staff;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public interface IElementLevelTools extends IElementTools{

@@ -3,14 +3,12 @@ package teamHTBP.vida.helper.guidebookHelper.serializer;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import teamHTBP.vida.event.server.datapack.GuideBookPageHandler;
 import teamHTBP.vida.helper.guidebookHelper.GuidebookHelper;
 import teamHTBP.vida.helper.guidebookHelper.components.IGuidebookComponent;
 import teamHTBP.vida.helper.guidebookHelper.components.TextGuidebookComponent;
-import teamHTBP.vida.recipe.utils.json.serializer.ItemStackSerializer;
+import teamHTBP.vida.utils.json.serializer.ItemStackSerializer;
 
 import java.lang.reflect.Type;
 

@@ -30,7 +30,7 @@ import teamHTBP.vida.utils.color.RGBAColor;
 import teamHTBP.vida.utils.math.FloatRange;
 
 import static net.minecraft.client.gui.AbstractGui.blit;
-import static net.minecraft.client.renderer.ItemRenderer.*;
+import static net.minecraft.client.renderer.ItemRenderer.getBuffer;
 import static teamHTBP.vida.helper.renderHelper.RenderHelper.renderTextWithTranslationKeyCenter;
 
 /**模型组件*/

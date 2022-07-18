@@ -18,7 +18,7 @@ import teamHTBP.vida.helper.guidebookHelper.GuidebookSinglePage;
 import teamHTBP.vida.helper.guidebookHelper.components.IGuidebookComponent;
 import teamHTBP.vida.helper.guidebookHelper.serializer.GuidebookComponentSerializer;
 import teamHTBP.vida.network.PacketGuidebookPage;
-import teamHTBP.vida.recipe.utils.json.serializer.ItemStackSerializer;
+import teamHTBP.vida.utils.json.serializer.ItemStackSerializer;
 
 import java.util.LinkedHashMap;
 import java.util.List;

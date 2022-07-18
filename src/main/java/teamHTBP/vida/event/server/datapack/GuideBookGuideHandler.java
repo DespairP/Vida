@@ -9,7 +9,6 @@ import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.fml.common.thread.EffectiveSide;
 import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.fml.server.ServerLifecycleHooks;
@@ -19,7 +18,8 @@ import teamHTBP.vida.helper.guidebookHelper.Guide;
 import teamHTBP.vida.network.PacketChannel;
 import teamHTBP.vida.network.PacketGuidebook;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**datapack相关guidebook的guide处理器*/

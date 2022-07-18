@@ -2,12 +2,7 @@ package teamHTBP.vida.modelRender.tilemodel;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.model.Model;
 import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.util.ResourceLocation;
-
-import java.util.function.Function;
 
 public class PrismTableModel extends TileEntityModel {
     private final ModelRenderer bone;

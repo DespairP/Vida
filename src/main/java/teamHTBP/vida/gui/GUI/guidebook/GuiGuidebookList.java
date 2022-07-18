@@ -1,9 +1,7 @@
 package teamHTBP.vida.gui.GUI.guidebook;
 
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import teamHTBP.vida.gui.components.GuidebookContext;
 
 /**区域下所有的guide条目*/
 public class GuiGuidebookList extends AbstractGuiGuidebook{

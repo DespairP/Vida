@@ -10,6 +10,7 @@ import teamHTBP.vida.utils.color.RGBAColor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public enum EnumElements implements IElement {
     VOID,
@@ -80,23 +81,10 @@ public enum EnumElements implements IElement {
         return this.elementRGBAColor;
     }
 
-
-    /**/
-    @Override
-    public IElement setRegistryName(ResourceLocation name) {
-        throw new IllegalArgumentException("不允许设置registry name");
-    }
+    ResourceLocation elementName;
 
     @Override
-    public String getElementName() {
-        return name();
+    public ResourceLocation getElementName() {
+        return elementName == null ? elementName = new ResourceLocation(Vida.MOD_ID, name().toLowerCase(Locale.ROOT)) : elementName;
     }
-
-    /**/
-    @Override
-    public ResourceLocation getRegistryName() {
-        return new ResourceLocation(Vida.MOD_ID, name());
-    }
-
-
 }

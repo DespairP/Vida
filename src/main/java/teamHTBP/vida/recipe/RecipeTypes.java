@@ -5,8 +5,8 @@ import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.recipe.altar.AltarRecipe;
-import teamHTBP.vida.recipe.utils.recipe.FermenterFluidRecipe;
+import teamHTBP.vida.recipe.recipe.AltarRecipe;
+import teamHTBP.vida.recipe.recipe.FermenterFluidRecipe;
 
 /**
  *

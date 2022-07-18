@@ -1,12 +1,10 @@
 package teamHTBP.vida.event.client;
 
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.event.custom.GuidebookComponentRegisterEvent;
 import teamHTBP.vida.helper.guidebookHelper.GuidebookHelper;
 import teamHTBP.vida.helper.guidebookHelper.components.CraftingGuidebookComponent;
 import teamHTBP.vida.helper.guidebookHelper.components.ModelGuidebookComponent;

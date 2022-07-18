@@ -6,11 +6,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
 import teamHTBP.vida.itemGroup.ItemGroupLoader;
-import teamHTBP.vida.itemGroup.VidaItemGroup;
-import teamHTBP.vida.modelRender.armormodel.ArmorModelDemo;
 import teamHTBP.vida.modelRender.armormodel.ArmorModelSeasonApprentice;
 
 import javax.annotation.Nullable;

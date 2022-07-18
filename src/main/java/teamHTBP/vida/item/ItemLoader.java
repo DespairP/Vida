@@ -11,12 +11,13 @@ import teamHTBP.vida.Vida;
 import teamHTBP.vida.block.BlockLoader;
 import teamHTBP.vida.helper.RegisterItemBlock;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
+import teamHTBP.vida.item.armor.*;
 import teamHTBP.vida.item.environment.ItemVidaBranch;
 import teamHTBP.vida.item.function.*;
 import teamHTBP.vida.item.potion.ItemCreativeElementPotion;
-import teamHTBP.vida.item.armor.*;
 import teamHTBP.vida.item.staff.*;
 import teamHTBP.vida.itemGroup.ItemGroupLoader;
+
 import static teamHTBP.vida.helper.elementHelper.EnumElements.*;
 
 //注册item的类

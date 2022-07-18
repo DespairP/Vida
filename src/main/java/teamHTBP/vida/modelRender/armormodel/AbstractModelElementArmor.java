@@ -7,11 +7,10 @@ import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import teamHTBP.vida.helper.itemHelper.PlayerInventoryHelper;
 
-import java.util.LinkedList;
 import java.util.List;
-import static net.minecraft.inventory.EquipmentSlotType.*;
+
+import static net.minecraft.inventory.EquipmentSlotType.HEAD;
 
 public abstract class AbstractModelElementArmor<T extends LivingEntity> extends BipedModel<T> {
     public final EquipmentSlotType renderPart;

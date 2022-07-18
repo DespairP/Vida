@@ -5,12 +5,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -22,11 +19,9 @@ import teamHTBP.vida.TileEntity.TileEntityPurfiedCauldron;
 import teamHTBP.vida.block.function.BlockCollecter;
 import teamHTBP.vida.block.function.BlockElementCoreAltar;
 import teamHTBP.vida.block.function.BlockPurfiedCauldron;
-import teamHTBP.vida.gui.HUD.*;
-import teamHTBP.vida.input.KeyBoardBottle;
-import teamHTBP.vida.item.armor.ItemArmorElementLegginsWithBottles;
-import teamHTBP.vida.item.staff.ItemElementPickaxe;
-import teamHTBP.vida.item.staff.ItemElementSword;
+import teamHTBP.vida.gui.HUD.CollectorHUD;
+import teamHTBP.vida.gui.HUD.ElementCoreAltarHUD;
+import teamHTBP.vida.gui.HUD.PurfiedCauldronHUD;
 
 
 /**

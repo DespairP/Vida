@@ -1,0 +1,25 @@
+{
+  "core": {
+    "item": "vida:elementcore_gold"
+  },
+  "other": [
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    }
+  ],
+  "element": "vida:gold",
+  "result": {
+    "item": "minecraft:air",
+    "count": 0
+  },
+  "type": "vida:altar"
+}

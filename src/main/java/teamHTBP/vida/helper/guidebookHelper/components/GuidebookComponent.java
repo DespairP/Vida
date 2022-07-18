@@ -1,7 +1,6 @@
 package teamHTBP.vida.helper.guidebookHelper.components;
 
 import com.google.gson.annotations.Expose;
-import com.mojang.blaze3d.matrix.MatrixStack;
 
 public abstract class GuidebookComponent implements IGuidebookComponent{
     /**是否被悬浮*/

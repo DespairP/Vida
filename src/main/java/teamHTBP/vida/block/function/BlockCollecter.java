@@ -15,7 +15,6 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import teamHTBP.vida.TileEntity.TileEntityCollector;
 import teamHTBP.vida.item.ItemLoader;
-import teamHTBP.vida.particle.ParticleFactoryLoader;
 import teamHTBP.vida.particle.ParticleLoader;
 import teamHTBP.vida.particle.util.BaseParticleData;
 
