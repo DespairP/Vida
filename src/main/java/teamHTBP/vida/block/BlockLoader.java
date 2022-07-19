@@ -191,5 +191,8 @@ public class BlockLoader {
     public static RegistryObject<Block> SILENTFORESTBRICK_7 = BLOCKS.register("silentforestbrick_7", BlockDecoFactory::normal);
 
     @RegisterItemBlock
-    public static RegistryObject<Block> SILENTFORESTBRICK_SLAB = BLOCKS.register("silentforestbrick_slab", BlockDecoFactory::normal);
+    public static RegistryObject<Block> SILENTFORESTBRICK_SLAB = BLOCKS.register("silentforestbrick_slab", BlockDecoFactory::slab);
+
+    @RegisterItemBlock
+    public static RegistryObject<Block> SILENTFORESTBRICK_SLAB_1 = BLOCKS.register("silentforestbrick_slab_1", BlockDecoFactory::slab);
 }

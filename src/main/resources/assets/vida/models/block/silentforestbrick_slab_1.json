@@ -1,0 +1,8 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "bottom": "vida:block/silentforestbrick_7",
+    "top": "vida:block/silentforestbrick_7",
+    "side": "vida:block/silentforestbrick_7"
+  }
+}
