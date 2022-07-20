@@ -29,6 +29,7 @@ public class ElementCrystalHUD extends GuiComponent implements IVidaHUD{
         this.progress_ticks = progress_ticks;
     }
 
+    @Override
     public void render(PoseStack matrixStack) {
         if (tileEntityCrystal == null) return;
         int screenWidth = this.width / 2 - 6;

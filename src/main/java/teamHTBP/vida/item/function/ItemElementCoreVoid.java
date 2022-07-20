@@ -16,7 +16,7 @@ import teamHTBP.vida.entity.EntityFaintLight;
 import teamHTBP.vida.entity.EntityLoader;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.item.ItemLoader;
-import teamHTBP.vida.itemGroup.ItemGroupLoader;
+import teamHTBP.vida.creativetab.ItemGroupLoader;
 
 import java.util.List;
 

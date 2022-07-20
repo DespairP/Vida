@@ -22,7 +22,7 @@ import teamHTBP.vida.utils.math.IntRange;
  * */
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(Dist.CLIENT)
-public class HUDItemEventHandler {
+public class HUDItemEventHandler extends HudHandler {
     /**瓶子的透明度*/
     public static IntRange alpha = new IntRange(0,100,0);
     /**剑元素HUD的透明度*/
@@ -70,6 +70,7 @@ public class HUDItemEventHandler {
         if (alpha.get() < BOTTLE_ALPHA_MIN) return;
 
         BottleHUD hud = new BottleHUD(stack, alpha.get());
+        setupShader();
         hud.render(matrixStack);
 
     }
@@ -85,6 +86,7 @@ public class HUDItemEventHandler {
 
         if (swordAlpha.get() > 0 && itemStack1 != ItemStack.EMPTY && !itemStack1.isEmpty()) {
             ElementSwordHUD hud = new ElementSwordHUD(itemStack1, swordAlpha.get());
+            setupShader();
             hud.render(matrixStack);
         }
     }

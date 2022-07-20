@@ -6,6 +6,8 @@ import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.Level;
+import teamHTBP.vida.utils.ContainerHelper;
 
 import java.util.List;
 
@@ -27,6 +29,21 @@ public abstract class BaseRecipe<T extends Container> implements Recipe<T> {
     public <C extends Container, R extends BaseRecipe<C>> R setID(ResourceLocation id) {
         this.id = id;
         return (R) this;
+    }
+
+    @Override
+    public boolean matches(T pContainer, Level pLevel) {
+        return matches(ContainerHelper.getItems(pContainer));
+    }
+
+    @Override
+    public ItemStack assemble(T pContainer) {
+        return getResultItem();
+    }
+
+    @Override
+    public boolean canCraftInDimensions(int pWidth, int pHeight) {
+        return true;
     }
 
     @Override

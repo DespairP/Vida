@@ -32,7 +32,7 @@ import teamHTBP.vida.gui.HUD.PurfiedCauldronHUD;
  * */
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(Dist.CLIENT)
-public class HUDFunctionBlockEventHandler {
+public class HUDFunctionBlockEventHandler extends HudHandler {
 
     @SubscribeEvent
     public static void onOverlayRender(RenderGameOverlayEvent event) {
@@ -58,6 +58,7 @@ public class HUDFunctionBlockEventHandler {
             TileEntityPurfiedCauldron tileEntityPurfiedCauldron = (TileEntityPurfiedCauldron) player.level.getBlockEntity(lookingPos);
             if (tileEntityPurfiedCauldron != null) {
                 PurfiedCauldronHUD purfiedCauldronHUD = new PurfiedCauldronHUD(tileEntityPurfiedCauldron);
+                setupShader();
                 purfiedCauldronHUD.render(event.getMatrixStack());
             }
             return;
@@ -67,6 +68,7 @@ public class HUDFunctionBlockEventHandler {
         if (block instanceof BlockElementCoreAltar) {
             TileEntityElementCoreAltar tileEntityElementCoreAltar = (TileEntityElementCoreAltar) player.level.getBlockEntity(lookingPos);
             ElementCoreAltarHUD elementCoreAltarHUD = new ElementCoreAltarHUD(tileEntityElementCoreAltar);
+            setupShader();
             elementCoreAltarHUD.render(matrixStack);
             return;
         }
@@ -75,6 +77,7 @@ public class HUDFunctionBlockEventHandler {
         if (block instanceof BlockCollecter) {
             TileEntityCollector tileEntityCollector = (TileEntityCollector) player.level.getBlockEntity(lookingPos);
             CollectorHUD collectorHUD = new CollectorHUD(tileEntityCollector);
+            setupShader();
             collectorHUD.render(matrixStack);
             return;
         }

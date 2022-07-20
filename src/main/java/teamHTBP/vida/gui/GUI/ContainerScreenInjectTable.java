@@ -321,7 +321,7 @@ public class ContainerScreenInjectTable extends ModBaseGui<ContainerInjectTable>
             PoseStack matrixstack = new PoseStack();
             MultiBufferSource.BufferSource irendertypebuffer$impl = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
             //渲染文字
-            Minecraft.getInstance().font.drawInBatch(surface.getSkillTranlateName(), (float) (backgroundXsize - this.font.width(surface.getSkillTranlateName()) / 2), this.topPos + backgroundYsize * 2 - 35, Integer.parseInt("008CFF", 16), false, matrixstack.last().pose(),
+            Minecraft.getInstance().font.drawInBatch(surface.getSkillTranslateName(), (float) (backgroundXsize - this.font.width(surface.getSkillTranslateName()) / 2), this.topPos + backgroundYsize * 2 - 35, Integer.parseInt("008CFF", 16), false, matrixstack.last().pose(),
                     irendertypebuffer$impl, false, 5, 15728890 - selectSkillNameAlpha);
             irendertypebuffer$impl.endBatch();
             matrixstack.popPose();
@@ -350,7 +350,7 @@ public class ContainerScreenInjectTable extends ModBaseGui<ContainerInjectTable>
             AbstractSkillSlot selectedSlot = skillSlots.get(buttonClickIndex);
             SkillSurface surface = selectedSlot.getSkillSurface();
             //绘制文字
-            drawCenteredString(matrixStack, this.font, surface.getSkillTranlateName(), this.leftPos + this.imageWidth - 54 - 1 * this.backgroundXsize / 50, this.topPos + 1 * this.backgroundYsize / 3, Integer.parseInt(selectedSlot.isLock() ? "FF3C00" : "45E800", 16));
+            drawCenteredString(matrixStack, this.font, surface.getSkillTranslateName(), this.leftPos + this.imageWidth - 54 - 1 * this.backgroundXsize / 50, this.topPos + 1 * this.backgroundYsize / 3, Integer.parseInt(selectedSlot.isLock() ? "FF3C00" : "45E800", 16));
             //绘制介绍
             if (selectedSlot.isLock()) {
                 drawCenteredString(matrixStack, this.font, "???", this.leftPos + this.imageWidth - 54 - 1 * this.backgroundXsize / 50, this.topPos + 3 * this.backgroundYsize / 7, Integer.parseInt("C0C0C0", 16));
@@ -362,7 +362,7 @@ public class ContainerScreenInjectTable extends ModBaseGui<ContainerInjectTable>
                     //从现有的skill中获取然后显示
                     ISkill skill = this.skills.get(id);
                     if (skill != null)
-                        drawCenteredString(matrixStack, this.font, "·" + skill.getSkillTranlateName(), this.leftPos + this.imageWidth - 54 - 1 * this.backgroundXsize / 50, this.topPos + 10 + 10 * integer.getAndIncrement() + 6 * this.backgroundYsize / 7, Integer.parseInt("FF615F", 16));
+                        drawCenteredString(matrixStack, this.font, "·" + skill.getSkillTranslateName(), this.leftPos + this.imageWidth - 54 - 1 * this.backgroundXsize / 50, this.topPos + 10 + 10 * integer.getAndIncrement() + 6 * this.backgroundYsize / 7, Integer.parseInt("FF615F", 16));
                 });
             } else {
                 //解锁后绘制解锁后的介绍文字
@@ -390,7 +390,7 @@ public class ContainerScreenInjectTable extends ModBaseGui<ContainerInjectTable>
     public void renderSkillToolTip(PoseStack matrixStack, int mouseX, int mouseY, SkillSurface skill) {
         if (skill == null) return;
         ArrayList<FormattedCharSequence> list = new ArrayList<>();
-        list.add(FormattedCharSequence.forward(skill.getSkillTranlateName(), Style.EMPTY));
+        list.add(FormattedCharSequence.forward(skill.getSkillTranslateName(), Style.EMPTY));
         this.renderTooltip(matrixStack, list, mouseX, mouseY);
     }
 

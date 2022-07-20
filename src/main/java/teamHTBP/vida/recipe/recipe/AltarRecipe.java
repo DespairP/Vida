@@ -11,7 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.RecipeMatcher;
 import teamHTBP.vida.blockentity.TileEntityElementCoreAltar;
 import teamHTBP.vida.helper.elementHelper.IElement;
@@ -36,16 +35,6 @@ public class AltarRecipe extends BaseRecipe<Container> {
     @Expose public IElement element;
     /**合成品*/
     @Expose public ItemStack result = ItemStack.EMPTY;
-
-    @Override
-    public boolean matches(Container inv, Level worldIn) {
-        return false;
-    }
-
-    @Override
-    public ItemStack assemble(Container inv) {
-        return result.copy();
-    }
 
     /**
      * 是否合适进行合成

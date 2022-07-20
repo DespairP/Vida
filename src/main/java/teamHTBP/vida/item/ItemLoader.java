@@ -16,7 +16,7 @@ import teamHTBP.vida.item.environment.ItemVidaBranch;
 import teamHTBP.vida.item.function.*;
 import teamHTBP.vida.item.potion.ItemCreativeElementPotion;
 import teamHTBP.vida.item.staff.*;
-import teamHTBP.vida.itemGroup.ItemGroupLoader;
+import teamHTBP.vida.creativetab.ItemGroupLoader;
 
 import static teamHTBP.vida.helper.elementHelper.EnumElements.*;
 

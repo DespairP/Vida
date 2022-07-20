@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(Dist.CLIENT)
-public class HUDElementItemHandler {
+public class HUDElementItemHandler extends HudHandler {
     /**渲染队列，队尾为list的第一个值(最晚出队)，队顶为list的最后一个值(最早出队)*/
     public static LinkedList<ElementLevelToolsHUD> renderQueue = new LinkedList<>();
     /**日志*/
@@ -52,6 +52,7 @@ public class HUDElementItemHandler {
 
         // 遍历进行渲染
         for(int i = 0 ; i < renderQueue.size();i++){
+            setupShader();
             ElementLevelToolsHUD hud = renderQueue.get(i);
             hud.render(event.getMatrixStack(), event.getPartialTicks());
             if(i > 1 || !hud.isSameItemStack(holdItemStack)) hud.notifyStopRender(); // 非首个渲染元素或者不是需要渲染元素的提醒出队(alpha到0后会自动出队)

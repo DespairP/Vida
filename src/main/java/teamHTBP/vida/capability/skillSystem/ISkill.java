@@ -14,7 +14,7 @@ public interface ISkill {
     /**
      * 获取技能的翻译名
      **/
-    String getSkillTranlateName();
+    String getSkillTranslateName();
 
     /**
      * 获取技能最大升级能量

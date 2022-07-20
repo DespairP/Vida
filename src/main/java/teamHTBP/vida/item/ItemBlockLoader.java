@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.block.BlockLoader;
 import teamHTBP.vida.helper.RegisterItemBlock;
-import teamHTBP.vida.itemGroup.ItemGroupLoader;
+import teamHTBP.vida.creativetab.ItemGroupLoader;
 
 import java.lang.reflect.Field;
 import java.util.LinkedHashMap;

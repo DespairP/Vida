@@ -22,7 +22,7 @@ import teamHTBP.vida.gui.HUD.ElementCrystalHUD;
  * @author DespairP
  * */
 @Mod.EventBusSubscriber(Dist.CLIENT)
-public class BlockEnergyCrystalHUDEventLoader {
+public class BlockEnergyCrystalHUDEventLoader extends HudHandler {
 
     //元素的张开的效果
     private static int element_Progress = 0;
@@ -59,11 +59,15 @@ public class BlockEnergyCrystalHUDEventLoader {
             BlockEntity tileEntityCrystal = world.getBlockEntity(pos);
             if (tileEntityCrystal instanceof IElementCrystal) {
                 ElementCrystalHUD hud = new ElementCrystalHUD((IElementCrystal) tileEntityCrystal, element_fragment_tick, element_Progress);
+                setupShader();
                 hud.render(event.getMatrixStack());
                 if (offset_frame % 8 == 0) {
                     final int MAX_PROGRESS = (int) (15.0f * ((IElementCrystal) tileEntityCrystal).getEnergyStored() / ((IElementCrystal) tileEntityCrystal).getMaxEnergy());
-                    if (element_Progress < MAX_PROGRESS) element_Progress += 1;
-                    else if (element_Progress > MAX_PROGRESS) element_Progress = 0;
+                    if (element_Progress < MAX_PROGRESS) {
+                        element_Progress += 1;
+                    } else if (element_Progress > MAX_PROGRESS) {
+                        element_Progress = 0;
+                    }
                 }
             }
             if (offset_frame % 16 == 0) {

@@ -1,4 +1,4 @@
-package teamHTBP.vida.itemGroup;
+package teamHTBP.vida.creativetab;
 
 import net.minecraft.world.item.CreativeModeTab;
 

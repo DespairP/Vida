@@ -8,7 +8,7 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.IItemRenderProperties;
-import teamHTBP.vida.itemGroup.ItemGroupLoader;
+import teamHTBP.vida.creativetab.ItemGroupLoader;
 import teamHTBP.vida.modelRender.armormodel.*;
 
 import javax.annotation.Nullable;

@@ -20,7 +20,7 @@ import net.minecraft.world.phys.HitResult;
 import teamHTBP.vida.entity.EntityFaintLight;
 import teamHTBP.vida.entity.EntityLoader;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
-import teamHTBP.vida.itemGroup.ItemGroupLoader;
+import teamHTBP.vida.creativetab.ItemGroupLoader;
 
 public class ItemFaintLight extends Item {
     public int element = 1;

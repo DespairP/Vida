@@ -24,7 +24,7 @@ public class BlockEventLoaderServer {
         //System.out.println("SSSS");
         if (event.getSource().getDirectEntity() instanceof Player) {
             Player playerEntity = (Player) event.getSource().getDirectEntity();
-            ItemStack stack = playerEntity.inventory.armor.get(1);
+            ItemStack stack = playerEntity.getInventory().armor.get(1);
             if (stack.getItem() instanceof ItemArmorElementLegginsWithBottles) {
                 CompoundTag nbt = stack.getOrCreateTag();
                 for (int i = 1; i <= 3; i++) {

@@ -90,6 +90,7 @@ public class Skill implements ISkill {
      *
      * @return 技能名字
      */
+    @Override
     public String getSkillName() {
         return skillName;
     }
@@ -108,7 +109,8 @@ public class Skill implements ISkill {
      *
      * @return 技能的翻译名
      */
-    public String getSkillTranlateName() {
+    @Override
+    public String getSkillTranslateName() {
         return new TranslatableComponent(getSkillCompleteName()).getString();
     }
 
@@ -137,6 +139,7 @@ public class Skill implements ISkill {
      *
      * @return 需要注入的能量
      */
+    @Override
     public int getSkillExpPerLevel() {
         return skillExpPerLevel;
     }
@@ -162,6 +165,7 @@ public class Skill implements ISkill {
      *
      * @param skillX 实际显示的X轴位置
      */
+    @Override
     public void setSkillX(int skillX) {
         this.skillX = skillX;
     }
@@ -178,6 +182,7 @@ public class Skill implements ISkill {
      * 修改技能实际显示的Y轴位置
      * @param skillY 实际显示的Y轴位置
      */
+    @Override
     public void setSkillY(int skillY) {
         this.skillY = skillY;
     }
@@ -224,6 +229,7 @@ public class Skill implements ISkill {
         return maxSkillLevel;
     }
 
+    @Override
     public void setSkillPosition(int skillX, int skillY) {
         this.skillX = skillX;
         this.skillY = skillY;

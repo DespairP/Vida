@@ -40,49 +40,29 @@ public class ElementSwordHUD extends GuiComponent {
         int exp = nbt.getInt("swordEXP");
         int progress = (int) (exp * 16.0f / (level * 200 + level * 13));
         if (progress >= 16) progress = 16;
-        RenderSystem.scaled(1.2f, 1.2f, 1.2f);
+        matrixStack.scale(1.2f, 1.2f, 1.2f);
         RenderSystem.setShaderTexture(0, HUD);
         switch (pixel_element) {
-            case 1:
-                blit(matrixStack, screenWidth, screenHeight, 0, 0, 0, 16, 16, 35, 119);
-                break;
-            case 2:
-                blit(matrixStack, screenWidth, screenHeight, 0, 48, 0, 16, 16, 35, 119);
-                break;
-            case 3:
-                blit(matrixStack, screenWidth, screenHeight, 0, 32, 0, 16, 16, 35, 119);
-                break;
-            case 4:
-                blit(matrixStack, screenWidth, screenHeight, 0, 16, 0, 16, 16, 35, 119);
-                break;
-            case 5:
-                blit(matrixStack, screenWidth, screenHeight, 0, 64, 0, 16, 16, 35, 119);
-                break;
+            case 1 -> blit(matrixStack, screenWidth, screenHeight, 0, 0, 0, 16, 16, 35, 119);
+            case 2 -> blit(matrixStack, screenWidth, screenHeight, 0, 48, 0, 16, 16, 35, 119);
+            case 3 -> blit(matrixStack, screenWidth, screenHeight, 0, 32, 0, 16, 16, 35, 119);
+            case 4 -> blit(matrixStack, screenWidth, screenHeight, 0, 16, 0, 16, 16, 35, 119);
+            case 5 -> blit(matrixStack, screenWidth, screenHeight, 0, 64, 0, 16, 16, 35, 119);
         }
         //System.out.println(progress);
         switch (pixel_element) {
-            case 1:
-                blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 0, 32 - progress, 16, progress, 35, 119);
-                break;
-            case 2:
-                blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 48, 32 - progress, 16, progress, 35, 119);
-                break;
-            case 3:
-                blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 32, 32 - progress, 16, progress, 35, 119);
-                break;
-            case 4:
-                blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 16, 32 - progress, 16, progress, 35, 119);
-                break;
-            case 5:
-                blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 64, 32 - progress, 16, progress, 35, 119);
-                break;
+            case 1 -> blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 0, 32 - progress, 16, progress, 35, 119);
+            case 2 -> blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 48, 32 - progress, 16, progress, 35, 119);
+            case 3 -> blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 32, 32 - progress, 16, progress, 35, 119);
+            case 4 -> blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 16, 32 - progress, 16, progress, 35, 119);
+            case 5 -> blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 64, 32 - progress, 16, progress, 35, 119);
         }
         matrixStack.pushPose();
         if (level >= 5) {
             blit(matrixStack, screenWidth + 16, screenHeight, 0, 80 + 6 * ((level / 5) - 1), 0, 6, 6, 35, 119);
         }
         matrixStack.popPose();
-        RenderSystem.scaled(0.95f, 0.95f, 0.95f);
+        matrixStack.scale(0.95f, 0.95f, 0.95f);
         drawCenteredString(matrixStack, minecraft.font, level + "", screenWidth + 16, screenHeight + 19, 62900 + level * 100);
         matrixStack.popPose();
     }

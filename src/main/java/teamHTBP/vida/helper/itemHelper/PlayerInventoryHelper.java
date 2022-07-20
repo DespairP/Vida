@@ -8,7 +8,7 @@ import teamHTBP.vida.event.client.HoldItemClientTickHandler;
 public class PlayerInventoryHelper {
     /**获取玩家某个部位的盔甲*/
     public static ItemStack getPlayerArmor(Player entity, EquipmentSlot part){
-        return entity.inventory.armor.get(part.getIndex());
+        return entity.getInventory().armor.get(part.getIndex());
     }
 
     /**获取玩家*/

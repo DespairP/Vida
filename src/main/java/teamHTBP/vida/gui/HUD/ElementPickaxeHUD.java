@@ -28,6 +28,7 @@ public class ElementPickaxeHUD extends GuiComponent implements IVidaHUD {
         this.alpha = alpha / 100.0f;
     }
 
+    @Override
     public void render(PoseStack matrixStack) {
         if (itemStack == null) return;
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, alpha);
@@ -41,42 +42,22 @@ public class ElementPickaxeHUD extends GuiComponent implements IVidaHUD {
         int exp = nbt.getInt("pickaxeEXP");
         int progress = (int) (exp * 16.0f / (level * 500.0f));
         if (progress >= 16) progress = 16;
-        RenderSystem.scaled(1.2f, 1.2f, 1.2f);
+        matrixStack.scale(1.2f, 1.2f, 1.2f);
         RenderSystem.setShaderTexture(0, HUD);
         switch (pixel_element) {
-            case GOLD:
-                blit(matrixStack, screenWidth, screenHeight, 0, 0, 0, 16, 16, 35, 119);
-                break;
-            case WOOD:
-                blit(matrixStack, screenWidth, screenHeight, 0, 48, 0, 16, 16, 35, 119);
-                break;
-            case AQUA:
-                blit(matrixStack, screenWidth, screenHeight, 0, 32, 0, 16, 16, 35, 119);
-                break;
-            case FIRE:
-                blit(matrixStack, screenWidth, screenHeight, 0, 16, 0, 16, 16, 35, 119);
-                break;
-            case EARTH:
-                blit(matrixStack, screenWidth, screenHeight, 0, 64, 0, 16, 16, 35, 119);
-                break;
+            case GOLD -> blit(matrixStack, screenWidth, screenHeight, 0, 0, 0, 16, 16, 35, 119);
+            case WOOD -> blit(matrixStack, screenWidth, screenHeight, 0, 48, 0, 16, 16, 35, 119);
+            case AQUA -> blit(matrixStack, screenWidth, screenHeight, 0, 32, 0, 16, 16, 35, 119);
+            case FIRE -> blit(matrixStack, screenWidth, screenHeight, 0, 16, 0, 16, 16, 35, 119);
+            case EARTH -> blit(matrixStack, screenWidth, screenHeight, 0, 64, 0, 16, 16, 35, 119);
         }
         //System.out.println(progress);
         switch (pixel_element) {
-            case GOLD:
-                blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 0, 32 - progress, 16, progress, 35, 119);
-                break;
-            case WOOD:
-                blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 48, 32 - progress, 16, progress, 35, 119);
-                break;
-            case AQUA:
-                blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 32, 32 - progress, 16, progress, 35, 119);
-                break;
-            case FIRE:
-                blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 16, 32 - progress, 16, progress, 35, 119);
-                break;
-            case EARTH:
-                blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 64, 32 - progress, 16, progress, 35, 119);
-                break;
+            case GOLD -> blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 0, 32 - progress, 16, progress, 35, 119);
+            case WOOD -> blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 48, 32 - progress, 16, progress, 35, 119);
+            case AQUA -> blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 32, 32 - progress, 16, progress, 35, 119);
+            case FIRE -> blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 16, 32 - progress, 16, progress, 35, 119);
+            case EARTH -> blit(matrixStack, screenWidth, screenHeight + 16 - progress, 0, 64, 32 - progress, 16, progress, 35, 119);
         }
         matrixStack.pushPose();
         if (level >= 5) {
@@ -84,7 +65,7 @@ public class ElementPickaxeHUD extends GuiComponent implements IVidaHUD {
             blit(matrixStack, screenWidth + 16, screenHeight, 0, 80 + 6 * offsetU, 0, 6, 6, 35, 119);
         }
         matrixStack.popPose();
-        RenderSystem.scaled(0.95f, 0.95f, 0.95f);
+        matrixStack.scale(0.95f, 0.95f, 0.95f);
         drawCenteredString(matrixStack, minecraft.font, level + "", screenWidth + 16, screenHeight + 19, 62900 + level * 100);
         matrixStack.popPose();
     }

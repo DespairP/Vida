@@ -12,38 +12,40 @@ import net.minecraftforge.fml.common.Mod;
 import teamHTBP.vida.gui.HUD.ElementLevelToolsExpHUD;
 import teamHTBP.vida.item.staff.IElementLevelTools;
 
-import java.util.Optional;
-
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(Dist.CLIENT)
-public class HUDElementExpHandler {
+public class HUDElementExpHandler extends HudHandler {
     public static boolean renderToolExp = true;
     private static ElementLevelToolsExpHUD hud = new ElementLevelToolsExpHUD();
 
     @SubscribeEvent
-    public static void onRenderExp(RenderGameOverlayEvent.Pre event){
+    public static void onRenderExp(RenderGameOverlayEvent.PreLayer event){
         final ItemStack holdItemStack = HoldItemClientTickHandler.getHoldItem();
-        final Item holdItem = Optional.ofNullable(holdItemStack).orElseGet(()->ItemStack.EMPTY).getItem();
-        if(event.getType() != RenderGameOverlayEvent.ElementType.EXPERIENCE){
+        final Item holdItem = holdItemStack.getItem();
+
+        if (event.getOverlay() != ForgeIngameGui.EXPERIENCE_BAR_ELEMENT){
             return;
         }
-        if(holdItem == null  || !(holdItem instanceof IElementLevelTools)){
+
+        if (holdItemStack.isEmpty() || !(holdItem instanceof IElementLevelTools)){
             return;
         }
-        if(!ForgeIngameGui.renderExperiance){
-            return;
-        }
+
+        var matrixStack = event.getMatrixStack();
+
         //render exp
+        setupShader();
         hud.render(event.getMatrixStack(), event.getPartialTicks(), holdItemStack);
         matrixStack.pushPose();
         RenderSystem.colorMask(false,false,false,false);
         matrixStack.popPose();
+
+        event.setCanceled(true);
     }
 
-
     @SubscribeEvent
-    public static  void afterRenderExp(RenderGameOverlayEvent.Post event){
-        if(event.getType() == RenderGameOverlayEvent.ElementType.EXPERIENCE) {
+    public static  void afterRenderExp(RenderGameOverlayEvent.PostLayer event){
+        if(event.getOverlay() == ForgeIngameGui.EXPERIENCE_BAR_ELEMENT) {
             RenderSystem.colorMask(true, true, true, true);
         }
     }

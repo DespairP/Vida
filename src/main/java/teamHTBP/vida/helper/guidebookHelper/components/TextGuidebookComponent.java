@@ -107,7 +107,7 @@ public class TextGuidebookComponent extends GuidebookComponent implements IGuide
 
         //如果可以滚动,渲染滚动条
         matrixStack.pushPose();
-        textureManager.bind(componentLocation);
+        RenderSystem.setShaderTexture(0, componentLocation);
         //渲染tracker顶部
         blit(matrixStack, x + getWidth(), y + 0, 0, scrollBarOuterTop.mu(), scrollBarOuterTop.mv(), scrollBarOuterTop.w(), scrollBarOuterTop.h(), 512, 512);
         //渲染tracker中部

@@ -12,7 +12,7 @@ import java.util.LinkedList;
 
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(Dist.CLIENT)
-public class HUDMessageEventHandler {
+public class HUDMessageEventHandler extends HudHandler {
     public static final LinkedList<String> messageList = new LinkedList<>();
     public static boolean isMessage = false;
     public static MessageHUD currentRnederer;
@@ -28,8 +28,10 @@ public class HUDMessageEventHandler {
         if (!isMessage) return;
         if (currentRnederer == null && isMessage && messageList.size() > 0) {
             currentRnederer = new MessageHUD(messageList.get(0));
+            setupShader();
             currentRnederer.render(event.getMatrixStack());
         } else if (currentRnederer != null && isMessage) {
+            setupShader();
             currentRnederer.render(event.getMatrixStack());
         }
         if ((currentRnederer == null || currentRnederer.alpha <= 0) && messageList.size() > 0) {
