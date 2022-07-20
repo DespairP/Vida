@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "vida:block/silentforest_brick_slab_1"
+    },
+    "type=double": {
+      "model": "vida:block/silentforest_brick_7"
+    },
+    "type=top": {
+      "model": "vida:block/silentforest_brick_slab_top_1"
+    }
+  }
+}

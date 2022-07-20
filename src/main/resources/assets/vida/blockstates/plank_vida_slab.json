@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "vida:block/plank_vida_slab"
+    },
+    "type=double": {
+      "model": "vida:block/plankvida1"
+    },
+    "type=top": {
+      "model": "vida:block/plank_vida_slab_top"
+    }
+  }
+}
