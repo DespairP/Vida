@@ -51,7 +51,7 @@ public class ContainerScreenBluePrint extends ContainerScreen<ContainerBluePrint
     public void refreshSlotAttrs() {
         AtomicInteger integer = new AtomicInteger(0);
         slots.forEach(slot -> {
-            slot.setHasItem(container.inventorySlots.get(integer.getAndIncrement()).inventory.getStackInSlot(0));
+            slot.setHasItem(container.slots.get(integer.getAndIncrement()).container.getItem(0));
         });
         slots.forEach(slot -> {
             slot.refreshMaxLightness();
@@ -59,11 +59,11 @@ public class ContainerScreenBluePrint extends ContainerScreen<ContainerBluePrint
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y) {
+    protected void renderBg(MatrixStack matrixStack, float partialTicks, int x, int y) {
         this.renderBackground(matrixStack);
         RenderSystem.color4f(1, 1, 1, 1);
-        this.minecraft.getTextureManager().bindTexture(GUI);
-        blit(matrixStack, this.guiLeft - 12, this.guiTop - 56, 0, 16, 0, 176, 211, 256, 256);
+        this.minecraft.getTextureManager().bind(GUI);
+        blit(matrixStack, this.leftPos - 12, this.topPos - 56, 0, 16, 0, 176, 211, 256, 256);
         if (slots == null) initBluePrintSlot();
         refreshSlotAttrs();
         slots.forEach(slot -> drawSlots(matrixStack, slot));
@@ -103,17 +103,17 @@ public class ContainerScreenBluePrint extends ContainerScreen<ContainerBluePrint
     }
 
     public void blitSlot(MatrixStack matrixStack, int screenX, int screenY) {
-        blit(matrixStack, this.guiLeft + screenX, this.guiTop + screenY, 0, 215, 206, 28, 32, 256, 256);
+        blit(matrixStack, this.leftPos + screenX, this.topPos + screenY, 0, 215, 206, 28, 32, 256, 256);
     }
 
     @Override
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
-        renderHoveredTooltip(matrixStack, mouseX, mouseY);
+        renderTooltip(matrixStack, mouseX, mouseY);
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y) {
+    protected void renderLabels(MatrixStack matrixStack, int x, int y) {
     }
 }

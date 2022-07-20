@@ -16,7 +16,7 @@ public class GuiGuidebookGuide extends AbstractGuiGuidebook implements IGuideboo
 
     public GuiGuidebookGuide() {
         super(new TranslationTextComponent("vida:guidebook_guide"));
-        ClientWorld world = Minecraft.getInstance().world;
+        ClientWorld world = Minecraft.getInstance().level;
         singlePage = GuidebookHelper
                 .getGuidePageHandler(world)
                 .guideToSinglePage
@@ -35,7 +35,7 @@ public class GuiGuidebookGuide extends AbstractGuiGuidebook implements IGuideboo
         singlePage.addLayout(startX + 186, startY + 0,132,140);
         //监听器初始化
         for(IGuiEventListener eventListener:singlePage.getPageListener()){
-            addListener(eventListener);
+            addWidget(eventListener);
         }
     }
 

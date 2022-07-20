@@ -11,7 +11,7 @@ public class CommandRefreshBluePrint implements Command<CommandSource> {
     @Override
     public int run(CommandContext<CommandSource> commandContext) throws CommandSyntaxException {
         BlueprintHelper.refreshAllBluePrints();
-        commandContext.getSource().sendFeedback(new StringTextComponent("blueprints has been reloaded"), true);
+        commandContext.getSource().sendSuccess(new StringTextComponent("blueprints has been reloaded"), true);
         return 0;
     }
 }

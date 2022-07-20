@@ -16,18 +16,18 @@ public class ElementFireParticle extends SpriteTexturedParticle {
         this.coordX = posXIn;
         this.coordY = posYIn;
         this.coordZ = posZIn;
-        this.particleRed = 1;
-        this.particleGreen = 1;
-        this.particleBlue = 1;
-        this.prevPosX = posXIn + xSpeedIn;
-        this.prevPosY = posYIn + ySpeedIn;
-        this.prevPosZ = posZIn + zSpeedIn;
-        this.posX = this.prevPosX;
-        this.posY = this.prevPosY;
-        this.posZ = this.prevPosZ;
-        this.canCollide = false;
-        this.particleGravity = 0.3f;
-        this.maxAge = (int) (Math.random() * 10.0D) + 30;
+        this.rCol = 1;
+        this.gCol = 1;
+        this.bCol = 1;
+        this.xo = posXIn + xSpeedIn;
+        this.yo = posYIn + ySpeedIn;
+        this.zo = posZIn + zSpeedIn;
+        this.x = this.xo;
+        this.y = this.yo;
+        this.z = this.zo;
+        this.hasPhysics = false;
+        this.gravity = 0.3f;
+        this.lifetime = (int) (Math.random() * 10.0D) + 30;
     }
 
     @Override
@@ -36,30 +36,30 @@ public class ElementFireParticle extends SpriteTexturedParticle {
     }
 
     public void tick() {
-        this.prevPosX = this.posX;
-        this.prevPosY = this.posY;
-        this.prevPosZ = this.posZ;
-        if (this.age++ >= this.maxAge) {
-            this.setExpired();
+        this.xo = this.x;
+        this.yo = this.y;
+        this.zo = this.z;
+        if (this.age++ >= this.lifetime) {
+            this.remove();
         } else {
-            this.motionY += 0.004D;
-            this.move(this.motionX, this.motionY, this.motionZ);
-            if (this.posY == this.prevPosY) {
-                this.motionX *= 0.1D;
-                this.motionZ *= 0.1D;
+            this.yd += 0.004D;
+            this.move(this.xd, this.yd, this.zd);
+            if (this.y == this.yo) {
+                this.xd *= 0.1D;
+                this.zd *= 0.1D;
             }
 
-            this.motionX *= 0.36F;
-            this.motionY *= 0.36F;
-            this.motionZ *= 0.36F;
+            this.xd *= 0.36F;
+            this.yd *= 0.36F;
+            this.zd *= 0.36F;
             if (this.onGround) {
-                this.motionX *= 0.17F;
-                this.motionZ *= 0.17F;
+                this.xd *= 0.17F;
+                this.zd *= 0.17F;
             }
 
         }
-        if (this.particleAlpha > 0.0)
-            this.particleAlpha -= 0.05f;
+        if (this.alpha > 0.0)
+            this.alpha -= 0.05f;
         //super.tick();
     }
 }

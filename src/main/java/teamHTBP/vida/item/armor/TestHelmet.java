@@ -14,9 +14,11 @@ import teamHTBP.vida.modelRender.armormodel.TestArmorModel;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.item.Item.Properties;
+
 public class TestHelmet extends ArmorItem {
     public TestHelmet() {
-        super(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD, new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD, new Properties().tab(ItemGroupLoader.vidaItemGroup));
     }
 
 
@@ -25,21 +27,21 @@ public class TestHelmet extends ArmorItem {
     public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
         TestArmorModel model = new TestArmorModel();
 
-        model.field_78116_c.showModel = armorSlot == EquipmentSlotType.HEAD;
-        model.bipedHeadwear.showModel = armorSlot == EquipmentSlotType.HEAD;
-        model.bipedBody.showModel = (armorSlot == EquipmentSlotType.CHEST)
+        model.head.visible = armorSlot == EquipmentSlotType.HEAD;
+        model.hat.visible = armorSlot == EquipmentSlotType.HEAD;
+        model.body.visible = (armorSlot == EquipmentSlotType.CHEST)
                 || (armorSlot == EquipmentSlotType.CHEST);
-        model.bipedRightArm.showModel = armorSlot == EquipmentSlotType.CHEST;
-        model.bipedLeftArm.showModel = armorSlot == EquipmentSlotType.CHEST;
-        model.bipedRightLeg.showModel = (armorSlot == EquipmentSlotType.LEGS)
+        model.rightArm.visible = armorSlot == EquipmentSlotType.CHEST;
+        model.leftArm.visible = armorSlot == EquipmentSlotType.CHEST;
+        model.rightLeg.visible = (armorSlot == EquipmentSlotType.LEGS)
                 || (armorSlot == EquipmentSlotType.FEET);
-        model.bipedLeftLeg.showModel = (armorSlot == EquipmentSlotType.LEGS)
+        model.leftLeg.visible = (armorSlot == EquipmentSlotType.LEGS)
                 || (armorSlot == EquipmentSlotType.FEET);
 
 
-        model.isChild = _default.isChild;
-        model.isSneak = _default.isSneak;
-        model.isSitting = _default.isSitting;
+        model.young = _default.young;
+        model.crouching = _default.crouching;
+        model.riding = _default.riding;
         model.rightArmPose = _default.rightArmPose;
         model.leftArmPose = _default.leftArmPose;
 

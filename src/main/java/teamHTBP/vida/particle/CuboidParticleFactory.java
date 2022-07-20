@@ -16,7 +16,7 @@ public class CuboidParticleFactory implements IParticleFactory<CuboidParticleDat
 
     @Nullable
     @Override
-    public Particle makeParticle(CuboidParticleData typeIn, ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+    public Particle createParticle(CuboidParticleData typeIn, ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
         CuboidParticle particle = new CuboidParticle(worldIn, x, y, z,
                 typeIn.getInformation(0),
                 typeIn.getInformation(1),
@@ -27,7 +27,7 @@ public class CuboidParticleFactory implements IParticleFactory<CuboidParticleDat
                 (float) typeIn.getInformation(6),
                 (int) typeIn.getInformation(7)
         );
-        particle.selectSpriteRandomly(sprites);
+        particle.pickSprite(sprites);
         return particle;
     }
 }

@@ -51,7 +51,7 @@ public class GuideBookPageEventHandler {
         GuideBookPageHandler handler = dataPackMap.get(serverPlayer.getServer().getDataPackRegistries());
         PacketGuidebookPage guidebook = handler.createSyncPacket();
         //将服务器的数据
-        PacketChannel.INSTANCE.sendTo(guidebook, serverPlayer.connection.netManager, NetworkDirection.PLAY_TO_CLIENT);
+        PacketChannel.INSTANCE.sendTo(guidebook, serverPlayer.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
     }
 
     /**当用户登出时，清除客户端存储的guidemap*/

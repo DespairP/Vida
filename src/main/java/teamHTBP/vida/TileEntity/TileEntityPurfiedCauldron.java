@@ -71,20 +71,20 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT compound) {
+    public void load(BlockState state, CompoundNBT compound) {
         containing = compound.getInt("containing");
         container = compound.getInt("container");
         isWater = compound.getBoolean("isWater");
         isFire = compound.getBoolean("isFire");
         element = ElementHelper.read(compound);
         if (compound.contains("meltItem"))
-            meltItem = ItemStack.read(compound.getCompound("meltItem"));
+            meltItem = ItemStack.of(compound.getCompound("meltItem"));
 
-        super.read(state, compound);
+        super.load(state, compound);
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
+    public CompoundNBT save(CompoundNBT compound) {
         compound.putInt("containing", containing);
         compound.putInt("container", container);
         compound.putBoolean("isWater", isWater);
@@ -92,20 +92,20 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
         ElementHelper.write(compound, element);
         if (!meltItem.isEmpty())
             compound.put("meltItem", meltItem.serializeNBT());
-        return super.write(compound);
+        return super.save(compound);
     }
 
     //服务端->客户端
     @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
+        return new SUpdateTileEntityPacket(this.worldPosition, 1, this.getUpdateTag());
     }
 
     //区块刚刚被加载时，服务端->客户端
     @Override
     public CompoundNBT getUpdateTag() {
-        return this.write(new CompoundNBT());
+        return this.save(new CompoundNBT());
 
     }
 
@@ -113,7 +113,7 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
         super.onDataPacket(net, pkt);
-        handleUpdateTag(world.getBlockState(pos), pkt.getNbtCompound());
+        handleUpdateTag(level.getBlockState(worldPosition), pkt.getTag());
     }
 
     //客户端处理收到的数据包
@@ -125,7 +125,7 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
         containing = tag.getInt("containing");
         element = ElementHelper.read(tag);
         if (tag.contains("meltItem"))
-            meltItem = ItemStack.read(tag.getCompound("meltItem"));
+            meltItem = ItemStack.of(tag.getCompound("meltItem"));
         else
             meltItem = ItemStack.EMPTY;
     }
@@ -134,7 +134,7 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
     //内部逻辑实现
     @Override
     public void tick() {
-        if (!world.isRemote) {
+        if (!level.isClientSide) {
             //如果缓冲值>0,先消耗缓冲值
             if (this.isWater && this.isFire) {
                 if (this.containing > 0) {
@@ -147,7 +147,7 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
                 }
                 //如果已满出，生成微光
                 generateFaintLight();
-                world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 3);
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
             }
             if (containing == 0) {
                 meltItem = ItemStack.EMPTY;
@@ -192,10 +192,10 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
     //生成微光
     public void generateFaintLight() {
         if (container > MAX_CONTAINER - 1) {
-            EntityFaintLight entityFaintLight = new EntityFaintLight(EntityLoader.faintLight.get(), world, element);
-            entityFaintLight.setPosition(pos.getX(), pos.up().getY(), pos.getZ() + 0.5);
+            EntityFaintLight entityFaintLight = new EntityFaintLight(EntityLoader.faintLight.get(), level, element);
+            entityFaintLight.setPos(worldPosition.getX(), worldPosition.above().getY(), worldPosition.getZ() + 0.5);
             entityFaintLight.setFaintLightType(element);
-            this.world.addEntity(entityFaintLight);
+            this.level.addFreshEntity(entityFaintLight);
             clear();
         }
     }
@@ -206,8 +206,8 @@ public class TileEntityPurfiedCauldron extends TileEntity implements ITickableTi
         this.containing = 0;
         this.element = null;
         this.isWater = false;
-        this.isFire = world.getBlockState(pos.down()).getBlock() == Blocks.FIRE || world.getBlockState(pos.down()).getBlock() == Blocks.LAVA;
+        this.isFire = level.getBlockState(worldPosition.below()).getBlock() == Blocks.FIRE || level.getBlockState(worldPosition.below()).getBlock() == Blocks.LAVA;
         this.meltItem = ItemStack.EMPTY;
-        markDirty();
+        setChanged();
     }
 }

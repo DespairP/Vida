@@ -39,7 +39,7 @@ public class HUDFunctionBlockEventHandler {
         if (event.getType() != RenderGameOverlayEvent.ElementType.ALL) {
             return;
         }
-        if (Minecraft.getInstance().player == null || Minecraft.getInstance().world == null) {
+        if (Minecraft.getInstance().player == null || Minecraft.getInstance().level == null) {
             return;
         }
 
@@ -55,7 +55,7 @@ public class HUDFunctionBlockEventHandler {
 
         //渲染纯净坩埚HUD
         if (block instanceof BlockPurfiedCauldron) {
-            TileEntityPurfiedCauldron tileEntityPurfiedCauldron = (TileEntityPurfiedCauldron) player.world.getTileEntity(lookingPos);
+            TileEntityPurfiedCauldron tileEntityPurfiedCauldron = (TileEntityPurfiedCauldron) player.level.getBlockEntity(lookingPos);
             if (tileEntityPurfiedCauldron != null) {
                 PurfiedCauldronHUD purfiedCauldronHUD = new PurfiedCauldronHUD(tileEntityPurfiedCauldron);
                 purfiedCauldronHUD.render(event.getMatrixStack());
@@ -65,7 +65,7 @@ public class HUDFunctionBlockEventHandler {
 
         //渲染元素祭坛HUD
         if (block instanceof BlockElementCoreAltar) {
-            TileEntityElementCoreAltar tileEntityElementCoreAltar = (TileEntityElementCoreAltar) player.world.getTileEntity(lookingPos);
+            TileEntityElementCoreAltar tileEntityElementCoreAltar = (TileEntityElementCoreAltar) player.level.getBlockEntity(lookingPos);
             ElementCoreAltarHUD elementCoreAltarHUD = new ElementCoreAltarHUD(tileEntityElementCoreAltar);
             elementCoreAltarHUD.render(matrixStack);
             return;
@@ -73,7 +73,7 @@ public class HUDFunctionBlockEventHandler {
 
         //渲染收集器HUD
         if (block instanceof BlockCollecter) {
-            TileEntityCollector tileEntityCollector = (TileEntityCollector) player.world.getTileEntity(lookingPos);
+            TileEntityCollector tileEntityCollector = (TileEntityCollector) player.level.getBlockEntity(lookingPos);
             CollectorHUD collectorHUD = new CollectorHUD(tileEntityCollector);
             collectorHUD.render(matrixStack);
             return;
@@ -85,8 +85,8 @@ public class HUDFunctionBlockEventHandler {
     public static Block getBlockPlayerLookAt(PlayerEntity player){
         RayTraceResult block =  player.pick(20.0D, 0.0F, false);
         if(block.getType() == RayTraceResult.Type.BLOCK) {
-            BlockPos blockpos = ((BlockRayTraceResult)block).getPos();
-            BlockState blockstate = player.world.getBlockState(blockpos);
+            BlockPos blockpos = ((BlockRayTraceResult)block).getBlockPos();
+            BlockState blockstate = player.level.getBlockState(blockpos);
             return blockstate.getBlock();
         }
         return null;
@@ -96,9 +96,9 @@ public class HUDFunctionBlockEventHandler {
     public static BlockPos getLookingPos(PlayerEntity player){
         RayTraceResult block =  player.pick(20.0D, 0.0F, false);
         if(block.getType() == RayTraceResult.Type.BLOCK) {
-            BlockPos blockpos = ((BlockRayTraceResult) block).getPos();
+            BlockPos blockpos = ((BlockRayTraceResult) block).getBlockPos();
             return blockpos;
         }
-        return new BlockPos(block.getHitVec());
+        return new BlockPos(block.getLocation());
     }
 }

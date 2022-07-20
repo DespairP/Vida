@@ -29,38 +29,38 @@ public class TileEntityInjectTable extends TileEntity implements ITickableTileEn
     }
 
     @Override
-    public void read(BlockState blockState, CompoundNBT compound) {
-        swordStack = ItemStack.read(compound.getCompound("swordItem"));
-        super.read(blockState, compound);
+    public void load(BlockState blockState, CompoundNBT compound) {
+        swordStack = ItemStack.of(compound.getCompound("swordItem"));
+        super.load(blockState, compound);
     }
 
-    public CompoundNBT write(CompoundNBT compound) {
+    public CompoundNBT save(CompoundNBT compound) {
         compound.put("swordItem", swordStack.serializeNBT());
-        return super.write(compound);
+        return super.save(compound);
     }
 
     @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
+        return new SUpdateTileEntityPacket(this.worldPosition, 1, this.getUpdateTag());
     }
 
     @Override
     public CompoundNBT getUpdateTag() {
-        return this.write(new CompoundNBT());
+        return this.save(new CompoundNBT());
     }
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
         super.onDataPacket(net, pkt);
-        handleUpdateTag(world.getBlockState(pos), pkt.getNbtCompound());
+        handleUpdateTag(level.getBlockState(worldPosition), pkt.getTag());
     }
 
     @Override
     public void handleUpdateTag(BlockState state, CompoundNBT tag) {
-        swordStack = ItemStack.read(tag.getCompound("swordItem"));
+        swordStack = ItemStack.of(tag.getCompound("swordItem"));
         super.handleUpdateTag(state, tag);
-        super.read(state, tag);
+        super.load(state, tag);
     }
 
     public boolean setSwordItem(ItemStack itemStack) {
@@ -101,7 +101,7 @@ public class TileEntityInjectTable extends TileEntity implements ITickableTileEn
     public void tick() {
         //
         CompoundNBT nbt = swordStack.getOrCreateTag();
-        world.notifyBlockUpdate(getPos(), getBlockState(), getBlockState(), 3);
+        level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
     }
 
     @Override
@@ -112,6 +112,6 @@ public class TileEntityInjectTable extends TileEntity implements ITickableTileEn
     @Nullable
     @Override
     public Container createMenu(int p_createMenu_1_, PlayerInventory p_createMenu_2_, PlayerEntity p_createMenu_3_) {
-        return new ContainerInjectTable(p_createMenu_1_, getSwordStack(), pos, world);
+        return new ContainerInjectTable(p_createMenu_1_, getSwordStack(), worldPosition, level);
     }
 }

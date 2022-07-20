@@ -11,7 +11,7 @@ public class VidaItemGroup extends ItemGroup {
     }
 
     @Override
-    public ItemStack createIcon() {
+    public ItemStack makeIcon() {
         return new ItemStack(ItemLoader.WAND_VIDA.get());
     }
 }

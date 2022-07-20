@@ -29,7 +29,7 @@ public class GuidebookContext {
     public GuidebookContext merge(GuidebookContext fromContext){
         CompoundNBT fromStore = fromContext != null ? fromContext.store : GuidebookContext.empty().store;
         // 复制不包括null的值进入到compound中
-        for(String key : fromStore.keySet()){
+        for(String key : fromStore.getAllKeys()){
             INBT fromValue = fromStore.get(key);
             if(fromValue == null){ continue; }
             store.put(key, fromValue);

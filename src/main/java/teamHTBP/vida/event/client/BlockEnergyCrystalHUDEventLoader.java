@@ -40,23 +40,23 @@ public class BlockEnergyCrystalHUDEventLoader {
         if (Minecraft.getInstance().player == null) {
             return;
         }
-        if (Minecraft.getInstance().world == null) {
+        if (Minecraft.getInstance().level == null) {
             return;
         }
         offset_frame = (offset_frame + 1) % 64;
         PlayerEntity player = Minecraft.getInstance().player;
-        RayTraceResult objectMouseOver = Minecraft.getInstance().objectMouseOver;
-        BlockPos pos = new BlockPos(objectMouseOver.getHitVec());
+        RayTraceResult objectMouseOver = Minecraft.getInstance().hitResult;
+        BlockPos pos = new BlockPos(objectMouseOver.getLocation());
 
-        Vector3d vec3d = player.getLook(event.getPartialTicks());
-        Vector3d vec3d1 = objectMouseOver.getHitVec();
+        Vector3d vec3d = player.getViewVector(event.getPartialTicks());
+        Vector3d vec3d1 = objectMouseOver.getLocation();
 
         BlockPos newpos = new BlockPos(vec3d1);
-        Block block = player.world.getBlockState(newpos).getBlock();
-        World world = player.world;
+        Block block = player.level.getBlockState(newpos).getBlock();
+        World world = player.level;
 
         if (block instanceof BlockElementCrystal) {
-            TileEntity tileEntityCrystal = world.getTileEntity(pos);
+            TileEntity tileEntityCrystal = world.getBlockEntity(pos);
             if (tileEntityCrystal instanceof IElementCrystal) {
                 ElementCrystalHUD hud = new ElementCrystalHUD((IElementCrystal) tileEntityCrystal, element_fragment_tick, element_Progress);
                 hud.render(event.getMatrixStack());

@@ -20,24 +20,26 @@ import teamHTBP.vida.itemGroup.ItemGroupLoader;
 
 import java.util.List;
 
+import net.minecraft.item.Item.Properties;
+
 public class ItemElementCoreVoid extends Item {
     public ItemElementCoreVoid() {
-        super(new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(new Properties().tab(ItemGroupLoader.vidaItemGroup));
     }
 
     @SubscribeEvent
     public static void interact(PlayerInteractEvent.EntityInteractSpecific event) {
         if (event.getWorld() == null) return;
-        if (event.getPlayer().inventory.getCurrentItem().getItem() == ItemLoader.ELEMENTCORE_VOID.get().getItem() && !event.getWorld().isRemote && event.getHand() == Hand.MAIN_HAND) {
+        if (event.getPlayer().inventory.getSelected().getItem() == ItemLoader.ELEMENTCORE_VOID.get().getItem() && !event.getWorld().isClientSide && event.getHand() == Hand.MAIN_HAND) {
             int x = event.getPos().getX();
             int y = event.getPos().getY();
             int z = event.getPos().getZ();
             AxisAlignedBB bb = new AxisAlignedBB(x - 1, y, z - 1, x + 1, y + 1, z + 1);
-            List<Entity> list = event.getPlayer().world.getEntitiesWithinAABB(EntityLoader.faintLight.get().create(event.getWorld()).getEntity().getClass(), bb);
+            List<Entity> list = event.getPlayer().level.getEntitiesOfClass(EntityLoader.faintLight.get().create(event.getWorld()).getEntity().getClass(), bb);
             if (!list.isEmpty()) {
                 if (list.get(0) instanceof EntityFaintLight) {
                     list.get(0).remove();
-                    ItemStack stack = event.getPlayer().inventory.getCurrentItem();
+                    ItemStack stack = event.getPlayer().inventory.getSelected();
                     stack.setCount(stack.getCount() - 1);
                     ItemStack getStack = ItemStack.EMPTY;
                     EntityFaintLight entityFaintLight = (EntityFaintLight) list.get(0);
@@ -61,7 +63,7 @@ public class ItemElementCoreVoid extends Item {
                                 break;
                         }
                     }
-                    event.getPlayer().inventory.addItemStackToInventory(getStack);
+                    event.getPlayer().inventory.add(getStack);
 
                 }
             }
@@ -69,12 +71,12 @@ public class ItemElementCoreVoid extends Item {
         }
     }
 
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
 
-        return super.onItemRightClick(worldIn, playerIn, handIn);
+        return super.use(worldIn, playerIn, handIn);
     }
 
-    public ActionResultType itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
+    public ActionResultType interactLivingEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
 
         System.out.println("ssss");
         return ActionResultType.SUCCESS;

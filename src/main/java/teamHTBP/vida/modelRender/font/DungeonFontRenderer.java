@@ -16,7 +16,7 @@ public class DungeonFontRenderer extends FontRenderer {
         super(font);
         this.font = font;
         this.characterManager = new CharacterManager((charID, style) -> {
-            return this.getFont(dungeonFont).func_238557_a_(charID).getAdvance();
+            return this.getFont(dungeonFont).getGlyphInfo(charID).getAdvance();
         });
     }
 
@@ -25,7 +25,7 @@ public class DungeonFontRenderer extends FontRenderer {
     }
 
     @Override
-    public CharacterManager getCharacterManager() {
+    public CharacterManager getSplitter() {
         return characterManager;
     }
 

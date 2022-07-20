@@ -15,7 +15,7 @@ public class TileEntityElementCrystal extends TileEntity implements ITickableTil
 
     @Override
     public void tick() {
-        if (world.isRemote)
+        if (level.isClientSide)
             if (sinWave > 2 * Math.PI) sinWave = 0;
             else sinWave += 0.1f;
     }

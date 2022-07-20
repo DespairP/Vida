@@ -43,7 +43,7 @@ public class AltarRecipe extends BaseRecipe<IInventory> {
     }
 
     @Override
-    public ItemStack getCraftingResult(IInventory inv) {
+    public ItemStack assemble(IInventory inv) {
         return result.copy();
     }
 
@@ -53,7 +53,7 @@ public class AltarRecipe extends BaseRecipe<IInventory> {
      * @param height 中心格子
      * */
     @Override
-    public boolean canFit(int width, int height) {
+    public boolean canCraftInDimensions(int width, int height) {
         return (width + height) >= 5;
     }
 
@@ -69,7 +69,7 @@ public class AltarRecipe extends BaseRecipe<IInventory> {
      * 获取合成结果
      * */
     @Override
-    public ItemStack getRecipeOutput() {
+    public ItemStack getResultItem() {
         return result.copy();
     }
 
@@ -90,7 +90,7 @@ public class AltarRecipe extends BaseRecipe<IInventory> {
 
     /**合成图标，用于JEI或合成使用*/
     @Override
-    public ItemStack getIcon() {
+    public ItemStack getToastSymbol() {
         return new ItemStack(ItemLoader.altarcubeMaker.get());
     }
 
@@ -101,7 +101,7 @@ public class AltarRecipe extends BaseRecipe<IInventory> {
 
     /**不会出现在合成书中*/
     @Override
-    public boolean isDynamic() {
+    public boolean isSpecial() {
         return false;
     }
 
@@ -127,7 +127,7 @@ public class AltarRecipe extends BaseRecipe<IInventory> {
         }
 
         public Builder core(Item core){
-            recipe.core = Ingredient.fromItems(core);
+            recipe.core = Ingredient.of(core);
             return this;
         }
 
@@ -143,10 +143,10 @@ public class AltarRecipe extends BaseRecipe<IInventory> {
         }
 
         public Builder others(Item o1, Item o2, Item o3, Item o4){
-            recipe.other = ImmutableList.of(Ingredient.fromItems(o1),
-                                            Ingredient.fromItems(o2),
-                                            Ingredient.fromItems(o3),
-                                            Ingredient.fromItems(o4)
+            recipe.other = ImmutableList.of(Ingredient.of(o1),
+                                            Ingredient.of(o2),
+                                            Ingredient.of(o3),
+                                            Ingredient.of(o4)
             );
             return this;
         }

@@ -27,7 +27,7 @@ public class ElementPotentialProvider implements IDataProvider {
     DataGenerator generator;
 
     @Override
-    public void act(DirectoryCache cache) throws IOException {
+    public void run(DirectoryCache cache) throws IOException {
         addPotentials(potentials);
         
         for (ElementPotential potential : potentials) {

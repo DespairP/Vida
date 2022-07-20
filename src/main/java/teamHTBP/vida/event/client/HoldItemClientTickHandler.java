@@ -36,7 +36,7 @@ public class HoldItemClientTickHandler {
             return;
         }
         // 如果玩家持有工具
-        ItemStack holdItem = player.getHeldItem(Hand.MAIN_HAND);
+        ItemStack holdItem = player.getItemInHand(Hand.MAIN_HAND);
         // 如果holdItem改变了的话，记录时间
         if(holdItem != latestHoldItem){
             latestHoldItem = holdItem;

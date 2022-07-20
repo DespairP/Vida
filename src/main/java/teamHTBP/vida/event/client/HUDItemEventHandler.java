@@ -38,7 +38,7 @@ public class HUDItemEventHandler {
         if (event.getType() != RenderGameOverlayEvent.ElementType.ALL) {
             return;
         }
-        if (Minecraft.getInstance().player == null || Minecraft.getInstance().world == null) {
+        if (Minecraft.getInstance().player == null || Minecraft.getInstance().level == null) {
             return;
         }
 
@@ -54,10 +54,10 @@ public class HUDItemEventHandler {
     /**渲染元素瓶HUD*/
     public static void onElementBottleRender(MatrixStack matrixStack, PlayerEntity player){
         // 获取装备栏
-        ItemStack stack = player.inventory.armorInventory.get(1);
+        ItemStack stack = player.inventory.armor.get(1);
 
         // 当装备栏穿着元素瓶并按着Alt键时
-        if (KeyBoardBottle.MESSAGE_KEY.isKeyDown()
+        if (KeyBoardBottle.MESSAGE_KEY.isDown()
                 && stack.getItem() instanceof ItemArmorElementLegginsWithBottles) {
             //增加alpha
             alpha.increase(3);
@@ -76,9 +76,9 @@ public class HUDItemEventHandler {
 
     /**渲染元素剑HUD*/
     public static void onElementSwordRender(MatrixStack matrixStack, PlayerEntity player){
-        if (player.inventory.getCurrentItem().getItem() instanceof ItemElementSword) {
+        if (player.inventory.getSelected().getItem() instanceof ItemElementSword) {
             swordAlpha.increase(2);
-            itemStack1 = player.inventory.getCurrentItem();
+            itemStack1 = player.inventory.getSelected();
         } else {
             swordAlpha.decrease(2);
         }

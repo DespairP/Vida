@@ -100,7 +100,7 @@ public abstract class AbstractGuiGuidebook extends Screen implements IGuiGuidebo
         int currentPage = pageable.getCurrentPage();
         int totalPage = pageable.getTotalPage();
         String pageText = currentPage + "/" + totalPage;
-        int centerTextX = (width - font.getStringWidth(pageText)) / 2 + 1;
+        int centerTextX = (width - font.width(pageText)) / 2 + 1;
         RenderSystem.pushMatrix();
         RenderHelper.renderTextWithDungeonFont(matrixStack, pageText, centerTextX, bottomY - 5);
         RenderSystem.popMatrix();
@@ -119,7 +119,7 @@ public abstract class AbstractGuiGuidebook extends Screen implements IGuiGuidebo
         RenderSystem.pushMatrix();
         int centerX = (width - bookSection.w()) / 2;
         int centerY = (height - bookSection.h()) / 2;
-        minecraft.textureManager.bindTexture(book);
+        minecraft.textureManager.bind(book);
         blit(matrixStack, centerX, centerY, 0, 0, 0, bookSection.w() , bookSection.h(), 512, 512);
         RenderSystem.popMatrix();
     }
@@ -131,7 +131,7 @@ public abstract class AbstractGuiGuidebook extends Screen implements IGuiGuidebo
     public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
         boolean isDragged =  super.mouseDragged(mouseX, mouseY, button, dragX, dragY);
 
-        for(IGuiEventListener iguieventlistener : this.getEventListeners()){
+        for(IGuiEventListener iguieventlistener : this.children()){
             iguieventlistener.mouseDragged(mouseX, mouseY, button, dragX, dragY);
         }
         return isDragged;
@@ -141,7 +141,7 @@ public abstract class AbstractGuiGuidebook extends Screen implements IGuiGuidebo
     @Override
     public boolean mouseReleased(double mouseX, double mouseY, int button) {
         this.setDragging(false);
-        this.getEventListeners().forEach((listener) -> {
+        this.children().forEach((listener) -> {
             listener.mouseReleased(mouseX, mouseY, button);
         });
         return true;
@@ -149,6 +149,6 @@ public abstract class AbstractGuiGuidebook extends Screen implements IGuiGuidebo
 
     /**强制关闭gui*/
     public void forceCloseScreen(){
-        this.minecraft.displayGuiScreen((Screen) null);
+        this.minecraft.setScreen((Screen) null);
     }
 }

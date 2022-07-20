@@ -16,13 +16,13 @@ public class ContainerScreenBottles extends ContainerScreen<ContainerBottles> {
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
         this.renderBackground(matrixStack);
         RenderSystem.color4f(1, 1, 1, 1);
-        this.minecraft.getTextureManager().bindTexture(Gui);
-        blit(matrixStack, this.guiLeft, this.guiTop, 0, 0, 176, 141, 256, 256);
-        if (container.isStack3Lock) {
-            blit(matrixStack, this.guiLeft + 104, this.guiTop + 12, 0, 246, 0, 10, 13, 256, 256);
+        this.minecraft.getTextureManager().bind(Gui);
+        blit(matrixStack, this.leftPos, this.topPos, 0, 0, 176, 141, 256, 256);
+        if (menu.isStack3Lock) {
+            blit(matrixStack, this.leftPos + 104, this.topPos + 12, 0, 246, 0, 10, 13, 256, 256);
         }
     }
 
@@ -30,11 +30,11 @@ public class ContainerScreenBottles extends ContainerScreen<ContainerBottles> {
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float ticks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, ticks);
-        renderHoveredTooltip(matrixStack, mouseX, mouseY);
+        renderTooltip(matrixStack, mouseX, mouseY);
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(MatrixStack p_230451_1_, int p_230451_2_, int p_230451_3_) {
+    protected void renderLabels(MatrixStack p_230451_1_, int p_230451_2_, int p_230451_3_) {
 
     }
 }

@@ -38,8 +38,8 @@ public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEnti
     }
 
     private static int getFluidColor(World world, BlockPos pos, Fluid fluid) {
-        if (fluid.isEquivalentTo(Fluids.WATER)) {
-            return BiomeColors.getWaterColor(world, pos);
+        if (fluid.isSame(Fluids.WATER)) {
+            return BiomeColors.getAverageWaterColor(world, pos);
         }
 
         return fluid.getAttributes().getColor();
@@ -48,28 +48,28 @@ public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEnti
     @Override
     public void render(TileEntityPurfiedCauldron tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
         if (tileEntityIn.isWater) {
-            matrixStackIn.push();
+            matrixStackIn.pushPose();
             //获取水的贴图
-            Fluid fluid = Fluids.WATER.getStillFluid();
-            BlockRendererDispatcher blockRenderer = Minecraft.getInstance().getBlockRendererDispatcher();
+            Fluid fluid = Fluids.WATER.getSource();
+            BlockRendererDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
             ResourceLocation resourceLocation;
             int color;
             if (fluid.getAttributes().getStillTexture() != null) {
                 resourceLocation = fluid.getAttributes().getStillTexture();
-                color = getFluidColor(tileEntityIn.getWorld(), tileEntityIn.getPos(), fluid);
+                color = getFluidColor(tileEntityIn.getLevel(), tileEntityIn.getBlockPos(), fluid);
             } else if (fluid.getAttributes().getFlowingTexture() != null) {  // In case that Still Texture don't exist
                 resourceLocation = fluid.getAttributes().getFlowingTexture();
-                color = getFluidColor(tileEntityIn.getWorld(), tileEntityIn.getPos(), fluid);
+                color = getFluidColor(tileEntityIn.getLevel(), tileEntityIn.getBlockPos(), fluid);
             } else { // In case that no texture exist
                 resourceLocation = Fluids.WATER.getAttributes().getStillTexture();
-                color = getFluidColor(tileEntityIn.getWorld(), tileEntityIn.getPos(), Fluids.WATER);
+                color = getFluidColor(tileEntityIn.getLevel(), tileEntityIn.getBlockPos(), Fluids.WATER);
             }
-            TextureAtlasSprite textureAtlasSprite = Minecraft.getInstance().getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE).apply(resourceLocation);
+            TextureAtlasSprite textureAtlasSprite = Minecraft.getInstance().getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(resourceLocation);
             //获取水贴图在精灵图中的最大/小u,v位置
-            float uMin = textureAtlasSprite.getMinU();
-            float uMax = textureAtlasSprite.getMaxU();
-            float vMin = textureAtlasSprite.getMinV();
-            float vMax = textureAtlasSprite.getMaxV();
+            float uMin = textureAtlasSprite.getU0();
+            float uMax = textureAtlasSprite.getU1();
+            float vMin = textureAtlasSprite.getV0();
+            float vMax = textureAtlasSprite.getV1();
             //环境光，默认为最高光亮
             int light = 15728880;
             //设置基础argb
@@ -88,45 +88,45 @@ public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEnti
                 bPlus = 228;
             }
             //开始绘制水贴图
-            Matrix4f matrix4f = matrixStackIn.getLast().getMatrix();
+            Matrix4f matrix4f = matrixStackIn.last().pose();
             //首先获取水位高度
             float waterlevel = tileEntityIn.container / 110814.2f;
             matrixStackIn.translate(0, 0.3F + waterlevel, 0);
             //设置贴图绘制方式
-            IVertexBuilder buffer = bufferIn.getBuffer(RenderType.getTranslucent());
+            IVertexBuilder buffer = bufferIn.getBuffer(RenderType.translucent());
             //绘制
-            buffer.pos(matrix4f, 0.1F, 0.1F, 0.1F).color(r, g, b, a).tex(uMin, vMin).overlay(0, 0).lightmap(light).normal(0, 1, 0).endVertex();
-            buffer.pos(matrix4f, 0.1F, 0.1F, 0.9F).color(r, g, b, a).tex(uMin, vMax).overlay(0, 0).lightmap(light).normal(0, 1, 0).endVertex();
-            buffer.pos(matrix4f, 0.9F, 0.1F, 0.9F).color(r, g, b, a).tex(uMax, vMax).overlay(0, 0).lightmap(light).normal(0, 1, 0).endVertex();
-            buffer.pos(matrix4f, 0.9F, 0.1F, 0.1F).color(r, g, b, a).tex(uMax, vMin).overlay(0, 0).lightmap(light).normal(0, 1, 0).endVertex();
+            buffer.vertex(matrix4f, 0.1F, 0.1F, 0.1F).color(r, g, b, a).uv(uMin, vMin).overlayCoords(0, 0).uv2(light).normal(0, 1, 0).endVertex();
+            buffer.vertex(matrix4f, 0.1F, 0.1F, 0.9F).color(r, g, b, a).uv(uMin, vMax).overlayCoords(0, 0).uv2(light).normal(0, 1, 0).endVertex();
+            buffer.vertex(matrix4f, 0.9F, 0.1F, 0.9F).color(r, g, b, a).uv(uMax, vMax).overlayCoords(0, 0).uv2(light).normal(0, 1, 0).endVertex();
+            buffer.vertex(matrix4f, 0.9F, 0.1F, 0.1F).color(r, g, b, a).uv(uMax, vMin).overlayCoords(0, 0).uv2(light).normal(0, 1, 0).endVertex();
             //结束绘制
-            Minecraft.getInstance().getProfiler().endSection();
-            matrixStackIn.pop();
+            Minecraft.getInstance().getProfiler().pop();
+            matrixStackIn.popPose();
         }
 
         if (!tileEntityIn.meltItem.isEmpty()) {
-            matrixStackIn.push();
+            matrixStackIn.pushPose();
             double floatingLevel = 0.1 * Math.sin(floating);
             matrixStackIn.translate(0.5f, 1.3f + floatingLevel, 0.55f);
             matrixStackIn.scale(0.6f, 0.6f, 0.6f);
 
-            TileEntityRendererDispatcher dispatcher = this.renderDispatcher;
-            Quaternion quaternion = dispatcher.renderInfo.getRotation();
+            TileEntityRendererDispatcher dispatcher = this.renderer;
+            Quaternion quaternion = dispatcher.camera.rotation();
             float f3 = MathHelper.lerp(partialTicks, 0, 0);
-            quaternion.multiply(Vector3f.XP.rotation(f3));
+            quaternion.mul(Vector3f.XP.rotation(f3));
 
-            matrixStackIn.rotate(quaternion);
+            matrixStackIn.mulPose(quaternion);
             ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
 
-            IBakedModel ibakedmodel = itemRenderer.getItemModelWithOverrides(tileEntityIn.meltItem, tileEntityIn.getWorld(), null);
-            itemRenderer.renderItem(tileEntityIn.meltItem, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+            IBakedModel ibakedmodel = itemRenderer.getModel(tileEntityIn.meltItem, tileEntityIn.getLevel(), null);
+            itemRenderer.render(tileEntityIn.meltItem, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
 
             if (floating >= 2 * Math.PI) {
                 floating = 0;
             } else {
                 floating += 0.01;
             }
-            matrixStackIn.pop();
+            matrixStackIn.popPose();
         }
 
         if (tileEntityIn.element == EnumElements.NONE) {

@@ -59,7 +59,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
     //读入NBT
 
     @Override
-    public void read(BlockState state, CompoundNBT compound) {
+    public void load(BlockState state, CompoundNBT compound) {
         isProgressing = compound.getBoolean("isProgressing");
         progress = compound.getInt("progress");
         isBlockOver = compound.getBoolean("isBlockOver");
@@ -69,24 +69,24 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         element = ElementManager.get(compound.getString("element"));
         for (int i = 0; i < 4; i++) {
             if (compound.contains("altarItem" + i)) {
-                altarItem.set(i,ItemStack.read(compound.getCompound("altarItem" + i)));
+                altarItem.set(i,ItemStack.of(compound.getCompound("altarItem" + i)));
             }
         }
         this.extraItem = new ItemStack[10];
         ListNBT nbtlist = compound.getList("extraItemList", 10);
         for (int j = 0; j < nbtlist.size(); j++) {
             CompoundNBT nbt = nbtlist.getCompound(j);
-            this.extraItem[j] = ItemStack.read(nbt);
+            this.extraItem[j] = ItemStack.of(nbt);
         }
         if (compound.contains("coreItem")) {
-            this.coreItem = ItemStack.read(compound.getCompound("coreItem"));
+            this.coreItem = ItemStack.of(compound.getCompound("coreItem"));
         }
-        super.read(state, compound);
+        super.load(state, compound);
     }
 
     //写入NBT
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
+    public CompoundNBT save(CompoundNBT compound) {
         compound.putInt("progress", progress);
         compound.putString("element", element.getElementName().toString());
         compound.putBoolean("isProgressing", isProgressing);
@@ -111,20 +111,20 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         compound.put("extraItemList", listNBT);
 
 
-        return super.write(compound);
+        return super.save(compound);
     }
 
     //服务端->客户端
     @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
+        return new SUpdateTileEntityPacket(this.worldPosition, 1, this.getUpdateTag());
     }
 
     //区块刚刚被加载时，服务端->客户端
     @Override
     public CompoundNBT getUpdateTag() {
-        return write(new CompoundNBT());
+        return save(new CompoundNBT());
 
     }
 
@@ -132,7 +132,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
         super.onDataPacket(net, pkt);
-        handleUpdateTag(world.getBlockState(pos), pkt.getNbtCompound());
+        handleUpdateTag(level.getBlockState(worldPosition), pkt.getTag());
     }
 
     @Override
@@ -145,16 +145,16 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         isWAND_VIDACilck = tag.getBoolean("isWAND_VIDAClick");
         element = ElementHelper.read(tag);
         for (int i = 0; i < 4; i++) {
-            altarItem.set(i,tag.contains("altarItem" + i) ? ItemStack.read(tag.getCompound("altarItem" + i)) : ItemStack.EMPTY);
+            altarItem.set(i,tag.contains("altarItem" + i) ? ItemStack.of(tag.getCompound("altarItem" + i)) : ItemStack.EMPTY);
         }
         this.extraItem = new ItemStack[10];
         ListNBT nbtlist = tag.getList("extraItemList", 10);
         for (int j = 0; j < nbtlist.size(); j++) {
             CompoundNBT nbt = nbtlist.getCompound(j);
-            this.extraItem[j] = ItemStack.read(nbt);
+            this.extraItem[j] = ItemStack.of(nbt);
         }
         if (tag.contains("coreItem")) {
-            this.coreItem = ItemStack.read(tag.getCompound("coreItem"));
+            this.coreItem = ItemStack.of(tag.getCompound("coreItem"));
         }
 
         super.handleUpdateTag(state, tag);
@@ -224,12 +224,12 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
     public void tick() {
         //System.out.println(this.altarItem[0] + "  " + this.altarItem[1] +"   " +this.altarItem[2]  +"   " +this.altarItem[3]);
         //System.out.println(this.coreItem);
-        if (!world.isRemote) {
+        if (!level.isClientSide) {
             //如果右键则开始进行
             if (this.isWAND_VIDACilck && !this.isProgressing) {
                 //System.out.println("s");
                 this.isProgressing = this.judAltarItem();
-                world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 3);
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
                 this.isWAND_VIDACilck = false;
             }
 
@@ -246,7 +246,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
             this.progress += 15;
         }
 
-        this.isBlockOver = world.getBlockState(this.getPos().up()).getBlock() != Blocks.AIR;
+        this.isBlockOver = level.getBlockState(this.getBlockPos().above()).getBlock() != Blocks.AIR;
 
         if (this.isProgressing && this.progress >= MAX_PROGRESS) {
             this.generateCrystal();
@@ -262,7 +262,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
             if (altarItem.get(i).isEmpty()) return false;
         }
 
-        AltarRecipe recipe = RecipeManager.getAltarRecipe(world,this);
+        AltarRecipe recipe = RecipeManager.getAltarRecipe(level,this);
 
         if (recipe != null) {
             this.element = recipe.element;
@@ -282,24 +282,24 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         this.extraItem = new ItemStack[10];
         //清除核心物品
         this.coreItem = ItemStack.EMPTY;
-        world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 3);
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
     }
 
     //生成水晶
     public void generateCrystal() {
-        assert world != null;
+        assert level != null;
         if (!this.isBlockOver) {
             this.clear();
             if (element == EnumElements.GOLD) {
-                world.setBlockState(this.pos.up(), BlockLoader.elementCrystalGold.get().getDefaultState());
+                level.setBlockAndUpdate(this.worldPosition.above(), BlockLoader.elementCrystalGold.get().defaultBlockState());
             } else if (element == EnumElements.WOOD) {
-                world.setBlockState(this.pos.up(), BlockLoader.elementCrystalWood.get().getDefaultState());
+                level.setBlockAndUpdate(this.worldPosition.above(), BlockLoader.elementCrystalWood.get().defaultBlockState());
             } else if (element == EnumElements.AQUA) {
-                world.setBlockState(this.pos.up(), BlockLoader.elementCrystalAqua.get().getDefaultState());
+                level.setBlockAndUpdate(this.worldPosition.above(), BlockLoader.elementCrystalAqua.get().defaultBlockState());
             } else if (element == EnumElements.FIRE) {
-                world.setBlockState(this.pos.up(), BlockLoader.elementCrystalFire.get().getDefaultState());
+                level.setBlockAndUpdate(this.worldPosition.above(), BlockLoader.elementCrystalFire.get().defaultBlockState());
             } else if (element == EnumElements.EARTH) {
-                world.setBlockState(this.pos.up(), BlockLoader.elementCrystalEarth.get().getDefaultState());
+                level.setBlockAndUpdate(this.worldPosition.above(), BlockLoader.elementCrystalEarth.get().defaultBlockState());
             }
         }
     }

@@ -23,16 +23,18 @@ import teamHTBP.vida.modelRender.armormodel.ArmorModelBelt;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.item.Item.Properties;
+
 /**
  * 图纸腰带
  */
 public class ItemArmorBelt extends ArmorItem {
     public ItemArmorBelt() {
-        super(new ArmorMaterialBelt(), EquipmentSlotType.LEGS, new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(new ArmorMaterialBelt(), EquipmentSlotType.LEGS, new Properties().tab(ItemGroupLoader.vidaItemGroup));
     }
 
     @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+    public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
         return false;
     }
 
@@ -48,27 +50,27 @@ public class ItemArmorBelt extends ArmorItem {
     public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
         ArmorModelBelt armorModelBelt = new ArmorModelBelt();
 
-        armorModelBelt.isChild = _default.isChild;
-        armorModelBelt.isSneak = _default.isSneak;
-        armorModelBelt.isSitting = _default.isSitting;
+        armorModelBelt.young = _default.young;
+        armorModelBelt.crouching = _default.crouching;
+        armorModelBelt.riding = _default.riding;
         armorModelBelt.rightArmPose = _default.rightArmPose;
         armorModelBelt.leftArmPose = _default.leftArmPose;
         return (A) armorModelBelt;
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        ItemStack stack = playerIn.getHeldItem(handIn);
+    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        ItemStack stack = playerIn.getItemInHand(handIn);
         //OPEN THE GUI
-        if (!worldIn.isRemote && !playerIn.isSneaking() && stack.getItem() instanceof ItemArmorBelt) {
+        if (!worldIn.isClientSide && !playerIn.isShiftKeyDown() && stack.getItem() instanceof ItemArmorBelt) {
             NetworkHooks.openGui((ServerPlayerEntity) playerIn, new ItemBluePrintBeltProvider("bluePrintBelt", stack), (buffer) -> {
-                buffer.writeItemStack(stack);
+                buffer.writeItem(stack);
             });
-            return ActionResult.resultSuccess(stack);
-        } else if (!worldIn.isRemote && playerIn.isSneaking() && stack.getItem() instanceof ItemArmorBelt) {
-            super.onItemRightClick(worldIn, playerIn, handIn);
+            return ActionResult.success(stack);
+        } else if (!worldIn.isClientSide && playerIn.isShiftKeyDown() && stack.getItem() instanceof ItemArmorBelt) {
+            super.use(worldIn, playerIn, handIn);
         }
-        return ActionResult.resultPass(stack);
+        return ActionResult.pass(stack);
     }
 
 
@@ -77,27 +79,27 @@ public class ItemArmorBelt extends ArmorItem {
 class ArmorMaterialBelt implements IArmorMaterial {
 
     @Override
-    public int getDurability(EquipmentSlotType slotIn) {
+    public int getDurabilityForSlot(EquipmentSlotType slotIn) {
         return 10000;
     }
 
     @Override
-    public int getDamageReductionAmount(EquipmentSlotType slotIn) {
+    public int getDefenseForSlot(EquipmentSlotType slotIn) {
         return 1;
     }
 
     @Override
-    public int getEnchantability() {
+    public int getEnchantmentValue() {
         return 10;
     }
 
     @Override
-    public SoundEvent getSoundEvent() {
-        return SoundEvents.ITEM_ARMOR_EQUIP_LEATHER;
+    public SoundEvent getEquipSound() {
+        return SoundEvents.ARMOR_EQUIP_LEATHER;
     }
 
     @Override
-    public Ingredient getRepairMaterial() {
+    public Ingredient getRepairIngredient() {
         return null;
     }
 

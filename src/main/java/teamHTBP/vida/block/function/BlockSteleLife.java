@@ -13,7 +13,7 @@ import java.util.Random;
 public class BlockSteleLife extends BlockMutiDoubleWithY {
 
     public BlockSteleLife() {
-        super(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.0f, 3.0f).sound(SoundType.STONE).notSolid());
+        super(Block.Properties.of(Material.STONE).strength(3.0f, 3.0f).sound(SoundType.STONE).noOcclusion());
     }
 
     @Override

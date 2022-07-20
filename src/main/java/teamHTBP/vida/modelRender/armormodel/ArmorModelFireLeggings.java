@@ -9,6 +9,6 @@ public class ArmorModelFireLeggings extends AbstractModelElementLeggings {
         super(128, 128);
 
         body_low = new ModelRenderer(this);
-        body_low.setRotationPoint(0.0F, 24.0F, 0.0F);
+        body_low.setPos(0.0F, 24.0F, 0.0F);
     }
 }

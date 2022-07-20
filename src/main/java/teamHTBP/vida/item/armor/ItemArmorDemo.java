@@ -12,16 +12,18 @@ import teamHTBP.vida.modelRender.armormodel.ArmorModelSeasonApprentice;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.item.Item.Properties;
+
 public class ItemArmorDemo extends ArmorItem {
 
     public ItemArmorDemo(EquipmentSlotType slot) {
-        super(ArmorMaterial.DIAMOND, slot, new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterial.DIAMOND, slot, new Properties().tab(ItemGroupLoader.vidaItemGroup));
     }
 
     @Nullable
     @Override
     public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
-        EquipmentSlotType slot = getEquipmentSlot();
+        EquipmentSlotType slot = getSlot();
         return (A)new ArmorModelSeasonApprentice(slot);
     }
 

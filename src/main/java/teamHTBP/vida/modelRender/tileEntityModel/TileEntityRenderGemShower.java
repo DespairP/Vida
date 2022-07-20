@@ -30,82 +30,82 @@ public class TileEntityRenderGemShower extends TileEntityRenderer<TileEntityGemS
     @Override
     public void render(TileEntityGemShower tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
         if (!tileEntityIn.gemItem.isEmpty()) {
-            TextureAtlasSprite textureAtlasSprite = Minecraft.getInstance().getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE).apply(this.getGemResource(tileEntityIn.gemItem));
+            TextureAtlasSprite textureAtlasSprite = Minecraft.getInstance().getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(this.getGemResource(tileEntityIn.gemItem));
             double floatHeight = Math.sin(height) * 0.1;
             this.height += 0.01;
             if (height >= Math.PI * 2) this.height = 0.0f;
 
-            float uMin = textureAtlasSprite.getMinU();
-            float uMax = textureAtlasSprite.getMaxU();
-            float vMin = textureAtlasSprite.getMinV();
-            float vMax = textureAtlasSprite.getMaxV();
+            float uMin = textureAtlasSprite.getU0();
+            float uMax = textureAtlasSprite.getU1();
+            float vMin = textureAtlasSprite.getV0();
+            float vMax = textureAtlasSprite.getV1();
 
             // 渲染中间的宝石块
-            IVertexBuilder buffer = bufferIn.getBuffer(RenderType.getCutout());
+            IVertexBuilder buffer = bufferIn.getBuffer(RenderType.cutout());
 
-            matrixStackIn.push();
+            matrixStackIn.pushPose();
             matrixStackIn.translate(.5F, 1.06F, .5F);
             matrixStackIn.scale(0.1f, 0.1f, 0.1f);
-            matrixStackIn.rotate(this.renderDispatcher.renderInfo.getRotation());
+            matrixStackIn.mulPose(this.renderer.camera.rotation());
             matrixStackIn.translate(-.5F, -0.9F, -.5F);
-            Matrix4f matrix4f = matrixStackIn.getLast().getMatrix();
+            Matrix4f matrix4f = matrixStackIn.last().pose();
 
             //int light = this.getBrightnessForRender(tileEntityIn, partialTicks);
-            buffer.pos(matrix4f, 0, 1, 1).color(r, g, b, a).tex(uMin, vMin).lightmap(120, 240).normal(0, 1, 0).endVertex();
-            buffer.pos(matrix4f, 1, 1, 0).color(r, g, b, a).tex(uMin, vMax).lightmap(120, 240).normal(0, 1, 0).endVertex();
-            buffer.pos(matrix4f, 1, 1, 1).color(r, g, b, a).tex(uMax, vMax).lightmap(120, 240).normal(0, 1, 0).endVertex();
-            buffer.pos(matrix4f, 0, 1, 0).color(r, g, b, a).tex(uMax, vMin).lightmap(120, 240).normal(0, 1, 0).endVertex();
+            buffer.vertex(matrix4f, 0, 1, 1).color(r, g, b, a).uv(uMin, vMin).uv2(120, 240).normal(0, 1, 0).endVertex();
+            buffer.vertex(matrix4f, 1, 1, 0).color(r, g, b, a).uv(uMin, vMax).uv2(120, 240).normal(0, 1, 0).endVertex();
+            buffer.vertex(matrix4f, 1, 1, 1).color(r, g, b, a).uv(uMax, vMax).uv2(120, 240).normal(0, 1, 0).endVertex();
+            buffer.vertex(matrix4f, 0, 1, 0).color(r, g, b, a).uv(uMax, vMin).uv2(120, 240).normal(0, 1, 0).endVertex();
 
-            buffer.pos(matrix4f, 0, 0, 0).color(r, g, b, a).tex(uMin, vMin).lightmap(120, 240).normal(1, 1, 1).endVertex();
-            buffer.pos(matrix4f, 1, 0, 0).color(r, g, b, a).tex(uMin, vMax).lightmap(120, 240).normal(1, 1, 1).endVertex();
-            buffer.pos(matrix4f, 1, 0, 1).color(r, g, b, a).tex(uMax, vMax).lightmap(120, 240).normal(1, 1, 1).endVertex();
-            buffer.pos(matrix4f, 0, 0, 1).color(r, g, b, a).tex(uMax, vMin).lightmap(120, 240).normal(1, 1, 1).endVertex();
+            buffer.vertex(matrix4f, 0, 0, 0).color(r, g, b, a).uv(uMin, vMin).uv2(120, 240).normal(1, 1, 1).endVertex();
+            buffer.vertex(matrix4f, 1, 0, 0).color(r, g, b, a).uv(uMin, vMax).uv2(120, 240).normal(1, 1, 1).endVertex();
+            buffer.vertex(matrix4f, 1, 0, 1).color(r, g, b, a).uv(uMax, vMax).uv2(120, 240).normal(1, 1, 1).endVertex();
+            buffer.vertex(matrix4f, 0, 0, 1).color(r, g, b, a).uv(uMax, vMin).uv2(120, 240).normal(1, 1, 1).endVertex();
 
-            buffer.pos(matrix4f, 0, 1, 0).color(r, g, b, a).tex(uMin, vMin).lightmap(120, 240).normal(1, 1, 0).endVertex();
-            buffer.pos(matrix4f, 1, 1, 0).color(r, g, b, a).tex(uMin, vMax).lightmap(120, 240).normal(1, 1, 0).endVertex();
-            buffer.pos(matrix4f, 1, 0, 0).color(r, g, b, a).tex(uMax, vMax).lightmap(120, 240).normal(1, 1, 0).endVertex();
-            buffer.pos(matrix4f, 0, 0, 0).color(r, g, b, a).tex(uMax, vMin).lightmap(120, 240).normal(1, 1, 0).endVertex();
+            buffer.vertex(matrix4f, 0, 1, 0).color(r, g, b, a).uv(uMin, vMin).uv2(120, 240).normal(1, 1, 0).endVertex();
+            buffer.vertex(matrix4f, 1, 1, 0).color(r, g, b, a).uv(uMin, vMax).uv2(120, 240).normal(1, 1, 0).endVertex();
+            buffer.vertex(matrix4f, 1, 0, 0).color(r, g, b, a).uv(uMax, vMax).uv2(120, 240).normal(1, 1, 0).endVertex();
+            buffer.vertex(matrix4f, 0, 0, 0).color(r, g, b, a).uv(uMax, vMin).uv2(120, 240).normal(1, 1, 0).endVertex();
 
-            buffer.pos(matrix4f, 0, 1, 1).color(r, g, b, a).tex(uMin, vMin).lightmap(120, 240).normal(1, 1, 0).endVertex();
-            buffer.pos(matrix4f, 0, 1, 0).color(r, g, b, a).tex(uMin, vMax).lightmap(120, 240).normal(1, 1, 0).endVertex();
-            buffer.pos(matrix4f, 0, 0, 0).color(r, g, b, a).tex(uMax, vMax).lightmap(120, 240).normal(1, 1, 0).endVertex();
-            buffer.pos(matrix4f, 0, 0, 1).color(r, g, b, a).tex(uMax, vMin).lightmap(120, 240).normal(1, 1, 0).endVertex();
+            buffer.vertex(matrix4f, 0, 1, 1).color(r, g, b, a).uv(uMin, vMin).uv2(120, 240).normal(1, 1, 0).endVertex();
+            buffer.vertex(matrix4f, 0, 1, 0).color(r, g, b, a).uv(uMin, vMax).uv2(120, 240).normal(1, 1, 0).endVertex();
+            buffer.vertex(matrix4f, 0, 0, 0).color(r, g, b, a).uv(uMax, vMax).uv2(120, 240).normal(1, 1, 0).endVertex();
+            buffer.vertex(matrix4f, 0, 0, 1).color(r, g, b, a).uv(uMax, vMin).uv2(120, 240).normal(1, 1, 0).endVertex();
 
-            buffer.pos(matrix4f, 0, 1, 1).color(r, g, b, a).tex(uMin, vMin).lightmap(120, 240).normal(1, 1, 0).endVertex();
-            buffer.pos(matrix4f, 1, 1, 1).color(r, g, b, a).tex(uMin, vMax).lightmap(120, 240).normal(1, 1, 0).endVertex();
-            buffer.pos(matrix4f, 1, 0, 1).color(r, g, b, a).tex(uMax, vMax).lightmap(120, 240).normal(1, 1, 0).endVertex();
-            buffer.pos(matrix4f, 0, 0, 1).color(r, g, b, a).tex(uMax, vMin).lightmap(120, 240).normal(1, 1, 0).endVertex();
-
-
-            buffer.pos(matrix4f, 1, 1, 1).color(r, g, b, a).tex(uMin, vMin).lightmap(120, 240).normal(0, 1, 0).endVertex();
-            buffer.pos(matrix4f, 1, 1, 0).color(r, g, b, a).tex(uMin, vMax).lightmap(120, 240).normal(0, 1, 0).endVertex();
-            buffer.pos(matrix4f, 1, 0, 0).color(r, g, b, a).tex(uMax, vMax).lightmap(120, 240).normal(0, 1, 0).endVertex();
-            buffer.pos(matrix4f, 1, 0, 1).color(r, g, b, a).tex(uMax, vMin).lightmap(120, 240).normal(0, 1, 0).endVertex();
+            buffer.vertex(matrix4f, 0, 1, 1).color(r, g, b, a).uv(uMin, vMin).uv2(120, 240).normal(1, 1, 0).endVertex();
+            buffer.vertex(matrix4f, 1, 1, 1).color(r, g, b, a).uv(uMin, vMax).uv2(120, 240).normal(1, 1, 0).endVertex();
+            buffer.vertex(matrix4f, 1, 0, 1).color(r, g, b, a).uv(uMax, vMax).uv2(120, 240).normal(1, 1, 0).endVertex();
+            buffer.vertex(matrix4f, 0, 0, 1).color(r, g, b, a).uv(uMax, vMin).uv2(120, 240).normal(1, 1, 0).endVertex();
 
 
-            matrixStackIn.pop();
+            buffer.vertex(matrix4f, 1, 1, 1).color(r, g, b, a).uv(uMin, vMin).uv2(120, 240).normal(0, 1, 0).endVertex();
+            buffer.vertex(matrix4f, 1, 1, 0).color(r, g, b, a).uv(uMin, vMax).uv2(120, 240).normal(0, 1, 0).endVertex();
+            buffer.vertex(matrix4f, 1, 0, 0).color(r, g, b, a).uv(uMax, vMax).uv2(120, 240).normal(0, 1, 0).endVertex();
+            buffer.vertex(matrix4f, 1, 0, 1).color(r, g, b, a).uv(uMax, vMin).uv2(120, 240).normal(0, 1, 0).endVertex();
+
+
+            matrixStackIn.popPose();
 
             // 渲染logo
-            textureAtlasSprite = Minecraft.getInstance().getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE).apply(this.getlogoResource(tileEntityIn.gemItem));
-            uMin = textureAtlasSprite.getMinU();
-            uMax = textureAtlasSprite.getMaxU();
-            vMin = textureAtlasSprite.getMinV();
-            vMax = textureAtlasSprite.getMaxV();
+            textureAtlasSprite = Minecraft.getInstance().getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(this.getlogoResource(tileEntityIn.gemItem));
+            uMin = textureAtlasSprite.getU0();
+            uMax = textureAtlasSprite.getU1();
+            vMin = textureAtlasSprite.getV0();
+            vMax = textureAtlasSprite.getV1();
             //draw logo
-            matrixStackIn.push();
-            IVertexBuilder bufferLogo = bufferIn.getBuffer(RenderType.getCutout());
+            matrixStackIn.pushPose();
+            IVertexBuilder bufferLogo = bufferIn.getBuffer(RenderType.cutout());
             matrixStackIn.translate(0.5f, 2.0F + floatHeight, 0.5f);
-            matrixStackIn.rotate(this.renderDispatcher.renderInfo.getRotation());
+            matrixStackIn.mulPose(this.renderer.camera.rotation());
             matrixStackIn.scale(0.5f, 0.5f, 0.5f);
             matrixStackIn.translate(-0.5f, -0.5, -0.5f);
 
-            Matrix4f matrix4flogo = matrixStackIn.getLast().getMatrix();
-            bufferLogo.pos(matrix4flogo, 0, 1, 0.5F).color(r, g, b, a).tex(uMin, vMin).lightmap(120, 240).normal(0, 1, 0).endVertex();
-            bufferLogo.pos(matrix4flogo, 1, 1, 0.5F).color(r, g, b, a).tex(uMin, vMax).lightmap(120, 240).normal(0, 1, 0).endVertex();
-            bufferLogo.pos(matrix4flogo, 1, 0, 0.5F).color(r, g, b, a).tex(uMax, vMax).lightmap(120, 240).normal(0, 1, 0).endVertex();
-            bufferLogo.pos(matrix4flogo, 0, 0, 0.5F).color(r, g, b, a).tex(uMax, vMin).lightmap(120, 240).normal(0, 1, 0).endVertex();
+            Matrix4f matrix4flogo = matrixStackIn.last().pose();
+            bufferLogo.vertex(matrix4flogo, 0, 1, 0.5F).color(r, g, b, a).uv(uMin, vMin).uv2(120, 240).normal(0, 1, 0).endVertex();
+            bufferLogo.vertex(matrix4flogo, 1, 1, 0.5F).color(r, g, b, a).uv(uMin, vMax).uv2(120, 240).normal(0, 1, 0).endVertex();
+            bufferLogo.vertex(matrix4flogo, 1, 0, 0.5F).color(r, g, b, a).uv(uMax, vMax).uv2(120, 240).normal(0, 1, 0).endVertex();
+            bufferLogo.vertex(matrix4flogo, 0, 0, 0.5F).color(r, g, b, a).uv(uMax, vMin).uv2(120, 240).normal(0, 1, 0).endVertex();
 
-            matrixStackIn.pop();
+            matrixStackIn.popPose();
 
         }
     }
@@ -141,7 +141,7 @@ public class TileEntityRenderGemShower extends TileEntityRenderer<TileEntityGemS
     }
 
     protected int getBrightnessForRender(TileEntityGemShower tileEntityGemShower, float partialTick) {
-        BlockPos blockpos = new BlockPos(tileEntityGemShower.getPos().getX(), tileEntityGemShower.getPos().getY(), tileEntityGemShower.getPos().getZ());
-        return tileEntityGemShower.getWorld().isBlockLoaded(blockpos) ? WorldRenderer.getCombinedLight(tileEntityGemShower.getWorld(), blockpos) : 0;
+        BlockPos blockpos = new BlockPos(tileEntityGemShower.getBlockPos().getX(), tileEntityGemShower.getBlockPos().getY(), tileEntityGemShower.getBlockPos().getZ());
+        return tileEntityGemShower.getLevel().hasChunkAt(blockpos) ? WorldRenderer.getLightColor(tileEntityGemShower.getLevel(), blockpos) : 0;
     }
 }

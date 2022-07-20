@@ -18,7 +18,7 @@ public class ContainerBluePrint extends Container {
         CompoundNBT nbt = stack.getOrCreateTag();
         int index = 0;
         for (int i = 0; i < slotPositions.length; i++) {
-            addSlot(new BluePrintSlot(new Inventory(ItemStack.read(nbt.getCompound("bluePrintSlot" + i))), 0, slotPositions[i][0] - 28, slotPositions[i][1] - 56));
+            addSlot(new BluePrintSlot(new Inventory(ItemStack.of(nbt.getCompound("bluePrintSlot" + i))), 0, slotPositions[i][0] - 28, slotPositions[i][1] - 56));
         }
 
         layoutPlayerInventorySlots(inventory, 24 - 28, 129 - 56);
@@ -61,12 +61,12 @@ public class ContainerBluePrint extends Container {
     }
 
     @Override
-    public boolean canInteractWith(PlayerEntity playerIn) {
+    public boolean stillValid(PlayerEntity playerIn) {
         return true;
     }
 
     @Override
-    public void onContainerClosed(PlayerEntity playerIn) {
+    public void removed(PlayerEntity playerIn) {
 
     }
 }
@@ -77,12 +77,12 @@ class BluePrintSlot extends Slot {
     }
 
     @Override
-    public boolean isItemValid(ItemStack stack) {
+    public boolean mayPlace(ItemStack stack) {
         return true;
     }
 
     @Override
-    public int getSlotStackLimit() {
+    public int getMaxStackSize() {
         return 1;
     }
 }

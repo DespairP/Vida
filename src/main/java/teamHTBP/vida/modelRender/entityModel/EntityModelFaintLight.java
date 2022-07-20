@@ -13,22 +13,22 @@ public class EntityModelFaintLight extends EntityModel<EntityFaintLight> {
     private final ModelRenderer body;
 
     public EntityModelFaintLight() {
-        textureWidth = 32;
-        textureHeight = 32;
+        texWidth = 32;
+        texHeight = 32;
         body = new ModelRenderer(this);
-        body.setRotationPoint(-4.0F, -8, -4);
-        body.setTextureSize(16, 16);
+        body.setPos(-4.0F, -8, -4);
+        body.setTexSize(16, 16);
         body.addBox(-1, -0, -1, 16, 16, 1, 0.0F);
 
     }
 
     @Override
-    public void setRotationAngles(EntityFaintLight entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(EntityFaintLight entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 
     }
 
     @Override
-    public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
         body.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
 
     }

@@ -31,17 +31,17 @@ public class FermenterFluidRecipe extends BaseRecipe<Inventory> {
     }
 
     @Override
-    public ItemStack getCraftingResult(Inventory inv) {
+    public ItemStack assemble(Inventory inv) {
         return output.copy();
     }
 
     @Override
-    public boolean canFit(int width, int height) {
+    public boolean canCraftInDimensions(int width, int height) {
         return true;
     }
 
     @Override
-    public ItemStack getRecipeOutput() {
+    public ItemStack getResultItem() {
         return output.copy();
     }
 

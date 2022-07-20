@@ -25,33 +25,33 @@ public class TileEntityEarthElementCrystal extends TileEntity implements ITickab
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT nbt) {
+    public void load(BlockState state, CompoundNBT nbt) {
         energyCapability.ifPresent(T -> T.setEnergy(nbt.getInt("energy")));
-        super.read(state, nbt);
+        super.load(state, nbt);
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
+    public CompoundNBT save(CompoundNBT compound) {
         energyCapability.ifPresent(h -> compound.putInt("energy", h.getEnergyStored()));
         //System.out.println(compound.getInt("energy"));
-        return super.write(compound);
+        return super.save(compound);
     }
 
     @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
+        return new SUpdateTileEntityPacket(this.worldPosition, 1, this.getUpdateTag());
     }
 
     @Override
     public CompoundNBT getUpdateTag() {
-        return this.write(new CompoundNBT());
+        return this.save(new CompoundNBT());
     }
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
         super.onDataPacket(net, pkt);
-        handleUpdateTag(world.getBlockState(pos), pkt.getNbtCompound());
+        handleUpdateTag(level.getBlockState(worldPosition), pkt.getTag());
     }
 
     @Override
@@ -63,7 +63,7 @@ public class TileEntityEarthElementCrystal extends TileEntity implements ITickab
 
     @Override
     public void tick() {
-        if (world.isRemote)
+        if (level.isClientSide)
             if (sinWave > 2 * Math.PI) sinWave = 0;
             else sinWave += 0.1f;
     }

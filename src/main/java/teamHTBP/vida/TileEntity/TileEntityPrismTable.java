@@ -49,10 +49,10 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
 
 
     @Override
-    public void read(BlockState state, CompoundNBT compound) {
-        this.slot.setInventorySlotContents(0, ItemStack.read(compound.getCompound("item1")));
-        this.slot.setInventorySlotContents(1, ItemStack.read(compound.getCompound("item2")));
-        this.slot.setInventorySlotContents(2, ItemStack.read(compound.getCompound("item3")));
+    public void load(BlockState state, CompoundNBT compound) {
+        this.slot.setItem(0, ItemStack.of(compound.getCompound("item1")));
+        this.slot.setItem(1, ItemStack.of(compound.getCompound("item2")));
+        this.slot.setItem(2, ItemStack.of(compound.getCompound("item3")));
         array.set(0, compound.getInt("fireX"));
         array.set(1, compound.getInt("fireY"));
         array.set(2, compound.getInt("mirrorX"));
@@ -60,14 +60,14 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
         isGem = compound.getBoolean("isGem");
         isMirror = compound.getBoolean("isMirror");
         isFire = compound.getBoolean("isFire");
-        super.read(state, compound);
+        super.load(state, compound);
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
-        ItemStack itemStack1 = this.slot.getStackInSlot(0).copy();
-        ItemStack itemStack2 = this.slot.getStackInSlot(1).copy();
-        ItemStack itemStack3 = this.slot.getStackInSlot(2).copy();
+    public CompoundNBT save(CompoundNBT compound) {
+        ItemStack itemStack1 = this.slot.getItem(0).copy();
+        ItemStack itemStack2 = this.slot.getItem(1).copy();
+        ItemStack itemStack3 = this.slot.getItem(2).copy();
         compound.put("item1", itemStack1.serializeNBT());
         compound.put("item2", itemStack2.serializeNBT());
         compound.put("item3", itemStack3.serializeNBT());
@@ -78,25 +78,25 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
         compound.putBoolean("isGem", isGem);
         compound.putBoolean("isMirror", isMirror);
         compound.putBoolean("isFire", isFire);
-        return super.write(compound);
+        return super.save(compound);
     }
 
     @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
+        return new SUpdateTileEntityPacket(this.worldPosition, 1, this.getUpdateTag());
     }
 
     @Override
     public CompoundNBT getUpdateTag() {
-        return this.write(new CompoundNBT());
+        return this.save(new CompoundNBT());
 
     }
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
         super.onDataPacket(net, pkt);
-        handleUpdateTag(world.getBlockState(pos), pkt.getNbtCompound());
+        handleUpdateTag(level.getBlockState(worldPosition), pkt.getTag());
     }
 
     @Override
@@ -109,7 +109,7 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
         isGem = tag.getBoolean("isGem");
         isMirror = tag.getBoolean("isMirror");
         isFire = tag.getBoolean("isFire");
-        super.read(state, tag);
+        super.load(state, tag);
     }
 
     public Inventory getSlot() {
@@ -124,25 +124,25 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
     @Nullable
     @Override
     public Container createMenu(int id, PlayerInventory p_createMenu_2_, PlayerEntity p_createMenu_3_) {
-        return new ContainerPrismTable(id, p_createMenu_2_, this.pos, this.world, this.array);
+        return new ContainerPrismTable(id, p_createMenu_2_, this.worldPosition, this.level, this.array);
     }
 
     @Override
     public void tick() {
         // world.notifyBlockUpdate(pos, getBlockState(),getBlockState(),3);
-        this.isMirror = this.slot.getStackInSlot(1).getItem() == ItemLoader.prism.get();
-        if (this.slot.getStackInSlot(0) == ItemStack.EMPTY && !(this.slot.getStackInSlot(0).getItem() instanceof ItemEnergyElementFragment)) {
+        this.isMirror = this.slot.getItem(1).getItem() == ItemLoader.prism.get();
+        if (this.slot.getItem(0) == ItemStack.EMPTY && !(this.slot.getItem(0).getItem() instanceof ItemEnergyElementFragment)) {
             //如果没有任何东西的话
             this.isGem = false;
             this.array.set(0, 0);
             this.array.set(1, 0);
         }
-        if (!world.isRemote) {
+        if (!level.isClientSide) {
             //如果没有宝石在里面就开始检测
             if (!this.isGem) {
                 gemInside();
-                world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 3);
-                this.markDirty();
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+                this.setChanged();
             }
             if (this.isClick && this.isGem) {
                 // System.out.println(this.array.get(0));
@@ -161,7 +161,7 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
         this.array.set(1, 0);
         this.array.set(2, 0);
         this.array.set(3, 0);
-        world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 3);
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
     }
 
     //磨制人工水晶
@@ -176,19 +176,19 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
             // System.out.println(offset1 + " "  +offset2);
             if (offset1 < 10 && offset2 < 10) {
                 ElementHelper elementHelper = new ElementHelper();
-                ItemStack itemStack = this.slot.getStackInSlot(0);
+                ItemStack itemStack = this.slot.getItem(0);
                 IElement element = ElementHelper.getContainingElement(itemStack);
 
-                if (this.slot.getStackInSlot(2) == ItemStack.EMPTY || this.slot.getStackInSlot(2).isEmpty()) {
-                    this.slot.setInventorySlotContents(2, this.getItemGemFromElement(element));
-                    int count = this.slot.getStackInSlot(0).getCount();
-                    this.slot.getStackInSlot(0).setCount(count - 1);
+                if (this.slot.getItem(2) == ItemStack.EMPTY || this.slot.getItem(2).isEmpty()) {
+                    this.slot.setItem(2, this.getItemGemFromElement(element));
+                    int count = this.slot.getItem(0).getCount();
+                    this.slot.getItem(0).setCount(count - 1);
                     clearPrismTable();
-                } else if (this.slot.getStackInSlot(2).getItem() == this.getItemGemFromElement(element).getItem() && this.slot.getStackInSlot(2).getCount() < 64) {
-                    int count = this.slot.getStackInSlot(2).getCount();
-                    this.slot.getStackInSlot(2).setCount(count + 1);
-                    count = this.slot.getStackInSlot(0).getCount();
-                    this.slot.getStackInSlot(0).setCount(count - 1);
+                } else if (this.slot.getItem(2).getItem() == this.getItemGemFromElement(element).getItem() && this.slot.getItem(2).getCount() < 64) {
+                    int count = this.slot.getItem(2).getCount();
+                    this.slot.getItem(2).setCount(count + 1);
+                    count = this.slot.getItem(0).getCount();
+                    this.slot.getItem(0).setCount(count - 1);
                     clearPrismTable();
                 }
 
@@ -201,7 +201,7 @@ public class TileEntityPrismTable extends TileEntity implements INamedContainerP
     public void gemInside() {
         //检测是否格子0中有宝石
         Item item = null; //宝石的item
-        ItemStack itemStack = this.slot.getStackInSlot(0); //先获取itemStak
+        ItemStack itemStack = this.slot.getItem(0); //先获取itemStak
         if (itemStack != null && !itemStack.isEmpty()) {
             item = itemStack.getItem(); //获得item
         }

@@ -19,9 +19,11 @@ import teamHTBP.vida.TileEntity.TileEntityOreReationMachine;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class BlockOreReactionMachine extends Block {
     public BlockOreReactionMachine() {
-        super(Properties.create(Material.ROCK).notSolid().hardnessAndResistance(4.0f, 4.0f));
+        super(Properties.of(Material.STONE).noOcclusion().strength(4.0f, 4.0f));
     }
 
 
@@ -31,16 +33,16 @@ public class BlockOreReactionMachine extends Block {
     }
 
     @Override
-    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-        TileEntityOreReationMachine tileEntityOreReationMachine = (TileEntityOreReationMachine) worldIn.getTileEntity(pos);
+    public void playerWillDestroy(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+        TileEntityOreReationMachine tileEntityOreReationMachine = (TileEntityOreReationMachine) worldIn.getBlockEntity(pos);
         if (tileEntityOreReationMachine != null) {
             for (int i = 0; i < 4; i++)
-                worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityOreReationMachine.getSmeltSlotInv().getStackInSlot(i)));
-            worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityOreReationMachine.getFuelInv().getStackInSlot(0)));
-            worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityOreReationMachine.getCompleteSlot().getStackInSlot(0)));
+                worldIn.addFreshEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityOreReationMachine.getSmeltSlotInv().getItem(i)));
+            worldIn.addFreshEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityOreReationMachine.getFuelInv().getItem(0)));
+            worldIn.addFreshEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityOreReationMachine.getCompleteSlot().getItem(0)));
 
         }
-        super.onBlockHarvested(worldIn, pos, state, player);
+        super.playerWillDestroy(worldIn, pos, state, player);
     }
 
     @Nullable
@@ -50,11 +52,11 @@ public class BlockOreReactionMachine extends Block {
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!worldIn.isRemote && handIn == Hand.MAIN_HAND) {
-            TileEntityOreReationMachine tileEntityOreReationMachine = (TileEntityOreReationMachine) worldIn.getTileEntity(pos);
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (!worldIn.isClientSide && handIn == Hand.MAIN_HAND) {
+            TileEntityOreReationMachine tileEntityOreReationMachine = (TileEntityOreReationMachine) worldIn.getBlockEntity(pos);
             NetworkHooks.openGui((ServerPlayerEntity) player, tileEntityOreReationMachine, (PacketBuffer packerBuffer) -> {
-                packerBuffer.writeBlockPos(tileEntityOreReationMachine.getPos());
+                packerBuffer.writeBlockPos(tileEntityOreReationMachine.getBlockPos());
             });
         }
         return ActionResultType.SUCCESS;

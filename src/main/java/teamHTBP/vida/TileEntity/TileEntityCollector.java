@@ -32,46 +32,46 @@ public class TileEntityCollector extends TileEntity implements ITickableTileEnti
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT compound) {
+    public void load(BlockState state, CompoundNBT compound) {
         if (compound.contains("coreItem"))
-            coreItem = ItemStack.read(compound.getCompound("coreItem"));
+            coreItem = ItemStack.of(compound.getCompound("coreItem"));
         isCollect = compound.getBoolean("isCollect");
         collection = compound.getInt("collectionU");
         element = ElementHelper.read(compound);
-        super.read(state, compound);
+        super.load(state, compound);
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
+    public CompoundNBT save(CompoundNBT compound) {
         if (coreItem != ItemStack.EMPTY || !coreItem.isEmpty())
             compound.put("coreItem", coreItem.serializeNBT());
         compound.putInt("collectionU", collection);
         compound.putBoolean("isCollect", isCollect);
         ElementHelper.write(compound, element);
-        return super.write(compound);
+        return super.save(compound);
     }
 
     @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
+        return new SUpdateTileEntityPacket(this.worldPosition, 1, this.getUpdateTag());
     }
 
     @Override
     public CompoundNBT getUpdateTag() {
-        return this.write(new CompoundNBT());
+        return this.save(new CompoundNBT());
     }
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
         super.onDataPacket(net, pkt);
-        handleUpdateTag(world.getBlockState(pos), pkt.getNbtCompound());
+        handleUpdateTag(level.getBlockState(worldPosition), pkt.getTag());
     }
 
     @Override
     public void handleUpdateTag(BlockState state, CompoundNBT tag) {
         if (tag.contains("gemItem"))
-            coreItem = ItemStack.read(tag.getCompound("gemItem"));
+            coreItem = ItemStack.of(tag.getCompound("gemItem"));
         else
             coreItem = ItemStack.EMPTY;
 
@@ -79,7 +79,7 @@ public class TileEntityCollector extends TileEntity implements ITickableTileEnti
         collection = tag.getInt("collectionU");
         element = ElementHelper.read(tag);
         super.handleUpdateTag(state, tag);
-        super.read(state, tag);
+        super.load(state, tag);
     }
 
 
@@ -142,11 +142,11 @@ public class TileEntityCollector extends TileEntity implements ITickableTileEnti
     public void tick() {
         boolean flag = false; // 更新数据flag
         // 如果是服务端的话进行逻辑判断
-        if (!world.isRemote) {
+        if (!level.isClientSide) {
             // 如果没有在收集且有空核心时，启用收集
             if (!isCollect && hasEmptyElementCore()) {
                 this.isCollect = true;
-                this.element = ElementHelper.getBiomeElement(world.getBiome(pos));
+                this.element = ElementHelper.getBiomeElement(level.getBiome(worldPosition));
                 flag = true;
             }
             // 如果正在收集，就继续收集
@@ -167,8 +167,8 @@ public class TileEntityCollector extends TileEntity implements ITickableTileEnti
         }
         // 更新逻辑
         if (flag) {
-            world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 3);
-            this.markDirty();
+            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+            this.setChanged();
         }
     }
 }

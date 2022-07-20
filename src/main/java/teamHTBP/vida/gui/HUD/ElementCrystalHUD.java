@@ -21,8 +21,8 @@ public class ElementCrystalHUD extends AbstractGui implements IVidaHUD{
     private int progress_ticks = 0;
 
     public ElementCrystalHUD(IElementCrystal tileEntityCrystal, int fragmentTick, int progress_ticks) {
-        width = Minecraft.getInstance().getMainWindow().getScaledWidth();
-        height = Minecraft.getInstance().getMainWindow().getScaledHeight();
+        width = Minecraft.getInstance().getWindow().getGuiScaledWidth();
+        height = Minecraft.getInstance().getWindow().getGuiScaledHeight();
         minecraft = Minecraft.getInstance();
         this.tileEntityCrystal = tileEntityCrystal;
         this.fragment_ticks = fragmentTick;
@@ -35,7 +35,7 @@ public class ElementCrystalHUD extends AbstractGui implements IVidaHUD{
         int screenHeight = this.height / 2 - 40;
         if (fragment_ticks > 33) fragment_ticks = fragment_ticks % 33;
         RenderSystem.color4f(1, 1, 1, 1);
-        this.minecraft.getTextureManager().bindTexture(HUD);
+        this.minecraft.getTextureManager().bind(HUD);
         blit(matrixStack, screenWidth - 9, screenHeight - 1, 0, 257, 0, 15, 16, 528, 528);
         blit(matrixStack, screenWidth + 15 - 9, screenHeight - 1, 0, 272, 0, 15, 16, 528, 528);
         renderFragment(matrixStack);

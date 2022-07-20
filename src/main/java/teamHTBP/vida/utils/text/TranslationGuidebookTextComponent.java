@@ -18,7 +18,7 @@ public class TranslationGuidebookTextComponent extends TextComponent {
 
 
     @Override
-    public TextComponent copyRaw() {
+    public TextComponent plainCopy() {
         return null;
     }
 }

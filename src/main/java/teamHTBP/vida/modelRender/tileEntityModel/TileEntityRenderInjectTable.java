@@ -39,39 +39,39 @@ public class TileEntityRenderInjectTable extends TileEntityRenderer<TileEntityIn
 
     @Override
     public void render(TileEntityInjectTable tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
-        IVertexBuilder iVertexBuilder = bufferIn.getBuffer(RenderType.getEntityTranslucent(TEXTURE));
+        IVertexBuilder iVertexBuilder = bufferIn.getBuffer(RenderType.entityTranslucent(TEXTURE));
 
-        matrixStackIn.push();
+        matrixStackIn.pushPose();
         matrixStackIn.scale(1, -1, 1);
         matrixStackIn.translate(0.5, 0, 0.5);
 
-        matrixStackIn.push();
-        matrixStackIn.rotate(Vector3f.YN.rotationDegrees(tick(partialTicks)));
-        int light = LightTexture.packLight(10, 10);
+        matrixStackIn.pushPose();
+        matrixStackIn.mulPose(Vector3f.YN.rotationDegrees(tick(partialTicks)));
+        int light = LightTexture.pack(10, 10);
         MODEL.rotateCube.render(matrixStackIn, iVertexBuilder, light, combinedOverlayIn);
-        matrixStackIn.pop();
-        MODEL.render(matrixStackIn, iVertexBuilder, combinedLightIn, combinedOverlayIn, 1, 1, 1, 1);
+        matrixStackIn.popPose();
+        MODEL.renderToBuffer(matrixStackIn, iVertexBuilder, combinedLightIn, combinedOverlayIn, 1, 1, 1, 1);
 
-        matrixStackIn.pop();
+        matrixStackIn.popPose();
 
         if (tileEntityIn.hasSwordItem() && tileEntityIn.getSwordStack().getItem() instanceof SwordItem) {
-            matrixStackIn.push();
+            matrixStackIn.pushPose();
             double floating = 0.12 * Math.sin(sinWave(partialTicks));
             matrixStackIn.translate(0.5f, 1.8f + floating, 0.5f);
-            matrixStackIn.rotate(new Quaternion(0, 0, 180 - 45, true));
+            matrixStackIn.mulPose(new Quaternion(0, 0, 180 - 45, true));
             ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-            IBakedModel ibakedmodel = itemRenderer.getItemModelWithOverrides(tileEntityIn.getSwordStack(), tileEntityIn.getWorld(), null);
-            itemRenderer.renderItem(tileEntityIn.getSwordStack(), ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, 240, combinedOverlayIn, ibakedmodel);
-            matrixStackIn.pop();
+            IBakedModel ibakedmodel = itemRenderer.getModel(tileEntityIn.getSwordStack(), tileEntityIn.getLevel(), null);
+            itemRenderer.render(tileEntityIn.getSwordStack(), ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, 240, combinedOverlayIn, ibakedmodel);
+            matrixStackIn.popPose();
         } else if (tileEntityIn.hasSwordItem()) {
-            matrixStackIn.push();
+            matrixStackIn.pushPose();
             double floating = 0.12 * Math.sin(sinWave(partialTicks));
             matrixStackIn.translate(0.5f, 1.8f + floating, 0.5f);
-            matrixStackIn.rotate(new Quaternion(0, 0, -45, true));
+            matrixStackIn.mulPose(new Quaternion(0, 0, -45, true));
             ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-            IBakedModel ibakedmodel = itemRenderer.getItemModelWithOverrides(tileEntityIn.getSwordStack(), tileEntityIn.getWorld(), null);
-            itemRenderer.renderItem(tileEntityIn.getSwordStack(), ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, 240, combinedOverlayIn, ibakedmodel);
-            matrixStackIn.pop();
+            IBakedModel ibakedmodel = itemRenderer.getModel(tileEntityIn.getSwordStack(), tileEntityIn.getLevel(), null);
+            itemRenderer.render(tileEntityIn.getSwordStack(), ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, 240, combinedOverlayIn, ibakedmodel);
+            matrixStackIn.popPose();
         }
 
     }

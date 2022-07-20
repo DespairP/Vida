@@ -82,7 +82,7 @@ public class BluePrintManager extends JsonReloadListener {
 
     /**根据不同的情况获取manager*/
     public BluePrintManager getManager(World world){
-        if(world.isRemote){
+        if(world.isClientSide){
             return clientManager;
         }
         MinecraftServer server = world.getServer();

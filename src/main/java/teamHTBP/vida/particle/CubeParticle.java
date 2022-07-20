@@ -23,72 +23,72 @@ public class CubeParticle extends SpriteTexturedParticle {
 
     protected CubeParticle(ClientWorld World, double posX, double posY, double posZ, double speedX, double speedY, double speedZ) {
         super(World, posX, posY, posZ, speedX, speedY, speedZ);
-        this.canCollide = true;
-        motionX = speedX;
-        motionY = speedY;
-        motionZ = speedZ;
-        particleScale = 0.1f;
-        this.maxAge = 100;
+        this.hasPhysics = true;
+        xd = speedX;
+        yd = speedY;
+        zd = speedZ;
+        quadSize = 0.1f;
+        this.lifetime = 100;
 
     }
 
     protected CubeParticle(ClientWorld World, double posX, double posY, double posZ, double speedX, double speedY, double speedZ, float r, float g, float b, float scale) {
         super(World, posX, posY, posZ, speedX, speedY, speedZ);
-        this.canCollide = true;
-        motionX = speedX;
-        motionY = speedY;
-        motionZ = speedZ;
-        particleScale = scale;
-        this.maxAge = 100;
-        this.particleRed = r / 255.0f;
-        this.particleGreen = g / 255.0f;
-        this.particleBlue = b / 255.0f;
+        this.hasPhysics = true;
+        xd = speedX;
+        yd = speedY;
+        zd = speedZ;
+        quadSize = scale;
+        this.lifetime = 100;
+        this.rCol = r / 255.0f;
+        this.gCol = g / 255.0f;
+        this.bCol = b / 255.0f;
         this.rotationType = new Random().nextInt(10) + 1;
-        if (this.particleScale == 0.03f) {
-            this.particleAlpha = 0.7f;
+        if (this.quadSize == 0.03f) {
+            this.alpha = 0.7f;
         }
     }
 
     @Override
-    public void renderParticle(IVertexBuilder buffer, ActiveRenderInfo renderInfo, float partialTicks) {
+    public void render(IVertexBuilder buffer, ActiveRenderInfo renderInfo, float partialTicks) {
 
-        Vector3d vec3d = renderInfo.getProjectedView();
-        float f = (float) (MathHelper.lerp(partialTicks, this.prevPosX, this.posX) - vec3d.getX());
-        float f1 = (float) (MathHelper.lerp(partialTicks, this.prevPosY, this.posY) - vec3d.getY());
-        float f2 = (float) (MathHelper.lerp(partialTicks, this.prevPosZ, this.posZ) - vec3d.getZ());
+        Vector3d vec3d = renderInfo.getPosition();
+        float f = (float) (MathHelper.lerp(partialTicks, this.xo, this.x) - vec3d.x());
+        float f1 = (float) (MathHelper.lerp(partialTicks, this.yo, this.y) - vec3d.y());
+        float f2 = (float) (MathHelper.lerp(partialTicks, this.zo, this.z) - vec3d.z());
 
 
-        Quaternion quaternion = new Quaternion(renderInfo.getRotation());
+        Quaternion quaternion = new Quaternion(renderInfo.rotation());
         switch (rotationType) {
             case 1:
-                quaternion = new Quaternion(this.particleAngle, this.particleAngle, 0, true);
+                quaternion = new Quaternion(this.roll, this.roll, 0, true);
                 break;
             case 2:
-                quaternion = new Quaternion(this.particleAngle, this.particleAngle, this.particleAngle, true);
+                quaternion = new Quaternion(this.roll, this.roll, this.roll, true);
                 break;
             case 3:
-                quaternion = new Quaternion(this.particleAngle, 0, this.particleAngle, true);
+                quaternion = new Quaternion(this.roll, 0, this.roll, true);
                 break;
             case 4:
-                quaternion = new Quaternion(0, this.particleAngle, this.particleAngle, true);
+                quaternion = new Quaternion(0, this.roll, this.roll, true);
                 break;
             case 5:
-                quaternion = new Quaternion(0, this.particleAngle, 0, true);
+                quaternion = new Quaternion(0, this.roll, 0, true);
                 break;
             case 6:
-                quaternion = new Quaternion(0, this.particleAngle, this.particleAngle, true);
+                quaternion = new Quaternion(0, this.roll, this.roll, true);
                 break;
             case 7:
-                quaternion = new Quaternion(0, -this.particleAngle, -this.particleAngle, true);
+                quaternion = new Quaternion(0, -this.roll, -this.roll, true);
                 break;
             case 8:
-                quaternion = new Quaternion(-this.particleAngle, -this.particleAngle, this.particleAngle, true);
+                quaternion = new Quaternion(-this.roll, -this.roll, this.roll, true);
                 break;
             case 9:
-                quaternion = new Quaternion(-this.particleAngle, -this.particleAngle, -this.particleAngle, true);
+                quaternion = new Quaternion(-this.roll, -this.roll, -this.roll, true);
                 break;
             case 10:
-                quaternion = new Quaternion(0, this.particleAngle, -this.particleAngle, true);
+                quaternion = new Quaternion(0, this.roll, -this.roll, true);
                 break;
         }
 
@@ -102,7 +102,7 @@ public class CubeParticle extends SpriteTexturedParticle {
                 new Vector3f(-1.0F, -1.0F, 2.0F), new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 2.0F)
 
         };
-        float f4 = this.getScale(partialTicks);
+        float f4 = this.getQuadSize(partialTicks);
 
         for (int i = 0; i < 24; ++i) {
             Vector3f vector3f = avector3f[i];
@@ -111,55 +111,55 @@ public class CubeParticle extends SpriteTexturedParticle {
             vector3f.add(f, f1, f2);
         }
 
-        float f7 = this.getMinU();
-        float f8 = this.getMaxU();
-        float f5 = this.getMinV();
-        float f6 = this.getMaxV();
-        int j = this.getBrightnessForRender(partialTicks);
+        float f7 = this.getU0();
+        float f8 = this.getU1();
+        float f5 = this.getV0();
+        float f6 = this.getV1();
+        int j = this.getLightColor(partialTicks);
         //下面(正反面都要渲染)
-        buffer.pos(avector3f[0].getX(), avector3f[0].getY(), avector3f[0].getZ()).tex(f8, f6).color(this.particleRed * 0.5f, this.particleGreen * 0.5f, this.particleBlue * 0.5f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[8].getX(), avector3f[8].getY(), avector3f[8].getZ()).tex(f8, f5).color(this.particleRed * 0.5f, this.particleGreen * 0.5f, this.particleBlue * 0.5f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[11].getX(), avector3f[11].getY(), avector3f[11].getZ()).tex(f7, f5).color(this.particleRed * 0.5f, this.particleGreen * 0.5f, this.particleBlue * 0.5f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[3].getX(), avector3f[3].getY(), avector3f[3].getZ()).tex(f7, f6).color(this.particleRed * 0.5f, this.particleGreen * 0.5f, this.particleBlue * 0.5f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.vertex(avector3f[0].x(), avector3f[0].y(), avector3f[0].z()).uv(f8, f6).color(this.rCol * 0.5f, this.gCol * 0.5f, this.bCol * 0.5f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[8].x(), avector3f[8].y(), avector3f[8].z()).uv(f8, f5).color(this.rCol * 0.5f, this.gCol * 0.5f, this.bCol * 0.5f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[11].x(), avector3f[11].y(), avector3f[11].z()).uv(f7, f5).color(this.rCol * 0.5f, this.gCol * 0.5f, this.bCol * 0.5f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[3].x(), avector3f[3].y(), avector3f[3].z()).uv(f7, f6).color(this.rCol * 0.5f, this.gCol * 0.5f, this.bCol * 0.5f, this.alpha).uv2(j).endVertex();
 
-        buffer.pos(avector3f[3].getX(), avector3f[3].getY(), avector3f[3].getZ()).tex(f8, f6).color(this.particleRed * 0.5f, this.particleGreen * 0.5f, this.particleBlue * 0.5f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[11].getX(), avector3f[11].getY(), avector3f[11].getZ()).tex(f8, f5).color(this.particleRed * 0.5f, this.particleGreen * 0.5f, this.particleBlue * 0.5f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[8].getX(), avector3f[8].getY(), avector3f[8].getZ()).tex(f7, f5).color(this.particleRed * 0.5f, this.particleGreen * 0.5f, this.particleBlue * 0.5f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[0].getX(), avector3f[0].getY(), avector3f[0].getZ()).tex(f7, f6).color(this.particleRed * 0.5f, this.particleGreen * 0.5f, this.particleBlue * 0.5f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.vertex(avector3f[3].x(), avector3f[3].y(), avector3f[3].z()).uv(f8, f6).color(this.rCol * 0.5f, this.gCol * 0.5f, this.bCol * 0.5f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[11].x(), avector3f[11].y(), avector3f[11].z()).uv(f8, f5).color(this.rCol * 0.5f, this.gCol * 0.5f, this.bCol * 0.5f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[8].x(), avector3f[8].y(), avector3f[8].z()).uv(f7, f5).color(this.rCol * 0.5f, this.gCol * 0.5f, this.bCol * 0.5f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[0].x(), avector3f[0].y(), avector3f[0].z()).uv(f7, f6).color(this.rCol * 0.5f, this.gCol * 0.5f, this.bCol * 0.5f, this.alpha).uv2(j).endVertex();
         //背面
-        buffer.pos(avector3f[0].getX(), avector3f[0].getY(), avector3f[0].getZ()).tex(f8, f6).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[1].getX(), avector3f[1].getY(), avector3f[1].getZ()).tex(f8, f5).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[2].getX(), avector3f[2].getY(), avector3f[2].getZ()).tex(f7, f5).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[3].getX(), avector3f[3].getY(), avector3f[3].getZ()).tex(f7, f6).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.vertex(avector3f[0].x(), avector3f[0].y(), avector3f[0].z()).uv(f8, f6).color(this.rCol * 0.8f, this.gCol * 0.8f, this.bCol * 0.8f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[1].x(), avector3f[1].y(), avector3f[1].z()).uv(f8, f5).color(this.rCol * 0.8f, this.gCol * 0.8f, this.bCol * 0.8f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[2].x(), avector3f[2].y(), avector3f[2].z()).uv(f7, f5).color(this.rCol * 0.8f, this.gCol * 0.8f, this.bCol * 0.8f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[3].x(), avector3f[3].y(), avector3f[3].z()).uv(f7, f6).color(this.rCol * 0.8f, this.gCol * 0.8f, this.bCol * 0.8f, this.alpha).uv2(j).endVertex();
 
         //左侧
-        buffer.pos(avector3f[1].getX(), avector3f[1].getY(), avector3f[1].getZ()).tex(f8, f6).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[0].getX(), avector3f[0].getY(), avector3f[0].getZ()).tex(f8, f5).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[8].getX(), avector3f[8].getY(), avector3f[8].getZ()).tex(f7, f5).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[9].getX(), avector3f[9].getY(), avector3f[9].getZ()).tex(f7, f6).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.vertex(avector3f[1].x(), avector3f[1].y(), avector3f[1].z()).uv(f8, f6).color(this.rCol * 0.6f, this.gCol * 0.6f, this.bCol * 0.6f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[0].x(), avector3f[0].y(), avector3f[0].z()).uv(f8, f5).color(this.rCol * 0.6f, this.gCol * 0.6f, this.bCol * 0.6f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[8].x(), avector3f[8].y(), avector3f[8].z()).uv(f7, f5).color(this.rCol * 0.6f, this.gCol * 0.6f, this.bCol * 0.6f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[9].x(), avector3f[9].y(), avector3f[9].z()).uv(f7, f6).color(this.rCol * 0.6f, this.gCol * 0.6f, this.bCol * 0.6f, this.alpha).uv2(j).endVertex();
 
         //正面
-        buffer.pos(avector3f[11].getX(), avector3f[11].getY(), avector3f[11].getZ()).tex(f8, f6).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[10].getX(), avector3f[10].getY(), avector3f[10].getZ()).tex(f8, f5).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[9].getX(), avector3f[9].getY(), avector3f[9].getZ()).tex(f7, f5).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[8].getX(), avector3f[8].getY(), avector3f[8].getZ()).tex(f7, f6).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.vertex(avector3f[11].x(), avector3f[11].y(), avector3f[11].z()).uv(f8, f6).color(this.rCol * 0.8f, this.gCol * 0.8f, this.bCol * 0.8f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[10].x(), avector3f[10].y(), avector3f[10].z()).uv(f8, f5).color(this.rCol * 0.8f, this.gCol * 0.8f, this.bCol * 0.8f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[9].x(), avector3f[9].y(), avector3f[9].z()).uv(f7, f5).color(this.rCol * 0.8f, this.gCol * 0.8f, this.bCol * 0.8f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[8].x(), avector3f[8].y(), avector3f[8].z()).uv(f7, f6).color(this.rCol * 0.8f, this.gCol * 0.8f, this.bCol * 0.8f, this.alpha).uv2(j).endVertex();
 
         //右侧
-        buffer.pos(avector3f[10].getX(), avector3f[10].getY(), avector3f[10].getZ()).tex(f8, f6).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[11].getX(), avector3f[11].getY(), avector3f[11].getZ()).tex(f8, f5).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[3].getX(), avector3f[3].getY(), avector3f[3].getZ()).tex(f7, f5).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[2].getX(), avector3f[2].getY(), avector3f[2].getZ()).tex(f7, f6).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.vertex(avector3f[10].x(), avector3f[10].y(), avector3f[10].z()).uv(f8, f6).color(this.rCol * 0.6f, this.gCol * 0.6f, this.bCol * 0.6f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[11].x(), avector3f[11].y(), avector3f[11].z()).uv(f8, f5).color(this.rCol * 0.6f, this.gCol * 0.6f, this.bCol * 0.6f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[3].x(), avector3f[3].y(), avector3f[3].z()).uv(f7, f5).color(this.rCol * 0.6f, this.gCol * 0.6f, this.bCol * 0.6f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[2].x(), avector3f[2].y(), avector3f[2].z()).uv(f7, f6).color(this.rCol * 0.6f, this.gCol * 0.6f, this.bCol * 0.6f, this.alpha).uv2(j).endVertex();
 
         //上面(正反面都要渲染)
-        buffer.pos(avector3f[2].getX(), avector3f[2].getY(), avector3f[2].getZ()).tex(f8, f6).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[10].getX(), avector3f[10].getY(), avector3f[10].getZ()).tex(f8, f5).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[9].getX(), avector3f[9].getY(), avector3f[9].getZ()).tex(f7, f5).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[1].getX(), avector3f[1].getY(), avector3f[1].getZ()).tex(f7, f6).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
+        buffer.vertex(avector3f[2].x(), avector3f[2].y(), avector3f[2].z()).uv(f8, f6).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[10].x(), avector3f[10].y(), avector3f[10].z()).uv(f8, f5).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[9].x(), avector3f[9].y(), avector3f[9].z()).uv(f7, f5).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[1].x(), avector3f[1].y(), avector3f[1].z()).uv(f7, f6).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(j).endVertex();
 
-        buffer.pos(avector3f[1].getX(), avector3f[1].getY(), avector3f[1].getZ()).tex(f8, f6).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[9].getX(), avector3f[9].getY(), avector3f[9].getZ()).tex(f8, f5).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[10].getX(), avector3f[10].getY(), avector3f[10].getZ()).tex(f7, f5).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[2].getX(), avector3f[2].getY(), avector3f[2].getZ()).tex(f7, f6).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
+        buffer.vertex(avector3f[1].x(), avector3f[1].y(), avector3f[1].z()).uv(f8, f6).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[9].x(), avector3f[9].y(), avector3f[9].z()).uv(f8, f5).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[10].x(), avector3f[10].y(), avector3f[10].z()).uv(f7, f5).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[2].x(), avector3f[2].y(), avector3f[2].z()).uv(f7, f6).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(j).endVertex();
     }
 
     @Override
@@ -170,17 +170,17 @@ public class CubeParticle extends SpriteTexturedParticle {
     @Override
     public void tick() {
         super.tick();
-        this.particleScale -= 0.0001f;
-        if (!this.onGround) this.particleAngle += 2f;
-        if (this.particleAngle >= 360) this.particleAngle = 0;
+        this.quadSize -= 0.0001f;
+        if (!this.onGround) this.roll += 2f;
+        if (this.roll >= 360) this.roll = 0;
         if (this.onGround) {
-            this.particleScale -= 0.0005f;
-            this.particleAlpha -= 0.1f;
+            this.quadSize -= 0.0005f;
+            this.alpha -= 0.1f;
         }
-        if (this.particleAlpha <= 0)
-            this.particleAlpha = 0;
-        if (this.particleScale <= 0)
-            this.particleScale = 0;
+        if (this.alpha <= 0)
+            this.alpha = 0;
+        if (this.quadSize <= 0)
+            this.quadSize = 0;
     }
 
 

@@ -10,9 +10,9 @@ import teamHTBP.vida.capability.VidaCapabilities;
 public class CommandBluePrint implements Command<CommandSource> {
     @Override
     public int run(CommandContext<CommandSource> commandContext) throws CommandSyntaxException {
-        commandContext.getSource().asPlayer().getCapability(VidaCapabilities.blueprint_Capability).ifPresent(
+        commandContext.getSource().getPlayerOrException().getCapability(VidaCapabilities.blueprint_Capability).ifPresent(
                 (cap) -> {
-                    cap.getAllBlueprints().forEach((s, blueprint) -> commandContext.getSource().sendFeedback(new StringTextComponent(s), true));
+                    cap.getAllBlueprints().forEach((s, blueprint) -> commandContext.getSource().sendSuccess(new StringTextComponent(s), true));
                 }
         );
         return 0;

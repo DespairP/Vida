@@ -17,40 +17,42 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 import teamHTBP.vida.item.ItemLoader;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class BlockDeepStoneBrickPillar extends RotatedPillarBlock {
     private static final IntegerProperty STATE = IntegerProperty.create("type", 0, 2);
 
     public BlockDeepStoneBrickPillar() {
-        super(Properties.create(Material.ROCK));
+        super(Properties.of(Material.STONE));
     }
 
     /**
      * state是柱子的品种
      */
     public BlockDeepStoneBrickPillar(int state) {
-        super(Properties.create(Material.ROCK).hardnessAndResistance(2.0f, 6.0f).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE));
-        this.setDefaultState(this.getStateContainer().getBaseState().with(STATE, state).with(AXIS, Direction.Axis.Y));
+        super(Properties.of(Material.STONE).strength(2.0f, 6.0f).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(STATE, state).setValue(AXIS, Direction.Axis.Y));
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!worldIn.isRemote) {
-            if (player.inventory.getCurrentItem().getItem() == ItemLoader.WAND_VIDA.get()) {
-                int stateInt = state.get(STATE);
-                Direction.Axis axis = state.get(AXIS);
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (!worldIn.isClientSide) {
+            if (player.inventory.getSelected().getItem() == ItemLoader.WAND_VIDA.get()) {
+                int stateInt = state.getValue(STATE);
+                Direction.Axis axis = state.getValue(AXIS);
                 stateInt = (stateInt >= 2 ? 0 : stateInt + 1);
-                BlockState newState = state.with(STATE, stateInt).with(AXIS, axis);
-                worldIn.setBlockState(pos, newState);
+                BlockState newState = state.setValue(STATE, stateInt).setValue(AXIS, axis);
+                worldIn.setBlockAndUpdate(pos, newState);
                 return ActionResultType.SUCCESS;
             }
-            return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+            return super.use(state, worldIn, pos, player, handIn, hit);
         }
         return ActionResultType.SUCCESS;
     }
 
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(STATE, AXIS);
     }
 }

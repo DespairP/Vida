@@ -32,20 +32,20 @@ public class LeafParticle extends SpriteTexturedParticle {
     public LeafParticle(ClientWorld worldIn, double posXIn, double posYIn, double posZIn, double xSpeedIn, double ySpeedIn, double zSpeedIn) {
         super(worldIn, posXIn, posYIn, posZIn, xSpeedIn, ySpeedIn, zSpeedIn);
         //存在时间1000帧
-        maxAge = 20;
+        lifetime = 20;
         //粒子大小x0.5
-        particleScale = 0.5F;
+        quadSize = 0.5F;
 
         // 设置速度
-        motionX = xSpeedIn;
-        motionY = ySpeedIn;
-        motionZ = zSpeedIn;
+        xd = xSpeedIn;
+        yd = ySpeedIn;
+        zd = zSpeedIn;
 
         //是否有碰撞体积
-        this.canCollide = false;
+        this.hasPhysics = false;
 
         //设置透明度，不透明为1
-        this.setAlphaF(0.9f);
+        this.setAlpha(0.9f);
 
         //设置圆心位置
         this.centerX = posXIn;
@@ -58,24 +58,24 @@ public class LeafParticle extends SpriteTexturedParticle {
      * 复制自TexturedParticle
      * */
     @Override
-    public void renderParticle(IVertexBuilder buffer, ActiveRenderInfo renderInfo, float partialTicks) {
-        Vector3d vec3d = renderInfo.getProjectedView();
-        float f = (float) (MathHelper.lerp(partialTicks, this.prevPosX, this.posX) - vec3d.getX());
-        float f1 = (float) (MathHelper.lerp(partialTicks, this.prevPosY, this.posY) - vec3d.getY());
-        float f2 = (float) (MathHelper.lerp(partialTicks, this.prevPosZ, this.posZ) - vec3d.getZ());
+    public void render(IVertexBuilder buffer, ActiveRenderInfo renderInfo, float partialTicks) {
+        Vector3d vec3d = renderInfo.getPosition();
+        float f = (float) (MathHelper.lerp(partialTicks, this.xo, this.x) - vec3d.x());
+        float f1 = (float) (MathHelper.lerp(partialTicks, this.yo, this.y) - vec3d.y());
+        float f2 = (float) (MathHelper.lerp(partialTicks, this.zo, this.z) - vec3d.z());
 
 
         Quaternion quaternion;
-        if (this.particleAngle == 0.0F) {
-            quaternion = renderInfo.getRotation();
+        if (this.roll == 0.0F) {
+            quaternion = renderInfo.rotation();
         } else {
-            quaternion = new Quaternion(renderInfo.getRotation());
-            float f3 = MathHelper.lerp(partialTicks, this.prevParticleAngle, this.particleAngle);
-            quaternion.multiply(Vector3f.ZP.rotation(f3));
+            quaternion = new Quaternion(renderInfo.rotation());
+            float f3 = MathHelper.lerp(partialTicks, this.oRoll, this.roll);
+            quaternion.mul(Vector3f.ZP.rotation(f3));
         }
 
         Vector3f[] avector3f = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
-        float f4 = this.getScale(partialTicks);
+        float f4 = this.getQuadSize(partialTicks);
 
         for (int i = 0; i < 4; ++i) {
             Vector3f vector3f = avector3f[i];
@@ -84,17 +84,17 @@ public class LeafParticle extends SpriteTexturedParticle {
             vector3f.add(f, f1, f2);
         }
 
-        float f7 = this.getMinU();
-        float f8 = this.getMaxU();
-        float f5 = this.getMinV();
-        float f6 = this.getMaxV();
-        int j = this.getBrightnessForRender(partialTicks);
+        float f7 = this.getU0();
+        float f8 = this.getU1();
+        float f5 = this.getV0();
+        float f6 = this.getV1();
+        int j = this.getLightColor(partialTicks);
 
 
-        buffer.pos(avector3f[0].getX(), avector3f[0].getY(), avector3f[0].getZ()).tex(f8, f6).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[1].getX(), avector3f[1].getY(), avector3f[1].getZ()).tex(f8, f5).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[2].getX(), avector3f[2].getY(), avector3f[2].getZ()).tex(f7, f5).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(avector3f[3].getX(), avector3f[3].getY(), avector3f[3].getZ()).tex(f7, f6).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
+        buffer.vertex(avector3f[0].x(), avector3f[0].y(), avector3f[0].z()).uv(f8, f6).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[1].x(), avector3f[1].y(), avector3f[1].z()).uv(f8, f5).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[2].x(), avector3f[2].y(), avector3f[2].z()).uv(f7, f5).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(j).endVertex();
+        buffer.vertex(avector3f[3].x(), avector3f[3].y(), avector3f[3].z()).uv(f7, f6).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(j).endVertex();
     }
 
     /*以透明渲染方式进行*/
@@ -107,15 +107,15 @@ public class LeafParticle extends SpriteTexturedParticle {
     @Override
     public void tick() {
         //System.out.println(motionX + "" + motionY + "" + motionZ);
-        this.prevPosX = this.posX;
-        this.prevPosY = this.posY;
-        this.prevPosZ = this.posZ;
-        if (this.age++ >= this.maxAge) {
-            this.setExpired();
+        this.xo = this.x;
+        this.yo = this.y;
+        this.zo = this.z;
+        if (this.age++ >= this.lifetime) {
+            this.remove();
         } else {
-            posY += motionY;
-            posX = centerX + MathHelper.sin((float) (this.motionX + this.motionZ + this.posY * 5));
-            posZ = centerZ + MathHelper.cos((float) (this.motionX + this.motionZ + this.posY * 5));
+            y += yd;
+            x = centerX + MathHelper.sin((float) (this.xd + this.zd + this.y * 5));
+            z = centerZ + MathHelper.cos((float) (this.xd + this.zd + this.y * 5));
 
         }
     }

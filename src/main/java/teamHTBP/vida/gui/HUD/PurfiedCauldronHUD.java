@@ -16,8 +16,8 @@ public class PurfiedCauldronHUD extends AbstractGui {
     private final TileEntityPurfiedCauldron tileEntityPurfiedCauldron;
 
     public PurfiedCauldronHUD(TileEntityPurfiedCauldron tileEntityPurfiedCauldron) {
-        width = Minecraft.getInstance().getMainWindow().getScaledWidth();
-        height = Minecraft.getInstance().getMainWindow().getScaledHeight();
+        width = Minecraft.getInstance().getWindow().getGuiScaledWidth();
+        height = Minecraft.getInstance().getWindow().getGuiScaledHeight();
         minecraft = Minecraft.getInstance();
         this.tileEntityPurfiedCauldron = tileEntityPurfiedCauldron;
     }
@@ -25,7 +25,7 @@ public class PurfiedCauldronHUD extends AbstractGui {
     public void render(MatrixStack matrixStack) {
         if (tileEntityPurfiedCauldron == null) return;
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.minecraft.getTextureManager().bindTexture(HUD);
+        this.minecraft.getTextureManager().bind(HUD);
         int screenWidth = this.width / 2 - 6;
         int screenHeight = this.height / 2 - 20;
         blit(matrixStack, screenWidth, screenHeight, 0, 25, 16, 14, 10, 64, 64);
@@ -42,7 +42,7 @@ public class PurfiedCauldronHUD extends AbstractGui {
         }
         if (!tileEntityPurfiedCauldron.meltItem.isEmpty()) {
             blit(matrixStack, screenWidth + 3, screenHeight - 6, 0, 28, 11, 8, 5, 64, 64);
-            Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(tileEntityPurfiedCauldron.meltItem, screenWidth - 1, screenHeight - 27);
+            Minecraft.getInstance().getItemRenderer().renderGuiItem(tileEntityPurfiedCauldron.meltItem, screenWidth - 1, screenHeight - 27);
 
         }
     }

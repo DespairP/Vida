@@ -7,7 +7,7 @@ import net.minecraftforge.fml.server.ServerLifecycleHooks;
 
 public class BiomeHelper {
     public static RegistryKey<Biome> getRegKey(Biome biome) {
-        return ServerLifecycleHooks.getCurrentServer().getDynamicRegistries()
-                .getRegistry(Registry.BIOME_KEY).getOptionalKey(biome).get();
+        return ServerLifecycleHooks.getCurrentServer().registryAccess()
+                .registryOrThrow(Registry.BIOME_REGISTRY).getResourceKey(biome).get();
     }
 }

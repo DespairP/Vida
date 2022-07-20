@@ -11,19 +11,19 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class GuiLoader {
     @SubscribeEvent
     public static void onClientSetupEvent(FMLClientSetupEvent event) {
-        ScreenManager.registerFactory(ContainerTypeLoader.prismTable.get(), (ContainerPrismTable screenContainer, PlayerInventory inv, ITextComponent titleIn) -> {
+        ScreenManager.register(ContainerTypeLoader.prismTable.get(), (ContainerPrismTable screenContainer, PlayerInventory inv, ITextComponent titleIn) -> {
             return new ContainerScreenPrismTable(screenContainer, inv, titleIn);
         });
-        ScreenManager.registerFactory(ContainerTypeLoader.oreReaction.get(), (ContainerOreReactionMachine screenContainer, PlayerInventory inv, ITextComponent titleIn) -> {
+        ScreenManager.register(ContainerTypeLoader.oreReaction.get(), (ContainerOreReactionMachine screenContainer, PlayerInventory inv, ITextComponent titleIn) -> {
             return new ContainerScreenOreReactionMachine(screenContainer, inv, titleIn);
         });
-        ScreenManager.registerFactory(ContainerTypeLoader.bottles.get(), (ContainerBottles bottles, PlayerInventory inv, ITextComponent titleIn) -> {
+        ScreenManager.register(ContainerTypeLoader.bottles.get(), (ContainerBottles bottles, PlayerInventory inv, ITextComponent titleIn) -> {
             return new ContainerScreenBottles(bottles, inv, titleIn);
         });
-        ScreenManager.registerFactory(ContainerTypeLoader.inject.get(), (ContainerInjectTable injectTable, PlayerInventory inv, ITextComponent titleIn) -> {
+        ScreenManager.register(ContainerTypeLoader.inject.get(), (ContainerInjectTable injectTable, PlayerInventory inv, ITextComponent titleIn) -> {
             return new ContainerScreenInjectTable(injectTable, inv, titleIn);
         });
-        ScreenManager.registerFactory(ContainerTypeLoader.bluePrints.get(), (ContainerBluePrint print, PlayerInventory inv, ITextComponent titleIn) -> {
+        ScreenManager.register(ContainerTypeLoader.bluePrints.get(), (ContainerBluePrint print, PlayerInventory inv, ITextComponent titleIn) -> {
             return new ContainerScreenBluePrint(print, inv, titleIn);
         });
     }

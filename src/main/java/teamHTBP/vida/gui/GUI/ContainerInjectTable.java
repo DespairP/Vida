@@ -19,8 +19,8 @@ public class ContainerInjectTable extends Container {
 
     public ContainerInjectTable(int id, ItemStack itemStack, BlockPos pos, World world) {
         super(ContainerTypeLoader.inject.get(), id);
-        this.stack = ((TileEntityInjectTable) world.getTileEntity(pos)).getSwordStack();
-        this.injectTable = (TileEntityInjectTable) world.getTileEntity(pos);
+        this.stack = ((TileEntityInjectTable) world.getBlockEntity(pos)).getSwordStack();
+        this.injectTable = (TileEntityInjectTable) world.getBlockEntity(pos);
         this.world = world;
         this.pos = pos;
         getElement(itemStack);
@@ -28,12 +28,12 @@ public class ContainerInjectTable extends Container {
     }
 
     @Override
-    public boolean canInteractWith(PlayerEntity playerIn) {
+    public boolean stillValid(PlayerEntity playerIn) {
         if (world.isAreaLoaded(pos, 1)
-                && world.getTileEntity(pos) instanceof TileEntityInjectTable
+                && world.getBlockEntity(pos) instanceof TileEntityInjectTable
                 && this.stack != ItemStack.EMPTY
                 && this.stack != null) {
-            stack = ((TileEntityInjectTable) world.getTileEntity(pos)).getSwordStack();
+            stack = ((TileEntityInjectTable) world.getBlockEntity(pos)).getSwordStack();
             return true;
         } else
             return false;
@@ -50,7 +50,7 @@ class swordSlot extends Slot {
         super(inventoryIn, index, xPosition, yPosition);
     }
 
-    public boolean canTakeStack(PlayerEntity playerIn) {
+    public boolean mayPickup(PlayerEntity playerIn) {
         return false;
     }
 }

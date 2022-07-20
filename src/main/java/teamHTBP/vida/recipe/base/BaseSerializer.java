@@ -34,20 +34,20 @@ public class BaseSerializer<C extends IInventory, RECIPE extends BaseRecipe<C>>
 
     /**读取Json文件*/
     @Override
-    public RECIPE read(ResourceLocation recipeId, JsonObject json) {
+    public RECIPE fromJson(ResourceLocation recipeId, JsonObject json) {
         return JsonUtils.INSTANCE.normal.fromJson(json, recipeClass).setID(recipeId).setSerializer(this);
     }
 
     /**写入Json文件*/
     @Nullable
     @Override
-    public RECIPE read(ResourceLocation recipeId, PacketBuffer buffer) {
-        return JsonUtils.INSTANCE.normal.fromJson(buffer.readString(32767), recipeClass).setID(recipeId).setSerializer(this);
+    public RECIPE fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+        return JsonUtils.INSTANCE.normal.fromJson(buffer.readUtf(32767), recipeClass).setID(recipeId).setSerializer(this);
     }
 
     /**流写入Json文件*/
     @Override
-    public void write(PacketBuffer buffer, RECIPE recipe) {
-        buffer.writeString(JsonUtils.INSTANCE.normal.toJson(recipe));
+    public void toNetwork(PacketBuffer buffer, RECIPE recipe) {
+        buffer.writeUtf(JsonUtils.INSTANCE.normal.toJson(recipe));
     }
 }

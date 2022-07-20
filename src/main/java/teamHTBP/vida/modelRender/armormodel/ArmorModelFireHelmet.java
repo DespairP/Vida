@@ -15,17 +15,17 @@ public class ArmorModelFireHelmet<T extends Entity> extends AbstractModelElement
 
         head = new ModelRenderer(this);
         //head.setRotationPoint(0.0F, 0.0F, 1.0F);
-        head.setTextureOffset(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.0F, false);
+        head.texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.0F, false);
     }
 
 
     @Override
-    public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-        super.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+    public void renderToBuffer(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+        super.renderToBuffer(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
     }
 
     @Override
-    public Iterable<ModelRenderer> getHeadParts() {
-        return super.getHeadParts();
+    public Iterable<ModelRenderer> headParts() {
+        return super.headParts();
     }
 }

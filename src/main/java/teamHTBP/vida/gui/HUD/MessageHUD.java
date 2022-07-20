@@ -16,8 +16,8 @@ public class MessageHUD extends AbstractGui {
     private String message = "";
 
     public MessageHUD(String message) {
-        int width = Minecraft.getInstance().getMainWindow().getScaledWidth();
-        int height = Minecraft.getInstance().getMainWindow().getScaledHeight();
+        int width = Minecraft.getInstance().getWindow().getGuiScaledWidth();
+        int height = Minecraft.getInstance().getWindow().getGuiScaledHeight();
         this.minecraft = Minecraft.getInstance();
         this.guiLeftMid = width / 2;
         this.guiTopMid = height / 2;
@@ -26,8 +26,8 @@ public class MessageHUD extends AbstractGui {
 
 
     public void render(MatrixStack matrixStack) {
-        int width = Minecraft.getInstance().getMainWindow().getScaledWidth();
-        int height = Minecraft.getInstance().getMainWindow().getScaledHeight();
+        int width = Minecraft.getInstance().getWindow().getGuiScaledWidth();
+        int height = Minecraft.getInstance().getWindow().getGuiScaledHeight();
         this.guiTopMid = height / 2;
 
         currentTime += 1;
@@ -35,7 +35,7 @@ public class MessageHUD extends AbstractGui {
         if (currentTime > stayTime - 19) alpha -= 0.06f;
         RenderSystem.pushMatrix();
         int a = (int) (alpha * 255);
-        drawString(matrixStack, minecraft.fontRenderer, message, guiLeftMid - (minecraft.fontRenderer.getStringWidth(message) / 2), guiTopMid - 100, MathHelper.rgb(99, 255, 99) + (a << 24));
+        drawString(matrixStack, minecraft.font, message, guiLeftMid - (minecraft.font.width(message) / 2), guiTopMid - 100, MathHelper.color(99, 255, 99) + (a << 24));
         RenderSystem.popMatrix();
     }
 }

@@ -22,7 +22,7 @@ public class RecipeManager {
 
     /**获取BaseRecipe相关的合成*/
     public static <C extends IInventory, T extends BaseRecipe<C>> List<T> getBaseRecipe(World level, IRecipeType<T> type) {
-        return level.getRecipeManager().getRecipesForType(type);
+        return level.getRecipeManager().getAllRecipesFor(type);
     }
 
     @Deprecated
@@ -33,8 +33,8 @@ public class RecipeManager {
 
     /**获取合成表*/
     public static AltarRecipe getAltarRecipe(World level, TileEntityElementCoreAltar altar){
-        level.getRecipeManager().getRecipesForType(RecipeTypes.ALTAR);
-        return level.getRecipeManager().getRecipesForType(RecipeTypes.ALTAR).stream().filter(
+        level.getRecipeManager().getAllRecipesFor(RecipeTypes.ALTAR);
+        return level.getRecipeManager().getAllRecipesFor(RecipeTypes.ALTAR).stream().filter(
                 r -> r.matches(altar)
         ).findFirst().orElse(null);
     }

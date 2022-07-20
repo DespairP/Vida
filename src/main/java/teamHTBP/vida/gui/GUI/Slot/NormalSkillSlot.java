@@ -83,7 +83,7 @@ public class NormalSkillSlot extends AbstractSkillSlot {
         RenderSystem.enableBlend();
         RenderSystem.color4f(1, 1, 1, alpha + hoveredLight + focusAlpha);
         Minecraft minecraft = Minecraft.getInstance();
-        minecraft.getTextureManager().bindTexture(Gui);
+        minecraft.getTextureManager().bind(Gui);
         switch (skillSurface.getSkillType()) {
             case NORMAL:
                 break;
@@ -112,7 +112,7 @@ public class NormalSkillSlot extends AbstractSkillSlot {
         RenderSystem.enableBlend();
         RenderSystem.color4f(1, 1, 1, alpha + hoveredLight + focusAlpha);
         Minecraft minecraft = Minecraft.getInstance();
-        minecraft.getTextureManager().bindTexture(skillSurface.getLocation());
+        minecraft.getTextureManager().bind(skillSurface.getLocation());
         RenderSystem.scaled(0.8, 0.8, 0.8);
         blit(matrixStack, (int) ((this.x + 6) * 1.25) + 4, (int) ((this.y + 9) * 1.25) + 3, 0, skillSurface.getSkillTextureU(), skillSurface.getSkillTextureV(), 32, 32, 256, 256);
         RenderSystem.popMatrix();
@@ -147,7 +147,7 @@ public class NormalSkillSlot extends AbstractSkillSlot {
     public void drawProgress(MatrixStack matrixStack) {
         RenderSystem.pushMatrix();
         Minecraft minecraft = Minecraft.getInstance();
-        minecraft.getTextureManager().bindTexture(Gui);
+        minecraft.getTextureManager().bind(Gui);
         double progress = skillSurface.skillCurrentExp * 1.0 / skillSurface.getRequiredExp(skillSurface.skillCurrentLevel) * 100.0;
         if (progress > 100) progress = 100;
         if (progress < 50)
@@ -165,7 +165,7 @@ public class NormalSkillSlot extends AbstractSkillSlot {
     public void renderLock(MatrixStack matrixStack) {
         RenderSystem.pushMatrix();
         Minecraft minecraft = Minecraft.getInstance();
-        minecraft.getTextureManager().bindTexture(Gui);
+        minecraft.getTextureManager().bind(Gui);
         blit(matrixStack, this.x + 13, this.y + 12, 0, 0, 170, 15, 23, 512, 512);
         RenderSystem.popMatrix();
     }

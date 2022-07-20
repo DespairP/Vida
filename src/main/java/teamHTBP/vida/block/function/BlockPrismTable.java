@@ -26,13 +26,15 @@ import teamHTBP.vida.TileEntity.TileEntityPrismTable;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class BlockPrismTable extends Block {
-    public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
-    private final VoxelShape SHAPE = Block.makeCuboidShape(0, 0, 0, 16, 13, 16);
+    public static final DirectionProperty FACING = HorizontalBlock.FACING;
+    private final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 13, 16);
 
 
     public BlockPrismTable() {
-        super(Properties.create(Material.WOOD).hardnessAndResistance(3.0f, 3.0f).notSolid().harvestTool(ToolType.PICKAXE).notSolid());
+        super(Properties.of(Material.WOOD).strength(3.0f, 3.0f).noOcclusion().harvestTool(ToolType.PICKAXE).noOcclusion());
     }
 
     @Override
@@ -47,25 +49,25 @@ public class BlockPrismTable extends Block {
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!worldIn.isRemote && handIn == Hand.MAIN_HAND) {
-            TileEntityPrismTable tileEntityPrismTable = (TileEntityPrismTable) worldIn.getTileEntity(pos);
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (!worldIn.isClientSide && handIn == Hand.MAIN_HAND) {
+            TileEntityPrismTable tileEntityPrismTable = (TileEntityPrismTable) worldIn.getBlockEntity(pos);
             NetworkHooks.openGui((ServerPlayerEntity) player, tileEntityPrismTable, (PacketBuffer packerBuffer) -> {
-                packerBuffer.writeBlockPos(tileEntityPrismTable.getPos());
+                packerBuffer.writeBlockPos(tileEntityPrismTable.getBlockPos());
             });
         }
         return ActionResultType.SUCCESS;
     }
 
     @Override
-    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-        TileEntityPrismTable tileEntityPrismTable = (TileEntityPrismTable) worldIn.getTileEntity(pos);
+    public void playerWillDestroy(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+        TileEntityPrismTable tileEntityPrismTable = (TileEntityPrismTable) worldIn.getBlockEntity(pos);
         if (tileEntityPrismTable != null) {
-            worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityPrismTable.getSlot().getStackInSlot(0)));
-            worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityPrismTable.getSlot().getStackInSlot(1)));
-            worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityPrismTable.getSlot().getStackInSlot(2)));
+            worldIn.addFreshEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityPrismTable.getSlot().getItem(0)));
+            worldIn.addFreshEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityPrismTable.getSlot().getItem(1)));
+            worldIn.addFreshEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityPrismTable.getSlot().getItem(2)));
         }
-        super.onBlockHarvested(worldIn, pos, state, player);
+        super.playerWillDestroy(worldIn, pos, state, player);
     }
 
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
@@ -73,15 +75,15 @@ public class BlockPrismTable extends Block {
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(FACING);
-        super.fillStateContainer(builder);
+        super.createBlockStateDefinition(builder);
     }
 
     @Nullable
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        BlockPos blockpos = context.getPos();
-        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing());
+        BlockPos blockpos = context.getClickedPos();
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection());
     }
 
 

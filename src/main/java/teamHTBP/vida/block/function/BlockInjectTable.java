@@ -21,9 +21,11 @@ import teamHTBP.vida.TileEntity.TileEntityInjectTable;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class BlockInjectTable extends Block {
     public BlockInjectTable() {
-        super(Properties.create(Material.ROCK).hardnessAndResistance(3.0f, 3.0f).harvestTool(ToolType.PICKAXE).notSolid().harvestLevel(1).sound(SoundType.STONE));
+        super(Properties.of(Material.STONE).strength(3.0f, 3.0f).harvestTool(ToolType.PICKAXE).noOcclusion().harvestLevel(1).sound(SoundType.STONE));
     }
 
     @Override
@@ -38,32 +40,32 @@ public class BlockInjectTable extends Block {
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!worldIn.isRemote) {
-            TileEntity tileEntity = worldIn.getTileEntity(pos);
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (!worldIn.isClientSide) {
+            TileEntity tileEntity = worldIn.getBlockEntity(pos);
             if (tileEntity instanceof TileEntityInjectTable) {
                 TileEntityInjectTable tileEntityInjectTable = (TileEntityInjectTable) tileEntity;
-                if (!player.isSneaking() && handIn == Hand.MAIN_HAND) {
-                    if (tileEntityInjectTable.setSwordItem(player.getHeldItem(Hand.MAIN_HAND)) && player.getHeldItem(Hand.MAIN_HAND) != ItemStack.EMPTY) {
-                        player.getHeldItem(Hand.MAIN_HAND).shrink(1);
-                        worldIn.notifyBlockUpdate(pos, state, state, 3);
+                if (!player.isShiftKeyDown() && handIn == Hand.MAIN_HAND) {
+                    if (tileEntityInjectTable.setSwordItem(player.getItemInHand(Hand.MAIN_HAND)) && player.getItemInHand(Hand.MAIN_HAND) != ItemStack.EMPTY) {
+                        player.getItemInHand(Hand.MAIN_HAND).shrink(1);
+                        worldIn.sendBlockUpdated(pos, state, state, 3);
                         return ActionResultType.SUCCESS;
                     } else if (tileEntityInjectTable.hasSwordItem()) {
                         NetworkHooks.openGui((ServerPlayerEntity) player, tileEntityInjectTable, (PacketBuffer packerBuffer) -> {
-                            packerBuffer.writeItemStack(tileEntityInjectTable.getSwordStack());
-                            packerBuffer.writeBlockPos(tileEntityInjectTable.getPos());
+                            packerBuffer.writeItem(tileEntityInjectTable.getSwordStack());
+                            packerBuffer.writeBlockPos(tileEntityInjectTable.getBlockPos());
                         });
                         return ActionResultType.SUCCESS;
                     }
-                } else if (player.isSneaking()) {
-                    player.addItemStackToInventory(tileEntityInjectTable.getSwordStackToPlayer());
-                    worldIn.notifyBlockUpdate(pos, state, state, 3);
+                } else if (player.isShiftKeyDown()) {
+                    player.addItem(tileEntityInjectTable.getSwordStackToPlayer());
+                    worldIn.sendBlockUpdated(pos, state, state, 3);
                     return ActionResultType.SUCCESS;
                 }
             }
         } else {
             return ActionResultType.CONSUME;
         }
-        return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+        return super.use(state, worldIn, pos, player, handIn, hit);
     }
 }

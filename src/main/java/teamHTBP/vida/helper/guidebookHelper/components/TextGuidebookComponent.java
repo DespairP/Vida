@@ -28,7 +28,7 @@ public class TextGuidebookComponent extends GuidebookComponent implements IGuide
     @Expose
     public String key;
     /**文字渲染器*/
-    public FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
+    public FontRenderer fontRenderer = Minecraft.getInstance().font;
     /**最大GUI长度*/
     public static final int MAX_GUI_LENGTH = 126;
     /**滚动大小*/
@@ -61,7 +61,7 @@ public class TextGuidebookComponent extends GuidebookComponent implements IGuide
     @Override
     public int getWidth() {
         //没有定义组件最大宽度,计算的宽度就是组件的宽度
-        return maxLength == -1 ? fontRenderer.getStringWidth(translationText.getString()) : maxLength;
+        return maxLength == -1 ? fontRenderer.width(translationText.getString()) : maxLength;
     }
 
 
@@ -72,7 +72,7 @@ public class TextGuidebookComponent extends GuidebookComponent implements IGuide
      * */
     public int getTextHeight(){
         TranslationTextComponent component = new TranslationTextComponent(key);
-        return maxLength == -1 ? fontRenderer.getWordWrappedHeight(component.getString(), maxLength) : maxHeight;
+        return maxLength == -1 ? fontRenderer.wordWrapHeight(component.getString(), maxLength) : maxHeight;
     }
 
     @Override
@@ -107,14 +107,14 @@ public class TextGuidebookComponent extends GuidebookComponent implements IGuide
 
         //如果可以滚动,渲染滚动条
         RenderSystem.pushMatrix();
-        textureManager.bindTexture(componentLocation);
+        textureManager.bind(componentLocation);
         //渲染tracker顶部
         blit(matrixStack, x + getWidth(), y + 0, 0, scrollBarOuterTop.mu(), scrollBarOuterTop.mv(), scrollBarOuterTop.w(), scrollBarOuterTop.h(), 512, 512);
         //渲染tracker中部
-        matrixStack.push();
+        matrixStack.pushPose();
         matrixStack.scale(1, trackerScaledFactor,1);
         blit(matrixStack, x + getWidth(), trackerRealYPosition, 0, scrollBarOuterTracker.mu(), scrollBarOuterTracker.mv(), scrollBarOuterTracker.w(), scrollBarOuterTracker.h(), 512, 512);
-        matrixStack.pop();
+        matrixStack.popPose();
         //渲染tracker底部
         blit(matrixStack, x + getWidth(), y + trackerHeight + 2, 0, scrollBarOuterBottom.mu(), scrollBarOuterBottom.mv(), scrollBarOuterBottom.w(), scrollBarOuterBottom.h(), 512, 512);
         RenderSystem.popMatrix();
@@ -125,15 +125,15 @@ public class TextGuidebookComponent extends GuidebookComponent implements IGuide
 
         //渲染icon
         int yoffset = offset.get();
-        int textHeight = fontRenderer.getWordWrappedHeight(getTranslation().getString(), maxLength);
+        int textHeight = fontRenderer.wordWrapHeight(getTranslation().getString(), maxLength);
         int pointerHeight = (int)((getHeight() * 45.0f / textHeight));
         float pointerScaledFactor = pointerHeight / 45.0f;
         blit(matrixStack, x + getWidth() + 1, y + 1 + (int)Math.floor((yoffset) * pointerScaledFactor), 0, scrollPointerTop.mu(), scrollPointerTop.mv(), scrollPointerTop.w(), scrollPointerTop.h(), 512, 512);
         //根据组件单独拉长
-        matrixStack.push();
+        matrixStack.pushPose();
         matrixStack.scale(1, pointerScaledFactor,1);
         blit(matrixStack, x + getWidth() + 1, (int)Math.ceil((y + 3) * (1.0f / pointerScaledFactor)) + yoffset , 0, scrollPointerTracker.mu(), scrollPointerTracker.mv(), scrollPointerTracker.w(), scrollPointerTracker.h(), 512, 512);
-        matrixStack.pop();
+        matrixStack.popPose();
         blit(matrixStack, x + getWidth() + 1, y + 3 + pointerHeight + (int)Math.floor((yoffset) * pointerScaledFactor), 0, scrollPointerBottom.mu(), scrollPointerBottom.mv(), scrollPointerBottom.w(), 2, 512, 512);
 
         RenderSystem.popMatrix();
@@ -153,11 +153,11 @@ public class TextGuidebookComponent extends GuidebookComponent implements IGuide
         int renderWidth = getWidth();
 
         //渲染文字
-        fontRenderer.func_238418_a_(getTranslation(), x - 1, y - offset.get(), renderWidth + 0, 0x000000);
-        fontRenderer.func_238418_a_(getTranslation(), x + 1, y - offset.get(), renderWidth + 0, 0x000000);
-        fontRenderer.func_238418_a_(getTranslation(), x, y - offset.get() - 1, renderWidth + 0, 0x000000);
-        fontRenderer.func_238418_a_(getTranslation(), x, y - offset.get() + 1, renderWidth + 0, 0x000000);
-        fontRenderer.func_238418_a_(getTranslation(), x, y - offset.get(), renderWidth + 0, 0x4CFF00);
+        fontRenderer.drawWordWrap(getTranslation(), x - 1, y - offset.get(), renderWidth + 0, 0x000000);
+        fontRenderer.drawWordWrap(getTranslation(), x + 1, y - offset.get(), renderWidth + 0, 0x000000);
+        fontRenderer.drawWordWrap(getTranslation(), x, y - offset.get() - 1, renderWidth + 0, 0x000000);
+        fontRenderer.drawWordWrap(getTranslation(), x, y - offset.get() + 1, renderWidth + 0, 0x000000);
+        fontRenderer.drawWordWrap(getTranslation(), x, y - offset.get(), renderWidth + 0, 0x4CFF00);
 
         //结束渲染
         RenderSystem.disableScissor();
@@ -216,12 +216,12 @@ public class TextGuidebookComponent extends GuidebookComponent implements IGuide
         if(maxHeight == -1){
             return false;
         }
-        return fontRenderer.getWordWrappedHeight(getTranslation().getString(), maxLength) >= maxHeight;
+        return fontRenderer.wordWrapHeight(getTranslation().getString(), maxLength) >= maxHeight;
     }
 
     /**获取最大滚动高度*/
     public int getMaxScrollOffset(){
         TranslationTextComponent component = new TranslationTextComponent(key);
-        return Math.max(fontRenderer.getWordWrappedHeight(component.getString(), maxLength) - Math.abs(maxHeight) , 0);
+        return Math.max(fontRenderer.wordWrapHeight(component.getString(), maxLength) - Math.abs(maxHeight) , 0);
     }
 }

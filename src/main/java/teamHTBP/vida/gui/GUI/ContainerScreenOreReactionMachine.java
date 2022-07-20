@@ -15,16 +15,16 @@ public class ContainerScreenOreReactionMachine extends ContainerScreen<Container
 
     public ContainerScreenOreReactionMachine(ContainerOreReactionMachine screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
-        this.tileEntityOreReationMachine = this.getContainer().machine;
+        this.tileEntityOreReationMachine = this.getMenu().machine;
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
         this.renderBackground(matrixStack);
         RenderSystem.color4f(1, 1, 1, 1);
-        this.minecraft.getTextureManager().bindTexture(Gui);
-        int i = (this.width - this.xSize) / 2;
-        int j = (this.height - this.ySize) / 2 - 30;
+        this.minecraft.getTextureManager().bind(Gui);
+        int i = (this.width - this.imageWidth) / 2;
+        int j = (this.height - this.imageHeight) / 2 - 30;
         blit(matrixStack, i, j, 0, 0, 176, 211, 256, 256);
         //渲染箭头
         if (tileEntityOreReationMachine.isCooking()) {
@@ -46,6 +46,6 @@ public class ContainerScreenOreReactionMachine extends ContainerScreen<Container
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float ticks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, ticks);
-        renderHoveredTooltip(matrixStack, mouseX, mouseY);
+        renderTooltip(matrixStack, mouseX, mouseY);
     }
 }

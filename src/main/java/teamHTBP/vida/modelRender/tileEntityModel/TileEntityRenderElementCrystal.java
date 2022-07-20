@@ -46,10 +46,10 @@ public class TileEntityRenderElementCrystal extends TileEntityRenderer<TileEntit
 
     @Override
     public void render(TileEntityElementCrystal tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
-        matrixStackIn.push();
-        TextureAtlasSprite atlasTexture = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(ELEMENT_CRYSTAL);
-        IVertexBuilder builder = bufferIn.getBuffer(RenderType.getCutout());
-        Matrix4f matrixStack = matrixStackIn.getLast().getMatrix();
+        matrixStackIn.pushPose();
+        TextureAtlasSprite atlasTexture = Minecraft.getInstance().getTextureAtlas(AtlasTexture.LOCATION_BLOCKS).apply(ELEMENT_CRYSTAL);
+        IVertexBuilder builder = bufferIn.getBuffer(RenderType.cutout());
+        Matrix4f matrixStack = matrixStackIn.last().pose();
         // System.out.println(element);
         // sinWave = 0;
         float sinWave = tileEntityIn.sinWave;
@@ -61,79 +61,79 @@ public class TileEntityRenderElementCrystal extends TileEntityRenderer<TileEntit
         float colorX = (float) (0.7 - 0.3 * floatWave);
         matrixStackIn.translate(0.6f, 0.6f + 0.03 * floatWave, 0.6f);
         matrixStackIn.scale(0.4f, 0.4f, 0.4f);
-        matrixStackIn.rotate(new Quaternion(0, angle, 0, true));
+        matrixStackIn.mulPose(new Quaternion(0, angle, 0, true));
         matrixStackIn.translate(-0.5, -0.5f, -0.5);
-        float Minu = atlasTexture.getMinU();
-        float Maxu = atlasTexture.getMaxU() - (atlasTexture.getMaxU() - atlasTexture.getMinU()) / 4.0f;
-        float MinV = atlasTexture.getMinV();
-        float MaxV = atlasTexture.getMaxV() - (atlasTexture.getMaxV() - atlasTexture.getMinV()) / 4.0f;
+        float Minu = atlasTexture.getU0();
+        float Maxu = atlasTexture.getU1() - (atlasTexture.getU1() - atlasTexture.getU0()) / 4.0f;
+        float MinV = atlasTexture.getV0();
+        float MaxV = atlasTexture.getV1() - (atlasTexture.getV1() - atlasTexture.getV0()) / 4.0f;
 
         float length = 0.25f;
 
         //System.out.println(Minu - Maxu);
-        builder.pos(matrixStack, 0, 0, 0).color(colorX, colorX, colorX, 1.0f).tex(Minu, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 0, 0).color(colorX, colorX, colorX, 1.0f).tex(Maxu, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 1, 0).color(colorX, colorX, colorX, 1.0f).tex(Maxu, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 0, 1, 0).color(colorX, colorX, colorX, 1.0f).tex(Minu, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 0, 0, 0).color(colorX, colorX, colorX, 1.0f).uv(Minu, MinV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 1, 0, 0).color(colorX, colorX, colorX, 1.0f).uv(Maxu, MinV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 1, 1, 0).color(colorX, colorX, colorX, 1.0f).uv(Maxu, MaxV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 0, 1, 0).color(colorX, colorX, colorX, 1.0f).uv(Minu, MaxV).uv2(240, 240).normal(1, 0, 0).endVertex();
 
-        builder.pos(matrixStack, 0, 1, 0).color(colorX, colorX, colorX, 1.0f).tex(Minu, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 1, 0).color(colorX, colorX, colorX, 1.0f).tex(Maxu, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 0, 0).color(colorX, colorX, colorX, 1.0f).tex(Maxu, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 0, 0, 0).color(colorX, colorX, colorX, 1.0f).tex(Minu, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-
-
-        builder.pos(matrixStack, 0, 1, 1).color(colorX, colorX, colorX, 1.0f).tex(Minu, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 1, 1).color(colorX, colorX, colorX, 1.0f).tex(Maxu, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 1, 0).color(colorX, colorX, colorX, 1.0f).tex(Maxu, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 0, 1, 0).color(colorX, colorX, colorX, 1.0f).tex(Minu, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-
-        builder.pos(matrixStack, 0, 1, 0).color(colorX, colorX, colorX, 1.0f).tex(Minu, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 1, 0).color(colorX, colorX, colorX, 1.0f).tex(Maxu, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 1, 1).color(colorX, colorX, colorX, 1.0f).tex(Maxu, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 0, 1, 1).color(colorX, colorX, colorX, 1.0f).tex(Minu, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 0, 1, 0).color(colorX, colorX, colorX, 1.0f).uv(Minu, MaxV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 1, 1, 0).color(colorX, colorX, colorX, 1.0f).uv(Maxu, MaxV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 1, 0, 0).color(colorX, colorX, colorX, 1.0f).uv(Maxu, MinV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 0, 0, 0).color(colorX, colorX, colorX, 1.0f).uv(Minu, MinV).uv2(240, 240).normal(1, 0, 0).endVertex();
 
 
-        builder.pos(matrixStack, 0, 1, 1).color(colorX, colorX, colorX, 1.0f).tex(Minu, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 1, 1).color(colorX, colorX, colorX, 1.0f).tex(Maxu, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 0, 1).color(colorX, colorX, colorX, 1.0f).tex(Maxu, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 0, 0, 1).color(colorX, colorX, colorX, 1.0f).tex(Minu, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 0, 1, 1).color(colorX, colorX, colorX, 1.0f).uv(Minu, MinV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 1, 1, 1).color(colorX, colorX, colorX, 1.0f).uv(Maxu, MinV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 1, 1, 0).color(colorX, colorX, colorX, 1.0f).uv(Maxu, MaxV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 0, 1, 0).color(colorX, colorX, colorX, 1.0f).uv(Minu, MaxV).uv2(240, 240).normal(1, 0, 0).endVertex();
 
-        builder.pos(matrixStack, 0, 0, 1).color(colorX, colorX, colorX, 1.0f).tex(Minu, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 0, 1).color(colorX, colorX, colorX, 1.0f).tex(Maxu, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 1, 1).color(colorX, colorX, colorX, 1.0f).tex(Maxu, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 0, 1, 1).color(colorX, colorX, colorX, 1.0f).tex(Minu, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-
-        builder.pos(matrixStack, 0, 0, 0).color(colorX, colorX, colorX, 1.0f).tex(Minu, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 0, 0).color(colorX, colorX, colorX, 1.0f).tex(Maxu, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 0, 1).color(colorX, colorX, colorX, 1.0f).tex(Maxu, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 0, 0, 1).color(colorX, colorX, colorX, 1.0f).tex(Minu, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-
-        builder.pos(matrixStack, 0, 0, 1).color(colorX, colorX, colorX, 1.0f).tex(Minu, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 0, 1).color(colorX, colorX, colorX, 1.0f).tex(Maxu, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 0, 0).color(colorX, colorX, colorX, 1.0f).tex(Maxu, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 0, 0, 0).color(colorX, colorX, colorX, 1.0f).tex(Minu, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-
-        builder.pos(matrixStack, 0, 1, 1).color(colorX, colorX, colorX, 1.0f).tex(Minu, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 0, 1, 0).color(colorX, colorX, colorX, 1.0f).tex(Maxu, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 0, 0, 0).color(colorX, colorX, colorX, 1.0f).tex(Maxu, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 0, 0, 1).color(colorX, colorX, colorX, 1.0f).tex(Minu, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-
-        builder.pos(matrixStack, 0, 0, 1).color(colorX, colorX, colorX, 1.0f).tex(Minu, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 0, 0, 0).color(colorX, colorX, colorX, 1.0f).tex(Maxu, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 0, 1, 0).color(colorX, colorX, colorX, 1.0f).tex(Maxu, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 0, 1, 1).color(colorX, colorX, colorX, 1.0f).tex(Minu, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-
-        builder.pos(matrixStack, 1, 0, 1).color(colorX, colorX, colorX, 1.0f).tex(Minu, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 0, 0).color(colorX, colorX, colorX, 1.0f).tex(Maxu, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 1, 0).color(colorX, colorX, colorX, 1.0f).tex(Maxu, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 1, 1).color(colorX, colorX, colorX, 1.0f).tex(Minu, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-
-        builder.pos(matrixStack, 1, 1, 1).color(colorX, colorX, colorX, 1.0f).tex(Minu, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 1, 0).color(colorX, colorX, colorX, 1.0f).tex(Maxu, MaxV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 0, 0).color(colorX, colorX, colorX, 1.0f).tex(Maxu, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
-        builder.pos(matrixStack, 1, 0, 1).color(colorX, colorX, colorX, 1.0f).tex(Minu, MinV).lightmap(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 0, 1, 0).color(colorX, colorX, colorX, 1.0f).uv(Minu, MaxV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 1, 1, 0).color(colorX, colorX, colorX, 1.0f).uv(Maxu, MaxV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 1, 1, 1).color(colorX, colorX, colorX, 1.0f).uv(Maxu, MinV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 0, 1, 1).color(colorX, colorX, colorX, 1.0f).uv(Minu, MinV).uv2(240, 240).normal(1, 0, 0).endVertex();
 
 
-        matrixStackIn.pop();
+        builder.vertex(matrixStack, 0, 1, 1).color(colorX, colorX, colorX, 1.0f).uv(Minu, MinV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 1, 1, 1).color(colorX, colorX, colorX, 1.0f).uv(Maxu, MinV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 1, 0, 1).color(colorX, colorX, colorX, 1.0f).uv(Maxu, MaxV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 0, 0, 1).color(colorX, colorX, colorX, 1.0f).uv(Minu, MaxV).uv2(240, 240).normal(1, 0, 0).endVertex();
+
+        builder.vertex(matrixStack, 0, 0, 1).color(colorX, colorX, colorX, 1.0f).uv(Minu, MaxV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 1, 0, 1).color(colorX, colorX, colorX, 1.0f).uv(Maxu, MaxV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 1, 1, 1).color(colorX, colorX, colorX, 1.0f).uv(Maxu, MinV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 0, 1, 1).color(colorX, colorX, colorX, 1.0f).uv(Minu, MinV).uv2(240, 240).normal(1, 0, 0).endVertex();
+
+        builder.vertex(matrixStack, 0, 0, 0).color(colorX, colorX, colorX, 1.0f).uv(Minu, MinV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 1, 0, 0).color(colorX, colorX, colorX, 1.0f).uv(Maxu, MinV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 1, 0, 1).color(colorX, colorX, colorX, 1.0f).uv(Maxu, MaxV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 0, 0, 1).color(colorX, colorX, colorX, 1.0f).uv(Minu, MaxV).uv2(240, 240).normal(1, 0, 0).endVertex();
+
+        builder.vertex(matrixStack, 0, 0, 1).color(colorX, colorX, colorX, 1.0f).uv(Minu, MaxV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 1, 0, 1).color(colorX, colorX, colorX, 1.0f).uv(Maxu, MaxV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 1, 0, 0).color(colorX, colorX, colorX, 1.0f).uv(Maxu, MinV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 0, 0, 0).color(colorX, colorX, colorX, 1.0f).uv(Minu, MinV).uv2(240, 240).normal(1, 0, 0).endVertex();
+
+        builder.vertex(matrixStack, 0, 1, 1).color(colorX, colorX, colorX, 1.0f).uv(Minu, MinV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 0, 1, 0).color(colorX, colorX, colorX, 1.0f).uv(Maxu, MinV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 0, 0, 0).color(colorX, colorX, colorX, 1.0f).uv(Maxu, MaxV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 0, 0, 1).color(colorX, colorX, colorX, 1.0f).uv(Minu, MaxV).uv2(240, 240).normal(1, 0, 0).endVertex();
+
+        builder.vertex(matrixStack, 0, 0, 1).color(colorX, colorX, colorX, 1.0f).uv(Minu, MaxV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 0, 0, 0).color(colorX, colorX, colorX, 1.0f).uv(Maxu, MaxV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 0, 1, 0).color(colorX, colorX, colorX, 1.0f).uv(Maxu, MinV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 0, 1, 1).color(colorX, colorX, colorX, 1.0f).uv(Minu, MinV).uv2(240, 240).normal(1, 0, 0).endVertex();
+
+        builder.vertex(matrixStack, 1, 0, 1).color(colorX, colorX, colorX, 1.0f).uv(Minu, MinV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 1, 0, 0).color(colorX, colorX, colorX, 1.0f).uv(Maxu, MinV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 1, 1, 0).color(colorX, colorX, colorX, 1.0f).uv(Maxu, MaxV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 1, 1, 1).color(colorX, colorX, colorX, 1.0f).uv(Minu, MaxV).uv2(240, 240).normal(1, 0, 0).endVertex();
+
+        builder.vertex(matrixStack, 1, 1, 1).color(colorX, colorX, colorX, 1.0f).uv(Minu, MaxV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 1, 1, 0).color(colorX, colorX, colorX, 1.0f).uv(Maxu, MaxV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 1, 0, 0).color(colorX, colorX, colorX, 1.0f).uv(Maxu, MinV).uv2(240, 240).normal(1, 0, 0).endVertex();
+        builder.vertex(matrixStack, 1, 0, 1).color(colorX, colorX, colorX, 1.0f).uv(Minu, MinV).uv2(240, 240).normal(1, 0, 0).endVertex();
+
+
+        matrixStackIn.popPose();
     }
 }

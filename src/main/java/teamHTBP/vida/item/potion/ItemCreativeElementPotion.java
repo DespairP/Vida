@@ -9,7 +9,7 @@ public class ItemCreativeElementPotion extends Item implements IElementItem {
     public final EnumElements ELEMENT_TYPE;
 
     public ItemCreativeElementPotion(EnumElements elementType) {
-        super(new Item.Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(new Item.Properties().tab(ItemGroupLoader.vidaItemGroup));
         this.ELEMENT_TYPE = elementType;
     }
 

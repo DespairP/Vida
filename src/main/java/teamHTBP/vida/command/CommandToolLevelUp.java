@@ -15,17 +15,17 @@ public class CommandToolLevelUp implements Command<CommandSource> {
     @Override
     public int run(CommandContext<CommandSource> commandContext) throws CommandSyntaxException {
         int exp = commandContext.getArgument("exp", Integer.class);
-        PlayerEntity entity = commandContext.getSource().asPlayer();
-        if (entity.getHeldItemMainhand() != ItemStack.EMPTY) {
-            ItemStack stack = entity.getHeldItemMainhand();
+        PlayerEntity entity = commandContext.getSource().getPlayerOrException();
+        if (entity.getMainHandItem() != ItemStack.EMPTY) {
+            ItemStack stack = entity.getMainHandItem();
             if (stack.getItem() instanceof IElementTools) {
                 stack.getOrCreateTag().putInt("pickaxeExp", exp);
                 BlockEventLoaderServer.levelupTool(stack);
             } else {
-                commandContext.getSource().sendErrorMessage(new StringTextComponent(I18n.format("error.tool_unsuitable.anno")));
+                commandContext.getSource().sendFailure(new StringTextComponent(I18n.get("error.tool_unsuitable.anno")));
             }
         } else {
-            commandContext.getSource().sendErrorMessage(new StringTextComponent(I18n.format("error.player_not_found.anno")));
+            commandContext.getSource().sendFailure(new StringTextComponent(I18n.get("error.player_not_found.anno")));
         }
         return 0;
     }

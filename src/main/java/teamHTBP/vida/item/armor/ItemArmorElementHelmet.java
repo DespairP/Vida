@@ -15,16 +15,18 @@ import teamHTBP.vida.modelRender.armormodel.*;
 import javax.annotation.Nullable;
 
 
+import net.minecraft.item.Item.Properties;
+
 public class ItemArmorElementHelmet extends ArmorItem {
     //盔甲属于什么元素
     protected int element = 1;
 
     public ItemArmorElementHelmet() {
-        super(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD, new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD, new Properties().tab(ItemGroupLoader.vidaItemGroup));
     }
 
     public ItemArmorElementHelmet(int element) {
-        super(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD, new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD, new Properties().tab(ItemGroupLoader.vidaItemGroup));
         this.element = element;
     }
 
@@ -52,9 +54,9 @@ public class ItemArmorElementHelmet extends ArmorItem {
 
         //model.bipedHeadwear.showModel = armorSlot == EquipmentSlotType.HEAD;
 
-        model.isChild = _default.isChild;
-        model.isSneak = _default.isSneak;
-        model.isSitting = _default.isSitting;
+        model.young = _default.young;
+        model.crouching = _default.crouching;
+        model.riding = _default.riding;
         model.rightArmPose = _default.rightArmPose;
         model.leftArmPose = _default.leftArmPose;
         return (A) model;

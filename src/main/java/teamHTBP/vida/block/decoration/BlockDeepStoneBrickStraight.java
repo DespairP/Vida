@@ -20,49 +20,51 @@ import teamHTBP.vida.item.ItemLoader;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class BlockDeepStoneBrickStraight extends Block {
-    public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+    public static final DirectionProperty FACING = HorizontalBlock.FACING;
 
 
     public BlockDeepStoneBrickStraight() {
-        super(Properties.create(Material.ROCK).hardnessAndResistance(2.0f, 6.0f).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE));
+        super(Properties.of(Material.STONE).strength(2.0f, 6.0f).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE));
     }
 
     @Nullable
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        BlockPos blockpos = context.getPos();
-        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing());
+        BlockPos blockpos = context.getClickedPos();
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection());
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(FACING);
-        super.fillStateContainer(builder);
+        super.createBlockStateDefinition(builder);
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!worldIn.isRemote) {
-            if (player.inventory.getCurrentItem().getItem() == ItemLoader.WAND_VIDA.get()) {
-                Direction stateDirection = state.get(FACING);
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (!worldIn.isClientSide) {
+            if (player.inventory.getSelected().getItem() == ItemLoader.WAND_VIDA.get()) {
+                Direction stateDirection = state.getValue(FACING);
                 System.out.println(stateDirection);
                 switch (stateDirection) {
                     case EAST:
-                        worldIn.setBlockState(pos, state.with(FACING, Direction.SOUTH));
+                        worldIn.setBlockAndUpdate(pos, state.setValue(FACING, Direction.SOUTH));
                         break;
                     case SOUTH:
-                        worldIn.setBlockState(pos, state.with(FACING, Direction.WEST));
+                        worldIn.setBlockAndUpdate(pos, state.setValue(FACING, Direction.WEST));
                         break;
                     case WEST:
-                        worldIn.setBlockState(pos, state.with(FACING, Direction.NORTH));
+                        worldIn.setBlockAndUpdate(pos, state.setValue(FACING, Direction.NORTH));
                         break;
                     case NORTH:
-                        worldIn.setBlockState(pos, state.with(FACING, Direction.EAST));
+                        worldIn.setBlockAndUpdate(pos, state.setValue(FACING, Direction.EAST));
                         break;
                 }
                 return ActionResultType.SUCCESS;
             } else {
-                return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+                return super.use(state, worldIn, pos, player, handIn, hit);
             }
         }
         return ActionResultType.SUCCESS;

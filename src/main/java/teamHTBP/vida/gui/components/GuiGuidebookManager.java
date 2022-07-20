@@ -27,12 +27,12 @@ public class GuiGuidebookManager {
         IGuiGuidebook preGuidebook = screenStack.peekFirst();
         // 显示上一个屏幕,并且传入context
         if(preGuidebook != null) {
-            minecraft.displayGuiScreen(preGuidebook.getScreen());
+            minecraft.setScreen(preGuidebook.getScreen());
             preGuidebook.handleReopenContext(context);
             return;
         }
         // 如果是null,直接不显示了
-        minecraft.displayGuiScreen((Screen) null);
+        minecraft.setScreen((Screen) null);
     }
 
     /**转到下一页,并且携带上一层的Context*/
@@ -44,20 +44,20 @@ public class GuiGuidebookManager {
             newContext.merge(preGuidebook.getContext());
         }
         // 打开下一层context
-        minecraft.displayGuiScreen(next.getScreen());
+        minecraft.setScreen(next.getScreen());
     }
 
     /**打开guide*/
     public void openGuidebook(){
         IGuiGuidebook guidebook = screenStack.peekFirst();
         if(guidebook != null){
-            minecraft.displayGuiScreen(guidebook.getScreen());
+            minecraft.setScreen(guidebook.getScreen());
             return;
         }
         // if first open
         GuiGuidebookGuide newGuide = new GuiGuidebookGuide();
         screenStack.push(newGuide);
-        minecraft.displayGuiScreen(newGuide);
+        minecraft.setScreen(newGuide);
     }
 
     /**强制清空所有栈中的screen*/

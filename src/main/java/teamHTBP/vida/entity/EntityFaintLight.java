@@ -23,55 +23,55 @@ import java.util.Optional;
 public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnData {
 
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final DataParameter<String> TYPE = EntityDataManager.createKey(EntityFaintLight.class, DataSerializers.STRING);
+    private static final DataParameter<String> TYPE = EntityDataManager.defineId(EntityFaintLight.class, DataSerializers.STRING);
     private IElement types;
 
     public EntityFaintLight(EntityType<?> entityTypeIn, World worldIn) {
         super(entityTypeIn, worldIn);
         types = EnumElements.GOLD;
-        double d1 = this.getPosX() + 0.5D;
-        double d2 = this.getPosY() + 0.5D;
-        double d3 = this.getPosZ() + 0.5D;
+        double d1 = this.getX() + 0.5D;
+        double d2 = this.getY() + 0.5D;
+        double d3 = this.getZ() + 0.5D;
         //this.setBoundingBox(new AxisAlignedBB(d1 - 0, d2 - 0, d3 - 0, d1 + 1, d2 + 1, d3 + 1));
 
     }
     public EntityFaintLight(EntityType<?> entityTypeIn, World worldIn, IElement type) {
         super(entityTypeIn, worldIn);
         this.types = type;
-        double d1 = this.getPosX() + 0.5D;
-        double d2 = this.getPosY() + 0.5D;
-        double d3 = this.getPosZ() + 0.5D;
+        double d1 = this.getX() + 0.5D;
+        double d2 = this.getY() + 0.5D;
+        double d3 = this.getZ() + 0.5D;
         //this.setBoundingBox(new AxisAlignedBB(d1 - 0, d2 - 0, d3 - 0, d1 + 2, d2 + 2, d3 + 2));
     }
 
     @Override
-    protected void registerData() {
-        this.dataManager.register(TYPE, Optional.ofNullable(types).orElse(EnumElements.NONE).getElementName().toString());
+    protected void defineSynchedData() {
+        this.entityData.define(TYPE, Optional.ofNullable(types).orElse(EnumElements.NONE).getElementName().toString());
     }
 
     @Override
-    protected void readAdditional(CompoundNBT compound) {
-        this.dataManager.set(TYPE, compound.getString("type"));
+    protected void readAdditionalSaveData(CompoundNBT compound) {
+        this.entityData.set(TYPE, compound.getString("type"));
     }
 
     @Override
-    protected void writeAdditional(CompoundNBT compound) {
-        compound.putString("type", this.dataManager.get(TYPE));
+    protected void addAdditionalSaveData(CompoundNBT compound) {
+        compound.putString("type", this.entityData.get(TYPE));
     }
 
     //提醒客户端生成实体
     @Override
-    public IPacket<?> createSpawnPacket() {
+    public IPacket<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
 
     public IElement getFaintLightType() {
-        return ElementManager.get(this.dataManager.get(TYPE));
+        return ElementManager.get(this.entityData.get(TYPE));
     }
 
     public void setFaintLightType(IElement type) {
-        this.dataManager.set(TYPE, type.getElementName().toString());
+        this.entityData.set(TYPE, type.getElementName().toString());
     }
 
 
@@ -81,10 +81,10 @@ public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnDa
     }
 
     @Override
-    public void notifyDataManagerChange(DataParameter<?> key) {
-        super.notifyDataManagerChange(key);
+    public void onSyncedDataUpdated(DataParameter<?> key) {
+        super.onSyncedDataUpdated(key);
         if (TYPE.equals(key)) {
-            this.types = ElementManager.get(dataManager.get(TYPE));
+            this.types = ElementManager.get(entityData.get(TYPE));
         }
     }
 
@@ -99,12 +99,12 @@ public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnDa
     }
 
     @Override
-    public float getCollisionBorderSize() {
+    public float getPickRadius() {
         return 0.5F;
     }
 
     @Override
-    public boolean canBeCollidedWith() {
+    public boolean isPickable() {
         return true;
     }
 }

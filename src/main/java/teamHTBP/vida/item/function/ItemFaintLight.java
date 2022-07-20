@@ -22,73 +22,75 @@ import teamHTBP.vida.entity.EntityLoader;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.itemGroup.ItemGroupLoader;
 
+import net.minecraft.item.Item.Properties;
+
 public class ItemFaintLight extends Item {
     public int element = 1;
 
     public ItemFaintLight() {
-        super(new Properties().maxStackSize(1).group(ItemGroupLoader.vidaItemGroup));
+        super(new Properties().stacksTo(1).tab(ItemGroupLoader.vidaItemGroup));
     }
 
     public ItemFaintLight(int element) {
-        super(new Properties().maxStackSize(1).group(ItemGroupLoader.vidaItemGroup));
+        super(new Properties().stacksTo(1).tab(ItemGroupLoader.vidaItemGroup));
         this.element = element;
     }
 
 
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        ItemStack itemstack = playerIn.getHeldItem(handIn);
-        RayTraceResult raytraceresult = rayTrace(worldIn, playerIn, RayTraceContext.FluidMode.SOURCE_ONLY);
+    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        ItemStack itemstack = playerIn.getItemInHand(handIn);
+        RayTraceResult raytraceresult = getPlayerPOVHitResult(worldIn, playerIn, RayTraceContext.FluidMode.SOURCE_ONLY);
         if (raytraceresult.getType() != RayTraceResult.Type.BLOCK) {
-            return ActionResult.resultPass(itemstack);
-        } else if (worldIn.isRemote) {
+            return ActionResult.pass(itemstack);
+        } else if (worldIn.isClientSide) {
             System.out.println("sssss");
-            return ActionResult.resultSuccess(itemstack);
+            return ActionResult.success(itemstack);
         } else {
             BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult) raytraceresult;
-            BlockPos blockpos = blockraytraceresult.getPos();
+            BlockPos blockpos = blockraytraceresult.getBlockPos();
             if (!(worldIn.getBlockState(blockpos).getBlock() instanceof FlowingFluidBlock)) {
-                return ActionResult.resultPass(itemstack);
-            } else if (worldIn.isBlockModifiable(playerIn, blockpos) && playerIn.canPlayerEdit(blockpos, blockraytraceresult.getFace(), itemstack)) {
+                return ActionResult.pass(itemstack);
+            } else if (worldIn.mayInteract(playerIn, blockpos) && playerIn.mayUseItemAt(blockpos, blockraytraceresult.getDirection(), itemstack)) {
                 EntityFaintLight entityFaintLight = new EntityFaintLight(EntityLoader.faintLight.get(), worldIn);
-                entityFaintLight.setPosition(blockpos.getX(), blockpos.getY(), blockpos.getZ());
+                entityFaintLight.setPos(blockpos.getX(), blockpos.getY(), blockpos.getZ());
                 entityFaintLight.setFaintLightType(EnumElements.values()[element]);
-                if (!worldIn.addEntity(entityFaintLight)) {
-                    return ActionResult.resultPass(itemstack);
+                if (!worldIn.addFreshEntity(entityFaintLight)) {
+                    return ActionResult.pass(itemstack);
                 } else {
 
-                    if (!playerIn.abilities.isCreativeMode) {
+                    if (!playerIn.abilities.instabuild) {
                         itemstack.shrink(1);
                     }
-                    playerIn.addStat(Stats.ITEM_USED.get(this));
-                    return ActionResult.resultSuccess(itemstack);
+                    playerIn.awardStat(Stats.ITEM_USED.get(this));
+                    return ActionResult.success(itemstack);
                 }
             } else {
-                return ActionResult.resultFail(itemstack);
+                return ActionResult.fail(itemstack);
             }
         }
     }
 
-    public ActionResultType onItemUse(ItemUseContext context) {
-        World world = context.getWorld();
-        if (world.isRemote) {
+    public ActionResultType useOn(ItemUseContext context) {
+        World world = context.getLevel();
+        if (world.isClientSide) {
             return ActionResultType.SUCCESS;
         } else {
-            ItemStack itemstack = context.getItem();
-            BlockPos blockpos = context.getPos();
-            Direction direction = context.getFace();
+            ItemStack itemstack = context.getItemInHand();
+            BlockPos blockpos = context.getClickedPos();
+            Direction direction = context.getClickedFace();
             BlockState blockstate = world.getBlockState(blockpos);
             Block block = blockstate.getBlock();
 
             BlockPos blockpos1;
-            if (blockstate.getCollisionShape(world, blockpos).isEmpty()) {
+            if (blockstate.getBlockSupportShape(world, blockpos).isEmpty()) {
                 blockpos1 = blockpos;
             } else {
-                blockpos1 = blockpos.offset(direction);
+                blockpos1 = blockpos.relative(direction);
             }
             EntityFaintLight entityFaintLight = new EntityFaintLight(EntityLoader.faintLight.get(), world);
-            entityFaintLight.setPosition(blockpos1.getX() + 0.5, blockpos1.getY(), blockpos1.getZ() + 0.5);
+            entityFaintLight.setPos(blockpos1.getX() + 0.5, blockpos1.getY(), blockpos1.getZ() + 0.5);
             entityFaintLight.setFaintLightType(EnumElements.values()[element]);
-            if (world.addEntity(entityFaintLight)) {
+            if (world.addFreshEntity(entityFaintLight)) {
                 itemstack.shrink(1);
             }
 

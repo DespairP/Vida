@@ -68,70 +68,70 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT compound) {
-        this.smeltSlot.setInventorySlotContents(0, ItemStack.read(compound.getCompound("smeltslot0")));
-        this.smeltSlot.setInventorySlotContents(1, ItemStack.read(compound.getCompound("smeltslot1")));
-        this.smeltSlot.setInventorySlotContents(2, ItemStack.read(compound.getCompound("smeltslot2")));
-        this.smeltSlot.setInventorySlotContents(3, ItemStack.read(compound.getCompound("smeltslot3")));
-        this.fuel.setInventorySlotContents(0, ItemStack.read(compound.getCompound("fuel")));
-        this.completeSlot.setInventorySlotContents(0, ItemStack.read(compound.getCompound("completeSlot")));
+    public void load(BlockState state, CompoundNBT compound) {
+        this.smeltSlot.setItem(0, ItemStack.of(compound.getCompound("smeltslot0")));
+        this.smeltSlot.setItem(1, ItemStack.of(compound.getCompound("smeltslot1")));
+        this.smeltSlot.setItem(2, ItemStack.of(compound.getCompound("smeltslot2")));
+        this.smeltSlot.setItem(3, ItemStack.of(compound.getCompound("smeltslot3")));
+        this.fuel.setItem(0, ItemStack.of(compound.getCompound("fuel")));
+        this.completeSlot.setItem(0, ItemStack.of(compound.getCompound("completeSlot")));
         array.set(0, compound.getInt("burnTime1"));
         array.set(1, compound.getInt("cookTime"));
         goldEnergy = compound.getInt("goldEnergy");
-        super.read(state, compound);
+        super.load(state, compound);
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
-        ItemStack smeltSlot0 = this.smeltSlot.getStackInSlot(0).copy();
-        ItemStack smeltSlot1 = this.smeltSlot.getStackInSlot(1).copy();
-        ItemStack smeltSlot2 = this.smeltSlot.getStackInSlot(2).copy();
-        ItemStack smeltSlot3 = this.smeltSlot.getStackInSlot(3).copy();
+    public CompoundNBT save(CompoundNBT compound) {
+        ItemStack smeltSlot0 = this.smeltSlot.getItem(0).copy();
+        ItemStack smeltSlot1 = this.smeltSlot.getItem(1).copy();
+        ItemStack smeltSlot2 = this.smeltSlot.getItem(2).copy();
+        ItemStack smeltSlot3 = this.smeltSlot.getItem(3).copy();
         compound.put("smeltslot0", smeltSlot0.serializeNBT());
         compound.put("smeltslot1", smeltSlot1.serializeNBT());
         compound.put("smeltslot2", smeltSlot2.serializeNBT());
         compound.put("smeltslot3", smeltSlot3.serializeNBT());
-        ItemStack fuel = this.fuel.getStackInSlot(0);
+        ItemStack fuel = this.fuel.getItem(0);
         compound.put("fuel", fuel.serializeNBT());
-        ItemStack completeSlot = this.completeSlot.getStackInSlot(0);
+        ItemStack completeSlot = this.completeSlot.getItem(0);
         compound.put("completeSlot", completeSlot.serializeNBT());
         compound.putInt("burnTime1", array.get(0));
         compound.putInt("cookTime", array.get(1));
         compound.putInt("goldEnergy", goldEnergy);
-        return super.write(compound);
+        return super.save(compound);
     }
 
     @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
+        return new SUpdateTileEntityPacket(this.worldPosition, 1, this.getUpdateTag());
     }
 
 
     @Override
     public CompoundNBT getUpdateTag() {
-        return this.write(new CompoundNBT());
+        return this.save(new CompoundNBT());
 
     }
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
         super.onDataPacket(net, pkt);
-        handleUpdateTag(world.getBlockState(pos), pkt.getNbtCompound());
+        handleUpdateTag(level.getBlockState(worldPosition), pkt.getTag());
     }
 
     @Override
     public void handleUpdateTag(BlockState state, CompoundNBT tag) {
-        this.smeltSlot.setInventorySlotContents(0, ItemStack.read(tag.getCompound("smeltslot0")));
-        this.smeltSlot.setInventorySlotContents(1, ItemStack.read(tag.getCompound("smeltslot1")));
-        this.smeltSlot.setInventorySlotContents(2, ItemStack.read(tag.getCompound("smeltslot2")));
-        this.smeltSlot.setInventorySlotContents(3, ItemStack.read(tag.getCompound("smeltslot3")));
-        this.fuel.setInventorySlotContents(0, ItemStack.read(tag.getCompound("fuel")));
-        this.completeSlot.setInventorySlotContents(0, ItemStack.read(tag.getCompound("completeSlot")));
+        this.smeltSlot.setItem(0, ItemStack.of(tag.getCompound("smeltslot0")));
+        this.smeltSlot.setItem(1, ItemStack.of(tag.getCompound("smeltslot1")));
+        this.smeltSlot.setItem(2, ItemStack.of(tag.getCompound("smeltslot2")));
+        this.smeltSlot.setItem(3, ItemStack.of(tag.getCompound("smeltslot3")));
+        this.fuel.setItem(0, ItemStack.of(tag.getCompound("fuel")));
+        this.completeSlot.setItem(0, ItemStack.of(tag.getCompound("completeSlot")));
         array.set(0, tag.getInt("burnTime1"));
         array.set(1, tag.getInt("cookTime"));
         goldEnergy = tag.getInt("goldEnergy");
-        super.read(state, tag);
+        super.load(state, tag);
     }
 
     @Override
@@ -142,7 +142,7 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
     @Nullable
     @Override
     public Container createMenu(int id, PlayerInventory inv, PlayerEntity player) {
-        return new ContainerOreReactionMachine(id, inv, this.pos, this.world, this.array);
+        return new ContainerOreReactionMachine(id, inv, this.worldPosition, this.level, this.array);
     }
 
     public Inventory getSmeltSlot() {
@@ -182,20 +182,20 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
 
     //得到燃烧值
     protected int getFuelBurnTime() {
-        if (fuel.getStackInSlot(0) == ItemStack.EMPTY || fuel.getStackInSlot(0).isEmpty()) {
+        if (fuel.getItem(0) == ItemStack.EMPTY || fuel.getItem(0).isEmpty()) {
             return 0;
         } else {
-            Item item = fuel.getStackInSlot(0).getItem();
-            return net.minecraftforge.common.ForgeHooks.getBurnTime(fuel.getStackInSlot(0));
+            Item item = fuel.getItem(0).getItem();
+            return net.minecraftforge.common.ForgeHooks.getBurnTime(fuel.getItem(0));
         }
     }
 
     //确定是否是燃料
     protected boolean isFuel() {
-        if (fuel.getStackInSlot(0) == ItemStack.EMPTY || fuel.getStackInSlot(0).isEmpty()) {
+        if (fuel.getItem(0) == ItemStack.EMPTY || fuel.getItem(0).isEmpty()) {
             return false;
         } else
-            return net.minecraftforge.common.ForgeHooks.getBurnTime(fuel.getStackInSlot(0)) > 0;
+            return net.minecraftforge.common.ForgeHooks.getBurnTime(fuel.getItem(0)) > 0;
     }
 
     //烧炼新燃料,返回是否有新燃料可以烧
@@ -205,10 +205,10 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
             //设置燃烧值
             array.set(0, this.getFuelBurnTime());
             //设置
-            if (this.fuel.getStackInSlot(0).getItem() != Items.LAVA_BUCKET)
-                this.fuel.getStackInSlot(0).shrink(1);
+            if (this.fuel.getItem(0).getItem() != Items.LAVA_BUCKET)
+                this.fuel.getItem(0).shrink(1);
             else
-                this.fuel.setInventorySlotContents(0, new ItemStack(Items.BUCKET, 1));
+                this.fuel.setItem(0, new ItemStack(Items.BUCKET, 1));
             return true;
         } else
             return false;
@@ -228,20 +228,20 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
 
     //得到合成表
     protected Optional<AbstractCookingRecipe> getRecipe() {
-        return world.getRecipeManager().getRecipe((IRecipeType<AbstractCookingRecipe>) recipeTypeIn, this.smeltSlot, world);
+        return level.getRecipeManager().getRecipeFor((IRecipeType<AbstractCookingRecipe>) recipeTypeIn, this.smeltSlot, level);
     }
 
     protected Optional<ItemStack> getOutPutItemStack(ItemStack stack) {
         Inventory inv = new Inventory(stack);
-        return world.getRecipeManager().getRecipe(recipeTypeIn, inv, world).map(recipe -> recipe.getCraftingResult(inv));
+        return level.getRecipeManager().getRecipeFor(recipeTypeIn, inv, level).map(recipe -> recipe.assemble(inv));
     }
 
     protected boolean canSmelt() {
-        ItemStack stack = getOutPutItemStack(this.smeltSlot.getStackInSlot(0)).orElse(ItemStack.EMPTY);
+        ItemStack stack = getOutPutItemStack(this.smeltSlot.getItem(0)).orElse(ItemStack.EMPTY);
         if (stack == ItemStack.EMPTY || stack.isEmpty() || this.outPutItemStack != ItemStack.EMPTY || !this.outPutItemStack.isEmpty()) {
             return false;
         } else {
-            ItemStack stack1 = completeSlot.getStackInSlot(0);
+            ItemStack stack1 = completeSlot.getItem(0);
             if (stack1 == ItemStack.EMPTY || stack1.isEmpty())
                 return true;
             else if (stack.getItem() == stack1.getItem())
@@ -254,9 +254,9 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
     //设置烧炼
     protected void setSmelt(boolean canSmelt) {
         if (canSmelt && isBurning()) {
-            this.outPutItemStack = this.smeltSlot.getStackInSlot(0).copy();
+            this.outPutItemStack = this.smeltSlot.getItem(0).copy();
             this.outPutItemStack.setCount(1);
-            this.smeltSlot.getStackInSlot(0).shrink(1);
+            this.smeltSlot.getItem(0).shrink(1);
             this.array.set(1, 1);
         } else {
             return;
@@ -265,17 +265,17 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
 
     protected void smelt() {
         ItemStack itemStack = getOutPutItemStack(this.outPutItemStack).orElse(ItemStack.EMPTY);
-        if (this.completeSlot.getStackInSlot(0).isEmpty()) {
+        if (this.completeSlot.getItem(0).isEmpty()) {
             itemStack.setCount(2);
-            this.completeSlot.setInventorySlotContents(0, itemStack.copy());
+            this.completeSlot.setItem(0, itemStack.copy());
         } else {
-            this.completeSlot.getStackInSlot(0).grow(2);
+            this.completeSlot.getItem(0).grow(2);
         }
         this.outPutItemStack = ItemStack.EMPTY;
     }
 
     public boolean isItemIn() {
-        return !(this.smeltSlot.getStackInSlot(0) == ItemStack.EMPTY || this.smeltSlot.getStackInSlot(0).isEmpty());
+        return !(this.smeltSlot.getItem(0) == ItemStack.EMPTY || this.smeltSlot.getItem(0).isEmpty());
     }
 
     public boolean hasOutPutItem() {
@@ -295,7 +295,7 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
             this.goldEnergy += 1;
             if (this.goldEnergy >= MAX_GOLDENERGY) this.goldEnergy = MAX_GOLDENERGY;
         }
-        if (!world.isRemote) {
+        if (!level.isClientSide) {
             //如果不在烧炼东西且有东西可以烧的时候,且在燃烧的时候
             if (isItemIn() && !isCooking() && canSmelt() && isBurning()) {
                 this.setSmelt(true);
@@ -319,8 +319,8 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
                 this.array.set(1, 1);
                 flag = true;
             }
-            if (this.goldEnergy >= MAX_GOLDENERGY && this.world.getTileEntity(this.pos.up()) != null) {
-                LazyOptional<IElementEnergyCapability> cap = this.world.getTileEntity(this.pos.up()).getCapability(VidaCapabilities.elementEnergy_Capability);
+            if (this.goldEnergy >= MAX_GOLDENERGY && this.level.getBlockEntity(worldPosition.above()) != null) {
+                LazyOptional<IElementEnergyCapability> cap = this.level.getBlockEntity(this.worldPosition.above()).getCapability(VidaCapabilities.elementEnergy_Capability);
                 cap.ifPresent((T) -> {
                     T.receiveEnergy(150, false, EnumElements.GOLD);
                     this.goldEnergy = 0;
@@ -329,8 +329,8 @@ public class TileEntityOreReationMachine extends TileEntity implements ITickable
             }
         }
         if (flag) {
-            world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 3);
-            this.markDirty();
+            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+            this.setChanged();
         }
         // resetCooking();
     }

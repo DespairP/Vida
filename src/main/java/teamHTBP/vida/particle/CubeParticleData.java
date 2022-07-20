@@ -8,16 +8,18 @@ import net.minecraft.particles.ParticleType;
 
 import java.util.Locale;
 
+import net.minecraft.particles.IParticleData.IDeserializer;
+
 public class CubeParticleData implements IParticleData {
     public static final IDeserializer<CubeParticleData> DESERIALIZER = new IDeserializer<CubeParticleData>() {
 
         @Override
-        public CubeParticleData deserialize(ParticleType<CubeParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
+        public CubeParticleData fromCommand(ParticleType<CubeParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
             return new CubeParticleData(1, 1, 1 ,1);
         }
 
         @Override
-        public CubeParticleData read(ParticleType<CubeParticleData> particleTypeIn, PacketBuffer buffer) {
+        public CubeParticleData fromNetwork(ParticleType<CubeParticleData> particleTypeIn, PacketBuffer buffer) {
             float r = buffer.readFloat();
             float g = buffer.readFloat();
             float b = buffer.readFloat();
@@ -46,7 +48,7 @@ public class CubeParticleData implements IParticleData {
     }
 
     @Override
-    public void write(PacketBuffer buffer) {
+    public void writeToNetwork(PacketBuffer buffer) {
         buffer.writeFloat(this.r);
         buffer.writeFloat(this.g);
         buffer.writeFloat(this.b);
@@ -54,7 +56,7 @@ public class CubeParticleData implements IParticleData {
     }
 
     @Override
-    public String getParameters() {
+    public String writeToString() {
         return String.format(Locale.ROOT, "%s", this.getType().getRegistryName());
     }
 

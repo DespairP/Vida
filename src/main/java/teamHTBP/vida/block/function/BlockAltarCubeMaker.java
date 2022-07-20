@@ -5,6 +5,6 @@ import net.minecraft.block.material.Material;
 
 public class BlockAltarCubeMaker extends Block {
     public BlockAltarCubeMaker() {
-        super(Block.Properties.create(Material.IRON));
+        super(Block.Properties.of(Material.METAL));
     }
 }

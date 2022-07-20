@@ -27,46 +27,46 @@ public class TileEntityWoodElementCrystal extends TileEntity implements ITickabl
 
     @Override
     public void tick() {
-        if (world.isRemote)
+        if (level.isClientSide)
             if (sinWave > 2 * Math.PI) sinWave = 0;
             else sinWave += 0.1f;
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT compound) {
+    public void load(BlockState state, CompoundNBT compound) {
         energyCapability.ifPresent(T -> T.setEnergy(compound.getInt("energy")));
-        super.read(state, compound);
+        super.load(state, compound);
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
+    public CompoundNBT save(CompoundNBT compound) {
         energyCapability.ifPresent(h -> compound.putInt("energy", h.getEnergyStored()));
         //System.out.println(compound.getInt("energy"));
-        return super.write(compound);
+        return super.save(compound);
     }
 
     @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
+        return new SUpdateTileEntityPacket(this.worldPosition, 1, this.getUpdateTag());
     }
 
     @Override
     public CompoundNBT getUpdateTag() {
-        return this.write(new CompoundNBT());
+        return this.save(new CompoundNBT());
     }
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
         super.onDataPacket(net, pkt);
-        handleUpdateTag(world.getBlockState(pos), pkt.getNbtCompound());
+        handleUpdateTag(level.getBlockState(worldPosition), pkt.getTag());
     }
 
     @Override
     public void handleUpdateTag(BlockState state, CompoundNBT tag) {
         //System.out.println(tag.getInt("energy"));
         energyCapability.ifPresent(T -> T.setEnergy(tag.getInt("energy")));
-        super.read(state, tag);
+        super.load(state, tag);
     }
 
     @Override

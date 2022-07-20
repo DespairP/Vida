@@ -13,7 +13,7 @@ public class CommandTextTest implements Command<CommandSource> {
     public int run(CommandContext<CommandSource> commandContext) throws CommandSyntaxException {
         PacketChannel.INSTANCE.send(PacketDistributor.PLAYER.with(() -> {
             try {
-                return commandContext.getSource().asPlayer();
+                return commandContext.getSource().getPlayerOrException();
             } catch (CommandSyntaxException e) {
                 e.printStackTrace();
             }

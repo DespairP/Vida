@@ -11,16 +11,18 @@ import net.minecraftforge.fml.DistExecutor;
 import teamHTBP.vida.helper.guidebookHelper.GuidebookHelper;
 import teamHTBP.vida.itemGroup.ItemGroupLoader;
 
+import net.minecraft.item.Item.Properties;
+
 public class ItemGuidebook extends Item {
     public ItemGuidebook() {
-        super(new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(new Properties().tab(ItemGroupLoader.vidaItemGroup));
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        if(!worldIn.isRemote) return super.onItemRightClick(worldIn, playerIn, handIn);
-        ItemStack itemstack = playerIn.getHeldItem(handIn);
+    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        if(!worldIn.isClientSide) return super.use(worldIn, playerIn, handIn);
+        ItemStack itemstack = playerIn.getItemInHand(handIn);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT,() -> () -> GuidebookHelper.getManager().openGuidebook());
-        return ActionResult.resultPass(itemstack);
+        return ActionResult.pass(itemstack);
     }
 }

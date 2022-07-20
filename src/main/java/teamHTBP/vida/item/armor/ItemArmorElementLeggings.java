@@ -14,15 +14,17 @@ import teamHTBP.vida.modelRender.armormodel.*;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.item.Item.Properties;
+
 public class ItemArmorElementLeggings extends ArmorItem {
     public int element = 1;
 
     public ItemArmorElementLeggings() {
-        super(ArmorMaterial.DIAMOND, EquipmentSlotType.LEGS, new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterial.DIAMOND, EquipmentSlotType.LEGS, new Properties().tab(ItemGroupLoader.vidaItemGroup));
     }
 
     public ItemArmorElementLeggings(int element) {
-        super(ArmorMaterial.DIAMOND, EquipmentSlotType.LEGS, new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterial.DIAMOND, EquipmentSlotType.LEGS, new Properties().tab(ItemGroupLoader.vidaItemGroup));
         this.element = element;
     }
 
@@ -48,9 +50,9 @@ public class ItemArmorElementLeggings extends ArmorItem {
                 break;
         }
 
-        model.isChild = _default.isChild;
-        model.isSneak = _default.isSneak;
-        model.isSitting = _default.isSitting;
+        model.young = _default.young;
+        model.crouching = _default.crouching;
+        model.riding = _default.riding;
         model.rightArmPose = _default.rightArmPose;
         model.leftArmPose = _default.leftArmPose;
         return (A) model;

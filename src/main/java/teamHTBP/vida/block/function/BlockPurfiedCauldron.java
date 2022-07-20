@@ -34,24 +34,24 @@ public class BlockPurfiedCauldron extends Block {
     private static final VoxelShape SHAPE;
 
     static {
-        VoxelShape aPillar = Block.makeCuboidShape(0.25, 2, 0.25, 2.25, 12, 2.25);//↖
-        VoxelShape aBase = Block.makeCuboidShape(0, 0, 0, 3, 3, 3);//↖基底
-        VoxelShape upBase = Block.makeCuboidShape(2, 1.75, 1, 14, 10.75, 2);
-        VoxelShape bPillar = Block.makeCuboidShape(13.75, 2, 0.25, 15.75, 12, 2.25);//↗
-        VoxelShape bBase = Block.makeCuboidShape(13, 0, 0, 16, 3, 3);//↗基底
-        VoxelShape rightBase = Block.makeCuboidShape(14, 1.75, 2, 15, 10.75, 14);
-        VoxelShape cPillar = Block.makeCuboidShape(13.75, 2, 13.75, 15.75, 12, 15.75);//↘
-        VoxelShape cBase = Block.makeCuboidShape(13, 0, 13, 16, 3, 16);//↘基底
-        VoxelShape downBase = Block.makeCuboidShape(2, 1.75, 14, 14, 10.75, 15);
-        VoxelShape dPillar = Block.makeCuboidShape(0.25, 2, 13.75, 2.25, 12, 15.75);//↙
-        VoxelShape dBase = Block.makeCuboidShape(0, 0, 13, 3, 3, 16);//↙基底
-        VoxelShape leftBase = Block.makeCuboidShape(1, 1.75, 2, 2, 10.75, 14);
-        VoxelShape base = Block.makeCuboidShape(1, 0.75, 1, 15, 1.75, 15);
+        VoxelShape aPillar = Block.box(0.25, 2, 0.25, 2.25, 12, 2.25);//↖
+        VoxelShape aBase = Block.box(0, 0, 0, 3, 3, 3);//↖基底
+        VoxelShape upBase = Block.box(2, 1.75, 1, 14, 10.75, 2);
+        VoxelShape bPillar = Block.box(13.75, 2, 0.25, 15.75, 12, 2.25);//↗
+        VoxelShape bBase = Block.box(13, 0, 0, 16, 3, 3);//↗基底
+        VoxelShape rightBase = Block.box(14, 1.75, 2, 15, 10.75, 14);
+        VoxelShape cPillar = Block.box(13.75, 2, 13.75, 15.75, 12, 15.75);//↘
+        VoxelShape cBase = Block.box(13, 0, 13, 16, 3, 16);//↘基底
+        VoxelShape downBase = Block.box(2, 1.75, 14, 14, 10.75, 15);
+        VoxelShape dPillar = Block.box(0.25, 2, 13.75, 2.25, 12, 15.75);//↙
+        VoxelShape dBase = Block.box(0, 0, 13, 3, 3, 16);//↙基底
+        VoxelShape leftBase = Block.box(1, 1.75, 2, 2, 10.75, 14);
+        VoxelShape base = Block.box(1, 0.75, 1, 15, 1.75, 15);
         SHAPE = VoxelShapes.or(aPillar, aBase, upBase, bPillar, bBase, rightBase, cPillar, cBase, downBase, dPillar, dBase, leftBase, base);
     }
 
     public BlockPurfiedCauldron() {
-        super(Block.Properties.create(Material.IRON).tickRandomly().notSolid().sound(SoundType.STONE).hardnessAndResistance(4.0f, 4.0f));
+        super(Block.Properties.of(Material.METAL).randomTicks().noOcclusion().sound(SoundType.STONE).strength(4.0f, 4.0f));
     }
 
     @Override
@@ -72,44 +72,44 @@ public class BlockPurfiedCauldron extends Block {
 
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (handIn == Hand.MAIN_HAND) {
-            TileEntityPurfiedCauldron entity = (TileEntityPurfiedCauldron) worldIn.getTileEntity(pos);
+            TileEntityPurfiedCauldron entity = (TileEntityPurfiedCauldron) worldIn.getBlockEntity(pos);
             //如果是创造模式不消耗水桶
             //如果是就消耗水桶
-            if (player.inventory.getCurrentItem().getItem() == Items.WATER_BUCKET && !entity.isWater) {
+            if (player.inventory.getSelected().getItem() == Items.WATER_BUCKET && !entity.isWater) {
                 if (player.isCreative()) {
                     entity.isWater = true;
-                    worldIn.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    worldIn.playSound(null, pos, SoundEvents.BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     return ActionResultType.SUCCESS;
                 } else {
-                    player.inventory.getCurrentItem().setCount(0);
-                    player.inventory.addItemStackToInventory(new ItemStack(
+                    player.inventory.getSelected().setCount(0);
+                    player.inventory.add(new ItemStack(
                             Items.BUCKET, 1));
                     entity.isWater = true;
-                    worldIn.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                    worldIn.notifyBlockUpdate(pos, state, state, Constants.BlockFlags.BLOCK_UPDATE);
+                    worldIn.playSound(null, pos, SoundEvents.BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    worldIn.sendBlockUpdated(pos, state, state, Constants.BlockFlags.BLOCK_UPDATE);
                     return ActionResultType.SUCCESS;
                 }
             }
 
         }
-        return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+        return super.use(state, worldIn, pos, player, handIn, hit);
     }
 
     @Override
     public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
-        if (worldIn.getBlockState(pos.down()).getBlock() == Blocks.FIRE || worldIn.getBlockState(pos.down()).getBlock() == Blocks.LAVA && !worldIn.isRemote) {
-            TileEntityPurfiedCauldron entity = (TileEntityPurfiedCauldron) worldIn.getTileEntity(pos);
+        if (worldIn.getBlockState(pos.below()).getBlock() == Blocks.FIRE || worldIn.getBlockState(pos.below()).getBlock() == Blocks.LAVA && !worldIn.isClientSide) {
+            TileEntityPurfiedCauldron entity = (TileEntityPurfiedCauldron) worldIn.getBlockEntity(pos);
             entity.isFire = true;
-            worldIn.notifyBlockUpdate(pos, state, state, Constants.BlockFlags.BLOCK_UPDATE);
+            worldIn.sendBlockUpdated(pos, state, state, Constants.BlockFlags.BLOCK_UPDATE);
         }
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos, isMoving);
     }
 
     @Override
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-        TileEntityPurfiedCauldron entity = (TileEntityPurfiedCauldron) worldIn.getTileEntity(pos);
+        TileEntityPurfiedCauldron entity = (TileEntityPurfiedCauldron) worldIn.getBlockEntity(pos);
         if (entity != null) {
             //生成粒子
             if (entity.element != null && !entity.meltItem.isEmpty() && rand.nextDouble() >= 0.65) {
@@ -158,19 +158,19 @@ public class BlockPurfiedCauldron extends Block {
 
 
     @Override
-    public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
-        if (!worldIn.isRemote) {
+    public void entityInside(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
+        if (!worldIn.isClientSide) {
             if (entityIn instanceof ItemEntity) {
-                TileEntityPurfiedCauldron entity = (TileEntityPurfiedCauldron) worldIn.getTileEntity(pos);
+                TileEntityPurfiedCauldron entity = (TileEntityPurfiedCauldron) worldIn.getBlockEntity(pos);
                 ItemStack itemStack = ((ItemEntity) entityIn).getItem();
                 if (entity.setMeltItem(itemStack)) {
                     entityIn.remove();
-                    worldIn.notifyBlockUpdate(pos, state, state, Constants.BlockFlags.BLOCK_UPDATE);
+                    worldIn.sendBlockUpdated(pos, state, state, Constants.BlockFlags.BLOCK_UPDATE);
                     entity.setMeltSpeed();
                 }
             }
         }
-        super.onEntityCollision(state, worldIn, pos, entityIn);
+        super.entityInside(state, worldIn, pos, entityIn);
     }
 
 }

@@ -34,35 +34,35 @@ public class PacketBottles {
         ctx.get().enqueueWork(() -> {
                     if (ctx.get().getSender() == null) return;
                     PlayerEntity entity = ctx.get().getSender();
-                    ItemStack stack = entity.inventory.armorInventory.get(1);
+                    ItemStack stack = entity.inventory.armor.get(1);
                     if (stack.getItem() instanceof ItemArmorElementLegginsWithBottles) {
                         ItemStack stack1 = ItemStack.EMPTY;
                         CompoundNBT nbt = stack.getOrCreateTag();
                         int progress = 0;
                         switch (this.mode) {
                             case 1:
-                                stack1 = ItemStack.read(nbt.getCompound("bottle1"));
+                                stack1 = ItemStack.of(nbt.getCompound("bottle1"));
                                 progress = nbt.getInt("bottle1Num");
                                 break;
                             case 2:
-                                stack1 = ItemStack.read(nbt.getCompound("bottle2"));
+                                stack1 = ItemStack.of(nbt.getCompound("bottle2"));
                                 progress = nbt.getInt("bottle2Num");
                                 break;
                             case 3:
-                                stack1 = ItemStack.read(nbt.getCompound("bottle3"));
+                                stack1 = ItemStack.of(nbt.getCompound("bottle3"));
                                 progress = nbt.getInt("bottle3Num");
                                 break;
                         }
                         if (progress >= 100 && stack1 != ItemStack.EMPTY && !stack1.isEmpty()) {
-                            List<EffectInstance> list = PotionUtils.getEffectsFromStack(stack1);
+                            List<EffectInstance> list = PotionUtils.getMobEffects(stack1);
                             for (EffectInstance instance : list) {
                                 if (((ItemArmorElementLegginsWithBottles) stack.getItem()).element == 5)
-                                    entity.addPotionEffect(new EffectInstance(instance.getPotion(), instance.getDuration() * 2, instance.getAmplifier()));
+                                    entity.addEffect(new EffectInstance(instance.getEffect(), instance.getDuration() * 2, instance.getAmplifier()));
                                 else
-                                    entity.addPotionEffect(new EffectInstance(instance));
+                                    entity.addEffect(new EffectInstance(instance));
                             }
                             if (((ItemArmorElementLegginsWithBottles) stack.getItem()).element == 3) {
-                                entity.addPotionEffect(new EffectInstance(Effect.get(10), 10));
+                                entity.addEffect(new EffectInstance(Effect.byId(10), 10));
                             }
                             switch (this.mode) {
                                 case 1:

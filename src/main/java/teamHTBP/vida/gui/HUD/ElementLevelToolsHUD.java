@@ -58,7 +58,7 @@ public class ElementLevelToolsHUD extends AbstractGui {
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, alphaNum / 100.0f);
         RenderSystem.pushMatrix();
         RenderSystem.enableBlend();
-        this.minecraft.getTextureManager().bindTexture(HUD);
+        this.minecraft.getTextureManager().bind(HUD);
         // 根据物品元素进行渲染
         EnumElements element = item.getItemElement();
         switch (element) {
@@ -99,7 +99,7 @@ public class ElementLevelToolsHUD extends AbstractGui {
         RenderSystem.popMatrix();
         RenderSystem.pushMatrix();
         // 显示工具等级
-        drawCenteredString(matrixStack, minecraft.fontRenderer, level + "", renderX + 16, renderY + 10, RGBAColor.getColorCodeFromRGBA(126,186,137,255 * alphaNum / 100));
+        drawCenteredString(matrixStack, minecraft.font, level + "", renderX + 16, renderY + 10, RGBAColor.getColorCodeFromRGBA(126,186,137,255 * alphaNum / 100));
         RenderSystem.popMatrix();
     }
 
@@ -108,12 +108,12 @@ public class ElementLevelToolsHUD extends AbstractGui {
     }
 
     public boolean isSameItemStack(ItemStack stack){
-        return stack.isItemEqualIgnoreDurability(this.itemStack);
+        return stack.sameItemStackIgnoreDurability(this.itemStack);
     }
 
     public void renew(){
-        this.width = minecraft.getMainWindow().getScaledWidth();
-        this.height = minecraft.getMainWindow().getScaledHeight();
+        this.width = minecraft.getWindow().getGuiScaledWidth();
+        this.height = minecraft.getWindow().getGuiScaledHeight();
     }
 
     public void renewItemStack(ItemStack stack){

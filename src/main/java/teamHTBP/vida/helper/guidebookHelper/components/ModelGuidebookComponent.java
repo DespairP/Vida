@@ -30,7 +30,6 @@ import teamHTBP.vida.utils.color.RGBAColor;
 import teamHTBP.vida.utils.math.FloatRange;
 
 import static net.minecraft.client.gui.AbstractGui.blit;
-import static net.minecraft.client.renderer.ItemRenderer.getBuffer;
 import static teamHTBP.vida.helper.renderHelper.RenderHelper.renderTextWithTranslationKeyCenter;
 
 /**模型组件*/
@@ -62,7 +61,7 @@ public class ModelGuidebookComponent implements IGuidebookComponent {
     /**物品渲染器*/
     private final ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
     /**模型渲染器*/
-    private final BlockModelShapes blockmodelshapes = Minecraft.getInstance().getBlockRendererDispatcher().getBlockModelShapes();
+    private final BlockModelShapes blockmodelshapes = Minecraft.getInstance().getBlockRenderer().getBlockModelShaper();
     /**材质管理*/
     private final TextureManager textureManager = Minecraft.getInstance().textureManager;
     private final static ResourceLocation componentLocation = new ResourceLocation("vida","textures/gui/book.png");
@@ -72,7 +71,7 @@ public class ModelGuidebookComponent implements IGuidebookComponent {
     /**是否能被旋转*/
     private boolean isFocused = false;
     /**字体渲染*/
-    private final FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
+    private final FontRenderer fontRenderer = Minecraft.getInstance().font;
 
     @Override
     public String getType() {
@@ -120,7 +119,7 @@ public class ModelGuidebookComponent implements IGuidebookComponent {
     /**渲染背景*/
     public void renderBackground(MatrixStack matrixStack){
         RenderSystem.pushMatrix();
-        textureManager.bindTexture(componentLocation);
+        textureManager.bind(componentLocation);
         blit(matrixStack, x, y, 0, componentSection.mu(), componentSection.mv(), componentSection.w(), componentSection.h(), 512, 512);
         RenderSystem.popMatrix();
     }
@@ -128,10 +127,10 @@ public class ModelGuidebookComponent implements IGuidebookComponent {
     /**渲染物品*/
     public void renderBlockInGui(MatrixStack matrixStack,float partialTicks){
         RenderSystem.pushMatrix();
-        matrixStack.push();
+        matrixStack.pushPose();
         //绑定方块模型,用于模型材质绑定
-        textureManager.bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
-        textureManager.getTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE).setBlurMipmapDirect(false, false);
+        textureManager.bind(AtlasTexture.LOCATION_BLOCKS);
+        textureManager.getTexture(AtlasTexture.LOCATION_BLOCKS).setFilter(false, false);
         //GL11方法, @see:ItemRenderer#renderItemModelIntoGUI
         RenderSystem.enableRescaleNormal();
         RenderSystem.enableAlphaTest();
@@ -149,46 +148,46 @@ public class ModelGuidebookComponent implements IGuidebookComponent {
         RenderSystem.scalef(64.0F, 64.0F, 64.0F);
         //获取要渲染的模型
         BlockState state = getBlockStateFromItemStack();
-        IBakedModel model = itemRenderer.getItemModelWithOverrides(renderStack,(World)null, (LivingEntity)null);
+        IBakedModel model = itemRenderer.getModel(renderStack,(World)null, (LivingEntity)null);
         //获取渲染的方式
-        RenderType rendertype = RenderTypeLookup.func_239219_a_(renderStack, true);
+        RenderType rendertype = RenderTypeLookup.getRenderType(renderStack, true);
         //将模型调整成适合GUI渲染的scale模型
         model = net.minecraftforge.client.ForgeHooksClient.handleCameraTransforms(matrixStack, model, ItemCameraTransforms.TransformType.GUI, false);
         //模型旋转
         matrixStack.translate(0.5,0.5,0.5); //将模型调整到正中央
-        matrixStack.rotate(new Quaternion(new Vector3f(0f,1f,0f) , MathHelper.clamp(partialTicks,prevRotateX, rotateX), false));
-        matrixStack.rotate(new Quaternion(new Vector3f(1f,0.0f,0f) , MathHelper.clamp(partialTicks,prevRotateY, rotateY), false));
+        matrixStack.mulPose(new Quaternion(new Vector3f(0f,1f,0f) , MathHelper.clamp(partialTicks,prevRotateX, rotateX), false));
+        matrixStack.mulPose(new Quaternion(new Vector3f(1f,0.0f,0f) , MathHelper.clamp(partialTicks,prevRotateY, rotateY), false));
         matrixStack.translate(-0.5,-0.5,-0.5f);// 将模型调整到旋转后的正中央
         //再次将模型比例缩小50%
-        matrixStack.getLast().getMatrix().mul(0.5F);
+        matrixStack.last().pose().multiply(0.5F);
         //渲染设定是否发光
-        boolean flag = !model.isSideLit();
+        boolean flag = !model.usesBlockLight();
         if (flag) {
-            RenderHelper.setupGuiFlatDiffuseLighting();
+            RenderHelper.setupForFlatItems();
         }
         //获取渲染buffer
-        IRenderTypeBuffer.Impl irendertypebuffer$impl = Minecraft.getInstance().getRenderTypeBuffers().getBufferSource();
+        IRenderTypeBuffer.Impl irendertypebuffer$impl = Minecraft.getInstance().renderBuffers().bufferSource();
         //真正绑定模型
-        IVertexBuilder ivertexbuilder = getBuffer(irendertypebuffer$impl, rendertype, true, renderStack.hasEffect());
+        IVertexBuilder ivertexbuilder = ItemRenderer.getFoilBuffer(irendertypebuffer$impl, rendertype, true, renderStack.hasFoil());
         //开始渲染
-        itemRenderer.renderModel(model, renderStack, 15728880, OverlayTexture.NO_OVERLAY, matrixStack, ivertexbuilder);
+        itemRenderer.renderModelLists(model, renderStack, 15728880, OverlayTexture.NO_OVERLAY, matrixStack, ivertexbuilder);
         //结束渲染
-        irendertypebuffer$impl.finish();
+        irendertypebuffer$impl.endBatch();
         //恢复渲染初始值
         RenderSystem.enableDepthTest();
         if (flag) {
-            RenderHelper.setupGui3DDiffuseLighting();
+            RenderHelper.setupFor3DItems();
         }
         RenderSystem.disableAlphaTest();
         RenderSystem.disableRescaleNormal();
-        matrixStack.pop();
+        matrixStack.popPose();
         RenderSystem.popMatrix();
     }
 
 
     /**渲染名字*/
     public void renderName(MatrixStack matrixStack,float partialTicks){
-        String key = I18n.format(renderStack.getTranslationKey());
+        String key = I18n.get(renderStack.getDescriptionId());
         int bottomY = (y + componentSection.h()) - 10;
         RGBAColor color = new RGBAColor(0,0,0,(int)(alpha.get() * 256));
         //渲染文字
@@ -209,9 +208,9 @@ public class ModelGuidebookComponent implements IGuidebookComponent {
     public BlockState getBlockStateFromItemStack(){
         Item item = renderStack.getItem();
         if(!(item instanceof BlockItem)){
-            return Blocks.AIR.getDefaultState();
+            return Blocks.AIR.defaultBlockState();
         }
-        return ((BlockItem)item).getBlock().getDefaultState();
+        return ((BlockItem)item).getBlock().defaultBlockState();
     }
 
     /*------- 组件监听 ----------*/

@@ -18,7 +18,7 @@ public class ContainerPrismTable extends Container {
     public ContainerPrismTable(int winId, PlayerInventory inventory, BlockPos pos, World world, PrismTableArray array) {
         super(ContainerTypeLoader.prismTable.get(), winId);
         this.array = array;
-        this.tileEntityPrismTable = (TileEntityPrismTable) world.getTileEntity(pos);
+        this.tileEntityPrismTable = (TileEntityPrismTable) world.getBlockEntity(pos);
         this.addSlot(new Slot(tileEntityPrismTable.getSlot(), 0, 10, 16));
         this.addSlot(new Slot(tileEntityPrismTable.getSlot(), 1, 28, 16));
         this.addSlot(new fobiddenSlot(tileEntityPrismTable.getSlot(), 2, 44, 59));
@@ -26,7 +26,7 @@ public class ContainerPrismTable extends Container {
     }
 
     @Override
-    public boolean canInteractWith(PlayerEntity playerIn) {
+    public boolean stillValid(PlayerEntity playerIn) {
         return true;
     }
 
@@ -67,35 +67,35 @@ public class ContainerPrismTable extends Container {
         addSlotRange(inventory, 0, leftCol, topRow, 9, 18);
     }
 
-    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
+    public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = this.inventorySlots.get(index);
-        if (slot != null && slot.getHasStack()) {
-            ItemStack itemstack1 = slot.getStack();
+        Slot slot = this.slots.get(index);
+        if (slot != null && slot.hasItem()) {
+            ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
             if (index == 0 || index == 1 || index == 2) {
-                if (!this.mergeItemStack(itemstack1, 3, 38, true)) {
+                if (!this.moveItemStackTo(itemstack1, 3, 38, true)) {
                     return ItemStack.EMPTY;
                 }
-                slot.onSlotChange(itemstack1, itemstack);
-            } else if (this.mergeItemStack(itemstack1, 0, 2, false)) {
+                slot.onQuickCraft(itemstack1, itemstack);
+            } else if (this.moveItemStackTo(itemstack1, 0, 2, false)) {
                 return ItemStack.EMPTY;
             } else if (index >= 3 && index < 30) {
-                if (!this.mergeItemStack(itemstack1, 30, 38, false)) {
+                if (!this.moveItemStackTo(itemstack1, 30, 38, false)) {
                     return ItemStack.EMPTY;
                 }
             } else if (index >= 30 && index < 39) {
-                if (!this.mergeItemStack(itemstack1, 3, 29, false)) {
+                if (!this.moveItemStackTo(itemstack1, 3, 29, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.mergeItemStack(itemstack1, 3, 38, false)) {
+            } else if (!this.moveItemStackTo(itemstack1, 3, 38, false)) {
                 return ItemStack.EMPTY;
             }
 
             if (itemstack1.isEmpty()) {
-                slot.putStack(ItemStack.EMPTY);
+                slot.set(ItemStack.EMPTY);
             } else {
-                slot.onSlotChanged();
+                slot.setChanged();
             }
 
             if (itemstack1.getCount() == itemstack.getCount()) {
@@ -116,7 +116,7 @@ class fobiddenSlot extends Slot {
         super(inventoryIn, index, xPosition, yPosition);
     }
 
-    public boolean isItemValid(ItemStack stack) {
+    public boolean mayPlace(ItemStack stack) {
         return false;
     }
 }

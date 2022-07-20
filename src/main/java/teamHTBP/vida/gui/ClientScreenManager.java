@@ -9,6 +9,6 @@ import teamHTBP.vida.gui.GUI.guidebook.GuiGuidebookMain;
 public class ClientScreenManager {
     @OnlyIn(Dist.CLIENT)
     public static void openGuideBook(){
-        Minecraft.getInstance().displayGuiScreen(new GuiGuidebookMain());
+        Minecraft.getInstance().setScreen(new GuiGuidebookMain());
     }
 }

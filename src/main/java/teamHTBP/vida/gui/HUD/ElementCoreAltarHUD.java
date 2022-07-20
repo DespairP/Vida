@@ -18,8 +18,8 @@ public class ElementCoreAltarHUD extends AbstractGui {
     private final TileEntityElementCoreAltar tileEntityElementCoreAltar;
 
     public ElementCoreAltarHUD(TileEntityElementCoreAltar tileEntityElementCoreAltar) {
-        width = Minecraft.getInstance().getMainWindow().getScaledWidth();
-        height = Minecraft.getInstance().getMainWindow().getScaledHeight();
+        width = Minecraft.getInstance().getWindow().getGuiScaledWidth();
+        height = Minecraft.getInstance().getWindow().getGuiScaledHeight();
         minecraft = Minecraft.getInstance();
         this.tileEntityElementCoreAltar = tileEntityElementCoreAltar;
     }
@@ -27,7 +27,7 @@ public class ElementCoreAltarHUD extends AbstractGui {
     public void render(MatrixStack matrixStack) {
         if (tileEntityElementCoreAltar == null) return;
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.minecraft.getTextureManager().bindTexture(HUD);
+        this.minecraft.getTextureManager().bind(HUD);
         int screenWidth = this.width / 2 - 28;
         int screenHeight = this.height / 2 - 66;
         blit(matrixStack, screenWidth, screenHeight, 0, 0, 0, 56, 56, 80, 80);
@@ -41,16 +41,16 @@ public class ElementCoreAltarHUD extends AbstractGui {
             if (stack != ItemStack.EMPTY && !stack.isEmpty()) {
                 switch (position) {
                     case LEFT:
-                        Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack, screenWidth + 1, screenHeight + 20);
+                        Minecraft.getInstance().getItemRenderer().renderGuiItem(stack, screenWidth + 1, screenHeight + 20);
                         break;
                     case TOP:
-                        Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack, screenWidth + 20, screenHeight + 1);
+                        Minecraft.getInstance().getItemRenderer().renderGuiItem(stack, screenWidth + 20, screenHeight + 1);
                         break;
                     case RIGHT:
-                        Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack, screenWidth + 39, screenHeight + 20);
+                        Minecraft.getInstance().getItemRenderer().renderGuiItem(stack, screenWidth + 39, screenHeight + 20);
                         break;
                     case BOTTOM:
-                        Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack, screenWidth + 20, screenHeight + 39);
+                        Minecraft.getInstance().getItemRenderer().renderGuiItem(stack, screenWidth + 20, screenHeight + 39);
                         break;
                 }
 
@@ -58,7 +58,7 @@ public class ElementCoreAltarHUD extends AbstractGui {
         }
         //绘制核心
         ItemStack stack = tileEntityElementCoreAltar.coreItem;
-        Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack, screenWidth + 20, screenHeight + 20);
+        Minecraft.getInstance().getItemRenderer().renderGuiItem(stack, screenWidth + 20, screenHeight + 20);
     }
 
 

@@ -22,51 +22,51 @@ import teamHTBP.vida.item.ItemLoader;
 import javax.annotation.Nullable;
 
 public class BlockDeepStoneBrickCorner extends Block {
-    public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+    public static final DirectionProperty FACING = HorizontalBlock.FACING;
     private static final IntegerProperty STATE = IntegerProperty.create("rotate", 0, 2);
 
 
     public BlockDeepStoneBrickCorner() {
-        super(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.0f, 6.0f).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE));
-        this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.NORTH).with(STATE, 0));
+        super(Block.Properties.of(Material.STONE).strength(2.0f, 6.0f).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(STATE, 0));
     }
 
     @Nullable
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        BlockPos blockpos = context.getPos();
-        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing());
+        BlockPos blockpos = context.getClickedPos();
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection());
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(FACING, STATE);
-        super.fillStateContainer(builder);
+        super.createBlockStateDefinition(builder);
     }
 
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!worldIn.isRemote) {
-            if (player.inventory.getCurrentItem().getItem() == ItemLoader.WAND_VIDA.get()) {
-                Direction stateDirection = state.get(FACING);
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (!worldIn.isClientSide) {
+            if (player.inventory.getSelected().getItem() == ItemLoader.WAND_VIDA.get()) {
+                Direction stateDirection = state.getValue(FACING);
                 //System.out.println(stateDirection);
                 switch (stateDirection) {
                     case EAST:
-                        worldIn.setBlockState(pos, state.with(FACING, Direction.SOUTH).with(STATE, 0));
+                        worldIn.setBlockAndUpdate(pos, state.setValue(FACING, Direction.SOUTH).setValue(STATE, 0));
                         break;
                     case SOUTH:
-                        worldIn.setBlockState(pos, state.with(FACING, Direction.WEST).with(STATE, 0));
+                        worldIn.setBlockAndUpdate(pos, state.setValue(FACING, Direction.WEST).setValue(STATE, 0));
                         break;
                     case WEST:
-                        worldIn.setBlockState(pos, state.with(FACING, Direction.NORTH).with(STATE, 0));
+                        worldIn.setBlockAndUpdate(pos, state.setValue(FACING, Direction.NORTH).setValue(STATE, 0));
                         break;
                     case NORTH:
-                        worldIn.setBlockState(pos, state.with(FACING, Direction.EAST).with(STATE, 0));
+                        worldIn.setBlockAndUpdate(pos, state.setValue(FACING, Direction.EAST).setValue(STATE, 0));
                         break;
                 }
                 return ActionResultType.SUCCESS;
             } else {
-                return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+                return super.use(state, worldIn, pos, player, handIn, hit);
             }
         }
         return ActionResultType.SUCCESS;

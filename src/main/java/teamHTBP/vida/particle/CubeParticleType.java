@@ -11,7 +11,7 @@ public class CubeParticleType extends ParticleType<CubeParticleData> {
     }
 
     @Override
-    public Codec<CubeParticleData> func_230522_e_() {
+    public Codec<CubeParticleData> codec() {
         return codec;
     }
 }

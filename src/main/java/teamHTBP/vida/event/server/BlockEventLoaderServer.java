@@ -22,14 +22,14 @@ public class BlockEventLoaderServer {
     @SubscribeEvent
     public static void kill(LivingDeathEvent event) {
         //System.out.println("SSSS");
-        if (event.getSource().getImmediateSource() instanceof PlayerEntity) {
-            PlayerEntity playerEntity = (PlayerEntity) event.getSource().getImmediateSource();
-            ItemStack stack = playerEntity.inventory.armorInventory.get(1);
+        if (event.getSource().getDirectEntity() instanceof PlayerEntity) {
+            PlayerEntity playerEntity = (PlayerEntity) event.getSource().getDirectEntity();
+            ItemStack stack = playerEntity.inventory.armor.get(1);
             if (stack.getItem() instanceof ItemArmorElementLegginsWithBottles) {
                 CompoundNBT nbt = stack.getOrCreateTag();
                 for (int i = 1; i <= 3; i++) {
                     if (nbt.contains("bottle" + i)) {
-                        ItemStack stack1 = ItemStack.read(nbt.getCompound("bottle" + i));
+                        ItemStack stack1 = ItemStack.of(nbt.getCompound("bottle" + i));
                         if (stack1 != ItemStack.EMPTY && !stack1.isEmpty()) {
                             int progress = nbt.getInt("bottle" + i + "Num");
                             if (progress < 100 && ((ItemArmorElementLegginsWithBottles) stack.getItem()).element != 4) {
@@ -55,7 +55,7 @@ public class BlockEventLoaderServer {
     public static void blockBreakEvent(BlockEvent.BreakEvent event) {
         PlayerEntity playerEntity = event.getPlayer();
         if (playerEntity != null) {
-            ItemStack itemStack = playerEntity.getHeldItem(Hand.MAIN_HAND);
+            ItemStack itemStack = playerEntity.getItemInHand(Hand.MAIN_HAND);
             if (itemStack.getItem() instanceof ItemElementPickaxe) {
                 CompoundNBT nbt = itemStack.getOrCreateTag();
                 Block block = event.getState().getBlock();
@@ -103,10 +103,10 @@ public class BlockEventLoaderServer {
 
     @SubscribeEvent
     public static void hitEntity(LivingAttackEvent event) {
-        Entity entity = event.getSource().getImmediateSource();
+        Entity entity = event.getSource().getDirectEntity();
         if (entity instanceof PlayerEntity) {
             PlayerEntity playerEntity = (PlayerEntity) entity;
-            ItemStack stack = playerEntity.getHeldItem(Hand.MAIN_HAND);
+            ItemStack stack = playerEntity.getItemInHand(Hand.MAIN_HAND);
             if (stack.getItem() instanceof ItemElementSword) {
                 CompoundNBT nbt = stack.getOrCreateTag();
                 int level = nbt.getInt("level");

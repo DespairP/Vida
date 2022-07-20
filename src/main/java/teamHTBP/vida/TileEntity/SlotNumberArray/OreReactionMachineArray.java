@@ -30,7 +30,7 @@ public class OreReactionMachineArray implements IIntArray {
     }
 
     @Override
-    public int size() {
+    public int getCount() {
         return 2;
     }
 }

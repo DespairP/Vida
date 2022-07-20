@@ -39,8 +39,8 @@ public class ModRecipes extends RecipeProvider {
     }
 
     @Override
-    public void act(DirectoryCache cache) throws IOException {
-        super.act(cache);
+    public void run(DirectoryCache cache) throws IOException {
+        super.run(cache);
 
         recipes.forEach(recipes -> {
             recipes.getRecipes().forEach((name, entry) -> save(cache, name, entry));
@@ -58,8 +58,8 @@ public class ModRecipes extends RecipeProvider {
 
     private static void saveRecipe(DirectoryCache pCache, String recipe, Path pPath) {
         try {
-            String s1 = HASH_FUNCTION.hashUnencodedChars(recipe).toString();
-            if (!Objects.equals(pCache.getPreviousHash(pPath), s1) || !Files.exists(pPath)) {
+            String s1 = SHA1.hashUnencodedChars(recipe).toString();
+            if (!Objects.equals(pCache.getHash(pPath), s1) || !Files.exists(pPath)) {
                 Files.createDirectories(pPath.getParent());
                 BufferedWriter bufferedwriter = Files.newBufferedWriter(pPath);
 
@@ -78,13 +78,13 @@ public class ModRecipes extends RecipeProvider {
                 bufferedwriter.close();
             }
 
-            pCache.recordHash(pPath, s1);
+            pCache.putNew(pPath, s1);
         } catch (IOException ignored) {
         }
     }
 
     @Override
-    protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
+    protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumer) {
         addCustomRecipes();
         vanillaRecipes(consumer);
     }

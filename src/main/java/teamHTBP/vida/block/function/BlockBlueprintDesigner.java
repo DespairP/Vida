@@ -7,7 +7,7 @@ import teamHTBP.vida.helper.blockHelper.BlockSingleWithY;
 
 public class BlockBlueprintDesigner extends BlockSingleWithY {
     public BlockBlueprintDesigner() {
-        super(Block.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(4.0f).notSolid());
+        super(Block.Properties.of(Material.STONE).sound(SoundType.STONE).strength(4.0f).noOcclusion());
     }
 
 

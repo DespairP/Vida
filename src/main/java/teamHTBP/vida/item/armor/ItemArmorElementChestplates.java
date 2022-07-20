@@ -14,16 +14,18 @@ import teamHTBP.vida.modelRender.armormodel.*;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.item.Item.Properties;
+
 public class ItemArmorElementChestplates extends ArmorItem {
 
     protected int element = 1;
 
     public ItemArmorElementChestplates() {
-        super(ArmorMaterial.DIAMOND, EquipmentSlotType.CHEST, new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterial.DIAMOND, EquipmentSlotType.CHEST, new Properties().tab(ItemGroupLoader.vidaItemGroup));
     }
 
     public ItemArmorElementChestplates(int element) {
-        super(ArmorMaterial.DIAMOND, EquipmentSlotType.CHEST, new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterial.DIAMOND, EquipmentSlotType.CHEST, new Properties().tab(ItemGroupLoader.vidaItemGroup));
         this.element = element;
     }
 
@@ -51,15 +53,15 @@ public class ItemArmorElementChestplates extends ArmorItem {
                 break;
         }
 
-        model.setVisible(true);
-        model.arm_left.showModel = true;
-        model.arm_right.showModel = true;
-        model.body.showModel = true;
+        model.setAllVisible(true);
+        model.arm_left.visible = true;
+        model.arm_right.visible = true;
+        model.body.visible = true;
 
 
-        model.isChild = _default.isChild;
-        model.isSneak = _default.isSneak;
-        model.isSitting = _default.isSitting;
+        model.young = _default.young;
+        model.crouching = _default.crouching;
+        model.riding = _default.riding;
         model.rightArmPose = _default.rightArmPose;
         model.leftArmPose = _default.leftArmPose;
         return (A) model;

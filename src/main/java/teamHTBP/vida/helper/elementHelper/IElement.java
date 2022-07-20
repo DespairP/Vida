@@ -13,7 +13,7 @@ public interface IElement {
     List<RegistryKey<Biome>> getContainsBiomes();
 
     default boolean contains(Biome biome) {
-        return getContainsBiomes().contains(RegistryKey.getOrCreateKey(Registry.BIOME_KEY,Objects.requireNonNull(biome.getRegistryName())));
+        return getContainsBiomes().contains(RegistryKey.create(Registry.BIOME_REGISTRY,Objects.requireNonNull(biome.getRegistryName())));
     }
 
     default boolean contains(RegistryKey<Biome> biome) {
@@ -21,7 +21,7 @@ public interface IElement {
     }
 
     default boolean contains(ResourceLocation name) {
-        return name != null && getContainsBiomes().stream().anyMatch((key) -> key.getLocation().getPath().equals(name.getPath()));
+        return name != null && getContainsBiomes().stream().anyMatch((key) -> key.location().getPath().equals(name.getPath()));
     }
 
     default Allelopathy test(IElement element) {

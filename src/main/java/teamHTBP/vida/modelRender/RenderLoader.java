@@ -53,17 +53,17 @@ public class RenderLoader {
 
     @SubscribeEvent
     public static void onRenderTypeSetup(FMLClientSetupEvent event) {
-        RenderTypeLookup.setRenderLayer(BlockLoader.saplingVida.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_CRISMCREST.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_SWEETCYANREED.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_SULLENHYDRANGEA.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_NITRITETHORNS.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_PLAMSTEM.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_HEARTOFWAL.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.purfiedCauldron.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.CORE_ALTAR.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.prismTable.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(BlockLoader.steleLife.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(BlockLoader.saplingVida.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_CRISMCREST.get(), RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_SWEETCYANREED.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_SULLENHYDRANGEA.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_NITRITETHORNS.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_PLAMSTEM.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_HEARTOFWAL.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BlockLoader.purfiedCauldron.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BlockLoader.CORE_ALTAR.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(BlockLoader.prismTable.get(), RenderType.translucent());
+        RenderTypeLookup.setRenderLayer(BlockLoader.steleLife.get(), RenderType.translucent());
     }
 
     @SubscribeEvent
@@ -118,8 +118,8 @@ public class RenderLoader {
     @SubscribeEvent
     public static void onAtlasEvent(TextureStitchEvent.Pre event) {
         Vida.LOGGER.info("register Atlas");
-        ResourceLocation stitching = event.getMap().getTextureLocation();
-        if (!stitching.equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE)) {
+        ResourceLocation stitching = event.getMap().location();
+        if (!stitching.equals(AtlasTexture.LOCATION_BLOCKS)) {
             return;
         }
         event.addSprite(goldgemLocation);

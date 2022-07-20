@@ -13,6 +13,8 @@ import teamHTBP.vida.particle.ParticleFactoryLoader;
 
 import java.util.Locale;
 
+import net.minecraft.particles.IParticleData.IDeserializer;
+
 /**
  * 基础Vida粒子数据<br/>
  * 粒子数据是创造粒子时需要的数据，见 {@link World#addParticle},<br/>
@@ -28,12 +30,12 @@ public class BaseParticleData implements IParticleData {
     public static final IDeserializer<BaseParticleData> DESERIALIZER = new IDeserializer<BaseParticleData>() {
 
         @Override
-        public BaseParticleData deserialize(ParticleType<BaseParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
+        public BaseParticleData fromCommand(ParticleType<BaseParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
             return new BaseParticleData(particleTypeIn, 255, 255, 255, 1 , 100);
         }
 
         @Override
-        public BaseParticleData read(ParticleType<BaseParticleData> particleTypeIn, PacketBuffer buffer) {
+        public BaseParticleData fromNetwork(ParticleType<BaseParticleData> particleTypeIn, PacketBuffer buffer) {
             int r = buffer.readInt();
             int g = buffer.readInt();
             int b = buffer.readInt();
@@ -66,7 +68,7 @@ public class BaseParticleData implements IParticleData {
     }
 
     @Override
-    public void write(PacketBuffer buffer) {
+    public void writeToNetwork(PacketBuffer buffer) {
         buffer.writeFloat(this.r);
         buffer.writeFloat(this.g);
         buffer.writeFloat(this.b);
@@ -75,7 +77,7 @@ public class BaseParticleData implements IParticleData {
     }
 
     @Override
-    public String getParameters() {
+    public String writeToString() {
         return String.format(Locale.ROOT, "%s", this.getType().getRegistryName());
     }
 

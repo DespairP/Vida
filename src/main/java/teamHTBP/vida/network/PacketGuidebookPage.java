@@ -35,13 +35,13 @@ public class PacketGuidebookPage {
             throw new NullPointerException("guidebook singlePage is null");
         }
         String mapString = GSON.toJson(guideToSinglePage);
-        buffer.writeString(mapString);
+        buffer.writeUtf(mapString);
         return buffer;
     }
 
     /**反序列化*/
     public static PacketGuidebookPage fromBytes(PacketBuffer buffer){
-        String pagesString = buffer.readString();
+        String pagesString = buffer.readUtf();
         if(pagesString.isEmpty()){
             LOGGER.error("pages in empty");
             return new PacketGuidebookPage(new LinkedHashMap<>());

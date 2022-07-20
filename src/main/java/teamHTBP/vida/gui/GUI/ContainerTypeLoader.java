@@ -16,31 +16,31 @@ public class ContainerTypeLoader {
 
     public static RegistryObject<ContainerType<ContainerPrismTable>> prismTable = CONTAINER_TYPES.register("container_prismtable", () -> {
         return IForgeContainerType.create((int id, PlayerInventory inventory, PacketBuffer buffer) -> {
-            return new ContainerPrismTable(id, inventory, buffer.readBlockPos(), inventory.player.world, new PrismTableArray());
+            return new ContainerPrismTable(id, inventory, buffer.readBlockPos(), inventory.player.level, new PrismTableArray());
         });
     });
 
     public static RegistryObject<ContainerType<ContainerOreReactionMachine>> oreReaction = CONTAINER_TYPES.register("container_orereactionmachine", () -> {
         return IForgeContainerType.create((int id, PlayerInventory inventory, PacketBuffer buffer) -> {
-            return new ContainerOreReactionMachine(id, inventory, buffer.readBlockPos(), inventory.player.world, new OreReactionMachineArray());
+            return new ContainerOreReactionMachine(id, inventory, buffer.readBlockPos(), inventory.player.level, new OreReactionMachineArray());
         });
     });
 
     public static RegistryObject<ContainerType<ContainerBottles>> bottles = CONTAINER_TYPES.register("container_bottles", () -> {
         return IForgeContainerType.create((int id, PlayerInventory inventory, PacketBuffer buffer) -> {
-            return new ContainerBottles(id, inventory, buffer.readItemStack());
+            return new ContainerBottles(id, inventory, buffer.readItem());
         });
     });
 
     public static RegistryObject<ContainerType<ContainerBluePrint>> bluePrints = CONTAINER_TYPES.register("container_blueprint", () -> {
         return IForgeContainerType.create((int id, PlayerInventory inventory, PacketBuffer buffer) -> {
-            return new ContainerBluePrint(id, inventory, buffer.readItemStack());
+            return new ContainerBluePrint(id, inventory, buffer.readItem());
         });
     });
 
     public static RegistryObject<ContainerType<ContainerInjectTable>> inject = CONTAINER_TYPES.register("container_inject", () -> {
         return IForgeContainerType.create((int id, PlayerInventory inventory, PacketBuffer buffer) -> {
-            return new ContainerInjectTable(id, buffer.readItemStack(), buffer.readBlockPos(), inventory.player.world);
+            return new ContainerInjectTable(id, buffer.readItem(), buffer.readBlockPos(), inventory.player.level);
         });
     });
 }

@@ -34,16 +34,16 @@ public class ElementLevelToolsExpHUD extends AbstractGui {
         }
         assert this.minecraft.player != null;
         checkRenew(stack);
-        width = this.minecraft.getMainWindow().getScaledWidth();
-        height = this.minecraft.getMainWindow().getScaledHeight();
+        width = this.minecraft.getWindow().getGuiScaledWidth();
+        height = this.minecraft.getWindow().getGuiScaledHeight();
 
         int xPos = width / 2 - 91;
         //渲染经验
-        this.minecraft.getTextureManager().bindTexture(AbstractGui.GUI_ICONS_LOCATION);
+        this.minecraft.getTextureManager().bind(AbstractGui.GUI_ICONS_LOCATION);
         RenderSystem.pushMatrix();
-        int i = this.minecraft.player.xpBarCap();
+        int i = this.minecraft.player.getXpNeededForNextLevel();
         if (i > 0) {
-            int expWidth = (int)(this.minecraft.player.experience * 183.0F);
+            int expWidth = (int)(this.minecraft.player.experienceProgress * 183.0F);
             expProgress = expProgress.get() == expWidth ? expProgress : new IntRange(expProgress.get(), expWidth,0);
             int yPos = height - 32 + 3;
             this.blit(matrixStack, xPos, yPos, 0, 64, 182, 5);
@@ -61,7 +61,7 @@ public class ElementLevelToolsExpHUD extends AbstractGui {
         if(toolElementColor == null) {
             return;
         }
-        this.minecraft.getTextureManager().bindTexture(VIDA_ICONS);
+        this.minecraft.getTextureManager().bind(VIDA_ICONS);
         RenderSystem.pushMatrix();
         double toolExp = item.getCurrentLevelXP(itemStack);
         double nextToolExp = item.getNextLevelRequiredXP(itemStack);
@@ -78,13 +78,13 @@ public class ElementLevelToolsExpHUD extends AbstractGui {
         RenderSystem.enableBlend();
         if (this.minecraft.player.experienceLevel > 0) {
             String s = "" + this.minecraft.player.experienceLevel;
-            int i1 = (width - this.minecraft.fontRenderer.getStringWidth(s)) / 2 - 20;
+            int i1 = (width - this.minecraft.font.width(s)) / 2 - 20;
             int j1 = height - 31 - 4;
-            this.minecraft.fontRenderer.drawString(matrixStack, s, (float)(i1 + 1), (float)j1, RGBAColor.getColorCodeFromRGBA(0,0,0,(int)((alpha.increase(1) / 100.0f) * 255.0F)));
-            this.minecraft.fontRenderer.drawString(matrixStack, s, (float)(i1 - 1), (float)j1, RGBAColor.getColorCodeFromRGBA(0,0,0,(int)((alpha.increase(1) / 100.0f) * 255.0F)));
-            this.minecraft.fontRenderer.drawString(matrixStack, s, (float)i1, (float)(j1 + 1), RGBAColor.getColorCodeFromRGBA(0,0,0,(int)((alpha.increase(1) / 100.0f) * 255.0F)));
-            this.minecraft.fontRenderer.drawString(matrixStack, s, (float)i1, (float)(j1 - 1), RGBAColor.getColorCodeFromRGBA(0,0,0,(int)((alpha.increase(1) / 100.0f) * 255.0F)));
-            this.minecraft.fontRenderer.drawString(matrixStack, s, (float)i1, (float)j1, RGBAColor.getColorCodeFromRGBA(128,255,32, (int)((alpha.increase(1) / 100.0f) * 255.0F)));
+            this.minecraft.font.draw(matrixStack, s, (float)(i1 + 1), (float)j1, RGBAColor.getColorCodeFromRGBA(0,0,0,(int)((alpha.increase(1) / 100.0f) * 255.0F)));
+            this.minecraft.font.draw(matrixStack, s, (float)(i1 - 1), (float)j1, RGBAColor.getColorCodeFromRGBA(0,0,0,(int)((alpha.increase(1) / 100.0f) * 255.0F)));
+            this.minecraft.font.draw(matrixStack, s, (float)i1, (float)(j1 + 1), RGBAColor.getColorCodeFromRGBA(0,0,0,(int)((alpha.increase(1) / 100.0f) * 255.0F)));
+            this.minecraft.font.draw(matrixStack, s, (float)i1, (float)(j1 - 1), RGBAColor.getColorCodeFromRGBA(0,0,0,(int)((alpha.increase(1) / 100.0f) * 255.0F)));
+            this.minecraft.font.draw(matrixStack, s, (float)i1, (float)j1, RGBAColor.getColorCodeFromRGBA(128,255,32, (int)((alpha.increase(1) / 100.0f) * 255.0F)));
         }
         RenderSystem.popMatrix();
         //渲染工具等级
@@ -92,13 +92,13 @@ public class ElementLevelToolsExpHUD extends AbstractGui {
         RenderSystem.enableBlend();
         if (this.minecraft.player.experienceLevel > 0) {
             String s = "" + item.getCurrentLevel(stack);
-            int i1 = (width - this.minecraft.fontRenderer.getStringWidth(s)) / 2 + 20;
+            int i1 = (width - this.minecraft.font.width(s)) / 2 + 20;
             int j1 = height - 31 - 4;
-            this.minecraft.fontRenderer.drawString(matrixStack, s, (float)(i1 + 1), (float)j1, RGBAColor.getColorCodeFromRGBA(0,0,0,(int)((alpha.increase(1) / 100.0f) * 255.0F)));
-            this.minecraft.fontRenderer.drawString(matrixStack, s, (float)(i1 - 1), (float)j1, RGBAColor.getColorCodeFromRGBA(0,0,0,(int)((alpha.increase(1) / 100.0f) * 255.0F)));
-            this.minecraft.fontRenderer.drawString(matrixStack, s, (float)i1, (float)(j1 + 1), RGBAColor.getColorCodeFromRGBA(0,0,0,(int)((alpha.increase(1) / 100.0f) * 255.0F)));
-            this.minecraft.fontRenderer.drawString(matrixStack, s, (float)i1, (float)(j1 - 1), RGBAColor.getColorCodeFromRGBA(0,0,0,(int)((alpha.increase(1) / 100.0f) * 255.0F)));
-            this.minecraft.fontRenderer.drawString(matrixStack, s, (float)i1, (float)j1, RGBAColor.getColorCodeFromRGBA(toolElementColor.getRed(),toolElementColor.getGreen(),toolElementColor.getBlue(), (int)((alpha.increase(1) / 100.0f) * 255.0F)));
+            this.minecraft.font.draw(matrixStack, s, (float)(i1 + 1), (float)j1, RGBAColor.getColorCodeFromRGBA(0,0,0,(int)((alpha.increase(1) / 100.0f) * 255.0F)));
+            this.minecraft.font.draw(matrixStack, s, (float)(i1 - 1), (float)j1, RGBAColor.getColorCodeFromRGBA(0,0,0,(int)((alpha.increase(1) / 100.0f) * 255.0F)));
+            this.minecraft.font.draw(matrixStack, s, (float)i1, (float)(j1 + 1), RGBAColor.getColorCodeFromRGBA(0,0,0,(int)((alpha.increase(1) / 100.0f) * 255.0F)));
+            this.minecraft.font.draw(matrixStack, s, (float)i1, (float)(j1 - 1), RGBAColor.getColorCodeFromRGBA(0,0,0,(int)((alpha.increase(1) / 100.0f) * 255.0F)));
+            this.minecraft.font.draw(matrixStack, s, (float)i1, (float)j1, RGBAColor.getColorCodeFromRGBA(toolElementColor.getRed(),toolElementColor.getGreen(),toolElementColor.getBlue(), (int)((alpha.increase(1) / 100.0f) * 255.0F)));
         }
         RenderSystem.popMatrix();
     }
@@ -109,7 +109,7 @@ public class ElementLevelToolsExpHUD extends AbstractGui {
      *
      * */
     public void checkRenew(ItemStack renderItem){
-        if(itemStack != null && itemStack.isItemEqualIgnoreDurability(renderItem)){
+        if(itemStack != null && itemStack.sameItemStackIgnoreDurability(renderItem)){
             this.itemStack = renderItem;
             return;
         }

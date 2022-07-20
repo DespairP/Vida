@@ -15,7 +15,7 @@ public class BaseParticleType<T extends Particle> extends ParticleType<BaseParti
 
 
     @Override
-    public Codec<BaseParticleData> func_230522_e_() {
+    public Codec<BaseParticleData> codec() {
         return codec;
     }
 }

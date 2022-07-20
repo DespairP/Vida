@@ -22,17 +22,17 @@ public class BiomeGenLoader {
         if (event.getCategory() == Biome.Category.FOREST || event.getCategory() == Biome.Category.PLAINS)
             event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(
                     () -> GenLoader.vidaTree.get()
-                            .withConfiguration(VidaTree.VIDATREE)
-                            .withPlacement(Placement.CHANCE.configure(new ChanceConfig(4))));
+                            .configured(VidaTree.VIDATREE)
+                            .decorated(Placement.CHANCE.configured(new ChanceConfig(4))));
     }
 
     static void eleOreDefaultConfig(BiomeLoadingEvent event, Block block) {
         event.getGeneration().getFeatures(GenerationStage.Decoration.UNDERGROUND_ORES).add(
-                () -> Feature.ORE.withConfiguration(
-                        new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD,
-                                block.getDefaultState(),
+                () -> Feature.ORE.configured(
+                        new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE,
+                                block.defaultBlockState(),
                                 8)
-                ).range(16).square()
+                ).range(16).squared()
         );
     }
 

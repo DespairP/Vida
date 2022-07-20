@@ -28,21 +28,21 @@ public abstract class AbstractModelElementChestplates<T extends LivingEntity> ex
         super(1.0f, 0, textureWidth, textureHeight);
     }
 
-    protected ModelRenderer getArmForSide(HandSide side) {
+    protected ModelRenderer getArm(HandSide side) {
         return side == HandSide.LEFT ? this.arm_left : this.arm_right;
     }
 
     @Override
-    public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-        super.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+    public void renderToBuffer(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+        super.renderToBuffer(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
     }
 
 
     @Override
-    protected Iterable<ModelRenderer> getBodyParts() {
-        arm_right.copyModelAngles(this.bipedRightArm);
-        body.copyModelAngles(this.bipedBody);
-        arm_left.copyModelAngles(this.bipedLeftArm);
+    protected Iterable<ModelRenderer> bodyParts() {
+        arm_right.copyFrom(this.rightArm);
+        body.copyFrom(this.body);
+        arm_left.copyFrom(this.leftArm);
         return ImmutableList.of(this.body, this.arm_left, this.arm_right, this.arm_left, this.arm_left);
     }
 
@@ -50,19 +50,19 @@ public abstract class AbstractModelElementChestplates<T extends LivingEntity> ex
      * This is a helper function from Tabula to set the rotation of model parts
      */
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-        modelRenderer.rotateAngleX = x;
-        modelRenderer.rotateAngleY = y;
-        modelRenderer.rotateAngleZ = z;
+        modelRenderer.xRot = x;
+        modelRenderer.yRot = y;
+        modelRenderer.zRot = z;
     }
 
 
-    public void setVisible(boolean visible) {
-        this.bipedHead.showModel = false;
-        this.bipedHeadwear.showModel = true;
-        this.bipedBody.showModel = true;
-        this.bipedRightArm.showModel = true;
-        this.bipedLeftArm.showModel = true;
-        this.bipedRightLeg.showModel = false;
-        this.bipedLeftLeg.showModel = false;
+    public void setAllVisible(boolean visible) {
+        this.head.visible = false;
+        this.hat.visible = true;
+        this.body.visible = true;
+        this.rightArm.visible = true;
+        this.leftArm.visible = true;
+        this.rightLeg.visible = false;
+        this.leftLeg.visible = false;
     }
 }

@@ -10,7 +10,7 @@ public class PacketMessage {
     private String message = "";
 
     public PacketMessage(PacketBuffer buffer) {
-        message = buffer.readString().trim();
+        message = buffer.readUtf().trim();
     }
 
     public PacketMessage(String message) {
@@ -18,7 +18,7 @@ public class PacketMessage {
     }
 
     public void toBytes(PacketBuffer buffer) {
-        buffer.writeString(message);
+        buffer.writeUtf(message);
     }
 
     public void handler(Supplier<NetworkEvent.Context> ctx) {

@@ -19,17 +19,17 @@ public class CommandUnlockBluePrint implements Command<CommandSource> {
         String argument = commandContext.getArgument("name", String.class);
         Blueprint blueprint = BlueprintHelper.getBluePrint(argument).orElse(null);
         if (blueprint == null) {
-            commandContext.getSource().sendErrorMessage(new StringTextComponent("blueprint : " + argument + " is not exists"));
+            commandContext.getSource().sendFailure(new StringTextComponent("blueprint : " + argument + " is not exists"));
             return 0;
         }
-        IBlueprintCapability capability = commandContext.getSource().asPlayer().getCapability(VidaCapabilities.blueprint_Capability).orElse(null);
+        IBlueprintCapability capability = commandContext.getSource().getPlayerOrException().getCapability(VidaCapabilities.blueprint_Capability).orElse(null);
         if (!capability.unlockBlueprint(blueprint)) {
-            commandContext.getSource().sendErrorMessage(new StringTextComponent("blueprint : " + argument + " is already unlocked"));
+            commandContext.getSource().sendFailure(new StringTextComponent("blueprint : " + argument + " is already unlocked"));
             return 0;
         }
         PacketChannel.INSTANCE.send(PacketDistributor.PLAYER.with(() -> {
             try {
-                return commandContext.getSource().asPlayer();
+                return commandContext.getSource().getPlayerOrException();
             } catch (CommandSyntaxException e) {
                 e.printStackTrace();
             }

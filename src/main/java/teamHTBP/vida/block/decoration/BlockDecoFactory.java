@@ -10,7 +10,7 @@ import net.minecraft.block.material.Material;
  *
  */
 public class BlockDecoFactory {
-    private static final Block.Properties BASIC_PROPERTIES = Block.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(3.0F);
+    private static final Block.Properties BASIC_PROPERTIES = Block.Properties.of(Material.STONE).sound(SoundType.STONE).strength(3.0F);
 
     public static Block yAxis(){
         return  new BlockDecoWithY(BASIC_PROPERTIES);

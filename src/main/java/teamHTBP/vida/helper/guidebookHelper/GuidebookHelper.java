@@ -32,14 +32,14 @@ public class GuidebookHelper {
      * @return GuideHandler
      * */
     public static GuideBookGuideHandler getGuideHandler(World world){
-        if(world == null || world.isRemote){
+        if(world == null || world.isClientSide){
             return GuideBookGuideEventHandler.clientHandler;
         }
         return GuideBookGuideEventHandler.getServerHandler(world);
     }
 
     public static GuideBookPageHandler getGuidePageHandler(World world){
-        if(world == null || world.isRemote){
+        if(world == null || world.isClientSide){
             return GuideBookPageEventHandler.clientHandler;
         }
         return GuideBookPageEventHandler.getServerHandler(world);

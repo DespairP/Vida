@@ -10,6 +10,6 @@ import teamHTBP.vida.itemGroup.ItemGroupLoader;
  **/
 public class ItemVidaWand extends Item {
     public ItemVidaWand() {
-        super(new Item.Properties().group(ItemGroupLoader.vidaItemGroup).maxStackSize(1));
+        super(new Item.Properties().tab(ItemGroupLoader.vidaItemGroup).stacksTo(1));
     }
 }

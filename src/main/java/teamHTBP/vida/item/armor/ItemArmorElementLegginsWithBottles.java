@@ -16,21 +16,21 @@ public class ItemArmorElementLegginsWithBottles extends ItemArmorElementLeggings
 
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        ItemStack itemstack = playerIn.getHeldItem(handIn);
-        if (!worldIn.isRemote) {
-            if (handIn == Hand.MAIN_HAND && playerIn.isSneaking()) {
-                return super.onItemRightClick(worldIn, playerIn, handIn);
+    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        ItemStack itemstack = playerIn.getItemInHand(handIn);
+        if (!worldIn.isClientSide) {
+            if (handIn == Hand.MAIN_HAND && playerIn.isShiftKeyDown()) {
+                return super.use(worldIn, playerIn, handIn);
             } else if (handIn == Hand.MAIN_HAND) {
-                ItemStack stack = playerIn.inventory.getCurrentItem();
+                ItemStack stack = playerIn.inventory.getSelected();
                 ItemArmorBottlesContainerProvider provider = new ItemArmorBottlesContainerProvider(stack);
                 NetworkHooks.openGui((ServerPlayerEntity) playerIn, provider, (PacketBuffer packerBuffer) -> {
-                    packerBuffer.writeItemStack(stack);
+                    packerBuffer.writeItem(stack);
                 });
-                return ActionResult.resultSuccess(stack);
+                return ActionResult.success(stack);
             }
         }
-        return ActionResult.resultPass(itemstack);
+        return ActionResult.pass(itemstack);
     }
 
 

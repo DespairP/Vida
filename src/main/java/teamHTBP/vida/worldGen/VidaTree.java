@@ -15,17 +15,17 @@ import java.util.Random;
 
 public class VidaTree extends Tree {
     public static final BaseTreeFeatureConfig VIDATREE = (new BaseTreeFeatureConfig.Builder(
-            new SimpleBlockStateProvider(BlockLoader.logVida.get().getDefaultState()),
-            new SimpleBlockStateProvider(BlockLoader.leavesVida.get().getDefaultState()),
+            new SimpleBlockStateProvider(BlockLoader.logVida.get().defaultBlockState()),
+            new SimpleBlockStateProvider(BlockLoader.leavesVida.get().defaultBlockState()),
             new BlobFoliagePlacer(
-                    FeatureSpread.create(3), FeatureSpread.create(0), 3
+                    FeatureSpread.fixed(3), FeatureSpread.fixed(0), 3
             ), new StraightTrunkPlacer(
             10, 2, 2
     ), new TwoLayerFeature(10, 5, 5))).build();
 
     @Nullable
     @Override
-    public ConfiguredFeature<BaseTreeFeatureConfig, ?> getTreeFeature(Random randomIn, boolean p_225546_2_) {
-        return GenLoader.vidaTree.get().withConfiguration(VIDATREE);
+    public ConfiguredFeature<BaseTreeFeatureConfig, ?> getConfiguredFeature(Random randomIn, boolean p_225546_2_) {
+        return GenLoader.vidaTree.get().configured(VIDATREE);
     }
 }

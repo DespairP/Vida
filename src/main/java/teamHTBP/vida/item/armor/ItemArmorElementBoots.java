@@ -14,15 +14,17 @@ import teamHTBP.vida.modelRender.armormodel.*;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.item.Item.Properties;
+
 public class ItemArmorElementBoots extends ArmorItem {  //盔甲属于什么元素
     protected int element = 1;
 
     public ItemArmorElementBoots() {
-        super(ArmorMaterial.DIAMOND, EquipmentSlotType.FEET, new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterial.DIAMOND, EquipmentSlotType.FEET, new Properties().tab(ItemGroupLoader.vidaItemGroup));
     }
 
     public ItemArmorElementBoots(int element) {
-        super(ArmorMaterial.DIAMOND, EquipmentSlotType.FEET, new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterial.DIAMOND, EquipmentSlotType.FEET, new Properties().tab(ItemGroupLoader.vidaItemGroup));
         this.element = element;
     }
 
@@ -48,15 +50,15 @@ public class ItemArmorElementBoots extends ArmorItem {  //盔甲属于什么元�
                 break;
         }
 
-        model.bipedLeftLeg.showModel = true;
-        model.bipedRightLeg.showModel = true;
-        model.leg_left.showModel = true;
-        model.leg_right.showModel = true;
+        model.leftLeg.visible = true;
+        model.rightLeg.visible = true;
+        model.leg_left.visible = true;
+        model.leg_right.visible = true;
 
 
-        model.isChild = _default.isChild;
-        model.isSneak = _default.isSneak;
-        model.isSitting = _default.isSitting;
+        model.young = _default.young;
+        model.crouching = _default.crouching;
+        model.riding = _default.riding;
         model.rightArmPose = _default.rightArmPose;
         model.leftArmPose = _default.leftArmPose;
         return (A) model;

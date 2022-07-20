@@ -10,22 +10,24 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public abstract class BlockElementCrystal extends Block {
     public VoxelShape SHAPE;
     public int element = 0;
 
     public BlockElementCrystal(int element) {
-        super(Properties.create(Material.GLASS).hardnessAndResistance(1.0F).notSolid().sound(SoundType.GLASS).setLightLevel((state) -> 15).notSolid());
+        super(Properties.of(Material.GLASS).strength(1.0F).noOcclusion().sound(SoundType.GLASS).lightLevel((state) -> 15).noOcclusion());
         this.element = element;
     }
 
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        SHAPE = Block.makeCuboidShape(6, 6, 6, 12, 12, 12);
+        SHAPE = Block.box(6, 6, 6, 12, 12, 12);
         return SHAPE;
     }
 
 
-    public BlockRenderType getRenderType(BlockState state) {
+    public BlockRenderType getRenderShape(BlockState state) {
         return BlockRenderType.ENTITYBLOCK_ANIMATED;
     }
 }

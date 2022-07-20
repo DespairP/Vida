@@ -129,23 +129,23 @@ public class ItemLoader {
     public static RegistryObject<Item> fireElementSword = ITEMS.register("fireelementsword", () -> new ItemElementSword(4));
     public static RegistryObject<Item> earthElementSword = ITEMS.register("earthelementsword", () -> new ItemElementSword(5));
 
-    public final static RegistryObject<Item> logVida = ITEMS.register("logvida", () -> new BlockItem(BlockLoader.logVida.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> leavesVida = ITEMS.register("leavesvida", () -> new BlockItem(BlockLoader.leavesVida.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> plankvida_0 = ITEMS.register("plankvida0", () -> new BlockItem(BlockLoader.plankVida_0.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> plankvida_1 = ITEMS.register("plankvida1", () -> new BlockItem(BlockLoader.plankVida_1.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> plankvida_2 = ITEMS.register("plankvida2", () -> new BlockItem(BlockLoader.plankVida_2.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public final static RegistryObject<Item> logVida = ITEMS.register("logvida", () -> new BlockItem(BlockLoader.logVida.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> leavesVida = ITEMS.register("leavesvida", () -> new BlockItem(BlockLoader.leavesVida.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> plankvida_0 = ITEMS.register("plankvida0", () -> new BlockItem(BlockLoader.plankVida_0.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> plankvida_1 = ITEMS.register("plankvida1", () -> new BlockItem(BlockLoader.plankVida_1.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> plankvida_2 = ITEMS.register("plankvida2", () -> new BlockItem(BlockLoader.plankVida_2.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
 
 
-    public static RegistryObject<Item> goldElementOre = ITEMS.register("goldelementore", () -> new BlockItem(BlockLoader.goldElementOre.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> woodElementOre = ITEMS.register("woodelementore", () -> new BlockItem(BlockLoader.woodElementOre.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> aquaElementOre = ITEMS.register("aquaelementore", () -> new BlockItem(BlockLoader.aquaElementOre.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> fireElementOre = ITEMS.register("fireelementore", () -> new BlockItem(BlockLoader.fireElementOre.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> earthElementOre = ITEMS.register("earthelementore", () -> new BlockItem(BlockLoader.earthElementOre.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> goldElementOre = ITEMS.register("goldelementore", () -> new BlockItem(BlockLoader.goldElementOre.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> woodElementOre = ITEMS.register("woodelementore", () -> new BlockItem(BlockLoader.woodElementOre.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> aquaElementOre = ITEMS.register("aquaelementore", () -> new BlockItem(BlockLoader.aquaElementOre.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> fireElementOre = ITEMS.register("fireelementore", () -> new BlockItem(BlockLoader.fireElementOre.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> earthElementOre = ITEMS.register("earthelementore", () -> new BlockItem(BlockLoader.earthElementOre.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
 
 
-    public static RegistryObject<Item> samping = ITEMS.register("saplingvida", () -> new BlockItem(BlockLoader.saplingVida.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> samping = ITEMS.register("saplingvida", () -> new BlockItem(BlockLoader.saplingVida.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
 
-    public static RegistryObject<Item> plankLush = ITEMS.register("lush_planks", () -> new BlockItem(BlockLoader.LUSH_PLANKS.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> plankLush = ITEMS.register("lush_planks", () -> new BlockItem(BlockLoader.LUSH_PLANKS.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
 
 
     //功能性方块
@@ -153,29 +153,29 @@ public class ItemLoader {
     public static RegistryObject<Item> GEM_STAND;
     @RegisterItemBlock
     public static RegistryObject<Item> CORE_ALTAR;
-    public static RegistryObject<Item> prismTable = ITEMS.register("prismtable", () -> new BlockItem(BlockLoader.prismTable.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup).maxStackSize(1)));
-    public static RegistryObject<Item> oreReactionMachine = ITEMS.register("orereactionmachine", () -> new BlockItem(BlockLoader.oreReactionMachine.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> collector = ITEMS.register("collector", () -> new BlockItem(BlockLoader.collector.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> injectionTable = ITEMS.register("injecttable", () -> new BlockItem(BlockLoader.injectionTable.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> altarcubeMaker = ITEMS.register("altarcubemaker", () -> new BlockItem(BlockLoader.altarcubeMaker.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> steleLife = ITEMS.register("lifestele", () -> new BlockItem(BlockLoader.steleLife.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> blueprintDesigner = ITEMS.register("blueprintdesigner", () -> new BlockItem(BlockLoader.blueprintDesigner.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> purfiedCauldron = ITEMS.register("purfiedcauldron", () -> new BlockItem(BlockLoader.purfiedCauldron.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> prismTable = ITEMS.register("prismtable", () -> new BlockItem(BlockLoader.prismTable.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup).stacksTo(1)));
+    public static RegistryObject<Item> oreReactionMachine = ITEMS.register("orereactionmachine", () -> new BlockItem(BlockLoader.oreReactionMachine.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> collector = ITEMS.register("collector", () -> new BlockItem(BlockLoader.collector.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> injectionTable = ITEMS.register("injecttable", () -> new BlockItem(BlockLoader.injectionTable.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> altarcubeMaker = ITEMS.register("altarcubemaker", () -> new BlockItem(BlockLoader.altarcubeMaker.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> steleLife = ITEMS.register("lifestele", () -> new BlockItem(BlockLoader.steleLife.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> blueprintDesigner = ITEMS.register("blueprintdesigner", () -> new BlockItem(BlockLoader.blueprintDesigner.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> purfiedCauldron = ITEMS.register("purfiedcauldron", () -> new BlockItem(BlockLoader.purfiedCauldron.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
 
     //悬浮元素水晶方块
-    public static RegistryObject<Item> goldElementCrystal = ITEMS.register("goldelementcrystal", () -> new BlockItem(BlockLoader.elementCrystalGold.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> woodElementCrystal = ITEMS.register("woodelementcrystal", () -> new BlockItem(BlockLoader.elementCrystalWood.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> aquaElementCrystal = ITEMS.register("aquaelementcrystal", () -> new BlockItem(BlockLoader.elementCrystalAqua.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> fireElementCrystal = ITEMS.register("fireelementcrystal", () -> new BlockItem(BlockLoader.elementCrystalFire.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> earthElementCrystal = ITEMS.register("earthelementcrystal", () -> new BlockItem(BlockLoader.elementCrystalEarth.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> goldElementCrystal = ITEMS.register("goldelementcrystal", () -> new BlockItem(BlockLoader.elementCrystalGold.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> woodElementCrystal = ITEMS.register("woodelementcrystal", () -> new BlockItem(BlockLoader.elementCrystalWood.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> aquaElementCrystal = ITEMS.register("aquaelementcrystal", () -> new BlockItem(BlockLoader.elementCrystalAqua.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> fireElementCrystal = ITEMS.register("fireelementcrystal", () -> new BlockItem(BlockLoader.elementCrystalFire.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> earthElementCrystal = ITEMS.register("earthelementcrystal", () -> new BlockItem(BlockLoader.elementCrystalEarth.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
 
     //元素农作物方块
-    public static RegistryObject<Item> CROP_CRISMCREST = ITEMS.register("crop_crimsoncrest", () -> new BlockItem(BlockLoader.CROP_CRISMCREST.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> CROP_HEARTOFWAL = ITEMS.register("crop_heartofwal", () -> new BlockItem(BlockLoader.CROP_HEARTOFWAL.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> CROP_NITRITETHORNS = ITEMS.register("crop_nitritethorns", () -> new BlockItem(BlockLoader.CROP_NITRITETHORNS.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> CROP_PLAMSTEM = ITEMS.register("crop_plamstem", () -> new BlockItem(BlockLoader.CROP_PLAMSTEM.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> CROP_SULLENHYDRANGEA = ITEMS.register("crop_sullenhydrangea", () -> new BlockItem(BlockLoader.CROP_SULLENHYDRANGEA.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
-    public static RegistryObject<Item> CROP_SWEETCYANREED = ITEMS.register("crop_sweetcyanreed", () -> new BlockItem(BlockLoader.CROP_SWEETCYANREED.get(), new Item.Properties().group(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> CROP_CRISMCREST = ITEMS.register("crop_crimsoncrest", () -> new BlockItem(BlockLoader.CROP_CRISMCREST.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> CROP_HEARTOFWAL = ITEMS.register("crop_heartofwal", () -> new BlockItem(BlockLoader.CROP_HEARTOFWAL.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> CROP_NITRITETHORNS = ITEMS.register("crop_nitritethorns", () -> new BlockItem(BlockLoader.CROP_NITRITETHORNS.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> CROP_PLAMSTEM = ITEMS.register("crop_plamstem", () -> new BlockItem(BlockLoader.CROP_PLAMSTEM.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> CROP_SULLENHYDRANGEA = ITEMS.register("crop_sullenhydrangea", () -> new BlockItem(BlockLoader.CROP_SULLENHYDRANGEA.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
+    public static RegistryObject<Item> CROP_SWEETCYANREED = ITEMS.register("crop_sweetcyanreed", () -> new BlockItem(BlockLoader.CROP_SWEETCYANREED.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
 
     //注册书
     public final static RegistryObject<Item> GUIDE_BOOK = ITEMS.register("vida_guidebook", ItemGuidebook::new);

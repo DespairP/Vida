@@ -28,7 +28,7 @@ public class PacketGuidebook {
     /**读取Packet,并处理成需要的格式*/
     public static PacketGuidebook fromBytes(PacketBuffer buffer){
         final Gson gson = new Gson();
-        String guideMapString = buffer.readString();
+        String guideMapString = buffer.readUtf();
         LOGGER.debug("get server guides: {}", guideMapString);
         return parseGuideMapString(gson, guideMapString);
     }
@@ -56,7 +56,7 @@ public class PacketGuidebook {
         Gson gson = new Gson();
         String mapString = gson.toJson(guideMap);
         LOGGER.debug("server is sending guide packet:");
-        buffer.writeString(mapString);
+        buffer.writeUtf(mapString);
     }
 
     /**如何处理数据包*/

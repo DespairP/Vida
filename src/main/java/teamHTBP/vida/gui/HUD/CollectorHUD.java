@@ -17,8 +17,8 @@ public class CollectorHUD extends AbstractGui {
     private final TileEntityCollector tileEntityCollector;
 
     public CollectorHUD(TileEntityCollector tileEntityCollector) {
-        width = Minecraft.getInstance().getMainWindow().getScaledWidth();
-        height = Minecraft.getInstance().getMainWindow().getScaledHeight();
+        width = Minecraft.getInstance().getWindow().getGuiScaledWidth();
+        height = Minecraft.getInstance().getWindow().getGuiScaledHeight();
         minecraft = Minecraft.getInstance();
         this.tileEntityCollector = tileEntityCollector;
     }
@@ -26,7 +26,7 @@ public class CollectorHUD extends AbstractGui {
     public void render(MatrixStack matrixStack) {
         if (tileEntityCollector == null) return;
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.minecraft.getTextureManager().bindTexture(HUD);
+        this.minecraft.getTextureManager().bind(HUD);
         int screenWidth = this.width / 2 - 10;
         int screenHeight = this.height / 2 - 66;
         blit(matrixStack, screenWidth + 2, screenHeight + 30, 0, 6, 29, 20, 3, 48, 48);
@@ -43,12 +43,12 @@ public class CollectorHUD extends AbstractGui {
         } else if (tileEntityCollector.isCollect) {
             blit(matrixStack, screenWidth + 20, screenHeight + 20, 0, 31, 19, 13, 10, 48, 48);
         }
-        drawString(matrixStack, minecraft.fontRenderer, progressPercent + "%", screenWidth + 7, screenHeight - 10, 60000);
+        drawString(matrixStack, minecraft.font, progressPercent + "%", screenWidth + 7, screenHeight - 10, 60000);
 
         //System.out.println(tileEntityCollector.getCollection());
         if (tileEntityCollector.coreItem != ItemStack.EMPTY && !tileEntityCollector.coreItem.isEmpty()) {
             ItemStack stack = tileEntityCollector.coreItem;
-            Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack, screenWidth + 4, screenHeight + 4);
+            Minecraft.getInstance().getItemRenderer().renderGuiItem(stack, screenWidth + 4, screenHeight + 4);
         }
 
     }

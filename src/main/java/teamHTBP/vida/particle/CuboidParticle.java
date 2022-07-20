@@ -21,46 +21,46 @@ public class CuboidParticle extends SpriteTexturedParticle {
     public CuboidParticle(ClientWorld World, double posX, double posY, double posZ, double speedX, double speedY, double speedZ, float r, float g, float b, float scale, int age) {
         super(World, posX, posY, posZ, speedX, speedY, speedZ);
         Random rand = new Random();
-        motionX = speedX;
+        xd = speedX;
         if (rand.nextFloat() > 0.95D)
-            motionY = speedY + rand.nextFloat() / 50.0f;
+            yd = speedY + rand.nextFloat() / 50.0f;
         else
-            motionY = speedY;
-        motionZ = speedZ;
-        this.particleRed = r / 255.0f;
-        this.particleGreen = g / 255.0f;
-        this.particleBlue = b / 255.0f;
-        this.maxAge = age;
+            yd = speedY;
+        zd = speedZ;
+        this.rCol = r / 255.0f;
+        this.gCol = g / 255.0f;
+        this.bCol = b / 255.0f;
+        this.lifetime = age;
         this.spinSpeed = rand.nextInt(3);
-        this.particleScale = scale;
+        this.quadSize = scale;
         this.extraYLength = rand.nextInt(4) + 3;
     }
 
     public CuboidParticle(ClientWorld World, double posX, double posY, double posZ, double speedX, double speedY, double speedZ) {
         super(World, posX, posY, posZ, speedX, speedY, speedZ);
         Random rand = new Random();
-        motionX = speedX;
+        xd = speedX;
         if (rand.nextFloat() > 0.95D)
-            motionY = speedY + rand.nextFloat() / 50.0f;
+            yd = speedY + rand.nextFloat() / 50.0f;
         else
-            motionY = speedY;
-        motionZ = speedZ;
-        this.particleRed = 255.0f / 255.0f;
-        this.particleGreen = 255.0f / 255.0f;
-        this.particleBlue = 255.0f / 255.0f;
-        this.maxAge = 50;
+            yd = speedY;
+        zd = speedZ;
+        this.rCol = 255.0f / 255.0f;
+        this.gCol = 255.0f / 255.0f;
+        this.bCol = 255.0f / 255.0f;
+        this.lifetime = 50;
         this.spinSpeed = rand.nextInt(5);
-        this.particleScale = 0.2f;
+        this.quadSize = 0.2f;
         this.extraYLength = rand.nextInt(5) + 3;
     }
 
     @Override
-    public void renderParticle(IVertexBuilder buffer, ActiveRenderInfo renderInfo, float partialTicks) {
+    public void render(IVertexBuilder buffer, ActiveRenderInfo renderInfo, float partialTicks) {
 
-        Vector3d vec3d = renderInfo.getProjectedView();
-        float f = (float) (MathHelper.lerp(partialTicks, this.prevPosX, this.posX) - vec3d.getX());
-        float f1 = (float) (MathHelper.lerp(partialTicks, this.prevPosY, this.posY) - vec3d.getY());
-        float f2 = (float) (MathHelper.lerp(partialTicks, this.prevPosZ, this.posZ) - vec3d.getZ());
+        Vector3d vec3d = renderInfo.getPosition();
+        float f = (float) (MathHelper.lerp(partialTicks, this.xo, this.x) - vec3d.x());
+        float f1 = (float) (MathHelper.lerp(partialTicks, this.yo, this.y) - vec3d.y());
+        float f2 = (float) (MathHelper.lerp(partialTicks, this.zo, this.z) - vec3d.z());
 
 
         Quaternion quaternion = new Quaternion(0, rotation, 0, true);
@@ -91,46 +91,46 @@ public class CuboidParticle extends SpriteTexturedParticle {
             vector3f.add(f, f1, f2);
         }
 
-        float f7 = this.getMinU();
-        float f8 = this.getMaxU();
-        float f5 = this.getMinV();
-        float f6 = this.getMaxV();
-        int j = this.getBrightnessForRender(partialTicks);
+        float f7 = this.getU0();
+        float f8 = this.getU1();
+        float f5 = this.getV0();
+        float f6 = this.getV1();
+        int j = this.getLightColor(partialTicks);
         //下面
-        buffer.pos(vec[4].getX(), vec[4].getY(), vec[4].getZ()).tex(f8, f6).color(this.particleRed * 0.5f, this.particleGreen * 0.5f, this.particleBlue * 0.5f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(vec[0].getX(), vec[0].getY(), vec[0].getZ()).tex(f8, f5).color(this.particleRed * 0.5f, this.particleGreen * 0.5f, this.particleBlue * 0.5f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(vec[3].getX(), vec[3].getY(), vec[3].getZ()).tex(f7, f5).color(this.particleRed * 0.5f, this.particleGreen * 0.5f, this.particleBlue * 0.5f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(vec[7].getX(), vec[7].getY(), vec[7].getZ()).tex(f7, f6).color(this.particleRed * 0.5f, this.particleGreen * 0.5f, this.particleBlue * 0.5f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.vertex(vec[4].x(), vec[4].y(), vec[4].z()).uv(f8, f6).color(this.rCol * 0.5f, this.gCol * 0.5f, this.bCol * 0.5f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(vec[0].x(), vec[0].y(), vec[0].z()).uv(f8, f5).color(this.rCol * 0.5f, this.gCol * 0.5f, this.bCol * 0.5f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(vec[3].x(), vec[3].y(), vec[3].z()).uv(f7, f5).color(this.rCol * 0.5f, this.gCol * 0.5f, this.bCol * 0.5f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(vec[7].x(), vec[7].y(), vec[7].z()).uv(f7, f6).color(this.rCol * 0.5f, this.gCol * 0.5f, this.bCol * 0.5f, this.alpha).uv2(j).endVertex();
 
         //背面
-        buffer.pos(vec[0].getX(), vec[0].getY(), vec[0].getZ()).tex(f8, f6).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(vec[1].getX(), vec[1].getY(), vec[1].getZ()).tex(f8, f5).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(vec[2].getX(), vec[2].getY(), vec[2].getZ()).tex(f7, f5).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(vec[3].getX(), vec[3].getY(), vec[3].getZ()).tex(f7, f6).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.vertex(vec[0].x(), vec[0].y(), vec[0].z()).uv(f8, f6).color(this.rCol * 0.8f, this.gCol * 0.8f, this.bCol * 0.8f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(vec[1].x(), vec[1].y(), vec[1].z()).uv(f8, f5).color(this.rCol * 0.8f, this.gCol * 0.8f, this.bCol * 0.8f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(vec[2].x(), vec[2].y(), vec[2].z()).uv(f7, f5).color(this.rCol * 0.8f, this.gCol * 0.8f, this.bCol * 0.8f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(vec[3].x(), vec[3].y(), vec[3].z()).uv(f7, f6).color(this.rCol * 0.8f, this.gCol * 0.8f, this.bCol * 0.8f, this.alpha).uv2(j).endVertex();
 
         //左侧
-        buffer.pos(vec[5].getX(), vec[5].getY(), vec[5].getZ()).tex(f8, f6).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(vec[1].getX(), vec[1].getY(), vec[1].getZ()).tex(f8, f5).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(vec[0].getX(), vec[0].getY(), vec[0].getZ()).tex(f7, f5).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(vec[4].getX(), vec[4].getY(), vec[4].getZ()).tex(f7, f6).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.vertex(vec[5].x(), vec[5].y(), vec[5].z()).uv(f8, f6).color(this.rCol * 0.6f, this.gCol * 0.6f, this.bCol * 0.6f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(vec[1].x(), vec[1].y(), vec[1].z()).uv(f8, f5).color(this.rCol * 0.6f, this.gCol * 0.6f, this.bCol * 0.6f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(vec[0].x(), vec[0].y(), vec[0].z()).uv(f7, f5).color(this.rCol * 0.6f, this.gCol * 0.6f, this.bCol * 0.6f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(vec[4].x(), vec[4].y(), vec[4].z()).uv(f7, f6).color(this.rCol * 0.6f, this.gCol * 0.6f, this.bCol * 0.6f, this.alpha).uv2(j).endVertex();
 
         //正面
-        buffer.pos(vec[5].getX(), vec[5].getY(), vec[5].getZ()).tex(f8, f6).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(vec[4].getX(), vec[4].getY(), vec[4].getZ()).tex(f8, f5).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(vec[7].getX(), vec[7].getY(), vec[7].getZ()).tex(f7, f5).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(vec[6].getX(), vec[6].getY(), vec[6].getZ()).tex(f7, f6).color(this.particleRed * 0.8f, this.particleGreen * 0.8f, this.particleBlue * 0.8f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.vertex(vec[5].x(), vec[5].y(), vec[5].z()).uv(f8, f6).color(this.rCol * 0.8f, this.gCol * 0.8f, this.bCol * 0.8f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(vec[4].x(), vec[4].y(), vec[4].z()).uv(f8, f5).color(this.rCol * 0.8f, this.gCol * 0.8f, this.bCol * 0.8f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(vec[7].x(), vec[7].y(), vec[7].z()).uv(f7, f5).color(this.rCol * 0.8f, this.gCol * 0.8f, this.bCol * 0.8f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(vec[6].x(), vec[6].y(), vec[6].z()).uv(f7, f6).color(this.rCol * 0.8f, this.gCol * 0.8f, this.bCol * 0.8f, this.alpha).uv2(j).endVertex();
 
         //右侧
-        buffer.pos(vec[2].getX(), vec[2].getY(), vec[2].getZ()).tex(f8, f6).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(vec[6].getX(), vec[6].getY(), vec[6].getZ()).tex(f8, f5).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(vec[7].getX(), vec[7].getY(), vec[7].getZ()).tex(f7, f5).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(vec[3].getX(), vec[3].getY(), vec[3].getZ()).tex(f7, f6).color(this.particleRed * 0.6f, this.particleGreen * 0.6f, this.particleBlue * 0.6f, this.particleAlpha).lightmap(j).endVertex();
+        buffer.vertex(vec[2].x(), vec[2].y(), vec[2].z()).uv(f8, f6).color(this.rCol * 0.6f, this.gCol * 0.6f, this.bCol * 0.6f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(vec[6].x(), vec[6].y(), vec[6].z()).uv(f8, f5).color(this.rCol * 0.6f, this.gCol * 0.6f, this.bCol * 0.6f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(vec[7].x(), vec[7].y(), vec[7].z()).uv(f7, f5).color(this.rCol * 0.6f, this.gCol * 0.6f, this.bCol * 0.6f, this.alpha).uv2(j).endVertex();
+        buffer.vertex(vec[3].x(), vec[3].y(), vec[3].z()).uv(f7, f6).color(this.rCol * 0.6f, this.gCol * 0.6f, this.bCol * 0.6f, this.alpha).uv2(j).endVertex();
 
         //上面
-        buffer.pos(vec[1].getX(), vec[1].getY(), vec[1].getZ()).tex(f8, f6).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(vec[5].getX(), vec[5].getY(), vec[5].getZ()).tex(f8, f5).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(vec[6].getX(), vec[6].getY(), vec[6].getZ()).tex(f7, f5).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
-        buffer.pos(vec[2].getX(), vec[2].getY(), vec[2].getZ()).tex(f7, f6).color(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j).endVertex();
+        buffer.vertex(vec[1].x(), vec[1].y(), vec[1].z()).uv(f8, f6).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(j).endVertex();
+        buffer.vertex(vec[5].x(), vec[5].y(), vec[5].z()).uv(f8, f5).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(j).endVertex();
+        buffer.vertex(vec[6].x(), vec[6].y(), vec[6].z()).uv(f7, f5).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(j).endVertex();
+        buffer.vertex(vec[2].x(), vec[2].y(), vec[2].z()).uv(f7, f6).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(j).endVertex();
     }
 
     @Override
@@ -141,18 +141,18 @@ public class CuboidParticle extends SpriteTexturedParticle {
     @Override
     public void tick() {
 
-        this.prevPosX = this.posX;
-        this.prevPosY = this.posY;
-        this.prevPosZ = this.posZ;
-        if (this.age++ >= this.maxAge) {
-            this.setExpired();
+        this.xo = this.x;
+        this.yo = this.y;
+        this.zo = this.z;
+        if (this.age++ >= this.lifetime) {
+            this.remove();
         } else {
-            this.posY += this.motionY;
-            this.posX += this.motionX;
-            this.posZ += this.motionZ;
+            this.y += this.yd;
+            this.x += this.xd;
+            this.z += this.zd;
             this.rotation += 1 + spinSpeed;
             this.rotation %= 360;
-            if (this.maxAge - 20 < this.age) this.particleAlpha -= 0.05f;
+            if (this.lifetime - 20 < this.age) this.alpha -= 0.05f;
         }
     }
 }

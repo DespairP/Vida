@@ -28,8 +28,8 @@ public class GuiGuidebookMain extends AbstractGuiGuidebook {
 
     /**强制清空栈,并退出*/
     @Override
-    public void closeScreen() {
+    public void onClose() {
         this.manager.forceClear();
-        super.closeScreen();
+        super.onClose();
     }
 }

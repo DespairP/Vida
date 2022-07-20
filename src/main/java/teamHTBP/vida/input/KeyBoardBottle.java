@@ -41,16 +41,16 @@ public class KeyBoardBottle {
 
     @SubscribeEvent
     public static void onKeyboardInput(InputEvent.KeyInputEvent event) {
-        if (MESSAGE_KEY.isKeyDown()) {
+        if (MESSAGE_KEY.isDown()) {
             //alpha += 2;
         }
-        if (MESSAGE_KEY_1.isPressed()) {
+        if (MESSAGE_KEY_1.consumeClick()) {
             PacketChannel.INSTANCE.sendToServer(new PacketBottles(1));
         }
-        if (MESSAGE_KEY_2.isPressed()) {
+        if (MESSAGE_KEY_2.consumeClick()) {
             PacketChannel.INSTANCE.sendToServer(new PacketBottles(2));
         }
-        if (MESSAGE_KEY_3.isPressed()) {
+        if (MESSAGE_KEY_3.consumeClick()) {
             PacketChannel.INSTANCE.sendToServer(new PacketBottles(3));
         }
     }

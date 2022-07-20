@@ -23,10 +23,10 @@ public class ParticleFactoryLoader {
 
     @SubscribeEvent
     public static void onParticleFactoryRegistration(ParticleFactoryRegisterEvent event) {
-        Minecraft.getInstance().particles.registerFactory(ParticleLoader.leafParticle.get(),(sprite)->new BaseParticleFactory(sprite, BaseVidaParticleType.LEAF));
-        Minecraft.getInstance().particles.registerFactory(ParticleLoader.cubeParticle.get(), CubeParticleFactory::new);
-        Minecraft.getInstance().particles.registerFactory(ParticleLoader.elementFireParticle.get(), (sprite)->new BaseParticleFactory(sprite, BaseVidaParticleType.ELEMENT_FIRE));
-        Minecraft.getInstance().particles.registerFactory(ParticleLoader.cuboidParticle.get(), CuboidParticleFactory::new);
-        Minecraft.getInstance().particles.registerFactory(ParticleLoader.particle.get(),(sprite)->new BaseParticleFactory(sprite, BaseVidaParticleType.CUBOID));
+        Minecraft.getInstance().particleEngine.register(ParticleLoader.leafParticle.get(),(sprite)->new BaseParticleFactory(sprite, BaseVidaParticleType.LEAF));
+        Minecraft.getInstance().particleEngine.register(ParticleLoader.cubeParticle.get(), CubeParticleFactory::new);
+        Minecraft.getInstance().particleEngine.register(ParticleLoader.elementFireParticle.get(), (sprite)->new BaseParticleFactory(sprite, BaseVidaParticleType.ELEMENT_FIRE));
+        Minecraft.getInstance().particleEngine.register(ParticleLoader.cuboidParticle.get(), CuboidParticleFactory::new);
+        Minecraft.getInstance().particleEngine.register(ParticleLoader.particle.get(),(sprite)->new BaseParticleFactory(sprite, BaseVidaParticleType.CUBOID));
     }
 }

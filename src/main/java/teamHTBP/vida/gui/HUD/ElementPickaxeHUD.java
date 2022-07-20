@@ -21,8 +21,8 @@ public class ElementPickaxeHUD extends AbstractGui implements IVidaHUD {
     float alpha;
 
     public ElementPickaxeHUD(ItemStack stack, int alpha) {
-        width = Minecraft.getInstance().getMainWindow().getScaledWidth();
-        height = Minecraft.getInstance().getMainWindow().getScaledHeight();
+        width = Minecraft.getInstance().getWindow().getGuiScaledWidth();
+        height = Minecraft.getInstance().getWindow().getGuiScaledHeight();
         minecraft = Minecraft.getInstance();
         this.itemStack = stack;
         this.alpha = alpha / 100.0f;
@@ -42,7 +42,7 @@ public class ElementPickaxeHUD extends AbstractGui implements IVidaHUD {
         int progress = (int) (exp * 16.0f / (level * 500.0f));
         if (progress >= 16) progress = 16;
         RenderSystem.scaled(1.2f, 1.2f, 1.2f);
-        this.minecraft.getTextureManager().bindTexture(HUD);
+        this.minecraft.getTextureManager().bind(HUD);
         switch (pixel_element) {
             case GOLD:
                 blit(matrixStack, screenWidth, screenHeight, 0, 0, 0, 16, 16, 35, 119);
@@ -85,7 +85,7 @@ public class ElementPickaxeHUD extends AbstractGui implements IVidaHUD {
         }
         RenderSystem.popMatrix();
         RenderSystem.scaled(0.95f, 0.95f, 0.95f);
-        drawCenteredString(matrixStack, minecraft.fontRenderer, level + "", screenWidth + 16, screenHeight + 19, 62900 + level * 100);
+        drawCenteredString(matrixStack, minecraft.font, level + "", screenWidth + 16, screenHeight + 19, 62900 + level * 100);
         RenderSystem.popMatrix();
     }
 }

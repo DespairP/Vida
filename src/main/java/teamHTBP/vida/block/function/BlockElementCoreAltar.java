@@ -28,11 +28,13 @@ import teamHTBP.vida.particle.CubeParticleData;
 import javax.annotation.Nullable;
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 /*元素祭坛
 @Version 0.0.1*/
 public class BlockElementCoreAltar extends Block {
     public BlockElementCoreAltar() {
-        super(Properties.create(Material.IRON).notSolid().hardnessAndResistance(5.0f, 5.0f).sound(SoundType.STONE).harvestLevel(2).harvestTool(ToolType.PICKAXE));
+        super(Properties.of(Material.METAL).noOcclusion().strength(5.0f, 5.0f).sound(SoundType.STONE).harvestLevel(2).harvestTool(ToolType.PICKAXE));
 
     }
 
@@ -49,50 +51,50 @@ public class BlockElementCoreAltar extends Block {
 
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!worldIn.isRemote) {
-            TileEntityElementCoreAltar tileEntityElementCoreAltar = (TileEntityElementCoreAltar) worldIn.getTileEntity(pos);
-            Item handItem = player.inventory.getCurrentItem().getItem();
+    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (!worldIn.isClientSide) {
+            TileEntityElementCoreAltar tileEntityElementCoreAltar = (TileEntityElementCoreAltar) worldIn.getBlockEntity(pos);
+            Item handItem = player.inventory.getSelected().getItem();
             boolean handItemResult = (handItem == ItemLoader.WAND_VIDA.get());
-            if (handIn == Hand.MAIN_HAND && !player.isSneaking() && !handItemResult) {
-                if (player.inventory.getCurrentItem() != ItemStack.EMPTY) {
+            if (handIn == Hand.MAIN_HAND && !player.isShiftKeyDown() && !handItemResult) {
+                if (player.inventory.getSelected() != ItemStack.EMPTY) {
                     //先检测是不是核心物品
-                    ItemStack stack = player.inventory.getCurrentItem().copy();
+                    ItemStack stack = player.inventory.getSelected().copy();
                     stack.setCount(1);
                     boolean result = tileEntityElementCoreAltar.setCoreItemStack(stack);
                     if (result) {
                         this.decreasePlayerItem(player);
-                        worldIn.notifyBlockUpdate(pos, state, state, 3);
+                        worldIn.sendBlockUpdated(pos, state, state, 3);
                         return ActionResultType.SUCCESS;
                     } else {
                         //不是的话放入祭坛物品中
-                        stack = player.inventory.getCurrentItem().copy();
+                        stack = player.inventory.getSelected().copy();
                         stack.setCount(1);
                         result = tileEntityElementCoreAltar.setAltarItemStack(stack);
                         if (result) {
                             this.decreasePlayerItem(player);
-                            worldIn.notifyBlockUpdate(pos, state, state, 3);
+                            worldIn.sendBlockUpdated(pos, state, state, 3);
                             return ActionResultType.SUCCESS;
                         } else
-                            return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+                            return super.use(state, worldIn, pos, player, handIn, hit);
                     }
                 }
                 //拿到祭坛中的物品
-            } else if (handIn == Hand.MAIN_HAND && player.isSneaking() && !handItemResult) {
+            } else if (handIn == Hand.MAIN_HAND && player.isShiftKeyDown() && !handItemResult) {
                 ItemStack itemStack = tileEntityElementCoreAltar.getAltarItemStack();
                 if (itemStack != ItemStack.EMPTY || !itemStack.isEmpty()) {
-                    player.inventory.addItemStackToInventory(itemStack);
+                    player.inventory.add(itemStack);
                 }
-                worldIn.notifyBlockUpdate(pos, state, state, 3);
-            } else if (!player.isSneaking() && handItemResult) {
+                worldIn.sendBlockUpdated(pos, state, state, 3);
+            } else if (!player.isShiftKeyDown() && handItemResult) {
                 //如果法杖右键的话，开始检测
                 tileEntityElementCoreAltar.isWAND_VIDACilck = true;
-                worldIn.notifyBlockUpdate(pos, state, state, 3);
+                worldIn.sendBlockUpdated(pos, state, state, 3);
                 return ActionResultType.SUCCESS;
             } else
-                return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+                return super.use(state, worldIn, pos, player, handIn, hit);
         }
-        return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+        return super.use(state, worldIn, pos, player, handIn, hit);
     }
 
 
@@ -100,38 +102,38 @@ public class BlockElementCoreAltar extends Block {
         if (player.isCreative()) {
             return;
         } else {
-            player.inventory.getCurrentItem().shrink(1);
+            player.inventory.getSelected().shrink(1);
         }
     }
 
     /**当祭坛被破坏时,内部物品掉出*/
     @Override
-    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-        TileEntityElementCoreAltar tileEntityElementCoreAltar = (TileEntityElementCoreAltar) worldIn.getTileEntity(pos);
-        if (tileEntityElementCoreAltar != null && !worldIn.isRemote) {
+    public void playerWillDestroy(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+        TileEntityElementCoreAltar tileEntityElementCoreAltar = (TileEntityElementCoreAltar) worldIn.getBlockEntity(pos);
+        if (tileEntityElementCoreAltar != null && !worldIn.isClientSide) {
             // 如果被破坏掉出祭坛物品
             for(ItemStack altarItem : tileEntityElementCoreAltar.altarItem){
                 if(!altarItem.isEmpty()){
-                    worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), altarItem));
+                    worldIn.addFreshEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), altarItem));
                 }
             }
             // 核心物品
             if (tileEntityElementCoreAltar.coreItem != ItemStack.EMPTY && !tileEntityElementCoreAltar.coreItem.isEmpty())
-                worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityElementCoreAltar.coreItem));
+                worldIn.addFreshEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityElementCoreAltar.coreItem));
 
             // 清空祭坛内物品
             tileEntityElementCoreAltar.altarItem.clear();
             tileEntityElementCoreAltar.coreItem = ItemStack.EMPTY;
         }
 
-        super.onBlockHarvested(worldIn, pos, state, player);
+        super.playerWillDestroy(worldIn, pos, state, player);
     }
 
 
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
         if (rand.nextBoolean()) {
-            TileEntityElementCoreAltar tileEntityElementCoreAltar = (TileEntityElementCoreAltar) worldIn.getTileEntity(pos);
+            TileEntityElementCoreAltar tileEntityElementCoreAltar = (TileEntityElementCoreAltar) worldIn.getBlockEntity(pos);
             if (tileEntityElementCoreAltar != null && tileEntityElementCoreAltar.isProgressing && tileEntityElementCoreAltar.moveup >= 0.8f) {
                 IElement element = tileEntityElementCoreAltar.element;
                 if (element instanceof EnumElements && rand.nextFloat() >= 0.65D) {

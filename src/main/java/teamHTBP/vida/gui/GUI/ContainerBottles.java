@@ -21,13 +21,13 @@ public class ContainerBottles extends Container {
         ItemStack bottle1 = ItemStack.EMPTY, bottle2 = ItemStack.EMPTY, bottle3 = ItemStack.EMPTY;
         CompoundNBT nbt = stack.getOrCreateTag();
         if (nbt.getCompound("bottle1") != null) {
-            bottle1 = ItemStack.read(nbt.getCompound("bottle1"));
+            bottle1 = ItemStack.of(nbt.getCompound("bottle1"));
         }
         if (nbt.getCompound("bottle2") != null) {
-            bottle2 = ItemStack.read(nbt.getCompound("bottle2"));
+            bottle2 = ItemStack.of(nbt.getCompound("bottle2"));
         }
         if (nbt.getCompound("bottle3") != null) {
-            bottle3 = ItemStack.read(nbt.getCompound("bottle3"));
+            bottle3 = ItemStack.of(nbt.getCompound("bottle3"));
         }
 
 
@@ -44,8 +44,8 @@ public class ContainerBottles extends Container {
     }
 
     @Override
-    public boolean canInteractWith(PlayerEntity playerIn) {
-        return stack == playerIn.inventory.getCurrentItem();
+    public boolean stillValid(PlayerEntity playerIn) {
+        return stack == playerIn.inventory.getSelected();
     }
 
     /**
@@ -84,15 +84,15 @@ public class ContainerBottles extends Container {
         addSlotRange(inventory, 0, leftCol, topRow, 9, 18);
     }
 
-    public void onContainerClosed(PlayerEntity playerIn) {
-        super.onContainerClosed(playerIn);
-        ItemStack stack = playerIn.inventory.getCurrentItem();
+    public void removed(PlayerEntity playerIn) {
+        super.removed(playerIn);
+        ItemStack stack = playerIn.inventory.getSelected();
         if (stack != ItemStack.EMPTY && stack != null && !stack.isEmpty() && stack.getItem() instanceof ItemArmorElementLegginsWithBottles) {
-            stack.getTag().put("bottle1", this.getSlot(0).getStack().serializeNBT());
+            stack.getTag().put("bottle1", this.getSlot(0).getItem().serializeNBT());
             stack.getTag().putInt("bottle1Num", 0);
-            stack.getTag().put("bottle2", this.getSlot(1).getStack().serializeNBT());
+            stack.getTag().put("bottle2", this.getSlot(1).getItem().serializeNBT());
             stack.getTag().putInt("bottle2Num", 0);
-            stack.getTag().put("bottle3", this.getSlot(2).getStack().serializeNBT());
+            stack.getTag().put("bottle3", this.getSlot(2).getItem().serializeNBT());
             stack.getTag().putInt("bottle3Num", 0);
         } else {
             //playerIn.addItemStackToInventory(this.getSlot(0).getStack());
@@ -101,15 +101,15 @@ public class ContainerBottles extends Container {
         }
     }
 
-    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
-        Slot slot = this.inventorySlots.get(index);
+    public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
+        Slot slot = this.slots.get(index);
         if (index >= 3) {
-            if (slot.getHasStack() && slot.getStack().getItem() instanceof PotionItem) {
+            if (slot.hasItem() && slot.getItem().getItem() instanceof PotionItem) {
                 for (int i = 0; i < 3; i++) {
-                    Slot slotPotion = this.inventorySlots.get(i);
-                    if (slotPotion.getHasStack()) continue;
-                    ItemStack stack = slotPotion.getStack();
-                    stack = slot.getStack().copy();
+                    Slot slotPotion = this.slots.get(i);
+                    if (slotPotion.hasItem()) continue;
+                    ItemStack stack = slotPotion.getItem();
+                    stack = slot.getItem().copy();
                 }
             }
         }
@@ -122,7 +122,7 @@ class potionSlot extends Slot {
         super(inventoryIn, index, xPosition, yPosition);
     }
 
-    public boolean isItemValid(ItemStack stack) {
+    public boolean mayPlace(ItemStack stack) {
         return stack.getItem() instanceof PotionItem;
     }
 }

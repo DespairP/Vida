@@ -41,18 +41,18 @@ public abstract class AbstractModelElementArmor<T extends LivingEntity> extends 
 
 
     @Override
-    protected Iterable<ModelRenderer> getHeadParts() {
+    protected Iterable<ModelRenderer> headParts() {
         return renderPart == HEAD ? ImmutableList.of(head) : ImmutableList.of();
     }
 
     @Override
-    protected Iterable<ModelRenderer> getBodyParts() {
+    protected Iterable<ModelRenderer> bodyParts() {
         List<ModelRenderer> renderParts;
         switch (renderPart){
             case CHEST:
-                return ImmutableList.of(leftArm, rightArm, body, bipedLeftArm, bipedRightArm, bipedBody);
+                return ImmutableList.of(leftArm, rightArm, body, leftArm, rightArm, body);
             case FEET:
-                return ImmutableList.of(leftLeg, rightLeg, bipedLeftLeg, bipedRightLeg);
+                return ImmutableList.of(leftLeg, rightLeg, leftLeg, rightLeg);
             case LEGS:
                 return ImmutableList.of(leftLeg, rightLeg, belt);
             case HEAD:
@@ -62,38 +62,38 @@ public abstract class AbstractModelElementArmor<T extends LivingEntity> extends 
     }
 
     @Override
-    public void setVisible(boolean visible) {
-        this.head.showModel = visible;
-        this.body.showModel = visible;
-        this.leftArm.showModel = visible;
-        this.rightArm.showModel = visible;
-        this.leftLeg.showModel = visible;
-        this.rightLeg.showModel = visible;
-        this.belt.showModel = visible;
-        super.setVisible(visible);
+    public void setAllVisible(boolean visible) {
+        this.head.visible = visible;
+        this.body.visible = visible;
+        this.leftArm.visible = visible;
+        this.rightArm.visible = visible;
+        this.leftLeg.visible = visible;
+        this.rightLeg.visible = visible;
+        this.belt.visible = visible;
+        super.setAllVisible(visible);
     }
 
     @Override
-    public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
         copyModelRotation();
-        setVisible(true);
-        super.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+        setAllVisible(true);
+        super.renderToBuffer(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
     }
 
     public abstract void initModel();
 
     public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-        modelRenderer.rotateAngleX = x;
-        modelRenderer.rotateAngleY = y;
-        modelRenderer.rotateAngleZ = z;
+        modelRenderer.xRot = x;
+        modelRenderer.yRot = y;
+        modelRenderer.zRot = z;
     }
 
     public void copyModelRotation(){
-        this.head.copyModelAngles(bipedHead);
-        this.body.copyModelAngles(bipedBody);
-        this.leftArm.copyModelAngles(bipedLeftArm);
-        this.rightArm.copyModelAngles(bipedRightArm);
-        this.leftLeg.copyModelAngles(bipedLeftLeg);
-        this.rightLeg.copyModelAngles(bipedRightLeg);
+        this.head.copyFrom(head);
+        this.body.copyFrom(body);
+        this.leftArm.copyFrom(leftArm);
+        this.rightArm.copyFrom(rightArm);
+        this.leftLeg.copyFrom(leftLeg);
+        this.rightLeg.copyFrom(rightLeg);
     }
 }

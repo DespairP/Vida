@@ -8,11 +8,13 @@ import net.minecraft.particles.ParticleType;
 
 import java.util.Locale;
 
+import net.minecraft.particles.IParticleData.IDeserializer;
+
 public class CuboidParticleData implements IParticleData {
     public static final IDeserializer<CuboidParticleData> DESERIALIZER = new IDeserializer<CuboidParticleData>() {
 
         @Override
-        public CuboidParticleData deserialize(ParticleType<CuboidParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
+        public CuboidParticleData fromCommand(ParticleType<CuboidParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
             reader.skipWhitespace();
             double speedX = reader.readDouble();
             reader.skipWhitespace();
@@ -34,7 +36,7 @@ public class CuboidParticleData implements IParticleData {
         }
 
         @Override
-        public CuboidParticleData read(ParticleType<CuboidParticleData> particleTypeIn, PacketBuffer buffer) {
+        public CuboidParticleData fromNetwork(ParticleType<CuboidParticleData> particleTypeIn, PacketBuffer buffer) {
             double speedX = buffer.readDouble();
             double speedY = buffer.readDouble();
             double speedZ = buffer.readDouble();
@@ -73,7 +75,7 @@ public class CuboidParticleData implements IParticleData {
     }
 
     @Override
-    public void write(PacketBuffer buffer) {
+    public void writeToNetwork(PacketBuffer buffer) {
         buffer.writeDouble(this.speedX);
         buffer.writeDouble(this.speedY);
         buffer.writeDouble(this.speedZ);
@@ -85,7 +87,7 @@ public class CuboidParticleData implements IParticleData {
     }
 
     @Override
-    public String getParameters() {
+    public String writeToString() {
         return String.format(Locale.ROOT, "%s", this.getType().getRegistryName());
     }
 

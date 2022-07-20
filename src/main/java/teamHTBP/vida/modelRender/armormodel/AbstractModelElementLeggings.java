@@ -19,26 +19,26 @@ public abstract class AbstractModelElementLeggings<T extends LivingEntity> exten
     }
 
     @Override
-    public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-        this.body_low.showModel = true;
+    public void renderToBuffer(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+        this.body_low.visible = true;
         this.body_low.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
     }
 
 
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-        modelRenderer.rotateAngleX = x;
-        modelRenderer.rotateAngleY = y;
-        modelRenderer.rotateAngleZ = z;
+        modelRenderer.xRot = x;
+        modelRenderer.yRot = y;
+        modelRenderer.zRot = z;
     }
 
-    public void setVisible(boolean visible) {
-        this.bipedHead.showModel = false;
-        this.bipedHeadwear.showModel = false;
-        this.bipedRightArm.showModel = false;
-        this.bipedLeftArm.showModel = false;
-        this.bipedRightLeg.showModel = true;
-        this.bipedLeftLeg.showModel = true;
-        this.body_low.showModel = true;
+    public void setAllVisible(boolean visible) {
+        this.head.visible = false;
+        this.hat.visible = false;
+        this.rightArm.visible = false;
+        this.leftArm.visible = false;
+        this.rightLeg.visible = true;
+        this.leftLeg.visible = true;
+        this.body_low.visible = true;
     }
 
 

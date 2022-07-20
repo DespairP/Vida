@@ -22,24 +22,24 @@ public abstract class AbstractModelElementBoots<T extends LivingEntity> extends 
 
 
     @Override
-    public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-        leg_left.copyModelAngles(bipedLeftLeg);
-        leg_right.copyModelAngles(bipedRightLeg);
-        super.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+    public void renderToBuffer(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+        leg_left.copyFrom(leftLeg);
+        leg_right.copyFrom(rightLeg);
+        super.renderToBuffer(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
     }
 
-    protected Iterable<ModelRenderer> getBodyParts() {
-        return ImmutableList.of(this.bipedBody, this.bipedRightArm, this.bipedLeftArm, this.leg_right, this.leg_left, this.bipedHeadwear);
+    protected Iterable<ModelRenderer> bodyParts() {
+        return ImmutableList.of(this.body, this.rightArm, this.leftArm, this.leg_right, this.leg_left, this.hat);
     }
 
 
-    public void setVisible(boolean visible) {
-        this.bipedHead.showModel = false;
-        this.bipedHeadwear.showModel = false;
-        this.bipedBody.showModel = false;
-        this.bipedRightArm.showModel = false;
-        this.bipedLeftArm.showModel = false;
-        this.leg_right.showModel = true;
-        this.leg_left.showModel = true;
+    public void setAllVisible(boolean visible) {
+        this.head.visible = false;
+        this.hat.visible = false;
+        this.body.visible = false;
+        this.rightArm.visible = false;
+        this.leftArm.visible = false;
+        this.leg_right.visible = true;
+        this.leg_left.visible = true;
     }
 }
