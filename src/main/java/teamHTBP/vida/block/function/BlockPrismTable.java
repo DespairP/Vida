@@ -16,8 +16,10 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
@@ -32,7 +34,7 @@ public class BlockPrismTable extends Block {
 
 
     public BlockPrismTable() {
-        super(Properties.create(Material.WOOD).hardnessAndResistance(3.0f, 3.0f).notSolid().harvestTool(ToolType.PICKAXE).notSolid());
+        super(Properties.create(Material.WOOD).hardnessAndResistance(3.0f, 3.0f).notSolid().harvestTool(ToolType.PICKAXE));
     }
 
     @Override
@@ -80,8 +82,7 @@ public class BlockPrismTable extends Block {
 
     @Nullable
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        BlockPos blockpos = context.getPos();
-        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing());
+        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
     }
 
 

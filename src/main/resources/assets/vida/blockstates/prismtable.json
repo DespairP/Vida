@@ -1,8 +1,8 @@
 {
   "variants": {
-    "facing=east":  { "model": "vida:block/prismtable"  },
-    "facing=west":  { "model": "vida:block/prismtable" , "y": 180 },
-    "facing=south": { "model": "vida:block/prismtable" , "y": 90},
-    "facing=north": { "model": "vida:block/prismtable" , "y": 270 }
+    "facing=east":  { "model": "vida:block/prismtable",  "y": 90},
+    "facing=west":  { "model": "vida:block/prismtable" , "y": 270 },
+    "facing=south": { "model": "vida:block/prismtable" , "y": 180},
+    "facing=north": { "model": "vida:block/prismtable" , "y": 0 }
   }
 }
