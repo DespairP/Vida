@@ -67,7 +67,7 @@ public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnDa
 
 
     public IElement getFaintLightType() {
-        return EnumElements.valueOf(this.dataManager.get(TYPE));
+        return ElementManager.get(this.dataManager.get(TYPE));
     }
 
     public void setFaintLightType(IElement type) {

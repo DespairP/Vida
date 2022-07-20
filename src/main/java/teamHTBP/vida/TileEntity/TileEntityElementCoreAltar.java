@@ -12,6 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
 import teamHTBP.vida.block.BlockLoader;
 import teamHTBP.vida.helper.elementHelper.ElementHelper;
+import teamHTBP.vida.helper.elementHelper.ElementManager;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.helper.elementHelper.IElement;
 import teamHTBP.vida.item.function.ItemElementCore;
@@ -65,7 +66,7 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         isElementOver = compound.getBoolean("isElementOver");
         //isMultiComplete = compound.getBoolean("isMutiComplete");
         isWAND_VIDACilck = compound.getBoolean("isWAND_VIDAClick");
-        element = EnumElements.valueOf(compound.getString("element"));
+        element = ElementManager.get(compound.getString("element"));
         for (int i = 0; i < 4; i++) {
             if (compound.contains("altarItem" + i)) {
                 altarItem.set(i,ItemStack.read(compound.getCompound("altarItem" + i)));
