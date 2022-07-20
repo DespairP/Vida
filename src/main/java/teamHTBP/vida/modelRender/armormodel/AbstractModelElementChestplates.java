@@ -4,18 +4,16 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.HandSide;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public abstract class AbstractModelElementChestplates<T extends LivingEntity> extends HumanoidModel<T> {
-
-    public ModelRenderer arm_right;
-    public ModelRenderer arm_left;
-    public ModelRenderer body;
 
 
     private float remainingItemUseTime;
@@ -28,8 +26,9 @@ public abstract class AbstractModelElementChestplates<T extends LivingEntity> ex
         super(1.0f, 0, textureWidth, textureHeight);
     }
 
-    protected ModelRenderer getArm(HandSide side) {
-        return side == HandSide.LEFT ? this.arm_left : this.arm_right;
+    @Override
+    protected ModelPart getArm(HumanoidArm side) {
+        return side == HumanoidArm.LEFT ? this.leftArm : this.rightArm;
     }
 
     @Override

@@ -2,11 +2,11 @@ package teamHTBP.vida.network;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.potion.PotionUtils;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraftforge.network.NetworkEvent;
 import teamHTBP.vida.item.armor.ItemArmorElementLegginsWithBottles;
 
@@ -34,7 +34,7 @@ public class PacketBottles {
         ctx.get().enqueueWork(() -> {
                     if (ctx.get().getSender() == null) return;
                     Player entity = ctx.get().getSender();
-                    ItemStack stack = entity.inventory.armor.get(1);
+                    ItemStack stack = entity.getInventory().armor.get(1);
                     if (stack.getItem() instanceof ItemArmorElementLegginsWithBottles) {
                         ItemStack stack1 = ItemStack.EMPTY;
                         CompoundTag nbt = stack.getOrCreateTag();

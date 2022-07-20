@@ -1,14 +1,14 @@
 package teamHTBP.vida.helper.renderHelper;
 
+import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.text.Style;
 
 public class RenderHelper {
     public static Font fontRenderer = Minecraft.getInstance().font;
@@ -22,9 +22,9 @@ public class RenderHelper {
     /**
      * 普通材质渲染
      */
-    public static void renderWithTexture(ResourceLocation texture, Runnable runnable) {
+    public static void renderWithTexture(PoseStack matrixStack, ResourceLocation texture, Runnable runnable) {
         matrixStack.pushPose();
-        Minecraft.getInstance().textureManager.bind(texture);
+        RenderSystem.setShaderTexture(0, texture);
         runnable.run();
         matrixStack.pushPose();
     }
@@ -52,7 +52,7 @@ public class RenderHelper {
 
     /**由于GL20的scissor的xy与MC的xy不同,所以请使用这个方法裁剪*/
     public static void renderScissor(int x,int y,int width,int height){
-        MainWindow window = Minecraft.getInstance().getWindow();
+        Window window = Minecraft.getInstance().getWindow();
         int scaledHeight = window.getGuiScaledHeight();
         int scaledWidth = window.getGuiScaledWidth();
         double scaledFactor = window.getGuiScale();
