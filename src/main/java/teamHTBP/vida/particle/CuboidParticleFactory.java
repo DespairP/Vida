@@ -1,16 +1,16 @@
 package teamHTBP.vida.particle;
 
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.IAnimatedSprite;
-import net.minecraft.client.particle.IParticleFactory;
+import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.Particle;
 
 import javax.annotation.Nullable;
 
-public class CuboidParticleFactory implements IParticleFactory<CuboidParticleData> {
-    private final IAnimatedSprite sprites;
+public class CuboidParticleFactory implements ParticleProvider<CuboidParticleData> {
+    private final SpriteSet sprites;
 
-    public CuboidParticleFactory(IAnimatedSprite sprite) {
+    public CuboidParticleFactory(SpriteSet sprite) {
         sprites = sprite;
     }
 

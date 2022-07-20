@@ -1,10 +1,10 @@
 package teamHTBP.vida.particle;
 
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.IParticleRenderType;
-import net.minecraft.client.particle.SpriteTexturedParticle;
+import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.particle.TextureSheetParticle;
 
-public class ElementFireParticle extends SpriteTexturedParticle {
+public class ElementFireParticle extends TextureSheetParticle {
 
     private final double coordX;
     private final double coordY;
@@ -31,8 +31,8 @@ public class ElementFireParticle extends SpriteTexturedParticle {
     }
 
     @Override
-    public IParticleRenderType getRenderType() {
-        return IParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+    public ParticleRenderType getRenderType() {
+        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
     public void tick() {

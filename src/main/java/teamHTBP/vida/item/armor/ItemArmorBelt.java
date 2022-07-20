@@ -15,11 +15,8 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.IItemRenderProperties;
 import net.minecraftforge.network.NetworkHooks;
-import org.checkerframework.checker.units.qual.A;
 import teamHTBP.vida.itemGroup.ItemGroupLoader;
 import teamHTBP.vida.modelRender.armormodel.ArmorModelBelt;
 
@@ -78,48 +75,46 @@ public class ItemArmorBelt extends ArmorItem {
         return InteractionResultHolder.pass(stack);
     }
 
+    static class ArmorMaterialBelt implements ArmorMaterial {
 
-}
+        @Override
+        public int getDurabilityForSlot(EquipmentSlot slotIn) {
+            return 10000;
+        }
 
-class ArmorMaterialBelt implements ArmorMaterial {
+        @Override
+        public int getDefenseForSlot(EquipmentSlot slotIn) {
+            return 1;
+        }
 
-    @Override
-    public int getDurabilityForSlot(EquipmentSlot slotIn) {
-        return 10000;
-    }
+        @Override
+        public int getEnchantmentValue() {
+            return 10;
+        }
 
-    @Override
-    public int getDefenseForSlot(EquipmentSlot slotIn) {
-        return 1;
-    }
+        @Override
+        public SoundEvent getEquipSound() {
+            return SoundEvents.ARMOR_EQUIP_LEATHER;
+        }
 
-    @Override
-    public int getEnchantmentValue() {
-        return 10;
-    }
+        @Override
+        public Ingredient getRepairIngredient() {
+            return null;
+        }
 
-    @Override
-    public SoundEvent getEquipSound() {
-        return SoundEvents.ARMOR_EQUIP_LEATHER;
-    }
+        @Override
+        public String getName() {
+            return "belt";
+        }
 
-    @Override
-    public Ingredient getRepairIngredient() {
-        return null;
-    }
+        @Override
+        public float getToughness() {
+            return 0;
+        }
 
-    @Override
-    public String getName() {
-        return "belt";
-    }
-
-    @Override
-    public float getToughness() {
-        return 0;
-    }
-
-    @Override
-    public float getKnockbackResistance() {
-        return 0;
+        @Override
+        public float getKnockbackResistance() {
+            return 0;
+        }
     }
 }

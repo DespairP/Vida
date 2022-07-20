@@ -3,12 +3,12 @@ package teamHTBP.vida.modelRender.armormodel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.entity.LivingEntity;
 
 public abstract class AbstractModelElementLeggings<T extends LivingEntity> extends HumanoidModel<T> {
 
-    public ModelRenderer body_low;
+    public ModelPart body_low;
 
     public AbstractModelElementLeggings() {
         super(1.0f, 0, 64, 64);
@@ -25,7 +25,7 @@ public abstract class AbstractModelElementLeggings<T extends LivingEntity> exten
     }
 
 
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+    public void setRotateAngle(ModelPart modelRenderer, float x, float y, float z) {
         modelRenderer.xRot = x;
         modelRenderer.yRot = y;
         modelRenderer.zRot = z;

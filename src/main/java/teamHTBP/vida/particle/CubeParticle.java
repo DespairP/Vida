@@ -4,9 +4,9 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.IParticleRenderType;
-import net.minecraft.client.particle.SpriteTexturedParticle;
-import net.minecraft.client.renderer.ActiveRenderInfo;
+import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.particle.TextureSheetParticle;
+import net.minecraft.client.Camera;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 
@@ -17,7 +17,7 @@ import java.util.Random;
  *
  * @Version 0.0.1
  **/
-public class CubeParticle extends SpriteTexturedParticle {
+public class CubeParticle extends TextureSheetParticle {
 
     private int rotationType = 1;
 
@@ -50,7 +50,7 @@ public class CubeParticle extends SpriteTexturedParticle {
     }
 
     @Override
-    public void render(VertexConsumer buffer, ActiveRenderInfo renderInfo, float partialTicks) {
+    public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
 
         Vec3 vec3d = renderInfo.getPosition();
         float f = (float) (Mth.lerp(partialTicks, this.xo, this.x) - vec3d.x());
@@ -163,8 +163,8 @@ public class CubeParticle extends SpriteTexturedParticle {
     }
 
     @Override
-    public IParticleRenderType getRenderType() {
-        return IParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+    public ParticleRenderType getRenderType() {
+        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
     @Override

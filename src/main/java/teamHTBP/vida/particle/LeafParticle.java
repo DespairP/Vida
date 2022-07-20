@@ -3,10 +3,10 @@ package teamHTBP.vida.particle;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
+import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.IParticleRenderType;
-import net.minecraft.client.particle.SpriteTexturedParticle;
-import net.minecraft.client.renderer.ActiveRenderInfo;
+import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 
@@ -16,7 +16,7 @@ import net.minecraft.world.phys.Vec3;
  *
  * @Version 0.0.1
  **/
-public class LeafParticle extends SpriteTexturedParticle {
+public class LeafParticle extends TextureSheetParticle {
     //掉到地面上不会马上消失,所以设置一个延迟时间
     private final int offsetTime = 0;
     //最大延迟时间为20
@@ -58,7 +58,7 @@ public class LeafParticle extends SpriteTexturedParticle {
      * 复制自TexturedParticle
      * */
     @Override
-    public void render(VertexConsumer buffer, ActiveRenderInfo renderInfo, float partialTicks) {
+    public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
         Vec3 vec3d = renderInfo.getPosition();
         float f = (float) (Mth.lerp(partialTicks, this.xo, this.x) - vec3d.x());
         float f1 = (float) (Mth.lerp(partialTicks, this.yo, this.y) - vec3d.y());
@@ -99,8 +99,8 @@ public class LeafParticle extends SpriteTexturedParticle {
 
     /*以透明渲染方式进行*/
     @Override
-    public IParticleRenderType getRenderType() {
-        return IParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+    public ParticleRenderType getRenderType() {
+        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
     /**每一帧会运行此方法，主要是设置一些粒子的可变参数*/

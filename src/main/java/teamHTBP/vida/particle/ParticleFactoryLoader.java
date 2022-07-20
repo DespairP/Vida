@@ -1,6 +1,7 @@
 package teamHTBP.vida.particle;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.ParticleProvider;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -10,7 +11,7 @@ import teamHTBP.vida.particle.util.BaseVidaParticleType;
 
 
 /**
- * 粒子注册工厂{@link net.minecraft.client.particle.IParticleFactory}<br/>
+ * 粒子注册工厂{@link ParticleProvider}<br/>
  *
  * 具体注册需要看{@link net.minecraft.client.particle.ParticleManager#registerFactory}形参中需要一个Provider和一个ParticleType<br/>
  *

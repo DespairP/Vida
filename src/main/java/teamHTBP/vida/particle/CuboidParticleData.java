@@ -3,14 +3,13 @@ package teamHTBP.vida.particle;
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleOptions.IDeserializer;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.FriendlyByteBuf;
 
 import java.util.Locale;
 
 public class CuboidParticleData implements ParticleOptions {
-    public static final IDeserializer<CuboidParticleData> DESERIALIZER = new IDeserializer<CuboidParticleData>() {
+    public static final Deserializer<CuboidParticleData> DESERIALIZER = new Deserializer<CuboidParticleData>() {
 
         @Override
         public CuboidParticleData fromCommand(ParticleType<CuboidParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {

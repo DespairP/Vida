@@ -4,13 +4,13 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.entity.LivingEntity;
 
 public abstract class AbstractModelElementBoots<T extends LivingEntity> extends HumanoidModel<T> {
 
-    public ModelRenderer leg_right;
-    public ModelRenderer leg_left;
+    public ModelPart leg_right;
+    public ModelPart leg_left;
 
     public AbstractModelElementBoots() {
         this( 64, 64);
@@ -28,7 +28,7 @@ public abstract class AbstractModelElementBoots<T extends LivingEntity> extends 
         super.renderToBuffer(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
     }
 
-    protected Iterable<ModelRenderer> bodyParts() {
+    protected Iterable<ModelPart> bodyParts() {
         return ImmutableList.of(this.body, this.rightArm, this.leftArm, this.leg_right, this.leg_left, this.hat);
     }
 

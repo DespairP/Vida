@@ -5,15 +5,17 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.HandSide;
-import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public abstract class AbstractModelElementChestplates<T extends LivingEntity> extends HumanoidModel<T> {
+
+    public ModelPart arm_right;
+    public ModelPart arm_left;
+    public ModelPart body;
 
 
     private float remainingItemUseTime;
@@ -26,9 +28,8 @@ public abstract class AbstractModelElementChestplates<T extends LivingEntity> ex
         super(1.0f, 0, textureWidth, textureHeight);
     }
 
-    @Override
-    protected ModelPart getArm(HumanoidArm side) {
-        return side == HumanoidArm.LEFT ? this.leftArm : this.rightArm;
+    protected ModelPart getArm(HandSide side) {
+        return side == HandSide.LEFT ? this.arm_left : this.arm_right;
     }
 
     @Override
@@ -38,7 +39,7 @@ public abstract class AbstractModelElementChestplates<T extends LivingEntity> ex
 
 
     @Override
-    protected Iterable<ModelRenderer> bodyParts() {
+    protected Iterable<ModelPart> bodyParts() {
         arm_right.copyFrom(this.rightArm);
         body.copyFrom(this.body);
         arm_left.copyFrom(this.leftArm);
@@ -48,7 +49,7 @@ public abstract class AbstractModelElementChestplates<T extends LivingEntity> ex
     /**
      * This is a helper function from Tabula to set the rotation of model parts
      */
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+    public void setRotateAngle(ModelPart modelRenderer, float x, float y, float z) {
         modelRenderer.xRot = x;
         modelRenderer.yRot = y;
         modelRenderer.zRot = z;

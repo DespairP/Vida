@@ -3,16 +3,16 @@ package teamHTBP.vida.particle;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
+import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.IParticleRenderType;
-import net.minecraft.client.particle.SpriteTexturedParticle;
-import net.minecraft.client.renderer.ActiveRenderInfo;
+import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.Random;
 
-public class CuboidParticle extends SpriteTexturedParticle {
+public class CuboidParticle extends TextureSheetParticle {
     private final float parAlpha = 0;
     private float spinSpeed = 1;
     private float rotation = 0;
@@ -55,7 +55,7 @@ public class CuboidParticle extends SpriteTexturedParticle {
     }
 
     @Override
-    public void render(VertexConsumer buffer, ActiveRenderInfo renderInfo, float partialTicks) {
+    public void render(VertexConsumer buffer, Camera renderInfo, float partialTicks) {
 
         Vec3 vec3d = renderInfo.getPosition();
         float f = (float) (Mth.lerp(partialTicks, this.xo, this.x) - vec3d.x());
@@ -134,8 +134,8 @@ public class CuboidParticle extends SpriteTexturedParticle {
     }
 
     @Override
-    public IParticleRenderType getRenderType() {
-        return IParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+    public ParticleRenderType getRenderType() {
+        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
     @Override

@@ -1,20 +1,20 @@
 package teamHTBP.vida.modelRender.armormodel;
 
-import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.entity.Entity;
 
 public class ArmorModelGoldHelmet<T extends Entity> extends AbstractModelElementHelmet {
-    private final ModelRenderer bone;
+    private final ModelPart bone;
 
 
     public ArmorModelGoldHelmet() {
         super(1.0f, 0, 128, 128);
 
-        head = new ModelRenderer(this);
+        head = new ModelPart(this);
         head.setPos(0.0F, 0.0F, 0.0F);
         head.texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.2F, false);
 
-        bone = new ModelRenderer(this);
+        bone = new ModelPart(this);
         bone.setPos(0.0F, -5.5F, -4.25F);
         head.addChild(bone);
         setRotationAngle(bone, 0.0436F, 0.0F, 0.0F);
@@ -30,7 +30,7 @@ public class ArmorModelGoldHelmet<T extends Entity> extends AbstractModelElement
     }
 
 
-    public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+    public void setRotationAngle(ModelPart modelRenderer, float x, float y, float z) {
         modelRenderer.xRot = x;
         modelRenderer.yRot = y;
         modelRenderer.zRot = z;

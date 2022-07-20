@@ -22,7 +22,7 @@ public class ItemArmorElementLegginsWithBottles extends ItemArmorElementLeggings
             if (handIn == InteractionHand.MAIN_HAND && playerIn.isShiftKeyDown()) {
                 return super.use(worldIn, playerIn, handIn);
             } else if (handIn == InteractionHand.MAIN_HAND) {
-                ItemStack stack = playerIn.inventory.getSelected();
+                ItemStack stack = playerIn.getInventory().getSelected();
                 ItemArmorBottlesContainerProvider provider = new ItemArmorBottlesContainerProvider(stack);
                 NetworkHooks.openGui((ServerPlayer) playerIn, provider, (FriendlyByteBuf packerBuffer) -> {
                     packerBuffer.writeItem(stack);

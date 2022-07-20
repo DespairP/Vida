@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 
@@ -14,13 +14,13 @@ import static net.minecraft.world.entity.EquipmentSlot.HEAD;
 
 public abstract class AbstractModelElementArmor<T extends LivingEntity> extends HumanoidModel<T> {
     public final EquipmentSlot renderPart;
-    public ModelRenderer head;
-    public ModelRenderer leftArm;
-    public ModelRenderer rightArm;
-    public ModelRenderer body;
-    public ModelRenderer leftLeg;
-    public ModelRenderer rightLeg;
-    public ModelRenderer belt;
+    public ModelPart head;
+    public ModelPart leftArm;
+    public ModelPart rightArm;
+    public ModelPart body;
+    public ModelPart leftLeg;
+    public ModelPart rightLeg;
+    public ModelPart belt;
 
     public AbstractModelElementArmor(int textureWidthIn, int textureHeightIn, EquipmentSlot part) {
         this(1.0f, 0, textureWidthIn, textureHeightIn,part);
@@ -28,26 +28,26 @@ public abstract class AbstractModelElementArmor<T extends LivingEntity> extends 
 
     public AbstractModelElementArmor(float modelSize, float yOffsetIn, int textureWidthIn, int textureHeightIn, EquipmentSlot part) {
         super(modelSize, yOffsetIn, textureWidthIn, textureHeightIn);
-        this.head     = new ModelRenderer(this, 0, 0);
-        this.body     = new ModelRenderer(this,0,0);
-        this.leftArm  = new ModelRenderer(this,0,0);
-        this.rightArm = new ModelRenderer(this,0,0);
-        this.leftLeg  = new ModelRenderer(this,0,0);
-        this.rightLeg = new ModelRenderer(this,0,0);
-        this.belt = new ModelRenderer(this,0,0);
+        this.head     = new ModelPart(this, 0, 0);
+        this.body     = new ModelPart(this,0,0);
+        this.leftArm  = new ModelPart(this,0,0);
+        this.rightArm = new ModelPart(this,0,0);
+        this.leftLeg  = new ModelPart(this,0,0);
+        this.rightLeg = new ModelPart(this,0,0);
+        this.belt = new ModelPart(this,0,0);
         this.renderPart = part;
         initModel();
     }
 
 
     @Override
-    protected Iterable<ModelRenderer> headParts() {
+    protected Iterable<ModelPart> headParts() {
         return renderPart == HEAD ? ImmutableList.of(head) : ImmutableList.of();
     }
 
     @Override
-    protected Iterable<ModelRenderer> bodyParts() {
-        List<ModelRenderer> renderParts;
+    protected Iterable<ModelPart> bodyParts() {
+        List<ModelPart> renderParts;
         switch (renderPart){
             case CHEST:
                 return ImmutableList.of(leftArm, rightArm, body, leftArm, rightArm, body);
@@ -82,7 +82,7 @@ public abstract class AbstractModelElementArmor<T extends LivingEntity> extends 
 
     public abstract void initModel();
 
-    public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+    public void setRotationAngle(ModelPart modelRenderer, float x, float y, float z) {
         modelRenderer.xRot = x;
         modelRenderer.yRot = y;
         modelRenderer.zRot = z;

@@ -3,10 +3,9 @@ package teamHTBP.vida.particle.util;
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.particle.IParticleFactory;
+import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleOptions.IDeserializer;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
@@ -20,13 +19,13 @@ import java.util.Locale;
  * 在指令或者代码生成时都需要使用到ParticleData<br/>
  * 首先{@link ClientLevel#addParticle}提醒renderer渲染粒子，形参中要加入{@link ParticleOptions}的实例<br/>
  * 然后{@link ParticleManager#addParticle}根据形参中的{@link ParticleOptions}从factories里取出能处理该data的工厂<br/>
- * 最后{@link IParticleFactory#makeParticle}根据实例构造出该粒子<br/>
+ * 最后{@link ParticleProvider#makeParticle}根据实例构造出该粒子<br/>
  *
  * - 工厂注册可见：{@link ParticleFactoryLoader#onParticleFactoryRegistration}
  * */
 public class BaseParticleData implements ParticleOptions {
     /**命令行解析器*/
-    public static final IDeserializer<BaseParticleData> DESERIALIZER = new IDeserializer<BaseParticleData>() {
+    public static final Deserializer<BaseParticleData> DESERIALIZER = new Deserializer<BaseParticleData>() {
 
         @Override
         public BaseParticleData fromCommand(ParticleType<BaseParticleData> particleTypeIn, StringReader reader) throws CommandSyntaxException {
