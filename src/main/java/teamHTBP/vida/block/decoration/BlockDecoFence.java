@@ -1,8 +1,6 @@
 package teamHTBP.vida.block.decoration;
 
-import net.minecraft.block.FenceBlock;
-
-import net.minecraft.block.AbstractBlock.Properties;
+import net.minecraft.world.level.block.FenceBlock;
 
 public class BlockDecoFence extends FenceBlock {
     public BlockDecoFence(Properties properties) {

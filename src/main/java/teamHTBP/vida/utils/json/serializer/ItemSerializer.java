@@ -1,8 +1,8 @@
 package teamHTBP.vida.utils.json.serializer;
 
 import com.google.gson.*;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.lang.reflect.Type;

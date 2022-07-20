@@ -1,7 +1,7 @@
 package teamHTBP.vida.network;
 
-import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.network.NetworkEvent;
 import teamHTBP.vida.event.client.HUDMessageEventHandler;
 
 import java.util.function.Supplier;
@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 public class PacketMessage {
     private String message = "";
 
-    public PacketMessage(PacketBuffer buffer) {
+    public PacketMessage(FriendlyByteBuf buffer) {
         message = buffer.readUtf().trim();
     }
 
@@ -17,7 +17,7 @@ public class PacketMessage {
         this.message = message;
     }
 
-    public void toBytes(PacketBuffer buffer) {
+    public void toBytes(FriendlyByteBuf buffer) {
         buffer.writeUtf(message);
     }
 

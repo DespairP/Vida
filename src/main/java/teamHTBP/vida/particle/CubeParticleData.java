@@ -2,15 +2,14 @@ package teamHTBP.vida.particle;
 
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.particles.IParticleData;
-import net.minecraft.particles.ParticleType;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleOptions.IDeserializer;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.network.FriendlyByteBuf;
 
 import java.util.Locale;
 
-import net.minecraft.particles.IParticleData.IDeserializer;
-
-public class CubeParticleData implements IParticleData {
+public class CubeParticleData implements ParticleOptions {
     public static final IDeserializer<CubeParticleData> DESERIALIZER = new IDeserializer<CubeParticleData>() {
 
         @Override
@@ -19,7 +18,7 @@ public class CubeParticleData implements IParticleData {
         }
 
         @Override
-        public CubeParticleData fromNetwork(ParticleType<CubeParticleData> particleTypeIn, PacketBuffer buffer) {
+        public CubeParticleData fromNetwork(ParticleType<CubeParticleData> particleTypeIn, FriendlyByteBuf buffer) {
             float r = buffer.readFloat();
             float g = buffer.readFloat();
             float b = buffer.readFloat();
@@ -48,7 +47,7 @@ public class CubeParticleData implements IParticleData {
     }
 
     @Override
-    public void writeToNetwork(PacketBuffer buffer) {
+    public void writeToNetwork(FriendlyByteBuf buffer) {
         buffer.writeFloat(this.r);
         buffer.writeFloat(this.g);
         buffer.writeFloat(this.b);

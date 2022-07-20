@@ -1,10 +1,10 @@
 package teamHTBP.vida.network;
 
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.network.NetworkEvent;
-import teamHTBP.vida.TileEntity.TileEntityPrismTable;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.network.NetworkEvent;
+import teamHTBP.vida.blockentity.TileEntityPrismTable;
 
 import java.util.function.Supplier;
 
@@ -16,7 +16,7 @@ public class PacketPrismTable {
     private int y = 0;
     private int z = 0;
 
-    public PacketPrismTable(PacketBuffer buffer) {
+    public PacketPrismTable(FriendlyByteBuf buffer) {
         mirrorX = buffer.readInt();
         mirrorY = buffer.readInt();
         x = buffer.readInt();
@@ -34,7 +34,7 @@ public class PacketPrismTable {
         isClick = true;
     }
 
-    public void toBytes(PacketBuffer buf) {
+    public void toBytes(FriendlyByteBuf buf) {
         buf.writeInt(this.mirrorX);
         buf.writeInt(this.mirrorY);
         buf.writeInt(this.x);
@@ -48,7 +48,7 @@ public class PacketPrismTable {
             if (ctx.get().getSender() == null) return;
 
             if (ctx.get().getSender().level.isAreaLoaded(new BlockPos(x, y, z), 1)) {
-                TileEntity tileEntity = ctx.get().getSender().level.getBlockEntity(new BlockPos(x, y, z));
+                BlockEntity tileEntity = ctx.get().getSender().level.getBlockEntity(new BlockPos(x, y, z));
                 if (tileEntity instanceof TileEntityPrismTable) {
                     TileEntityPrismTable tileEntityPrismTable = (TileEntityPrismTable) tileEntity;
                     tileEntityPrismTable.array.set(2, this.mirrorX);

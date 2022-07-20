@@ -1,8 +1,8 @@
 package teamHTBP.vida.datagen.recipes;
 
 
-import net.minecraft.item.Items;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.item.ItemLoader;

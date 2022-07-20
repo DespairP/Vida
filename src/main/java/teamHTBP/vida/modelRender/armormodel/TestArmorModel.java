@@ -1,12 +1,12 @@
 package teamHTBP.vida.modelRender.armormodel;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.entity.model.BipedModel;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ArmorStandEntity;
+import net.minecraft.world.entity.Entity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -14,7 +14,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * PlayerModel - Either Mojang or a mod author (Taken From Memory)
  */
 @OnlyIn(Dist.CLIENT)
-public class TestArmorModel<T extends Entity> extends BipedModel<ArmorStandEntity> {
+public class TestArmorModel<T extends Entity> extends HumanoidModel<ArmorStandEntity> {
     private final boolean isChildHeadScaled = false;
     private final float childHeadOffsetY = 5.0f;
     private final float childHeadOffsetZ = 5.0f;
@@ -53,7 +53,7 @@ public class TestArmorModel<T extends Entity> extends BipedModel<ArmorStandEntit
     }
 
     @Override
-    public void renderToBuffer(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
         super.renderToBuffer(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
     }
 

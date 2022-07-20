@@ -1,7 +1,7 @@
 package teamHTBP.vida.modelRender.tilemodel;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.model.ModelRenderer;
 
 public class PrismTableModel extends TileEntityModel {
@@ -49,7 +49,7 @@ public class PrismTableModel extends TileEntityModel {
     }
 
     @Override
-    public void renderToBuffer(MatrixStack matrixStack, IVertexBuilder iVertexBuilder, int i, int i1, float v, float v1, float v2, float v3) {
+    public void renderToBuffer(PoseStack matrixStack, VertexConsumer iVertexBuilder, int i, int i1, float v, float v1, float v2, float v3) {
         bone.render(matrixStack, iVertexBuilder, i, i1, v, v1, v2, v3);
     }
 }

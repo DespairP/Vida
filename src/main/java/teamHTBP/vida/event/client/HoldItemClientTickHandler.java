@@ -1,9 +1,9 @@
 package teamHTBP.vida.event.client;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Hand;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.TickEvent;
@@ -29,14 +29,14 @@ public class HoldItemClientTickHandler {
 
     @SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent event) {
-        PlayerEntity player = Minecraft.getInstance().player;
+        Player player = Minecraft.getInstance().player;
         // 如果没有进入游戏，重置参数
         if(player == null){
             reset();
             return;
         }
         // 如果玩家持有工具
-        ItemStack holdItem = player.getItemInHand(Hand.MAIN_HAND);
+        ItemStack holdItem = player.getItemInHand(InteractionHand.MAIN_HAND);
         // 如果holdItem改变了的话，记录时间
         if(holdItem != latestHoldItem){
             latestHoldItem = holdItem;

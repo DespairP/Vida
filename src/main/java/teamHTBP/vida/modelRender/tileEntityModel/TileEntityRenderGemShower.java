@@ -1,36 +1,36 @@
 package teamHTBP.vida.modelRender.tileEntityModel;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Matrix4f;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.inventory.container.PlayerContainer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Matrix4f;
-import teamHTBP.vida.TileEntity.TileEntityGemShower;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import teamHTBP.vida.blockentity.TileEntityGemShower;
 import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.modelRender.RenderLoader;
 
-public class TileEntityRenderGemShower extends TileEntityRenderer<TileEntityGemShower> {
+public class TileEntityRenderGemShower extends BlockEntityRenderer<TileEntityGemShower> {
     float r = 1, g = 1, b = 1, a = 1;
     double height = 0.0f;
 
-    public TileEntityRenderGemShower(TileEntityRendererDispatcher rendererDispatcherIn) {
+    public TileEntityRenderGemShower(BlockEntityRenderDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
     }
 
     @Override
-    public void render(TileEntityGemShower tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
+    public void render(TileEntityGemShower tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
         if (!tileEntityIn.gemItem.isEmpty()) {
-            TextureAtlasSprite textureAtlasSprite = Minecraft.getInstance().getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(this.getGemResource(tileEntityIn.gemItem));
+            TextureAtlasSprite textureAtlasSprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(this.getGemResource(tileEntityIn.gemItem));
             double floatHeight = Math.sin(height) * 0.1;
             this.height += 0.01;
             if (height >= Math.PI * 2) this.height = 0.0f;
@@ -41,7 +41,7 @@ public class TileEntityRenderGemShower extends TileEntityRenderer<TileEntityGemS
             float vMax = textureAtlasSprite.getV1();
 
             // 渲染中间的宝石块
-            IVertexBuilder buffer = bufferIn.getBuffer(RenderType.cutout());
+            VertexConsumer buffer = bufferIn.getBuffer(RenderType.cutout());
 
             matrixStackIn.pushPose();
             matrixStackIn.translate(.5F, 1.06F, .5F);
@@ -86,14 +86,14 @@ public class TileEntityRenderGemShower extends TileEntityRenderer<TileEntityGemS
             matrixStackIn.popPose();
 
             // 渲染logo
-            textureAtlasSprite = Minecraft.getInstance().getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(this.getlogoResource(tileEntityIn.gemItem));
+            textureAtlasSprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(this.getlogoResource(tileEntityIn.gemItem));
             uMin = textureAtlasSprite.getU0();
             uMax = textureAtlasSprite.getU1();
             vMin = textureAtlasSprite.getV0();
             vMax = textureAtlasSprite.getV1();
             //draw logo
             matrixStackIn.pushPose();
-            IVertexBuilder bufferLogo = bufferIn.getBuffer(RenderType.cutout());
+            VertexConsumer bufferLogo = bufferIn.getBuffer(RenderType.cutout());
             matrixStackIn.translate(0.5f, 2.0F + floatHeight, 0.5f);
             matrixStackIn.mulPose(this.renderer.camera.rotation());
             matrixStackIn.scale(0.5f, 0.5f, 0.5f);

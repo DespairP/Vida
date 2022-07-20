@@ -1,7 +1,9 @@
 package teamHTBP.vida.helper.guidebookHelper.components;
 
-import net.minecraft.client.gui.IGuiEventListener;
-import net.minecraft.client.gui.IRenderable;
+import net.minecraft.client.gui.components.Widget;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.narration.NarratableEntry;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import teamHTBP.vida.event.client.VidaClientEventHandler;
 import teamHTBP.vida.event.server.datapack.GuideBookPageHandler;
@@ -15,7 +17,7 @@ import teamHTBP.vida.helper.guidebookHelper.GuidebookSinglePage;
  * <br/>
  * <b>***注意：组件类型一定要进行注册,见</b>{@link VidaClientEventHandler#onInitializeClient(FMLClientSetupEvent)}
  * */
-public interface IGuidebookComponent extends IRenderable, IGuiEventListener {
+public interface IGuidebookComponent extends Widget, GuiEventListener, NarratableEntry {
     /**获取组件类型*/
     public String getType();
     /**渲染的x位置*/
@@ -35,4 +37,19 @@ public interface IGuidebookComponent extends IRenderable, IGuiEventListener {
     public int getHeight();
     /**获取组件宽度*/
     public int getWidth();
+
+    @Override
+    default NarrationPriority narrationPriority() {
+        return NarrationPriority.NONE;
+    }
+
+    @Override
+    default boolean isActive() {
+        return false;
+    }
+
+    @Override
+    default void updateNarration(NarrationElementOutput pNarrationElementOutput) {
+
+    }
 }

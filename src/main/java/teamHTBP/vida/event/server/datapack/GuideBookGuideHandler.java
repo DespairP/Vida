@@ -3,15 +3,15 @@ package teamHTBP.vida.event.server.datapack;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-import net.minecraft.client.resources.JsonReloadListener;
-import net.minecraft.profiler.IProfiler;
-import net.minecraft.resources.IResourceManager;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
+import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.common.thread.EffectiveSide;
-import net.minecraftforge.fml.network.PacketDistributor;
-import net.minecraftforge.fml.server.ServerLifecycleHooks;
+import net.minecraftforge.fml.util.thread.EffectiveSide;
+import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.server.ServerLifecycleHooks;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.helper.guidebookHelper.Guide;
@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**datapack相关guidebook的guide处理器*/
-public class GuideBookGuideHandler extends JsonReloadListener {
+public class GuideBookGuideHandler extends SimpleJsonResourceReloadListener {
     /**Handler中的所有guide,这里可能为客户端的也可能是服务端的*/
     public Map<String, Guide> guideMap = new LinkedHashMap<>();
     /**GSON*/
@@ -38,7 +38,7 @@ public class GuideBookGuideHandler extends JsonReloadListener {
 
     /**解析data数据包*/
     @Override
-    public void apply(Map<ResourceLocation, JsonElement> objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
+    public void apply(Map<ResourceLocation, JsonElement> objectIn, ResourceManager resourceManagerIn, ProfilerFiller profilerIn) {
         objectIn.forEach((resourceLocation, jsonElement)->{
             Guide guide = GSON.fromJson(jsonElement,Guide.class);
             guideMap.put(guide.id, guide);

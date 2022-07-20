@@ -1,60 +1,59 @@
 package teamHTBP.vida.block.decoration;
 
-import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.EnumProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.state.properties.DoubleBlockHalf;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.ToolType;
-import teamHTBP.vida.TileEntity.TileEntityGemShower;
+import teamHTBP.vida.blockentity.TileEntityGemShower;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
-public class BlockGemShower extends Block {
+public class BlockGemShower extends Block implements EntityBlock {
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
-    public static final DirectionProperty FACING = HorizontalBlock.FACING;
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     VoxelShape base = Block.box(1, 0, 1, 15, 16, 15);
     VoxelShape high = Block.box(1, 0, 1, 15, 9, 15);
 
 
     public BlockGemShower() {
-        super(Properties.of(Material.WOOD).sound(SoundType.WOOD).noOcclusion().strength(2.0f, 3.0f).harvestTool(ToolType.AXE));
+        super(Properties.of(Material.WOOD).sound(SoundType.WOOD).noOcclusion().strength(2.0f, 3.0f)
+                // todo tag .harvestTool(ToolType.AXE)
+        );
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(HALF, DoubleBlockHalf.LOWER));
     }
 
 
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         return state.getValue(HALF) == DoubleBlockHalf.UPPER ? this.high : this.base;
     }
 
     @Override
-    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
         DoubleBlockHalf doubleblockhalf = stateIn.getValue(HALF);
         if (facing.getAxis() == Direction.Axis.Y && doubleblockhalf == DoubleBlockHalf.LOWER == (facing == Direction.UP)) {
             return facingState.getBlock() == this && facingState.getValue(HALF) != doubleblockhalf ? stateIn.setValue(FACING, facingState.getValue(FACING)) : Blocks.AIR.defaultBlockState();
@@ -63,16 +62,17 @@ public class BlockGemShower extends Block {
         }
     }
 
-    public void playerDestroy(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
+    @Override
+    public void playerDestroy(Level worldIn, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity te, ItemStack stack) {
         super.playerDestroy(worldIn, player, pos, Blocks.AIR.defaultBlockState(), te, stack);
     }
 
     @Override
-    public void playerWillDestroy(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+    public void playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {
         DoubleBlockHalf doubleblockhalf = state.getValue(HALF);
         BlockPos blockpos = doubleblockhalf == DoubleBlockHalf.LOWER ? pos.above() : pos.below();
         BlockState blockstate = worldIn.getBlockState(blockpos);
-        TileEntity te = null;
+        BlockEntity te = null;
         if (doubleblockhalf == DoubleBlockHalf.LOWER)
             te = worldIn.getBlockEntity(pos);
         else
@@ -85,7 +85,7 @@ public class BlockGemShower extends Block {
             worldIn.setBlock(blockpos, Blocks.AIR.defaultBlockState(), 35);
             worldIn.levelEvent(player, 2001, blockpos, Block.getId(blockstate));
             ItemStack itemstack = player.getMainHandItem();
-            if (!worldIn.isClientSide && !player.isCreative() && ForgeHooks.canHarvestBlock(state, player, worldIn, pos)) {
+            if (!worldIn.isClientSide && !player.isCreative() && state.canHarvestBlock(worldIn, pos, player)) {
                 Block.dropResources(state, worldIn, pos, null, player, itemstack);
                 Block.dropResources(blockstate, worldIn, blockpos, null, player, itemstack);
             }
@@ -94,11 +94,12 @@ public class BlockGemShower extends Block {
         super.playerWillDestroy(worldIn, pos, state, player);
     }
 
+    @Override
     @Nullable
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockPos blockpos = context.getClickedPos();
         if (blockpos.getY() < 255 && context.getLevel().getBlockState(blockpos.above()).canBeReplaced(context)) {
-            World world = context.getLevel();
+            Level world = context.getLevel();
             boolean flag = world.hasNeighborSignal(blockpos) || world.hasNeighborSignal(blockpos.above());
             return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection()).setValue(HALF, DoubleBlockHalf.LOWER);
         } else {
@@ -106,11 +107,13 @@ public class BlockGemShower extends Block {
         }
     }
 
-    public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+    @Override
+    public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
         worldIn.setBlock(pos.above(), state.setValue(HALF, DoubleBlockHalf.UPPER), 3);
     }
 
-    public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+    @Override
+    public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
         BlockPos blockpos = pos.below();
         BlockState blockstate = worldIn.getBlockState(blockpos);
         if (state.getValue(HALF) == DoubleBlockHalf.LOWER) {
@@ -121,31 +124,21 @@ public class BlockGemShower extends Block {
     }
 
 
+    @Override
     @OnlyIn(Dist.CLIENT)
     public long getSeed(BlockState state, BlockPos pos) {
-        return MathHelper.getSeed(pos.getX(), pos.below(state.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), pos.getZ());
+        return Mth.getSeed(pos.getX(), pos.below(state.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), pos.getZ());
     }
 
 
-    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(HALF, FACING);
     }
 
     @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        if (state.getValue(HALF) == DoubleBlockHalf.LOWER) return new TileEntityGemShower();
-        return null;
-    }
-
-    @Override
-    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (handIn == Hand.MAIN_HAND && !worldIn.isClientSide) {
+    public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+        if (handIn == InteractionHand.MAIN_HAND && !worldIn.isClientSide) {
             TileEntityGemShower entity = null;
             BlockPos position = pos;
             if (worldIn.getBlockState(pos).getValue(HALF) == DoubleBlockHalf.LOWER)
@@ -156,9 +149,9 @@ public class BlockGemShower extends Block {
             }
             //如果是创造模式不消耗宝石
             if (!player.isShiftKeyDown()) {
-                if (entity.setGem(player.inventory.getSelected())) {
+                if (entity.setGem(player.getInventory().getSelected())) {
                     if (!player.isCreative()) {
-                        ItemStack stack = player.inventory.getSelected();
+                        ItemStack stack = player.getInventory().getSelected();
                         stack.setCount(stack.getCount() - 1);
                         worldIn.sendBlockUpdated(position, state, state, 3);
                     } else {
@@ -167,7 +160,7 @@ public class BlockGemShower extends Block {
                 }
             } else {
                 if (!entity.gemItem.isEmpty()) {
-                    player.inventory.add(entity.gemItem);
+                    player.getInventory().add(entity.gemItem);
                     entity.gemItem = ItemStack.EMPTY;
                     worldIn.sendBlockUpdated(position, state, state, 3);
                 }
@@ -175,8 +168,16 @@ public class BlockGemShower extends Block {
         } else {
             return super.use(state, worldIn, pos, player, handIn, hit);
         }
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
 
+    @org.jetbrains.annotations.Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pPos, BlockState state) {
+        if (state.getValue(HALF) == DoubleBlockHalf.LOWER) {
+            return new TileEntityGemShower();
+        }
+        return null;
+    }
 }

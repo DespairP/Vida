@@ -1,6 +1,6 @@
 package teamHTBP.vida.capability.skillSystem;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.LinkedHashMap;
 

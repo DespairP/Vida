@@ -1,16 +1,16 @@
 package teamHTBP.vida.gui.HUD;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.util.ResourceLocation;
-import teamHTBP.vida.TileEntity.IElementCrystal;
+import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.resources.ResourceLocation;
 import teamHTBP.vida.Vida;
+import teamHTBP.vida.blockentity.crystal.IElementCrystal;
 import teamHTBP.vida.gui.IVidaHUD;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 
-public class ElementCrystalHUD extends AbstractGui implements IVidaHUD{
+public class ElementCrystalHUD extends GuiComponent implements IVidaHUD{
     private final int width;
     private final int height;
     private final Minecraft minecraft;
@@ -29,13 +29,13 @@ public class ElementCrystalHUD extends AbstractGui implements IVidaHUD{
         this.progress_ticks = progress_ticks;
     }
 
-    public void render(MatrixStack matrixStack) {
+    public void render(PoseStack matrixStack) {
         if (tileEntityCrystal == null) return;
         int screenWidth = this.width / 2 - 6;
         int screenHeight = this.height / 2 - 40;
         if (fragment_ticks > 33) fragment_ticks = fragment_ticks % 33;
-        RenderSystem.color4f(1, 1, 1, 1);
-        this.minecraft.getTextureManager().bind(HUD);
+        RenderSystem.setShaderColor(1, 1, 1, 1);
+        RenderSystem.setShaderTexture(0, HUD);
         blit(matrixStack, screenWidth - 9, screenHeight - 1, 0, 257, 0, 15, 16, 528, 528);
         blit(matrixStack, screenWidth + 15 - 9, screenHeight - 1, 0, 272, 0, 15, 16, 528, 528);
         renderFragment(matrixStack);
@@ -45,7 +45,7 @@ public class ElementCrystalHUD extends AbstractGui implements IVidaHUD{
 
     }
 
-    private void renderCrystal(MatrixStack matrixStack) {
+    private void renderCrystal(PoseStack matrixStack) {
         EnumElements element = tileEntityCrystal.getElement();
         int screenWidth = this.width / 2 - 6;
         int screenHeight = this.height / 2 - 40;
@@ -57,7 +57,7 @@ public class ElementCrystalHUD extends AbstractGui implements IVidaHUD{
         }
     }
 
-    private void renderFragment(MatrixStack matrixStack) {
+    private void renderFragment(PoseStack matrixStack) {
         int screenWidth = this.width / 2 - 6;
         int screenHeight = this.height / 2 - 40;
         blit(matrixStack, screenWidth + 15 - 9 - progress_ticks, screenHeight - 1, 0, 225 + 15 - progress_ticks, 0 + 16 * fragment_ticks, progress_ticks, 16, 528, 528);

@@ -1,10 +1,11 @@
 package teamHTBP.vida.block.environment;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.material.Material;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
 
 public class BlockOreElement extends Block {
     public BlockOreElement() {
@@ -13,7 +14,7 @@ public class BlockOreElement extends Block {
     }
 
     @Override
-    public int getExpDrop(BlockState state, net.minecraft.world.IWorldReader reader, BlockPos pos, int fortune, int silktouch) {
-        return silktouch == 0 ? MathHelper.nextInt(RANDOM, 5, 7) : 0;
+    public int getExpDrop(BlockState state, BlockGetter reader, BlockPos pos, int fortune, int silktouch) {
+        return silktouch == 0 ? Mth.nextInt(RANDOM, 5, 7) : 0;
     }
 }

@@ -1,12 +1,12 @@
 package teamHTBP.vida.capability.blueprintCapability;
 
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.util.INBTSerializable;
 import teamHTBP.vida.helper.blueprintHelper.EnumBlueprintRarity;
 
 import java.util.Map;
 
-public interface IBlueprintCapability extends INBTSerializable<CompoundNBT> {
+public interface IBlueprintCapability extends INBTSerializable<CompoundTag> {
     /**
      * 获取所有可能解锁的图纸
      *

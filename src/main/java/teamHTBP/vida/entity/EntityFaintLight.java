@@ -1,17 +1,17 @@
 package teamHTBP.vida.entity;
 
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.IPacket;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.entity.IEntityAdditionalSpawnData;
+import net.minecraftforge.network.NetworkHooks;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.helper.elementHelper.ElementManager;
@@ -23,10 +23,10 @@ import java.util.Optional;
 public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnData {
 
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final DataParameter<String> TYPE = EntityDataManager.defineId(EntityFaintLight.class, DataSerializers.STRING);
+    private static final EntityDataAccessor<String> TYPE = SynchedEntityData.defineId(EntityFaintLight.class, EntityDataSerializers.STRING);
     private IElement types;
 
-    public EntityFaintLight(EntityType<?> entityTypeIn, World worldIn) {
+    public EntityFaintLight(EntityType<?> entityTypeIn, Level worldIn) {
         super(entityTypeIn, worldIn);
         types = EnumElements.GOLD;
         double d1 = this.getX() + 0.5D;
@@ -35,7 +35,7 @@ public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnDa
         //this.setBoundingBox(new AxisAlignedBB(d1 - 0, d2 - 0, d3 - 0, d1 + 1, d2 + 1, d3 + 1));
 
     }
-    public EntityFaintLight(EntityType<?> entityTypeIn, World worldIn, IElement type) {
+    public EntityFaintLight(EntityType<?> entityTypeIn, Level worldIn, IElement type) {
         super(entityTypeIn, worldIn);
         this.types = type;
         double d1 = this.getX() + 0.5D;
@@ -50,18 +50,18 @@ public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnDa
     }
 
     @Override
-    protected void readAdditionalSaveData(CompoundNBT compound) {
+    protected void readAdditionalSaveData(CompoundTag compound) {
         this.entityData.set(TYPE, compound.getString("type"));
     }
 
     @Override
-    protected void addAdditionalSaveData(CompoundNBT compound) {
+    protected void addAdditionalSaveData(CompoundTag compound) {
         compound.putString("type", this.entityData.get(TYPE));
     }
 
     //提醒客户端生成实体
     @Override
-    public IPacket<?> getAddEntityPacket() {
+    public Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
@@ -81,7 +81,7 @@ public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnDa
     }
 
     @Override
-    public void onSyncedDataUpdated(DataParameter<?> key) {
+    public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
         super.onSyncedDataUpdated(key);
         if (TYPE.equals(key)) {
             this.types = ElementManager.get(entityData.get(TYPE));
@@ -90,12 +90,12 @@ public class EntityFaintLight extends Entity implements IEntityAdditionalSpawnDa
 
 
     @Override
-    public void writeSpawnData(PacketBuffer buffer) {
+    public void writeSpawnData(FriendlyByteBuf buffer) {
 
     }
 
     @Override
-    public void readSpawnData(PacketBuffer additionalData) {
+    public void readSpawnData(FriendlyByteBuf additionalData) {
     }
 
     @Override

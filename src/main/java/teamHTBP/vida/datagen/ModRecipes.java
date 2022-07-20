@@ -1,10 +1,10 @@
 package teamHTBP.vida.datagen;
 
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DirectoryCache;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.data.RecipeProvider;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.HashCache;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.resources.ResourceLocation;
 import teamHTBP.vida.datagen.recipes.AlterRecipes;
 import teamHTBP.vida.datagen.recipes.ModGenRecipes;
 
@@ -33,13 +33,13 @@ public class ModRecipes extends RecipeProvider {
         recipes.add(new AlterRecipes());
     }
 
-    protected void vanillaRecipes(Consumer<IFinishedRecipe> consumer) {
+    protected void vanillaRecipes(Consumer<FinishedRecipe> consumer) {
         //SimpleCookingRecipeBuilder.smelting()
         //        .unlockedBy("has_stone", has(Blocks.DIORITE)).save(consumer);
     }
 
     @Override
-    public void run(DirectoryCache cache) throws IOException {
+    public void run(HashCache cache) {
         super.run(cache);
 
         recipes.forEach(recipes -> {
@@ -47,7 +47,7 @@ public class ModRecipes extends RecipeProvider {
         });
     }
 
-    protected void save(DirectoryCache pCache, ResourceLocation name, Map.Entry<String, String> entry) {
+    protected void save(HashCache pCache, ResourceLocation name, Map.Entry<String, String> entry) {
         String json = entry.getKey();
         String subPath = entry.getValue();
 
@@ -56,7 +56,7 @@ public class ModRecipes extends RecipeProvider {
         saveRecipe(pCache, json, path.resolve("data/" + name.getNamespace() + "/recipes/" + subPath + "/" + name.getPath() + ".json"));
     }
 
-    private static void saveRecipe(DirectoryCache pCache, String recipe, Path pPath) {
+    private static void saveRecipe(HashCache pCache, String recipe, Path pPath) {
         try {
             String s1 = SHA1.hashUnencodedChars(recipe).toString();
             if (!Objects.equals(pCache.getHash(pPath), s1) || !Files.exists(pPath)) {
@@ -84,8 +84,8 @@ public class ModRecipes extends RecipeProvider {
     }
 
     @Override
-    protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumer) {
+    protected void buildCraftingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
         addCustomRecipes();
-        vanillaRecipes(consumer);
+        vanillaRecipes(pFinishedRecipeConsumer);
     }
 }

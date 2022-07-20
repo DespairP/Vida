@@ -1,16 +1,17 @@
 package teamHTBP.vida;
 
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import teamHTBP.vida.TileEntity.TileEntityLoader;
 import teamHTBP.vida.block.BlockLoader;
+import teamHTBP.vida.blockentity.TileEntityLoader;
 import teamHTBP.vida.entity.EntityLoader;
 import teamHTBP.vida.event.client.VidaClientEventHandler;
 import teamHTBP.vida.event.server.BlockEventLoaderServer;
-import teamHTBP.vida.gui.GUI.ContainerTypeLoader;
+import teamHTBP.vida.gui.menu.ContainerTypeLoader;
 import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.item.function.ItemElementCoreVoid;
 import teamHTBP.vida.particle.ParticleLoader;
@@ -29,16 +30,18 @@ public class Vida {
 
     public Vida() {
         MinecraftForge.EVENT_BUS.register(VidaClientEventHandler.class);
-        ItemLoader.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        BlockLoader.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ParticleLoader.PARTICLE.register(FMLJavaModLoadingContext.get().getModEventBus());
-        GenLoader.FEATURES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        TileEntityLoader.TILE_ENTITY_DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
-        EntityLoader.ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ContainerTypeLoader.CONTAINER_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ItemLoader.ITEMS.register(bus);
+        BlockLoader.BLOCKS.register(bus);
+        ParticleLoader.PARTICLE.register(bus);
+        GenLoader.register(bus);
+        TileEntityLoader.TILE_ENTITY_DEFERRED_REGISTER.register(bus);
+        EntityLoader.ENTITY_TYPES.register(bus);
+        ContainerTypeLoader.CONTAINER_TYPES.register(bus);
         MinecraftForge.EVENT_BUS.register(ItemElementCoreVoid.class);
         MinecraftForge.EVENT_BUS.register(BlockEventLoaderServer.class);
-        RecipeManager.register(FMLJavaModLoadingContext.get().getModEventBus());
+        RecipeManager.register(bus);
         //RecipeLoader.RECIPES.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         //RecipeLoader.RECIPES.register(FMLJavaModLoadingContext.get().getModEventBus());

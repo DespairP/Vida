@@ -1,9 +1,7 @@
 package teamHTBP.vida.block.environment;
 
-import net.minecraft.block.RotatedPillarBlock;
-import net.minecraft.block.material.Material;
-
-import net.minecraft.block.AbstractBlock.Properties;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.material.Material;
 
 /**
  * 生命原木

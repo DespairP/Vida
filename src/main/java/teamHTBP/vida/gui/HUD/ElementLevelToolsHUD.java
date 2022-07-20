@@ -1,11 +1,11 @@
 package teamHTBP.vida.gui.HUD;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.apache.logging.log4j.LogManager;
@@ -18,7 +18,7 @@ import teamHTBP.vida.utils.color.RGBAColor;
 import teamHTBP.vida.utils.math.IntRange;
 
 @OnlyIn(Dist.CLIENT)
-public class ElementLevelToolsHUD extends AbstractGui {
+public class ElementLevelToolsHUD extends GuiComponent {
     private ItemStack itemStack = ItemStack.EMPTY;
     private boolean isIncrease = true;
     private IntRange alpha;
@@ -37,7 +37,7 @@ public class ElementLevelToolsHUD extends AbstractGui {
         this.minecraft = Minecraft.getInstance();
     }
 
-    public void render(MatrixStack matrixStack,float partialTicks){
+    public void render(PoseStack matrixStack, float partialTicks){
         int alphaNum = isIncrease ? alpha.increase(2) : alpha.decrease(2);
         if((alphaNum == 0 && !isIncrease) || itemStack == null || !(itemStack.getItem() instanceof IElementLevelTools)){
             LOGGER.debug("ElementLevelToolsHUD is being pop,isIncrease:{},itemStack:{}",isIncrease,itemStack);
@@ -55,10 +55,10 @@ public class ElementLevelToolsHUD extends AbstractGui {
         int renderX = 3;
         int renderY = (int) (this.height * 5.5F / 6.0F);
         // --- start render ---
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, alphaNum / 100.0f);
-        RenderSystem.pushMatrix();
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, alphaNum / 100.0f);
+        matrixStack.pushPose();
         RenderSystem.enableBlend();
-        this.minecraft.getTextureManager().bind(HUD);
+        RenderSystem.setShaderTexture(0, HUD);
         // 根据物品元素进行渲染
         EnumElements element = item.getItemElement();
         switch (element) {
@@ -96,11 +96,11 @@ public class ElementLevelToolsHUD extends AbstractGui {
                 blit(matrixStack, renderX, renderY + 16 - progressHeight, 0, 64, 32 - progressHeight, 16, progressHeight, 35, 119);
                 break;
         }
-        RenderSystem.popMatrix();
-        RenderSystem.pushMatrix();
+        matrixStack.popPose();
+        matrixStack.pushPose();
         // 显示工具等级
         drawCenteredString(matrixStack, minecraft.font, level + "", renderX + 16, renderY + 10, RGBAColor.getColorCodeFromRGBA(126,186,137,255 * alphaNum / 100));
-        RenderSystem.popMatrix();
+        matrixStack.popPose();
     }
 
     public void notifyStopRender(){
@@ -117,6 +117,8 @@ public class ElementLevelToolsHUD extends AbstractGui {
     }
 
     public void renewItemStack(ItemStack stack){
-        if(this.isSameItemStack(stack)) this.itemStack = stack;
+        if(this.isSameItemStack(stack)) {
+            this.itemStack = stack;
+        }
     }
 }

@@ -1,7 +1,7 @@
 package teamHTBP.vida.modelRender.armormodel;
 
 import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.Entity;
+import net.minecraft.world.entity.Entity;
 
 public class ArmorModelGoldHelmet<T extends Entity> extends AbstractModelElementHelmet {
     private final ModelRenderer bone;

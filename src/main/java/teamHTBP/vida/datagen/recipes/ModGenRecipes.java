@@ -1,8 +1,8 @@
 package teamHTBP.vida.datagen.recipes;
 
 
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import teamHTBP.vida.recipe.base.BaseRecipe;
 import teamHTBP.vida.utils.json.JsonUtils;
 

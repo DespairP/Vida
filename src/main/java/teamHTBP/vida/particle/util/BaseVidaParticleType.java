@@ -1,8 +1,8 @@
 package teamHTBP.vida.particle.util;
 
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import teamHTBP.vida.particle.CuboidParticle;
 import teamHTBP.vida.particle.ElementFireParticle;
 import teamHTBP.vida.particle.LeafParticle;
@@ -30,17 +30,17 @@ public enum BaseVidaParticleType {
         this.type = type;
     }
 
-    public Particle getParticle(ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int r, int g, int b) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    public Particle getParticle(ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int r, int g, int b) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         assert particleClass != null;
         Constructor<?> c = null;
         switch (type) {
             case WITHXYZSPEED:
                 // world, x, y, z, xSpeed, ySpeed, zSpeed
-                c = particleClass.getConstructor(ClientWorld.class, double.class, double.class, double.class, double.class, double.class, double.class);
+                c = particleClass.getConstructor(ClientLevel.class, double.class, double.class, double.class, double.class, double.class, double.class);
                 return (Particle) c.newInstance(worldIn, x, y, z, xSpeed, ySpeed, zSpeed);
             case WITHALL:
                 // world, x, y, z, xSpeed, ySpeed, zSpeed, r, g, b
-                c = particleClass.getConstructor(ClientWorld.class, double.class, double.class, double.class, double.class, double.class, double.class, int.class, int.class, int.class);
+                c = particleClass.getConstructor(ClientLevel.class, double.class, double.class, double.class, double.class, double.class, double.class, int.class, int.class, int.class);
                 return (Particle) c.newInstance(worldIn, x, y, z, xSpeed, ySpeed, zSpeed, r % 256,  g % 256, b % 256);
             default:
                 throw new NoSuchMethodException();

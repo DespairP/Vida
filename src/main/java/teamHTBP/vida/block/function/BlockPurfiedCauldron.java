@@ -1,36 +1,35 @@
 package teamHTBP.vida.block.function;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.Constants;
-import teamHTBP.vida.TileEntity.TileEntityPurfiedCauldron;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import teamHTBP.vida.block.base.ModBaseEntityBlock;
+import teamHTBP.vida.blockentity.TileEntityLoader;
+import teamHTBP.vida.blockentity.TileEntityPurfiedCauldron;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.particle.CubeParticleData;
 
-import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockPurfiedCauldron extends Block {
+public class BlockPurfiedCauldron extends ModBaseEntityBlock<TileEntityPurfiedCauldron> {
     private static final VoxelShape SHAPE;
 
     static {
@@ -47,49 +46,43 @@ public class BlockPurfiedCauldron extends Block {
         VoxelShape dBase = Block.box(0, 0, 13, 3, 3, 16);//↙基底
         VoxelShape leftBase = Block.box(1, 1.75, 2, 2, 10.75, 14);
         VoxelShape base = Block.box(1, 0.75, 1, 15, 1.75, 15);
-        SHAPE = VoxelShapes.or(aPillar, aBase, upBase, bPillar, bBase, rightBase, cPillar, cBase, downBase, dPillar, dBase, leftBase, base);
+        SHAPE = Shapes.or(aPillar, aBase, upBase, bPillar, bBase, rightBase, cPillar, cBase, downBase, dPillar, dBase, leftBase, base);
     }
 
     public BlockPurfiedCauldron() {
-        super(Block.Properties.of(Material.METAL).randomTicks().noOcclusion().sound(SoundType.STONE).strength(4.0f, 4.0f));
+        super(Block.Properties.of(Material.METAL)
+                .randomTicks()
+                .noOcclusion()
+                .sound(SoundType.STONE)
+                .strength(4.0f, 4.0f),
+                TileEntityLoader.TileEntityPurfiedCauldron);
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new TileEntityPurfiedCauldron();
-    }
-
 
     @Override
-    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (handIn == Hand.MAIN_HAND) {
+    public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+        if (handIn == InteractionHand.MAIN_HAND) {
             TileEntityPurfiedCauldron entity = (TileEntityPurfiedCauldron) worldIn.getBlockEntity(pos);
             //如果是创造模式不消耗水桶
             //如果是就消耗水桶
-            if (player.inventory.getSelected().getItem() == Items.WATER_BUCKET && !entity.isWater) {
+            if (player.getInventory().getSelected().getItem() == Items.WATER_BUCKET && !entity.isWater) {
                 if (player.isCreative()) {
                     entity.isWater = true;
-                    worldIn.playSound(null, pos, SoundEvents.BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                    return ActionResultType.SUCCESS;
+                    worldIn.playSound(null, pos, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    return InteractionResult.SUCCESS;
                 } else {
-                    player.inventory.getSelected().setCount(0);
-                    player.inventory.add(new ItemStack(
+                    player.getInventory().getSelected().setCount(0);
+                    player.getInventory().add(new ItemStack(
                             Items.BUCKET, 1));
                     entity.isWater = true;
-                    worldIn.playSound(null, pos, SoundEvents.BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                    worldIn.sendBlockUpdated(pos, state, state, Constants.BlockFlags.BLOCK_UPDATE);
-                    return ActionResultType.SUCCESS;
+                    worldIn.playSound(null, pos, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    worldIn.sendBlockUpdated(pos, state, state, Block.UPDATE_NEIGHBORS);
+                    return InteractionResult.SUCCESS;
                 }
             }
 
@@ -98,17 +91,17 @@ public class BlockPurfiedCauldron extends Block {
     }
 
     @Override
-    public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+    public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
         if (worldIn.getBlockState(pos.below()).getBlock() == Blocks.FIRE || worldIn.getBlockState(pos.below()).getBlock() == Blocks.LAVA && !worldIn.isClientSide) {
             TileEntityPurfiedCauldron entity = (TileEntityPurfiedCauldron) worldIn.getBlockEntity(pos);
             entity.isFire = true;
-            worldIn.sendBlockUpdated(pos, state, state, Constants.BlockFlags.BLOCK_UPDATE);
+            worldIn.sendBlockUpdated(pos, state, state, Block.UPDATE_NEIGHBORS);
         }
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos, isMoving);
     }
 
     @Override
-    public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+    public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
         TileEntityPurfiedCauldron entity = (TileEntityPurfiedCauldron) worldIn.getBlockEntity(pos);
         if (entity != null) {
             //生成粒子
@@ -158,14 +151,14 @@ public class BlockPurfiedCauldron extends Block {
 
 
     @Override
-    public void entityInside(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
+    public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
         if (!worldIn.isClientSide) {
             if (entityIn instanceof ItemEntity) {
                 TileEntityPurfiedCauldron entity = (TileEntityPurfiedCauldron) worldIn.getBlockEntity(pos);
                 ItemStack itemStack = ((ItemEntity) entityIn).getItem();
                 if (entity.setMeltItem(itemStack)) {
-                    entityIn.remove();
-                    worldIn.sendBlockUpdated(pos, state, state, Constants.BlockFlags.BLOCK_UPDATE);
+                    entityIn.discard();
+                    worldIn.sendBlockUpdated(pos, state, state, Block.UPDATE_NEIGHBORS);
                     entity.setMeltSpeed();
                 }
             }

@@ -1,6 +1,6 @@
 package teamHTBP.vida.helper.blueprintHelper;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.Collections;
 import java.util.List;

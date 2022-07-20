@@ -1,15 +1,15 @@
 package teamHTBP.vida.gui.HUD;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import teamHTBP.vida.TileEntity.TileEntityElementCoreAltar;
+import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import teamHTBP.vida.Vida;
+import teamHTBP.vida.blockentity.TileEntityElementCoreAltar;
 
-public class ElementCoreAltarHUD extends AbstractGui {
+public class ElementCoreAltarHUD extends GuiComponent {
     private final int width;
     private final int height;
     private final Minecraft minecraft;
@@ -24,10 +24,10 @@ public class ElementCoreAltarHUD extends AbstractGui {
         this.tileEntityElementCoreAltar = tileEntityElementCoreAltar;
     }
 
-    public void render(MatrixStack matrixStack) {
+    public void render(PoseStack matrixStack) {
         if (tileEntityElementCoreAltar == null) return;
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.minecraft.getTextureManager().bind(HUD);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderTexture(0, HUD);
         int screenWidth = this.width / 2 - 28;
         int screenHeight = this.height / 2 - 66;
         blit(matrixStack, screenWidth, screenHeight, 0, 0, 0, 56, 56, 80, 80);

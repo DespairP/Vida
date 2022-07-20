@@ -1,18 +1,18 @@
 package teamHTBP.vida.helper.guidebookHelper.components;
 
 import com.google.gson.annotations.Expose;
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 import teamHTBP.vida.helper.renderHelper.RenderHelper;
 import teamHTBP.vida.helper.renderHelper.guiHelper.TextureSection;
 import teamHTBP.vida.utils.math.IntRange;
 
-import static net.minecraft.client.gui.AbstractGui.blit;
+import static net.minecraft.client.gui.GuiComponent.blit;
 
 /**文字渲染组件*/
 public class TextGuidebookComponent extends GuidebookComponent implements IGuidebookComponent {
@@ -28,13 +28,13 @@ public class TextGuidebookComponent extends GuidebookComponent implements IGuide
     @Expose
     public String key;
     /**文字渲染器*/
-    public FontRenderer fontRenderer = Minecraft.getInstance().font;
+    public Font fontRenderer = Minecraft.getInstance().font;
     /**最大GUI长度*/
     public static final int MAX_GUI_LENGTH = 126;
     /**滚动大小*/
     public IntRange offset = new IntRange(0,0,0);
     /**组件*/
-    private TranslationTextComponent translationText;
+    private TranslatableComponent translationText;
     /**滚动条*/
     private final TextureManager textureManager = Minecraft.getInstance().textureManager;
     private final static ResourceLocation componentLocation = new ResourceLocation("vida","textures/gui/book.png");
@@ -71,12 +71,12 @@ public class TextGuidebookComponent extends GuidebookComponent implements IGuide
      * case 2:如果定义了最大宽度,那么就是计算后的height
      * */
     public int getTextHeight(){
-        TranslationTextComponent component = new TranslationTextComponent(key);
+        TranslatableComponent component = new TranslatableComponent(key);
         return maxLength == -1 ? fontRenderer.wordWrapHeight(component.getString(), maxLength) : maxHeight;
     }
 
     @Override
-    public void render(MatrixStack matrixStack,int mouseX, int mouseY, float partialTicks) {
+    public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         //首先提前加载组件
         getTranslation();
         //检测是否悬浮在该组件上
@@ -88,7 +88,7 @@ public class TextGuidebookComponent extends GuidebookComponent implements IGuide
     }
 
     /**渲染滚动条*/
-    public void renderScrollBar(MatrixStack matrixStack, float partialTicks){
+    public void renderScrollBar(PoseStack matrixStack, float partialTicks){
         //如果不能滚动,不渲染滚动条
         if(!isScrollable() || !isActive()){
             return;
@@ -98,7 +98,7 @@ public class TextGuidebookComponent extends GuidebookComponent implements IGuide
         renderTrackButton(matrixStack, partialTicks);
     }
 
-    public void renderTracker(MatrixStack matrixStack, float partialTicks){
+    public void renderTracker(PoseStack matrixStack, float partialTicks){
         //计算滚动条大小
         int trackerHeight = Math.max(getHeight() - 4, 4);
         //根据组件长度拉长,单位长度会相应的被拉长,trackerScaledFactor计算拉长了多少倍
@@ -106,7 +106,7 @@ public class TextGuidebookComponent extends GuidebookComponent implements IGuide
         int trackerRealYPosition = (int)Math.ceil((y + 2) * (1.0f / trackerScaledFactor));
 
         //如果可以滚动,渲染滚动条
-        RenderSystem.pushMatrix();
+        matrixStack.pushPose();
         textureManager.bind(componentLocation);
         //渲染tracker顶部
         blit(matrixStack, x + getWidth(), y + 0, 0, scrollBarOuterTop.mu(), scrollBarOuterTop.mv(), scrollBarOuterTop.w(), scrollBarOuterTop.h(), 512, 512);
@@ -117,11 +117,11 @@ public class TextGuidebookComponent extends GuidebookComponent implements IGuide
         matrixStack.popPose();
         //渲染tracker底部
         blit(matrixStack, x + getWidth(), y + trackerHeight + 2, 0, scrollBarOuterBottom.mu(), scrollBarOuterBottom.mv(), scrollBarOuterBottom.w(), scrollBarOuterBottom.h(), 512, 512);
-        RenderSystem.popMatrix();
+        matrixStack.popPose();
     }
 
-    public void renderTrackButton(MatrixStack matrixStack, float partialTicks){
-        RenderSystem.pushMatrix();
+    public void renderTrackButton(PoseStack matrixStack, float partialTicks){
+        matrixStack.pushPose();
 
         //渲染icon
         int yoffset = offset.get();
@@ -136,12 +136,12 @@ public class TextGuidebookComponent extends GuidebookComponent implements IGuide
         matrixStack.popPose();
         blit(matrixStack, x + getWidth() + 1, y + 3 + pointerHeight + (int)Math.floor((yoffset) * pointerScaledFactor), 0, scrollPointerBottom.mu(), scrollPointerBottom.mv(), scrollPointerBottom.w(), 2, 512, 512);
 
-        RenderSystem.popMatrix();
+        matrixStack.popPose();
     }
 
     /**渲染文字*/
-    public void renderText(MatrixStack matrixStack, float partialTicks){
-        RenderSystem.pushMatrix();
+    public void renderText(PoseStack matrixStack, float partialTicks){
+        matrixStack.pushPose();
 
         //如果有定义最大高度,裁剪
         if(maxHeight > 0){
@@ -161,13 +161,13 @@ public class TextGuidebookComponent extends GuidebookComponent implements IGuide
 
         //结束渲染
         RenderSystem.disableScissor();
-        RenderSystem.popMatrix();
+        matrixStack.popPose();
     }
 
     /**获取翻译文字*/
-    private TranslationTextComponent getTranslation(){
+    private TranslatableComponent getTranslation(){
         if(translationText == null || !key.equals(translationText.getKey())){
-            translationText = new TranslationTextComponent(key);
+            translationText = new TranslatableComponent(key);
         }
         return translationText;
     }
@@ -221,7 +221,7 @@ public class TextGuidebookComponent extends GuidebookComponent implements IGuide
 
     /**获取最大滚动高度*/
     public int getMaxScrollOffset(){
-        TranslationTextComponent component = new TranslationTextComponent(key);
+        TranslatableComponent component = new TranslatableComponent(key);
         return Math.max(fontRenderer.wordWrapHeight(component.getString(), maxLength) - Math.abs(maxHeight) , 0);
     }
 }

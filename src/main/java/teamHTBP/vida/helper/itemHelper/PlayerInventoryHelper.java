@@ -1,13 +1,13 @@
 package teamHTBP.vida.helper.itemHelper;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import teamHTBP.vida.event.client.HoldItemClientTickHandler;
 
 public class PlayerInventoryHelper {
     /**获取玩家某个部位的盔甲*/
-    public static ItemStack getPlayerArmor(PlayerEntity entity, EquipmentSlotType part){
+    public static ItemStack getPlayerArmor(Player entity, EquipmentSlot part){
         return entity.inventory.armor.get(part.getIndex());
     }
 

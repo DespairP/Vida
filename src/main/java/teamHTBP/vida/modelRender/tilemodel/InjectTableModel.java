@@ -3,8 +3,8 @@ package teamHTBP.vida.modelRender.tilemodel;// Made with Blockbench 3.9.3
 // Paste this class into your mod and generate all required imports
 
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.model.ModelRenderer;
 
 public class InjectTableModel extends TileEntityModel {
@@ -58,7 +58,7 @@ public class InjectTableModel extends TileEntityModel {
 
 
 	@Override
-	public void renderToBuffer(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
+	public void renderToBuffer(PoseStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
 		group.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
 		group2.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
 		cube_r1.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);

@@ -4,8 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.network.NetworkEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.event.server.datapack.GuideBookGuideEventHandler;
@@ -26,7 +26,7 @@ public class PacketGuidebook {
     }
 
     /**读取Packet,并处理成需要的格式*/
-    public static PacketGuidebook fromBytes(PacketBuffer buffer){
+    public static PacketGuidebook fromBytes(FriendlyByteBuf buffer){
         final Gson gson = new Gson();
         String guideMapString = buffer.readUtf();
         LOGGER.debug("get server guides: {}", guideMapString);
@@ -48,7 +48,7 @@ public class PacketGuidebook {
     }
 
     /**将数据写入packet*/
-    public void toBytes(PacketBuffer buffer){
+    public void toBytes(FriendlyByteBuf buffer){
         if(guideMap == null){
             LOGGER.error("packet from guide is null,cannot send the packet");
             throw new NullPointerException("guideMap is null");

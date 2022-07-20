@@ -3,9 +3,9 @@ package teamHTBP.vida.datagen;
 import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DirectoryCache;
-import net.minecraft.data.IDataProvider;
-import net.minecraft.item.Items;
+import net.minecraft.data.DataProvider;
+import net.minecraft.data.HashCache;
+import net.minecraft.world.item.Items;
 import teamHTBP.vida.event.server.datapack.element.ElementPotential;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.item.ItemLoader;
@@ -20,21 +20,21 @@ import java.util.List;
  * @author DustW
  **/
 @AllArgsConstructor
-public class ElementPotentialProvider implements IDataProvider {
+public class ElementPotentialProvider implements DataProvider {
     final List<ElementPotential> potentials = new ArrayList<>();
 
     String modId;
     DataGenerator generator;
 
     @Override
-    public void run(DirectoryCache cache) throws IOException {
+    public void run(HashCache cache) throws IOException {
         addPotentials(potentials);
         
         for (ElementPotential potential : potentials) {
             Gson gson = JsonUtils.INSTANCE.noExpose;
             Path path = generator.getOutputFolder().resolve("data/" + modId + "/element_potential/" + potential.getItem() + ".json");
-            
-            IDataProvider.save(gson, cache, gson.toJsonTree(potential), path);
+
+            DataProvider.save(gson, cache, gson.toJsonTree(potential), path);
         }
     }
 

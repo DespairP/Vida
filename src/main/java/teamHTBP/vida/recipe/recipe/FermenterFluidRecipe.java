@@ -2,11 +2,11 @@ package teamHTBP.vida.recipe.recipe;
 
 import com.google.gson.annotations.Expose;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.world.World;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.FluidStack;
 import teamHTBP.vida.recipe.RecipeSerializers;
 import teamHTBP.vida.recipe.RecipeTypes;
@@ -26,7 +26,7 @@ public class FermenterFluidRecipe extends BaseRecipe<Inventory> {
     public FluidStack fluidStack;
 
     @Override
-    public boolean matches(Inventory inv, World worldIn) {
+    public boolean matches(Inventory inv, Level worldIn) {
         return false;
     }
 
@@ -46,12 +46,12 @@ public class FermenterFluidRecipe extends BaseRecipe<Inventory> {
     }
 
     @Override
-    public IRecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<?> getSerializer() {
         return RecipeSerializers.PLATE_RECIPE.get();
     }
 
     @Override
-    public IRecipeType<?> getType() {
+    public RecipeType<?> getType() {
         return RecipeTypes.FERMENTER_FLUID;
     }
 

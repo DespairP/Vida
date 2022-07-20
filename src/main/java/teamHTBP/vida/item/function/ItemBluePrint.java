@@ -1,13 +1,11 @@
 package teamHTBP.vida.item.function;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.world.World;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import teamHTBP.vida.itemGroup.ItemGroupLoader;
-
-import net.minecraft.item.Item.Properties;
 
 public class ItemBluePrint extends Item {
     private int rarity = 1; //稀有度
@@ -18,9 +16,9 @@ public class ItemBluePrint extends Item {
     }
 
     @Override
-    public void onCraftedBy(ItemStack stack, World worldIn, PlayerEntity playerIn) {
+    public void onCraftedBy(ItemStack stack, Level worldIn, Player playerIn) {
         super.onCraftedBy(stack, worldIn, playerIn);
-        CompoundNBT nbt = stack.getOrCreateTag();
+        CompoundTag nbt = stack.getOrCreateTag();
         nbt.putInt("complete", 0); //设置完成度
         nbt.putInt("rarity", rarity); //设置稀有度
     }

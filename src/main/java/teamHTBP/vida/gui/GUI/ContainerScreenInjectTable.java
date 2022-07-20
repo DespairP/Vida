@@ -1,26 +1,27 @@
-package teamHTBP.vida.gui.GUI;
+package teamHTBP.vida.gui.gui;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.Tesselator;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.IReorderingProcessor;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.Style;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.capability.skillSystem.ISkill;
 import teamHTBP.vida.capability.skillSystem.SkillHelper;
 import teamHTBP.vida.capability.skillSystem.SkillSurface;
-import teamHTBP.vida.gui.GUI.Slot.AbstractSkillSlot;
-import teamHTBP.vida.gui.GUI.Slot.NormalSkillSlot;
+import teamHTBP.vida.gui.gui.base.ModBaseGui;
+import teamHTBP.vida.gui.menu.ContainerInjectTable;
+import teamHTBP.vida.gui.menu.Slot.AbstractSkillSlot;
+import teamHTBP.vida.gui.menu.Slot.NormalSkillSlot;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.item.staff.IElementTools;
 import teamHTBP.vida.item.staff.ItemElementPickaxe;
@@ -31,7 +32,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class ContainerScreenInjectTable extends ContainerScreen<ContainerInjectTable> {
+public class ContainerScreenInjectTable extends ModBaseGui<ContainerInjectTable> {
     /**
      * 最大界面刷新时间
      */
@@ -101,7 +102,7 @@ public class ContainerScreenInjectTable extends ContainerScreen<ContainerInjectT
     private int selectSkillNameAlpha = 0;
 
 
-    public ContainerScreenInjectTable(ContainerInjectTable screenContainer, PlayerInventory inv, ITextComponent titleIn) {
+    public ContainerScreenInjectTable(ContainerInjectTable screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);
         this.stack = this.getMenu().stack;
         this.backgroundXsize = this.width / 2;
@@ -157,22 +158,22 @@ public class ContainerScreenInjectTable extends ContainerScreen<ContainerInjectT
             //判定技能格是否为上锁状态
             slot.setLock(isSkillLocked(skill));
             skillSlots.add(slot);
-            addButton(slot);
+            addWidget(slot);
         });
     }
 
     @Override
-    protected void renderBg(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
         this.stack = this.getMenu().injectTable.getSwordStack();
         this.renderBackground(matrixStack);
-        this.minecraft.getTextureManager().bind(Gui);
+        RenderSystem.setShaderTexture(0, Gui);
         alpha += 0.1f;
         if (alpha >= 1.0f) alpha = 1.0f;
         refreshTick = (refreshTick + 1) % MAX_REFRESH_TIME;
-        CompoundNBT nbt = stack.getOrCreateTag();
+        CompoundTag nbt = stack.getOrCreateTag();
         drawForegGround(matrixStack); //绘制背景
         drawSkillIntroducution(matrixStack); //绘制技能介绍
-        drawSkill(mouseX,mouseY); //调整技能位置
+        drawSkill(matrixStack, mouseX,mouseY); //调整技能位置
         drawLevel(matrixStack, nbt, this.stack); //绘制工具等级
         drawSkillEnergy(matrixStack);
         refreshSkill(nbt, false);
@@ -182,22 +183,22 @@ public class ContainerScreenInjectTable extends ContainerScreen<ContainerInjectT
     /**
      * 绘制工具和工具框
      */
-    private void drawSword(MatrixStack matrixStack) {
-        RenderSystem.pushMatrix();
-        RenderSystem.enableAlphaTest();
+    private void drawSword(PoseStack matrixStack) {
+        matrixStack.pushPose();
+        //RenderSystem.enableAlphaTest();
         RenderSystem.enableBlend();
-        RenderSystem.color4f(1, 1, 1, alpha);
+        RenderSystem.setShaderColor(1, 1, 1, alpha);
         //渲染物品
         Minecraft.getInstance().getItemRenderer().renderGuiItem(stack, this.backgroundXsize - 18 + 10 + this.offsetX, this.backgroundYsize - 18 + 11 + this.offsetY);
         //渲染物品的外框
-        this.minecraft.getTextureManager().bind(Gui);
+        RenderSystem.setShaderTexture(0, Gui);
         blit(matrixStack, this.backgroundXsize - 21 + offsetX, this.backgroundYsize - 24 + offsetY, 0, 91, 56, 42, 48, 512, 512);
-        RenderSystem.popMatrix();
+        matrixStack.popPose();
     }
 
     /**渲染tooltip*/
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float ticks) {
+    public void render(PoseStack matrixStack, int mouseX, int mouseY, float ticks) {
         super.render(matrixStack, mouseX, mouseY, ticks);
         renderTooltip(matrixStack, mouseX, mouseY); //渲染原生的tooltip
         skillSlots.forEach((slot) -> {
@@ -209,24 +210,24 @@ public class ContainerScreenInjectTable extends ContainerScreen<ContainerInjectT
     /**
      * 画左上角的等级框
      **/
-    public void drawLevel(MatrixStack matrixStack, CompoundNBT nbt, ItemStack stack) {
+    public void drawLevel(PoseStack matrixStack, CompoundTag nbt, ItemStack stack) {
         double toolExpPercent = getToolExpPercent(nbt, stack);
         increaseProgressLevel(toolExpPercent, 52);
-        RenderSystem.pushMatrix();
-        RenderSystem.color4f(1, 1, 1, alpha);
+        matrixStack.pushPose();
+        RenderSystem.setShaderColor(1, 1, 1, alpha);
         //渲染外框
         blit(matrixStack, this.leftPos + backgroundXsize / 20, this.topPos + 10, 0, 0, 228, 68, 13, 512, 512);
         //渲染进度条
         blit(matrixStack, this.leftPos + 14 + backgroundXsize / 20, this.topPos + 9 + 10, 0, 70, 238, progressLevel, 2, 512, 512);
         //渲染左侧元素所属区域
         renderGem(matrixStack, stack);
-        RenderSystem.popMatrix();
+        matrixStack.popPose();
     }
 
     /**
      * 获得经验百分比
      */
-    private double getToolExpPercent(CompoundNBT nbt, ItemStack stack) {
+    private double getToolExpPercent(CompoundTag nbt, ItemStack stack) {
         int level = nbt.getInt("level");
         int exp = 0;
         double percent = 1;
@@ -254,27 +255,17 @@ public class ContainerScreenInjectTable extends ContainerScreen<ContainerInjectT
     /**
      * 元素渲染
      */
-    private void renderGem(MatrixStack matrixStack, ItemStack itemStack) {
+    private void renderGem(PoseStack matrixStack, ItemStack itemStack) {
         Item itemTool = stack.getItem();
-        RenderSystem.color4f(1, (float) 1, 1, 0.6f + (float) gemLightnessRenew());
+        RenderSystem.setShaderColor(1, (float) 1, 1, 0.6f + (float) gemLightnessRenew());
         if (itemTool instanceof IElementTools) {
-            EnumElements elementType = ((IElementTools) itemTool.getItem()).getItemElement();
+            EnumElements elementType = ((IElementTools) itemTool).getItemElement();
             switch (elementType) {
-                case GOLD:
-                    blit(matrixStack, this.leftPos + backgroundXsize / 20, this.topPos + 10, 0, 39, 241, 13, 13, 512, 512);
-                    break;
-                case WOOD:
-                    blit(matrixStack, this.leftPos + backgroundXsize / 20, this.topPos + 10, 0, 26, 241, 13, 13, 512, 512);
-                    break;
-                case AQUA:
-                    blit(matrixStack, this.leftPos + backgroundXsize / 20, this.topPos + 10, 0, 13, 241, 13, 13, 512, 512);
-                    break;
-                case FIRE:
-                    blit(matrixStack, this.leftPos + backgroundXsize / 20, this.topPos + 10, 0, 0, 241, 13, 13, 512, 512);
-                    break;
-                case EARTH:
-                    blit(matrixStack, this.leftPos + backgroundXsize / 20, this.topPos + 10, 0, 52, 241, 13, 13, 512, 512);
-                    break;
+                case GOLD -> blit(matrixStack, this.leftPos + backgroundXsize / 20, this.topPos + 10, 0, 39, 241, 13, 13, 512, 512);
+                case WOOD -> blit(matrixStack, this.leftPos + backgroundXsize / 20, this.topPos + 10, 0, 26, 241, 13, 13, 512, 512);
+                case AQUA -> blit(matrixStack, this.leftPos + backgroundXsize / 20, this.topPos + 10, 0, 13, 241, 13, 13, 512, 512);
+                case FIRE -> blit(matrixStack, this.leftPos + backgroundXsize / 20, this.topPos + 10, 0, 0, 241, 13, 13, 512, 512);
+                case EARTH -> blit(matrixStack, this.leftPos + backgroundXsize / 20, this.topPos + 10, 0, 52, 241, 13, 13, 512, 512);
             }
         }
     }
@@ -294,32 +285,31 @@ public class ContainerScreenInjectTable extends ContainerScreen<ContainerInjectT
     /**
      * 渲染技能按钮
      **/
-    public void drawSkill(int mouseX,int mouseY) {
-        RenderSystem.pushMatrix();
-        RenderSystem.enableAlphaTest();
+    public void drawSkill(PoseStack ps, int mouseX,int mouseY) {
+        ps.pushPose();
+        //RenderSystem.enableAlphaTest();
         RenderSystem.enableBlend();
-        RenderSystem.color4f(1, 1, 1, alpha);
+        RenderSystem.setShaderColor(1, 1, 1, alpha);
         skillSlots.forEach((slot) -> {
             slot.updateSkillSlotInfo(backgroundXsize, backgroundYsize, offsetX, offsetY, mouseX, mouseY);
         });
-        RenderSystem.popMatrix();
+        ps.popPose();
     }
 
 
-    public void drawSwordFrameDeco() {
-        this.minecraft.getTextureManager().bind(Gui);
-        RenderSystem.popMatrix();
+    public void drawSwordFrameDeco(PoseStack os) {
+        RenderSystem.setShaderTexture(0, Gui);
     }
 
 
     /**
      * 画底边的技能能量条
      **/
-    public void drawSkillEnergy(MatrixStack matrixStack) {
-        RenderSystem.pushMatrix();
-        RenderSystem.enableAlphaTest();
+    public void drawSkillEnergy(PoseStack matrixStack) {
+        matrixStack.pushPose();
+        //RenderSystem.enableAlphaTest();
         RenderSystem.enableBlend();
-        RenderSystem.color4f(1, 1, 1, selectSkillProgressAlpha);
+        RenderSystem.setShaderColor(1, 1, 1, selectSkillProgressAlpha);
         if (buttonClickIndex != -1) {
             SkillSurface surface = skills.get(buttonClickSkillName);
             double energyLength = (surface.skillCurrentExp * 107.0) / surface.getRequiredExp(surface.skillCurrentLevel); //计算能量最大长度
@@ -327,21 +317,21 @@ public class ContainerScreenInjectTable extends ContainerScreen<ContainerInjectT
             if (selectSkillProgressAlpha < 1.0f) selectSkillProgressAlpha += 0.1f; //增加透明度
             if (selectSkillNameAlpha < 10) selectSkillNameAlpha += 1; //检查是否透明度溢出
             if (selectSkillProgressLength > 106) selectSkillProgressLength = 106; //检查进度条是否溢出
-            RenderSystem.pushMatrix();
-            MatrixStack matrixstack = new MatrixStack();
-            IRenderTypeBuffer.Impl irendertypebuffer$impl = IRenderTypeBuffer.immediate(Tessellator.getInstance().getBuilder());
+            matrixStack.pushPose();
+            PoseStack matrixstack = new PoseStack();
+            MultiBufferSource.BufferSource irendertypebuffer$impl = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
             //渲染文字
             Minecraft.getInstance().font.drawInBatch(surface.getSkillTranlateName(), (float) (backgroundXsize - this.font.width(surface.getSkillTranlateName()) / 2), this.topPos + backgroundYsize * 2 - 35, Integer.parseInt("008CFF", 16), false, matrixstack.last().pose(),
                     irendertypebuffer$impl, false, 5, 15728890 - selectSkillNameAlpha);
             irendertypebuffer$impl.endBatch();
-            RenderSystem.popMatrix();
+            matrixstack.popPose();
         } else {
             //不再有焦点是减少透明度
             if (selectSkillProgressAlpha > 0.0f) selectSkillProgressAlpha -= 0.1f;
             selectSkillNameAlpha = 0;
             selectSkillProgressLength = 0;
         }
-        this.minecraft.getTextureManager().bind(Gui);
+        RenderSystem.setShaderTexture(0, Gui);
         //绘制原框
         blit(matrixStack, backgroundXsize - 55, this.topPos + backgroundYsize * 2 - 25, 0, 175, 150, 111, 7, 512, 512);
         //绘制低点位
@@ -350,13 +340,13 @@ public class ContainerScreenInjectTable extends ContainerScreen<ContainerInjectT
         blit(matrixStack, backgroundXsize - 52 + selectSkillProgressLength, this.topPos + backgroundYsize * 2 - 23, 0, 176, 159, 1, 3, 512, 512);
         //绘制条
         blit(matrixStack, backgroundXsize - 53, this.topPos + backgroundYsize * 2 - 24, 0, 177, 158, selectSkillProgressLength + 1, 5, 512, 512);
-        RenderSystem.popMatrix();
+        matrixStack.popPose();
     }
 
-    public void drawSkillIntroducution(MatrixStack matrixStack) {
+    public void drawSkillIntroducution(PoseStack matrixStack) {
         drawBoard(matrixStack);
         if (this.buttonClickIndex > -1) {
-            RenderSystem.pushMatrix();
+            matrixStack.pushPose();
             AbstractSkillSlot selectedSlot = skillSlots.get(buttonClickIndex);
             SkillSurface surface = selectedSlot.getSkillSurface();
             //绘制文字
@@ -365,7 +355,7 @@ public class ContainerScreenInjectTable extends ContainerScreen<ContainerInjectT
             if (selectedSlot.isLock()) {
                 drawCenteredString(matrixStack, this.font, "???", this.leftPos + this.imageWidth - 54 - 1 * this.backgroundXsize / 50, this.topPos + 3 * this.backgroundYsize / 7, Integer.parseInt("C0C0C0", 16));
                 //绘制需要的前置技能
-                drawCenteredString(matrixStack, this.font, I18n.get("skill.vida.requiredSkill.anno"), this.leftPos + this.imageWidth - 54 - 1 * this.backgroundXsize / 50, this.topPos + 6 * this.backgroundYsize / 7, Integer.parseInt("FF6A00", 16));
+                drawCenteredString(matrixStack, this.font, new TranslatableComponent("skill.vida.requiredSkill.anno"), this.leftPos + this.imageWidth - 54 - 1 * this.backgroundXsize / 50, this.topPos + 6 * this.backgroundYsize / 7, Integer.parseInt("FF6A00", 16));
                 AtomicInteger integer = new AtomicInteger(0);
                 //获取所有的前置技能
                 surface.dependentSkill.forEach((id) -> {
@@ -379,28 +369,28 @@ public class ContainerScreenInjectTable extends ContainerScreen<ContainerInjectT
                 //todo 谜之数字98
                 this.font.draw(matrixStack, surface.getSkillTranlateDesc(), this.leftPos + this.imageWidth - 104 - 1 * this.backgroundXsize / 50, this.topPos + 3 * this.backgroundYsize / 7, 0x90E8E8);
             }
-            RenderSystem.popMatrix();
+            matrixStack.popPose();
         }
-        this.minecraft.getTextureManager().bind(Gui);
+        RenderSystem.setShaderTexture(0, Gui);
     }
 
-    public void drawBoard(MatrixStack matrixStack) {
+    public void drawBoard(PoseStack matrixStack) {
         //绘制右边信息板
-        RenderSystem.pushMatrix();
+        matrixStack.pushPose();
         //这里使用的是下面技能进度条的透明度，因为两者是同步的
-        RenderSystem.color4f(1, 1, 1, selectSkillProgressAlpha * 0.5f);
+        RenderSystem.setShaderColor(1, 1, 1, selectSkillProgressAlpha * 0.5f);
         blit(matrixStack, this.leftPos + this.imageWidth - 114 - 1 * this.backgroundXsize / 100, this.topPos + 1 * this.backgroundYsize / 4, 0, 173, 5, 114, 142, 512, 512);
-        RenderSystem.popMatrix();
+        matrixStack.popPose();
     }
 
     /**
      * 渲染技能的提示悬浮框
      **/
     // todo 这块可能得改改
-    public void renderSkillToolTip(MatrixStack matrixStack, int mouseX, int mouseY, SkillSurface skill) {
+    public void renderSkillToolTip(PoseStack matrixStack, int mouseX, int mouseY, SkillSurface skill) {
         if (skill == null) return;
-        ArrayList<IReorderingProcessor> list = new ArrayList<>();
-        list.add(IReorderingProcessor.forward(skill.getSkillTranlateName(), Style.EMPTY));
+        ArrayList<FormattedCharSequence> list = new ArrayList<>();
+        list.add(FormattedCharSequence.forward(skill.getSkillTranlateName(), Style.EMPTY));
         this.renderTooltip(matrixStack, list, mouseX, mouseY);
     }
 
@@ -421,17 +411,17 @@ public class ContainerScreenInjectTable extends ContainerScreen<ContainerInjectT
     /**
      * 渲染背景
      */
-    public void drawForegGround(MatrixStack matrixStack) {
-        this.minecraft.getTextureManager().bind(background);
-        RenderSystem.pushMatrix();
-        RenderSystem.enableAlphaTest();
+    public void drawForegGround(PoseStack matrixStack) {
+        RenderSystem.setShaderTexture(0, background);
+        matrixStack.pushPose();
+        //RenderSystem.enableAlphaTest();
         RenderSystem.enableBlend();
-        RenderSystem.color4f(1, 1, 1, 0.4f);
-        RenderSystem.scalef(6.0f, 6.0f, 6.0f);
-        RenderSystem.translated(-0, -0, -0);
+        RenderSystem.setShaderColor(1, 1, 1, 0.4f);
+        matrixStack.scale(6.0f, 6.0f, 6.0f);
+        matrixStack.translate(-0, -0, -0);
         blit(matrixStack, 0 + offsetX / 10, 0 + offsetY / 10, 0, 0, 0, 64, 64, 64, 64);
-        RenderSystem.popMatrix();
-        this.minecraft.getTextureManager().bind(Gui);
+        matrixStack.popPose();
+        RenderSystem.setShaderTexture(0, Gui);
     }
 
     /**
@@ -463,7 +453,7 @@ public class ContainerScreenInjectTable extends ContainerScreen<ContainerInjectT
     }
 
     /***/
-    public void refreshSkill(CompoundNBT nbt, boolean fullRefresh) {
+    public void refreshSkill(CompoundTag nbt, boolean fullRefresh) {
         if (refreshTick == MAX_REFRESH_TIME - 1) {
             if (!fullRefresh) {
                 skills.forEach((id, skill) -> {
@@ -476,7 +466,7 @@ public class ContainerScreenInjectTable extends ContainerScreen<ContainerInjectT
     }
 
     @Override
-    protected void renderLabels(MatrixStack p_230451_1_, int p_230451_2_, int p_230451_3_) {
+    protected void renderLabels(PoseStack p_230451_1_, int p_230451_2_, int p_230451_3_) {
 
     }
 

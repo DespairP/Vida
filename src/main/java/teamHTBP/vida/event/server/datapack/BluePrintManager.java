@@ -5,22 +5,20 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import net.minecraft.client.resources.JsonReloadListener;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.profiler.IProfiler;
-import net.minecraft.resources.DataPackRegistries;
-import net.minecraft.resources.IResourceManager;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraft.server.ReloadableServerResources;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
+import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.thread.EffectiveSide;
-import net.minecraftforge.fml.server.ServerLifecycleHooks;
+import net.minecraftforge.fml.util.thread.EffectiveSide;
+import net.minecraftforge.server.ServerLifecycleHooks;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.capability.blueprintCapability.Blueprint;
@@ -34,8 +32,9 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
+// TODO 需要重写
 /**PENDING,还未上线*/
-public class BluePrintManager extends JsonReloadListener {
+public class BluePrintManager extends SimpleJsonResourceReloadListener {
     /**蓝图管理*/
     private final Map<ResourceLocation, Blueprint> blueprints = Collections.emptyMap();
     /**Gson*/
@@ -45,8 +44,7 @@ public class BluePrintManager extends JsonReloadListener {
     /**manager,注意：这里服务端和客户端都拥有*/
     private static final BluePrintManager clientManager = new BluePrintManager();
     /**cocurrent map*/
-    @OnlyIn(Dist.DEDICATED_SERVER)
-    private static final ConcurrentMap<DataPackRegistries, BluePrintManager> map = new MapMaker().weakKeys().makeMap();
+    private static final ConcurrentMap<ReloadableServerResources, BluePrintManager> map = new MapMaker().weakKeys().makeMap();
 
     public BluePrintManager() {
         super(GSON, "blueprints");
@@ -54,7 +52,7 @@ public class BluePrintManager extends JsonReloadListener {
 
     /**解析文件夹内的datapack*/
     @Override
-    protected void apply(Map<ResourceLocation, JsonElement> objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
+    protected void apply(Map<ResourceLocation, JsonElement> objectIn, ResourceManager resourceManagerIn, ProfilerFiller profilerIn) {
         Map<ResourceLocation,Blueprint> processBlueprints = objectIn.entrySet().stream().map(
                 (set)->{
                     Blueprint blueprint = parseBlueprint(set.getKey(), set.getValue());
@@ -68,7 +66,7 @@ public class BluePrintManager extends JsonReloadListener {
         }
     }
 
-    public Blueprint parseBlueprint(ResourceLocation location,JsonElement element){
+    public Blueprint parseBlueprint(ResourceLocation location, JsonElement element){
         JsonObject object = element.getAsJsonObject();
         EnumBlueprintRarity rarity = EnumBlueprintRarity.valueOf(Optional.ofNullable(object.get("rarity").getAsString()).orElse("NORMAL"));
         EnumBlueprintType type = EnumBlueprintType.valueOf(Optional.ofNullable(object.get("type").getAsString()).orElse("OTHERS"));
@@ -81,7 +79,7 @@ public class BluePrintManager extends JsonReloadListener {
     }
 
     /**根据不同的情况获取manager*/
-    public BluePrintManager getManager(World world){
+    public BluePrintManager getManager(Level world){
         if(world.isClientSide){
             return clientManager;
         }
@@ -89,13 +87,13 @@ public class BluePrintManager extends JsonReloadListener {
         if(server == null){
             throw new NullPointerException("server is not server");
         }
-        return map.get(server.getDataPackRegistries());
+        return map.get(server.getServerResources());
     }
 
     /**当用户登录时，将服务端datapack传输到客户端*/
     @SubscribeEvent
     public void playerLogin(PlayerEvent.PlayerLoggedInEvent event){
-        if(!(event.getPlayer() instanceof ServerPlayerEntity)) return;
+        if(!(event.getPlayer() instanceof ServerPlayer)) return;
         //do sync server -> client
     }
 
@@ -106,11 +104,10 @@ public class BluePrintManager extends JsonReloadListener {
     }
 
     /**注册datapack时，将datapack放入map中*/
-    @OnlyIn(Dist.DEDICATED_SERVER)
     @SubscribeEvent
     public void dataPackRegister(AddReloadListenerEvent event){
         BluePrintManager serverManager = new BluePrintManager();
-        if(map.putIfAbsent(event.getDataPackRegistries(),serverManager) == null){
+        if(map.putIfAbsent(event.getServerResources(),serverManager) == null){
             throw new IllegalArgumentException("duplicate manger");
         }
         event.addListener(clientManager);

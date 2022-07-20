@@ -1,6 +1,6 @@
 package teamHTBP.vida.item.staff;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 public interface IElementLevelTools extends IElementTools{
     public int getCurrentLevel(ItemStack stack);

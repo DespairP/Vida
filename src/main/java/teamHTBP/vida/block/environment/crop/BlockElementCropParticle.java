@@ -1,10 +1,10 @@
 package teamHTBP.vida.block.environment.crop;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.particles.RedstoneParticleData;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import teamHTBP.vida.helper.elementHelper.IElement;
 import teamHTBP.vida.utils.color.ColorHelper;
 
@@ -15,7 +15,7 @@ import java.util.Random;
  */
 public class BlockElementCropParticle extends AbstractBlockElementCrops {
     /**种子*/
-    private final IItemProvider provider;
+    private final ItemLike provider;
     /***/
     private final ColorHelper color;
     protected boolean isMutations = false;
@@ -29,7 +29,7 @@ public class BlockElementCropParticle extends AbstractBlockElementCrops {
      * @param provider 所提供的itemseed
      * @param helper   粒子颜色，使用ColorHelper来表现rgb
      */
-    public BlockElementCropParticle(int stage, IElement element, IItemProvider provider, ColorHelper helper) {
+    public BlockElementCropParticle(int stage, IElement element, ItemLike provider, ColorHelper helper) {
         super(stage, element);
         this.provider = provider;
         this.color = helper;
@@ -44,7 +44,7 @@ public class BlockElementCropParticle extends AbstractBlockElementCrops {
      * @param helper      粒子颜色，使用ColorHelper来表现rgb
      * @param isMutations 是否可以变异
      */
-    public BlockElementCropParticle(int stage, IElement element, IItemProvider provider, ColorHelper helper, boolean isMutations) {
+    public BlockElementCropParticle(int stage, IElement element, ItemLike provider, ColorHelper helper, boolean isMutations) {
         super(stage, element);
         this.provider = provider;
         this.color = helper;
@@ -53,12 +53,12 @@ public class BlockElementCropParticle extends AbstractBlockElementCrops {
 
 
     @Override
-    protected IItemProvider getSeedsItem() {
+    protected ItemLike getSeedsItem() {
         return provider != null ? provider : super.getSeedsItem();
     }
 
     @Override
-    public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+    public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
         float x = pos.getX();
         float y = pos.getY();
         float z = pos.getZ();
@@ -66,7 +66,7 @@ public class BlockElementCropParticle extends AbstractBlockElementCrops {
             double offsetX = RANDOM.nextDouble() * 0.5D + 0.2D;
             double offsetZ = RANDOM.nextDouble() * 0.5D + 0.2D;
             //worldIn.addParticle(new CuboidParticleData(0,0.02D,0,128 - offsetColor,214 - offsetColor, 142 - offsetColor, 0.5f, 100), x + offsetX, y , z + offsetZ,0,0,0);
-            worldIn.addParticle(new RedstoneParticleData(color.r * 1.0F / 255.0F, color.g * 1.0F / 255.0F, color.b * 1.0F / 255.0F, 1), x + offsetX, y + 0.4f, z + offsetZ, 0, 0, 0);
+            worldIn.addParticle(new DustParticleOptions(color.r * 1.0F / 255.0F, color.g * 1.0F / 255.0F, color.b * 1.0F / 255.0F, 1), x + offsetX, y + 0.4f, z + offsetZ, 0, 0, 0);
         }
     }
 }

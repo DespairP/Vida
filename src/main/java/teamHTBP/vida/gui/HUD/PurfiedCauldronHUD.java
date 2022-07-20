@@ -1,14 +1,14 @@
 package teamHTBP.vida.gui.HUD;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.util.ResourceLocation;
-import teamHTBP.vida.TileEntity.TileEntityPurfiedCauldron;
+import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.resources.ResourceLocation;
 import teamHTBP.vida.Vida;
+import teamHTBP.vida.blockentity.TileEntityPurfiedCauldron;
 
-public class PurfiedCauldronHUD extends AbstractGui {
+public class PurfiedCauldronHUD extends GuiComponent {
     private final int width;
     private final int height;
     private final Minecraft minecraft;
@@ -22,10 +22,10 @@ public class PurfiedCauldronHUD extends AbstractGui {
         this.tileEntityPurfiedCauldron = tileEntityPurfiedCauldron;
     }
 
-    public void render(MatrixStack matrixStack) {
+    public void render(PoseStack matrixStack) {
         if (tileEntityPurfiedCauldron == null) return;
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.minecraft.getTextureManager().bind(HUD);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderTexture(0, HUD);
         int screenWidth = this.width / 2 - 6;
         int screenHeight = this.height / 2 - 20;
         blit(matrixStack, screenWidth, screenHeight, 0, 25, 16, 14, 10, 64, 64);

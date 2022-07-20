@@ -2,7 +2,7 @@ package teamHTBP.vida.particle.util;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.particles.ParticleType;
+import net.minecraft.core.particles.ParticleType;
 
 /**
  * */

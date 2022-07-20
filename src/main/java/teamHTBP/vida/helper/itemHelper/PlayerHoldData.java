@@ -1,6 +1,6 @@
 package teamHTBP.vida.helper.itemHelper;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 public class PlayerHoldData {
     public ItemStack holdStack;

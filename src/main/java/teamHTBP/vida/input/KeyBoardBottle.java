@@ -1,7 +1,7 @@
 package teamHTBP.vida.input;
 
-import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.client.util.InputMappings;
+import com.mojang.blaze3d.platform.InputConstants;
+import net.minecraft.client.KeyMapping;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.settings.KeyConflictContext;
@@ -14,28 +14,28 @@ import teamHTBP.vida.network.PacketChannel;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
 public class KeyBoardBottle {
-    public static final KeyBinding MESSAGE_KEY = new KeyBinding("key.bottles",
+    public static final KeyMapping MESSAGE_KEY = new KeyMapping("key.bottles",
             KeyConflictContext.IN_GAME,
             KeyModifier.NONE,
-            InputMappings.Type.KEYSYM,
+            InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_LEFT_ALT,
             "key.category.vida");
-    public static final KeyBinding MESSAGE_KEY_1 = new KeyBinding("key.bottle1.use",
+    public static final KeyMapping MESSAGE_KEY_1 = new KeyMapping("key.bottle1.use",
             KeyConflictContext.IN_GAME,
             KeyModifier.ALT,
-            InputMappings.Type.KEYSYM,
+            InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_A,
             "key.category.vida");
-    public static final KeyBinding MESSAGE_KEY_2 = new KeyBinding("key.bottle2.use",
+    public static final KeyMapping MESSAGE_KEY_2 = new KeyMapping("key.bottle2.use",
             KeyConflictContext.IN_GAME,
             KeyModifier.ALT,
-            InputMappings.Type.KEYSYM,
+            InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_D,
             "key.category.vida");
-    public static final KeyBinding MESSAGE_KEY_3 = new KeyBinding("key.bottle3.use",
+    public static final KeyMapping MESSAGE_KEY_3 = new KeyMapping("key.bottle3.use",
             KeyConflictContext.IN_GAME,
             KeyModifier.ALT,
-            InputMappings.Type.KEYSYM,
+            InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_W,
             "key.category.vida");
 

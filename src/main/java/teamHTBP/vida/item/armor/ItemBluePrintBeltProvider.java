@@ -1,17 +1,16 @@
 package teamHTBP.vida.item.armor;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import teamHTBP.vida.gui.GUI.ContainerBluePrint;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import teamHTBP.vida.gui.menu.ContainerBluePrint;
 
 import javax.annotation.Nullable;
 
-public class ItemBluePrintBeltProvider implements INamedContainerProvider {
+public class ItemBluePrintBeltProvider implements MenuProvider {
     ItemStack stack = ItemStack.EMPTY;
     String providerName = "";
 
@@ -21,13 +20,13 @@ public class ItemBluePrintBeltProvider implements INamedContainerProvider {
     }
 
     @Override
-    public ITextComponent getDisplayName() {
-        return new StringTextComponent(providerName);
+    public TextComponent getDisplayName() {
+        return new TextComponent(providerName);
     }
 
     @Nullable
     @Override
-    public Container createMenu(int id, PlayerInventory p_createMenu_2_, PlayerEntity p_createMenu_3_) {
+    public AbstractContainerMenu createMenu(int id, Inventory p_createMenu_2_, Player p_createMenu_3_) {
         return new ContainerBluePrint(id, p_createMenu_2_, stack);
     }
 }

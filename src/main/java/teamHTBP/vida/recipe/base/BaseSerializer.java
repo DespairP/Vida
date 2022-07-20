@@ -1,10 +1,10 @@
 package teamHTBP.vida.recipe.base;
 
 import com.google.gson.JsonObject;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import teamHTBP.vida.utils.json.JsonUtils;
 
@@ -18,9 +18,9 @@ import javax.annotation.Nullable;
  * @author DustW
  * @see BaseRecipe
  **/
-public class BaseSerializer<C extends IInventory, RECIPE extends BaseRecipe<C>>
-        extends ForgeRegistryEntry<IRecipeSerializer<?>>
-        implements IRecipeSerializer<RECIPE> {
+public class BaseSerializer<C extends Container, RECIPE extends BaseRecipe<C>>
+        extends ForgeRegistryEntry<RecipeSerializer<?>>
+        implements RecipeSerializer<RECIPE> {
 
     Class<RECIPE> recipeClass;
 
@@ -41,13 +41,13 @@ public class BaseSerializer<C extends IInventory, RECIPE extends BaseRecipe<C>>
     /**写入Json文件*/
     @Nullable
     @Override
-    public RECIPE fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+    public RECIPE fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
         return JsonUtils.INSTANCE.normal.fromJson(buffer.readUtf(32767), recipeClass).setID(recipeId).setSerializer(this);
     }
 
     /**流写入Json文件*/
     @Override
-    public void toNetwork(PacketBuffer buffer, RECIPE recipe) {
+    public void toNetwork(FriendlyByteBuf buffer, RECIPE recipe) {
         buffer.writeUtf(JsonUtils.INSTANCE.normal.toJson(recipe));
     }
 }

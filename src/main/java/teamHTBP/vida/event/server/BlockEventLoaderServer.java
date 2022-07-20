@@ -1,12 +1,12 @@
 package teamHTBP.vida.event.server;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.OreBlock;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.Hand;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.OreBlock;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -22,11 +22,11 @@ public class BlockEventLoaderServer {
     @SubscribeEvent
     public static void kill(LivingDeathEvent event) {
         //System.out.println("SSSS");
-        if (event.getSource().getDirectEntity() instanceof PlayerEntity) {
-            PlayerEntity playerEntity = (PlayerEntity) event.getSource().getDirectEntity();
+        if (event.getSource().getDirectEntity() instanceof Player) {
+            Player playerEntity = (Player) event.getSource().getDirectEntity();
             ItemStack stack = playerEntity.inventory.armor.get(1);
             if (stack.getItem() instanceof ItemArmorElementLegginsWithBottles) {
-                CompoundNBT nbt = stack.getOrCreateTag();
+                CompoundTag nbt = stack.getOrCreateTag();
                 for (int i = 1; i <= 3; i++) {
                     if (nbt.contains("bottle" + i)) {
                         ItemStack stack1 = ItemStack.of(nbt.getCompound("bottle" + i));
@@ -53,11 +53,11 @@ public class BlockEventLoaderServer {
      */
     @SubscribeEvent
     public static void blockBreakEvent(BlockEvent.BreakEvent event) {
-        PlayerEntity playerEntity = event.getPlayer();
+        Player playerEntity = event.getPlayer();
         if (playerEntity != null) {
-            ItemStack itemStack = playerEntity.getItemInHand(Hand.MAIN_HAND);
+            ItemStack itemStack = playerEntity.getItemInHand(InteractionHand.MAIN_HAND);
             if (itemStack.getItem() instanceof ItemElementPickaxe) {
-                CompoundNBT nbt = itemStack.getOrCreateTag();
+                CompoundTag nbt = itemStack.getOrCreateTag();
                 Block block = event.getState().getBlock();
                 Random random = new Random();
                 int level = nbt.getInt("level");
@@ -80,7 +80,7 @@ public class BlockEventLoaderServer {
      * @return 工具是否升级
      */
     public static boolean levelupTool(ItemStack stack) {
-        CompoundNBT stackNBT = stack.getOrCreateTag();
+        CompoundTag stackNBT = stack.getOrCreateTag();
         int currentLevel = stackNBT.getInt("level");
         double currentExp = stackNBT.getDouble("pickaxeExp");
         int futureLevel = currentLevel;
@@ -104,11 +104,11 @@ public class BlockEventLoaderServer {
     @SubscribeEvent
     public static void hitEntity(LivingAttackEvent event) {
         Entity entity = event.getSource().getDirectEntity();
-        if (entity instanceof PlayerEntity) {
-            PlayerEntity playerEntity = (PlayerEntity) entity;
-            ItemStack stack = playerEntity.getItemInHand(Hand.MAIN_HAND);
+        if (entity instanceof Player) {
+            Player playerEntity = (Player) entity;
+            ItemStack stack = playerEntity.getItemInHand(InteractionHand.MAIN_HAND);
             if (stack.getItem() instanceof ItemElementSword) {
-                CompoundNBT nbt = stack.getOrCreateTag();
+                CompoundTag nbt = stack.getOrCreateTag();
                 int level = nbt.getInt("level");
                 int exp = nbt.getInt("swordEXP");
                 if (level < 30) {
@@ -122,7 +122,7 @@ public class BlockEventLoaderServer {
 
     public static boolean level_up_sword(int level, int exp, ItemStack stack) {
         if (level * 200 + level * 13 <= exp) {
-            CompoundNBT nbt = stack.getOrCreateTag();
+            CompoundTag nbt = stack.getOrCreateTag();
             nbt.putInt("level", level + 1);
             nbt.putInt("swordEXP", exp - (level * 200 + level * 13));
             return true;

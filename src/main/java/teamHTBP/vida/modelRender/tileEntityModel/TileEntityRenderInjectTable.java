@@ -1,26 +1,26 @@
 package teamHTBP.vida.modelRender.tileEntityModel;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Quaternion;
+import com.mojang.math.Vector3f;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.client.renderer.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.item.SwordItem;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.vector.Quaternion;
-import net.minecraft.util.math.vector.Vector3f;
-import teamHTBP.vida.TileEntity.TileEntityInjectTable;
+import net.minecraft.resources.ResourceLocation;
 import teamHTBP.vida.Vida;
+import teamHTBP.vida.blockentity.TileEntityInjectTable;
 import teamHTBP.vida.event.client.ClientTickHandler;
 import teamHTBP.vida.modelRender.tilemodel.InjectTableModel;
 
-public class TileEntityRenderInjectTable extends TileEntityRenderer<TileEntityInjectTable> {
+public class TileEntityRenderInjectTable extends BlockEntityRenderer<TileEntityInjectTable> {
     public static final ResourceLocation TEXTURE = new ResourceLocation(Vida.MOD_ID, "textures/tileentity/injecttable.png");
     public static final InjectTableModel MODEL = new InjectTableModel();
 
@@ -33,13 +33,13 @@ public class TileEntityRenderInjectTable extends TileEntityRenderer<TileEntityIn
     }
 
 
-    public TileEntityRenderInjectTable(TileEntityRendererDispatcher rendererDispatcherIn) {
+    public TileEntityRenderInjectTable(BlockEntityRenderDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
     }
 
     @Override
-    public void render(TileEntityInjectTable tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
-        IVertexBuilder iVertexBuilder = bufferIn.getBuffer(RenderType.entityTranslucent(TEXTURE));
+    public void render(TileEntityInjectTable tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
+        VertexConsumer iVertexBuilder = bufferIn.getBuffer(RenderType.entityTranslucent(TEXTURE));
 
         matrixStackIn.pushPose();
         matrixStackIn.scale(1, -1, 1);
@@ -60,8 +60,8 @@ public class TileEntityRenderInjectTable extends TileEntityRenderer<TileEntityIn
             matrixStackIn.translate(0.5f, 1.8f + floating, 0.5f);
             matrixStackIn.mulPose(new Quaternion(0, 0, 180 - 45, true));
             ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-            IBakedModel ibakedmodel = itemRenderer.getModel(tileEntityIn.getSwordStack(), tileEntityIn.getLevel(), null);
-            itemRenderer.render(tileEntityIn.getSwordStack(), ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, 240, combinedOverlayIn, ibakedmodel);
+            BakedModel ibakedmodel = itemRenderer.getModel(tileEntityIn.getSwordStack(), tileEntityIn.getLevel(), null);
+            itemRenderer.render(tileEntityIn.getSwordStack(), ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, 240, combinedOverlayIn, ibakedmodel);
             matrixStackIn.popPose();
         } else if (tileEntityIn.hasSwordItem()) {
             matrixStackIn.pushPose();
@@ -69,8 +69,8 @@ public class TileEntityRenderInjectTable extends TileEntityRenderer<TileEntityIn
             matrixStackIn.translate(0.5f, 1.8f + floating, 0.5f);
             matrixStackIn.mulPose(new Quaternion(0, 0, -45, true));
             ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-            IBakedModel ibakedmodel = itemRenderer.getModel(tileEntityIn.getSwordStack(), tileEntityIn.getLevel(), null);
-            itemRenderer.render(tileEntityIn.getSwordStack(), ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, 240, combinedOverlayIn, ibakedmodel);
+            BakedModel ibakedmodel = itemRenderer.getModel(tileEntityIn.getSwordStack(), tileEntityIn.getLevel(), null);
+            itemRenderer.render(tileEntityIn.getSwordStack(), ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, 240, combinedOverlayIn, ibakedmodel);
             matrixStackIn.popPose();
         }
 

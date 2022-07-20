@@ -1,66 +1,56 @@
 package teamHTBP.vida.block.function;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
-import net.minecraftforge.common.ToolType;
-import net.minecraftforge.fml.network.NetworkHooks;
-import teamHTBP.vida.TileEntity.TileEntityPrismTable;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
+import teamHTBP.vida.block.base.ModBaseEntityBlock;
+import teamHTBP.vida.blockentity.TileEntityLoader;
+import teamHTBP.vida.blockentity.TileEntityPrismTable;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
-public class BlockPrismTable extends Block {
-    public static final DirectionProperty FACING = HorizontalBlock.FACING;
+public class BlockPrismTable extends ModBaseEntityBlock<TileEntityPrismTable> {
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     private final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 13, 16);
 
 
     public BlockPrismTable() {
-        super(Properties.of(Material.WOOD).strength(3.0f, 3.0f).noOcclusion().harvestTool(ToolType.PICKAXE).noOcclusion());
+        super(Properties.of(Material.WOOD).strength(3.0f, 3.0f).noOcclusion()
+                // todo tag .harvestTool(ToolType.PICKAXE)
+                .noOcclusion(), TileEntityLoader.TileEntityPrismTable);
     }
 
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new TileEntityPrismTable();
-    }
 
     @Override
-    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!worldIn.isClientSide && handIn == Hand.MAIN_HAND) {
+    public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+        if (!worldIn.isClientSide && handIn == InteractionHand.MAIN_HAND) {
             TileEntityPrismTable tileEntityPrismTable = (TileEntityPrismTable) worldIn.getBlockEntity(pos);
-            NetworkHooks.openGui((ServerPlayerEntity) player, tileEntityPrismTable, (PacketBuffer packerBuffer) -> {
+            NetworkHooks.openGui((ServerPlayer) player, tileEntityPrismTable, (FriendlyByteBuf packerBuffer) -> {
                 packerBuffer.writeBlockPos(tileEntityPrismTable.getBlockPos());
             });
         }
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
-    public void playerWillDestroy(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+    public void playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {
         TileEntityPrismTable tileEntityPrismTable = (TileEntityPrismTable) worldIn.getBlockEntity(pos);
         if (tileEntityPrismTable != null) {
             worldIn.addFreshEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityPrismTable.getSlot().getItem(0)));
@@ -70,21 +60,21 @@ public class BlockPrismTable extends Block {
         super.playerWillDestroy(worldIn, pos, state, player);
     }
 
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
     @Override
-    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING);
         super.createBlockStateDefinition(builder);
     }
 
+    @Override
     @Nullable
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockPos blockpos = context.getClickedPos();
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection());
     }
-
-
 }

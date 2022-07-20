@@ -5,15 +5,15 @@ import com.google.gson.annotations.Expose;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.world.World;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.RecipeMatcher;
-import teamHTBP.vida.TileEntity.TileEntityElementCoreAltar;
+import teamHTBP.vida.blockentity.TileEntityElementCoreAltar;
 import teamHTBP.vida.helper.elementHelper.IElement;
 import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.recipe.RecipeSerializers;
@@ -27,7 +27,7 @@ import java.util.List;
  */
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class AltarRecipe extends BaseRecipe<IInventory> {
+public class AltarRecipe extends BaseRecipe<Container> {
     /**核心物品*/
     @Expose public Ingredient core;
     /**四周物品*/
@@ -38,12 +38,12 @@ public class AltarRecipe extends BaseRecipe<IInventory> {
     @Expose public ItemStack result = ItemStack.EMPTY;
 
     @Override
-    public boolean matches(IInventory inv, World worldIn) {
+    public boolean matches(Container inv, Level worldIn) {
         return false;
     }
 
     @Override
-    public ItemStack assemble(IInventory inv) {
+    public ItemStack assemble(Container inv) {
         return result.copy();
     }
 
@@ -78,7 +78,7 @@ public class AltarRecipe extends BaseRecipe<IInventory> {
      *
      * @return*/
     @Override
-    public IRecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<?> getSerializer() {
         return RecipeSerializers.ALTAR.get();
     }
 
@@ -95,7 +95,7 @@ public class AltarRecipe extends BaseRecipe<IInventory> {
     }
 
     @Override
-    public IRecipeType<?> getType() {
+    public RecipeType<?> getType() {
         return RecipeTypes.ALTAR;
     }
 

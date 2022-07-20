@@ -1,28 +1,29 @@
-package teamHTBP.vida.gui.GUI;
+package teamHTBP.vida.gui.gui;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import teamHTBP.vida.TileEntity.TileEntityOreReationMachine;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
 import teamHTBP.vida.Vida;
+import teamHTBP.vida.blockentity.TileEntityOreReationMachine;
+import teamHTBP.vida.gui.gui.base.ModBaseGui;
+import teamHTBP.vida.gui.menu.ContainerOreReactionMachine;
 
-public class ContainerScreenOreReactionMachine extends ContainerScreen<ContainerOreReactionMachine> {
+public class ContainerScreenOreReactionMachine extends ModBaseGui<ContainerOreReactionMachine> {
     ResourceLocation Gui = new ResourceLocation(Vida.MOD_ID, "textures/gui/orereaction_gui.png");
     TileEntityOreReationMachine tileEntityOreReationMachine;
 
-    public ContainerScreenOreReactionMachine(ContainerOreReactionMachine screenContainer, PlayerInventory inv, ITextComponent titleIn) {
+    public ContainerScreenOreReactionMachine(ContainerOreReactionMachine screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);
         this.tileEntityOreReationMachine = this.getMenu().machine;
     }
 
     @Override
-    protected void renderBg(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
         this.renderBackground(matrixStack);
-        RenderSystem.color4f(1, 1, 1, 1);
-        this.minecraft.getTextureManager().bind(Gui);
+        RenderSystem.setShaderColor(1, 1, 1, 1);
+        RenderSystem.setShaderTexture(0, Gui);
         int i = (this.width - this.imageWidth) / 2;
         int j = (this.height - this.imageHeight) / 2 - 30;
         blit(matrixStack, i, j, 0, 0, 176, 211, 256, 256);
@@ -43,7 +44,7 @@ public class ContainerScreenOreReactionMachine extends ContainerScreen<Container
     }
 
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float ticks) {
+    public void render(PoseStack matrixStack, int mouseX, int mouseY, float ticks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, ticks);
         renderTooltip(matrixStack, mouseX, mouseY);

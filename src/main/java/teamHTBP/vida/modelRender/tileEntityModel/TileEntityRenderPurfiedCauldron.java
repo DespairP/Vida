@@ -1,43 +1,43 @@
 package teamHTBP.vida.modelRender.tileEntityModel;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Matrix4f;
+import com.mojang.math.Quaternion;
+import com.mojang.math.Vector3f;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.client.renderer.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.core.BlockPos;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.inventory.container.PlayerContainer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Matrix4f;
-import net.minecraft.util.math.vector.Quaternion;
-import net.minecraft.util.math.vector.Vector3f;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeColors;
-import teamHTBP.vida.TileEntity.TileEntityPurfiedCauldron;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.BiomeColors;
+import teamHTBP.vida.blockentity.TileEntityPurfiedCauldron;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.helper.elementHelper.IElement;
 
-public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEntityPurfiedCauldron> {
+public class TileEntityRenderPurfiedCauldron extends BlockEntityRenderer<TileEntityPurfiedCauldron> {
     private float floating = 0; //物品悬浮增量
     private float rPlus = 0; //r变色增量
     private float gPlus = 0; //b变色增量
     private float bPlus = 0; //g变色增量
 
-    public TileEntityRenderPurfiedCauldron(TileEntityRendererDispatcher rendererDispatcherIn) {
+    public TileEntityRenderPurfiedCauldron(BlockEntityRenderDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
     }
 
-    private static int getFluidColor(World world, BlockPos pos, Fluid fluid) {
+    private static int getFluidColor(Level world, BlockPos pos, Fluid fluid) {
         if (fluid.isSame(Fluids.WATER)) {
             return BiomeColors.getAverageWaterColor(world, pos);
         }
@@ -46,7 +46,7 @@ public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEnti
     }
 
     @Override
-    public void render(TileEntityPurfiedCauldron tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
+    public void render(TileEntityPurfiedCauldron tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
         if (tileEntityIn.isWater) {
             matrixStackIn.pushPose();
             //获取水的贴图
@@ -64,7 +64,7 @@ public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEnti
                 resourceLocation = Fluids.WATER.getAttributes().getStillTexture();
                 color = getFluidColor(tileEntityIn.getLevel(), tileEntityIn.getBlockPos(), Fluids.WATER);
             }
-            TextureAtlasSprite textureAtlasSprite = Minecraft.getInstance().getTextureAtlas(PlayerContainer.BLOCK_ATLAS).apply(resourceLocation);
+            TextureAtlasSprite textureAtlasSprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(resourceLocation);
             //获取水贴图在精灵图中的最大/小u,v位置
             float uMin = textureAtlasSprite.getU0();
             float uMax = textureAtlasSprite.getU1();
@@ -93,7 +93,7 @@ public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEnti
             float waterlevel = tileEntityIn.container / 110814.2f;
             matrixStackIn.translate(0, 0.3F + waterlevel, 0);
             //设置贴图绘制方式
-            IVertexBuilder buffer = bufferIn.getBuffer(RenderType.translucent());
+            VertexConsumer buffer = bufferIn.getBuffer(RenderType.translucent());
             //绘制
             buffer.vertex(matrix4f, 0.1F, 0.1F, 0.1F).color(r, g, b, a).uv(uMin, vMin).overlayCoords(0, 0).uv2(light).normal(0, 1, 0).endVertex();
             buffer.vertex(matrix4f, 0.1F, 0.1F, 0.9F).color(r, g, b, a).uv(uMin, vMax).overlayCoords(0, 0).uv2(light).normal(0, 1, 0).endVertex();
@@ -110,16 +110,16 @@ public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEnti
             matrixStackIn.translate(0.5f, 1.3f + floatingLevel, 0.55f);
             matrixStackIn.scale(0.6f, 0.6f, 0.6f);
 
-            TileEntityRendererDispatcher dispatcher = this.renderer;
+            BlockEntityRenderDispatcher dispatcher = this.renderer;
             Quaternion quaternion = dispatcher.camera.rotation();
-            float f3 = MathHelper.lerp(partialTicks, 0, 0);
+            float f3 = Mth.lerp(partialTicks, 0, 0);
             quaternion.mul(Vector3f.XP.rotation(f3));
 
             matrixStackIn.mulPose(quaternion);
             ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
 
-            IBakedModel ibakedmodel = itemRenderer.getModel(tileEntityIn.meltItem, tileEntityIn.getLevel(), null);
-            itemRenderer.render(tileEntityIn.meltItem, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+            BakedModel ibakedmodel = itemRenderer.getModel(tileEntityIn.meltItem, tileEntityIn.getLevel(), null);
+            itemRenderer.render(tileEntityIn.meltItem, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
 
             if (floating >= 2 * Math.PI) {
                 floating = 0;

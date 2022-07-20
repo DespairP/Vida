@@ -1,14 +1,14 @@
 package teamHTBP.vida.particle;
 
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Quaternion;
+import com.mojang.math.Vector3f;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.IParticleRenderType;
 import net.minecraft.client.particle.SpriteTexturedParticle;
 import net.minecraft.client.renderer.ActiveRenderInfo;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Quaternion;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.math.vector.Vector3f;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
 
 /**
  * 树叶粒子类
@@ -29,7 +29,7 @@ public class LeafParticle extends SpriteTexturedParticle {
     /**Y轴圆心*/
     private double centerZ;
 
-    public LeafParticle(ClientWorld worldIn, double posXIn, double posYIn, double posZIn, double xSpeedIn, double ySpeedIn, double zSpeedIn) {
+    public LeafParticle(ClientLevel worldIn, double posXIn, double posYIn, double posZIn, double xSpeedIn, double ySpeedIn, double zSpeedIn) {
         super(worldIn, posXIn, posYIn, posZIn, xSpeedIn, ySpeedIn, zSpeedIn);
         //存在时间1000帧
         lifetime = 20;
@@ -58,11 +58,11 @@ public class LeafParticle extends SpriteTexturedParticle {
      * 复制自TexturedParticle
      * */
     @Override
-    public void render(IVertexBuilder buffer, ActiveRenderInfo renderInfo, float partialTicks) {
-        Vector3d vec3d = renderInfo.getPosition();
-        float f = (float) (MathHelper.lerp(partialTicks, this.xo, this.x) - vec3d.x());
-        float f1 = (float) (MathHelper.lerp(partialTicks, this.yo, this.y) - vec3d.y());
-        float f2 = (float) (MathHelper.lerp(partialTicks, this.zo, this.z) - vec3d.z());
+    public void render(VertexConsumer buffer, ActiveRenderInfo renderInfo, float partialTicks) {
+        Vec3 vec3d = renderInfo.getPosition();
+        float f = (float) (Mth.lerp(partialTicks, this.xo, this.x) - vec3d.x());
+        float f1 = (float) (Mth.lerp(partialTicks, this.yo, this.y) - vec3d.y());
+        float f2 = (float) (Mth.lerp(partialTicks, this.zo, this.z) - vec3d.z());
 
 
         Quaternion quaternion;
@@ -70,7 +70,7 @@ public class LeafParticle extends SpriteTexturedParticle {
             quaternion = renderInfo.rotation();
         } else {
             quaternion = new Quaternion(renderInfo.rotation());
-            float f3 = MathHelper.lerp(partialTicks, this.oRoll, this.roll);
+            float f3 = Mth.lerp(partialTicks, this.oRoll, this.roll);
             quaternion.mul(Vector3f.ZP.rotation(f3));
         }
 
@@ -114,8 +114,8 @@ public class LeafParticle extends SpriteTexturedParticle {
             this.remove();
         } else {
             y += yd;
-            x = centerX + MathHelper.sin((float) (this.xd + this.zd + this.y * 5));
-            z = centerZ + MathHelper.cos((float) (this.xd + this.zd + this.y * 5));
+            x = centerX + Mth.sin((float) (this.xd + this.zd + this.y * 5));
+            z = centerZ + Mth.cos((float) (this.xd + this.zd + this.y * 5));
 
         }
     }

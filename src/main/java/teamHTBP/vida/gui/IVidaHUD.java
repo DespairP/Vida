@@ -1,9 +1,9 @@
 package teamHTBP.vida.gui;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 
 @Deprecated
 public interface IVidaHUD {
 
-    public void render(MatrixStack matrixStack);
+    public void render(PoseStack matrixStack);
 }

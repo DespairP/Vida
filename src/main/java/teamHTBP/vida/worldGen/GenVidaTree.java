@@ -1,20 +1,16 @@
 package teamHTBP.vida.worldGen;
 
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 
-import java.util.Random;
-
-public class GenVidaTree extends Feature<BaseTreeFeatureConfig> {
+public class GenVidaTree extends Feature<TreeConfiguration> {
     public GenVidaTree() {
-        super(BaseTreeFeatureConfig.CODEC);
+        super(TreeConfiguration.CODEC);
     }
 
     @Override
-    public boolean place(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, BaseTreeFeatureConfig config) {
+    public boolean place(FeaturePlaceContext<TreeConfiguration> pContext) {
         return false;
     }
 }

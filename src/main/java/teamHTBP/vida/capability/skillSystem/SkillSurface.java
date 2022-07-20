@@ -1,11 +1,13 @@
 package teamHTBP.vida.capability.skillSystem;
 
+import net.minecraft.world.item.ItemStack;
+
 import java.util.LinkedList;
 
 /**
  * SkillSurface是一个便于用户操作Skill的类，通常用于对用户显示<br/>
  * 可以通过SkillSurface获取当前界面中/游戏中该物品其中一个技能当前的 等级 和 经验<br/>
- * {@link SkillHelper#getAllSkillSurfaceFromItemStack(net.minecraft.item.ItemStack)}<br/>
+ * {@link SkillHelper#getAllSkillSurfaceFromItemStack(ItemStack)}<br/>
  * 可以通过SkillHelper#getAllSkillSurface 获取该物品的所有封装后的技能组
  */
 public class SkillSurface extends Skill {

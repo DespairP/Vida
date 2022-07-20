@@ -1,7 +1,7 @@
 package teamHTBP.vida.itemGroup;
 
-import net.minecraft.item.ItemGroup;
+import net.minecraft.world.item.CreativeModeTab;
 
 public class ItemGroupLoader {
-    public static ItemGroup vidaItemGroup = new VidaItemGroup();
+    public static CreativeModeTab vidaItemGroup = new VidaItemGroup();
 }

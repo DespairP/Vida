@@ -1,19 +1,19 @@
 package teamHTBP.vida.modelRender;
 
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.client.renderer.texture.AtlasTexture;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import teamHTBP.vida.TileEntity.TileEntityLoader;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.block.BlockLoader;
+import teamHTBP.vida.blockentity.TileEntityLoader;
 import teamHTBP.vida.modelRender.tileEntityModel.*;
 
 /**
@@ -53,17 +53,17 @@ public class RenderLoader {
 
     @SubscribeEvent
     public static void onRenderTypeSetup(FMLClientSetupEvent event) {
-        RenderTypeLookup.setRenderLayer(BlockLoader.saplingVida.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_CRISMCREST.get(), RenderType.translucent());
-        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_SWEETCYANREED.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_SULLENHYDRANGEA.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_NITRITETHORNS.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_PLAMSTEM.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_HEARTOFWAL.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.purfiedCauldron.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.CORE_ALTAR.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.prismTable.get(), RenderType.translucent());
-        RenderTypeLookup.setRenderLayer(BlockLoader.steleLife.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(BlockLoader.saplingVida.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(BlockLoader.CROP_CRISMCREST.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(BlockLoader.CROP_SWEETCYANREED.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(BlockLoader.CROP_SULLENHYDRANGEA.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(BlockLoader.CROP_NITRITETHORNS.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(BlockLoader.CROP_PLAMSTEM.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(BlockLoader.CROP_HEARTOFWAL.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(BlockLoader.purfiedCauldron.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(BlockLoader.CORE_ALTAR.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(BlockLoader.prismTable.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(BlockLoader.steleLife.get(), RenderType.translucent());
     }
 
     @SubscribeEvent
@@ -119,7 +119,7 @@ public class RenderLoader {
     public static void onAtlasEvent(TextureStitchEvent.Pre event) {
         Vida.LOGGER.info("register Atlas");
         ResourceLocation stitching = event.getMap().location();
-        if (!stitching.equals(AtlasTexture.LOCATION_BLOCKS)) {
+        if (!stitching.equals(TextureAtlas.LOCATION_BLOCKS)) {
             return;
         }
         event.addSprite(goldgemLocation);

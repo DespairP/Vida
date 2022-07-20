@@ -1,6 +1,6 @@
 package teamHTBP.vida.capability.blueprintCapability;
 
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 import teamHTBP.vida.helper.blueprintHelper.BlueprintHelper;
 import teamHTBP.vida.helper.blueprintHelper.EnumBlueprintRarity;
 
@@ -91,9 +91,9 @@ public class BlueprintCapability implements IBlueprintCapability {
 
 
     @Override
-    public CompoundNBT serializeNBT() {
-        CompoundNBT playerNbt = new CompoundNBT();
-        CompoundNBT nbtBluePrint = new CompoundNBT();
+    public CompoundTag serializeNBT() {
+        CompoundTag playerNbt = new CompoundTag();
+        CompoundTag nbtBluePrint = new CompoundTag();
         final Map<String, Blueprint> allBlueprints = getAllBlueprints();
         allBlueprints.forEach((id, blueprint) -> nbtBluePrint.putBoolean(id + ".blueprint", false));
         unlockedBluePrint.forEach((id, blueprint) -> nbtBluePrint.putBoolean(id + ".blueprint", true));
@@ -102,8 +102,8 @@ public class BlueprintCapability implements IBlueprintCapability {
     }
 
     @Override
-    public void deserializeNBT(CompoundNBT nbt) {
-        CompoundNBT bluePrintNbt = nbt.getCompound("blueprints");
+    public void deserializeNBT(CompoundTag nbt) {
+        CompoundTag bluePrintNbt = nbt.getCompound("blueprints");
         final Map<String, Blueprint> allBlueprints = getAllBlueprints();
         unlockedBluePrint.clear();
         allBlueprints.forEach((id, blueprint) -> {

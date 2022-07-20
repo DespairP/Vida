@@ -5,8 +5,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
-import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.network.NetworkEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.event.server.datapack.GuideBookPageEventHandler;
@@ -30,7 +30,7 @@ public class PacketGuidebookPage {
     }
 
     /**序列化*/
-    public PacketBuffer toBytes(PacketBuffer buffer){
+    public FriendlyByteBuf toBytes(FriendlyByteBuf buffer){
         if(guideToSinglePage == null){
             throw new NullPointerException("guidebook singlePage is null");
         }
@@ -40,7 +40,7 @@ public class PacketGuidebookPage {
     }
 
     /**反序列化*/
-    public static PacketGuidebookPage fromBytes(PacketBuffer buffer){
+    public static PacketGuidebookPage fromBytes(FriendlyByteBuf buffer){
         String pagesString = buffer.readUtf();
         if(pagesString.isEmpty()){
             LOGGER.error("pages in empty");

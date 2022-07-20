@@ -1,19 +1,19 @@
 package teamHTBP.vida.modelRender.armormodel;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.entity.model.BipedModel;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 
 import java.util.List;
 
-import static net.minecraft.inventory.EquipmentSlotType.HEAD;
+import static net.minecraft.world.entity.EquipmentSlot.HEAD;
 
-public abstract class AbstractModelElementArmor<T extends LivingEntity> extends BipedModel<T> {
-    public final EquipmentSlotType renderPart;
+public abstract class AbstractModelElementArmor<T extends LivingEntity> extends HumanoidModel<T> {
+    public final EquipmentSlot renderPart;
     public ModelRenderer head;
     public ModelRenderer leftArm;
     public ModelRenderer rightArm;
@@ -22,11 +22,11 @@ public abstract class AbstractModelElementArmor<T extends LivingEntity> extends 
     public ModelRenderer rightLeg;
     public ModelRenderer belt;
 
-    public AbstractModelElementArmor(int textureWidthIn, int textureHeightIn, EquipmentSlotType part) {
+    public AbstractModelElementArmor(int textureWidthIn, int textureHeightIn, EquipmentSlot part) {
         this(1.0f, 0, textureWidthIn, textureHeightIn,part);
     }
 
-    public AbstractModelElementArmor(float modelSize, float yOffsetIn, int textureWidthIn, int textureHeightIn,EquipmentSlotType part) {
+    public AbstractModelElementArmor(float modelSize, float yOffsetIn, int textureWidthIn, int textureHeightIn, EquipmentSlot part) {
         super(modelSize, yOffsetIn, textureWidthIn, textureHeightIn);
         this.head     = new ModelRenderer(this, 0, 0);
         this.body     = new ModelRenderer(this,0,0);
@@ -74,7 +74,7 @@ public abstract class AbstractModelElementArmor<T extends LivingEntity> extends 
     }
 
     @Override
-    public void renderToBuffer(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
         copyModelRotation();
         setAllVisible(true);
         super.renderToBuffer(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);

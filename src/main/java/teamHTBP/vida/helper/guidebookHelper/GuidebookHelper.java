@@ -1,6 +1,6 @@
 package teamHTBP.vida.helper.guidebookHelper;
 
-import net.minecraft.world.World;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import teamHTBP.vida.event.server.datapack.GuideBookGuideEventHandler;
@@ -31,14 +31,14 @@ public class GuidebookHelper {
      * @param world 不同端的world
      * @return GuideHandler
      * */
-    public static GuideBookGuideHandler getGuideHandler(World world){
+    public static GuideBookGuideHandler getGuideHandler(Level world){
         if(world == null || world.isClientSide){
             return GuideBookGuideEventHandler.clientHandler;
         }
         return GuideBookGuideEventHandler.getServerHandler(world);
     }
 
-    public static GuideBookPageHandler getGuidePageHandler(World world){
+    public static GuideBookPageHandler getGuidePageHandler(Level world){
         if(world == null || world.isClientSide){
             return GuideBookPageEventHandler.clientHandler;
         }

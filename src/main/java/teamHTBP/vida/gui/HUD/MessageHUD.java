@@ -1,12 +1,11 @@
 package teamHTBP.vida.gui.HUD;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.util.Mth;
 
-public class MessageHUD extends AbstractGui {
+public class MessageHUD extends GuiComponent {
     private final int guiLeftMid;
     private final Minecraft minecraft;
     public float alpha = 0;
@@ -25,7 +24,7 @@ public class MessageHUD extends AbstractGui {
     }
 
 
-    public void render(MatrixStack matrixStack) {
+    public void render(PoseStack matrixStack) {
         int width = Minecraft.getInstance().getWindow().getGuiScaledWidth();
         int height = Minecraft.getInstance().getWindow().getGuiScaledHeight();
         this.guiTopMid = height / 2;
@@ -33,9 +32,9 @@ public class MessageHUD extends AbstractGui {
         currentTime += 1;
         if (currentTime < 17) alpha += 0.06f;
         if (currentTime > stayTime - 19) alpha -= 0.06f;
-        RenderSystem.pushMatrix();
+        matrixStack.pushPose();
         int a = (int) (alpha * 255);
-        drawString(matrixStack, minecraft.font, message, guiLeftMid - (minecraft.font.width(message) / 2), guiTopMid - 100, MathHelper.color(99, 255, 99) + (a << 24));
-        RenderSystem.popMatrix();
+        drawString(matrixStack, minecraft.font, message, guiLeftMid - (minecraft.font.width(message) / 2), guiTopMid - 100, Mth.color(99, 255, 99) + (a << 24));
+        matrixStack.popPose();
     }
 }

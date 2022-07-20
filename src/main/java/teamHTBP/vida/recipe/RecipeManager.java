@@ -1,13 +1,13 @@
 package teamHTBP.vida.recipe;
 
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.world.World;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.FluidStack;
-import teamHTBP.vida.TileEntity.TileEntityElementCoreAltar;
 import teamHTBP.vida.Vida;
+import teamHTBP.vida.blockentity.TileEntityElementCoreAltar;
 import teamHTBP.vida.recipe.base.BaseRecipe;
 import teamHTBP.vida.recipe.recipe.AltarRecipe;
 import teamHTBP.vida.recipe.recipe.FermenterFluidRecipe;
@@ -21,18 +21,18 @@ public class RecipeManager {
     public static final String MOD_ID = Vida.MOD_ID;
 
     /**获取BaseRecipe相关的合成*/
-    public static <C extends IInventory, T extends BaseRecipe<C>> List<T> getBaseRecipe(World level, IRecipeType<T> type) {
+    public static <C extends Container, T extends BaseRecipe<C>> List<T> getBaseRecipe(Level level, RecipeType<T> type) {
         return level.getRecipeManager().getAllRecipesFor(type);
     }
 
     @Deprecated
-    public static FermenterFluidRecipe getFermenterFuildRecipe(World level, ItemStack itemStack, FluidStack inputFuild) {
+    public static FermenterFluidRecipe getFermenterFuildRecipe(Level level, ItemStack itemStack, FluidStack inputFuild) {
         return getBaseRecipe(level, RecipeTypes.FERMENTER_FLUID).stream()
                 .filter(s -> s.matches(itemStack, inputFuild)).findFirst().orElse(null);
     }
 
     /**获取合成表*/
-    public static AltarRecipe getAltarRecipe(World level, TileEntityElementCoreAltar altar){
+    public static AltarRecipe getAltarRecipe(Level level, TileEntityElementCoreAltar altar){
         level.getRecipeManager().getAllRecipesFor(RecipeTypes.ALTAR);
         return level.getRecipeManager().getAllRecipesFor(RecipeTypes.ALTAR).stream().filter(
                 r -> r.matches(altar)

@@ -1,30 +1,28 @@
 package teamHTBP.vida.helper.blockHelper;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.EnumProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.state.properties.DoubleBlockHalf;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
-
-import net.minecraft.block.AbstractBlock.Properties;
 
 /**
  * 有双层结构的方块,大多数代码来自于DoublePlantBlock
@@ -47,7 +45,8 @@ public abstract class BlockMutiDouble extends Block {
      * 此方法用于在方块放置时，根据所提供的方块隔壁方块的state，更新自己的blockstate
      * [[有待考据]]
      */
-    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+    @Override
+    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
         //得到放置方块的blockstate，传进Property得到是否是上和下的信息
         DoubleBlockHalf doubleblockhalf = stateIn.getValue(HALF);
         //如果方块的轴不为Y轴 或者 方块朝向和自己的state不符合，进行更新
@@ -66,12 +65,12 @@ public abstract class BlockMutiDouble extends Block {
      */
     @Override
     @Nullable
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockPos blockpos = context.getClickedPos();
         //小于限制高度，其上方可以放置时发，进行放置
         if (!context.getLevel().isClientSide) {
-            ServerWorld world = (ServerWorld) context.getLevel();
-            return blockpos.getY() < world.getChunkSource().generator.getGenDepth() - 1
+            ServerLevel world = (ServerLevel) context.getLevel();
+            return blockpos.getY() < world.getChunkSource().getGenerator().getGenDepth() - 1
                     && context.getLevel().getBlockState(blockpos.above()).canBeReplaced(context)
                     ? super.getStateForPlacement(context) : null;
         }
@@ -84,7 +83,7 @@ public abstract class BlockMutiDouble extends Block {
      * Called by ItemBlocks after a block is set in the world, to allow post-place logic
      */
     @Override
-    public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+    public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
         //放置上面的方块
         worldIn.setBlock(pos.above(), this.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER), 3);
     }
@@ -92,7 +91,8 @@ public abstract class BlockMutiDouble extends Block {
     /**
      * 是否是有效的位置
      */
-    public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+    @Override
+    public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
         //如果blockState为Down则判定有效
         if (state.getValue(HALF) != DoubleBlockHalf.UPPER) {
             return super.canSurvive(state, worldIn, pos);
@@ -108,7 +108,8 @@ public abstract class BlockMutiDouble extends Block {
     /**
      * 生成方块掉落物，当Block.removedByPlayer被调用时，此方块可能已经被设置为空气-Air了
      */
-    public void playerDestroy(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
+    @Override
+    public void playerDestroy(Level worldIn, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity te, ItemStack stack) {
         //直接调用父类方法
         super.playerDestroy(worldIn, player, pos, Blocks.AIR.defaultBlockState(), te, stack);
     }
@@ -117,7 +118,8 @@ public abstract class BlockMutiDouble extends Block {
      * 在被破坏前调用这个方法，注意和havestBlock的区别，无论玩家的武器能不能[[采集]]此方块都会被调用
      * 被调用的情况首先都是要方块被破坏
      */
-    public void playerWillDestroy(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+    @Override
+    public void playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {
         DoubleBlockHalf doubleblockhalf = state.getValue(HALF); //获取方块的blockstate
         BlockPos blockpos = doubleblockhalf == DoubleBlockHalf.LOWER ? pos.above() : pos.below();//获取上方位置或者下方位置
         BlockState blockstate = worldIn.getBlockState(blockpos); //获取当前位置的blockstate
@@ -137,7 +139,8 @@ public abstract class BlockMutiDouble extends Block {
     /**
      * 注册Property，注意重写时要super一下
      */
-    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(HALF);
     }
 
@@ -145,7 +148,7 @@ public abstract class BlockMutiDouble extends Block {
      * 设置碰撞体积
      */
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         return state.getValue(HALF) == DoubleBlockHalf.UPPER ? this.high : this.base;
     }
 }

@@ -1,6 +1,6 @@
 package teamHTBP.vida.capability.skillSystem;
 
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * 技能的接口，用于定义技能的各种抽象方法

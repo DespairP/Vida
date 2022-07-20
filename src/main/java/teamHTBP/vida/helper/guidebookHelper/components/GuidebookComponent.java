@@ -37,6 +37,7 @@ public abstract class GuidebookComponent implements IGuidebookComponent{
 
 
     /**是否是激活状态*/
+    @Override
     public boolean isActive(){
         return isFocus || isHovered;
     }

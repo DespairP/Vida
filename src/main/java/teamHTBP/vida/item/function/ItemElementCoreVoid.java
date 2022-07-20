@@ -1,15 +1,15 @@
 package teamHTBP.vida.item.function;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import teamHTBP.vida.entity.EntityFaintLight;
@@ -20,8 +20,6 @@ import teamHTBP.vida.itemGroup.ItemGroupLoader;
 
 import java.util.List;
 
-import net.minecraft.item.Item.Properties;
-
 public class ItemElementCoreVoid extends Item {
     public ItemElementCoreVoid() {
         super(new Properties().tab(ItemGroupLoader.vidaItemGroup));
@@ -30,11 +28,11 @@ public class ItemElementCoreVoid extends Item {
     @SubscribeEvent
     public static void interact(PlayerInteractEvent.EntityInteractSpecific event) {
         if (event.getWorld() == null) return;
-        if (event.getPlayer().inventory.getSelected().getItem() == ItemLoader.ELEMENTCORE_VOID.get().getItem() && !event.getWorld().isClientSide && event.getHand() == Hand.MAIN_HAND) {
+        if (event.getPlayer().inventory.getSelected().getItem() == ItemLoader.ELEMENTCORE_VOID.get().getItem() && !event.getWorld().isClientSide && event.getHand() == InteractionHand.MAIN_HAND) {
             int x = event.getPos().getX();
             int y = event.getPos().getY();
             int z = event.getPos().getZ();
-            AxisAlignedBB bb = new AxisAlignedBB(x - 1, y, z - 1, x + 1, y + 1, z + 1);
+            AABB bb = new AABB(x - 1, y, z - 1, x + 1, y + 1, z + 1);
             List<Entity> list = event.getPlayer().level.getEntitiesOfClass(EntityLoader.faintLight.get().create(event.getWorld()).getEntity().getClass(), bb);
             if (!list.isEmpty()) {
                 if (list.get(0) instanceof EntityFaintLight) {
@@ -71,15 +69,15 @@ public class ItemElementCoreVoid extends Item {
         }
     }
 
-    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
 
         return super.use(worldIn, playerIn, handIn);
     }
 
-    public ActionResultType interactLivingEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
+    public InteractionResult interactLivingEntity(ItemStack stack, Player playerIn, LivingEntity target, InteractionHand hand) {
 
         System.out.println("ssss");
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
 }

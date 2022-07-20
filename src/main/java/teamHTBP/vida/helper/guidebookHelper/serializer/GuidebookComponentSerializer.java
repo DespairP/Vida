@@ -2,7 +2,7 @@ package teamHTBP.vida.helper.guidebookHelper.serializer;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.helper.guidebookHelper.GuidebookHelper;

@@ -1,12 +1,13 @@
 package teamHTBP.vida.block.environment.crop;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.state.IntegerProperty;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import teamHTBP.vida.helper.elementHelper.Allelopathy;
 import teamHTBP.vida.helper.elementHelper.ElementHelper;
 
@@ -50,7 +51,7 @@ public class GrowthLogics {
     }
 
     /**获取生长概率*/
-    public static float getGrowthChance(Block blockIn, IBlockReader worldIn, BlockPos pos) {
+    public static float getGrowthChance(Block blockIn, BlockGetter worldIn, BlockPos pos) {
         float f = 1.0F;
         BlockPos blockpos = pos.below();
 
@@ -58,7 +59,7 @@ public class GrowthLogics {
             for (int j = -1; j <= 1; ++j) {
                 float f1 = 0.0F;
                 BlockState blockstate = worldIn.getBlockState(blockpos.offset(i, 0, j));
-                if (blockstate.canSustainPlant(worldIn, blockpos.offset(i, 0, j), net.minecraft.util.Direction.UP, (net.minecraftforge.common.IPlantable) blockIn)) {
+                if (blockstate.canSustainPlant(worldIn, blockpos.offset(i, 0, j), Direction.UP, (net.minecraftforge.common.IPlantable) blockIn)) {
                     f1 = 1.0F;
                     if (blockstate.isFertile(worldIn, blockpos.offset(i, 0, j))) {
                         f1 = 3.0F;

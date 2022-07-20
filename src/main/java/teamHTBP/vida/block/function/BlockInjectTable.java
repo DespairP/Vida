@@ -1,70 +1,55 @@
 package teamHTBP.vida.block.function;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
-import net.minecraftforge.common.ToolType;
-import net.minecraftforge.fml.network.NetworkHooks;
-import teamHTBP.vida.TileEntity.TileEntityInjectTable;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.network.NetworkHooks;
+import teamHTBP.vida.block.base.ModBaseEntityBlock;
+import teamHTBP.vida.blockentity.TileEntityInjectTable;
+import teamHTBP.vida.blockentity.TileEntityLoader;
 
-import javax.annotation.Nullable;
-
-import net.minecraft.block.AbstractBlock.Properties;
-
-public class BlockInjectTable extends Block {
+public class BlockInjectTable extends ModBaseEntityBlock<TileEntityInjectTable> {
     public BlockInjectTable() {
-        super(Properties.of(Material.STONE).strength(3.0f, 3.0f).harvestTool(ToolType.PICKAXE).noOcclusion().harvestLevel(1).sound(SoundType.STONE));
+        super(Properties.of(Material.STONE).strength(3.0f, 3.0f)
+                // todo tag .harvestTool(ToolType.PICKAXE).harvestLevel(1)
+                .noOcclusion().sound(SoundType.STONE), TileEntityLoader.TileEntityInjectTable);
     }
 
     @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new TileEntityInjectTable();
-    }
-
-    @Override
-    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+    public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
         if (!worldIn.isClientSide) {
-            TileEntity tileEntity = worldIn.getBlockEntity(pos);
-            if (tileEntity instanceof TileEntityInjectTable) {
-                TileEntityInjectTable tileEntityInjectTable = (TileEntityInjectTable) tileEntity;
-                if (!player.isShiftKeyDown() && handIn == Hand.MAIN_HAND) {
-                    if (tileEntityInjectTable.setSwordItem(player.getItemInHand(Hand.MAIN_HAND)) && player.getItemInHand(Hand.MAIN_HAND) != ItemStack.EMPTY) {
-                        player.getItemInHand(Hand.MAIN_HAND).shrink(1);
+            BlockEntity tileEntity = worldIn.getBlockEntity(pos);
+            if (tileEntity instanceof TileEntityInjectTable tileEntityInjectTable) {
+                if (!player.isShiftKeyDown() && handIn == InteractionHand.MAIN_HAND) {
+                    if (tileEntityInjectTable.setSwordItem(player.getItemInHand(InteractionHand.MAIN_HAND)) && player.getItemInHand(InteractionHand.MAIN_HAND) != ItemStack.EMPTY) {
+                        player.getItemInHand(InteractionHand.MAIN_HAND).shrink(1);
                         worldIn.sendBlockUpdated(pos, state, state, 3);
-                        return ActionResultType.SUCCESS;
+                        return InteractionResult.SUCCESS;
                     } else if (tileEntityInjectTable.hasSwordItem()) {
-                        NetworkHooks.openGui((ServerPlayerEntity) player, tileEntityInjectTable, (PacketBuffer packerBuffer) -> {
+                        NetworkHooks.openGui((ServerPlayer) player, tileEntityInjectTable, (FriendlyByteBuf packerBuffer) -> {
                             packerBuffer.writeItem(tileEntityInjectTable.getSwordStack());
                             packerBuffer.writeBlockPos(tileEntityInjectTable.getBlockPos());
                         });
-                        return ActionResultType.SUCCESS;
+                        return InteractionResult.SUCCESS;
                     }
                 } else if (player.isShiftKeyDown()) {
                     player.addItem(tileEntityInjectTable.getSwordStackToPlayer());
                     worldIn.sendBlockUpdated(pos, state, state, 3);
-                    return ActionResultType.SUCCESS;
+                    return InteractionResult.SUCCESS;
                 }
             }
         } else {
-            return ActionResultType.CONSUME;
+            return InteractionResult.CONSUME;
         }
         return super.use(state, worldIn, pos, player, handIn, hit);
     }

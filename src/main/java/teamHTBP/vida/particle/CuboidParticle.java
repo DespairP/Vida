@@ -1,14 +1,14 @@
 package teamHTBP.vida.particle;
 
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Quaternion;
+import com.mojang.math.Vector3f;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.IParticleRenderType;
 import net.minecraft.client.particle.SpriteTexturedParticle;
 import net.minecraft.client.renderer.ActiveRenderInfo;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Quaternion;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.math.vector.Vector3f;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Random;
 
@@ -18,7 +18,7 @@ public class CuboidParticle extends SpriteTexturedParticle {
     private float rotation = 0;
     private float extraYLength = 0;
 
-    public CuboidParticle(ClientWorld World, double posX, double posY, double posZ, double speedX, double speedY, double speedZ, float r, float g, float b, float scale, int age) {
+    public CuboidParticle(ClientLevel World, double posX, double posY, double posZ, double speedX, double speedY, double speedZ, float r, float g, float b, float scale, int age) {
         super(World, posX, posY, posZ, speedX, speedY, speedZ);
         Random rand = new Random();
         xd = speedX;
@@ -36,7 +36,7 @@ public class CuboidParticle extends SpriteTexturedParticle {
         this.extraYLength = rand.nextInt(4) + 3;
     }
 
-    public CuboidParticle(ClientWorld World, double posX, double posY, double posZ, double speedX, double speedY, double speedZ) {
+    public CuboidParticle(ClientLevel World, double posX, double posY, double posZ, double speedX, double speedY, double speedZ) {
         super(World, posX, posY, posZ, speedX, speedY, speedZ);
         Random rand = new Random();
         xd = speedX;
@@ -55,12 +55,12 @@ public class CuboidParticle extends SpriteTexturedParticle {
     }
 
     @Override
-    public void render(IVertexBuilder buffer, ActiveRenderInfo renderInfo, float partialTicks) {
+    public void render(VertexConsumer buffer, ActiveRenderInfo renderInfo, float partialTicks) {
 
-        Vector3d vec3d = renderInfo.getPosition();
-        float f = (float) (MathHelper.lerp(partialTicks, this.xo, this.x) - vec3d.x());
-        float f1 = (float) (MathHelper.lerp(partialTicks, this.yo, this.y) - vec3d.y());
-        float f2 = (float) (MathHelper.lerp(partialTicks, this.zo, this.z) - vec3d.z());
+        Vec3 vec3d = renderInfo.getPosition();
+        float f = (float) (Mth.lerp(partialTicks, this.xo, this.x) - vec3d.x());
+        float f1 = (float) (Mth.lerp(partialTicks, this.yo, this.y) - vec3d.y());
+        float f2 = (float) (Mth.lerp(partialTicks, this.zo, this.z) - vec3d.z());
 
 
         Quaternion quaternion = new Quaternion(0, rotation, 0, true);

@@ -1,17 +1,16 @@
 package teamHTBP.vida.block.decoration;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraftforge.common.ToolType;
-
-import net.minecraft.block.AbstractBlock.Properties;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.material.Material;
 
 public class BlockDimRockBrick extends Block {
     private final long tick = 0;
 
     public BlockDimRockBrick() {
-        super(Properties.of(Material.STONE).strength(2.0f, 6.0f).harvestTool(ToolType.PICKAXE).sound(SoundType.STONE));
+        super(Properties.of(Material.STONE).strength(2.0f, 6.0f)
+                // TODO tag .harvestTool(ToolType.PICKAXE)
+                .sound(SoundType.STONE));
     }
 
 /*

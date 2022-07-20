@@ -1,6 +1,7 @@
 package teamHTBP.vida.gui.components;
 
-import net.minecraft.client.gui.screen.Screen;
+
+import net.minecraft.client.gui.screens.Screen;
 
 /**用于context管理*/
 public interface IGuiGuidebook {

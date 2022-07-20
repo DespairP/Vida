@@ -1,39 +1,29 @@
 package teamHTBP.vida.block.function;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
-import teamHTBP.vida.TileEntity.TileEntityOreReationMachine;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.network.NetworkHooks;
+import teamHTBP.vida.block.base.ModBaseEntityBlock;
+import teamHTBP.vida.blockentity.TileEntityLoader;
+import teamHTBP.vida.blockentity.TileEntityOreReationMachine;
 
-import javax.annotation.Nullable;
-
-import net.minecraft.block.AbstractBlock.Properties;
-
-public class BlockOreReactionMachine extends Block {
+public class BlockOreReactionMachine extends ModBaseEntityBlock<TileEntityOreReationMachine> {
     public BlockOreReactionMachine() {
-        super(Properties.of(Material.STONE).noOcclusion().strength(4.0f, 4.0f));
-    }
-
-
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
+        super(Properties.of(Material.STONE).noOcclusion().strength(4.0f, 4.0f),
+                TileEntityLoader.TileEntityOreReationMachine);
     }
 
     @Override
-    public void playerWillDestroy(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+    public void playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {
         TileEntityOreReationMachine tileEntityOreReationMachine = (TileEntityOreReationMachine) worldIn.getBlockEntity(pos);
         if (tileEntityOreReationMachine != null) {
             for (int i = 0; i < 4; i++)
@@ -45,20 +35,15 @@ public class BlockOreReactionMachine extends Block {
         super.playerWillDestroy(worldIn, pos, state, player);
     }
 
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new TileEntityOreReationMachine();
-    }
 
     @Override
-    public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!worldIn.isClientSide && handIn == Hand.MAIN_HAND) {
+    public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+        if (!worldIn.isClientSide && handIn == InteractionHand.MAIN_HAND) {
             TileEntityOreReationMachine tileEntityOreReationMachine = (TileEntityOreReationMachine) worldIn.getBlockEntity(pos);
-            NetworkHooks.openGui((ServerPlayerEntity) player, tileEntityOreReationMachine, (PacketBuffer packerBuffer) -> {
+            NetworkHooks.openGui((ServerPlayer) player, tileEntityOreReationMachine, (FriendlyByteBuf packerBuffer) -> {
                 packerBuffer.writeBlockPos(tileEntityOreReationMachine.getBlockPos());
             });
         }
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 }

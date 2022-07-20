@@ -1,12 +1,12 @@
 package teamHTBP.vida.item;
 
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.block.BlockLoader;
 import teamHTBP.vida.helper.RegisterItemBlock;
@@ -111,10 +111,10 @@ public class ItemLoader {
     public final static RegistryObject<Item> ARMOR_EARTH_BOOTS = ITEMS.register("earthbootsarmor", () -> new ItemArmorElementBoots(5));
 
     // 测试用盔甲
-    public final static RegistryObject<Item> ARMOR_DEMO_HELMET = ITEMS.register("armor_demo_helmet",()->new ItemArmorDemo(EquipmentSlotType.HEAD));
-    public final static RegistryObject<Item> ARMOR_DEMO_CHEST = ITEMS.register("armor_demo_chest",()->new ItemArmorDemo(EquipmentSlotType.CHEST));
-    public final static RegistryObject<Item> ARMOR_DEMO_LEGGINGS = ITEMS.register("armor_demo_leggings",()->new ItemArmorDemo(EquipmentSlotType.LEGS));
-    public final static RegistryObject<Item> ARMOR_DEMO_BOOT = ITEMS.register("armor_demo_boots",()->new ItemArmorDemo(EquipmentSlotType.FEET));
+    public final static RegistryObject<Item> ARMOR_DEMO_HELMET = ITEMS.register("armor_demo_helmet",()->new ItemArmorDemo(EquipmentSlot.HEAD));
+    public final static RegistryObject<Item> ARMOR_DEMO_CHEST = ITEMS.register("armor_demo_chest",()->new ItemArmorDemo(EquipmentSlot.CHEST));
+    public final static RegistryObject<Item> ARMOR_DEMO_LEGGINGS = ITEMS.register("armor_demo_leggings",()->new ItemArmorDemo(EquipmentSlot.LEGS));
+    public final static RegistryObject<Item> ARMOR_DEMO_BOOT = ITEMS.register("armor_demo_boots",()->new ItemArmorDemo(EquipmentSlot.FEET));
 
     //元素工具
     public static RegistryObject<Item> goldElementPickaxe = ITEMS.register("goldelementpickaxe", () -> new ItemElementPickaxe(GOLD));

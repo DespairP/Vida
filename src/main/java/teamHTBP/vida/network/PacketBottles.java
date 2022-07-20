@@ -1,13 +1,13 @@
 package teamHTBP.vida.network;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectInstance;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.potion.PotionUtils;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.network.NetworkEvent;
 import teamHTBP.vida.item.armor.ItemArmorElementLegginsWithBottles;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public class PacketBottles {
     private int mode = 0;
 
     /***/
-    public PacketBottles(PacketBuffer buffer) {
+    public PacketBottles(FriendlyByteBuf buffer) {
         mode = buffer.readInt();
     }
 
@@ -25,7 +25,7 @@ public class PacketBottles {
         this.mode = mode;
     }
 
-    public void toBytes(PacketBuffer buffer) {
+    public void toBytes(FriendlyByteBuf buffer) {
         buffer.writeInt(mode);
     }
 
@@ -33,11 +33,11 @@ public class PacketBottles {
     public void handler(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
                     if (ctx.get().getSender() == null) return;
-                    PlayerEntity entity = ctx.get().getSender();
+                    Player entity = ctx.get().getSender();
                     ItemStack stack = entity.inventory.armor.get(1);
                     if (stack.getItem() instanceof ItemArmorElementLegginsWithBottles) {
                         ItemStack stack1 = ItemStack.EMPTY;
-                        CompoundNBT nbt = stack.getOrCreateTag();
+                        CompoundTag nbt = stack.getOrCreateTag();
                         int progress = 0;
                         switch (this.mode) {
                             case 1:
@@ -54,15 +54,15 @@ public class PacketBottles {
                                 break;
                         }
                         if (progress >= 100 && stack1 != ItemStack.EMPTY && !stack1.isEmpty()) {
-                            List<EffectInstance> list = PotionUtils.getMobEffects(stack1);
-                            for (EffectInstance instance : list) {
+                            List<MobEffectInstance> list = PotionUtils.getMobEffects(stack1);
+                            for (MobEffectInstance instance : list) {
                                 if (((ItemArmorElementLegginsWithBottles) stack.getItem()).element == 5)
-                                    entity.addEffect(new EffectInstance(instance.getEffect(), instance.getDuration() * 2, instance.getAmplifier()));
+                                    entity.addEffect(new MobEffectInstance(instance.getEffect(), instance.getDuration() * 2, instance.getAmplifier()));
                                 else
-                                    entity.addEffect(new EffectInstance(instance));
+                                    entity.addEffect(new MobEffectInstance(instance));
                             }
                             if (((ItemArmorElementLegginsWithBottles) stack.getItem()).element == 3) {
-                                entity.addEffect(new EffectInstance(Effect.byId(10), 10));
+                                entity.addEffect(new MobEffectInstance(MobEffect.byId(10), 10));
                             }
                             switch (this.mode) {
                                 case 1:

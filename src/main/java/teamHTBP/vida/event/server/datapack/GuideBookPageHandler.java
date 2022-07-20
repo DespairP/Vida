@@ -3,12 +3,12 @@ package teamHTBP.vida.event.server.datapack;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
-import net.minecraft.client.resources.JsonReloadListener;
-import net.minecraft.item.ItemStack;
-import net.minecraft.profiler.IProfiler;
-import net.minecraft.resources.IResourceManager;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
+import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.apache.logging.log4j.LogManager;
@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class GuideBookPageHandler extends JsonReloadListener {
+public class GuideBookPageHandler extends SimpleJsonResourceReloadListener {
     private static final Logger LOGGER = LogManager.getLogger();
     /**GSON*/
     public static final Gson GSON = new GsonBuilder()
@@ -36,7 +36,7 @@ public class GuideBookPageHandler extends JsonReloadListener {
     /**
      * 存储所有Pages,GuideId->List Pages
      * Guide可以通过{@link GuideBookGuideHandler#guideMap}来获取,
-     * GuideHandler可以通过{@link GuidebookHelper#getGuideHandler(World)}获取
+     * GuideHandler可以通过{@link GuidebookHelper#getGuideHandler(Level)}获取
      * */
     public Map<String, List<GuidebookSinglePage>> guideToSinglePage = new LinkedHashMap<>();
 
@@ -46,7 +46,7 @@ public class GuideBookPageHandler extends JsonReloadListener {
     }
 
     @Override
-    protected void apply(Map<ResourceLocation, JsonElement> objectIn, IResourceManager resourceManagerIn, IProfiler profilerIn) {
+    protected void apply(Map<ResourceLocation, JsonElement> objectIn, ResourceManager resourceManagerIn, ProfilerFiller profilerIn) {
         //全部处理并group by guideName
         Map<String,List<GuidebookSinglePage>> pages = objectIn.entrySet().stream().map((entry) -> {
             JsonElement jsonElement = entry.getValue();

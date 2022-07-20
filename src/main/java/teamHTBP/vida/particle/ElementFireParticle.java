@@ -1,8 +1,8 @@
 package teamHTBP.vida.particle;
 
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.IParticleRenderType;
 import net.minecraft.client.particle.SpriteTexturedParticle;
-import net.minecraft.client.world.ClientWorld;
 
 public class ElementFireParticle extends SpriteTexturedParticle {
 
@@ -10,7 +10,7 @@ public class ElementFireParticle extends SpriteTexturedParticle {
     private final double coordY;
     private final double coordZ;
 
-    public ElementFireParticle(ClientWorld worldIn, double posXIn, double posYIn, double posZIn, double xSpeedIn, double ySpeedIn, double zSpeedIn) {
+    public ElementFireParticle(ClientLevel worldIn, double posXIn, double posYIn, double posZIn, double xSpeedIn, double ySpeedIn, double zSpeedIn) {
         super(worldIn, posXIn, posYIn, posZIn, xSpeedIn, ySpeedIn, zSpeedIn);
 
         this.coordX = posXIn;

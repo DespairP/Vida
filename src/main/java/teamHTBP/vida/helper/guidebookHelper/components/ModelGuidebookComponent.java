@@ -1,35 +1,41 @@
 package teamHTBP.vida.helper.guidebookHelper.components;
 
 import com.google.gson.annotations.Expose;
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Quaternion;
+import com.mojang.math.Vector3f;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.client.renderer.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.block.BlockModelShaper;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Quaternion;
-import net.minecraft.util.math.vector.Vector3f;
-import net.minecraft.world.World;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import teamHTBP.vida.helper.renderHelper.RenderHelper;
 import teamHTBP.vida.helper.renderHelper.guiHelper.TextureSection;
 import teamHTBP.vida.utils.color.RGBAColor;
 import teamHTBP.vida.utils.math.FloatRange;
 
-import static net.minecraft.client.gui.AbstractGui.blit;
+import static net.minecraft.client.gui.GuiComponent.blit;
 import static teamHTBP.vida.helper.renderHelper.RenderHelper.renderTextWithTranslationKeyCenter;
 
 /**模型组件*/
@@ -61,7 +67,7 @@ public class ModelGuidebookComponent implements IGuidebookComponent {
     /**物品渲染器*/
     private final ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
     /**模型渲染器*/
-    private final BlockModelShapes blockmodelshapes = Minecraft.getInstance().getBlockRenderer().getBlockModelShaper();
+    private final BlockModelShaper blockmodelshapes = Minecraft.getInstance().getBlockRenderer().getBlockModelShaper();
     /**材质管理*/
     private final TextureManager textureManager = Minecraft.getInstance().textureManager;
     private final static ResourceLocation componentLocation = new ResourceLocation("vida","textures/gui/book.png");
@@ -71,7 +77,7 @@ public class ModelGuidebookComponent implements IGuidebookComponent {
     /**是否能被旋转*/
     private boolean isFocused = false;
     /**字体渲染*/
-    private final FontRenderer fontRenderer = Minecraft.getInstance().font;
+    private final Font fontRenderer = Minecraft.getInstance().font;
 
     @Override
     public String getType() {
@@ -105,7 +111,7 @@ public class ModelGuidebookComponent implements IGuidebookComponent {
     }
 
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         //是不是悬浮在组件上
         mouseMoved(mouseX,mouseY);
         //渲染背景
@@ -117,58 +123,58 @@ public class ModelGuidebookComponent implements IGuidebookComponent {
     }
 
     /**渲染背景*/
-    public void renderBackground(MatrixStack matrixStack){
-        RenderSystem.pushMatrix();
-        textureManager.bind(componentLocation);
+    public void renderBackground(PoseStack matrixStack){
+        matrixStack.pushPose();
+        RenderSystem.setShaderTexture(0, componentLocation);
         blit(matrixStack, x, y, 0, componentSection.mu(), componentSection.mv(), componentSection.w(), componentSection.h(), 512, 512);
-        RenderSystem.popMatrix();
+        matrixStack.popPose();
     }
 
     /**渲染物品*/
-    public void renderBlockInGui(MatrixStack matrixStack,float partialTicks){
-        RenderSystem.pushMatrix();
+    public void renderBlockInGui(PoseStack matrixStack, float partialTicks){
+        matrixStack.pushPose();
         matrixStack.pushPose();
         //绑定方块模型,用于模型材质绑定
-        textureManager.bind(AtlasTexture.LOCATION_BLOCKS);
-        textureManager.getTexture(AtlasTexture.LOCATION_BLOCKS).setFilter(false, false);
+        RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_BLOCKS);
+        textureManager.getTexture(TextureAtlas.LOCATION_BLOCKS).setFilter(false, false);
         //GL11方法, @see:ItemRenderer#renderItemModelIntoGUI
-        RenderSystem.enableRescaleNormal();
-        RenderSystem.enableAlphaTest();
-        RenderSystem.defaultAlphaFunc();
+        //RenderSystem.enableRescaleNormal();
+        //RenderSystem.enableAlphaTest();
+        //RenderSystem.defaultAlphaFunc();
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
         //渲染值全颜色
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0f);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0f);
         //设置渲染位移
         //设置渲染的位置
-        RenderSystem.translatef((float)x + componentSection.cw() - 20.0F, (float)y + componentSection.ch() - 32.0F, 100.0F);
-        RenderSystem.translatef(32.0F, 32.0F, 0.0F);
+        matrixStack.translate((float)x + componentSection.cw() - 20.0F, (float)y + componentSection.ch() - 32.0F, 100.0F);
+        matrixStack.translate(32.0F, 32.0F, 0.0F);
         //设置渲染大小
-        RenderSystem.scalef(1.0F, -1.0F, 1.0F);
-        RenderSystem.scalef(64.0F, 64.0F, 64.0F);
+        matrixStack.scale(1.0F, -1.0F, 1.0F);
+        matrixStack.scale(64.0F, 64.0F, 64.0F);
         //获取要渲染的模型
         BlockState state = getBlockStateFromItemStack();
-        IBakedModel model = itemRenderer.getModel(renderStack,(World)null, (LivingEntity)null);
+        BakedModel model = itemRenderer.getModel(renderStack, null, null, 0);
         //获取渲染的方式
-        RenderType rendertype = RenderTypeLookup.getRenderType(renderStack, true);
+        RenderType rendertype = ItemBlockRenderTypes.getRenderType(renderStack, true);
         //将模型调整成适合GUI渲染的scale模型
-        model = net.minecraftforge.client.ForgeHooksClient.handleCameraTransforms(matrixStack, model, ItemCameraTransforms.TransformType.GUI, false);
+        model = net.minecraftforge.client.ForgeHooksClient.handleCameraTransforms(matrixStack, model, ItemTransforms.TransformType.GUI, false);
         //模型旋转
         matrixStack.translate(0.5,0.5,0.5); //将模型调整到正中央
-        matrixStack.mulPose(new Quaternion(new Vector3f(0f,1f,0f) , MathHelper.clamp(partialTicks,prevRotateX, rotateX), false));
-        matrixStack.mulPose(new Quaternion(new Vector3f(1f,0.0f,0f) , MathHelper.clamp(partialTicks,prevRotateY, rotateY), false));
+        matrixStack.mulPose(new Quaternion(new Vector3f(0f,1f,0f) , Mth.clamp(partialTicks,prevRotateX, rotateX), false));
+        matrixStack.mulPose(new Quaternion(new Vector3f(1f,0.0f,0f) , Mth.clamp(partialTicks,prevRotateY, rotateY), false));
         matrixStack.translate(-0.5,-0.5,-0.5f);// 将模型调整到旋转后的正中央
         //再次将模型比例缩小50%
         matrixStack.last().pose().multiply(0.5F);
         //渲染设定是否发光
         boolean flag = !model.usesBlockLight();
         if (flag) {
-            RenderHelper.setupForFlatItems();
+            Lighting.setupForFlatItems();
         }
         //获取渲染buffer
-        IRenderTypeBuffer.Impl irendertypebuffer$impl = Minecraft.getInstance().renderBuffers().bufferSource();
+        MultiBufferSource.BufferSource irendertypebuffer$impl = Minecraft.getInstance().renderBuffers().bufferSource();
         //真正绑定模型
-        IVertexBuilder ivertexbuilder = ItemRenderer.getFoilBuffer(irendertypebuffer$impl, rendertype, true, renderStack.hasFoil());
+        VertexConsumer ivertexbuilder = ItemRenderer.getFoilBuffer(irendertypebuffer$impl, rendertype, true, renderStack.hasFoil());
         //开始渲染
         itemRenderer.renderModelLists(model, renderStack, 15728880, OverlayTexture.NO_OVERLAY, matrixStack, ivertexbuilder);
         //结束渲染
@@ -176,17 +182,17 @@ public class ModelGuidebookComponent implements IGuidebookComponent {
         //恢复渲染初始值
         RenderSystem.enableDepthTest();
         if (flag) {
-            RenderHelper.setupFor3DItems();
+            Lighting.setupFor3DItems();
         }
-        RenderSystem.disableAlphaTest();
-        RenderSystem.disableRescaleNormal();
+        // RenderSystem.disableAlphaTest();
+        // RenderSystem.disableRescaleNormal();
         matrixStack.popPose();
-        RenderSystem.popMatrix();
+        matrixStack.popPose();
     }
 
 
     /**渲染名字*/
-    public void renderName(MatrixStack matrixStack,float partialTicks){
+    public void renderName(PoseStack matrixStack, float partialTicks){
         String key = I18n.get(renderStack.getDescriptionId());
         int bottomY = (y + componentSection.h()) - 10;
         RGBAColor color = new RGBAColor(0,0,0,(int)(alpha.get() * 256));
@@ -268,6 +274,7 @@ public class ModelGuidebookComponent implements IGuidebookComponent {
         return mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.getWidth() && mouseY < this.y + this.getHeight();
     }
 
+    @Override
     public boolean isActive(){
         return isHovered || isFocused;
     }

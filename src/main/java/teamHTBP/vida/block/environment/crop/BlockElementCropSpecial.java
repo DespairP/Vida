@@ -1,8 +1,8 @@
 package teamHTBP.vida.block.environment.crop;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.utils.color.ColorHelper;
 
@@ -21,7 +21,7 @@ public class BlockElementCropSpecial extends AbstractBlockElementCrops {
     }
 
     @Override
-    public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+    public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
         //super.animateTick(stateIn, worldIn, pos, rand);
         float x = pos.getX();
         float y = pos.getY();

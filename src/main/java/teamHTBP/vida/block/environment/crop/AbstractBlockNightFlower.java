@@ -1,8 +1,8 @@
 package teamHTBP.vida.block.environment.crop;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.state.BlockState;
 import teamHTBP.vida.helper.elementHelper.IElement;
 
 import java.util.Random;
@@ -15,7 +15,7 @@ public class AbstractBlockNightFlower extends AbstractBlockElementCrops {
     }
 
     @Override
-    public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
+    public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random rand) {
         super.tick(state, worldIn, pos, rand);
         if (!worldIn.isAreaLoaded(pos, 1)) return;
         if (worldIn.getRawBrightness(pos, 0) >= 9) {

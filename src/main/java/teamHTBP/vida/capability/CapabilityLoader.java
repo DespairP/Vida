@@ -1,56 +1,60 @@
 package teamHTBP.vida.capability;
 
-import net.minecraft.nbt.INBT;
-import net.minecraft.util.Direction;
+import net.minecraft.nbt.Tag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.GameRules;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
+import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import teamHTBP.vida.Vida;
+import teamHTBP.vida.capability.blueprintCapability.BlueprintCapabilityProvider;
 import teamHTBP.vida.capability.blueprintCapability.IBlueprintCapability;
 import teamHTBP.vida.capability.energyCapability.IElementEnergyCapability;
 
-import javax.annotation.Nullable;
-
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CapabilityLoader {
+
     @SubscribeEvent
-    public static void onSetupEvent(FMLCommonSetupEvent event) {
-        CapabilityManager.INSTANCE.register(
-                IElementEnergyCapability.class,
-                new Capability.IStorage<IElementEnergyCapability>() {
-                    @Nullable
-                    @Override
-                    public INBT writeNBT(Capability<IElementEnergyCapability> capability, IElementEnergyCapability instance, Direction side) {
-                        return null;
-                    }
-
-                    @Override
-                    public void readNBT(Capability<IElementEnergyCapability> capability, IElementEnergyCapability instance, Direction side, INBT nbt) {
-
-                    }
-                },
-                () -> null
-        );
+    public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
+        event.register(IElementEnergyCapability.class);
+        event.register(IBlueprintCapability.class);
     }
 
     @SubscribeEvent
-    public static void registerPlayerCapability(FMLCommonSetupEvent event) {
-        CapabilityManager.INSTANCE.register(IBlueprintCapability.class, new Capability.IStorage<IBlueprintCapability>() {
-
-                    @Nullable
-                    @Override
-                    public INBT writeNBT(Capability<IBlueprintCapability> capability, IBlueprintCapability instance, Direction side) {
-                        return null;
-                    }
-
-                    @Override
-                    public void readNBT(Capability<IBlueprintCapability> capability, IBlueprintCapability instance, Direction side, INBT nbt) {
-
-                    }
-                },
-                () -> null
-        );
+    public static void onAttachCapabilitiesPlayer(AttachCapabilitiesEvent<Entity> event){
+        if (event.getObject() instanceof Player player) {
+            if (!player.getCapability(VidaCapabilities.BLUEPRINT).isPresent()) {
+                // The player does not already have this capability so we need to add the capability provider here
+                event.addCapability(new ResourceLocation(Vida.MOD_ID, "blueprint"),
+                        new BlueprintCapabilityProvider());
+            }
+        }
     }
 
+    @SubscribeEvent
+    public static void onPlayerCloned(PlayerEvent.Clone event) {
+        cloneCapability(event, VidaCapabilities.BLUEPRINT);
+    }
+
+    static <T extends Tag, C extends INBTSerializable<T>> void cloneCapability(PlayerEvent.Clone event, Capability<C> capability) {
+        Player player = event.getPlayer();
+        if (event.isWasDeath()) {
+            if (player.level instanceof ServerLevel serverLevel) {
+                if (serverLevel.getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) {
+                    event.getOriginal().reviveCaps();
+
+                    event.getOriginal().getCapability(capability).ifPresent(oldStore ->
+                            event.getPlayer().getCapability(capability).ifPresent(newStore ->
+                                    newStore.deserializeNBT(oldStore.serializeNBT())));
+                }
+            }
+        }
+    }
 }

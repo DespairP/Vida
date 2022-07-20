@@ -1,13 +1,12 @@
 package teamHTBP.vida.modelRender.font;
 
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.fonts.Font;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.gui.Font;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.text.CharacterManager;
 
 import java.util.function.Function;
 
-public class DungeonFontRenderer extends FontRenderer {
+public class DungeonFontRenderer extends Font {
     private final CharacterManager characterManager;
     private final Function<ResourceLocation, Font> font;
     public final ResourceLocation dungeonFont = new ResourceLocation("vida","font/dungeonfont");

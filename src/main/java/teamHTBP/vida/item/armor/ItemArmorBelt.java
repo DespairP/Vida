@@ -1,36 +1,37 @@
 package teamHTBP.vida.item.armor;
 
-import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.IArmorMaterial;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.world.World;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.client.IItemRenderProperties;
+import net.minecraftforge.network.NetworkHooks;
+import org.checkerframework.checker.units.qual.A;
 import teamHTBP.vida.itemGroup.ItemGroupLoader;
 import teamHTBP.vida.modelRender.armormodel.ArmorModelBelt;
 
 import javax.annotation.Nullable;
-
-import net.minecraft.item.Item.Properties;
+import java.util.function.Consumer;
 
 /**
  * 图纸腰带
  */
 public class ItemArmorBelt extends ArmorItem {
     public ItemArmorBelt() {
-        super(new ArmorMaterialBelt(), EquipmentSlotType.LEGS, new Properties().tab(ItemGroupLoader.vidaItemGroup));
+        super(new ArmorMaterialBelt(), EquipmentSlot.LEGS, new Properties().tab(ItemGroupLoader.vidaItemGroup));
     }
 
     @Override
@@ -40,51 +41,55 @@ public class ItemArmorBelt extends ArmorItem {
 
     @Nullable
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
+    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
         return "vida:textures/model/armor/blueprintbelt.png";
     }
 
-    @OnlyIn(Dist.CLIENT)
-    @Nullable
     @Override
-    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
-        ArmorModelBelt armorModelBelt = new ArmorModelBelt();
+    public void initializeClient(Consumer<IItemRenderProperties> consumer) {
+        consumer.accept(new IItemRenderProperties() {
+            @org.jetbrains.annotations.Nullable
+            @Override
+            public HumanoidModel<?> getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> _default) {
+                ArmorModelBelt armorModelBelt = new ArmorModelBelt();
 
-        armorModelBelt.young = _default.young;
-        armorModelBelt.crouching = _default.crouching;
-        armorModelBelt.riding = _default.riding;
-        armorModelBelt.rightArmPose = _default.rightArmPose;
-        armorModelBelt.leftArmPose = _default.leftArmPose;
-        return (A) armorModelBelt;
+                armorModelBelt.young = _default.young;
+                armorModelBelt.crouching = _default.crouching;
+                armorModelBelt.riding = _default.riding;
+                armorModelBelt.rightArmPose = _default.rightArmPose;
+                armorModelBelt.leftArmPose = _default.leftArmPose;
+                return armorModelBelt;
+            }
+        });
     }
 
     @Override
-    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         ItemStack stack = playerIn.getItemInHand(handIn);
         //OPEN THE GUI
         if (!worldIn.isClientSide && !playerIn.isShiftKeyDown() && stack.getItem() instanceof ItemArmorBelt) {
-            NetworkHooks.openGui((ServerPlayerEntity) playerIn, new ItemBluePrintBeltProvider("bluePrintBelt", stack), (buffer) -> {
+            NetworkHooks.openGui((ServerPlayer) playerIn, new ItemBluePrintBeltProvider("bluePrintBelt", stack), (buffer) -> {
                 buffer.writeItem(stack);
             });
-            return ActionResult.success(stack);
+            return InteractionResultHolder.success(stack);
         } else if (!worldIn.isClientSide && playerIn.isShiftKeyDown() && stack.getItem() instanceof ItemArmorBelt) {
             super.use(worldIn, playerIn, handIn);
         }
-        return ActionResult.pass(stack);
+        return InteractionResultHolder.pass(stack);
     }
 
 
 }
 
-class ArmorMaterialBelt implements IArmorMaterial {
+class ArmorMaterialBelt implements ArmorMaterial {
 
     @Override
-    public int getDurabilityForSlot(EquipmentSlotType slotIn) {
+    public int getDurabilityForSlot(EquipmentSlot slotIn) {
         return 10000;
     }
 
     @Override
-    public int getDefenseForSlot(EquipmentSlotType slotIn) {
+    public int getDefenseForSlot(EquipmentSlot slotIn) {
         return 1;
     }
 

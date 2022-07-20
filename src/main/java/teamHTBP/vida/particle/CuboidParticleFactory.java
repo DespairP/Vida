@@ -1,9 +1,9 @@
 package teamHTBP.vida.particle;
 
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.IAnimatedSprite;
 import net.minecraft.client.particle.IParticleFactory;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.world.ClientWorld;
 
 import javax.annotation.Nullable;
 
@@ -16,7 +16,7 @@ public class CuboidParticleFactory implements IParticleFactory<CuboidParticleDat
 
     @Nullable
     @Override
-    public Particle createParticle(CuboidParticleData typeIn, ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+    public Particle createParticle(CuboidParticleData typeIn, ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
         CuboidParticle particle = new CuboidParticle(worldIn, x, y, z,
                 typeIn.getInformation(0),
                 typeIn.getInformation(1),

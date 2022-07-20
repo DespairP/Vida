@@ -1,19 +1,19 @@
 package teamHTBP.vida.event.client;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import teamHTBP.vida.TileEntity.IElementCrystal;
-import teamHTBP.vida.block.function.BlockElementCrystal;
+import teamHTBP.vida.block.function.crystal.BlockElementCrystal;
+import teamHTBP.vida.blockentity.crystal.IElementCrystal;
 import teamHTBP.vida.gui.HUD.ElementCrystalHUD;
 
 /**
@@ -44,19 +44,19 @@ public class BlockEnergyCrystalHUDEventLoader {
             return;
         }
         offset_frame = (offset_frame + 1) % 64;
-        PlayerEntity player = Minecraft.getInstance().player;
-        RayTraceResult objectMouseOver = Minecraft.getInstance().hitResult;
+        Player player = Minecraft.getInstance().player;
+        HitResult objectMouseOver = Minecraft.getInstance().hitResult;
         BlockPos pos = new BlockPos(objectMouseOver.getLocation());
 
-        Vector3d vec3d = player.getViewVector(event.getPartialTicks());
-        Vector3d vec3d1 = objectMouseOver.getLocation();
+        Vec3 vec3d = player.getViewVector(event.getPartialTicks());
+        Vec3 vec3d1 = objectMouseOver.getLocation();
 
         BlockPos newpos = new BlockPos(vec3d1);
         Block block = player.level.getBlockState(newpos).getBlock();
-        World world = player.level;
+        Level world = player.level;
 
         if (block instanceof BlockElementCrystal) {
-            TileEntity tileEntityCrystal = world.getBlockEntity(pos);
+            BlockEntity tileEntityCrystal = world.getBlockEntity(pos);
             if (tileEntityCrystal instanceof IElementCrystal) {
                 ElementCrystalHUD hud = new ElementCrystalHUD((IElementCrystal) tileEntityCrystal, element_fragment_tick, element_Progress);
                 hud.render(event.getMatrixStack());

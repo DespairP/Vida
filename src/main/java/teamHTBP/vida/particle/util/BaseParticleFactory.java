@@ -1,10 +1,10 @@
 package teamHTBP.vida.particle.util;
 
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.IAnimatedSprite;
 import net.minecraft.client.particle.IParticleFactory;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.SpriteTexturedParticle;
-import net.minecraft.client.world.ClientWorld;
 
 import javax.annotation.Nullable;
 
@@ -21,7 +21,7 @@ public class BaseParticleFactory implements IParticleFactory<BaseParticleData> {
 
     @Nullable
     @Override
-    public Particle createParticle(BaseParticleData data, ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+    public Particle createParticle(BaseParticleData data, ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
         try {
             Particle p = type.getParticle(worldIn, x, y, z, xSpeed, ySpeed, zSpeed, data.getR(), data.getG(), data.getB());
             if (p instanceof SpriteTexturedParticle) {

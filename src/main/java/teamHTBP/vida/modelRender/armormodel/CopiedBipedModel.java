@@ -1,9 +1,9 @@
 package teamHTBP.vida.modelRender.armormodel;
 
-import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 
-public class CopiedBipedModel extends BipedModel {
+public class CopiedBipedModel extends HumanoidModel {
     public ModelRenderer bipedHead;
     public ModelRenderer bipedHeadwear;
     public ModelRenderer bipedBody;

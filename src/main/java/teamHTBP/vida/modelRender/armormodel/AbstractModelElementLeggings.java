@@ -1,12 +1,12 @@
 package teamHTBP.vida.modelRender.armormodel;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.entity.model.BipedModel;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.world.entity.LivingEntity;
 
-public abstract class AbstractModelElementLeggings<T extends LivingEntity> extends BipedModel<T> {
+public abstract class AbstractModelElementLeggings<T extends LivingEntity> extends HumanoidModel<T> {
 
     public ModelRenderer body_low;
 
@@ -19,7 +19,7 @@ public abstract class AbstractModelElementLeggings<T extends LivingEntity> exten
     }
 
     @Override
-    public void renderToBuffer(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
         this.body_low.visible = true;
         this.body_low.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
     }

@@ -1,9 +1,9 @@
 package teamHTBP.vida.helper.elementHelper;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.biome.Biome;
 import teamHTBP.vida.capability.skillSystem.ISkill;
 import teamHTBP.vida.capability.skillSystem.SkillCategory;
 import teamHTBP.vida.capability.skillSystem.SkillHelper;
@@ -26,12 +26,12 @@ public class ElementHelper {
     static Map<Item, ElementPotential> map = ModDataPacks.ELEMENT_POTENTIAL_MANAGER.getByItem();
 
     /**NBT辅助写入*/
-    public static void write(CompoundNBT nbt, IElement element) {
+    public static void write(CompoundTag nbt, IElement element) {
         nbt.putString("element", Optional.ofNullable(element).orElse(EnumElements.NONE).getElementName().toString());
     }
 
     /**NBT辅助读取*/
-    public static IElement read(CompoundNBT nbt) {
+    public static IElement read(CompoundTag nbt) {
         if (!nbt.contains("element")) {
             return null;
         }
@@ -82,7 +82,7 @@ public class ElementHelper {
     public static void addTip(ItemStack stack) {
         SkillCategory category = SkillHelper.skillCategories.get(stack.getItem());
         if (category != null) {
-            CompoundNBT nbt = stack.getOrCreateTag();
+            CompoundTag nbt = stack.getOrCreateTag();
             HashMap<String, ISkill> skills = category.getAllSkills();
             skills.forEach((name, skill) -> {
                 if (!nbt.contains(name + "Exp")) nbt.putInt(name + "Exp", 1);

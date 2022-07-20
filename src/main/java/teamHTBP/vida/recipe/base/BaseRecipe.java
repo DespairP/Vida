@@ -1,11 +1,11 @@
 package teamHTBP.vida.recipe.base;
 
 import com.google.gson.annotations.Expose;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author DustW
  **/
-public abstract class BaseRecipe<T extends IInventory> implements IRecipe<T> {
+public abstract class BaseRecipe<T extends Container> implements Recipe<T> {
     @Expose(deserialize = false, serialize = false)
     ResourceLocation id;
     @Expose
@@ -24,7 +24,7 @@ public abstract class BaseRecipe<T extends IInventory> implements IRecipe<T> {
 
     public abstract boolean matches(List<ItemStack> inputs);
 
-    public <C extends IInventory, R extends BaseRecipe<C>> R setID(ResourceLocation id) {
+    public <C extends Container, R extends BaseRecipe<C>> R setID(ResourceLocation id) {
         this.id = id;
         return (R) this;
     }
@@ -34,15 +34,15 @@ public abstract class BaseRecipe<T extends IInventory> implements IRecipe<T> {
         return id;
     }
 
-    private IRecipeSerializer<?> serializer;
+    private RecipeSerializer<?> serializer;
 
-    public <C extends IInventory, R extends BaseRecipe<C>> R setSerializer(IRecipeSerializer<?> serializer) {
+    public <C extends Container, R extends BaseRecipe<C>> R setSerializer(RecipeSerializer<?> serializer) {
         this.serializer = serializer;
         return (R) this;
     }
 
     @Override
-    public IRecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<?> getSerializer() {
         return this.serializer;
     }
 

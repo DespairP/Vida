@@ -1,12 +1,12 @@
 package teamHTBP.vida.gui.components;
 
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 
 /**上下文,当gui关闭时需要打开另一个gui并需要传递信息时,可以使用此类进行传递*/
 public class GuidebookContext {
     /**储存,使用特有的nbt进行储存,可以直接代替Map*/
-    public CompoundNBT store = new CompoundNBT();
+    public CompoundTag store = new CompoundTag();
 
     /**是否为空*/
     public boolean isStoreEmpty(){
@@ -27,10 +27,10 @@ public class GuidebookContext {
 
     /**将context中的所有值复制到此context中,需要注意会覆盖原有的值*/
     public GuidebookContext merge(GuidebookContext fromContext){
-        CompoundNBT fromStore = fromContext != null ? fromContext.store : GuidebookContext.empty().store;
+        CompoundTag fromStore = fromContext != null ? fromContext.store : GuidebookContext.empty().store;
         // 复制不包括null的值进入到compound中
         for(String key : fromStore.getAllKeys()){
-            INBT fromValue = fromStore.get(key);
+            Tag fromValue = fromStore.get(key);
             if(fromValue == null){ continue; }
             store.put(key, fromValue);
         }

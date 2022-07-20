@@ -2,30 +2,29 @@ package teamHTBP.vida.particle.util;
 
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.IParticleFactory;
 import net.minecraft.client.particle.ParticleManager;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.particles.IParticleData;
-import net.minecraft.particles.ParticleType;
-import net.minecraft.world.World;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleOptions.IDeserializer;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.level.Level;
 import teamHTBP.vida.particle.ParticleFactoryLoader;
 
 import java.util.Locale;
 
-import net.minecraft.particles.IParticleData.IDeserializer;
-
 /**
  * 基础Vida粒子数据<br/>
- * 粒子数据是创造粒子时需要的数据，见 {@link World#addParticle},<br/>
+ * 粒子数据是创造粒子时需要的数据，见 {@link Level#addParticle},<br/>
  * 在指令或者代码生成时都需要使用到ParticleData<br/>
- * 首先{@link ClientWorld#addParticle}提醒renderer渲染粒子，形参中要加入{@link IParticleData}的实例<br/>
- * 然后{@link ParticleManager#addParticle}根据形参中的{@link IParticleData}从factories里取出能处理该data的工厂<br/>
+ * 首先{@link ClientLevel#addParticle}提醒renderer渲染粒子，形参中要加入{@link ParticleOptions}的实例<br/>
+ * 然后{@link ParticleManager#addParticle}根据形参中的{@link ParticleOptions}从factories里取出能处理该data的工厂<br/>
  * 最后{@link IParticleFactory#makeParticle}根据实例构造出该粒子<br/>
  *
  * - 工厂注册可见：{@link ParticleFactoryLoader#onParticleFactoryRegistration}
  * */
-public class BaseParticleData implements IParticleData {
+public class BaseParticleData implements ParticleOptions {
     /**命令行解析器*/
     public static final IDeserializer<BaseParticleData> DESERIALIZER = new IDeserializer<BaseParticleData>() {
 
@@ -35,7 +34,7 @@ public class BaseParticleData implements IParticleData {
         }
 
         @Override
-        public BaseParticleData fromNetwork(ParticleType<BaseParticleData> particleTypeIn, PacketBuffer buffer) {
+        public BaseParticleData fromNetwork(ParticleType<BaseParticleData> particleTypeIn, FriendlyByteBuf buffer) {
             int r = buffer.readInt();
             int g = buffer.readInt();
             int b = buffer.readInt();
@@ -68,7 +67,7 @@ public class BaseParticleData implements IParticleData {
     }
 
     @Override
-    public void writeToNetwork(PacketBuffer buffer) {
+    public void writeToNetwork(FriendlyByteBuf buffer) {
         buffer.writeFloat(this.r);
         buffer.writeFloat(this.g);
         buffer.writeFloat(this.b);

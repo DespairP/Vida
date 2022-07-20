@@ -1,11 +1,11 @@
 package teamHTBP.vida.itemGroup;
 
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import teamHTBP.vida.item.ItemLoader;
 
 
-public class VidaItemGroup extends ItemGroup {
+public class VidaItemGroup extends CreativeModeTab {
     public VidaItemGroup() {
         super("Vida");
     }

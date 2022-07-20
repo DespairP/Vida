@@ -3,7 +3,7 @@ package teamHTBP.vida.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import teamHTBP.vida.gui.GUI.guidebook.GuiGuidebookMain;
+import teamHTBP.vida.gui.menu.guidebook.GuiGuidebookMain;
 
 @OnlyIn(Dist.CLIENT)
 public class ClientScreenManager {

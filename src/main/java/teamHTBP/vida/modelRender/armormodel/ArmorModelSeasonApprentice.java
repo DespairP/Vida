@@ -1,14 +1,14 @@
 package teamHTBP.vida.modelRender.armormodel;
 
 import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
 
-public class ArmorModelSeasonApprentice extends AbstractModelElementArmor<PlayerEntity> {
+public class ArmorModelSeasonApprentice extends AbstractModelElementArmor<Player> {
 
     private ModelRenderer head_2_r1;
     
-    public ArmorModelSeasonApprentice(EquipmentSlotType part) {
+    public ArmorModelSeasonApprentice(EquipmentSlot part) {
         super(128, 128, part);
     }
 

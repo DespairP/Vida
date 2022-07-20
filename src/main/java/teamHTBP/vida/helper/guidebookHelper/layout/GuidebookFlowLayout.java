@@ -1,6 +1,6 @@
 package teamHTBP.vida.helper.guidebookHelper.layout;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import teamHTBP.vida.helper.guidebookHelper.components.IGuidebookComponent;
 
 import java.awt.*;
@@ -31,7 +31,7 @@ public class GuidebookFlowLayout {
      *
      * @return 未被成功渲染的component
      * */
-    public List<IGuidebookComponent> renderComponents(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks, final List<IGuidebookComponent> components){
+    public List<IGuidebookComponent> renderComponents(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks, final List<IGuidebookComponent> components){
         //剩下未被渲染的组件
         List<IGuidebookComponent> remainComponents = new LinkedList<>(components);
         //记录的占用的大小

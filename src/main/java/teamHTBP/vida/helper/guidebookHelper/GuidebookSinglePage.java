@@ -1,9 +1,9 @@
 package teamHTBP.vida.helper.guidebookHelper;
 
 import com.google.gson.annotations.Expose;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.gui.IGuiEventListener;
-import net.minecraft.util.ResourceLocation;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.helper.guidebookHelper.components.IGuidebookComponent;
@@ -42,7 +42,7 @@ public class GuidebookSinglePage {
     }
 
     /**渲染一整页所有组件*/
-    public void renderPage(MatrixStack matrixStack,int mouseX,int mouseY,float partialTicks){
+    public void renderPage(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks){
         List<IGuidebookComponent> remainComponents = components;
         for(GuidebookFlowLayout layout: layouts) {
             if(remainComponents == null || remainComponents.isEmpty()){
@@ -53,8 +53,8 @@ public class GuidebookSinglePage {
     }
 
     /***/
-    public <T extends IGuiEventListener> List<T> getPageListener(){
-        return (List<T>) components;
+    public List<IGuidebookComponent> getPageListener(){
+        return components;
     }
 
 }

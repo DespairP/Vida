@@ -1,10 +1,9 @@
 package teamHTBP.vida.gui.components;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.Screen;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import teamHTBP.vida.gui.GUI.guidebook.GuiGuidebookGuide;
+import teamHTBP.vida.gui.menu.guidebook.GuiGuidebookGuide;
 
 import java.util.Deque;
 import java.util.LinkedList;
@@ -32,7 +31,7 @@ public class GuiGuidebookManager {
             return;
         }
         // 如果是null,直接不显示了
-        minecraft.setScreen((Screen) null);
+        minecraft.setScreen(null);
     }
 
     /**转到下一页,并且携带上一层的Context*/

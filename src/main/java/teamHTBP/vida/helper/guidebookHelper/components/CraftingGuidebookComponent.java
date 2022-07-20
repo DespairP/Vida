@@ -1,6 +1,6 @@
 package teamHTBP.vida.helper.guidebookHelper.components;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 
 public class CraftingGuidebookComponent implements IGuidebookComponent{
     public int x = 0;
@@ -42,7 +42,7 @@ public class CraftingGuidebookComponent implements IGuidebookComponent{
     }
 
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
 
     }
 }

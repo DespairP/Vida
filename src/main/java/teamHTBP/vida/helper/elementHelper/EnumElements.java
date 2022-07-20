@@ -1,9 +1,9 @@
 package teamHTBP.vida.helper.elementHelper;
 
-import net.minecraft.util.RegistryKey;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.utils.color.RGBAColor;
 
@@ -14,9 +14,10 @@ import java.util.Locale;
 
 public enum EnumElements implements IElement {
     VOID,
-    GOLD(2, 3, 0xFFD04A,
-            Biomes.MOUNTAINS,
-            Biomes.MOUNTAIN_EDGE),
+    GOLD(2, 3, 0xFFD04A
+            //Biomes.MOUNTAINS,
+            //Biomes.MOUNTAIN_EDGE
+    ),
     WOOD(5, 4, 0x80C245,
             Biomes.PLAINS,
             Biomes.FOREST,
@@ -29,18 +30,20 @@ public enum EnumElements implements IElement {
             Biomes.OCEAN,
             Biomes.RIVER,
             Biomes.SNOWY_TAIGA,
-            Biomes.COLD_OCEAN,
-            Biomes.SNOWY_TUNDRA),
+            Biomes.COLD_OCEAN
+            //Biomes.SNOWY_TUNDRA
+    ),
     FIRE(1, 5, 0xF53C06,
-            Biomes.MOUNTAINS,
-            Biomes.DESERT,
-            Biomes.MOUNTAIN_EDGE),
+            //Biomes.MOUNTAINS,
+            Biomes.DESERT
+            //Biomes.MOUNTAIN_EDGE
+    ),
     EARTH(3, 1, 0x633800,
             Biomes.ERODED_BADLANDS,
             Biomes.DARK_FOREST),
     NONE;
 
-    List<RegistryKey<Biome>> biomes = new ArrayList<>();
+    List<ResourceKey<Biome>> biomes = new ArrayList<>();
     int conflict;
     int interGrowth;
     RGBAColor elementRGBAColor = RGBAColor.BLACK;
@@ -51,7 +54,7 @@ public enum EnumElements implements IElement {
 
     // todo 重新设计元素和群系的关系之后修改biomes
     @SafeVarargs
-    EnumElements(int conflictIndex, int interGrowthIndex,int hexColor, RegistryKey<Biome>... biomes) {
+    EnumElements(int conflictIndex, int interGrowthIndex,int hexColor, ResourceKey<Biome>... biomes) {
         this.biomes = Arrays.asList(biomes);
         this.interGrowth = interGrowthIndex;
         this.elementRGBAColor = RGBAColor.fromHexRGB(hexColor);
@@ -60,7 +63,7 @@ public enum EnumElements implements IElement {
 
     /**/
     @Override
-    public List<RegistryKey<Biome>> getContainsBiomes() {
+    public List<ResourceKey<Biome>> getContainsBiomes() {
         return biomes;
     }
 

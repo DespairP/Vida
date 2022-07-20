@@ -1,21 +1,21 @@
 package teamHTBP.vida.modelRender.entityRender;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Matrix4f;
+import com.mojang.math.Quaternion;
+import com.mojang.math.Vector3f;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Matrix4f;
-import net.minecraft.util.math.vector.Quaternion;
-import net.minecraft.util.math.vector.Vector3f;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import teamHTBP.vida.entity.EntityFaintLight;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.modelRender.RenderLoader;
@@ -25,7 +25,7 @@ public class EntityRenderFaintLight extends EntityRenderer<EntityFaintLight> {
     private final EntityModel<EntityFaintLight> model;
 
 
-    public EntityRenderFaintLight(EntityRendererManager renderManager) {
+    public EntityRenderFaintLight(Context renderManager) {
         super(renderManager);
         model = new EntityModelFaintLight();
     }
@@ -51,7 +51,7 @@ public class EntityRenderFaintLight extends EntityRenderer<EntityFaintLight> {
 
 
     @Override
-    public void render(EntityFaintLight entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
+    public void render(EntityFaintLight entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
         //super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
         matrixStackIn.pushPose();
         Quaternion quaternion = getDispatcher().camera.rotation();
@@ -61,10 +61,10 @@ public class EntityRenderFaintLight extends EntityRenderer<EntityFaintLight> {
         //matrixStackIn.translate(-0.5f, -0.5F, -0.5f);
 
 
-        TextureAtlasSprite atlasTexture = Minecraft.getInstance().getTextureAtlas(AtlasTexture.LOCATION_BLOCKS).apply(this.getTextureLocation(entityIn));
+        TextureAtlasSprite atlasTexture = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(this.getTextureLocation(entityIn));
 
 
-        IVertexBuilder builder = bufferIn.getBuffer(RenderType.translucent());
+        VertexConsumer builder = bufferIn.getBuffer(RenderType.translucent());
 
         //model.render(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.NO_OVERLAY, r, g, b, a / 2);
 

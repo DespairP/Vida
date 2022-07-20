@@ -1,22 +1,27 @@
 package teamHTBP.vida.block.environment.crop;
 
-import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.monster.RavagerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.state.IntegerProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.monster.Ravager;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.PlantType;
 import teamHTBP.vida.helper.elementHelper.Allelopathy;
 import teamHTBP.vida.helper.elementHelper.ElementHelper;
@@ -25,9 +30,7 @@ import teamHTBP.vida.helper.elementHelper.IElement;
 
 import java.util.Random;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
-public abstract class AbstractBlockElementCrops extends BushBlock implements IGrowable {
+public abstract class AbstractBlockElementCrops extends CropBlock {
     private final static IntegerProperty AGE = BlockStateProperties.AGE_5;
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 10.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D), Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)};
     private final IElement element;
@@ -40,7 +43,7 @@ public abstract class AbstractBlockElementCrops extends BushBlock implements IGr
         this.element = element;
     }
 
-    protected static float getGrowthChance(Block blockIn, IBlockReader worldIn, BlockPos pos) {
+    protected static float getGrowthChance(Block blockIn, BlockGetter worldIn, BlockPos pos) {
         float f = 1.0F;
         BlockPos blockpos = pos.below();
 
@@ -48,7 +51,7 @@ public abstract class AbstractBlockElementCrops extends BushBlock implements IGr
             for (int j = -1; j <= 1; ++j) {
                 float f1 = 0.0F;
                 BlockState blockstate = worldIn.getBlockState(blockpos.offset(i, 0, j));
-                if (blockstate.canSustainPlant(worldIn, blockpos.offset(i, 0, j), net.minecraft.util.Direction.UP, (net.minecraftforge.common.IPlantable) blockIn)) {
+                if (blockstate.canSustainPlant(worldIn, blockpos.offset(i, 0, j), Direction.UP, (net.minecraftforge.common.IPlantable) blockIn)) {
                     f1 = 1.0F;
                     if (blockstate.isFertile(worldIn, blockpos.offset(i, 0, j))) {
                         f1 = 3.0F;
@@ -81,12 +84,8 @@ public abstract class AbstractBlockElementCrops extends BushBlock implements IGr
         return f;
     }
 
-    public static boolean isOpaque(VoxelShape shape) {
-        return true;
-    }
-
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         return SHAPE_BY_AGE[state.getValue(this.getAgeProperties())];
     }
 
@@ -103,7 +102,7 @@ public abstract class AbstractBlockElementCrops extends BushBlock implements IGr
      * @return 是否能生长
      * */
     @Override
-    protected boolean mayPlaceOn(BlockState state, IBlockReader worldIn, BlockPos pos) {
+    protected boolean mayPlaceOn(BlockState state, BlockGetter worldIn, BlockPos pos) {
         return state.getBlock() == Blocks.FARMLAND;
     }
 
@@ -120,6 +119,7 @@ public abstract class AbstractBlockElementCrops extends BushBlock implements IGr
      * @param state 植物的state
      * @return 植物的年龄
      */
+    @Override
     protected int getAge(BlockState state) {
         return state.getValue(this.getAgeProperties());
     }
@@ -127,7 +127,8 @@ public abstract class AbstractBlockElementCrops extends BushBlock implements IGr
     /***
      * 注册State
      * */
-    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(AGE);
     }
 
@@ -151,19 +152,19 @@ public abstract class AbstractBlockElementCrops extends BushBlock implements IGr
 
     /*是否能生长*/
     @Override
-    public boolean isValidBonemealTarget(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
         return !this.isMaxAge(state);
     }
 
     /*是否能使用骨粉，默认不能使用*/
     @Override
-    public boolean isBonemealSuccess(World worldIn, Random rand, BlockPos pos, BlockState state) {
+    public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
         return false;
     }
 
     /*骨粉生长逻辑*/
     @Override
-    public void performBonemeal(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
+    public void performBonemeal(ServerLevel worldIn, Random rand, BlockPos pos, BlockState state) {
         int i = this.getAge(state) + 1;
         int j = this.maxStage;
         if (i > j) {
@@ -172,25 +173,27 @@ public abstract class AbstractBlockElementCrops extends BushBlock implements IGr
     }
 
     /*当玩家碰撞的时候，破坏方块*/
-    public void entityInside(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
-        if (entityIn instanceof RavagerEntity && net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(worldIn, entityIn)) {
+    @Override
+    public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
+        if (entityIn instanceof Ravager && net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(worldIn, entityIn)) {
             worldIn.destroyBlock(pos, true, entityIn);
         }
         super.entityInside(state, worldIn, pos, entityIn);
     }
 
     @Override
-    public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+    public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
         return (worldIn.getRawBrightness(pos, 0) >= 8 || worldIn.canSeeSky(pos)) && super.canSurvive(state, worldIn, pos);
     }
 
-    public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
+    @Override
+    public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random rand) {
         if (!worldIn.isAreaLoaded(pos, 1)) return;
         if (worldIn.getRawBrightness(pos, 0) >= 9) {
             int i = this.getAge(state);
             //元素不为相克时才能生长
             if (i < this.getMaxStage() &&
-                    ElementHelper.getRelationShip(element, ElementHelper.getBiomeElement(worldIn.getBiome(pos))) != Allelopathy.Conflict) {
+                    ElementHelper.getRelationShip(element, ElementHelper.getBiomeElement(worldIn.getBiome(pos).value())) != Allelopathy.Conflict) {
                 float f = getGrowthChance(this, worldIn, pos);
                 if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt((int) (25.0F / f) + 1) == 0)) {
                     worldIn.setBlock(pos, this.withAge(i + 1), 2);
@@ -201,19 +204,24 @@ public abstract class AbstractBlockElementCrops extends BushBlock implements IGr
 
     }
 
-    public ItemStack getCloneItemStack(IBlockReader worldIn, BlockPos pos, BlockState state) {
-        return new ItemStack(this.getSeedsItem());
+    @Override
+    public ItemStack getCloneItemStack(BlockGetter worldIn, BlockPos pos, BlockState state) {
+        return new ItemStack(this.getBaseSeedId());
     }
 
-    protected IItemProvider getSeedsItem() {
-        return Items.WHEAT_SEEDS;
+    @Override
+    protected ItemLike getBaseSeedId() {
+        return getSeedsItem();
     }
+
+    protected ItemLike getSeedsItem() {return Items.WHEAT_SEEDS;};
 
     public IElement getCropElement() {
         return this.element;
     }
 
-    public PlantType getPlantType(IBlockReader world, BlockPos pos) {
+    @Override
+    public PlantType getPlantType(BlockGetter world, BlockPos pos) {
         return PlantType.CROP;
     }
 
@@ -222,7 +230,7 @@ public abstract class AbstractBlockElementCrops extends BushBlock implements IGr
     public interface GrowLogic{
         /**生长逻辑*/
         public boolean grow(BlockState state,
-                            ServerWorld worldIn,
+                            ServerLevel worldIn,
                             BlockPos pos,
                             Random rand,
                             EnumElements cropElement,

@@ -1,8 +1,8 @@
 package teamHTBP.vida.capability.skillSystem;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.item.ItemLoader;
 
@@ -44,7 +44,7 @@ public class SkillHelper {
             if (skillCategory == null) return new LinkedHashMap<>();
             //先获取所有的Skill
             LinkedHashMap<String, SkillSurface> skillsSurface = skillCategory.getAllSkillsSurface();
-            CompoundNBT nbt = itemStack.getOrCreateTag();
+            CompoundTag nbt = itemStack.getOrCreateTag();
             //开始封装所有获取的skill
             skillsSurface.forEach((name, skill) -> {
                 int[] expLevel = getSkillExpAndLevel(skill, nbt);
@@ -55,7 +55,7 @@ public class SkillHelper {
         }
     }
 
-    private static int[] getSkillExpAndLevel(ISkill skill, CompoundNBT nbt) {
+    private static int[] getSkillExpAndLevel(ISkill skill, CompoundTag nbt) {
         int[] expLevel = new int[2];
         if (skill == null || nbt == null) return expLevel;
         expLevel[0] = nbt.getInt(skill.getSkillName() + "Exp");
@@ -69,7 +69,7 @@ public class SkillHelper {
      * @param surface 要刷新的技能
      * @param nbt     物品的NBT
      */
-    public static void refreshSkillSurfaceExpAndLevel(SkillSurface surface, CompoundNBT nbt) {
+    public static void refreshSkillSurfaceExpAndLevel(SkillSurface surface, CompoundTag nbt) {
         int[] expLevel = getSkillExpAndLevel(surface, nbt);
         if (expLevel.length == 2) {
             surface.skillCurrentExp = expLevel[0];

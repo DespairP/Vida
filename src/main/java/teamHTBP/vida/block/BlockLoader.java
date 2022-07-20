@@ -1,10 +1,10 @@
 package teamHTBP.vida.block;
 
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.block.decoration.*;
 import teamHTBP.vida.block.environment.BlockDeepStone;
@@ -14,6 +14,7 @@ import teamHTBP.vida.block.environment.BlockOreElement;
 import teamHTBP.vida.block.environment.crop.BlockElementCropParticle;
 import teamHTBP.vida.block.environment.crop.BlockSaplingVida;
 import teamHTBP.vida.block.function.*;
+import teamHTBP.vida.block.function.crystal.*;
 import teamHTBP.vida.helper.RegisterItemBlock;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.item.ItemBlockLoader;

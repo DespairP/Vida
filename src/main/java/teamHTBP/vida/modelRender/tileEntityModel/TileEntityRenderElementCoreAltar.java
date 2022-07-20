@@ -1,32 +1,32 @@
 package teamHTBP.vida.modelRender.tileEntityModel;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Quaternion;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.client.renderer.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.vector.Quaternion;
-import teamHTBP.vida.TileEntity.TileEntityElementCoreAltar;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.world.item.ItemStack;
+import teamHTBP.vida.blockentity.TileEntityElementCoreAltar;
 
 import java.util.Random;
 
-public class TileEntityRenderElementCoreAltar extends TileEntityRenderer<TileEntityElementCoreAltar> {
+public class TileEntityRenderElementCoreAltar extends BlockEntityRenderer<TileEntityElementCoreAltar> {
     int[] randomRotationY = {0, 0, 0, 0};
     int[] randomRotationZ = {0, 0, 0, 0};
     Random rand = new Random();
 
-    public TileEntityRenderElementCoreAltar(TileEntityRendererDispatcher rendererDispatcherIn) {
+    public TileEntityRenderElementCoreAltar(BlockEntityRenderDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
 
 
     }
 
     @Override
-    public void render(TileEntityElementCoreAltar tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
+    public void render(TileEntityElementCoreAltar tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
 
         if (tileEntityIn.coreItem != ItemStack.EMPTY || !tileEntityIn.coreItem.isEmpty()) {
             matrixStackIn.pushPose();
@@ -38,8 +38,8 @@ public class TileEntityRenderElementCoreAltar extends TileEntityRenderer<TileEnt
             else
                 matrixStackIn.mulPose(this.renderer.camera.rotation());
             ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-            IBakedModel ibakedmodel = itemRenderer.getModel(tileEntityIn.coreItem, tileEntityIn.getLevel(), null);
-            itemRenderer.render(tileEntityIn.coreItem, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+            BakedModel ibakedmodel = itemRenderer.getModel(tileEntityIn.coreItem, tileEntityIn.getLevel(), null);
+            itemRenderer.render(tileEntityIn.coreItem, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
             matrixStackIn.popPose();
         }
         for (int i = 0; i < 4; i++) {
@@ -64,8 +64,8 @@ public class TileEntityRenderElementCoreAltar extends TileEntityRenderer<TileEnt
                 matrixStackIn.mulPose(new Quaternion(90, 0, this.randomRotationZ[i], true));
                 matrixStackIn.scale(0.3f, 0.3f, 0.3f);
                 ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-                IBakedModel ibakedmodel = itemRenderer.getModel(tileEntityIn.getStack(i), tileEntityIn.getLevel(), null);
-                itemRenderer.render(tileEntityIn.getStack(i), ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+                BakedModel ibakedmodel = itemRenderer.getModel(tileEntityIn.getStack(i), tileEntityIn.getLevel(), null);
+                itemRenderer.render(tileEntityIn.getStack(i), ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
             }
         }

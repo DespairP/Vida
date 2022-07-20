@@ -1,7 +1,7 @@
 package teamHTBP.vida.capability.skillSystem;
 
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 import teamHTBP.vida.Vida;
 
 public class Skill implements ISkill {
@@ -109,7 +109,7 @@ public class Skill implements ISkill {
      * @return 技能的翻译名
      */
     public String getSkillTranlateName() {
-        return new TranslationTextComponent(getSkillCompleteName()).getString();
+        return new TranslatableComponent(getSkillCompleteName()).getString();
     }
 
 
@@ -119,7 +119,7 @@ public class Skill implements ISkill {
      * @return 技能介绍
      */
     public String getSkillTranlateDesc() {
-        return new TranslationTextComponent("skill.vida." + skillName + ".desc", (char) 0x0A).getString();
+        return new TranslatableComponent("skill.vida." + skillName + ".desc", (char) 0x0A).getString();
     }
 
     @Override
