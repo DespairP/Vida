@@ -9,15 +9,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import teamHTBP.vida.entity.EntityFaintLight;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
+import teamHTBP.vida.modelRender.LayerRegistryHandler;
 import teamHTBP.vida.modelRender.RenderLoader;
 import teamHTBP.vida.modelRender.entityModel.EntityModelFaintLight;
 
@@ -27,7 +26,7 @@ public class EntityRenderFaintLight extends EntityRenderer<EntityFaintLight> {
 
     public EntityRenderFaintLight(Context renderManager) {
         super(renderManager);
-        model = new EntityModelFaintLight();
+        model = LayerRegistryHandler.create(EntityModelFaintLight.class);
     }
 
     @Override
@@ -54,7 +53,7 @@ public class EntityRenderFaintLight extends EntityRenderer<EntityFaintLight> {
     public void render(EntityFaintLight entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
         //super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
         matrixStackIn.pushPose();
-        Quaternion quaternion = getDispatcher().camera.rotation();
+        Quaternion quaternion = Minecraft.getInstance().gameRenderer.getMainCamera().rotation();
         //quaternion.multiply(Vector3f.XP.rotation(0));
         matrixStackIn.translate(0.5, 0.5, 0);
         //matrixStackIn.rotate(quaternion);
@@ -99,10 +98,5 @@ public class EntityRenderFaintLight extends EntityRenderer<EntityFaintLight> {
 
         matrixStackIn.popPose();
 
-    }
-
-    protected int getBrightnessForRender(EntityFaintLight entityIn, float partialTick) {
-        BlockPos blockpos = new BlockPos(entityIn.xo, entityIn.yo, entityIn.zo);
-        return entityIn.level.hasChunkAt(blockpos) ? WorldRenderer.getLightColor(entityIn.level, blockpos) : 0;
     }
 }

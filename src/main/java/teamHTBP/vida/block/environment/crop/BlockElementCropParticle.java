@@ -1,5 +1,6 @@
 package teamHTBP.vida.block.environment.crop;
 
+import com.mojang.math.Vector3f;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.world.level.ItemLike;
@@ -66,7 +67,7 @@ public class BlockElementCropParticle extends AbstractBlockElementCrops {
             double offsetX = RANDOM.nextDouble() * 0.5D + 0.2D;
             double offsetZ = RANDOM.nextDouble() * 0.5D + 0.2D;
             //worldIn.addParticle(new CuboidParticleData(0,0.02D,0,128 - offsetColor,214 - offsetColor, 142 - offsetColor, 0.5f, 100), x + offsetX, y , z + offsetZ,0,0,0);
-            worldIn.addParticle(new DustParticleOptions(color.r * 1.0F / 255.0F, color.g * 1.0F / 255.0F, color.b * 1.0F / 255.0F, 1), x + offsetX, y + 0.4f, z + offsetZ, 0, 0, 0);
+            worldIn.addParticle(new DustParticleOptions(new Vector3f(color.r * 1.0F / 255.0F, color.g * 1.0F / 255.0F, color.b * 1.0F / 255.0F), 1), x + offsetX, y + 0.4f, z + offsetZ, 0, 0, 0);
         }
     }
 }

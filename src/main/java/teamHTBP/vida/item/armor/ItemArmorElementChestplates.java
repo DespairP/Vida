@@ -9,7 +9,8 @@ import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.IItemRenderProperties;
 import teamHTBP.vida.creativetab.ItemGroupLoader;
-import teamHTBP.vida.modelRender.armormodel.*;
+import teamHTBP.vida.modelRender.LayerRegistryHandler;
+import teamHTBP.vida.modelRender.armormodel.chestplate.*;
 
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
@@ -34,11 +35,11 @@ public class ItemArmorElementChestplates extends ArmorItem {
             @Override
             public HumanoidModel<?> getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> _default) {
                 AbstractModelElementChestplates model = switch (element) {
-                    case 1 -> new ArmorModelGoldChestplates();
-                    case 2 -> new ArmorModelWoodChestplates();
-                    case 3 -> new AbstractModelAquaChestplates();
-                    case 4 -> new ArmorModelFireChestplates();
-                    case 5 -> new ArmorModelEarthChestplates();
+                    case 1 -> LayerRegistryHandler.create(ArmorModelGoldChestplates.class);
+                    case 2 -> LayerRegistryHandler.create(ArmorModelWoodChestplates.class);
+                    case 3 -> LayerRegistryHandler.create(AbstractModelAquaChestplates.class);
+                    case 4 -> LayerRegistryHandler.create(ArmorModelFireChestplates.class);
+                    case 5 -> LayerRegistryHandler.create(ArmorModelEarthChestplates.class);
                     default -> null;
                 };
 

@@ -28,11 +28,13 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import teamHTBP.vida.block.base.ModBaseEntityBlock;
 import teamHTBP.vida.blockentity.TileEntityGemShower;
+import teamHTBP.vida.blockentity.TileEntityLoader;
 
 import javax.annotation.Nullable;
 
-public class BlockGemShower extends Block implements EntityBlock {
+public class BlockGemShower extends ModBaseEntityBlock<TileEntityGemShower> {
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     VoxelShape base = Block.box(1, 0, 1, 15, 16, 15);
@@ -40,8 +42,9 @@ public class BlockGemShower extends Block implements EntityBlock {
 
 
     public BlockGemShower() {
-        super(Properties.of(Material.WOOD).sound(SoundType.WOOD).noOcclusion().strength(2.0f, 3.0f)
+        super(Properties.of(Material.WOOD).sound(SoundType.WOOD).noOcclusion().strength(2.0f, 3.0f),
                 // todo tag .harvestTool(ToolType.AXE)
+                TileEntityLoader.TileEntityGemShower
         );
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(HALF, DoubleBlockHalf.LOWER));
     }
@@ -176,7 +179,7 @@ public class BlockGemShower extends Block implements EntityBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState state) {
         if (state.getValue(HALF) == DoubleBlockHalf.LOWER) {
-            return new TileEntityGemShower();
+            return new TileEntityGemShower(pPos, state);
         }
         return null;
     }

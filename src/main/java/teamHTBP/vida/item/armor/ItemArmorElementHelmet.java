@@ -9,7 +9,8 @@ import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.IItemRenderProperties;
 import teamHTBP.vida.creativetab.ItemGroupLoader;
-import teamHTBP.vida.modelRender.armormodel.*;
+import teamHTBP.vida.modelRender.LayerRegistryHandler;
+import teamHTBP.vida.modelRender.armormodel.helmet.*;
 
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
@@ -34,11 +35,11 @@ public class ItemArmorElementHelmet extends ArmorItem {
             @Override
             public HumanoidModel<?> getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> _default) {
                 AbstractModelElementHelmet model = switch (element) {
-                    case 1 -> new ArmorModelGoldHelmet();
-                    case 2 -> new ArmorModelWoodHelmet();
-                    case 3 -> new ArmorModelAquaHelmet();
-                    case 4 -> new ArmorModelFireHelmet();
-                    case 5 -> new ArmorModelEarthHelmet();
+                    case 1 -> LayerRegistryHandler.create(ArmorModelGoldHelmet.class);
+                    case 2 -> LayerRegistryHandler.create(ArmorModelWoodHelmet.class);
+                    case 3 -> LayerRegistryHandler.create(ArmorModelAquaHelmet.class);
+                    case 4 -> LayerRegistryHandler.create(ArmorModelFireHelmet.class);
+                    case 5 -> LayerRegistryHandler.create(ArmorModelEarthHelmet.class);
                     default -> null;
                 };
 

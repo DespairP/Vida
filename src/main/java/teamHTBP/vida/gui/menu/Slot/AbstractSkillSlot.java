@@ -1,6 +1,7 @@
 package teamHTBP.vida.gui.menu.Slot;
 
 import net.minecraft.client.gui.components.AbstractButton;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.TextComponent;
 import teamHTBP.vida.capability.skillSystem.SkillSurface;
 
@@ -94,5 +95,10 @@ public abstract class AbstractSkillSlot extends AbstractButton {
 
     public interface FocusChangeListener {
         void onClick(String skillName, int index, AbstractSkillSlot slot);
+    }
+
+    @Override
+    public void updateNarration(NarrationElementOutput pNarrationElementOutput) {
+
     }
 }

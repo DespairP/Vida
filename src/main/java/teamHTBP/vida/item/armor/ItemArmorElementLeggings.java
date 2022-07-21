@@ -9,7 +9,8 @@ import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.IItemRenderProperties;
 import teamHTBP.vida.creativetab.ItemGroupLoader;
-import teamHTBP.vida.modelRender.armormodel.*;
+import teamHTBP.vida.modelRender.LayerRegistryHandler;
+import teamHTBP.vida.modelRender.armormodel.leg.*;
 
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
@@ -33,11 +34,11 @@ public class ItemArmorElementLeggings extends ArmorItem {
             @Override
             public HumanoidModel<?> getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> _default) {
                 AbstractModelElementLeggings model = switch (element) {
-                    case 1 -> new ArmorModelGoldLeggings();
-                    case 2 -> new ArmorModelWoodLeggings();
-                    case 3 -> new ArmorModelAquaLeggings();
-                    case 4 -> new ArmorModelFireLeggings();
-                    case 5 -> new ArmorModelEarthLeggings();
+                    case 1 -> LayerRegistryHandler.create(ArmorModelGoldLeggings.class);
+                    case 2 -> LayerRegistryHandler.create(ArmorModelWoodLeggings.class);
+                    case 3 -> LayerRegistryHandler.create(ArmorModelAquaLeggings.class);
+                    case 4 -> LayerRegistryHandler.create(ArmorModelFireLeggings.class);
+                    case 5 -> LayerRegistryHandler.create(ArmorModelEarthLeggings.class);
                     default -> null;
                 };
 

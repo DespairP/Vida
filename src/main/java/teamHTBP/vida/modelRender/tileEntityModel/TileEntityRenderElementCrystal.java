@@ -7,8 +7,7 @@ import com.mojang.math.Quaternion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
@@ -16,33 +15,23 @@ import teamHTBP.vida.Vida;
 import teamHTBP.vida.blockentity.TileEntityElementCrystal;
 import teamHTBP.vida.modelRender.RenderLoader;
 
-public class TileEntityRenderElementCrystal extends BlockEntityRenderer<TileEntityElementCrystal> {
+public class TileEntityRenderElementCrystal extends ModBlockEntityRenderer<TileEntityElementCrystal> {
     public ResourceLocation ELEMENT_CRYSTAL;
     private int element = 0;
 
-    public TileEntityRenderElementCrystal(BlockEntityRenderDispatcher rendererDispatcherIn, int element) {
-        super(rendererDispatcherIn);
+    public TileEntityRenderElementCrystal(BlockEntityRendererProvider.Context context, int element) {
+        super(context);
         this.element = element;
         switch (element) {
-            case 1:
-                ELEMENT_CRYSTAL = RenderLoader.goldCrystalLocation;
-                break;
-            case 2:
-                ELEMENT_CRYSTAL = RenderLoader.woodCrystalLocation;
-                break;
-            case 3:
-                ELEMENT_CRYSTAL = RenderLoader.aquaCrystalLocation;
-                break;
-            case 4:
-                ELEMENT_CRYSTAL = RenderLoader.fireCrystalLocation;
-                break;
-            case 5:
-                ELEMENT_CRYSTAL = RenderLoader.earthCrystalLocation;
-                break;
-            default:
-                ELEMENT_CRYSTAL = new ResourceLocation(Vida.MOD_ID, "model/earthelementcrystal");
+            case 1 -> ELEMENT_CRYSTAL = RenderLoader.goldCrystalLocation;
+            case 2 -> ELEMENT_CRYSTAL = RenderLoader.woodCrystalLocation;
+            case 3 -> ELEMENT_CRYSTAL = RenderLoader.aquaCrystalLocation;
+            case 4 -> ELEMENT_CRYSTAL = RenderLoader.fireCrystalLocation;
+            case 5 -> ELEMENT_CRYSTAL = RenderLoader.earthCrystalLocation;
+            default -> ELEMENT_CRYSTAL = new ResourceLocation(Vida.MOD_ID, "model/earthelementcrystal");
         }
     }
+
 
     @Override
     public void render(TileEntityElementCrystal tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {

@@ -2,9 +2,9 @@ package teamHTBP.vida.utils.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import teamHTBP.vida.helper.elementHelper.IElement;
 import teamHTBP.vida.utils.json.serializer.IElementSerializer;
 import teamHTBP.vida.utils.json.serializer.IngredientSerializer;

@@ -5,8 +5,7 @@ import com.mojang.math.Quaternion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.item.ItemStack;
@@ -14,15 +13,13 @@ import teamHTBP.vida.blockentity.TileEntityElementCoreAltar;
 
 import java.util.Random;
 
-public class TileEntityRenderElementCoreAltar extends BlockEntityRenderer<TileEntityElementCoreAltar> {
+public class TileEntityRenderElementCoreAltar extends ModBlockEntityRenderer<TileEntityElementCoreAltar> {
     int[] randomRotationY = {0, 0, 0, 0};
     int[] randomRotationZ = {0, 0, 0, 0};
     Random rand = new Random();
 
-    public TileEntityRenderElementCoreAltar(BlockEntityRenderDispatcher rendererDispatcherIn) {
-        super(rendererDispatcherIn);
-
-
+    public TileEntityRenderElementCoreAltar(BlockEntityRendererProvider.Context context) {
+        super(context);
     }
 
     @Override
@@ -38,7 +35,7 @@ public class TileEntityRenderElementCoreAltar extends BlockEntityRenderer<TileEn
             else
                 matrixStackIn.mulPose(this.renderer.camera.rotation());
             ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-            BakedModel ibakedmodel = itemRenderer.getModel(tileEntityIn.coreItem, tileEntityIn.getLevel(), null);
+            BakedModel ibakedmodel = itemRenderer.getModel(tileEntityIn.coreItem, tileEntityIn.getLevel(), null, 0);
             itemRenderer.render(tileEntityIn.coreItem, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
             matrixStackIn.popPose();
         }
@@ -48,23 +45,15 @@ public class TileEntityRenderElementCoreAltar extends BlockEntityRenderer<TileEn
                 if (randomRotationZ[i] == 0) this.randomRotationZ[i] = rand.nextInt();
                 matrixStackIn.pushPose();
                 switch (i) {
-                    case 0:
-                        matrixStackIn.translate(0.2, 0.7 + tileEntityIn.moveup / 4.0 - tileEntityIn.floating / 2, 0.5);
-                        break;
-                    case 1:
-                        matrixStackIn.translate(0.5, 0.7 + tileEntityIn.moveup / 4.0 - tileEntityIn.floating / 2, 0.2);
-                        break;
-                    case 2:
-                        matrixStackIn.translate(0.5, 0.7 + tileEntityIn.moveup / 4.0 - tileEntityIn.floating / 2, 0.8);
-                        break;
-                    case 3:
-                        matrixStackIn.translate(0.8, 0.7 + tileEntityIn.moveup / 4.0 - tileEntityIn.floating / 2, 0.5);
-                        break;
+                    case 0 -> matrixStackIn.translate(0.2, 0.7 + tileEntityIn.moveup / 4.0 - tileEntityIn.floating / 2, 0.5);
+                    case 1 -> matrixStackIn.translate(0.5, 0.7 + tileEntityIn.moveup / 4.0 - tileEntityIn.floating / 2, 0.2);
+                    case 2 -> matrixStackIn.translate(0.5, 0.7 + tileEntityIn.moveup / 4.0 - tileEntityIn.floating / 2, 0.8);
+                    case 3 -> matrixStackIn.translate(0.8, 0.7 + tileEntityIn.moveup / 4.0 - tileEntityIn.floating / 2, 0.5);
                 }
                 matrixStackIn.mulPose(new Quaternion(90, 0, this.randomRotationZ[i], true));
                 matrixStackIn.scale(0.3f, 0.3f, 0.3f);
                 ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-                BakedModel ibakedmodel = itemRenderer.getModel(tileEntityIn.getStack(i), tileEntityIn.getLevel(), null);
+                BakedModel ibakedmodel = itemRenderer.getModel(tileEntityIn.getStack(i), tileEntityIn.getLevel(), null, 0);
                 itemRenderer.render(tileEntityIn.getStack(i), ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
             }

@@ -13,9 +13,7 @@ import teamHTBP.vida.blockentity.crystal.*;
 public class TileEntityLoader {
     public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITY_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, Vida.MOD_ID);
     public static RegistryObject<BlockEntityType<TileEntityPurfiedCauldron>> TileEntityPurfiedCauldron = TILE_ENTITY_DEFERRED_REGISTER.register("tepurfiedcauldron", () -> {
-        return BlockEntityType.Builder.of(() -> {
-                    return new TileEntityPurfiedCauldron();
-                },
+        return BlockEntityType.Builder.of(teamHTBP.vida.blockentity.TileEntityPurfiedCauldron::new,
                 BlockLoader.purfiedCauldron.get()).build(null);
     });
     public static RegistryObject<BlockEntityType<TileEntityGemShower>> TileEntityGemShower = TILE_ENTITY_DEFERRED_REGISTER.register("tegemshower", () -> {
@@ -23,37 +21,27 @@ public class TileEntityLoader {
     });
 
     public static RegistryObject<BlockEntityType<TileEntityElementCoreAltar>> TileEntityElementCoreAltar = TILE_ENTITY_DEFERRED_REGISTER.register("teelementcorealtar", () -> {
-        return BlockEntityType.Builder.of((p, b) -> {
-                    return new TileEntityElementCoreAltar(p, b);
-                },
+        return BlockEntityType.Builder.of(teamHTBP.vida.blockentity.TileEntityElementCoreAltar::new,
                 BlockLoader.CORE_ALTAR.get()).build(null);
     });
 
     public static RegistryObject<BlockEntityType<TileEntityPrismTable>> TileEntityPrismTable = TILE_ENTITY_DEFERRED_REGISTER.register("teprismtable", () -> {
-        return BlockEntityType.Builder.of((p, b) -> {
-                    return new TileEntityPrismTable(p, b);
-                },
+        return BlockEntityType.Builder.of(teamHTBP.vida.blockentity.TileEntityPrismTable::new,
                 BlockLoader.prismTable.get()).build(null);
     });
 
     public static RegistryObject<BlockEntityType<TileEntityOreReationMachine>> TileEntityOreReationMachine = TILE_ENTITY_DEFERRED_REGISTER.register("teorereactionmachine", () -> {
-        return BlockEntityType.Builder.of((p, b) -> {
-                    return new TileEntityOreReationMachine(p, b);
-                },
+        return BlockEntityType.Builder.of(teamHTBP.vida.blockentity.TileEntityOreReationMachine::new,
                 BlockLoader.oreReactionMachine.get()).build(null);
     });
 
     public static RegistryObject<BlockEntityType<TileEntityCollector>> TileEntityCollector = TILE_ENTITY_DEFERRED_REGISTER.register("tecollector", () -> {
-        return BlockEntityType.Builder.of((p, b) -> {
-                    return new TileEntityCollector(p, b);
-                },
+        return BlockEntityType.Builder.of(teamHTBP.vida.blockentity.TileEntityCollector::new,
                 BlockLoader.collector.get()).build(null);
     });
 
     public static RegistryObject<BlockEntityType<TileEntityGoldElementCrystal>> TileEntityCrystalGold = TILE_ENTITY_DEFERRED_REGISTER.register("teelementcrystal_gold", () -> {
-        return BlockEntityType.Builder.of((p, b) -> {
-                    return new TileEntityGoldElementCrystal(p, b, 1);
-                },
+        return BlockEntityType.Builder.of(TileEntityGoldElementCrystal::new,
                 BlockLoader.elementCrystalGold.get()).build(null);
     });
 

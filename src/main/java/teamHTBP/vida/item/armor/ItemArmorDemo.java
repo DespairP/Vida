@@ -1,5 +1,6 @@
 package teamHTBP.vida.item.armor;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -9,7 +10,8 @@ import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.IItemRenderProperties;
 import teamHTBP.vida.creativetab.ItemGroupLoader;
-import teamHTBP.vida.modelRender.armormodel.ArmorModelSeasonApprentice;
+import teamHTBP.vida.modelRender.LayerRegistryHandler;
+import teamHTBP.vida.modelRender.armormodel.armor.ArmorModelSeasonApprentice;
 
 import java.util.function.Consumer;
 
@@ -26,7 +28,8 @@ public class ItemArmorDemo extends ArmorItem {
             @Override
             public HumanoidModel<?> getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> _default) {
                 EquipmentSlot slot = getSlot();
-                return new ArmorModelSeasonApprentice(slot);
+                return new ArmorModelSeasonApprentice(Minecraft.getInstance()
+                        .getEntityModels().bakeLayer(LayerRegistryHandler.SEASON_APPRENTICE), slot);
             }
         });
     }
@@ -36,8 +39,4 @@ public class ItemArmorDemo extends ArmorItem {
     {
         return "vida:textures/model/armor/armor_demo.png";
     }
-
-
-
-
 }

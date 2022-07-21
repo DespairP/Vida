@@ -9,7 +9,8 @@ import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.IItemRenderProperties;
 import teamHTBP.vida.creativetab.ItemGroupLoader;
-import teamHTBP.vida.modelRender.armormodel.*;
+import teamHTBP.vida.modelRender.LayerRegistryHandler;
+import teamHTBP.vida.modelRender.armormodel.boots.*;
 
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
@@ -33,11 +34,11 @@ public class ItemArmorElementBoots extends ArmorItem {  //盔甲属于什么元�
             @Override
             public HumanoidModel<?> getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> _default) {
                 AbstractModelElementBoots model = switch (element) {
-                    case 1 -> new ArmorModelGoldBoots();
-                    case 2 -> new ArmorModelWoodBoots();
-                    case 3 -> new ArmorModelGoldBoots();
-                    case 4 -> new ArmorModelFireBoots();
-                    case 5 -> new ArmorModelEarthBoots();
+                    case 1 -> LayerRegistryHandler.create(ArmorModelGoldBoots.class);
+                    case 2 -> LayerRegistryHandler.create(ArmorModelWoodBoots.class);
+                    case 3 -> LayerRegistryHandler.create(ArmorModelGoldBoots.class);
+                    case 4 -> LayerRegistryHandler.create(ArmorModelFireBoots.class);
+                    case 5 -> LayerRegistryHandler.create(ArmorModelEarthBoots.class);
                     default -> null;
                 };
 

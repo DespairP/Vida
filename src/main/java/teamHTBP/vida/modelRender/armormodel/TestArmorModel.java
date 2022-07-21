@@ -5,16 +5,22 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.entity.item.ArmorStandEntity;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import teamHTBP.vida.modelRender.AutoRegModel;
+import teamHTBP.vida.utils.ModelHelper;
 
 /**
  * PlayerModel - Either Mojang or a mod author (Taken From Memory)
  */
 @OnlyIn(Dist.CLIENT)
-public class TestArmorModel<T extends Entity> extends HumanoidModel<ArmorStandEntity> {
+@AutoRegModel
+public class TestArmorModel<T extends Entity> extends HumanoidModel<ArmorStand> {
     private final boolean isChildHeadScaled = false;
     private final float childHeadOffsetY = 5.0f;
     private final float childHeadOffsetZ = 5.0f;
@@ -23,53 +29,44 @@ public class TestArmorModel<T extends Entity> extends HumanoidModel<ArmorStandEn
     public ModelPart a2;
     public ModelPart a3;
 
+    public TestArmorModel(ModelPart pRoot) {
+        super(pRoot);
 
-    public TestArmorModel() {
-        super(1.0f, 0, 64, 64);
-
-
-        this.texWidth = 64;
-        this.texHeight = 64;
-        this.a3 = new ModelPart(this, 0, 49);
-        this.a3.setPos(0.0F, 0.0F, 0.0F);
-        this.a3.addBox(-1.0F, -7.0F, -2.5F, 2.0F, 2.0F, 5.0F, 0.0F, 0.0F, 0.0F);
-        this.setRotateAngle(a3, 0.42987458011881735F, 0.0F, 1.0555751236166873F);
-        this.a2 = new ModelPart(this, 0, 56);
-        this.a2.setPos(0.0F, 0.0F, 0.0F);
-        this.a2.addBox(-1.0F, -5.8F, 5.0F, 2.0F, 2.0F, 6.0F, 0.0F, 0.0F, 0.0F);
-        this.setRotateAngle(a2, 1.4465288361160007F, 0.0F, 0.0F);
-        this.head = new ModelPart(this, 0, 0);
-        this.head.setPos(0.0F, 0.0F, 0.0F);
-        this.head.addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.0F, 0.0F, 0.0F);
-        this.a4 = new ModelPart(this, 0, 49);
-        this.a4.setPos(0.0F, 0.0F, 0.0F);
-        this.a4.addBox(-1.0F, -7.0F, -2.5F, 2.0F, 2.0F, 5.0F, 0.0F, 0.0F, 0.0F);
-        this.setRotateAngle(a4, 0.42987458011881735F, 0.0F, -1.0555751236166873F);
-        this.head.addChild(this.a3);
-        this.head.addChild(this.a2);
-        this.head.addChild(this.a4);
-
-
+        head = pRoot.getChild("head");
+        a4 = pRoot.getChild("a4");
+        a2 = pRoot.getChild("a2");
+        a3 = pRoot.getChild("a3");
     }
+
 
     @Override
     public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
         super.renderToBuffer(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
     }
 
+    @Override
     protected Iterable<ModelPart> headParts() {
         //this.head.copyModelAngles(this.bipedHead);
         return ImmutableList.of(this.head);
     }
 
-    /**
-     * This is a helper function from Tabula to set the rotation of model parts
-     */
-    public void setRotateAngle(ModelPart modelRenderer, float x, float y, float z) {
-        modelRenderer.xRot = x;
-        modelRenderer.yRot = y;
-        modelRenderer.zRot = z;
-    }
 
+    public static LayerDefinition createBodyLayer() {
+        return ModelHelper.createBodyLayer(partDefinition -> {
+            var head = partDefinition.addOrReplaceChild("head",
+                    CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+            var a3 = head.addOrReplaceChild("a3",
+                    CubeListBuilder.create(),PartPose.offset(0.0F, 0.0F, 0.0F));
+
+            var a2 = head.addOrReplaceChild("a2",
+                    CubeListBuilder.create(),PartPose.offset(0.0F, 0.0F, 0.0F));
+
+            var a4 = head.addOrReplaceChild("a4",
+                    CubeListBuilder.create(),PartPose.offset(0.0F, 0.0F, 0.0F));
+
+
+        });
+    }
 
 }

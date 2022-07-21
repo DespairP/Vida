@@ -29,7 +29,7 @@ public class GrowthLogics {
         // 如果加载超界或者光源不满足的情况下，停止生长
         if (!worldIn.isAreaLoaded(pos, 1) || worldIn.getRawBrightness(pos, 0) < 9) return false;
         // 如果不符合相生定律,不生长
-        final Allelopathy allelopathy = ElementHelper.getRelationShip(cropElement, ElementHelper.getBiomeElement(worldIn.getBiome(pos)));
+        final Allelopathy allelopathy = ElementHelper.getRelationShip(cropElement, ElementHelper.getBiomeElement(worldIn.getBiome(pos).value()));
         if(ILLEGAL_ALLELOPATHY_LIST.contains(allelopathy)) return false;
         final float f = getGrowthChance(state.getBlock(), worldIn, pos);
         return age < maxAge && onCropsGrowPre(worldIn, pos, state, rand.nextInt((int) (25.0F / f) + 1) == 0);

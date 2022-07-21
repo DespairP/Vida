@@ -6,11 +6,8 @@ import com.mojang.math.Matrix4f;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.Item;
@@ -19,13 +16,14 @@ import teamHTBP.vida.blockentity.TileEntityGemShower;
 import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.modelRender.RenderLoader;
 
-public class TileEntityRenderGemShower extends BlockEntityRenderer<TileEntityGemShower> {
+public class TileEntityRenderGemShower extends ModBlockEntityRenderer<TileEntityGemShower> {
     float r = 1, g = 1, b = 1, a = 1;
     double height = 0.0f;
 
-    public TileEntityRenderGemShower(BlockEntityRenderDispatcher rendererDispatcherIn) {
-        super(rendererDispatcherIn);
+    public TileEntityRenderGemShower(BlockEntityRendererProvider.Context context) {
+        super(context);
     }
+
 
     @Override
     public void render(TileEntityGemShower tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
@@ -33,7 +31,10 @@ public class TileEntityRenderGemShower extends BlockEntityRenderer<TileEntityGem
             TextureAtlasSprite textureAtlasSprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(this.getGemResource(tileEntityIn.gemItem));
             double floatHeight = Math.sin(height) * 0.1;
             this.height += 0.01;
-            if (height >= Math.PI * 2) this.height = 0.0f;
+
+            if (height >= Math.PI * 2) {
+                this.height = 0.0f;
+            }
 
             float uMin = textureAtlasSprite.getU0();
             float uMax = textureAtlasSprite.getU1();
@@ -138,10 +139,5 @@ public class TileEntityRenderGemShower extends BlockEntityRenderer<TileEntityGem
         } else {
             return RenderLoader.earthlogoLocation;
         }
-    }
-
-    protected int getBrightnessForRender(TileEntityGemShower tileEntityGemShower, float partialTick) {
-        BlockPos blockpos = new BlockPos(tileEntityGemShower.getBlockPos().getX(), tileEntityGemShower.getBlockPos().getY(), tileEntityGemShower.getBlockPos().getZ());
-        return tileEntityGemShower.getLevel().hasChunkAt(blockpos) ? WorldRenderer.getLightColor(tileEntityGemShower.getLevel(), blockpos) : 0;
     }
 }

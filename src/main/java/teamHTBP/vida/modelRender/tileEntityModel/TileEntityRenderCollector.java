@@ -4,16 +4,16 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.item.ItemStack;
 import teamHTBP.vida.blockentity.TileEntityCollector;
 
-public class TileEntityRenderCollector extends BlockEntityRenderer<TileEntityCollector> {
-    public TileEntityRenderCollector(BlockEntityRenderDispatcher rendererDispatcherIn) {
-        super(rendererDispatcherIn);
+public class TileEntityRenderCollector extends ModBlockEntityRenderer<TileEntityCollector> {
+
+    public TileEntityRenderCollector(BlockEntityRendererProvider.Context context) {
+        super(context);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class TileEntityRenderCollector extends BlockEntityRenderer<TileEntityCol
             ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
             // matrixStack.pushPose();
             // RenderSystem.setShaderColor(1, 1.0f, 1, 0.8f);
-            BakedModel ibakedmodel = itemRenderer.getModel(stack, tileEntityIn.getLevel(), null);
+            BakedModel ibakedmodel = itemRenderer.getModel(stack, tileEntityIn.getLevel(), null, 0);
             itemRenderer.render(stack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
             // matrixStack.popPose();
             matrixStackIn.popPose();

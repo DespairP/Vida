@@ -5,8 +5,7 @@ import com.mojang.math.Quaternion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.item.ItemStack;
@@ -16,13 +15,14 @@ import teamHTBP.vida.blockentity.TileEntityPrismTable;
 
 import java.util.Random;
 
-public class TileEntityRenderPrismTable extends BlockEntityRenderer<TileEntityPrismTable> {
+public class TileEntityRenderPrismTable extends ModBlockEntityRenderer<TileEntityPrismTable> {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     Random random = new Random();
 
-    public TileEntityRenderPrismTable(BlockEntityRenderDispatcher rendererDispatcherIn) {
-        super(rendererDispatcherIn);
+    public TileEntityRenderPrismTable(BlockEntityRendererProvider.Context context) {
+        super(context);
     }
+
 
     @Override
     public void render(TileEntityPrismTable tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
@@ -52,7 +52,7 @@ public class TileEntityRenderPrismTable extends BlockEntityRenderer<TileEntityPr
                 }
                 matrixStackIn.scale(0.5f, 0.5f, 0.5f);
                 ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-                BakedModel ibakedmodel = itemRenderer.getModel(stack, tileEntityIn.getLevel(), null);
+                BakedModel ibakedmodel = itemRenderer.getModel(stack, tileEntityIn.getLevel(), null, 0);
                 itemRenderer.render(stack, ItemTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
                 matrixStackIn.popPose();
             }

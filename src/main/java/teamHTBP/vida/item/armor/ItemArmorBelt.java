@@ -18,7 +18,8 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.client.IItemRenderProperties;
 import net.minecraftforge.network.NetworkHooks;
 import teamHTBP.vida.creativetab.ItemGroupLoader;
-import teamHTBP.vida.modelRender.armormodel.ArmorModelBelt;
+import teamHTBP.vida.modelRender.LayerRegistryHandler;
+import teamHTBP.vida.modelRender.armormodel.belt.ArmorModelBelt;
 
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
@@ -48,7 +49,7 @@ public class ItemArmorBelt extends ArmorItem {
             @org.jetbrains.annotations.Nullable
             @Override
             public HumanoidModel<?> getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> _default) {
-                ArmorModelBelt armorModelBelt = new ArmorModelBelt();
+                ArmorModelBelt armorModelBelt = LayerRegistryHandler.create(ArmorModelBelt.class);
 
                 armorModelBelt.young = _default.young;
                 armorModelBelt.crouching = _default.crouching;

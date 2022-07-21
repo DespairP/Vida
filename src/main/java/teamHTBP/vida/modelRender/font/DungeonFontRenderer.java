@@ -1,32 +1,31 @@
 package teamHTBP.vida.modelRender.font;
 
+import net.minecraft.client.StringSplitter;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.font.FontSet;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.text.CharacterManager;
 
 import java.util.function.Function;
 
 public class DungeonFontRenderer extends Font {
-    private final CharacterManager characterManager;
-    private final Function<ResourceLocation, Font> font;
+    private final StringSplitter characterManager;
+    private final Function<ResourceLocation, FontSet> font;
     public final ResourceLocation dungeonFont = new ResourceLocation("vida","font/dungeonfont");
 
-    public DungeonFontRenderer(Function<ResourceLocation, Font> font) {
+    public DungeonFontRenderer(Function<ResourceLocation, FontSet> font) {
         super(font);
         this.font = font;
-        this.characterManager = new CharacterManager((charID, style) -> {
-            return this.getFont(dungeonFont).getGlyphInfo(charID).getAdvance();
+        this.characterManager = new StringSplitter((charID, style) -> {
+            return font.apply(style.getFont()).getGlyphInfo(charID).getAdvance(style.isBold());
         });
     }
 
-    private Font getFont(ResourceLocation fontLocation) {
+    private FontSet getFont(ResourceLocation fontLocation) {
         return this.font.apply(fontLocation);
     }
 
     @Override
-    public CharacterManager getSplitter() {
+    public StringSplitter getSplitter() {
         return characterManager;
     }
-
-
 }

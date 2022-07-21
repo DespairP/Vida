@@ -6,11 +6,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import teamHTBP.vida.block.BlockLoader;
 import teamHTBP.vida.blockentity.base.ModBaseBlockEntity;
-import teamHTBP.vida.helper.elementHelper.ElementHelper;
 import teamHTBP.vida.helper.elementHelper.ElementManager;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.helper.elementHelper.IElement;
@@ -48,11 +46,9 @@ public class TileEntityElementCoreAltar extends ModBaseBlockEntity {
     boolean isElementOver = false;
     //是否有多方块结构，TODO
     boolean isMultiComplete = false;
-    //元素核心
-    ElementHelper helper = new ElementHelper();
     float floater = 0.0f;
 
-    public TileEntityElementCoreAltar(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
+    public TileEntityElementCoreAltar(BlockPos pWorldPosition, BlockState pBlockState) {
         super(TileEntityLoader.TileEntityElementCoreAltar.get(), pWorldPosition, pBlockState);
     }
 

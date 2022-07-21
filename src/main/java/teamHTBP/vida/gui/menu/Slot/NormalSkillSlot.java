@@ -79,11 +79,11 @@ public class NormalSkillSlot extends AbstractSkillSlot {
      */
     public void renderSkillFrame(PoseStack matrixStack) {
         matrixStack.pushPose();
-        RenderSystem.enableAlphaTest();
+        //RenderSystem.enableAlphaTest();
         RenderSystem.enableBlend();
         RenderSystem.setShaderColor(1, 1, 1, alpha + hoveredLight + focusAlpha);
         Minecraft minecraft = Minecraft.getInstance();
-        minecraft.getTextureManager().bind(Gui);
+        RenderSystem.setShaderTexture(0, Gui);
         switch (skillSurface.getSkillType()) {
             case NORMAL:
                 break;
@@ -108,12 +108,12 @@ public class NormalSkillSlot extends AbstractSkillSlot {
      */
     public void renderSkill(PoseStack matrixStack) {
         matrixStack.pushPose();
-        RenderSystem.enableAlphaTest();
+        //RenderSystem.enableAlphaTest();
         RenderSystem.enableBlend();
         RenderSystem.setShaderColor(1, 1, 1, alpha + hoveredLight + focusAlpha);
         Minecraft minecraft = Minecraft.getInstance();
-        minecraft.getTextureManager().bind(skillSurface.getLocation());
-        RenderSystem.scaled(0.8, 0.8, 0.8);
+        RenderSystem.setShaderTexture(0, skillSurface.getLocation());
+        matrixStack.scale(0.8f, 0.8f, 0.8f);
         blit(matrixStack, (int) ((this.x + 6) * 1.25) + 4, (int) ((this.y + 9) * 1.25) + 3, 0, skillSurface.getSkillTextureU(), skillSurface.getSkillTextureV(), 32, 32, 256, 256);
         matrixStack.popPose();
     }
@@ -148,7 +148,7 @@ public class NormalSkillSlot extends AbstractSkillSlot {
     public void drawProgress(PoseStack matrixStack) {
         matrixStack.pushPose();
         Minecraft minecraft = Minecraft.getInstance();
-        minecraft.getTextureManager().bind(Gui);
+        RenderSystem.setShaderTexture(0, Gui);
         double progress = skillSurface.skillCurrentExp * 1.0 / skillSurface.getRequiredExp(skillSurface.skillCurrentLevel) * 100.0;
         if (progress > 100) progress = 100;
         if (progress < 50)
@@ -166,7 +166,7 @@ public class NormalSkillSlot extends AbstractSkillSlot {
     public void renderLock(PoseStack matrixStack) {
         matrixStack.pushPose();
         Minecraft minecraft = Minecraft.getInstance();
-        minecraft.getTextureManager().bind(Gui);
+        RenderSystem.setShaderTexture(0, Gui);
         blit(matrixStack, this.x + 13, this.y + 12, 0, 0, 170, 15, 23, 512, 512);
         matrixStack.popPose();
     }

@@ -9,6 +9,7 @@ import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.IItemRenderProperties;
 import teamHTBP.vida.creativetab.ItemGroupLoader;
+import teamHTBP.vida.modelRender.LayerRegistryHandler;
 import teamHTBP.vida.modelRender.armormodel.TestArmorModel;
 
 import javax.annotation.Nullable;
@@ -25,7 +26,7 @@ public class TestHelmet extends ArmorItem {
             @org.jetbrains.annotations.Nullable
             @Override
             public HumanoidModel<?> getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> _default) {
-                TestArmorModel model = new TestArmorModel();
+                TestArmorModel model = LayerRegistryHandler.create(TestArmorModel.class);
 
                 model.head.visible = armorSlot == EquipmentSlot.HEAD;
                 model.hat.visible = armorSlot == EquipmentSlot.HEAD;

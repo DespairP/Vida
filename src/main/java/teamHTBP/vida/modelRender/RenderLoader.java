@@ -2,11 +2,11 @@ package teamHTBP.vida.modelRender;
 
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.ClientRegistry;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -67,50 +67,38 @@ public class RenderLoader {
     }
 
     @SubscribeEvent
-    public static void onClientEvent(FMLClientSetupEvent event) {
-        ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityPurfiedCauldron.get(), (tileEntityRendererDispatcher -> {
-            return new TileEntityRenderPurfiedCauldron(tileEntityRendererDispatcher);
-        }));
+    public static void onClientEvent(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(TileEntityLoader.TileEntityPurfiedCauldron.get(), TileEntityRenderPurfiedCauldron::new);
 
-        ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityGemShower.get(), (tileEntityRendererDispatcher -> {
-            return new TileEntityRenderGemShower(tileEntityRendererDispatcher);
-        }));
+        event.registerBlockEntityRenderer(TileEntityLoader.TileEntityGemShower.get(), (TileEntityRenderGemShower::new));
 
-        ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityElementCoreAltar.get(), (tileEntityRendererDispatcher -> {
-            return new TileEntityRenderElementCoreAltar(tileEntityRendererDispatcher);
-        }));
+        event.registerBlockEntityRenderer(TileEntityLoader.TileEntityElementCoreAltar.get(), (TileEntityRenderElementCoreAltar::new));
 
-        ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityPrismTable.get(), (tileEntityRendererDispatcher -> {
-            return new TileEntityRenderPrismTable(tileEntityRendererDispatcher);
-        }));
+        event.registerBlockEntityRenderer(TileEntityLoader.TileEntityPrismTable.get(), (TileEntityRenderPrismTable::new));
 
-        ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityCollector.get(), (tileEntityRendererDispatcher -> {
-            return new TileEntityRenderCollector(tileEntityRendererDispatcher);
-        }));
+        event.registerBlockEntityRenderer(TileEntityLoader.TileEntityCollector.get(), (TileEntityRenderCollector::new));
 
-        ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityCrystalGold.get(), (tileEntityRendererDispatcher -> {
+        event.registerBlockEntityRenderer(TileEntityLoader.TileEntityCrystalGold.get(), (tileEntityRendererDispatcher -> {
             return new TileEntityRenderGoldCrystal(tileEntityRendererDispatcher, 1);
         }));
 
-        ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityCrystalWood.get(), (tileEntityRendererDispatcher -> {
+        event.registerBlockEntityRenderer(TileEntityLoader.TileEntityCrystalWood.get(), (tileEntityRendererDispatcher -> {
             return new TileEntityRenderWoodCrystal(tileEntityRendererDispatcher, 2);
         }));
 
-        ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityCrystalAqua.get(), (tileEntityRendererDispatcher -> {
+        event.registerBlockEntityRenderer(TileEntityLoader.TileEntityCrystalAqua.get(), (tileEntityRendererDispatcher -> {
             return new TileEntityRenderLoaderAquaCrystal(tileEntityRendererDispatcher, 3);
         }));
 
-        ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityCrystalFire.get(), (tileEntityRendererDispatcher -> {
+        event.registerBlockEntityRenderer(TileEntityLoader.TileEntityCrystalFire.get(), (tileEntityRendererDispatcher -> {
             return new TileEntityRenderFireCrystal(tileEntityRendererDispatcher, 4);
         }));
 
-        ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityCrystalEarth.get(), (tileEntityRendererDispatcher -> {
+        event.registerBlockEntityRenderer(TileEntityLoader.TileEntityCrystalEarth.get(), (tileEntityRendererDispatcher -> {
             return new TileEntityRenderEarthCrystal(tileEntityRendererDispatcher, 5);
         }));
 
-        ClientRegistry.bindTileEntityRenderer(TileEntityLoader.TileEntityInjectTable.get(), (tileEntityRendererDispatcher -> {
-            return new TileEntityRenderInjectTable(tileEntityRendererDispatcher);
-        }));
+        event.registerBlockEntityRenderer(TileEntityLoader.TileEntityInjectTable.get(), (TileEntityRenderInjectTable::new));
 
 
     }
@@ -118,8 +106,8 @@ public class RenderLoader {
     @SubscribeEvent
     public static void onAtlasEvent(TextureStitchEvent.Pre event) {
         Vida.LOGGER.info("register Atlas");
-        ResourceLocation stitching = event.getMap().location();
-        if (!stitching.equals(TextureAtlas.LOCATION_BLOCKS)) {
+        ResourceLocation stitching = event.getAtlas().location();
+        if (!stitching.equals(InventoryMenu.BLOCK_ATLAS)) {
             return;
         }
         event.addSprite(goldgemLocation);

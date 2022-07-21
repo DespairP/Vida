@@ -1,5 +1,6 @@
 package teamHTBP.vida.block.environment.crop;
 
+import com.mojang.math.Vector3f;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.world.level.ItemLike;
@@ -30,7 +31,7 @@ public class BlockCropSullenHydrangea extends AbstractBlockElementCrops {
             double offsetX = RANDOM.nextDouble() * 0.5D + 0.2D;
             double offsetZ = RANDOM.nextDouble() * 0.5D + 0.2D;
             //worldIn.addParticle(new CuboidParticleData(0,0.02D,0,247 - offsetColor,81 - offsetColor, 236 - offsetColor, 0.5f, 100), x + offsetX, y , z + offsetZ,0,0,0);
-            worldIn.addParticle(new DustParticleOptions(247.0F / 255.0F, 81.0F / 255.0F, 236.0F / 255.0F, 1), x + offsetX, y + 0.7f, z + offsetZ, 0, 0, 0);
+            worldIn.addParticle(new DustParticleOptions(new Vector3f(247.0F / 255.0F, 81.0F / 255.0F, 236.0F / 255.0F), 1), x + offsetX, y + 0.7f, z + offsetZ, 0, 0, 0);
         }
     }
 }
