@@ -170,7 +170,7 @@ public class BlockLoader {
     public static RegistryObject<Block> SILENTFOREST_BRICK_0 = BLOCKS.register("silentforest_brick_0", BlockDecoFactory::normal);
 
     @RegisterItemBlock
-    public static RegistryObject<Block> SILENTFOREST_BRICK_1 = BLOCKS.register("silentforest_brick_1", BlockDecoFactory::normal);
+    public static RegistryObject<Block> SILENTFOREST_BRICK_1 = BLOCKS.register("silentforest_brick_1", BlockDecoFactory::yAxis);
 
     @RegisterItemBlock
     public static RegistryObject<Block> SILENTFOREST_BRICK_2 = BLOCKS.register("silentforest_brick_2", BlockDecoFactory::normal);
@@ -179,16 +179,19 @@ public class BlockLoader {
     public static RegistryObject<Block> SILENTFOREST_BRICK_3 = BLOCKS.register("silentforest_brick_3", BlockDecoFactory::normal);
 
     @RegisterItemBlock
-    public static RegistryObject<Block> SILENTFOREST_BRICK_4 = BLOCKS.register("silentforest_brick_4", BlockDecoFactory::normal);
+    public static RegistryObject<Block> SILENTFOREST_BRICK_4 = BLOCKS.register("silentforest_brick_4", BlockDecoFactory::yAxis);
 
     @RegisterItemBlock
-    public static RegistryObject<Block> SILENTFOREST_BRICK_5 = BLOCKS.register("silentforest_brick_5", BlockDecoFactory::normal);
+    public static RegistryObject<Block> SILENTFOREST_BRICK_5 = BLOCKS.register("silentforest_brick_5", BlockDecoFactory::yAxis);
 
     @RegisterItemBlock
-    public static RegistryObject<Block> SILENTFOREST_BRICK_6 = BLOCKS.register("silentforest_brick_6", BlockDecoFactory::normal);
+    public static RegistryObject<Block> SILENTFOREST_BRICK_6 = BLOCKS.register("silentforest_brick_6", BlockDecoFactory::yAxis);
 
     @RegisterItemBlock
     public static RegistryObject<Block> SILENTFOREST_BRICK_7 = BLOCKS.register("silentforest_brick_7", BlockDecoFactory::normal);
+
+    @RegisterItemBlock
+    public static RegistryObject<Block> SILENTFOREST_BRICK_8 = BLOCKS.register("silentforest_brick_8", BlockDecoFactory::normal);
 
     @RegisterItemBlock
     public static RegistryObject<Block> SILENTFOREST_BRICK_SLAB = BLOCKS.register("silentforest_brick_slab", BlockDecoFactory::slab);
@@ -202,4 +205,7 @@ public class BlockLoader {
 
     @RegisterItemBlock
     public static RegistryObject<Block> PLANK_VIDA_FENCE = BLOCKS.register("plank_vida_fence", BlockDecoFactory::fence);
+
+    @RegisterItemBlock
+    public static RegistryObject<Block> PLANK_VIDA_DOOR = BLOCKS.register("plank_vida_door", BlockDecoFactory::door);
 }

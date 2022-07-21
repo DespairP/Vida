@@ -1,6 +1,7 @@
 {
-  "parent": "block/cube_all",
+  "parent": "block/cube_column",
   "textures": {
-    "all": "vida:block/silentforestbrick_3"
+    "end": "vida:block/silentforestbrick_8",
+    "side": "vida:block/silentforestbrick_3"
   }
 }
