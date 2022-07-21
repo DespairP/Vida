@@ -1,4 +1,4 @@
-package teamHTBP.vida.JsonGenerator.impl;
+package teamHTBP.vida.datagen.JsonGenerator.impl;
 
 import java.util.Map;
 

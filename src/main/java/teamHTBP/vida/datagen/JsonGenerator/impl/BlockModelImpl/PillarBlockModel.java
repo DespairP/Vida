@@ -1,12 +1,12 @@
-package teamHTBP.vida.JsonGenerator.impl.BlockModelImpl;
+package teamHTBP.vida.datagen.JsonGenerator.impl.BlockModelImpl;
 
 import com.google.common.collect.ImmutableMap;
-import teamHTBP.vida.JsonGenerator.impl.EnumBlockModelBasic;
-import teamHTBP.vida.JsonGenerator.impl.IBlockModelJsonWriter;
+import teamHTBP.vida.datagen.JsonGenerator.impl.EnumBlockModelBasic;
+import teamHTBP.vida.datagen.JsonGenerator.impl.IBlockModelJsonWriter;
 
 import java.util.Map;
 
-import static teamHTBP.vida.JsonGenerator.Helper.BlockStateWriterHelper.MOD_ID;
+import static teamHTBP.vida.datagen.JsonGenerator.helper.BlockStateWriterHelper.MOD_ID;
 
 public class PillarBlockModel implements IBlockModelJsonWriter {
     private String topTexture = "";

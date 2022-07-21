@@ -1,4 +1,4 @@
-package teamHTBP.vida.JsonGenerator.Helper;
+package teamHTBP.vida.datagen.JsonGenerator.helper;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;

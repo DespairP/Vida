@@ -1,4 +1,4 @@
-package teamHTBP.vida.JsonGenerator.Properties;
+package teamHTBP.vida.datagen.JsonGenerator.Properties;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -1,8 +1,8 @@
-package teamHTBP.vida.JsonGenerator.Properties;
+package teamHTBP.vida.datagen.JsonGenerator.Properties;
 
 import com.google.gson.Gson;
-import teamHTBP.vida.JsonGenerator.impl.IBlockModelJsonWriter;
-import teamHTBP.vida.JsonGenerator.impl.IBlockStateJsonWriter;
+import teamHTBP.vida.datagen.JsonGenerator.impl.IBlockModelJsonWriter;
+import teamHTBP.vida.datagen.JsonGenerator.impl.IBlockStateJsonWriter;
 
 import java.io.FileWriter;
 import java.io.IOException;

@@ -1,11 +1,11 @@
-package teamHTBP.vida.JsonGenerator;
+package teamHTBP.vida.datagen.JsonGenerator;
 
 import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import teamHTBP.vida.JsonGenerator.Properties.BlockModelProperties;
-import teamHTBP.vida.JsonGenerator.impl.BlockModelImpl.PillarBlockModel;
-import teamHTBP.vida.JsonGenerator.impl.BlockStateImpl.BasicStateWriterGenerator;
+import teamHTBP.vida.datagen.JsonGenerator.Properties.BlockModelProperties;
+import teamHTBP.vida.datagen.JsonGenerator.impl.BlockModelImpl.PillarBlockModel;
+import teamHTBP.vida.datagen.JsonGenerator.impl.BlockStateImpl.BasicStateWriterGenerator;
 
 import java.util.List;
 

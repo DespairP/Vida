@@ -7,8 +7,7 @@ import net.minecraft.world.biome.Biome;
 import teamHTBP.vida.capability.skillSystem.ISkill;
 import teamHTBP.vida.capability.skillSystem.SkillCategory;
 import teamHTBP.vida.capability.skillSystem.SkillHelper;
-import teamHTBP.vida.event.server.datapack.element.ElementPotential;
-import teamHTBP.vida.event.server.datapack.element.ModDataPacks;
+import teamHTBP.vida.event.server.datapack.ElementPotentialEventListener;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -23,7 +22,7 @@ public class ElementHelper {
     /**
      * 一个存放元素值-键的Hashmap
      */
-    static Map<Item, ElementPotential> map = ModDataPacks.ELEMENT_POTENTIAL_MANAGER.getByItem();
+    static Map<Item, ElementPotential> map = ElementPotentialEventListener.ELEMENT_POTENTIAL_MANAGER.getByItem();
 
     /**NBT辅助写入*/
     public static void write(CompoundNBT nbt, IElement element) {

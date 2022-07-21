@@ -1,4 +1,4 @@
-package teamHTBP.vida.event.server.datapack.element;
+package teamHTBP.vida.helper.elementHelper;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,8 +11,8 @@ import teamHTBP.vida.helper.elementHelper.IElement;
 @AllArgsConstructor
 @Data
 public class ElementPotential {
-    Item item;
-    IElement element;
-    int containing;
-    String name;
+    private Item item;
+    private IElement element;
+    private int containing;
+    private String name;
 }

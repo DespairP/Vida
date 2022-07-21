@@ -1,4 +1,4 @@
-package teamHTBP.vida.JsonGenerator.Helper;
+package teamHTBP.vida.datagen.JsonGenerator.helper;
 
 public enum EnumDirections {
     East("east", 0),

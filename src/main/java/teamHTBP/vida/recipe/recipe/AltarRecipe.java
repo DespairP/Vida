@@ -59,7 +59,7 @@ public class AltarRecipe extends BaseRecipe<IInventory> {
 
 
     /**
-     *
+     * 判断altar内部物品是否和自己的合成表符合
      * */
     public boolean matches(TileEntityElementCoreAltar altar) {
         return core.test(altar.coreItem) && RecipeMatcher.findMatches(altar.altarItem, other) != null;
@@ -75,15 +75,14 @@ public class AltarRecipe extends BaseRecipe<IInventory> {
 
     /**
      * 获取序列化读取器,用于读取/写入Json
-     *
-     * @return*/
+     * */
     @Override
     public IRecipeSerializer<?> getSerializer() {
         return RecipeSerializers.ALTAR.get();
     }
 
     /**
-     * 获取Builder，用于手动写入合成表
+     * 获取Builder，用于手动代码写入合成表
      * */
     public static Builder builder(){return new Builder();}
 
@@ -94,6 +93,7 @@ public class AltarRecipe extends BaseRecipe<IInventory> {
         return new ItemStack(ItemLoader.altarcubeMaker.get());
     }
 
+    /**合成类型*/
     @Override
     public IRecipeType<?> getType() {
         return RecipeTypes.ALTAR;
@@ -105,6 +105,7 @@ public class AltarRecipe extends BaseRecipe<IInventory> {
         return false;
     }
 
+    @Deprecated
     @Override
     public boolean matches(List<ItemStack> inputs) {
         return false;

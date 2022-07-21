@@ -1,8 +1,8 @@
-package teamHTBP.vida.JsonGenerator.impl.BlockStateImpl;
+package teamHTBP.vida.datagen.JsonGenerator.impl.BlockStateImpl;
 
 import com.google.common.collect.ImmutableList;
-import teamHTBP.vida.JsonGenerator.Helper.BlockStateWriterHelper;
-import teamHTBP.vida.JsonGenerator.impl.IBlockStateJsonWriter;
+import teamHTBP.vida.datagen.JsonGenerator.helper.BlockStateWriterHelper;
+import teamHTBP.vida.datagen.JsonGenerator.impl.IBlockStateJsonWriter;
 
 import java.util.List;
 

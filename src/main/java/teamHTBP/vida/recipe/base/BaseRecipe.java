@@ -12,7 +12,6 @@ import java.util.List;
 /**
  * 普通实现合成表方案
  *
- * SELF 继承了BaseRecipe的子类，也就是自己本身
  *
  * @author DustW
  **/

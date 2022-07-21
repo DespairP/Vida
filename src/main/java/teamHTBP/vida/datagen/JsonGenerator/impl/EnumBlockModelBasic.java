@@ -1,4 +1,4 @@
-package teamHTBP.vida.JsonGenerator.impl;
+package teamHTBP.vida.datagen.JsonGenerator.impl;
 
 public enum EnumBlockModelBasic {
     Cross("block/cross"), Pillar("block/cube_column"), Full("block/cube_all"), None(null);

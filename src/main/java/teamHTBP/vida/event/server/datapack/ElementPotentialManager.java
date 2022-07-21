@@ -1,4 +1,4 @@
-package teamHTBP.vida.event.server.datapack.element;
+package teamHTBP.vida.event.server.datapack;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -8,12 +8,14 @@ import net.minecraft.item.Item;
 import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
+import teamHTBP.vida.helper.elementHelper.ElementPotential;
 import teamHTBP.vida.utils.json.JsonUtils;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 元素物品潜力值注册
  * @author DustW
  **/
 public class ElementPotentialManager extends JsonReloadListener {
