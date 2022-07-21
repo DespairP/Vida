@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.block.BlockLoader;
 import teamHTBP.vida.blockentity.TileEntityLoader;
 import teamHTBP.vida.entity.EntityLoader;
-import teamHTBP.vida.event.client.VidaClientEventHandler;
+import teamHTBP.vida.client.event.listener.VidaClientEventHandler;
 import teamHTBP.vida.event.server.BlockEventLoaderServer;
 import teamHTBP.vida.event.server.datapack.ModDataPacks;
 import teamHTBP.vida.menu.ContainerTypeLoader;

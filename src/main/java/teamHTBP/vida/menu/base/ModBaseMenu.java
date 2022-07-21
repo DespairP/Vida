@@ -27,7 +27,7 @@ public abstract class ModBaseMenu extends AbstractContainerMenu {
         this.inventory = inventory;
         invHandler = new InvWrapper(inventory);
 
-        layoutPlayerInventorySlots(7 + 1, 83 + 1);
+        //layoutPlayerInventorySlots(7 + 1, 83 + 1);
     }
 
     @Override

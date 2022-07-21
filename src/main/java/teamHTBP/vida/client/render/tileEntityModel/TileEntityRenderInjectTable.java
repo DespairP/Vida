@@ -18,7 +18,7 @@ import teamHTBP.vida.Vida;
 import teamHTBP.vida.blockentity.TileEntityInjectTable;
 import teamHTBP.vida.client.render.LayerRegistryHandler;
 import teamHTBP.vida.client.render.tilemodel.InjectTableModel;
-import teamHTBP.vida.event.client.ClientTickHandler;
+import teamHTBP.vida.client.event.listener.ClientTickHandler;
 
 public class TileEntityRenderInjectTable extends ModBlockEntityRenderer<TileEntityInjectTable> {
     public static final ResourceLocation TEXTURE = new ResourceLocation(Vida.MOD_ID, "textures/tileentity/injecttable.png");

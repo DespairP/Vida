@@ -9,7 +9,7 @@ import net.minecraft.world.entity.player.Inventory;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.client.gui.gui.base.ModBaseGui;
 import teamHTBP.vida.menu.ContainerBluePrint;
-import teamHTBP.vida.menu.Slot.BluePrintScreenSlot;
+import teamHTBP.vida.menu.slot.BluePrintScreenSlot;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;

@@ -3,7 +3,7 @@ package teamHTBP.vida.client.gui.components;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import teamHTBP.vida.menu.guidebook.GuiGuidebookGuide;
+import teamHTBP.vida.client.gui.gui.guidebook.GuiGuidebookGuide;
 
 import java.util.Deque;
 import java.util.LinkedList;
