@@ -27,19 +27,20 @@ public class RecipeManager {
 
     @Deprecated
     public static FermenterFluidRecipe getFermenterFuildRecipe(Level level, ItemStack itemStack, FluidStack inputFuild) {
-        return getBaseRecipe(level, RecipeTypes.FERMENTER_FLUID).stream()
+        return getBaseRecipe(level, RecipeTypes.FERMENTER_FLUID.get()).stream()
                 .filter(s -> s.matches(itemStack, inputFuild)).findFirst().orElse(null);
     }
 
     /**获取合成表*/
     public static AltarRecipe getAltarRecipe(Level level, TileEntityElementCoreAltar altar){
-        level.getRecipeManager().getAllRecipesFor(RecipeTypes.ALTAR);
-        return level.getRecipeManager().getAllRecipesFor(RecipeTypes.ALTAR).stream().filter(
+        level.getRecipeManager().getAllRecipesFor(RecipeTypes.ALTAR.get());
+        return level.getRecipeManager().getAllRecipesFor(RecipeTypes.ALTAR.get()).stream().filter(
                 r -> r.matches(altar)
         ).findFirst().orElse(null);
     }
 
     public static void register(IEventBus bus) {
         RecipeSerializers.register(bus);
+        RecipeTypes.register(bus);
     }
 }

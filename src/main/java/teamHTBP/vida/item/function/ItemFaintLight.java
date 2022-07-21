@@ -17,10 +17,10 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import teamHTBP.vida.creativetab.ItemGroupLoader;
 import teamHTBP.vida.entity.EntityFaintLight;
 import teamHTBP.vida.entity.EntityLoader;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
-import teamHTBP.vida.creativetab.ItemGroupLoader;
 
 public class ItemFaintLight extends Item {
     public int element = 1;

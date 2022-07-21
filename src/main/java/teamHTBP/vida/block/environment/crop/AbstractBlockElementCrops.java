@@ -37,8 +37,8 @@ public abstract class AbstractBlockElementCrops extends CropBlock {
     private int maxStage = 5;
 
     public AbstractBlockElementCrops(int stage, IElement element) {
-        super(Properties.of(Material.PLANT).noCollission().sound(SoundType.CROP).noOcclusion().strength(0.5f, 0).randomTicks());
-        this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0));
+        super(Properties.of(Material.PLANT).noCollission().sound(SoundType.CROP)
+                .noOcclusion().strength(0.5f, 0).randomTicks());
         this.maxStage = stage;
         this.element = element;
     }
@@ -86,14 +86,15 @@ public abstract class AbstractBlockElementCrops extends CropBlock {
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-        return SHAPE_BY_AGE[state.getValue(this.getAgeProperties())];
+        return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
     }
 
     /***
      * 获取植物的AGE PROPERTY
      * @return Property
      */
-    public IntegerProperty getAgeProperties() {
+    @Override
+    public IntegerProperty getAgeProperty() {
         return AGE;
     }
 
@@ -121,7 +122,7 @@ public abstract class AbstractBlockElementCrops extends CropBlock {
      */
     @Override
     protected int getAge(BlockState state) {
-        return state.getValue(this.getAgeProperties());
+        return state.getValue(this.getAgeProperty());
     }
 
     /***
@@ -138,7 +139,7 @@ public abstract class AbstractBlockElementCrops extends CropBlock {
      * @return 修改后的state
      */
     public BlockState withAge(int age) {
-        return this.defaultBlockState().setValue(this.getAgeProperties(), age);
+        return this.defaultBlockState().setValue(this.getAgeProperty(), age);
     }
 
     /***
@@ -147,7 +148,7 @@ public abstract class AbstractBlockElementCrops extends CropBlock {
      * @return 是否已经达到最大生长状态
      */
     public boolean isMaxAge(BlockState state) {
-        return state.getValue(this.getAgeProperties()) >= this.getMaxStage();
+        return state.getValue(this.getAgeProperty()) >= this.getMaxStage();
     }
 
     /*是否能生长*/

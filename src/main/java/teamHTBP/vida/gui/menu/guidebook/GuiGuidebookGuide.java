@@ -3,7 +3,6 @@ package teamHTBP.vida.gui.menu.guidebook;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.chat.TranslatableComponent;
 import teamHTBP.vida.gui.components.IGuidebookPageable;

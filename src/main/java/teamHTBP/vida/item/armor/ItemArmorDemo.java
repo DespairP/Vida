@@ -9,9 +9,9 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.IItemRenderProperties;
+import teamHTBP.vida.client.render.LayerRegistryHandler;
+import teamHTBP.vida.client.render.armormodel.armor.ArmorModelSeasonApprentice;
 import teamHTBP.vida.creativetab.ItemGroupLoader;
-import teamHTBP.vida.modelRender.LayerRegistryHandler;
-import teamHTBP.vida.modelRender.armormodel.armor.ArmorModelSeasonApprentice;
 
 import java.util.function.Consumer;
 

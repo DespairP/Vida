@@ -9,6 +9,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.block.BlockLoader;
+import teamHTBP.vida.creativetab.ItemGroupLoader;
 import teamHTBP.vida.helper.RegisterItemBlock;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.item.armor.*;
@@ -16,7 +17,6 @@ import teamHTBP.vida.item.environment.ItemVidaBranch;
 import teamHTBP.vida.item.function.*;
 import teamHTBP.vida.item.potion.ItemCreativeElementPotion;
 import teamHTBP.vida.item.staff.*;
-import teamHTBP.vida.creativetab.ItemGroupLoader;
 
 import static teamHTBP.vida.helper.elementHelper.EnumElements.*;
 

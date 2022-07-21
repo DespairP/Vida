@@ -13,7 +13,6 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.server.ServerLifecycleHooks;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.Vida;
@@ -46,9 +45,9 @@ public class GuideBookGuideEventHandler {
     @SubscribeEvent
     public static void dataPackRegistry(AddReloadListenerEvent event) {
         GuideBookGuideHandler guideBookHandler = new GuideBookGuideHandler();
-        if(dataPackMap.putIfAbsent(ServerLifecycleHooks.getCurrentServer().getServerResources(), guideBookHandler) != null){
-            LOGGER.error("duplicated datapack registries");
-        }
+        //if(dataPackMap.putIfAbsent(ServerLifecycleHooks.getCurrentServer().getServerResources(), guideBookHandler) != null){
+        //    LOGGER.error("duplicated datapack registries");
+        //}
         event.addListener(guideBookHandler);
     }
 
@@ -62,6 +61,11 @@ public class GuideBookGuideEventHandler {
         ServerPlayer serverPlayer = (ServerPlayer) entity;
         //从server取到Handler里的guideMap
         GuideBookGuideHandler handler = dataPackMap.get(serverPlayer.getServer().getServerResources());
+
+        if (handler == null) {
+            return;
+        }
+
         PacketGuidebook guidebook = handler.createSyncPacket();
         //将服务器的数据
         PacketChannel.INSTANCE.sendTo(guidebook, serverPlayer.connection.connection, NetworkDirection.PLAY_TO_CLIENT);

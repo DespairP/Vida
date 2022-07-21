@@ -8,8 +8,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
-import teamHTBP.vida.helper.guidebookHelper.GuidebookHelper;
 import teamHTBP.vida.creativetab.ItemGroupLoader;
+import teamHTBP.vida.helper.guidebookHelper.GuidebookHelper;
 
 public class ItemGuidebook extends Item {
     public ItemGuidebook() {

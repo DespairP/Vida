@@ -36,7 +36,7 @@ public class FermenterFluidRecipe extends BaseRecipe<Container> {
 
     @Override
     public RecipeType<?> getType() {
-        return RecipeTypes.FERMENTER_FLUID;
+        return RecipeTypes.FERMENTER_FLUID.get();
     }
 
     public boolean matches(ItemStack input, FluidStack inputFluid) {

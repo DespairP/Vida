@@ -32,8 +32,8 @@ public class Vida {
         MinecraftForge.EVENT_BUS.register(VidaClientEventHandler.class);
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        ItemLoader.ITEMS.register(bus);
         BlockLoader.BLOCKS.register(bus);
+        ItemLoader.ITEMS.register(bus);
         ParticleLoader.PARTICLE.register(bus);
         GenLoader.register(bus);
         TileEntityLoader.TILE_ENTITY_DEFERRED_REGISTER.register(bus);

@@ -17,9 +17,9 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.IItemRenderProperties;
 import net.minecraftforge.network.NetworkHooks;
+import teamHTBP.vida.client.render.LayerRegistryHandler;
+import teamHTBP.vida.client.render.armormodel.belt.ArmorModelBelt;
 import teamHTBP.vida.creativetab.ItemGroupLoader;
-import teamHTBP.vida.modelRender.LayerRegistryHandler;
-import teamHTBP.vida.modelRender.armormodel.belt.ArmorModelBelt;
 
 import javax.annotation.Nullable;
 import java.util.function.Consumer;

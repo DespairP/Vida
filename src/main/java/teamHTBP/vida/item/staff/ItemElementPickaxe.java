@@ -18,9 +18,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import teamHTBP.vida.creativetab.ItemGroupLoader;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.item.ItemLoader;
-import teamHTBP.vida.creativetab.ItemGroupLoader;
 
 import javax.annotation.Nullable;
 import java.util.List;

@@ -2,7 +2,6 @@ package teamHTBP.vida.helper.guidebookHelper;
 
 import com.google.gson.annotations.Expose;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

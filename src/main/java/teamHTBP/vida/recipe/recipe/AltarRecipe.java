@@ -85,7 +85,7 @@ public class AltarRecipe extends BaseRecipe<Container> {
 
     @Override
     public RecipeType<?> getType() {
-        return RecipeTypes.ALTAR;
+        return RecipeTypes.ALTAR.get();
     }
 
     /**不会出现在合成书中*/
