@@ -6,6 +6,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import teamHTBP.vida.helper.elementHelper.IElement;
+import teamHTBP.vida.helper.guidebookHelper.components.IGuidebookComponent;
+import teamHTBP.vida.helper.guidebookHelper.serializer.GuidebookComponentSerializer;
 import teamHTBP.vida.utils.json.serializer.IElementSerializer;
 import teamHTBP.vida.utils.json.serializer.IngredientSerializer;
 import teamHTBP.vida.utils.json.serializer.ItemSerializer;
@@ -31,6 +33,7 @@ public enum JsonUtils {
                 .registerTypeAdapter(Ingredient.class, new IngredientSerializer())
                 .registerTypeAdapter(ItemStack.class, new ItemStackSerializer())
                 // 注册自定义类型的序列化/反序列化器（附带子类）
+                .registerTypeHierarchyAdapter(IGuidebookComponent.class, new GuidebookComponentSerializer())
                 .registerTypeHierarchyAdapter(Item.class, new ItemSerializer())
                 .registerTypeHierarchyAdapter(IElement.class, new IElementSerializer());
 

@@ -11,7 +11,8 @@ import teamHTBP.vida.blockentity.TileEntityLoader;
 import teamHTBP.vida.entity.EntityLoader;
 import teamHTBP.vida.event.client.VidaClientEventHandler;
 import teamHTBP.vida.event.server.BlockEventLoaderServer;
-import teamHTBP.vida.gui.menu.ContainerTypeLoader;
+import teamHTBP.vida.event.server.datapack.ModDataPacks;
+import teamHTBP.vida.menu.ContainerTypeLoader;
 import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.item.function.ItemElementCoreVoid;
 import teamHTBP.vida.particle.ParticleLoader;
@@ -47,5 +48,7 @@ public class Vida {
         //RecipeLoader.RECIPES.register(FMLJavaModLoadingContext.get().getModEventBus());
         //registerType(OREACTION, OreReactionMachineRecipe.RECIPE_TYPE);
         //RecipeLoader.init(FMLJavaModLoadingContext.get().getModEventBus());
+
+        ModDataPacks.register(bus);
     }
 }

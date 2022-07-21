@@ -8,7 +8,7 @@ import teamHTBP.vida.capability.skillSystem.ISkill;
 import teamHTBP.vida.capability.skillSystem.SkillCategory;
 import teamHTBP.vida.capability.skillSystem.SkillHelper;
 import teamHTBP.vida.event.server.datapack.element.ElementPotential;
-import teamHTBP.vida.event.server.datapack.element.ModDataPacks;
+import teamHTBP.vida.event.server.datapack.element.ElementPotentialManager;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -23,7 +23,7 @@ public class ElementHelper {
     /**
      * 一个存放元素值-键的Hashmap
      */
-    static Map<Item, ElementPotential> map = ModDataPacks.ELEMENT_POTENTIAL_MANAGER.getByItem();
+    static Map<Item, ElementPotential> map = ElementPotentialManager.INSTANCE.getByItem();
 
     /**NBT辅助写入*/
     public static void write(CompoundTag nbt, IElement element) {

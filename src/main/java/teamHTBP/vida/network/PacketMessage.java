@@ -2,7 +2,7 @@ package teamHTBP.vida.network;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
-import teamHTBP.vida.event.client.HUDMessageEventHandler;
+import teamHTBP.vida.event.client.hud.HUDMessageEventHandler;
 
 import java.util.function.Supplier;
 

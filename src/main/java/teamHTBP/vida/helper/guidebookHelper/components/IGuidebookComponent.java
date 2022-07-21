@@ -6,7 +6,7 @@ import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import teamHTBP.vida.event.client.VidaClientEventHandler;
-import teamHTBP.vida.event.server.datapack.GuideBookPageHandler;
+import teamHTBP.vida.event.server.datapack.guidebook.GuideBookPageHandler;
 import teamHTBP.vida.helper.guidebookHelper.GuidebookSinglePage;
 
 /**

@@ -11,7 +11,7 @@ import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.block.state.BlockState;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.blockentity.base.ModBaseMenuBlockEntity;
-import teamHTBP.vida.gui.menu.ContainerInjectTable;
+import teamHTBP.vida.menu.ContainerInjectTable;
 
 import javax.annotation.Nullable;
 import java.util.Collections;

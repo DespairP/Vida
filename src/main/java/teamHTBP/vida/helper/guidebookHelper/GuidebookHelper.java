@@ -3,11 +3,9 @@ package teamHTBP.vida.helper.guidebookHelper;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import teamHTBP.vida.event.server.datapack.GuideBookGuideEventHandler;
-import teamHTBP.vida.event.server.datapack.GuideBookGuideHandler;
-import teamHTBP.vida.event.server.datapack.GuideBookPageEventHandler;
-import teamHTBP.vida.event.server.datapack.GuideBookPageHandler;
-import teamHTBP.vida.gui.components.GuiGuidebookManager;
+import teamHTBP.vida.event.server.datapack.guidebook.GuideBookGuideHandler;
+import teamHTBP.vida.event.server.datapack.guidebook.GuideBookPageHandler;
+import teamHTBP.vida.client.gui.components.GuiGuidebookManager;
 import teamHTBP.vida.helper.guidebookHelper.components.IGuidebookComponent;
 
 import java.util.LinkedHashMap;
@@ -32,17 +30,11 @@ public class GuidebookHelper {
      * @return GuideHandler
      * */
     public static GuideBookGuideHandler getGuideHandler(Level world){
-        if(world == null || world.isClientSide){
-            return GuideBookGuideEventHandler.clientHandler;
-        }
-        return GuideBookGuideEventHandler.getServerHandler(world);
+        return GuideBookGuideHandler.INSTANCE;
     }
 
     public static GuideBookPageHandler getGuidePageHandler(Level world){
-        if(world == null || world.isClientSide){
-            return GuideBookPageEventHandler.clientHandler;
-        }
-        return GuideBookPageEventHandler.getServerHandler(world);
+        return GuideBookPageHandler.INSTANCE;
     }
 
     /*---------------------guidebook component工具方法-------------------------*/

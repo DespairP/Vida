@@ -15,12 +15,11 @@ public class PacketChannel {
             PROTOCOL_VERSION::equals
     );
 
+    static int id = 0;
+
     public static void register() {
-        int id = 0;
         INSTANCE.registerMessage(id++, PacketPrismTable.class, PacketPrismTable::toBytes, PacketPrismTable::new, PacketPrismTable::handler);
         INSTANCE.registerMessage(id++, PacketBottles.class, PacketBottles::toBytes, PacketBottles::new, PacketBottles::handler);
         INSTANCE.registerMessage(id++, PacketMessage.class, PacketMessage::toBytes, PacketMessage::new, PacketMessage::handler);
-        INSTANCE.registerMessage(id++, PacketGuidebook.class,PacketGuidebook::toBytes,PacketGuidebook::fromBytes,  PacketGuidebook::handler);
-        INSTANCE.registerMessage(id++,PacketGuidebookPage.class,PacketGuidebookPage::toBytes,PacketGuidebookPage::fromBytes,PacketGuidebookPage::handler);
     }
 }

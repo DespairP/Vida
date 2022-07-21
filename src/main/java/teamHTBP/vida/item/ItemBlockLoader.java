@@ -46,7 +46,7 @@ public class ItemBlockLoader {
             blockItem.setRegistryName(registerName);
             event.getRegistry().register(blockItem);
             // 注册完成后放入Map中
-            REGISTRY_ITEMBLOCK_MAP.put(key,RegistryObject.of(registerName, event.getRegistry()));
+            REGISTRY_ITEMBLOCK_MAP.put(key, RegistryObject.create(registerName, event.getRegistry()));
         });
         // 进行注入
         inject();

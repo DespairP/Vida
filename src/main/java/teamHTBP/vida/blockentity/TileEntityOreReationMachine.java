@@ -19,7 +19,7 @@ import teamHTBP.vida.blockentity.SlotNumberArray.OreReactionMachineArray;
 import teamHTBP.vida.blockentity.base.ModBaseMenuBlockEntity;
 import teamHTBP.vida.capability.VidaCapabilities;
 import teamHTBP.vida.capability.energyCapability.IElementEnergyCapability;
-import teamHTBP.vida.gui.menu.ContainerOreReactionMachine;
+import teamHTBP.vida.menu.ContainerOreReactionMachine;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.utils.ContainerHelper;
 

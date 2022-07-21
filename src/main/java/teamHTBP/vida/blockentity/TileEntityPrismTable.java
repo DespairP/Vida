@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import teamHTBP.vida.blockentity.SlotNumberArray.PrismTableArray;
 import teamHTBP.vida.blockentity.base.ModBaseMenuBlockEntity;
-import teamHTBP.vida.gui.menu.ContainerPrismTable;
+import teamHTBP.vida.menu.ContainerPrismTable;
 import teamHTBP.vida.helper.elementHelper.ElementHelper;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.helper.elementHelper.IElement;

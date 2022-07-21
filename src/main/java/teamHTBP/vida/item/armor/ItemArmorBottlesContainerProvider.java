@@ -5,8 +5,8 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import teamHTBP.vida.gui.menu.ContainerBottles;
-import teamHTBP.vida.gui.menu.base.ModBaseMenu;
+import teamHTBP.vida.menu.ContainerBottles;
+import teamHTBP.vida.menu.base.ModBaseMenu;
 
 import javax.annotation.Nullable;
 
