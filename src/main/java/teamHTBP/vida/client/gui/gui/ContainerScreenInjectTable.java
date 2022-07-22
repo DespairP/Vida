@@ -258,14 +258,19 @@ public class ContainerScreenInjectTable extends ModBaseGui<ContainerInjectTable>
     private void renderGem(PoseStack matrixStack, ItemStack itemStack) {
         Item itemTool = stack.getItem();
         RenderSystem.setShaderColor(1, (float) 1, 1, 0.6f + (float) gemLightnessRenew());
-        if (itemTool instanceof IElementTools) {
-            EnumElements elementType = ((IElementTools) itemTool).getItemElement();
-            switch (elementType) {
-                case GOLD -> blit(matrixStack, this.leftPos + backgroundXsize / 20, this.topPos + 10, 0, 39, 241, 13, 13, 512, 512);
-                case WOOD -> blit(matrixStack, this.leftPos + backgroundXsize / 20, this.topPos + 10, 0, 26, 241, 13, 13, 512, 512);
-                case AQUA -> blit(matrixStack, this.leftPos + backgroundXsize / 20, this.topPos + 10, 0, 13, 241, 13, 13, 512, 512);
-                case FIRE -> blit(matrixStack, this.leftPos + backgroundXsize / 20, this.topPos + 10, 0, 0, 241, 13, 13, 512, 512);
-                case EARTH -> blit(matrixStack, this.leftPos + backgroundXsize / 20, this.topPos + 10, 0, 52, 241, 13, 13, 512, 512);
+        if (itemTool instanceof IElementTools elementTool) {
+            if (elementTool.getItemElement() instanceof EnumElements element) {
+                int u = switch (element) {
+                    case VOID, FIRE, NONE -> 0;
+                    case GOLD -> 39;
+                    case WOOD -> 26;
+                    case AQUA -> 13;
+                    case EARTH -> 52;
+                };
+                blit(matrixStack, this.leftPos + backgroundXsize / 20, this.topPos + 10, 0,
+                        52, 241,
+                        13, 13,
+                        512, 512);
             }
         }
     }

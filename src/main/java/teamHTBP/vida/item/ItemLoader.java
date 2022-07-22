@@ -123,11 +123,11 @@ public class ItemLoader {
     public static RegistryObject<Item> fireElementPickaxe = ITEMS.register("fireelementpickaxe", () -> new ItemElementPickaxe(FIRE));
     public static RegistryObject<Item> earthElementPickaxe = ITEMS.register("earthelementpickaxe", () -> new ItemElementPickaxe(EARTH));
 
-    public static RegistryObject<Item> goldElementSword = ITEMS.register("goldelementsword", () -> new ItemElementSword(1));
-    public static RegistryObject<Item> woodElementSword = ITEMS.register("woodelementsword", () -> new ItemElementSword(2));
-    public static RegistryObject<Item> aquaElementSword = ITEMS.register("aquaelementsword", () -> new ItemElementSword(3));
-    public static RegistryObject<Item> fireElementSword = ITEMS.register("fireelementsword", () -> new ItemElementSword(4));
-    public static RegistryObject<Item> earthElementSword = ITEMS.register("earthelementsword", () -> new ItemElementSword(5));
+    public static RegistryObject<Item> goldElementSword = ITEMS.register("goldelementsword", () -> new ItemElementSword(GOLD));
+    public static RegistryObject<Item> woodElementSword = ITEMS.register("woodelementsword", () -> new ItemElementSword(WOOD));
+    public static RegistryObject<Item> aquaElementSword = ITEMS.register("aquaelementsword", () -> new ItemElementSword(AQUA));
+    public static RegistryObject<Item> fireElementSword = ITEMS.register("fireelementsword", () -> new ItemElementSword(FIRE));
+    public static RegistryObject<Item> earthElementSword = ITEMS.register("earthelementsword", () -> new ItemElementSword(EARTH));
 
     public final static RegistryObject<Item> logVida = ITEMS.register("logvida", () -> new BlockItem(BlockLoader.logVida.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));
     public static RegistryObject<Item> leavesVida = ITEMS.register("leavesvida", () -> new BlockItem(BlockLoader.leavesVida.get(), new Item.Properties().tab(ItemGroupLoader.vidaItemGroup)));

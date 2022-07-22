@@ -15,14 +15,15 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import teamHTBP.vida.creativetab.ItemGroupLoader;
+import teamHTBP.vida.helper.elementHelper.IElement;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemElementSword extends SwordItem {
-    public int element = 0;
+public class ItemElementSword extends SwordItem implements IElementLevelTools {
+    public IElement element;
 
-    public ItemElementSword(int element) {
+    public ItemElementSword(IElement element) {
         super(new ItemElementPickaxe.ElementItemTier(), 3, -2.4f, new Properties().tab(ItemGroupLoader.vidaItemGroup));
         this.element = element;
     }
@@ -32,7 +33,6 @@ public class ItemElementSword extends SwordItem {
         ItemStack stack = new ItemStack(this);
         stack.getOrCreateTag().putInt("swordEXP", 0);
         stack.getOrCreateTag().putInt("level", 1);
-        stack.getOrCreateTag().putInt("ToolElement", element);
         if (this.allowdedIn(group)) {
             items.add(stack);
         }
@@ -43,7 +43,6 @@ public class ItemElementSword extends SwordItem {
         CompoundTag nbt = stack.getOrCreateTag();
         nbt.putInt("swordExp", 0);
         nbt.putInt("level", 1);
-        nbt.putInt("ToolElement", element);
     }
 
     @Override
@@ -57,6 +56,29 @@ public class ItemElementSword extends SwordItem {
         tooltip.add(iTextComponent);
         tooltip.add(new TextComponent("(" + exp + "/" + (level * 200 + level * 13) + ")").withStyle(ChatFormatting.AQUA));
         //System.out.println(iTextComponent.getFormattedText());
+    }
+
+    @Override
+    public IElement getItemElement() {
+        return element;
+    }
+
+    @Override
+    public int getCurrentLevel(ItemStack stack) {
+        CompoundTag nbt = stack.getOrCreateTag();
+        return nbt.getInt("level");
+    }
+
+    @Override
+    public double getNextLevelRequiredXP(ItemStack stack) {
+        CompoundTag nbt = stack.getOrCreateTag();
+        return nbt.getDouble("level") * 500.0f;
+    }
+
+    @Override
+    public double getCurrentLevelXP(ItemStack stack) {
+        CompoundTag nbt = stack.getOrCreateTag();
+        return nbt.getDouble("swordEXP");
     }
 }
 
