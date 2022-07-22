@@ -7,10 +7,9 @@ import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.resources.ResourceLocation;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.blockentity.crystal.IElementCrystal;
-import teamHTBP.vida.client.gui.IVidaHUD;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 
-public class ElementCrystalHUD extends GuiComponent implements IVidaHUD{
+public class ElementCrystalHUD extends GuiComponent {
     private final int width;
     private final int height;
     private final Minecraft minecraft;
@@ -29,7 +28,6 @@ public class ElementCrystalHUD extends GuiComponent implements IVidaHUD{
         this.progress_ticks = progress_ticks;
     }
 
-    @Override
     public void render(PoseStack matrixStack) {
         if (tileEntityCrystal == null) return;
         int screenWidth = this.width / 2 - 6;

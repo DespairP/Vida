@@ -8,7 +8,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import teamHTBP.vida.client.hud.BottleHUD;
 import teamHTBP.vida.client.hud.ElementSwordHUD;
 import teamHTBP.vida.input.KeyBoardBottle;
@@ -21,7 +20,7 @@ import teamHTBP.vida.utils.math.IntRange;
  *
  * */
 @OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(Dist.CLIENT)
+//@Mod.EventBusSubscriber(Dist.CLIENT)
 public class HUDItemEventHandler extends HudHandler {
     /**瓶子的透明度*/
     public static IntRange alpha = new IntRange(0,100,0);

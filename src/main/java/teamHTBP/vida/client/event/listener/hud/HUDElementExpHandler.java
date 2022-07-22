@@ -8,13 +8,12 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.gui.ForgeIngameGui;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import teamHTBP.vida.client.event.listener.HoldItemClientTickHandler;
 import teamHTBP.vida.client.hud.ElementLevelToolsExpHUD;
 import teamHTBP.vida.item.staff.IElementLevelTools;
 
 @OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(Dist.CLIENT)
+//@Mod.EventBusSubscriber(Dist.CLIENT)
 public class HUDElementExpHandler extends HudHandler {
     public static boolean renderToolExp = true;
     private static ElementLevelToolsExpHUD hud = new ElementLevelToolsExpHUD();

@@ -8,11 +8,10 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.client.gui.IVidaHUD;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.item.staff.ItemElementPickaxe;
 
-public class ElementPickaxeHUD extends GuiComponent implements IVidaHUD {
+public class ElementPickaxeHUD extends GuiComponent {
     private final int width;
     private final int height;
     private final Minecraft minecraft;
@@ -28,7 +27,6 @@ public class ElementPickaxeHUD extends GuiComponent implements IVidaHUD {
         this.alpha = alpha / 100.0f;
     }
 
-    @Override
     public void render(PoseStack matrixStack) {
         if (itemStack == null) return;
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, alpha);
