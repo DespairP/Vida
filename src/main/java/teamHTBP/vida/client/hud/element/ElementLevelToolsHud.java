@@ -1,72 +1,30 @@
-package teamHTBP.vida.client.hud;
+package teamHTBP.vida.client.hud.element;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.gui.ForgeIngameGui;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.client.animation.TimeInterpolator;
-import teamHTBP.vida.client.animation.animator.Animator;
-import teamHTBP.vida.client.animation.valueholder.FloatPropertyValueHolder;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.item.staff.IElementLevelTools;
 import teamHTBP.vida.utils.color.RGBAColor;
 
-public class ElementLevelToolsHud extends Hud {
+public class ElementLevelToolsHud extends ElementToolsHud {
     private static final ResourceLocation HUD = new ResourceLocation(Vida.MOD_ID, "textures/gui/pickaxe_hud.png");
-
-    private ItemStack last = ItemStack.EMPTY;
-
-    Animator in;
-    Animator out;
-
-    @Override
-    protected void init() {
-        in = Animator.of(this, new FloatPropertyValueHolder<>(ALPHA, 0f, 100f))
-                .interpolator(TimeInterpolator.ACCELERATE).durationTick(20);
-
-        out = Animator.of(this, new FloatPropertyValueHolder<>(ALPHA, 100f, 0f))
-                .interpolator(TimeInterpolator.DECELERATE).durationTick(20);
-    }
-
-    void animTick(boolean isIncrease) {
-        if (isIncrease) {
-            out.cancel();
-            in.start();
-        } else {
-            in.cancel();
-            out.start();
-        }
-    }
 
     @Override
     public void renderInner(ForgeIngameGui gui, PoseStack poseStack, float partialTick, int width, int height) {
         gui.setupOverlayRenderState(true, false);
 
-        RenderSystem.setShaderTexture(0, HUD);
+        checkLastAndAnimTick();
 
-        ItemStack itemStack = player().getMainHandItem();
+        if (alpha > 0 && last.getItem() instanceof IElementLevelTools item) {
+            float alpha = this.alpha / 100F;
 
-        boolean isIncrease = itemStack.getItem() instanceof IElementLevelTools;
+            RenderSystem.setShaderTexture(0, HUD);
+            RenderSystem.setShaderColor(1, 1, 1, alpha);
 
-        if (isIncrease && last != itemStack) {
-            last = itemStack;
-            in.setTickPercent(.5F);
-        }
-
-        animTick(isIncrease);
-
-        float alpha = this.alpha / 100F;
-
-        if (alpha == 0) {
-            last = ItemStack.EMPTY;
-        }
-
-        RenderSystem.setShaderColor(1, 1, 1, alpha);
-
-        if (!last.isEmpty() && last.getItem() instanceof IElementLevelTools item) {
             // 根据物品元素进行渲染
             EnumElements element = item.getItemElement();
 
