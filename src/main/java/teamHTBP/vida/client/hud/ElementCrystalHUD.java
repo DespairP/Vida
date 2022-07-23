@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.blockentity.crystal.IElementCrystal;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
+import teamHTBP.vida.helper.elementHelper.IElement;
 
 public class ElementCrystalHUD extends GuiComponent {
     private final int width;
@@ -45,14 +46,14 @@ public class ElementCrystalHUD extends GuiComponent {
     }
 
     private void renderCrystal(PoseStack matrixStack) {
-        EnumElements element = tileEntityCrystal.getElement();
+        IElement element = tileEntityCrystal.getElement();
         int screenWidth = this.width / 2 - 6;
         int screenHeight = this.height / 2 - 40;
         int progress = (int) (tileEntityCrystal.getEnergyStored() * 14.0f / tileEntityCrystal.getMaxEnergy());
         //System.out.println(tileEntityCrystal.getEnergyStored());
-        switch (element) {
-            case GOLD:
-                blit(matrixStack, screenWidth, screenHeight + 14 - progress, 18, 65 + 14 - progress, 12, progress, 528, 528);
+
+        if (EnumElements.GOLD == element) {
+            blit(matrixStack, screenWidth, screenHeight + 14 - progress, 18, 65 + 14 - progress, 12, progress, 528, 528);
         }
     }
 

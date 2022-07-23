@@ -6,8 +6,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -46,38 +46,36 @@ public class BlockEnergyCrystalHUDEventLoader extends HudHandler {
         offset_frame = (offset_frame + 1) % 64;
         Player player = Minecraft.getInstance().player;
         HitResult objectMouseOver = Minecraft.getInstance().hitResult;
-        BlockPos pos = new BlockPos(objectMouseOver.getLocation());
 
-        Vec3 vec3d = player.getViewVector(event.getPartialTicks());
-        Vec3 vec3d1 = objectMouseOver.getLocation();
+        if (objectMouseOver instanceof BlockHitResult result) {
+            BlockPos pos = result.getBlockPos();
 
-        BlockPos newpos = new BlockPos(vec3d1);
-        Block block = player.level.getBlockState(newpos).getBlock();
-        Level world = player.level;
+            Level world = player.level;
+            Block block = world.getBlockState(pos).getBlock();
 
-        if (block instanceof BlockElementCrystal) {
-            BlockEntity tileEntityCrystal = world.getBlockEntity(pos);
-            if (tileEntityCrystal instanceof IElementCrystal) {
-                ElementCrystalHUD hud = new ElementCrystalHUD((IElementCrystal) tileEntityCrystal, element_fragment_tick, element_Progress);
-                setupShader();
-                hud.render(event.getMatrixStack());
-                if (offset_frame % 8 == 0) {
-                    final int MAX_PROGRESS = (int) (15.0f * ((IElementCrystal) tileEntityCrystal).getEnergyStored() / ((IElementCrystal) tileEntityCrystal).getMaxEnergy());
-                    if (element_Progress < MAX_PROGRESS) {
-                        element_Progress += 1;
-                    } else if (element_Progress > MAX_PROGRESS) {
-                        element_Progress = 0;
+            if (block instanceof BlockElementCrystal) {
+                BlockEntity tileEntityCrystal = world.getBlockEntity(pos);
+                if (tileEntityCrystal instanceof IElementCrystal) {
+                    ElementCrystalHUD hud = new ElementCrystalHUD((IElementCrystal) tileEntityCrystal, element_fragment_tick, element_Progress);
+                    setupShader();
+                    hud.render(event.getMatrixStack());
+                    if (offset_frame % 8 == 0) {
+                        final int MAX_PROGRESS = (int) (15.0f * ((IElementCrystal) tileEntityCrystal).getEnergyStored() / ((IElementCrystal) tileEntityCrystal).getMaxEnergy());
+                        if (element_Progress < MAX_PROGRESS) {
+                            element_Progress += 1;
+                        } else if (element_Progress > MAX_PROGRESS) {
+                            element_Progress = 0;
+                        }
                     }
                 }
+                if (offset_frame % 16 == 0) {
+                    element_fragment_tick += 1;
+                    element_fragment_tick %= 32;
+                }
+            } else {
+                element_fragment_tick = 0;
+                element_Progress = 0;
             }
-            if (offset_frame % 16 == 0) {
-                element_fragment_tick += 1;
-                element_fragment_tick %= 32;
-            }
-        } else {
-            element_fragment_tick = 0;
-            element_Progress = 0;
         }
-
     }
 }
