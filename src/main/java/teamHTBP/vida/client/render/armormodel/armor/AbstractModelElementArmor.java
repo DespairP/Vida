@@ -45,17 +45,12 @@ public abstract class AbstractModelElementArmor<T extends LivingEntity> extends 
     @Override
     protected Iterable<ModelPart> bodyParts() {
         List<ModelPart> renderParts;
-        switch (renderPart){
-            case CHEST:
-                return ImmutableList.of(leftArm, rightArm, body, leftArm, rightArm, body);
-            case FEET:
-                return ImmutableList.of(leftLeg, rightLeg, leftLeg, rightLeg);
-            case LEGS:
-                return ImmutableList.of(leftLeg, rightLeg, belt);
-            case HEAD:
-            default:
-                return ImmutableList.of();
-        }
+        return switch (renderPart) {
+            case CHEST -> ImmutableList.of(leftArm, rightArm, body, leftArm, rightArm, body);
+            case FEET -> ImmutableList.of(leftLeg, rightLeg, leftLeg, rightLeg);
+            case LEGS -> ImmutableList.of(leftLeg, rightLeg, belt);
+            default -> ImmutableList.of();
+        };
     }
 
     @Override
@@ -86,11 +81,11 @@ public abstract class AbstractModelElementArmor<T extends LivingEntity> extends 
     }
 
     public void copyModelRotation(){
-        this.head.copyFrom(head);
-        this.body.copyFrom(body);
-        this.leftArm.copyFrom(leftArm);
-        this.rightArm.copyFrom(rightArm);
-        this.leftLeg.copyFrom(leftLeg);
-        this.rightLeg.copyFrom(rightLeg);
+        this.head.copyFrom(super.head);
+        this.body.copyFrom(super.body);
+        this.leftArm.copyFrom(super.leftArm);
+        this.rightArm.copyFrom(super.rightArm);
+        this.leftLeg.copyFrom(super.leftLeg);
+        this.rightLeg.copyFrom(super.rightLeg);
     }
 }
