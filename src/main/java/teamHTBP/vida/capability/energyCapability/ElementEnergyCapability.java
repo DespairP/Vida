@@ -1,6 +1,7 @@
 package teamHTBP.vida.capability.energyCapability;
 
 import teamHTBP.vida.helper.elementHelper.EnumElements;
+import teamHTBP.vida.helper.elementHelper.IElement;
 
 public class ElementEnergyCapability implements IElementEnergyCapability {
     //现有的能量
@@ -12,13 +13,13 @@ public class ElementEnergyCapability implements IElementEnergyCapability {
     //最大一次输出能量
     protected int maxExtract;
     //能量的元素
-    protected EnumElements element;
+    protected IElement element;
 
     public ElementEnergyCapability(int capacity, int maxReceive, int maxExtract, int energy) {
         this(capacity, maxReceive, maxExtract, energy, EnumElements.VOID);
     }
 
-    public ElementEnergyCapability(int capacity, int maxReceive, int maxExtract, int energy, EnumElements element) {
+    public ElementEnergyCapability(int capacity, int maxReceive, int maxExtract, int energy, IElement element) {
         this.capacity = capacity;
         this.maxReceive = maxReceive;
         this.maxExtract = maxExtract;
@@ -65,17 +66,17 @@ public class ElementEnergyCapability implements IElementEnergyCapability {
     }
 
     @Override
-    public boolean canExtract(EnumElements element) {
+    public boolean canExtract(IElement element) {
         return this.maxExtract > 0 && this.energy > 0 && element == this.element;
     }
 
     @Override
-    public boolean canReceive(EnumElements element) {
+    public boolean canReceive(IElement element) {
         return this.maxReceive > 0 && this.energy <= this.capacity && element == this.element;
     }
 
     @Override
-    public EnumElements getElement() {
+    public IElement getElement() {
         return this.element;
     }
 

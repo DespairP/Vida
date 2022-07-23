@@ -1,9 +1,9 @@
 package teamHTBP.vida.blockentity.crystal;
 
-import teamHTBP.vida.helper.elementHelper.EnumElements;
+import teamHTBP.vida.helper.elementHelper.IElement;
 
 public interface IElementCrystal {
-    EnumElements getElement();
+    IElement getElement();
 
     int getEnergyStored();
 

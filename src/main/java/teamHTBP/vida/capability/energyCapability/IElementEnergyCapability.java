@@ -1,6 +1,7 @@
 package teamHTBP.vida.capability.energyCapability;
 
 import teamHTBP.vida.helper.elementHelper.EnumElements;
+import teamHTBP.vida.helper.elementHelper.IElement;
 
 /**
  * COPY FROM IEnergyStorage
@@ -39,19 +40,22 @@ public interface IElementEnergyCapability {
     /**
      * Returns if this storage can have energy extracted.
      * If this is false, then any calls to extractEnergy will return 0.
+     * @param element
      */
-    boolean canExtract(EnumElements element);
+    boolean canExtract(IElement element);
 
     /**
      * Used to determine if this storage can receive energy.
      * If this is false, then any calls to receiveEnergy will return 0.
+     * @param element
      */
-    boolean canReceive(EnumElements element);
+    boolean canReceive(IElement element);
 
     /**
      * Get the Element of the energy
+     * @return element
      */
-    EnumElements getElement();
+    IElement getElement();
 
     /***/
     void setEnergy(int energy);

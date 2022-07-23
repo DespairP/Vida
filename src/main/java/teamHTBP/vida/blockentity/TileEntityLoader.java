@@ -46,27 +46,18 @@ public class TileEntityLoader {
     });
 
     public static RegistryObject<BlockEntityType<TileEntityWoodElementCrystal>> TileEntityCrystalWood = TILE_ENTITY_DEFERRED_REGISTER.register("teelementcrystal_wood", () -> {
-        return BlockEntityType.Builder.of((p, b) -> {
-                    return new TileEntityWoodElementCrystal(p, b, 2);
-                },
+        return BlockEntityType.Builder.of(TileEntityWoodElementCrystal::new,
                 BlockLoader.elementCrystalWood.get()).build(null);
     });
-    public static RegistryObject<BlockEntityType<TileEntityAquaElementCrystal>> TileEntityCrystalAqua = TILE_ENTITY_DEFERRED_REGISTER.register("teelementcrystal_fire", () -> {
-        return BlockEntityType.Builder.of((p, b) -> {
-                    return new TileEntityAquaElementCrystal(p, b, 3);
-                },
-                BlockLoader.elementCrystalAqua.get()).build(null);
-    });
+    public static RegistryObject<BlockEntityType<TileEntityAquaElementCrystal>> TileEntityCrystalAqua = TILE_ENTITY_DEFERRED_REGISTER
+            .register("teelementcrystal_fire", () -> BlockEntityType.Builder.of(TileEntityAquaElementCrystal::new,
+                    BlockLoader.elementCrystalAqua.get()).build(null));
     public static RegistryObject<BlockEntityType<TileEntityFireElementCrystal>> TileEntityCrystalFire = TILE_ENTITY_DEFERRED_REGISTER.register("teelementcrystal_aqua", () -> {
-        return BlockEntityType.Builder.of((p, b) -> {
-                    return new TileEntityFireElementCrystal(p, b, 4);
-                },
+        return BlockEntityType.Builder.of(TileEntityFireElementCrystal::new,
                 BlockLoader.elementCrystalFire.get()).build(null);
     });
     public static RegistryObject<BlockEntityType<TileEntityEarthElementCrystal>> TileEntityCrystalEarth = TILE_ENTITY_DEFERRED_REGISTER.register("teelementcrystal_earth", () -> {
-        return BlockEntityType.Builder.of((p, b) -> {
-                    return new TileEntityEarthElementCrystal(p, b, 5);
-                },
+        return BlockEntityType.Builder.of(TileEntityEarthElementCrystal::new,
                 BlockLoader.elementCrystalEarth.get()).build(null);
     });
     public static RegistryObject<BlockEntityType<TileEntityInjectTable>> TileEntityInjectTable =
