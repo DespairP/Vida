@@ -28,7 +28,7 @@ public interface TimeInterpolator {
 
     /**
      * 获取插值结果
-     * @param value 待插值的值
+     * @param value 待插值的值 (0 ~ 1)
      * @return      插值的结果
      */
     float interpolation(float value);
