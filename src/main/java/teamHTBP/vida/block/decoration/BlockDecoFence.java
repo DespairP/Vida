@@ -6,6 +6,4 @@ public class BlockDecoFence extends FenceBlock {
     public BlockDecoFence(Properties properties) {
         super(properties);
     }
-
-
 }

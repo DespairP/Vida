@@ -36,6 +36,12 @@ public class ModBlockTags extends BlockTagsProvider {
                 .add(BlockLoader.prismTable.get())
                 .add(BlockLoader.CORE_ALTAR.get())
                 .add(BlockLoader.injectionTable.get());
+
+        tag(BlockTags.FENCES)
+                .add(BlockLoader.PLANK_VIDA_FENCE.get());
+
+        tag(BlockTags.WOODEN_FENCES)
+                .add(BlockLoader.PLANK_VIDA_FENCE.get());
     }
 
     @Override
