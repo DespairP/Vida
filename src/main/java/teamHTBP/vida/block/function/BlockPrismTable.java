@@ -33,7 +33,6 @@ public class BlockPrismTable extends ModBaseEntityBlock<TileEntityPrismTable> {
 
     public BlockPrismTable() {
         super(Properties.of(Material.WOOD).strength(3.0f, 3.0f).noOcclusion()
-                // todo tag .harvestTool(ToolType.PICKAXE)
                 .noOcclusion(), TileEntityLoader.TileEntityPrismTable);
     }
 

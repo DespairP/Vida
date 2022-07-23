@@ -7,8 +7,6 @@ import net.minecraft.world.level.material.Material;
 @Deprecated
 public class BlockFertileSoilBrick extends Block {
     public BlockFertileSoilBrick() {
-        super(Properties.of(Material.STONE)
-                // todo tag .harvestTool(ToolType.PICKAXE)
-                .sound(SoundType.STONE).strength(2.0f, 6.0f));
+        super(Properties.of(Material.STONE).sound(SoundType.STONE).strength(2.0f, 6.0f));
     }
 }

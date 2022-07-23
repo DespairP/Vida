@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "vida:deepsea_bricks_corner",
+    "vida:deepsea_pillar_0",
+    "vida:deepsea_pillar_1",
+    "vida:deepsea_pillar_2",
+    "vida:deepsea_bricks_straight",
+    "vida:dim_bricks",
+    "vida:dim_bricks_deco_0",
+    "vida:dim_bricks_deco_1",
+    "vida:gemshower",
+    "vida:deepsea_stone",
+    "vida:prismtable",
+    "vida:elementcorealtar",
+    "vida:injecttable"
+  ]
+}

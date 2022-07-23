@@ -46,7 +46,6 @@ public class BlockGemShower extends ModBaseEntityBlock<TileEntityGemShower> {
 
     public BlockGemShower() {
         super(Properties.of(Material.WOOD).sound(SoundType.WOOD).noOcclusion().strength(2.0f, 3.0f),
-                // todo tag .harvestTool(ToolType.AXE)
                 TileEntityLoader.TileEntityGemShower
         );
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(HALF, DoubleBlockHalf.LOWER));

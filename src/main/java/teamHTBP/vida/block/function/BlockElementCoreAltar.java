@@ -29,12 +29,8 @@ import java.util.Random;
 @Version 0.0.1*/
 public class BlockElementCoreAltar extends ModBaseEntityBlock<TileEntityElementCoreAltar> {
     public BlockElementCoreAltar() {
-        super(Properties.of(Material.METAL).noOcclusion().strength(5.0f, 5.0f)
-                .sound(SoundType.STONE),
-                // todo tag .harvestLevel(2).harvestTool(ToolType.PICKAXE)
-                TileEntityLoader.TileEntityElementCoreAltar
-        );
-
+        super(Properties.of(Material.METAL).noOcclusion().strength(5.0f, 5.0f).sound(SoundType.STONE),
+                TileEntityLoader.TileEntityElementCoreAltar);
     }
 
     @Override

@@ -9,7 +9,6 @@ import java.util.function.Supplier;
 public class BlockDecoStair extends StairBlock {
 
     public BlockDecoStair(Supplier<BlockState> state, BlockBehaviour.Properties properties) {
-        //TODO
         super(state, properties);
     }
 }

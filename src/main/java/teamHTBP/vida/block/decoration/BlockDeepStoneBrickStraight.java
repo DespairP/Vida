@@ -25,7 +25,6 @@ public class BlockDeepStoneBrickStraight extends Block {
 
     public BlockDeepStoneBrickStraight() {
         super(Properties.of(Material.STONE).strength(2.0f, 6.0f)
-                // TODO tag .harvestTool(ToolType.PICKAXE)
                 .sound(SoundType.STONE));
     }
 

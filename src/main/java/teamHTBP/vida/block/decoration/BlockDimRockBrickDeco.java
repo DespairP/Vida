@@ -7,7 +7,6 @@ import net.minecraft.world.level.material.Material;
 public class BlockDimRockBrickDeco extends Block {
     public BlockDimRockBrickDeco() {
         super(Properties.of(Material.STONE).strength(2.0f, 6.0f)
-                // todo tag.harvestTool(ToolType.PICKAXE)
                 .sound(SoundType.STONE));
     }
 }

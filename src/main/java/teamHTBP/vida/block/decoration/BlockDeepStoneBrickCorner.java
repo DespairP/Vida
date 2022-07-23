@@ -27,7 +27,6 @@ public class BlockDeepStoneBrickCorner extends Block {
 
     public BlockDeepStoneBrickCorner() {
         super(Block.Properties.of(Material.STONE).strength(2.0f, 6.0f)
-                // TODO 用 tag .harvestTool(ToolType.PICKAXE)
                 .sound(SoundType.STONE));
         this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(STATE, 0));
     }

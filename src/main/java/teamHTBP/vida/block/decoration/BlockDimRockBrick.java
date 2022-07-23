@@ -9,7 +9,6 @@ public class BlockDimRockBrick extends Block {
 
     public BlockDimRockBrick() {
         super(Properties.of(Material.STONE).strength(2.0f, 6.0f)
-                // TODO tag .harvestTool(ToolType.PICKAXE)
                 .sound(SoundType.STONE));
     }
 

@@ -21,7 +21,6 @@ import teamHTBP.vida.blockentity.TileEntityLoader;
 public class BlockInjectTable extends ModBaseEntityBlock<TileEntityInjectTable> {
     public BlockInjectTable() {
         super(Properties.of(Material.STONE).strength(3.0f, 3.0f)
-                // todo tag .harvestTool(ToolType.PICKAXE).harvestLevel(1)
                 .noOcclusion().sound(SoundType.STONE), TileEntityLoader.TileEntityInjectTable);
     }
 

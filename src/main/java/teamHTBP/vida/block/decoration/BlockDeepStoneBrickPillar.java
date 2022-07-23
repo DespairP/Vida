@@ -28,7 +28,6 @@ public class BlockDeepStoneBrickPillar extends RotatedPillarBlock {
      */
     public BlockDeepStoneBrickPillar(int state) {
         super(Properties.of(Material.STONE).strength(2.0f, 6.0f)
-                // TODO tag .harvestTool(ToolType.PICKAXE)
                 .sound(SoundType.STONE));
         this.registerDefaultState(this.getStateDefinition().any().setValue(STATE, state).setValue(AXIS, Direction.Axis.Y));
     }
