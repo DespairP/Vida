@@ -56,8 +56,12 @@ public class ElementLevelToolsHud extends ElementToolsHud {
                         119, 35);
 
                 // 显示工具等级
-                GuiComponent.drawCenteredString(poseStack, mc.font, level + "", renderX + 16, renderY + 10,
-                        RGBAColor.getColorCodeFromRGBA(126, 186, 137, (int) (255 * alpha)));
+                int a = (int) (255 * alpha);
+
+                if (a > 2) {
+                    GuiComponent.drawCenteredString(poseStack, mc.font, level + "", renderX + 16, renderY + 10,
+                            RGBAColor.getColorCodeFromRGBA(126, 186, 137, a));
+                }
             }
         }
     }

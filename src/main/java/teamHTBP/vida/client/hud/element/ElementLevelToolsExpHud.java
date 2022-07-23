@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FastColor;
 import net.minecraftforge.client.gui.ForgeIngameGui;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.item.staff.IElementLevelTools;
@@ -18,11 +19,11 @@ public class ElementLevelToolsExpHud extends ElementToolsHud {
     @Override
     protected void renderInner(ForgeIngameGui gui, PoseStack poseStack, float partialTick, int width, int height) {
         gui.setupOverlayRenderState(true, false);
-        
+
         checkLastAndAnimTick();
 
         //渲染工具经验
-        if(alpha > 0 && last.getItem() instanceof IElementLevelTools item) {
+        if (alpha > 0 && last.getItem() instanceof IElementLevelTools item) {
             RGBAColor color = item.getItemElement().getElementRGBAColor();
 
             if (color == null) {
@@ -54,16 +55,17 @@ public class ElementLevelToolsExpHud extends ElementToolsHud {
             }
 
             int level = item.getCurrentLevel(last);
+            int a = (int) (255 * alpha);
 
-            if (level > 0) {
+            if (a > 2 && level > 0) {
                 String s = "" + level;
                 int i1 = (width - mc.font.width(s)) / 2 + 20;
                 int j1 = height - 31 - 4;
-                mc.font.draw(poseStack, s, (float) (i1 + 1), (float) j1, RGBAColor.getColorCodeFromRGBA(0, 0, 0, (int) (alpha * 255.0F)));
-                mc.font.draw(poseStack, s, (float) (i1 - 1), (float) j1, RGBAColor.getColorCodeFromRGBA(0, 0, 0, (int) (alpha * 255.0F)));
-                mc.font.draw(poseStack, s, (float) i1, (float) (j1 + 1), RGBAColor.getColorCodeFromRGBA(0, 0, 0, (int) (alpha * 255.0F)));
-                mc.font.draw(poseStack, s, (float) i1, (float) (j1 - 1), RGBAColor.getColorCodeFromRGBA(0, 0, 0, (int) (alpha * 255.0F)));
-                mc.font.draw(poseStack, s, (float) i1, (float) j1, RGBAColor.getColorCodeFromRGBA(r, g, b, (int) (alpha * 255.0F)));
+                mc.font.draw(poseStack, s, (float) (i1 + 1), (float) j1, RGBAColor.getColorCodeFromRGBA(0, 0, 0, a));
+                mc.font.draw(poseStack, s, (float) (i1 - 1), (float) j1, RGBAColor.getColorCodeFromRGBA(0, 0, 0, a));
+                mc.font.draw(poseStack, s, (float) i1, (float) (j1 + 1), RGBAColor.getColorCodeFromRGBA(0, 0, 0, a));
+                mc.font.draw(poseStack, s, (float) i1, (float) (j1 - 1), RGBAColor.getColorCodeFromRGBA(0, 0, 0, a));
+                mc.font.draw(poseStack, s, (float) i1, (float) j1, FastColor.ARGB32.color(a, r, g, b));
             }
         }
     }
