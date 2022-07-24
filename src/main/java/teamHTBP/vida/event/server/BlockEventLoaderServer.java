@@ -11,6 +11,7 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import teamHTBP.vida.item.armor.ItemArmorElementLegginsWithBottles;
 import teamHTBP.vida.item.staff.ItemElementPickaxe;
 import teamHTBP.vida.item.staff.ItemElementSword;
@@ -18,6 +19,7 @@ import teamHTBP.vida.item.staff.ItemElementSword;
 import java.util.Random;
 
 
+@Mod.EventBusSubscriber
 public class BlockEventLoaderServer {
     @SubscribeEvent
     public static void kill(LivingDeathEvent event) {
@@ -113,14 +115,14 @@ public class BlockEventLoaderServer {
                 int exp = nbt.getInt("swordEXP");
                 if (level < 30) {
                     nbt.putInt("swordEXP", exp + new Random().nextInt(3) + 100);
-                    level_up_sword(level, exp, stack);
+                    levelUpSword(level, exp, stack);
                 }
             }
         }
     }
 
 
-    public static boolean level_up_sword(int level, int exp, ItemStack stack) {
+    public static boolean levelUpSword(int level, int exp, ItemStack stack) {
         if (level * 200 + level * 13 <= exp) {
             CompoundTag nbt = stack.getOrCreateTag();
             nbt.putInt("level", level + 1);

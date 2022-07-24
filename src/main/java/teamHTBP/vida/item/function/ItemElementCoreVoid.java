@@ -11,6 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import teamHTBP.vida.creativetab.ItemGroupLoader;
 import teamHTBP.vida.entity.EntityFaintLight;
 import teamHTBP.vida.entity.EntityLoader;
@@ -19,6 +20,7 @@ import teamHTBP.vida.item.ItemLoader;
 
 import java.util.List;
 
+@Mod.EventBusSubscriber
 public class ItemElementCoreVoid extends Item {
     public ItemElementCoreVoid() {
         super(new Properties().tab(ItemGroupLoader.vidaItemGroup));
@@ -38,7 +40,7 @@ public class ItemElementCoreVoid extends Item {
                 ItemStack stack = event.getPlayer().getInventory().getSelected();
                 stack.setCount(stack.getCount() - 1);
                 ItemStack getStack = ItemStack.EMPTY;
-                EntityFaintLight entityFaintLight = (EntityFaintLight) list.get(0);
+                EntityFaintLight entityFaintLight = list.get(0);
 
                 if (entityFaintLight.getFaintLightType() instanceof EnumElements) {
                     switch ((EnumElements) entityFaintLight.getFaintLightType()) {
@@ -47,12 +49,11 @@ public class ItemElementCoreVoid extends Item {
                         case AQUA -> getStack = new ItemStack(ItemLoader.ELEMENTCORE_AQUA.get(), 1);
                         case FIRE -> getStack = new ItemStack(ItemLoader.ELEMENTCORE_FIRE.get(), 1);
                         case EARTH -> getStack = new ItemStack(ItemLoader.ELEMENTCORE_EARTH.get(), 1);
+                        default -> getStack = ItemStack.EMPTY;
                     }
                 }
                 event.getPlayer().getInventory().add(getStack);
-
             }
-
         }
     }
 
