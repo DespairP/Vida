@@ -15,7 +15,7 @@ public class ArmorModelGoldLeggings extends AbstractModelElementLeggings {
     }
 
     public static LayerDefinition createBodyLayer() {
-        return ModelHelper.createBodyLayerH(partDefinition -> {
+        return ModelHelper.createBodyLayerHumanoid(partDefinition -> {
             var body_low = partDefinition.addOrReplaceChild("body_low",
                     CubeListBuilder.create().texOffs(0, 51).addBox(-4.0F, -2.0F, -2.0F, 8.0F, 2.0F, 4.0F, new CubeDeformation(0.2F))
                             .texOffs(0, 57).addBox(-4.75F, -2.5F, -1.5F, 1.0F, 7.0F, 3.0F, new CubeDeformation(0.0F))

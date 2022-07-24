@@ -15,7 +15,7 @@ public class ArmorModelGoldBoots extends AbstractModelElementBoots {
     }
 
     public static LayerDefinition createBodyLayer() {
-        return ModelHelper.createBodyLayerH(partDefinition -> {
+        return ModelHelper.createBodyLayerHumanoid(partDefinition -> {
             var leg_right = partDefinition.addOrReplaceChild("leg_right",
                     CubeListBuilder.create().texOffs(0, 67).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 5.0F, 4.0F, new CubeDeformation(0.2F))
                             .texOffs(0, 76).addBox(-2.0F, 6.9F, -2.0F, 4.0F, 5.0F, 4.0F, new CubeDeformation(0.2F))

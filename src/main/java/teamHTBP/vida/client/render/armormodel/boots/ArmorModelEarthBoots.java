@@ -15,7 +15,7 @@ public class ArmorModelEarthBoots extends AbstractModelElementBoots {
     }
 
     public static LayerDefinition createBodyLayer() {
-        return ModelHelper.createBodyLayerH(partDefinition -> {
+        return ModelHelper.createBodyLayerHumanoid(partDefinition -> {
             var leg_left = partDefinition.addOrReplaceChild("leg_left",
                     CubeListBuilder.create().texOffs(22, 56).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 2.0F, 4.0F, new CubeDeformation(0.2F))
                             .texOffs(38, 56).addBox(-2.0F, 7.0F, -2.0F, 4.0F, 5.0F, 4.0F, new CubeDeformation(0.2F))

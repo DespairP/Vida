@@ -12,11 +12,7 @@ import java.util.function.Consumer;
  * @author DustW
  */
 public class ModelHelper {
-    public static LayerDefinition createBodyLayer(Consumer<PartDefinition> definition) {
-        return createBodyLayer(definition, 64, 64);
-    }
-
-    public static LayerDefinition createBodyLayerH(Consumer<PartDefinition> definition, int width, int height) {
+    public static LayerDefinition createBodyLayerHumanoid(Consumer<PartDefinition> definition, int width, int height) {
         MeshDefinition meshdefinition = HumanoidModel.createMesh(new CubeDeformation(0), 0);
         PartDefinition partdefinition = meshdefinition.getRoot();
 
@@ -25,13 +21,17 @@ public class ModelHelper {
         return LayerDefinition.create(meshdefinition, width, height);
     }
 
-    public static LayerDefinition createBodyLayerH(Consumer<PartDefinition> definition) {
+    public static LayerDefinition createBodyLayerHumanoid(Consumer<PartDefinition> definition) {
         MeshDefinition meshdefinition = HumanoidModel.createMesh(new CubeDeformation(0), 0);
         PartDefinition partdefinition = meshdefinition.getRoot();
 
         definition.accept(partdefinition);
 
         return LayerDefinition.create(meshdefinition, 64, 64);
+    }
+
+    public static LayerDefinition createBodyLayer(Consumer<PartDefinition> definition) {
+        return createBodyLayer(definition, 64, 64);
     }
 
     public static LayerDefinition createBodyLayer(Consumer<PartDefinition> definition, int width, int height) {

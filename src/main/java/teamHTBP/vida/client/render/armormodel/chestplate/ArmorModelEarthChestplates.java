@@ -15,7 +15,7 @@ public class ArmorModelEarthChestplates extends AbstractModelElementChestplates 
     }
 
     public static LayerDefinition createBodyLayer() {
-        return ModelHelper.createBodyLayerH(partDefinition -> {
+        return ModelHelper.createBodyLayerHumanoid(partDefinition -> {
             var arm_right = partDefinition.addOrReplaceChild("arm_right",
                     CubeListBuilder.create().texOffs(26, 36).addBox(-4.25F, -3.0F, -2.5F, 3.0F, 5.0F, 5.0F, new CubeDeformation(0.0F))
                             .texOffs(0, 28).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 5.0F, 4.0F, new CubeDeformation(0.2F))

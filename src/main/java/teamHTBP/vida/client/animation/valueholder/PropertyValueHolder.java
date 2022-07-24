@@ -1,7 +1,7 @@
 package teamHTBP.vida.client.animation.valueholder;
 
 import teamHTBP.vida.client.animation.TimeInterpolator;
-import teamHTBP.vida.utils.property.Property;
+import teamHTBP.vida.client.animation.property.Property;
 
 /**
  * @author DustW
@@ -15,5 +15,12 @@ public abstract class PropertyValueHolder<O, V> {
         this.keyFrames = keyFrames;
     }
 
-    public abstract void setValue(O target, float actualTick, int maxTick, TimeInterpolator interpolator);
+    /**
+     * 使用 time interpolator 插值并将结果设置到目标对象上
+     * @param target        目标对象
+     * @param actualTick    实际的 tick
+     * @param maxTick       最大的 tick
+     * @param interpolator  插值器
+     */
+    public abstract void setValue(O target, float actualTick, int maxTick, TimeInterpolator<V> interpolator);
 }

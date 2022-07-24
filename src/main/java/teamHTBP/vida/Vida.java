@@ -15,7 +15,7 @@ import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.menu.ContainerTypeLoader;
 import teamHTBP.vida.particle.ParticleLoader;
 import teamHTBP.vida.recipe.RecipeManager;
-import teamHTBP.vida.worldGen.GenLoader;
+import teamHTBP.vida.world.generation.GenerationLoader;
 
 
 /**
@@ -38,7 +38,7 @@ public class Vida {
         EntityLoader.ENTITY_TYPES.register(bus);
         ContainerTypeLoader.CONTAINER_TYPES.register(bus);
 
-        GenLoader.register(bus);
+        GenerationLoader.register(bus);
         RecipeManager.register(bus);
         ModDataPacks.register(bus);
     }

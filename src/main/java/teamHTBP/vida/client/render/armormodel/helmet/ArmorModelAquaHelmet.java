@@ -16,7 +16,7 @@ public class ArmorModelAquaHelmet extends AbstractModelElementHelmet {
     }
 
     public static LayerDefinition createBodyLayer() {
-        return ModelHelper.createBodyLayerH(partDefinition -> {
+        return ModelHelper.createBodyLayerHumanoid(partDefinition -> {
             var head = partDefinition.addOrReplaceChild("head",
                     CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.2F))
                     ,PartPose.offset(0.0F, 0.0F, 0.0F));

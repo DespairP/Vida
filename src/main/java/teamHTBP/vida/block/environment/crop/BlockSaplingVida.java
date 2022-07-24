@@ -16,18 +16,18 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import teamHTBP.vida.worldGen.VidaTree;
+import teamHTBP.vida.world.generation.VidaTreeGrower;
 
 import java.util.Random;
 
 public class BlockSaplingVida extends BushBlock implements BonemealableBlock {
     public static final IntegerProperty STAGE = BlockStateProperties.STAGE;
     protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 12.0D, 14.0D);
-    private final VidaTree tree;
+    private final VidaTreeGrower tree;
 
     public BlockSaplingVida() {
         super(BlockBehaviour.Properties.of(Material.DECORATION).noCollission().randomTicks().noOcclusion().strength(0.5f).sound(SoundType.GRAVEL));
-        tree = new VidaTree();
+        tree = new VidaTreeGrower();
     }
 
     @Override

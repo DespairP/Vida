@@ -16,7 +16,7 @@ public class AbstractModelAquaChestplates extends AbstractModelElementChestplate
     }
 
     public static LayerDefinition createBodyLayer() {
-        return ModelHelper.createBodyLayerH(partDefinition -> {
+        return ModelHelper.createBodyLayerHumanoid(partDefinition -> {
             var arm_left = partDefinition.addOrReplaceChild("arm_left",
                     CubeListBuilder.create().texOffs(24, 41).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.2F))
                             .texOffs(40, 41).addBox(-1.0F, 7.0F, -2.0F, 4.0F, 3.0F, 4.0F, new CubeDeformation(0.2F))

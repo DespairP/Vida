@@ -31,7 +31,7 @@ public class ArmorModelBelt extends HumanoidModel<Player> {
 
 
     public static LayerDefinition createBodyLayer() {
-        return ModelHelper.createBodyLayerH(partDefinition -> {
+        return ModelHelper.createBodyLayerHumanoid(partDefinition -> {
             var body = partDefinition.addOrReplaceChild("body",
                     CubeListBuilder.create().texOffs(0, 0).addBox(-4.5F, 9.9F, -2.5F, 9.0F, 2.0F, 5.0F, new CubeDeformation(0.0F))
                             .texOffs(0, 7).addBox(-0.5F, 9.4F, -2.75F, 1.0F, 3.0F, 1.0F, new CubeDeformation(0.0F))

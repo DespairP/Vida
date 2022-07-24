@@ -15,7 +15,7 @@ public class ArmorModelFireChestplates extends AbstractModelElementChestplates {
     }
 
     public static LayerDefinition createBodyLayer() {
-        return ModelHelper.createBodyLayerH(partDefinition -> {
+        return ModelHelper.createBodyLayerHumanoid(partDefinition -> {
             var body = partDefinition.addOrReplaceChild("body",
                     CubeListBuilder.create().texOffs(48, 16).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.0F))
                     , PartPose.offset(0.0F, 0.0F, 0.0F));

@@ -14,7 +14,7 @@ public class ArmorModelFireLeggings extends AbstractModelElementLeggings {
     }
 
     public static LayerDefinition createBodyLayer() {
-        return ModelHelper.createBodyLayerH(partDefinition -> {
+        return ModelHelper.createBodyLayerHumanoid(partDefinition -> {
             var body_low = partDefinition.addOrReplaceChild("body_low",
                     CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 

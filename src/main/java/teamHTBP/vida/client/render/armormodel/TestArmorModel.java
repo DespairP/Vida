@@ -52,7 +52,7 @@ public class TestArmorModel<T extends Entity> extends HumanoidModel<ArmorStand> 
 
 
     public static LayerDefinition createBodyLayer() {
-        return ModelHelper.createBodyLayerH(partDefinition -> {
+        return ModelHelper.createBodyLayerHumanoid(partDefinition -> {
             var head = partDefinition.addOrReplaceChild("head",
                     CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 

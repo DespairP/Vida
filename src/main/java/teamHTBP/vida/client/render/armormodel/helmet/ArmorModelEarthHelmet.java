@@ -15,7 +15,7 @@ public class ArmorModelEarthHelmet extends AbstractModelElementHelmet {
     }
 
     public static LayerDefinition createBodyLayer() {
-        return ModelHelper.createBodyLayerH(partDefinition -> {
+        return ModelHelper.createBodyLayerHumanoid(partDefinition -> {
             var head = partDefinition.addOrReplaceChild("head",
                     CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.2F))
                             .texOffs(64, 12).addBox(-1.5F, -9.5F, -4.35F, 3.0F, 3.0F, 1.0F, new CubeDeformation(0.0F))

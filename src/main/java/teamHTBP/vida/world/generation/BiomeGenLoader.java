@@ -1,4 +1,4 @@
-package teamHTBP.vida.worldGen;
+package teamHTBP.vida.world.generation;
 
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
@@ -12,39 +12,37 @@ import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.UNDER
 import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.VEGETAL_DECORATION;
 
 
-@Mod.EventBusSubscriber()
+@Mod.EventBusSubscriber
 public class BiomeGenLoader {
 
     @SubscribeEvent
-    public static void biomeGenSetup(BiomeLoadingEvent event) {
-        if (event.getCategory() == Biome.BiomeCategory.FOREST || event.getCategory() == Biome.BiomeCategory.PLAINS)
-            event.getGeneration().getFeatures(VEGETAL_DECORATION).add(GenLoader.VIDA_TREE_PLACED.getHolder().get());
-    }
-
-    static void eleOreDefaultConfig(BiomeLoadingEvent event, RegistryObject<PlacedFeature> ore) {
-        event.getGeneration().getFeatures(UNDERGROUND_ORES).add(ore.getHolder().get());
-    }
-
-    @SubscribeEvent
     public static void oreGenSetup(BiomeLoadingEvent event) {
+        if (event.getCategory() == Biome.BiomeCategory.FOREST || event.getCategory() == Biome.BiomeCategory.PLAINS) {
+            event.getGeneration().getFeatures(VEGETAL_DECORATION).add(GenerationLoader.VIDA_TREE_PLACED.getHolder().get());
+        }
+
         if (EnumElements.AQUA.contains(event.getName())) {
-            eleOreDefaultConfig(event, GenLoader.aquaElementOre);
+            baseElementOre(event, GenerationLoader.aquaElementOre);
         }
 
         if (EnumElements.GOLD.contains(event.getName())) {
-            eleOreDefaultConfig(event, GenLoader.goldElementOre);
+            baseElementOre(event, GenerationLoader.goldElementOre);
         }
 
         if (EnumElements.FIRE.contains(event.getName())) {
-            eleOreDefaultConfig(event, GenLoader.fireElementOre);
+            baseElementOre(event, GenerationLoader.fireElementOre);
         }
 
         if (EnumElements.EARTH.contains(event.getName())) {
-            eleOreDefaultConfig(event, GenLoader.earthElementOre);
+            baseElementOre(event, GenerationLoader.earthElementOre);
         }
 
         if (EnumElements.WOOD.contains(event.getName())) {
-            eleOreDefaultConfig(event, GenLoader.woodElementOre);
+            baseElementOre(event, GenerationLoader.woodElementOre);
         }
+    }
+
+    static void baseElementOre(BiomeLoadingEvent event, RegistryObject<PlacedFeature> ore) {
+        event.getGeneration().getFeatures(UNDERGROUND_ORES).add(ore.getHolder().get());
     }
 }

@@ -1,7 +1,7 @@
 package teamHTBP.vida.client.animation.valueholder;
 
 import teamHTBP.vida.client.animation.TimeInterpolator;
-import teamHTBP.vida.utils.property.Property;
+import teamHTBP.vida.client.animation.property.Property;
 
 /**
  * @author DustW
@@ -12,7 +12,7 @@ public class FloatPropertyValueHolder<O> extends PropertyValueHolder<O, Float> {
     }
 
     @Override
-    public void setValue(O target, float actualTick, int maxTick, TimeInterpolator interpolator) {
+    public void setValue(O target, float actualTick, int maxTick, TimeInterpolator<Float> interpolator) {
         float k1 = keyFrames[0];
         float k2 = keyFrames[1];
 

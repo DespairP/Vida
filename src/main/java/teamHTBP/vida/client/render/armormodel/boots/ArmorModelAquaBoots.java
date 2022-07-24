@@ -16,7 +16,7 @@ public class ArmorModelAquaBoots extends AbstractModelElementBoots<Player> {
     }
 
     public static LayerDefinition createBodyLayer() {
-        return ModelHelper.createBodyLayerH(partDefinition -> {
+        return ModelHelper.createBodyLayerHumanoid(partDefinition -> {
             var leg_left = partDefinition.addOrReplaceChild("leg_left",
                     CubeListBuilder.create().texOffs(12, 73).addBox(-2.0F, 7.0F, -2.0F, 4.0F, 5.0F, 4.0F, new CubeDeformation(0.2F))
                             .texOffs(12, 64).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 5.0F, 4.0F, new CubeDeformation(0.2F))

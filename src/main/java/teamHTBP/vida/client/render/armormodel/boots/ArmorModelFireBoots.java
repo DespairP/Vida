@@ -16,7 +16,7 @@ public class ArmorModelFireBoots extends AbstractModelElementBoots {
     }
 
     public static LayerDefinition createBodyLayer() {
-        return ModelHelper.createBodyLayerH(partDefinition -> {
+        return ModelHelper.createBodyLayerHumanoid(partDefinition -> {
             var leg_right = partDefinition.addOrReplaceChild("leg_right",
                     CubeListBuilder.create().texOffs(64, 32).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F))
                     , PartPose.offset(-2.0F, 12.0F, 0.0F));

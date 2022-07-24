@@ -1,11 +1,11 @@
-package teamHTBP.vida.worldGen;
+package teamHTBP.vida.world.generation;
 
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 
-public class GenVidaTree extends Feature<TreeConfiguration> {
-    public GenVidaTree() {
+public class VidaTreeFeature extends Feature<TreeConfiguration> {
+    public VidaTreeFeature() {
         super(TreeConfiguration.CODEC);
     }
 

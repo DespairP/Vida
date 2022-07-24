@@ -1,4 +1,4 @@
-package teamHTBP.vida.worldGen;
+package teamHTBP.vida.world.generation;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.data.BuiltinRegistries;
@@ -29,7 +29,7 @@ import java.util.List;
 
 import static net.minecraft.data.worldgen.features.OreFeatures.NATURAL_STONE;
 
-public class GenLoader {
+public class GenerationLoader {
     public static final DeferredRegister<ConfiguredFeature<?, ?>> CONFIGURED_FEATURE =
             DeferredRegister.create(BuiltinRegistries.CONFIGURED_FEATURE.key(), Vida.MOD_ID);
 
@@ -37,7 +37,7 @@ public class GenLoader {
             DeferredRegister.create(BuiltinRegistries.PLACED_FEATURE.key(), Vida.MOD_ID);
 
     public static DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, Vida.MOD_ID);
-    public static final RegistryObject<Feature<TreeConfiguration>> VIDA_TREE_FEATURE = FEATURES.register("vida_tree", GenVidaTree::new);
+    public static final RegistryObject<Feature<TreeConfiguration>> VIDA_TREE_FEATURE = FEATURES.register("vida_tree", VidaTreeFeature::new);
 
     public static final RegistryObject<ConfiguredFeature<?, ?>> VIDA_TREE =
             CONFIGURED_FEATURE.register("vida_tree", () ->
