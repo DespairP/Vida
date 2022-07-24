@@ -8,9 +8,9 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.IItemRenderProperties;
-import teamHTBP.vida.client.render.LayerRegistryHandler;
-import teamHTBP.vida.client.render.armormodel.helmet.*;
-import teamHTBP.vida.creativetab.ItemGroupLoader;
+import teamHTBP.vida.client.model.LayerRegistryHandler;
+import teamHTBP.vida.client.model.armor.helmet.*;
+import teamHTBP.vida.creativetab.ItemGroupRegistry;
 
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
@@ -20,11 +20,11 @@ public class ItemArmorElementHelmet extends ArmorItem {
     protected int element = 1;
 
     public ItemArmorElementHelmet() {
-        super(ArmorMaterials.DIAMOND, EquipmentSlot.HEAD, new Properties().tab(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterials.DIAMOND, EquipmentSlot.HEAD, new Properties().tab(ItemGroupRegistry.vidaItemGroup));
     }
 
     public ItemArmorElementHelmet(int element) {
-        super(ArmorMaterials.DIAMOND, EquipmentSlot.HEAD, new Properties().tab(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterials.DIAMOND, EquipmentSlot.HEAD, new Properties().tab(ItemGroupRegistry.vidaItemGroup));
         this.element = element;
     }
 

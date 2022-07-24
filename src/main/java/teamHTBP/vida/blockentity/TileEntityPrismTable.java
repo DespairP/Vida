@@ -10,13 +10,13 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import teamHTBP.vida.blockentity.SlotNumberArray.PrismTableArray;
-import teamHTBP.vida.blockentity.base.ModBaseMenuBlockEntity;
-import teamHTBP.vida.menu.ContainerPrismTable;
-import teamHTBP.vida.helper.elementHelper.ElementHelper;
-import teamHTBP.vida.helper.elementHelper.EnumElements;
-import teamHTBP.vida.helper.elementHelper.IElement;
-import teamHTBP.vida.item.ItemLoader;
+import teamHTBP.vida.blockentity.data.PrismTableData;
+import teamHTBP.vida.blockentity.base.VidaBaseMenuBlockEntity;
+import teamHTBP.vida.menu.PrismTableMenu;
+import teamHTBP.vida.element.ElementHelper;
+import teamHTBP.vida.element.EnumElements;
+import teamHTBP.vida.element.IElement;
+import teamHTBP.vida.item.VidaItemRegistry;
 import teamHTBP.vida.item.function.ItemEnergyElementFragment;
 import teamHTBP.vida.utils.ContainerHelper;
 
@@ -24,11 +24,11 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class TileEntityPrismTable extends ModBaseMenuBlockEntity {
+public class TileEntityPrismTable extends VidaBaseMenuBlockEntity {
     //Slot的inventory
     private final SimpleContainer slot = new SimpleContainer(3);
     //prismTable所需要的数值
-    public PrismTableArray array = new PrismTableArray();
+    public PrismTableData array = new PrismTableData();
     //是否有镜子
     public boolean isMirror = false;
     //是否已经生成火焰
@@ -94,13 +94,13 @@ public class TileEntityPrismTable extends ModBaseMenuBlockEntity {
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int id, Inventory p_createMenu_2_, Player p_createMenu_3_) {
-        return new ContainerPrismTable(id, p_createMenu_2_, this.worldPosition, this.level, this.array);
+        return new PrismTableMenu(id, p_createMenu_2_, this.worldPosition, this.level, this.array);
     }
 
     @Override
     public void tick() {
         // world.notifyBlockUpdate(pos, getBlockState(),getBlockState(),3);
-        this.isMirror = this.slot.getItem(1).getItem() == ItemLoader.prism.get();
+        this.isMirror = this.slot.getItem(1).getItem() == VidaItemRegistry.prism.get();
         if (this.slot.getItem(0) == ItemStack.EMPTY && !(this.slot.getItem(0).getItem() instanceof ItemEnergyElementFragment)) {
             //如果没有任何东西的话
             this.isGem = false;
@@ -187,15 +187,15 @@ public class TileEntityPrismTable extends ModBaseMenuBlockEntity {
         if (element instanceof EnumElements) {
             switch ((EnumElements) element) {
                 case GOLD:
-                    return new ItemStack(ItemLoader.ARTIFICIAL_ELEMENTGEM_GOLD.get(), 1);
+                    return new ItemStack(VidaItemRegistry.ARTIFICIAL_ELEMENTGEM_GOLD.get(), 1);
                 case WOOD:
-                    return new ItemStack(ItemLoader.ARTIFICIAL_ELEMENTGEM_WOOD.get(), 1);
+                    return new ItemStack(VidaItemRegistry.ARTIFICIAL_ELEMENTGEM_WOOD.get(), 1);
                 case AQUA:
-                    return new ItemStack(ItemLoader.ARTIFICIAL_ELEMENTGEM_AQUA.get(), 1);
+                    return new ItemStack(VidaItemRegistry.ARTIFICIAL_ELEMENTGEM_AQUA.get(), 1);
                 case FIRE:
-                    return new ItemStack(ItemLoader.ARTIFICIAL_ELEMENTGEM_FIRE.get(), 1);
+                    return new ItemStack(VidaItemRegistry.ARTIFICIAL_ELEMENTGEM_FIRE.get(), 1);
                 case EARTH:
-                    return new ItemStack(ItemLoader.ARTIFICIAL_ELEMENTGEM_EARTH.get(), 1);
+                    return new ItemStack(VidaItemRegistry.ARTIFICIAL_ELEMENTGEM_EARTH.get(), 1);
             }
         }
         return ItemStack.EMPTY;

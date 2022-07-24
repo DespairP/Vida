@@ -17,9 +17,9 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.IItemRenderProperties;
 import net.minecraftforge.network.NetworkHooks;
-import teamHTBP.vida.client.render.LayerRegistryHandler;
-import teamHTBP.vida.client.render.armormodel.belt.ArmorModelBelt;
-import teamHTBP.vida.creativetab.ItemGroupLoader;
+import teamHTBP.vida.client.model.LayerRegistryHandler;
+import teamHTBP.vida.client.model.armor.belt.ArmorModelBelt;
+import teamHTBP.vida.creativetab.ItemGroupRegistry;
 
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
@@ -29,7 +29,7 @@ import java.util.function.Consumer;
  */
 public class ItemArmorBelt extends ArmorItem {
     public ItemArmorBelt() {
-        super(new ArmorMaterialBelt(), EquipmentSlot.LEGS, new Properties().tab(ItemGroupLoader.vidaItemGroup));
+        super(new ArmorMaterialBelt(), EquipmentSlot.LEGS, new Properties().tab(ItemGroupRegistry.vidaItemGroup));
     }
 
     @Override

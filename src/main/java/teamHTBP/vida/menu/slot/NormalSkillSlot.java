@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.capability.skillSystem.SkillSurface;
+import teamHTBP.vida.capability.skill.SkillSurface;
 
 public class NormalSkillSlot extends AbstractSkillSlot {
     /**

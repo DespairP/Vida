@@ -13,7 +13,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.capability.blueprintCapability.BlueprintCapabilityProvider;
+import teamHTBP.vida.capability.blueprint.BlueprintCapabilityProvider;
 
 /**
  * @author DustW
@@ -23,7 +23,7 @@ public class CapabilityCommonListener {
     @SubscribeEvent
     public static void onAttachCapabilitiesPlayer(AttachCapabilitiesEvent<Entity> event){
         if (event.getObject() instanceof Player player) {
-            if (!player.getCapability(VidaCapabilities.BLUEPRINT).isPresent()) {
+            if (!player.getCapability(VidaCapabilityRegistry.BLUEPRINT).isPresent()) {
                 // The player does not already have this capability so we need to add the capability provider here
                 event.addCapability(new ResourceLocation(Vida.MOD_ID, "blueprint"),
                         new BlueprintCapabilityProvider());
@@ -33,7 +33,7 @@ public class CapabilityCommonListener {
 
     @SubscribeEvent
     public static void onPlayerCloned(PlayerEvent.Clone event) {
-        cloneCapability(event, VidaCapabilities.BLUEPRINT);
+        cloneCapability(event, VidaCapabilityRegistry.BLUEPRINT);
     }
 
     static <T extends Tag, C extends INBTSerializable<T>> void cloneCapability(PlayerEvent.Clone event, Capability<C> capability) {

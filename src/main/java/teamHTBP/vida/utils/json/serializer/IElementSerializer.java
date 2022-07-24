@@ -1,8 +1,8 @@
 package teamHTBP.vida.utils.json.serializer;
 
 import com.google.gson.*;
-import teamHTBP.vida.helper.elementHelper.ElementManager;
-import teamHTBP.vida.helper.elementHelper.IElement;
+import teamHTBP.vida.element.ElementManager;
+import teamHTBP.vida.element.IElement;
 
 import java.lang.reflect.Type;
 

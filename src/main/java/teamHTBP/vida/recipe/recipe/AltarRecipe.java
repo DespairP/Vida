@@ -13,8 +13,8 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.common.util.RecipeMatcher;
 import teamHTBP.vida.blockentity.TileEntityElementCoreAltar;
-import teamHTBP.vida.helper.elementHelper.IElement;
-import teamHTBP.vida.item.ItemLoader;
+import teamHTBP.vida.element.IElement;
+import teamHTBP.vida.item.VidaItemRegistry;
 import teamHTBP.vida.recipe.RecipeSerializers;
 import teamHTBP.vida.recipe.RecipeTypes;
 import teamHTBP.vida.recipe.base.BaseRecipe;
@@ -80,7 +80,7 @@ public class AltarRecipe extends BaseRecipe<Container> {
     /**合成图标，用于JEI或合成使用*/
     @Override
     public ItemStack getToastSymbol() {
-        return new ItemStack(ItemLoader.altarcubeMaker.get());
+        return new ItemStack(VidaItemRegistry.altarcubeMaker.get());
     }
 
     @Override

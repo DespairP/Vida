@@ -4,16 +4,16 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import teamHTBP.vida.blockentity.base.ModBaseBlockEntity;
-import teamHTBP.vida.helper.elementHelper.ElementHelper;
-import teamHTBP.vida.helper.elementHelper.EnumElements;
-import teamHTBP.vida.helper.elementHelper.IElement;
-import teamHTBP.vida.item.ItemLoader;
+import teamHTBP.vida.blockentity.base.VidaBaseBlockEntity;
+import teamHTBP.vida.element.ElementHelper;
+import teamHTBP.vida.element.EnumElements;
+import teamHTBP.vida.element.IElement;
+import teamHTBP.vida.item.VidaItemRegistry;
 
 import java.util.Collections;
 import java.util.List;
 
-public class TileEntityCollector extends ModBaseBlockEntity {
+public class TileEntityCollector extends VidaBaseBlockEntity {
     //最大收集值
     public final int MAX_COLLECTION = 20000;
     //是否在收集
@@ -57,7 +57,7 @@ public class TileEntityCollector extends ModBaseBlockEntity {
 
 
     public boolean setCore(ItemStack itemStack) {
-        if (itemStack.getItem() == ItemLoader.ELEMENTCORE_VOID.get()) {
+        if (itemStack.getItem() == VidaItemRegistry.ELEMENTCORE_VOID.get()) {
             if (this.coreItem == ItemStack.EMPTY || this.coreItem.isEmpty()) {
                 this.coreItem = itemStack;
                 return true;
@@ -76,7 +76,7 @@ public class TileEntityCollector extends ModBaseBlockEntity {
     }
 
     //是否放入了空核心
-    public boolean hasEmptyElementCore() {return coreItem != null && coreItem.getItem() == ItemLoader.ELEMENTCORE_VOID.get();}
+    public boolean hasEmptyElementCore() {return coreItem != null && coreItem.getItem() == VidaItemRegistry.ELEMENTCORE_VOID.get();}
 
     //重置收集状态
     public void resetCollect() {
@@ -90,19 +90,19 @@ public class TileEntityCollector extends ModBaseBlockEntity {
         if (element instanceof EnumElements) {
             switch ((EnumElements)element) {
                 case GOLD:
-                    this.coreItem = new ItemStack(ItemLoader.ELEMENTCORE_GOLD.get(), 1);
+                    this.coreItem = new ItemStack(VidaItemRegistry.ELEMENTCORE_GOLD.get(), 1);
                     break;
                 case WOOD:
-                    this.coreItem = new ItemStack(ItemLoader.ELEMENTCORE_WOOD.get(), 1);
+                    this.coreItem = new ItemStack(VidaItemRegistry.ELEMENTCORE_WOOD.get(), 1);
                     break;
                 case AQUA:
-                    this.coreItem = new ItemStack(ItemLoader.ELEMENTCORE_AQUA.get(), 1);
+                    this.coreItem = new ItemStack(VidaItemRegistry.ELEMENTCORE_AQUA.get(), 1);
                     break;
                 case FIRE:
-                    this.coreItem = new ItemStack(ItemLoader.ELEMENTCORE_FIRE.get(), 1);
+                    this.coreItem = new ItemStack(VidaItemRegistry.ELEMENTCORE_FIRE.get(), 1);
                     break;
                 default:
-                    this.coreItem = new ItemStack(ItemLoader.ELEMENTCORE_EARTH.get(), 1);
+                    this.coreItem = new ItemStack(VidaItemRegistry.ELEMENTCORE_EARTH.get(), 1);
                     break;
             }
         }

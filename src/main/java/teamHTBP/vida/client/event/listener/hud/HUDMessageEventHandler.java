@@ -6,7 +6,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import teamHTBP.vida.client.hud.MessageHUD;
+import teamHTBP.vida.client.hud.MessageHud;
 
 import java.util.LinkedList;
 
@@ -15,7 +15,7 @@ import java.util.LinkedList;
 public class HUDMessageEventHandler extends HudHandler {
     public static final LinkedList<String> messageList = new LinkedList<>();
     public static boolean isMessage = false;
-    public static MessageHUD currentRnederer;
+    public static MessageHud currentRnederer;
 
     @SubscribeEvent
     public static void renderMessageHUD(RenderGameOverlayEvent event) {
@@ -27,7 +27,7 @@ public class HUDMessageEventHandler extends HudHandler {
         }
         if (!isMessage) return;
         if (currentRnederer == null && isMessage && messageList.size() > 0) {
-            currentRnederer = new MessageHUD(messageList.get(0));
+            currentRnederer = new MessageHud(messageList.get(0));
             setupShader();
             currentRnederer.render(event.getMatrixStack());
         } else if (currentRnederer != null && isMessage) {

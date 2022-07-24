@@ -1,14 +1,10 @@
 package teamHTBP.vida.client.gui;
 
 import net.minecraft.client.Minecraft;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import teamHTBP.vida.client.gui.gui.guidebook.GuiGuidebookMain;
+import teamHTBP.vida.client.gui.screen.guidebook.GuidebookMainScreen;
 
-@OnlyIn(Dist.CLIENT)
 public class ClientScreenManager {
-    @OnlyIn(Dist.CLIENT)
     public static void openGuideBook(){
-        Minecraft.getInstance().setScreen(new GuiGuidebookMain());
+        Minecraft.getInstance().setScreen(new GuidebookMainScreen());
     }
 }

@@ -1,11 +1,11 @@
 package teamHTBP.vida.item.staff;
 
 import net.minecraft.world.item.Item;
-import teamHTBP.vida.creativetab.ItemGroupLoader;
+import teamHTBP.vida.creativetab.ItemGroupRegistry;
 
 public class ItemChisel extends Item {
     public ItemChisel() {
-        super(new Properties().stacksTo(1).tab(ItemGroupLoader.vidaItemGroup));
+        super(new Properties().stacksTo(1).tab(ItemGroupRegistry.vidaItemGroup));
     }
 
 

@@ -12,9 +12,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import teamHTBP.vida.block.function.crystal.BlockElementCrystal;
+import teamHTBP.vida.block.function.crystal.ElementCrystalBlock;
 import teamHTBP.vida.blockentity.crystal.IElementCrystal;
-import teamHTBP.vida.client.hud.ElementCrystalHUD;
+import teamHTBP.vida.client.hud.ElementCrystalHud;
 
 /**
  * 用于渲染元素武器与工具HUD的事件侦听
@@ -53,10 +53,10 @@ public class BlockEnergyCrystalHUDEventLoader extends HudHandler {
             Level world = player.level;
             Block block = world.getBlockState(pos).getBlock();
 
-            if (block instanceof BlockElementCrystal) {
+            if (block instanceof ElementCrystalBlock) {
                 BlockEntity tileEntityCrystal = world.getBlockEntity(pos);
                 if (tileEntityCrystal instanceof IElementCrystal) {
-                    ElementCrystalHUD hud = new ElementCrystalHUD((IElementCrystal) tileEntityCrystal, element_fragment_tick, element_Progress);
+                    ElementCrystalHud hud = new ElementCrystalHud((IElementCrystal) tileEntityCrystal, element_fragment_tick, element_Progress);
                     setupShader();
                     hud.render(event.getMatrixStack());
                     if (offset_frame % 8 == 0) {

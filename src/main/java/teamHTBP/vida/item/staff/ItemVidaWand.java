@@ -1,7 +1,7 @@
 package teamHTBP.vida.item.staff;
 
 import net.minecraft.world.item.Item;
-import teamHTBP.vida.creativetab.ItemGroupLoader;
+import teamHTBP.vida.creativetab.ItemGroupRegistry;
 
 /**
  * 生命法杖
@@ -10,6 +10,6 @@ import teamHTBP.vida.creativetab.ItemGroupLoader;
  **/
 public class ItemVidaWand extends Item {
     public ItemVidaWand() {
-        super(new Item.Properties().tab(ItemGroupLoader.vidaItemGroup).stacksTo(1));
+        super(new Item.Properties().tab(ItemGroupRegistry.vidaItemGroup).stacksTo(1));
     }
 }

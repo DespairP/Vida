@@ -8,8 +8,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import teamHTBP.vida.client.hud.BottleHUD;
-import teamHTBP.vida.input.KeyBoardBottle;
+import teamHTBP.vida.client.hud.BottleHud;
+import teamHTBP.vida.input.BottleKeys;
 import teamHTBP.vida.item.armor.ItemArmorElementLegginsWithBottles;
 import teamHTBP.vida.utils.math.IntRange;
 
@@ -53,7 +53,7 @@ public class HUDItemEventHandler extends HudHandler {
         ItemStack stack = player.getInventory().armor.get(1);
 
         // 当装备栏穿着元素瓶并按着Alt键时
-        if (KeyBoardBottle.MESSAGE_KEY.isDown()
+        if (BottleKeys.MESSAGE_KEY.isDown()
                 && stack.getItem() instanceof ItemArmorElementLegginsWithBottles) {
             //增加alpha
             alpha.increase(3);
@@ -65,7 +65,7 @@ public class HUDItemEventHandler extends HudHandler {
         // alpha没有到界限就不渲染
         if (alpha.get() < BOTTLE_ALPHA_MIN) return;
 
-        BottleHUD hud = new BottleHUD(stack, alpha.get());
+        BottleHud hud = new BottleHud(stack, alpha.get());
         setupShader();
         hud.render(matrixStack);
 

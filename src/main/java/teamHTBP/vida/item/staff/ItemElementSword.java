@@ -14,8 +14,8 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import teamHTBP.vida.creativetab.ItemGroupLoader;
-import teamHTBP.vida.helper.elementHelper.IElement;
+import teamHTBP.vida.creativetab.ItemGroupRegistry;
+import teamHTBP.vida.element.IElement;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -24,7 +24,7 @@ public class ItemElementSword extends SwordItem implements IElementLevelTools {
     public IElement element;
 
     public ItemElementSword(IElement element) {
-        super(new ItemElementPickaxe.ElementItemTier(), 3, -2.4f, new Properties().tab(ItemGroupLoader.vidaItemGroup));
+        super(new ItemElementPickaxe.ElementItemTier(), 3, -2.4f, new Properties().tab(ItemGroupRegistry.vidaItemGroup));
         this.element = element;
     }
 
@@ -59,7 +59,7 @@ public class ItemElementSword extends SwordItem implements IElementLevelTools {
     }
 
     @Override
-    public IElement getItemElement() {
+    public IElement getElement() {
         return element;
     }
 

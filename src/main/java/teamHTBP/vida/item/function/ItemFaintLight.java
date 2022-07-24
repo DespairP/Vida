@@ -17,20 +17,20 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import teamHTBP.vida.creativetab.ItemGroupLoader;
-import teamHTBP.vida.entity.EntityFaintLight;
-import teamHTBP.vida.entity.EntityLoader;
-import teamHTBP.vida.helper.elementHelper.EnumElements;
+import teamHTBP.vida.creativetab.ItemGroupRegistry;
+import teamHTBP.vida.entity.FaintLight;
+import teamHTBP.vida.entity.VidaEntityRegistry;
+import teamHTBP.vida.element.EnumElements;
 
 public class ItemFaintLight extends Item {
     public int element = 1;
 
     public ItemFaintLight() {
-        super(new Properties().stacksTo(1).tab(ItemGroupLoader.vidaItemGroup));
+        super(new Properties().stacksTo(1).tab(ItemGroupRegistry.vidaItemGroup));
     }
 
     public ItemFaintLight(int element) {
-        super(new Properties().stacksTo(1).tab(ItemGroupLoader.vidaItemGroup));
+        super(new Properties().stacksTo(1).tab(ItemGroupRegistry.vidaItemGroup));
         this.element = element;
     }
 
@@ -49,10 +49,10 @@ public class ItemFaintLight extends Item {
             if (!(worldIn.getBlockState(blockpos).getBlock() instanceof LiquidBlock)) {
                 return InteractionResultHolder.pass(itemstack);
             } else if (worldIn.mayInteract(playerIn, blockpos) && playerIn.mayUseItemAt(blockpos, blockraytraceresult.getDirection(), itemstack)) {
-                EntityFaintLight entityFaintLight = new EntityFaintLight(EntityLoader.faintLight.get(), worldIn);
-                entityFaintLight.setPos(blockpos.getX(), blockpos.getY(), blockpos.getZ());
-                entityFaintLight.setFaintLightType(EnumElements.values()[element]);
-                if (!worldIn.addFreshEntity(entityFaintLight)) {
+                FaintLight faintLight = new FaintLight(VidaEntityRegistry.faintLight.get(), worldIn);
+                faintLight.setPos(blockpos.getX(), blockpos.getY(), blockpos.getZ());
+                faintLight.setFaintLightType(EnumElements.values()[element]);
+                if (!worldIn.addFreshEntity(faintLight)) {
                     return InteractionResultHolder.pass(itemstack);
                 } else {
 
@@ -86,10 +86,10 @@ public class ItemFaintLight extends Item {
             } else {
                 blockpos1 = blockpos.relative(direction);
             }
-            EntityFaintLight entityFaintLight = new EntityFaintLight(EntityLoader.faintLight.get(), world);
-            entityFaintLight.setPos(blockpos1.getX() + 0.5, blockpos1.getY(), blockpos1.getZ() + 0.5);
-            entityFaintLight.setFaintLightType(EnumElements.values()[element]);
-            if (world.addFreshEntity(entityFaintLight)) {
+            FaintLight faintLight = new FaintLight(VidaEntityRegistry.faintLight.get(), world);
+            faintLight.setPos(blockpos1.getX() + 0.5, blockpos1.getY(), blockpos1.getZ() + 0.5);
+            faintLight.setFaintLightType(EnumElements.values()[element]);
+            if (world.addFreshEntity(faintLight)) {
                 itemstack.shrink(1);
             }
 

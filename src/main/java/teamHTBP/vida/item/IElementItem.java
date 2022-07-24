@@ -1,8 +1,6 @@
 package teamHTBP.vida.item;
 
-import teamHTBP.vida.helper.elementHelper.IElement;
+import teamHTBP.vida.element.IElementHolder;
 
-public interface IElementItem {
-    public IElement getItemElement();
-
+public interface IElementItem extends IElementHolder {
 }

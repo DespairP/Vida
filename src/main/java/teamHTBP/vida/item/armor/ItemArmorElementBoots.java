@@ -8,9 +8,9 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.IItemRenderProperties;
-import teamHTBP.vida.client.render.LayerRegistryHandler;
-import teamHTBP.vida.client.render.armormodel.boots.*;
-import teamHTBP.vida.creativetab.ItemGroupLoader;
+import teamHTBP.vida.client.model.LayerRegistryHandler;
+import teamHTBP.vida.client.model.armor.boots.*;
+import teamHTBP.vida.creativetab.ItemGroupRegistry;
 
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
@@ -19,11 +19,11 @@ public class ItemArmorElementBoots extends ArmorItem {  //盔甲属于什么元�
     protected int element = 1;
 
     public ItemArmorElementBoots() {
-        super(ArmorMaterials.DIAMOND, EquipmentSlot.FEET, new Properties().tab(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterials.DIAMOND, EquipmentSlot.FEET, new Properties().tab(ItemGroupRegistry.vidaItemGroup));
     }
 
     public ItemArmorElementBoots(int element) {
-        super(ArmorMaterials.DIAMOND, EquipmentSlot.FEET, new Properties().tab(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterials.DIAMOND, EquipmentSlot.FEET, new Properties().tab(ItemGroupRegistry.vidaItemGroup));
         this.element = element;
     }
 

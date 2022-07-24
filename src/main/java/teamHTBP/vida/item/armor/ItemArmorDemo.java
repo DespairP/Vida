@@ -9,16 +9,16 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.IItemRenderProperties;
-import teamHTBP.vida.client.render.LayerRegistryHandler;
-import teamHTBP.vida.client.render.armormodel.armor.ArmorModelSeasonApprentice;
-import teamHTBP.vida.creativetab.ItemGroupLoader;
+import teamHTBP.vida.client.model.LayerRegistryHandler;
+import teamHTBP.vida.client.model.armor.armor.ArmorModelSeasonApprentice;
+import teamHTBP.vida.creativetab.ItemGroupRegistry;
 
 import java.util.function.Consumer;
 
 public class ItemArmorDemo extends ArmorItem {
 
     public ItemArmorDemo(EquipmentSlot slot) {
-        super(ArmorMaterials.DIAMOND, slot, new Properties().tab(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterials.DIAMOND, slot, new Properties().tab(ItemGroupRegistry.vidaItemGroup));
     }
 
     @Override

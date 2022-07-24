@@ -18,9 +18,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import teamHTBP.vida.creativetab.ItemGroupLoader;
-import teamHTBP.vida.helper.elementHelper.IElement;
-import teamHTBP.vida.item.ItemLoader;
+import teamHTBP.vida.creativetab.ItemGroupRegistry;
+import teamHTBP.vida.element.IElement;
+import teamHTBP.vida.item.VidaItemRegistry;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -33,7 +33,7 @@ public class ItemElementPickaxe extends PickaxeItem implements IElementLevelTool
 
     public ItemElementPickaxe(IElement element) {
         super(new ElementItemTier(), 1, -2.8f,
-                new Properties().tab(ItemGroupLoader.vidaItemGroup));
+                new Properties().tab(ItemGroupRegistry.vidaItemGroup));
         this.element = element;
     }
 
@@ -99,12 +99,12 @@ public class ItemElementPickaxe extends PickaxeItem implements IElementLevelTool
     }
 
     @Override
-    public IElement getItemElement() {
+    public IElement getElement() {
         return element;
     }
 
     static class ElementItemTier implements Tier {
-        Item repairItem = ItemLoader.ELEMENTCORE_EARTH.get();
+        Item repairItem = VidaItemRegistry.ELEMENTCORE_EARTH.get();
 
         @Override
         public int getUses() {

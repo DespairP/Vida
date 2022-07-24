@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.event.server.datapack.ModDataPack;
-import teamHTBP.vida.helper.guidebookHelper.Guide;
+import teamHTBP.vida.helper.guidebook.Guide;
 import teamHTBP.vida.utils.json.JsonUtils;
 
 import java.util.LinkedHashMap;

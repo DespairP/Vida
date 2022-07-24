@@ -8,12 +8,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
-import teamHTBP.vida.creativetab.ItemGroupLoader;
-import teamHTBP.vida.helper.guidebookHelper.GuidebookHelper;
+import teamHTBP.vida.creativetab.ItemGroupRegistry;
+import teamHTBP.vida.helper.guidebook.GuidebookHelper;
 
 public class ItemGuidebook extends Item {
     public ItemGuidebook() {
-        super(new Properties().tab(ItemGroupLoader.vidaItemGroup));
+        super(new Properties().tab(ItemGroupRegistry.vidaItemGroup));
     }
 
     @Override

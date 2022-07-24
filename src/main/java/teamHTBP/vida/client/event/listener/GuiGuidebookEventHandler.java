@@ -7,7 +7,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.helper.guidebookHelper.GuidebookHelper;
+import teamHTBP.vida.helper.guidebook.GuidebookHelper;
 
 /**
  * 关于Guidebook的事件处理

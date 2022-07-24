@@ -23,24 +23,30 @@ import java.util.Random;
 public class BlockEventLoaderServer {
     @SubscribeEvent
     public static void kill(LivingDeathEvent event) {
-        //System.out.println("SSSS");
-        if (event.getSource().getDirectEntity() instanceof Player) {
-            Player playerEntity = (Player) event.getSource().getDirectEntity();
-            ItemStack stack = playerEntity.getInventory().armor.get(1);
+        if (event.getSource().getDirectEntity() instanceof Player player) {
+            ItemStack stack = player.getInventory().armor.get(1);
+
             if (stack.getItem() instanceof ItemArmorElementLegginsWithBottles) {
                 CompoundTag nbt = stack.getOrCreateTag();
+
                 for (int i = 1; i <= 3; i++) {
+
                     if (nbt.contains("bottle" + i)) {
                         ItemStack stack1 = ItemStack.of(nbt.getCompound("bottle" + i));
+
                         if (stack1 != ItemStack.EMPTY && !stack1.isEmpty()) {
                             int progress = nbt.getInt("bottle" + i + "Num");
+
                             if (progress < 100 && ((ItemArmorElementLegginsWithBottles) stack.getItem()).element != 4) {
                                 nbt.putInt("bottle" + i + "Num", progress + new Random().nextInt(3) + 1);
+
                                 if (((ItemArmorElementLegginsWithBottles) (stack.getItem())).element == 1) {
-                                    if (new Random().nextFloat() > 0.85D)
+                                    if (new Random().nextFloat() > 0.85D) {
                                         nbt.putInt("bottle" + (new Random().nextInt(3) + 1) + "Num", 100);
+                                    }
                                 }
-                            } else if (progress < 200 && ((ItemArmorElementLegginsWithBottles) stack.getItem()).element == 4) {
+                            }
+                            else if (progress < 200 && ((ItemArmorElementLegginsWithBottles) stack.getItem()).element == 4) {
                                 nbt.putInt("bottle" + i + "Num", progress + new Random().nextInt(3) + 1);
                             }
                         }
@@ -67,7 +73,7 @@ public class BlockEventLoaderServer {
                     int exp = nbt.getInt("pickaxeExp");
                     nbt.putDouble("pickaxeExp", exp + random.nextInt(5) + 5);
                     levelupTool(itemStack);
-                } else if (block instanceof Block && level < 30) {
+                } else if (level < 30) {
                     int exp = nbt.getInt("pickaxeExp");
                     nbt.putDouble("pickaxeExp", exp + random.nextInt(2));
                     levelupTool(itemStack);
@@ -99,20 +105,24 @@ public class BlockEventLoaderServer {
             stackNBT.putInt("level", futureLevel);
             stackNBT.putDouble("pickaxeExp", currentExp);
             return true;  //工具需要升级且升级完成
-        } else
+        }
+        else {
             return false; //默认工具不需要升级
+        }
     }
 
     @SubscribeEvent
     public static void hitEntity(LivingAttackEvent event) {
         Entity entity = event.getSource().getDirectEntity();
-        if (entity instanceof Player) {
-            Player playerEntity = (Player) entity;
-            ItemStack stack = playerEntity.getItemInHand(InteractionHand.MAIN_HAND);
+
+        if (entity instanceof Player player) {
+            ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
+
             if (stack.getItem() instanceof ItemElementSword) {
                 CompoundTag nbt = stack.getOrCreateTag();
                 int level = nbt.getInt("level");
                 int exp = nbt.getInt("swordEXP");
+
                 if (level < 30) {
                     nbt.putInt("swordEXP", exp + new Random().nextInt(3) + 100);
                     levelUpSword(level, exp, stack);
@@ -129,6 +139,7 @@ public class BlockEventLoaderServer {
             nbt.putInt("swordEXP", exp - (level * 200 + level * 13));
             return true;
         }
+
         return false;
     }
 }

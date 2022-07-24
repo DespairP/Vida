@@ -9,11 +9,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
-import teamHTBP.vida.blockentity.base.ModBaseBlockEntity;
-import teamHTBP.vida.capability.VidaCapabilities;
-import teamHTBP.vida.capability.energyCapability.ElementEnergyCapability;
-import teamHTBP.vida.capability.energyCapability.IElementEnergyCapability;
-import teamHTBP.vida.helper.elementHelper.IElement;
+import teamHTBP.vida.blockentity.base.VidaBaseBlockEntity;
+import teamHTBP.vida.capability.VidaCapabilityRegistry;
+import teamHTBP.vida.capability.energy.ElementEnergyCapability;
+import teamHTBP.vida.capability.energy.IElementEnergyCapability;
+import teamHTBP.vida.element.IElement;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * @author DustW
  */
-public abstract class BaseCrystalBlockEntity extends ModBaseBlockEntity implements IElementCrystal {
+public abstract class BaseCrystalBlockEntity extends VidaBaseBlockEntity implements IElementCrystal {
     protected final IElement element;
     protected final LazyOptional<IElementEnergyCapability> energyCapability = LazyOptional.of(this::createNewEnergyCap);
     public float sinWave = 0;
@@ -65,7 +65,7 @@ public abstract class BaseCrystalBlockEntity extends ModBaseBlockEntity implemen
     @Override
     @Nonnull
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        return VidaCapabilities.ELEMENT_ENERGY.orEmpty(cap, energyCapability);
+        return VidaCapabilityRegistry.ELEMENT_ENERGY.orEmpty(cap, energyCapability);
     }
 
     @Override

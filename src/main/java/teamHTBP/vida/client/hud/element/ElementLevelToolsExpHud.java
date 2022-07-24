@@ -24,7 +24,7 @@ public class ElementLevelToolsExpHud extends ElementToolsHud {
 
         //渲染工具经验
         if (alpha > 0 && last.getItem() instanceof IElementLevelTools item) {
-            RGBAColor color = item.getItemElement().getElementRGBAColor();
+            RGBAColor color = item.getElement().getElementRGBAColor();
 
             if (color == null) {
                 return;

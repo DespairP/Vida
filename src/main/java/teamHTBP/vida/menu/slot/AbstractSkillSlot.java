@@ -3,7 +3,7 @@ package teamHTBP.vida.menu.slot;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.TextComponent;
-import teamHTBP.vida.capability.skillSystem.SkillSurface;
+import teamHTBP.vida.capability.skill.SkillSurface;
 
 public abstract class AbstractSkillSlot extends AbstractButton {
     //点击标记监听器

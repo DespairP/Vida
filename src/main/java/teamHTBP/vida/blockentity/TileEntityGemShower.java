@@ -5,13 +5,13 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import teamHTBP.vida.blockentity.base.ModBaseBlockEntity;
-import teamHTBP.vida.item.ItemLoader;
+import teamHTBP.vida.blockentity.base.VidaBaseBlockEntity;
+import teamHTBP.vida.item.VidaItemRegistry;
 
 import java.util.Collections;
 import java.util.List;
 
-public class TileEntityGemShower extends ModBaseBlockEntity {
+public class TileEntityGemShower extends VidaBaseBlockEntity {
     //展示的宝石
     public ItemStack gemItem = ItemStack.EMPTY;
 
@@ -39,9 +39,9 @@ public class TileEntityGemShower extends ModBaseBlockEntity {
             return false;
         else {
             Item putGemItem = itemStack.getItem();
-            if (putGemItem == ItemLoader.ELEMENTGEM_FIRE.get() || putGemItem == ItemLoader.ELEMENTGEM_GOLD.get() ||
-                    putGemItem == ItemLoader.ELEMENTGEM_WOOD.get() || putGemItem == ItemLoader.ELEMENTGEM_AQUA.get() ||
-                    putGemItem == ItemLoader.ELEMENTGEM_EARTH.get())
+            if (putGemItem == VidaItemRegistry.ELEMENTGEM_FIRE.get() || putGemItem == VidaItemRegistry.ELEMENTGEM_GOLD.get() ||
+                    putGemItem == VidaItemRegistry.ELEMENTGEM_WOOD.get() || putGemItem == VidaItemRegistry.ELEMENTGEM_AQUA.get() ||
+                    putGemItem == VidaItemRegistry.ELEMENTGEM_EARTH.get())
                 gemItem = new ItemStack(itemStack.getItem(), 1);
             return true;
         }

@@ -9,8 +9,8 @@ import net.minecraft.world.level.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.event.server.datapack.ModDataPack;
-import teamHTBP.vida.helper.guidebookHelper.GuidebookHelper;
-import teamHTBP.vida.helper.guidebookHelper.GuidebookSinglePage;
+import teamHTBP.vida.helper.guidebook.GuidebookHelper;
+import teamHTBP.vida.helper.guidebook.GuidebookSinglePage;
 import teamHTBP.vida.utils.json.JsonUtils;
 
 import java.util.LinkedHashMap;

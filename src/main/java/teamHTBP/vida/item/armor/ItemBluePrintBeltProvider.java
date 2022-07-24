@@ -6,7 +6,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import teamHTBP.vida.menu.ContainerBluePrint;
+import teamHTBP.vida.menu.BluePrintMenu;
 
 import javax.annotation.Nullable;
 
@@ -27,6 +27,6 @@ public class ItemBluePrintBeltProvider implements MenuProvider {
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int id, Inventory p_createMenu_2_, Player p_createMenu_3_) {
-        return new ContainerBluePrint(id, p_createMenu_2_, stack);
+        return new BluePrintMenu(id, p_createMenu_2_, stack);
     }
 }

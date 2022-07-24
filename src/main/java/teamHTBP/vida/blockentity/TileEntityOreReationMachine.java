@@ -15,19 +15,19 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.LazyOptional;
-import teamHTBP.vida.blockentity.SlotNumberArray.OreReactionMachineArray;
-import teamHTBP.vida.blockentity.base.ModBaseMenuBlockEntity;
-import teamHTBP.vida.capability.VidaCapabilities;
-import teamHTBP.vida.capability.energyCapability.IElementEnergyCapability;
-import teamHTBP.vida.menu.ContainerOreReactionMachine;
-import teamHTBP.vida.helper.elementHelper.EnumElements;
+import teamHTBP.vida.blockentity.data.OreReactionMachineData;
+import teamHTBP.vida.blockentity.base.VidaBaseMenuBlockEntity;
+import teamHTBP.vida.capability.VidaCapabilityRegistry;
+import teamHTBP.vida.capability.energy.IElementEnergyCapability;
+import teamHTBP.vida.menu.OreReactionMachineMenu;
+import teamHTBP.vida.element.EnumElements;
 import teamHTBP.vida.utils.ContainerHelper;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class TileEntityOreReationMachine extends ModBaseMenuBlockEntity {
+public class TileEntityOreReationMachine extends VidaBaseMenuBlockEntity {
     //最大的cookTime
     public final int MAX_COOKTIME = 200;
     //最大烧炼值
@@ -37,7 +37,7 @@ public class TileEntityOreReationMachine extends ModBaseMenuBlockEntity {
     //燃料格子
     public SimpleContainer fuel = new SimpleContainer(1);
     //burnTime 和 cookTime
-    public OreReactionMachineArray array = new OreReactionMachineArray();
+    public OreReactionMachineData array = new OreReactionMachineData();
     //矿石的格子
     protected SimpleContainer smeltSlot = new SimpleContainer(4);
     //烧制矿石的格子
@@ -109,7 +109,7 @@ public class TileEntityOreReationMachine extends ModBaseMenuBlockEntity {
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int id, Inventory inv, Player player) {
-        return new ContainerOreReactionMachine(id, inv, this.worldPosition, this.level, this.array);
+        return new OreReactionMachineMenu(id, inv, this.worldPosition, this.level, this.array);
     }
 
     public SimpleContainer getSmeltSlot() {
@@ -287,7 +287,7 @@ public class TileEntityOreReationMachine extends ModBaseMenuBlockEntity {
                 flag = true;
             }
             if (this.goldEnergy >= MAX_GOLDENERGY && this.level.getBlockEntity(worldPosition.above()) != null) {
-                LazyOptional<IElementEnergyCapability> cap = this.level.getBlockEntity(this.worldPosition.above()).getCapability(VidaCapabilities.ELEMENT_ENERGY);
+                LazyOptional<IElementEnergyCapability> cap = this.level.getBlockEntity(this.worldPosition.above()).getCapability(VidaCapabilityRegistry.ELEMENT_ENERGY);
                 cap.ifPresent((T) -> {
                     T.receiveEnergy(150, false, EnumElements.GOLD);
                     this.goldEnergy = 0;

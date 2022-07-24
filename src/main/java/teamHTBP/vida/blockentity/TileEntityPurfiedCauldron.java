@@ -5,19 +5,19 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import teamHTBP.vida.blockentity.base.ModBaseBlockEntity;
-import teamHTBP.vida.entity.EntityFaintLight;
-import teamHTBP.vida.entity.EntityLoader;
-import teamHTBP.vida.helper.elementHelper.ElementHelper;
-import teamHTBP.vida.helper.elementHelper.EnumElements;
-import teamHTBP.vida.helper.elementHelper.IElement;
+import teamHTBP.vida.blockentity.base.VidaBaseBlockEntity;
+import teamHTBP.vida.entity.FaintLight;
+import teamHTBP.vida.entity.VidaEntityRegistry;
+import teamHTBP.vida.element.ElementHelper;
+import teamHTBP.vida.element.EnumElements;
+import teamHTBP.vida.element.IElement;
 import teamHTBP.vida.item.potion.ItemCreativeElementPotion;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class TileEntityPurfiedCauldron extends ModBaseBlockEntity {
+public class TileEntityPurfiedCauldron extends VidaBaseBlockEntity {
     //满提炼值
     public final int MAX_CONTAINER = 30000;
     //五元素数值
@@ -160,10 +160,10 @@ public class TileEntityPurfiedCauldron extends ModBaseBlockEntity {
     //生成微光
     public void generateFaintLight() {
         if (container > MAX_CONTAINER - 1) {
-            EntityFaintLight entityFaintLight = new EntityFaintLight(EntityLoader.faintLight.get(), level, element);
-            entityFaintLight.setPos(worldPosition.getX(), worldPosition.above().getY(), worldPosition.getZ() + 0.5);
-            entityFaintLight.setFaintLightType(element);
-            this.level.addFreshEntity(entityFaintLight);
+            FaintLight faintLight = new FaintLight(VidaEntityRegistry.faintLight.get(), level, element);
+            faintLight.setPos(worldPosition.getX(), worldPosition.above().getY(), worldPosition.getZ() + 0.5);
+            faintLight.setFaintLightType(element);
+            this.level.addFreshEntity(faintLight);
             clear();
         }
     }

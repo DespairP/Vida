@@ -9,8 +9,8 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.capability.blueprintCapability.BlueprintCapabilityProvider;
-import teamHTBP.vida.capability.blueprintCapability.IBlueprintCapability;
+import teamHTBP.vida.capability.blueprint.BlueprintCapabilityProvider;
+import teamHTBP.vida.capability.blueprint.IBlueprintCapability;
 
 @Mod.EventBusSubscriber()
 public class CapabilityEntityLoader {
@@ -25,8 +25,8 @@ public class CapabilityEntityLoader {
     @SubscribeEvent
     public static void restoreCapability(PlayerEvent.Clone event) {
         if (event.isWasDeath()) {
-            LazyOptional<IBlueprintCapability> old_Cap = event.getOriginal().getCapability(VidaCapabilities.BLUEPRINT);
-            event.getPlayer().getCapability(VidaCapabilities.BLUEPRINT).ifPresent((new_Cap) -> {
+            LazyOptional<IBlueprintCapability> old_Cap = event.getOriginal().getCapability(VidaCapabilityRegistry.BLUEPRINT);
+            event.getPlayer().getCapability(VidaCapabilityRegistry.BLUEPRINT).ifPresent((new_Cap) -> {
                 old_Cap.ifPresent((old) -> {
                     new_Cap.deserializeNBT(old.serializeNBT());
                 });

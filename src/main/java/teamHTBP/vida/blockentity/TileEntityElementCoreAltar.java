@@ -7,11 +7,11 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import teamHTBP.vida.block.BlockLoader;
-import teamHTBP.vida.blockentity.base.ModBaseBlockEntity;
-import teamHTBP.vida.helper.elementHelper.ElementManager;
-import teamHTBP.vida.helper.elementHelper.EnumElements;
-import teamHTBP.vida.helper.elementHelper.IElement;
+import teamHTBP.vida.block.VidaBlockRegistry;
+import teamHTBP.vida.blockentity.base.VidaBaseBlockEntity;
+import teamHTBP.vida.element.ElementManager;
+import teamHTBP.vida.element.EnumElements;
+import teamHTBP.vida.element.IElement;
 import teamHTBP.vida.item.function.ItemElementCore;
 import teamHTBP.vida.recipe.RecipeManager;
 import teamHTBP.vida.recipe.recipe.AltarRecipe;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class TileEntityElementCoreAltar extends ModBaseBlockEntity {
+public class TileEntityElementCoreAltar extends VidaBaseBlockEntity {
     //最大的仪式进度
     public static int MAX_PROGRESS = 30000;
     //核心物品
@@ -249,15 +249,15 @@ public class TileEntityElementCoreAltar extends ModBaseBlockEntity {
         if (!this.isBlockOver) {
             this.clear();
             if (element == EnumElements.GOLD) {
-                level.setBlockAndUpdate(this.worldPosition.above(), BlockLoader.elementCrystalGold.get().defaultBlockState());
+                level.setBlockAndUpdate(this.worldPosition.above(), VidaBlockRegistry.elementCrystalGold.get().defaultBlockState());
             } else if (element == EnumElements.WOOD) {
-                level.setBlockAndUpdate(this.worldPosition.above(), BlockLoader.elementCrystalWood.get().defaultBlockState());
+                level.setBlockAndUpdate(this.worldPosition.above(), VidaBlockRegistry.elementCrystalWood.get().defaultBlockState());
             } else if (element == EnumElements.AQUA) {
-                level.setBlockAndUpdate(this.worldPosition.above(), BlockLoader.elementCrystalAqua.get().defaultBlockState());
+                level.setBlockAndUpdate(this.worldPosition.above(), VidaBlockRegistry.elementCrystalAqua.get().defaultBlockState());
             } else if (element == EnumElements.FIRE) {
-                level.setBlockAndUpdate(this.worldPosition.above(), BlockLoader.elementCrystalFire.get().defaultBlockState());
+                level.setBlockAndUpdate(this.worldPosition.above(), VidaBlockRegistry.elementCrystalFire.get().defaultBlockState());
             } else if (element == EnumElements.EARTH) {
-                level.setBlockAndUpdate(this.worldPosition.above(), BlockLoader.elementCrystalEarth.get().defaultBlockState());
+                level.setBlockAndUpdate(this.worldPosition.above(), VidaBlockRegistry.elementCrystalEarth.get().defaultBlockState());
             }
         }
     }

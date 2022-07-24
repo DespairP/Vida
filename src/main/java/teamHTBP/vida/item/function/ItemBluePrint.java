@@ -5,13 +5,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import teamHTBP.vida.creativetab.ItemGroupLoader;
+import teamHTBP.vida.creativetab.ItemGroupRegistry;
 
 public class ItemBluePrint extends Item {
     private int rarity = 1; //稀有度
 
     public ItemBluePrint(int rarity) {
-        super(new Properties().tab(ItemGroupLoader.vidaItemGroup).stacksTo(1));
+        super(new Properties().tab(ItemGroupRegistry.vidaItemGroup).stacksTo(1));
         this.rarity = rarity;
     }
 

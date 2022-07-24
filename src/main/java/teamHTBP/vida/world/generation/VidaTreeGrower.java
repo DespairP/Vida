@@ -11,6 +11,6 @@ public class VidaTreeGrower extends AbstractTreeGrower {
     @Nullable
     @Override
     public Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(Random randomIn, boolean p_225546_2_) {
-        return GenerationLoader.VIDA_TREE.getHolder().get();
+        return GenerationRegistry.VIDA_TREE.getHolder().get();
     }
 }

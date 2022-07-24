@@ -9,7 +9,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import teamHTBP.vida.helper.itemHelper.PlayerHoldData;
+import teamHTBP.vida.helper.item.PlayerHoldData;
 
 
 /**

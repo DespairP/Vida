@@ -6,7 +6,7 @@ import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.gui.ForgeIngameGui;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.helper.elementHelper.EnumElements;
+import teamHTBP.vida.element.EnumElements;
 import teamHTBP.vida.item.staff.IElementLevelTools;
 import teamHTBP.vida.utils.color.RGBAColor;
 
@@ -26,7 +26,7 @@ public class ElementLevelToolsHud extends ElementToolsHud {
             RenderSystem.setShaderColor(1, 1, 1, alpha);
 
             // 根据物品元素进行渲染
-            if (item.getItemElement() instanceof EnumElements element) {
+            if (item.getElement() instanceof EnumElements element) {
                 int u = switch (element) {
                     case VOID, GOLD, NONE -> 0;
                     case WOOD -> 48;

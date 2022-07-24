@@ -6,16 +6,17 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import teamHTBP.vida.block.BlockLoader;
+import teamHTBP.vida.block.VidaBlockRegistry;
 import teamHTBP.vida.blockentity.TileEntityLoader;
 import teamHTBP.vida.client.event.listener.VidaClientEventHandler;
-import teamHTBP.vida.entity.EntityLoader;
+import teamHTBP.vida.entity.VidaEntityRegistry;
 import teamHTBP.vida.event.server.datapack.ModDataPacks;
-import teamHTBP.vida.item.ItemLoader;
-import teamHTBP.vida.menu.ContainerTypeLoader;
+import teamHTBP.vida.item.VidaItemRegistry;
+import teamHTBP.vida.menu.TypeLoaderMenu;
+import teamHTBP.vida.network.PacketManager;
 import teamHTBP.vida.particle.ParticleLoader;
 import teamHTBP.vida.recipe.RecipeManager;
-import teamHTBP.vida.world.generation.GenerationLoader;
+import teamHTBP.vida.world.generation.GenerationRegistry;
 
 
 /**
@@ -31,15 +32,17 @@ public class Vida {
         MinecraftForge.EVENT_BUS.register(VidaClientEventHandler.class);
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        BlockLoader.BLOCKS.register(bus);
-        ItemLoader.ITEMS.register(bus);
+        VidaBlockRegistry.BLOCKS.register(bus);
+        VidaItemRegistry.ITEMS.register(bus);
         ParticleLoader.PARTICLE.register(bus);
         TileEntityLoader.TILE_ENTITY_DEFERRED_REGISTER.register(bus);
-        EntityLoader.ENTITY_TYPES.register(bus);
-        ContainerTypeLoader.CONTAINER_TYPES.register(bus);
+        VidaEntityRegistry.ENTITY_TYPES.register(bus);
+        TypeLoaderMenu.CONTAINER_TYPES.register(bus);
 
-        GenerationLoader.register(bus);
+        GenerationRegistry.register(bus);
         RecipeManager.register(bus);
         ModDataPacks.register(bus);
+
+        PacketManager.register();
     }
 }

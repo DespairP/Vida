@@ -8,9 +8,9 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.IItemRenderProperties;
-import teamHTBP.vida.client.render.LayerRegistryHandler;
-import teamHTBP.vida.client.render.armormodel.leg.*;
-import teamHTBP.vida.creativetab.ItemGroupLoader;
+import teamHTBP.vida.client.model.LayerRegistryHandler;
+import teamHTBP.vida.client.model.armor.leg.*;
+import teamHTBP.vida.creativetab.ItemGroupRegistry;
 
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
@@ -19,11 +19,11 @@ public class ItemArmorElementLeggings extends ArmorItem {
     public int element = 1;
 
     public ItemArmorElementLeggings() {
-        super(ArmorMaterials.DIAMOND, EquipmentSlot.LEGS, new Properties().tab(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterials.DIAMOND, EquipmentSlot.LEGS, new Properties().tab(ItemGroupRegistry.vidaItemGroup));
     }
 
     public ItemArmorElementLeggings(int element) {
-        super(ArmorMaterials.DIAMOND, EquipmentSlot.LEGS, new Properties().tab(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterials.DIAMOND, EquipmentSlot.LEGS, new Properties().tab(ItemGroupRegistry.vidaItemGroup));
         this.element = element;
     }
 

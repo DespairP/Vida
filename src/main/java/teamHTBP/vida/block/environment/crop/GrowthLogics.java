@@ -8,13 +8,13 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import teamHTBP.vida.helper.elementHelper.Allelopathy;
-import teamHTBP.vida.helper.elementHelper.ElementHelper;
+import teamHTBP.vida.element.Allelopathy;
+import teamHTBP.vida.element.ElementHelper;
 
 import java.util.List;
 
 import static net.minecraftforge.common.ForgeHooks.onCropsGrowPre;
-import static teamHTBP.vida.block.environment.crop.AbstractBlockElementCrops.GrowLogic;
+import static teamHTBP.vida.block.environment.crop.AbstractElementCropsBlock.GrowLogic;
 
 /**
  * 统一管理生长逻辑

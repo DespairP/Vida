@@ -10,14 +10,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.block.state.BlockState;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.blockentity.base.ModBaseMenuBlockEntity;
-import teamHTBP.vida.menu.ContainerInjectTable;
+import teamHTBP.vida.blockentity.base.VidaBaseMenuBlockEntity;
+import teamHTBP.vida.menu.InjectTableMenu;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-public class TileEntityInjectTable extends ModBaseMenuBlockEntity {
+public class TileEntityInjectTable extends VidaBaseMenuBlockEntity {
     //将要被注魔的剑
     ItemStack swordStack = ItemStack.EMPTY;
 
@@ -91,6 +91,6 @@ public class TileEntityInjectTable extends ModBaseMenuBlockEntity {
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int p_createMenu_1_, Inventory p_createMenu_2_, Player p_createMenu_3_) {
-        return new ContainerInjectTable(p_createMenu_1_, p_createMenu_2_, getSwordStack(), worldPosition, level);
+        return new InjectTableMenu(p_createMenu_1_, p_createMenu_2_, getSwordStack(), worldPosition, level);
     }
 }

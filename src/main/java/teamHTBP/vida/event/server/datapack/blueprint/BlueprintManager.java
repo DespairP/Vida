@@ -8,10 +8,10 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import teamHTBP.vida.capability.blueprintCapability.Blueprint;
+import teamHTBP.vida.capability.blueprint.Blueprint;
 import teamHTBP.vida.event.server.datapack.ModDataPack;
-import teamHTBP.vida.helper.blueprintHelper.EnumBlueprintRarity;
-import teamHTBP.vida.helper.blueprintHelper.EnumBlueprintType;
+import teamHTBP.vida.helper.blueprint.EnumBlueprintRarity;
+import teamHTBP.vida.helper.blueprint.EnumBlueprintType;
 import teamHTBP.vida.utils.json.JsonUtils;
 
 import java.util.AbstractMap;
