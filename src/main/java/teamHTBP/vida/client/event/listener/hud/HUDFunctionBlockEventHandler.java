@@ -15,10 +15,10 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import teamHTBP.vida.block.function.CollecterBlock;
 import teamHTBP.vida.block.function.ElementCoreAltarBlock;
-import teamHTBP.vida.block.function.PurfiedCauldronBlock;
+import teamHTBP.vida.block.function.PurifiedCauldronBlock;
 import teamHTBP.vida.blockentity.TileEntityCollector;
 import teamHTBP.vida.blockentity.TileEntityElementCoreAltar;
-import teamHTBP.vida.blockentity.TileEntityPurfiedCauldron;
+import teamHTBP.vida.blockentity.TileEntityPurifiedCauldron;
 import teamHTBP.vida.client.hud.CollectorHud;
 import teamHTBP.vida.client.hud.ElementCoreAltarHud;
 import teamHTBP.vida.client.hud.PurfiedCauldronHud;
@@ -54,10 +54,10 @@ public class HUDFunctionBlockEventHandler extends HudHandler {
         BlockPos lookingPos = getLookingPos(player);
 
         //渲染纯净坩埚HUD
-        if (block instanceof PurfiedCauldronBlock) {
-            TileEntityPurfiedCauldron tileEntityPurfiedCauldron = (TileEntityPurfiedCauldron) player.level.getBlockEntity(lookingPos);
-            if (tileEntityPurfiedCauldron != null) {
-                PurfiedCauldronHud purfiedCauldronHUD = new PurfiedCauldronHud(tileEntityPurfiedCauldron);
+        if (block instanceof PurifiedCauldronBlock) {
+            TileEntityPurifiedCauldron tileEntityPurifiedCauldron = (TileEntityPurifiedCauldron) player.level.getBlockEntity(lookingPos);
+            if (tileEntityPurifiedCauldron != null) {
+                PurfiedCauldronHud purfiedCauldronHUD = new PurfiedCauldronHud(tileEntityPurifiedCauldron);
                 setupShader();
                 purfiedCauldronHUD.render(event.getMatrixStack());
             }

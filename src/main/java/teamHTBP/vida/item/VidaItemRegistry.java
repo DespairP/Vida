@@ -4,6 +4,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -111,10 +112,10 @@ public class VidaItemRegistry {
     public final static RegistryObject<Item> ARMOR_EARTH_BOOTS = ITEMS.register("earthbootsarmor", () -> new ItemArmorElementBoots(5));
 
     // 测试用盔甲
-    public final static RegistryObject<Item> ARMOR_DEMO_HELMET = ITEMS.register("armor_demo_helmet",()->new ItemArmorDemo(EquipmentSlot.HEAD));
-    public final static RegistryObject<Item> ARMOR_DEMO_CHEST = ITEMS.register("armor_demo_chest",()->new ItemArmorDemo(EquipmentSlot.CHEST));
-    public final static RegistryObject<Item> ARMOR_DEMO_LEGGINGS = ITEMS.register("armor_demo_leggings",()->new ItemArmorDemo(EquipmentSlot.LEGS));
-    public final static RegistryObject<Item> ARMOR_DEMO_BOOT = ITEMS.register("armor_demo_boots",()->new ItemArmorDemo(EquipmentSlot.FEET));
+    public final static RegistryObject<Item> ARMOR_DEMO_HELMET = ITEMS.register("armor_demo_helmet", () -> new ItemArmorDemo(EquipmentSlot.HEAD));
+    public final static RegistryObject<Item> ARMOR_DEMO_CHEST = ITEMS.register("armor_demo_chest", () -> new ItemArmorDemo(EquipmentSlot.CHEST));
+    public final static RegistryObject<Item> ARMOR_DEMO_LEGGINGS = ITEMS.register("armor_demo_leggings", () -> new ItemArmorDemo(EquipmentSlot.LEGS));
+    public final static RegistryObject<Item> ARMOR_DEMO_BOOT = ITEMS.register("armor_demo_boots", () -> new ItemArmorDemo(EquipmentSlot.FEET));
 
     //元素工具
     public static RegistryObject<Item> goldElementPickaxe = ITEMS.register("goldelementpickaxe", () -> new ItemElementPickaxe(GOLD));
@@ -153,34 +154,42 @@ public class VidaItemRegistry {
     public static RegistryObject<Item> GEM_STAND;
     @RegisterItemBlock
     public static RegistryObject<Item> CORE_ALTAR;
-    public static RegistryObject<Item> prismTable = ITEMS.register("prismtable", () -> new BlockItem(VidaBlockRegistry.prismTable.get(), new Item.Properties().tab(ItemGroupRegistry.vidaItemGroup).stacksTo(1)));
-    public static RegistryObject<Item> oreReactionMachine = ITEMS.register("orereactionmachine", () -> new BlockItem(VidaBlockRegistry.oreReactionMachine.get(), new Item.Properties().tab(ItemGroupRegistry.vidaItemGroup)));
-    public static RegistryObject<Item> collector = ITEMS.register("collector", () -> new BlockItem(VidaBlockRegistry.collector.get(), new Item.Properties().tab(ItemGroupRegistry.vidaItemGroup)));
-    public static RegistryObject<Item> injectionTable = ITEMS.register("injecttable", () -> new BlockItem(VidaBlockRegistry.injectionTable.get(), new Item.Properties().tab(ItemGroupRegistry.vidaItemGroup)));
-    public static RegistryObject<Item> altarcubeMaker = ITEMS.register("altarcubemaker", () -> new BlockItem(VidaBlockRegistry.altarcubeMaker.get(), new Item.Properties().tab(ItemGroupRegistry.vidaItemGroup)));
-    public static RegistryObject<Item> steleLife = ITEMS.register("lifestele", () -> new BlockItem(VidaBlockRegistry.steleLife.get(), new Item.Properties().tab(ItemGroupRegistry.vidaItemGroup)));
-    public static RegistryObject<Item> blueprintDesigner = ITEMS.register("blueprintdesigner", () -> new BlockItem(VidaBlockRegistry.blueprintDesigner.get(), new Item.Properties().tab(ItemGroupRegistry.vidaItemGroup)));
-    public static RegistryObject<Item> purfiedCauldron = ITEMS.register("purfiedcauldron", () -> new BlockItem(VidaBlockRegistry.purfiedCauldron.get(), new Item.Properties().tab(ItemGroupRegistry.vidaItemGroup)));
+    public static RegistryObject<Item> prismTable = block(VidaBlockRegistry.prismTable);
+    public static RegistryObject<Item> oreReactionMachine = block(VidaBlockRegistry.oreReactionMachine);
+    public static RegistryObject<Item> collector = block(VidaBlockRegistry.collector);
+    public static RegistryObject<Item> injectionTable = block(VidaBlockRegistry.injectionTable);
+    public static RegistryObject<Item> altarcubeMaker = block(VidaBlockRegistry.altarcubeMaker);
+    public static RegistryObject<Item> steleLife = block(VidaBlockRegistry.steleLife);
+    public static RegistryObject<Item> blueprintDesigner = block(VidaBlockRegistry.blueprintDesigner);
+    public static RegistryObject<Item> purfiedCauldron = block(VidaBlockRegistry.purfiedCauldron);
 
     //悬浮元素水晶方块
-    public static RegistryObject<Item> goldElementCrystal = ITEMS.register("goldelementcrystal", () -> new BlockItem(VidaBlockRegistry.elementCrystalGold.get(), new Item.Properties().tab(ItemGroupRegistry.vidaItemGroup)));
-    public static RegistryObject<Item> woodElementCrystal = ITEMS.register("woodelementcrystal", () -> new BlockItem(VidaBlockRegistry.elementCrystalWood.get(), new Item.Properties().tab(ItemGroupRegistry.vidaItemGroup)));
-    public static RegistryObject<Item> aquaElementCrystal = ITEMS.register("aquaelementcrystal", () -> new BlockItem(VidaBlockRegistry.elementCrystalAqua.get(), new Item.Properties().tab(ItemGroupRegistry.vidaItemGroup)));
-    public static RegistryObject<Item> fireElementCrystal = ITEMS.register("fireelementcrystal", () -> new BlockItem(VidaBlockRegistry.elementCrystalFire.get(), new Item.Properties().tab(ItemGroupRegistry.vidaItemGroup)));
-    public static RegistryObject<Item> earthElementCrystal = ITEMS.register("earthelementcrystal", () -> new BlockItem(VidaBlockRegistry.elementCrystalEarth.get(), new Item.Properties().tab(ItemGroupRegistry.vidaItemGroup)));
+    public static RegistryObject<Item> goldElementCrystal = block(VidaBlockRegistry.GOLD_CRYSTAL);
+    public static RegistryObject<Item> woodElementCrystal = block(VidaBlockRegistry.WOOD_CRYSTAL);
+    public static RegistryObject<Item> aquaElementCrystal = block(VidaBlockRegistry.AQUA_CRYSTAL);
+    public static RegistryObject<Item> fireElementCrystal = block(VidaBlockRegistry.FIRE_CRYSTAL);
+    public static RegistryObject<Item> earthElementCrystal = block(VidaBlockRegistry.EARTH_CRYSTAL);
 
     //元素农作物方块
-    public static RegistryObject<Item> CROP_CRISMCREST = ITEMS.register("crop_crimsoncrest", () -> new BlockItem(VidaBlockRegistry.CROP_CRISMCREST.get(), new Item.Properties().tab(ItemGroupRegistry.vidaItemGroup)));
-    public static RegistryObject<Item> CROP_HEARTOFWAL = ITEMS.register("crop_heartofwal", () -> new BlockItem(VidaBlockRegistry.CROP_HEARTOFWAL.get(), new Item.Properties().tab(ItemGroupRegistry.vidaItemGroup)));
-    public static RegistryObject<Item> CROP_NITRITETHORNS = ITEMS.register("crop_nitritethorns", () -> new BlockItem(VidaBlockRegistry.CROP_NITRITETHORNS.get(), new Item.Properties().tab(ItemGroupRegistry.vidaItemGroup)));
-    public static RegistryObject<Item> CROP_PLAMSTEM = ITEMS.register("crop_plamstem", () -> new BlockItem(VidaBlockRegistry.CROP_PLAMSTEM.get(), new Item.Properties().tab(ItemGroupRegistry.vidaItemGroup)));
-    public static RegistryObject<Item> CROP_SULLENHYDRANGEA = ITEMS.register("crop_sullenhydrangea", () -> new BlockItem(VidaBlockRegistry.CROP_SULLENHYDRANGEA.get(), new Item.Properties().tab(ItemGroupRegistry.vidaItemGroup)));
-    public static RegistryObject<Item> CROP_SWEETCYANREED = ITEMS.register("crop_sweetcyanreed", () -> new BlockItem(VidaBlockRegistry.CROP_SWEETCYANREED.get(), new Item.Properties().tab(ItemGroupRegistry.vidaItemGroup)));
+    public static RegistryObject<Item> CROP_CRISMCREST = block(VidaBlockRegistry.CROP_CRISMCREST);
+    public static RegistryObject<Item> CROP_HEARTOFWAL = block(VidaBlockRegistry.CROP_HEARTOFWAL);
+    public static RegistryObject<Item> CROP_NITRITETHORNS = block(VidaBlockRegistry.CROP_NITRITETHORNS);
+    public static RegistryObject<Item> CROP_PLAMSTEM = block(VidaBlockRegistry.CROP_PLAMSTEM);
+    public static RegistryObject<Item> CROP_SULLENHYDRANGEA = block(VidaBlockRegistry.CROP_SULLENHYDRANGEA);
+    public static RegistryObject<Item> CROP_SWEETCYANREED = block(VidaBlockRegistry.CROP_SWEETCYANREED);
 
     //注册书
     public final static RegistryObject<Item> GUIDE_BOOK = ITEMS.register("vida_guidebook", ItemGuidebook::new);
 
-    public Item getItem(RegistryObject<Item> registryObject){
+    public Item getItem(RegistryObject<Item> registryObject) {
         return registryObject != null ? registryObject.orElse(Items.AIR) : Items.AIR;
+    }
+
+    static RegistryObject<Item> block(RegistryObject<Block> block) {
+        return ITEMS.register(block.getId().getPath(), () -> new BlockItem(block.get(), base()));
+    }
+
+    static Item.Properties base() {
+        return new Item.Properties().tab(ItemGroupRegistry.vidaItemGroup);
     }
 }

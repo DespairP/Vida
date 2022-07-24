@@ -10,7 +10,7 @@ import teamHTBP.vida.block.VidaBlockRegistry;
 import teamHTBP.vida.blockentity.TileEntityLoader;
 import teamHTBP.vida.client.event.listener.VidaClientEventHandler;
 import teamHTBP.vida.entity.VidaEntityRegistry;
-import teamHTBP.vida.event.server.datapack.ModDataPacks;
+import teamHTBP.vida.datapack.ModDataPacks;
 import teamHTBP.vida.item.VidaItemRegistry;
 import teamHTBP.vida.menu.TypeLoaderMenu;
 import teamHTBP.vida.network.PacketManager;

@@ -17,15 +17,12 @@ public class VidaDataGenerator {
         DataGenerator generator = event.getGenerator();
         ExistingFileHelper helper = event.getExistingFileHelper();
 
-        if (event.includeServer()) {
-            generator.addProvider(new ElementPotentialProvider(Vida.MOD_ID, generator));
-            generator.addProvider(new VidaRecipeProvider(generator));
-            VidaBlockTagProvider blockTags = new VidaBlockTagProvider(generator, helper);
-            generator.addProvider(blockTags);
-            generator.addProvider(new VidaItemTagProvider(generator, blockTags, helper));
-        }
-        else if (event.includeClient()) {
-            generator.addProvider(new VidaLanguageProvider(Vida.MOD_ID, generator));
-        }
+        generator.addProvider(new ElementPotentialProvider(Vida.MOD_ID, generator));
+        generator.addProvider(new VidaRecipeProvider(generator));
+        VidaBlockTagProvider blockTags = new VidaBlockTagProvider(generator, helper);
+        generator.addProvider(blockTags);
+        generator.addProvider(new VidaItemTagProvider(generator, blockTags, helper));
+
+        generator.addProvider(new VidaLanguageProvider(Vida.MOD_ID, generator));
     }
 }

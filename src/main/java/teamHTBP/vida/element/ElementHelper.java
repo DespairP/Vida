@@ -7,8 +7,8 @@ import net.minecraft.world.level.biome.Biome;
 import teamHTBP.vida.capability.skill.ISkill;
 import teamHTBP.vida.capability.skill.SkillCategory;
 import teamHTBP.vida.capability.skill.SkillHelper;
-import teamHTBP.vida.event.server.datapack.element.ElementPotential;
-import teamHTBP.vida.event.server.datapack.element.ElementPotentialManager;
+import teamHTBP.vida.datapack.element.ElementPotential;
+import teamHTBP.vida.datapack.element.ElementPotentialManager;
 
 import java.util.*;
 import java.util.stream.Collectors;

@@ -6,7 +6,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
 import net.minecraft.world.item.Items;
-import teamHTBP.vida.event.server.datapack.element.ElementPotential;
+import teamHTBP.vida.datapack.element.ElementPotential;
 import teamHTBP.vida.element.EnumElements;
 import teamHTBP.vida.item.VidaItemRegistry;
 import teamHTBP.vida.utils.json.JsonUtils;

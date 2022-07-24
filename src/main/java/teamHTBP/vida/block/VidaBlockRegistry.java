@@ -119,16 +119,16 @@ public class VidaBlockRegistry {
     @RegisterItemBlock
     public static RegistryObject<Block> VERDANT_BRICKS_DECO_4 = BLOCKS.register("verdant_bricks_deco_4", DecoBlockFactory::normal);
     //水晶
-    public static RegistryObject<Block> elementCrystalGold = BLOCKS.register("goldelementcrystal", GoldCrystalBlock::new);
-    public static RegistryObject<Block> elementCrystalWood = BLOCKS.register("woodelementcrystal", WoodCrystalBlock::new);
-    public static RegistryObject<Block> elementCrystalAqua = BLOCKS.register("aquaelementcrystal", AquaCrystalBlock::new);
-    public static RegistryObject<Block> elementCrystalFire = BLOCKS.register("fireelementcrystal", FireCrystalBlock::new);
-    public static RegistryObject<Block> elementCrystalEarth = BLOCKS.register("earthelementcrystal", EarthCrystalBlock::new);
+    public static RegistryObject<Block> GOLD_CRYSTAL = BLOCKS.register("gold_crystal", GoldCrystalBlock::new);
+    public static RegistryObject<Block> WOOD_CRYSTAL = BLOCKS.register("wood_crystal", WoodCrystalBlock::new);
+    public static RegistryObject<Block> AQUA_CRYSTAL = BLOCKS.register("aqua_crystal", AquaCrystalBlock::new);
+    public static RegistryObject<Block> FIRE_CRYSTAL = BLOCKS.register("fire_crystal", FireCrystalBlock::new);
+    public static RegistryObject<Block> EARTH_CRYSTAL = BLOCKS.register("earth_crystal", EarthCrystalBlock::new);
     //生命原木
     public static RegistryObject<Block> logVida = BLOCKS.register("logvida", () -> new VidaLogBlock());
     public static RegistryObject<Block> leavesVida = BLOCKS.register("leavesvida", () -> new VidaLeavesBlock());
     public static RegistryObject<Block> saplingVida = BLOCKS.register("saplingvida", () -> new VidaSaplingBlock());
-    public static RegistryObject<Block> purfiedCauldron = BLOCKS.register("purfiedcauldron", () -> new PurfiedCauldronBlock());
+    public static RegistryObject<Block> purfiedCauldron = BLOCKS.register("purfiedcauldron", () -> new PurifiedCauldronBlock());
     public static RegistryObject<Block> plankVida_0 = BLOCKS.register("plankvida0", () -> new VidaPlankBlock(0));
     public static RegistryObject<Block> plankVida_1 = BLOCKS.register("plankvida1", () -> new VidaPlankBlock(1));
     public static RegistryObject<Block> plankVida_2 = BLOCKS.register("plankvida2", () -> new VidaPlankBlock(2));

@@ -12,8 +12,8 @@ import teamHTBP.vida.blockentity.crystal.*;
 
 public class TileEntityLoader {
     public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITY_DEFERRED_REGISTER = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, Vida.MOD_ID);
-    public static RegistryObject<BlockEntityType<TileEntityPurfiedCauldron>> TileEntityPurfiedCauldron = TILE_ENTITY_DEFERRED_REGISTER.register("tepurfiedcauldron", () -> {
-        return BlockEntityType.Builder.of(teamHTBP.vida.blockentity.TileEntityPurfiedCauldron::new,
+    public static RegistryObject<BlockEntityType<TileEntityPurifiedCauldron>> TileEntityPurfiedCauldron = TILE_ENTITY_DEFERRED_REGISTER.register("tepurfiedcauldron", () -> {
+        return BlockEntityType.Builder.of(TileEntityPurifiedCauldron::new,
                 VidaBlockRegistry.purfiedCauldron.get()).build(null);
     });
     public static RegistryObject<BlockEntityType<TileEntityGemShower>> TileEntityGemShower = TILE_ENTITY_DEFERRED_REGISTER.register("tegemshower", () -> {
@@ -42,23 +42,23 @@ public class TileEntityLoader {
 
     public static RegistryObject<BlockEntityType<GoldElementCrystalBlockEntity>> TileEntityCrystalGold = TILE_ENTITY_DEFERRED_REGISTER.register("teelementcrystal_gold", () -> {
         return BlockEntityType.Builder.of(GoldElementCrystalBlockEntity::new,
-                VidaBlockRegistry.elementCrystalGold.get()).build(null);
+                VidaBlockRegistry.GOLD_CRYSTAL.get()).build(null);
     });
 
     public static RegistryObject<BlockEntityType<WoodElementCrystalBlockEntity>> TileEntityCrystalWood = TILE_ENTITY_DEFERRED_REGISTER.register("teelementcrystal_wood", () -> {
         return BlockEntityType.Builder.of(WoodElementCrystalBlockEntity::new,
-                VidaBlockRegistry.elementCrystalWood.get()).build(null);
+                VidaBlockRegistry.WOOD_CRYSTAL.get()).build(null);
     });
     public static RegistryObject<BlockEntityType<AquaCrystalBlockEntity>> TileEntityCrystalAqua = TILE_ENTITY_DEFERRED_REGISTER
             .register("teelementcrystal_fire", () -> BlockEntityType.Builder.of(AquaCrystalBlockEntity::new,
-                    VidaBlockRegistry.elementCrystalAqua.get()).build(null));
+                    VidaBlockRegistry.AQUA_CRYSTAL.get()).build(null));
     public static RegistryObject<BlockEntityType<FireElementCrystalBlockEntity>> TileEntityCrystalFire = TILE_ENTITY_DEFERRED_REGISTER.register("teelementcrystal_aqua", () -> {
         return BlockEntityType.Builder.of(FireElementCrystalBlockEntity::new,
-                VidaBlockRegistry.elementCrystalFire.get()).build(null);
+                VidaBlockRegistry.FIRE_CRYSTAL.get()).build(null);
     });
     public static RegistryObject<BlockEntityType<EarthCrystalBlockEntity>> TileEntityCrystalEarth = TILE_ENTITY_DEFERRED_REGISTER.register("teelementcrystal_earth", () -> {
         return BlockEntityType.Builder.of(EarthCrystalBlockEntity::new,
-                VidaBlockRegistry.elementCrystalEarth.get()).build(null);
+                VidaBlockRegistry.EARTH_CRYSTAL.get()).build(null);
     });
     public static RegistryObject<BlockEntityType<TileEntityInjectTable>> TileEntityInjectTable =
             TILE_ENTITY_DEFERRED_REGISTER.register("teinjecttable",

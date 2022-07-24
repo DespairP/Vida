@@ -36,11 +36,11 @@ public class RenderRegistry {
     public static ResourceLocation firelogoLocation = new ResourceLocation(Vida.MOD_ID, "model/firelogo");
     public static ResourceLocation earthlogoLocation = new ResourceLocation(Vida.MOD_ID, "model/earthlogo");
 
-    public static ResourceLocation goldCrystalLocation = new ResourceLocation(Vida.MOD_ID, "model/goldelementcrystal_animate");
-    public static ResourceLocation woodCrystalLocation = new ResourceLocation(Vida.MOD_ID, "model/woodelementcrystal_animate");
-    public static ResourceLocation aquaCrystalLocation = new ResourceLocation(Vida.MOD_ID, "model/aquaelementcrystal_animate");
-    public static ResourceLocation fireCrystalLocation = new ResourceLocation(Vida.MOD_ID, "model/fireelementcrystal_animate");
-    public static ResourceLocation earthCrystalLocation = new ResourceLocation(Vida.MOD_ID, "model/earthelementcrystal_animate");
+    public static ResourceLocation goldCrystalLocation = new ResourceLocation(Vida.MOD_ID, "model/gold_crystal_animate");
+    public static ResourceLocation woodCrystalLocation = new ResourceLocation(Vida.MOD_ID, "model/wood_crystal_animate");
+    public static ResourceLocation aquaCrystalLocation = new ResourceLocation(Vida.MOD_ID, "model/aqua_crystal_animate");
+    public static ResourceLocation fireCrystalLocation = new ResourceLocation(Vida.MOD_ID, "model/fire_crystal_animate");
+    public static ResourceLocation earthCrystalLocation = new ResourceLocation(Vida.MOD_ID, "model/earth_crystal_animate");
 
     public static ResourceLocation goldFaintLightLocation = new ResourceLocation(Vida.MOD_ID, "item/faintlight_gold");
     public static ResourceLocation woodFaintLightLocation = new ResourceLocation(Vida.MOD_ID, "item/faintlight_wood");

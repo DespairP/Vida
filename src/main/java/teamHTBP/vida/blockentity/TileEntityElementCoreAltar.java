@@ -249,15 +249,15 @@ public class TileEntityElementCoreAltar extends VidaBaseBlockEntity {
         if (!this.isBlockOver) {
             this.clear();
             if (element == EnumElements.GOLD) {
-                level.setBlockAndUpdate(this.worldPosition.above(), VidaBlockRegistry.elementCrystalGold.get().defaultBlockState());
+                level.setBlockAndUpdate(this.worldPosition.above(), VidaBlockRegistry.GOLD_CRYSTAL.get().defaultBlockState());
             } else if (element == EnumElements.WOOD) {
-                level.setBlockAndUpdate(this.worldPosition.above(), VidaBlockRegistry.elementCrystalWood.get().defaultBlockState());
+                level.setBlockAndUpdate(this.worldPosition.above(), VidaBlockRegistry.WOOD_CRYSTAL.get().defaultBlockState());
             } else if (element == EnumElements.AQUA) {
-                level.setBlockAndUpdate(this.worldPosition.above(), VidaBlockRegistry.elementCrystalAqua.get().defaultBlockState());
+                level.setBlockAndUpdate(this.worldPosition.above(), VidaBlockRegistry.AQUA_CRYSTAL.get().defaultBlockState());
             } else if (element == EnumElements.FIRE) {
-                level.setBlockAndUpdate(this.worldPosition.above(), VidaBlockRegistry.elementCrystalFire.get().defaultBlockState());
+                level.setBlockAndUpdate(this.worldPosition.above(), VidaBlockRegistry.FIRE_CRYSTAL.get().defaultBlockState());
             } else if (element == EnumElements.EARTH) {
-                level.setBlockAndUpdate(this.worldPosition.above(), VidaBlockRegistry.elementCrystalEarth.get().defaultBlockState());
+                level.setBlockAndUpdate(this.worldPosition.above(), VidaBlockRegistry.EARTH_CRYSTAL.get().defaultBlockState());
             }
         }
     }
