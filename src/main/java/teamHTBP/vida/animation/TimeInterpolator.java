@@ -1,4 +1,4 @@
-package teamHTBP.vida.client.animation;
+package teamHTBP.vida.animation;
 
 import net.minecraft.util.Mth;
 import teamHTBP.vida.utils.math.VidaMath;

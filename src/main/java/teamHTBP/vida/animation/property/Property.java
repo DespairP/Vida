@@ -1,4 +1,4 @@
-package teamHTBP.vida.client.animation.property;
+package teamHTBP.vida.animation.property;
 
 import javax.annotation.Nonnull;
 

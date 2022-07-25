@@ -1,7 +1,6 @@
 package teamHTBP.vida.helper.guidebook.components;
 
 import com.google.gson.annotations.Expose;
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -11,23 +10,25 @@ import com.mojang.math.Vector3f;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.client.ForgeHooksClient;
 import teamHTBP.vida.helper.render.TextureSection;
 import teamHTBP.vida.utils.color.RGBAColor;
 import teamHTBP.vida.utils.math.FloatRange;
@@ -132,14 +133,15 @@ public class ModelGuidebookComponent implements IGuidebookComponent {
         matrixStack.pushPose();
         matrixStack.pushPose();
         //绑定方块模型,用于模型材质绑定
-        RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_BLOCKS);
-        textureManager.getTexture(TextureAtlas.LOCATION_BLOCKS).setFilter(false, false);
+        ResourceLocation atlas = InventoryMenu.BLOCK_ATLAS;
+        RenderSystem.setShaderTexture(0, atlas);
+        textureManager.getTexture(atlas).setFilter(false, false);
         //GL11方法, @see:ItemRenderer#renderItemModelIntoGUI
         //RenderSystem.enableRescaleNormal();
         //RenderSystem.enableAlphaTest();
         //RenderSystem.defaultAlphaFunc();
         RenderSystem.enableBlend();
-        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        //RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
         //渲染值全颜色
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0f);
         //设置渲染位移
@@ -148,36 +150,35 @@ public class ModelGuidebookComponent implements IGuidebookComponent {
         matrixStack.translate(32.0F, 32.0F, 0.0F);
         //设置渲染大小
         matrixStack.scale(1.0F, -1.0F, 1.0F);
-        matrixStack.scale(64.0F, 64.0F, 64.0F);
+        matrixStack.scale(32.0F, 32.0F, 32.0F);
         //获取要渲染的模型
-        BlockState state = getBlockStateFromItemStack();
-        BakedModel model = itemRenderer.getModel(renderStack, null, null, 0);
+        Minecraft mc = Minecraft.getInstance();
+        BakedModel model = itemRenderer.getModel(renderStack, mc.level, mc.player, 0);
         //获取渲染的方式
         RenderType rendertype = ItemBlockRenderTypes.getRenderType(renderStack, true);
         //将模型调整成适合GUI渲染的scale模型
-        model = net.minecraftforge.client.ForgeHooksClient.handleCameraTransforms(matrixStack, model, ItemTransforms.TransformType.GUI, false);
+        model = ForgeHooksClient.handleCameraTransforms(matrixStack, model, ItemTransforms.TransformType.GUI, false);
         //模型旋转
         matrixStack.translate(0.5,0.5,0.5); //将模型调整到正中央
         matrixStack.mulPose(new Quaternion(new Vector3f(0f,1f,0f) , Mth.clamp(partialTicks,prevRotateX, rotateX), false));
         matrixStack.mulPose(new Quaternion(new Vector3f(1f,0.0f,0f) , Mth.clamp(partialTicks,prevRotateY, rotateY), false));
         matrixStack.translate(-0.5,-0.5,-0.5f);// 将模型调整到旋转后的正中央
-        //再次将模型比例缩小50%
-        matrixStack.last().pose().multiply(0.5F);
+        // //再次将模型比例缩小50%
+        // matrixStack.last().pose().multiply(0.5F);
         //渲染设定是否发光
         boolean flag = !model.usesBlockLight();
         if (flag) {
             Lighting.setupForFlatItems();
         }
         //获取渲染buffer
-        MultiBufferSource.BufferSource irendertypebuffer$impl = Minecraft.getInstance().renderBuffers().bufferSource();
+        MultiBufferSource.BufferSource source = mc.renderBuffers().bufferSource();
         //真正绑定模型
-        VertexConsumer ivertexbuilder = ItemRenderer.getFoilBuffer(irendertypebuffer$impl, rendertype, true, renderStack.hasFoil());
+        VertexConsumer buffer = ItemRenderer.getFoilBuffer(source, rendertype, true, renderStack.hasFoil());
         //开始渲染
-        itemRenderer.renderModelLists(model, renderStack, 15728880, OverlayTexture.NO_OVERLAY, matrixStack, ivertexbuilder);
+        itemRenderer.renderModelLists(model, renderStack, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, matrixStack, buffer);
         //结束渲染
-        irendertypebuffer$impl.endBatch();
+        source.endBatch();
         //恢复渲染初始值
-        RenderSystem.enableDepthTest();
         if (flag) {
             Lighting.setupFor3DItems();
         }

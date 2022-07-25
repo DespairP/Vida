@@ -1,4 +1,4 @@
-package teamHTBP.vida.client.animation.animator;
+package teamHTBP.vida.animation.animator;
 
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;

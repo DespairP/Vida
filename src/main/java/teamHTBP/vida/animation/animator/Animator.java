@@ -1,7 +1,7 @@
-package teamHTBP.vida.client.animation.animator;
+package teamHTBP.vida.animation.animator;
 
-import teamHTBP.vida.client.animation.TimeInterpolator;
-import teamHTBP.vida.client.animation.valueholder.PropertyValueHolder;
+import teamHTBP.vida.animation.TimeInterpolator;
+import teamHTBP.vida.animation.valueholder.PropertyValueHolder;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -82,10 +82,9 @@ public abstract class AbstractGuidebookScreen extends Screen implements IGuidebo
 
     /**渲染页数,需要子类继承{@link IPageableGuidebook}*/
     public void renderPage(PoseStack matrixStack){
-        if(!(this instanceof IPageableGuidebook)){
+        if(!(this instanceof IPageableGuidebook pageable)){
             return;
         }
-        IPageableGuidebook pageable = (IPageableGuidebook) this;
         // 渲染背景
         matrixStack.pushPose();
         int centerX = (width - pageSection.w()) / 2;

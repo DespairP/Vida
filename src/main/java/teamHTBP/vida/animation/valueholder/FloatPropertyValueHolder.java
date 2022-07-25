@@ -1,7 +1,7 @@
-package teamHTBP.vida.client.animation.valueholder;
+package teamHTBP.vida.animation.valueholder;
 
-import teamHTBP.vida.client.animation.TimeInterpolator;
-import teamHTBP.vida.client.animation.property.Property;
+import teamHTBP.vida.animation.TimeInterpolator;
+import teamHTBP.vida.animation.property.Property;
 
 /**
  * @author DustW

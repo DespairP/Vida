@@ -6,7 +6,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraftforge.client.gui.ForgeIngameGui;
 import net.minecraftforge.client.gui.IIngameOverlay;
 import org.jetbrains.annotations.NotNull;
-import teamHTBP.vida.client.animation.property.Property;
+import teamHTBP.vida.animation.property.Property;
 
 /**
  * @author DustW

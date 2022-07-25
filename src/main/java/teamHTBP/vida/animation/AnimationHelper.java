@@ -1,4 +1,4 @@
-package teamHTBP.vida.client.animation;
+package teamHTBP.vida.animation;
 
 /**
  * @author DustW
