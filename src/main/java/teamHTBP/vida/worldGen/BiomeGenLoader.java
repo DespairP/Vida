@@ -10,7 +10,7 @@ import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import teamHTBP.vida.block.BlockLoader;
+import teamHTBP.vida.block.VidaBlockLoader;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 
 
@@ -39,23 +39,23 @@ public class BiomeGenLoader {
     @SubscribeEvent
     public static void oreGenSetup(BiomeLoadingEvent event) {
         if (EnumElements.AQUA.contains(event.getName())) {
-            eleOreDefaultConfig(event, BlockLoader.aquaElementOre.get());
+            eleOreDefaultConfig(event, VidaBlockLoader.aquaElementOre.get());
         }
 
         if (EnumElements.GOLD.contains(event.getName())) {
-            eleOreDefaultConfig(event, BlockLoader.goldElementOre.get());
+            eleOreDefaultConfig(event, VidaBlockLoader.goldElementOre.get());
         }
 
         if (EnumElements.FIRE.contains(event.getName())) {
-            eleOreDefaultConfig(event, BlockLoader.fireElementOre.get());
+            eleOreDefaultConfig(event, VidaBlockLoader.fireElementOre.get());
         }
 
         if (EnumElements.EARTH.contains(event.getName())) {
-            eleOreDefaultConfig(event, BlockLoader.earthElementOre.get());
+            eleOreDefaultConfig(event, VidaBlockLoader.earthElementOre.get());
         }
 
         if (EnumElements.WOOD.contains(event.getName())) {
-            eleOreDefaultConfig(event, BlockLoader.woodElementOre.get());
+            eleOreDefaultConfig(event, VidaBlockLoader.woodElementOre.get());
         }
     }
 }

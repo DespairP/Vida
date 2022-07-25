@@ -11,7 +11,7 @@ import teamHTBP.vida.item.ItemLoader;
 import java.util.Random;
 
 @Deprecated
-public class BlockCropHeartOfWal extends AbstractBlockElementCrops {
+public class BlockCropHeartOfWal extends AbstractElementCropsBlock {
     public BlockCropHeartOfWal(int stage, IElement element) {
         super(stage, element);
     }

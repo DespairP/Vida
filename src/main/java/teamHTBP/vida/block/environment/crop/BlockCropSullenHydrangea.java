@@ -11,7 +11,7 @@ import teamHTBP.vida.item.ItemLoader;
 import java.util.Random;
 
 @Deprecated
-public class BlockCropSullenHydrangea extends AbstractBlockElementCrops {
+public class BlockCropSullenHydrangea extends AbstractElementCropsBlock {
     public BlockCropSullenHydrangea(int stage, IElement element) {
         super(stage, element);
     }

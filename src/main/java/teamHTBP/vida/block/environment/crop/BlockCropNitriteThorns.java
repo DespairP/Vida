@@ -11,7 +11,7 @@ import teamHTBP.vida.item.ItemLoader;
 import java.util.Random;
 
 @Deprecated
-public class BlockCropNitriteThorns extends AbstractBlockElementCrops {
+public class BlockCropNitriteThorns extends AbstractElementCropsBlock {
     public BlockCropNitriteThorns(int stage, IElement element) {
         super(stage, element);
     }

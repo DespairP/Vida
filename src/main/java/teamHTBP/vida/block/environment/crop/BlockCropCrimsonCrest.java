@@ -11,7 +11,7 @@ import teamHTBP.vida.item.ItemLoader;
 import java.util.Random;
 
 @Deprecated
-public class BlockCropCrimsonCrest extends AbstractBlockElementCrops {
+public class BlockCropCrimsonCrest extends AbstractElementCropsBlock {
     public BlockCropCrimsonCrest(int stage, IElement element) {
         super(stage, element);
     }

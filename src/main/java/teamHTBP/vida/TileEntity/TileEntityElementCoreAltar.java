@@ -10,7 +10,7 @@ import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
-import teamHTBP.vida.block.BlockLoader;
+import teamHTBP.vida.block.VidaBlockLoader;
 import teamHTBP.vida.helper.elementHelper.ElementHelper;
 import teamHTBP.vida.helper.elementHelper.EnumElements;
 import teamHTBP.vida.helper.elementHelper.IElement;
@@ -290,15 +290,15 @@ public class TileEntityElementCoreAltar extends TileEntity implements ITickableT
         if (!this.isBlockOver) {
             this.clear();
             if (element == EnumElements.GOLD) {
-                world.setBlockState(this.pos.up(), BlockLoader.elementCrystalGold.get().getDefaultState());
+                world.setBlockState(this.pos.up(), VidaBlockLoader.elementCrystalGold.get().getDefaultState());
             } else if (element == EnumElements.WOOD) {
-                world.setBlockState(this.pos.up(), BlockLoader.elementCrystalWood.get().getDefaultState());
+                world.setBlockState(this.pos.up(), VidaBlockLoader.elementCrystalWood.get().getDefaultState());
             } else if (element == EnumElements.AQUA) {
-                world.setBlockState(this.pos.up(), BlockLoader.elementCrystalAqua.get().getDefaultState());
+                world.setBlockState(this.pos.up(), VidaBlockLoader.elementCrystalAqua.get().getDefaultState());
             } else if (element == EnumElements.FIRE) {
-                world.setBlockState(this.pos.up(), BlockLoader.elementCrystalFire.get().getDefaultState());
+                world.setBlockState(this.pos.up(), VidaBlockLoader.elementCrystalFire.get().getDefaultState());
             } else if (element == EnumElements.EARTH) {
-                world.setBlockState(this.pos.up(), BlockLoader.elementCrystalEarth.get().getDefaultState());
+                world.setBlockState(this.pos.up(), VidaBlockLoader.elementCrystalEarth.get().getDefaultState());
             }
         }
     }

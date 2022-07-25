@@ -11,7 +11,7 @@ import teamHTBP.vida.item.ItemLoader;
 import java.util.Random;
 
 @Deprecated
-public class BlockCropSweetCyanReed extends AbstractBlockElementCrops {
+public class BlockCropSweetCyanReed extends AbstractElementCropsBlock {
     public BlockCropSweetCyanReed(int stage, IElement element) {
         super(stage, element);
     }

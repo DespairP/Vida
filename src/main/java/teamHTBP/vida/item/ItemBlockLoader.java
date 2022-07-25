@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.block.BlockLoader;
+import teamHTBP.vida.block.VidaBlockLoader;
 import teamHTBP.vida.helper.RegisterItemBlock;
 import teamHTBP.vida.itemGroup.ItemGroupLoader;
 
@@ -55,7 +55,7 @@ public class ItemBlockLoader {
 
     /**获取所有可以被注册的字段*/
     private static void init() throws IllegalAccessException {
-        for(Field decoratedBlock : BlockLoader.class.getDeclaredFields()){
+        for(Field decoratedBlock : VidaBlockLoader.class.getDeclaredFields()){
             if(decoratedBlock.getType() == RegistryObject.class && decoratedBlock.isAnnotationPresent(RegisterItemBlock.class)){
                 decoratedBlock.setAccessible(true);
                 REGISTRY_BLOCK_LIST.put(decoratedBlock.getName(),(RegistryObject<Block>) decoratedBlock.get(null));

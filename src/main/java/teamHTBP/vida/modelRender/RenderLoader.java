@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import teamHTBP.vida.TileEntity.TileEntityLoader;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.block.BlockLoader;
+import teamHTBP.vida.block.VidaBlockLoader;
 import teamHTBP.vida.modelRender.tileEntityModel.*;
 
 /**
@@ -53,17 +53,17 @@ public class RenderLoader {
 
     @SubscribeEvent
     public static void onRenderTypeSetup(FMLClientSetupEvent event) {
-        RenderTypeLookup.setRenderLayer(BlockLoader.saplingVida.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_CRISMCREST.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_SWEETCYANREED.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_SULLENHYDRANGEA.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_NITRITETHORNS.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_PLAMSTEM.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.CROP_HEARTOFWAL.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.purfiedCauldron.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.CORE_ALTAR.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(BlockLoader.prismTable.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(BlockLoader.steleLife.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(VidaBlockLoader.saplingVida.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VidaBlockLoader.CROP_CRISMCREST.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(VidaBlockLoader.CROP_SWEETCYANREED.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VidaBlockLoader.CROP_SULLENHYDRANGEA.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VidaBlockLoader.CROP_NITRITETHORNS.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VidaBlockLoader.CROP_PLAMSTEM.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VidaBlockLoader.CROP_HEARTOFWAL.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VidaBlockLoader.purfiedCauldron.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VidaBlockLoader.CORE_ALTAR.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VidaBlockLoader.prismTable.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(VidaBlockLoader.steleLife.get(), RenderType.getTranslucent());
     }
 
     @SubscribeEvent
