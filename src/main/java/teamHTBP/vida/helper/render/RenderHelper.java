@@ -2,9 +2,12 @@ package teamHTBP.vida.helper.render;
 
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.*;
+import com.mojang.math.Matrix4f;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -64,5 +67,26 @@ public class RenderHelper {
         );
     }
 
+    public static void blitVertical(PoseStack poseStack, int x1, int y1, int height, int weight, int z, TextureAtlasSprite sprite, double percent) {
+        innerBlit(poseStack,
+                x1, x1 + weight,
+                (int) (y1 + height * (1 - percent)), y1 + height,
+                z,
+                sprite.getU0(), sprite.getU1(),
+                (float) (sprite.getV0() + (sprite.getV1() - sprite.getV0()) * (1 - percent)), sprite.getV1());
+    }
 
+    private static void innerBlit(PoseStack poseStack, int pX1, int pX2, int pY1, int pY2, int pBlitOffset, float pMinU, float pMaxU, float pMinV, float pMaxV) {
+        Matrix4f m4 = poseStack.last().pose();
+
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        BufferBuilder bufferbuilder = Tesselator.getInstance().getBuilder();
+        bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+        bufferbuilder.vertex(m4, (float)pX1, (float)pY2, (float)pBlitOffset).uv(pMinU, pMaxV).endVertex();
+        bufferbuilder.vertex(m4, (float)pX2, (float)pY2, (float)pBlitOffset).uv(pMaxU, pMaxV).endVertex();
+        bufferbuilder.vertex(m4, (float)pX2, (float)pY1, (float)pBlitOffset).uv(pMaxU, pMinV).endVertex();
+        bufferbuilder.vertex(m4, (float)pX1, (float)pY1, (float)pBlitOffset).uv(pMinU, pMinV).endVertex();
+        bufferbuilder.end();
+        BufferUploader.end(bufferbuilder);
+    }
 }

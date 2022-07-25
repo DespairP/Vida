@@ -11,7 +11,7 @@ import teamHTBP.vida.item.staff.IElementLevelTools;
  * @author DustW
  */
 public abstract class ElementToolsHud extends Hud {
-    protected ItemStack last = ItemStack.EMPTY;
+    protected ItemStack lastStack = ItemStack.EMPTY;
 
     Animator in;
     Animator out;
@@ -43,12 +43,12 @@ public abstract class ElementToolsHud extends Hud {
 
         boolean isIncrease = itemStack.getItem() instanceof IElementLevelTools;
 
-        if (isIncrease && last != itemStack) {
-            last = itemStack;
+        if (isIncrease && lastStack != itemStack) {
+            lastStack = itemStack;
         }
 
         if (alpha / 100F <= 0) {
-            last = ItemStack.EMPTY;
+            lastStack = ItemStack.EMPTY;
         }
 
         animTick(isIncrease);

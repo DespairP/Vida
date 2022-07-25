@@ -23,7 +23,7 @@ public class ElementLevelToolsExpHud extends ElementToolsHud {
         checkLastAndAnimTick();
 
         //渲染工具经验
-        if (alpha > 0 && last.getItem() instanceof IElementLevelTools item) {
+        if (alpha > 0 && lastStack.getItem() instanceof IElementLevelTools item) {
             RGBAColor color = item.getElement().getElementRGBAColor();
 
             if (color == null) {
@@ -38,10 +38,10 @@ public class ElementLevelToolsExpHud extends ElementToolsHud {
             RenderSystem.setShaderTexture(0, VIDA_ICONS);
             RenderSystem.setShaderColor(r / 255.0F, g / 255.0F, b / 255.0F, alpha);
 
-            double toolExp = item.getCurrentLevelXP(last);
+            double toolExp = item.getCurrentLevelXP(lastStack);
 
             if (toolExp > 0) {
-                double nextToolExp = item.getNextLevelRequiredXP(last);
+                double nextToolExp = item.getNextLevelRequiredXP(lastStack);
                 int toolExpWidth = (int) (toolExp / nextToolExp * 183.0F);
                 toolExpProgress = toolExpProgress.get() == toolExpWidth ? toolExpProgress : new IntRange(toolExpProgress.get(), toolExpWidth, 0);
 
@@ -54,10 +54,10 @@ public class ElementLevelToolsExpHud extends ElementToolsHud {
                         256, 256);
             }
 
-            int level = item.getCurrentLevel(last);
+            int level = item.getCurrentLevel(lastStack);
             int a = (int) (255 * alpha);
 
-            if (a > 2 && level > 0) {
+            if (a > 10 && level > 0) {
                 String s = "" + level;
                 int i1 = (width - mc.font.width(s)) / 2 + 20;
                 int j1 = height - 31 - 4;
