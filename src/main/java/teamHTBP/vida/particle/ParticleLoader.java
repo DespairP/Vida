@@ -18,4 +18,5 @@ public class ParticleLoader {
     public static RegistryObject<ParticleType<BaseParticleData>> elementFireParticle = PARTICLE.register("elementfireparticle", BaseParticleType::new);
     public static RegistryObject<ParticleType<CuboidParticleData>> cuboidParticle = PARTICLE.register("cuboidparticle", CuboidParticleType::new);
     public static RegistryObject<ParticleType<BaseParticleData>> particle = PARTICLE.register("cuboid", BaseParticleType::new);
+    public static RegistryObject<ParticleType<BaseParticleData>> trailParticle = PARTICLE.register("trail", BaseParticleType::new);
 }

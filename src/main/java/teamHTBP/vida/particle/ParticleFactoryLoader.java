@@ -28,5 +28,6 @@ public class ParticleFactoryLoader {
         Minecraft.getInstance().particles.registerFactory(ParticleLoader.elementFireParticle.get(), (sprite)->new BaseParticleFactory(sprite, BaseVidaParticleType.ELEMENT_FIRE));
         Minecraft.getInstance().particles.registerFactory(ParticleLoader.cuboidParticle.get(), CuboidParticleFactory::new);
         Minecraft.getInstance().particles.registerFactory(ParticleLoader.particle.get(),(sprite)->new BaseParticleFactory(sprite, BaseVidaParticleType.CUBOID));
+        Minecraft.getInstance().particles.registerFactory(ParticleLoader.trailParticle.get(),(sprite)->new BaseParticleFactory(sprite, BaseVidaParticleType.TRAIL));
     }
 }
