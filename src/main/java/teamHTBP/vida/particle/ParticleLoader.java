@@ -5,8 +5,8 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.particle.util.BaseParticleData;
-import teamHTBP.vida.particle.util.BaseParticleType;
+import teamHTBP.vida.particle.base.BaseParticleData;
+import teamHTBP.vida.particle.base.BaseParticleType;
 
 /**
  * 注册ParticleType

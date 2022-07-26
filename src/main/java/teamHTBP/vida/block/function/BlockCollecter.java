@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import teamHTBP.vida.TileEntity.TileEntityCollector;
 import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.particle.ParticleLoader;
-import teamHTBP.vida.particle.util.BaseParticleData;
+import teamHTBP.vida.particle.base.BaseParticleData;
 
 import javax.annotation.Nullable;
 import java.util.Random;
