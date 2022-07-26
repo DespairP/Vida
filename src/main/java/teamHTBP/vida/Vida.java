@@ -1,6 +1,7 @@
 package teamHTBP.vida;
 
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -29,20 +30,17 @@ public class Vida {
 
     public Vida() {
         MinecraftForge.EVENT_BUS.register(VidaClientEventHandler.class);
-        ItemLoader.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        VidaBlockLoader.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ParticleLoader.PARTICLE.register(FMLJavaModLoadingContext.get().getModEventBus());
-        GenLoader.FEATURES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        TileEntityLoader.TILE_ENTITY_DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
-        EntityLoader.ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ContainerTypeLoader.CONTAINER_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ItemLoader.ITEMS.register(bus);
+        VidaBlockLoader.BLOCKS.register(bus);
+        ParticleLoader.PARTICLE.register(bus);
+        GenLoader.FEATURES.register(bus);
+        TileEntityLoader.TILE_ENTITY_DEFERRED_REGISTER.register(bus);
+        EntityLoader.ENTITY_TYPES.register(bus);
+        ContainerTypeLoader.CONTAINER_TYPES.register(bus);
         MinecraftForge.EVENT_BUS.register(ItemElementCoreVoid.class);
         MinecraftForge.EVENT_BUS.register(BlockEventLoaderServer.class);
-        RecipeManager.register(FMLJavaModLoadingContext.get().getModEventBus());
-        //RecipeLoader.RECIPES.register(FMLJavaModLoadingContext.get().getModEventBus());
-
-        //RecipeLoader.RECIPES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        //registerType(OREACTION, OreReactionMachineRecipe.RECIPE_TYPE);
-        //RecipeLoader.init(FMLJavaModLoadingContext.get().getModEventBus());
+        RecipeManager.register(bus);
     }
 }

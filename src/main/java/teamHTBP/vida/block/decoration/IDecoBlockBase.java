@@ -1,6 +1,6 @@
 package teamHTBP.vida.block.decoration;
 
-import teamHTBP.vida.helper.elementHelper.EnumElements;
+import teamHTBP.vida.core.element.EnumElements;
 
 /**
  * 表示这是一个装饰性方块

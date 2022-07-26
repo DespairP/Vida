@@ -25,7 +25,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Quaternion;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.world.World;
-import teamHTBP.vida.helper.renderHelper.guiHelper.TextureSection;
+import teamHTBP.vida.helper.renderHelper.TextureSection;
 import teamHTBP.vida.utils.color.RGBAColor;
 import teamHTBP.vida.utils.math.FloatRange;
 

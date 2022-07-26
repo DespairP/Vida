@@ -19,7 +19,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import teamHTBP.vida.entity.EntityFaintLight;
 import teamHTBP.vida.entity.EntityLoader;
-import teamHTBP.vida.helper.elementHelper.EnumElements;
+import teamHTBP.vida.core.element.EnumElements;
 import teamHTBP.vida.itemGroup.ItemGroupLoader;
 
 public class ItemFaintLight extends Item {

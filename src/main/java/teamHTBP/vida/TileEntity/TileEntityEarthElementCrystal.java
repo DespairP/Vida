@@ -9,7 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.LazyOptional;
 import teamHTBP.vida.capability.energyCapability.ElementEnergyCapability;
 import teamHTBP.vida.capability.energyCapability.IElementEnergyCapability;
-import teamHTBP.vida.helper.elementHelper.EnumElements;
+import teamHTBP.vida.core.element.EnumElements;
 
 import javax.annotation.Nullable;
 

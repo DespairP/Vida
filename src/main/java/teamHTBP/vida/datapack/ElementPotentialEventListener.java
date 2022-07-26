@@ -1,9 +1,8 @@
-package teamHTBP.vida.event.server.datapack;
+package teamHTBP.vida.datapack;
 
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import teamHTBP.vida.event.server.datapack.ElementPotentialManager;
 
 /**
  * @author DustW

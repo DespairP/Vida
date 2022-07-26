@@ -1,4 +1,4 @@
-package teamHTBP.vida.helper.elementHelper;
+package teamHTBP.vida.core.element;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -7,7 +7,7 @@ import net.minecraft.world.biome.Biome;
 import teamHTBP.vida.capability.skillSystem.ISkill;
 import teamHTBP.vida.capability.skillSystem.SkillCategory;
 import teamHTBP.vida.capability.skillSystem.SkillHelper;
-import teamHTBP.vida.event.server.datapack.ElementPotentialEventListener;
+import teamHTBP.vida.datapack.ElementPotentialEventListener;
 
 import java.util.*;
 import java.util.stream.Collectors;

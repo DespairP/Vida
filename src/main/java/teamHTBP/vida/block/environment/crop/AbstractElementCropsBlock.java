@@ -18,10 +18,10 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.PlantType;
-import teamHTBP.vida.helper.elementHelper.Allelopathy;
-import teamHTBP.vida.helper.elementHelper.ElementHelper;
-import teamHTBP.vida.helper.elementHelper.EnumElements;
-import teamHTBP.vida.helper.elementHelper.IElement;
+import teamHTBP.vida.core.element.Allelopathy;
+import teamHTBP.vida.core.element.ElementHelper;
+import teamHTBP.vida.core.element.EnumElements;
+import teamHTBP.vida.core.element.IElement;
 
 import java.util.Random;
 

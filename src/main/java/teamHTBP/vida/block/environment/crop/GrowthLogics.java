@@ -7,8 +7,8 @@ import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
-import teamHTBP.vida.helper.elementHelper.Allelopathy;
-import teamHTBP.vida.helper.elementHelper.ElementHelper;
+import teamHTBP.vida.core.element.Allelopathy;
+import teamHTBP.vida.core.element.ElementHelper;
 
 import java.util.List;
 

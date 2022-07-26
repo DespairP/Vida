@@ -6,8 +6,8 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
 import net.minecraft.data.IDataProvider;
 import net.minecraft.item.Items;
-import teamHTBP.vida.helper.elementHelper.ElementPotential;
-import teamHTBP.vida.helper.elementHelper.EnumElements;
+import teamHTBP.vida.core.element.ElementPotential;
+import teamHTBP.vida.core.element.EnumElements;
 import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.utils.json.JsonUtils;
 

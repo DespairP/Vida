@@ -3,7 +3,7 @@ package teamHTBP.vida.block.environment.crop;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
-import teamHTBP.vida.helper.elementHelper.IElement;
+import teamHTBP.vida.core.element.IElement;
 
 import java.util.Random;
 

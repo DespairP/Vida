@@ -15,7 +15,7 @@ import teamHTBP.vida.block.environment.crop.ElementCropParticleBlock;
 import teamHTBP.vida.block.environment.crop.SaplingVidaBlock;
 import teamHTBP.vida.block.function.*;
 import teamHTBP.vida.helper.RegisterItemBlock;
-import teamHTBP.vida.helper.elementHelper.EnumElements;
+import teamHTBP.vida.core.element.EnumElements;
 import teamHTBP.vida.item.ItemBlockLoader;
 import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.utils.color.ColorHelper;

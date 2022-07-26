@@ -24,8 +24,8 @@ import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeColors;
 import teamHTBP.vida.TileEntity.TileEntityPurfiedCauldron;
-import teamHTBP.vida.helper.elementHelper.EnumElements;
-import teamHTBP.vida.helper.elementHelper.IElement;
+import teamHTBP.vida.core.element.EnumElements;
+import teamHTBP.vida.core.element.IElement;
 
 public class TileEntityRenderPurfiedCauldron extends TileEntityRenderer<TileEntityPurfiedCauldron> {
     private float floating = 0; //物品悬浮增量

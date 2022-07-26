@@ -17,7 +17,7 @@ import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.util.math.vector.Quaternion;
 import net.minecraft.util.math.vector.Vector3f;
 import teamHTBP.vida.entity.EntityFaintLight;
-import teamHTBP.vida.helper.elementHelper.EnumElements;
+import teamHTBP.vida.core.element.EnumElements;
 import teamHTBP.vida.modelRender.RenderLoader;
 import teamHTBP.vida.modelRender.entityModel.EntityModelFaintLight;
 

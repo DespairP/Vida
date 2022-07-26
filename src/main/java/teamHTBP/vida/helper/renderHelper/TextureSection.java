@@ -1,4 +1,4 @@
-package teamHTBP.vida.helper.renderHelper.guiHelper;
+package teamHTBP.vida.helper.renderHelper;
 
 public class TextureSection {
     private int minU;

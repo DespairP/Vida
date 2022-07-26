@@ -10,13 +10,13 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TranslationTextComponent;
 
+/**渲染帮助类*/
 public class RenderHelper {
     public static FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
     /**
      * 字体位置
      **/
     public final static ResourceLocation DUNGEON_FONT = new ResourceLocation("vida", "dungeonfont");
-    //public final static ResourceLocation fusionpixel = new ResourceLocation("vida", "fusionpixel");
 
 
     /**

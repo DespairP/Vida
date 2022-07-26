@@ -9,7 +9,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.gui.IVidaHUD;
-import teamHTBP.vida.helper.elementHelper.EnumElements;
+import teamHTBP.vida.core.element.EnumElements;
 import teamHTBP.vida.item.staff.ItemElementPickaxe;
 
 public class ElementPickaxeHUD extends AbstractGui implements IVidaHUD {

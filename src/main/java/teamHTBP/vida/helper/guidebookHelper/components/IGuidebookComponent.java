@@ -4,7 +4,7 @@ import net.minecraft.client.gui.IGuiEventListener;
 import net.minecraft.client.gui.IRenderable;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import teamHTBP.vida.event.client.VidaClientEventHandler;
-import teamHTBP.vida.event.server.datapack.GuideBookPageHandler;
+import teamHTBP.vida.datapack.GuideBookPageHandler;
 import teamHTBP.vida.helper.guidebookHelper.GuidebookSinglePage;
 
 /**

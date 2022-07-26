@@ -3,10 +3,10 @@ package teamHTBP.vida.helper.guidebookHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import teamHTBP.vida.event.server.datapack.GuideBookGuideEventHandler;
-import teamHTBP.vida.event.server.datapack.GuideBookGuideHandler;
-import teamHTBP.vida.event.server.datapack.GuideBookPageEventHandler;
-import teamHTBP.vida.event.server.datapack.GuideBookPageHandler;
+import teamHTBP.vida.datapack.GuideBookGuideEventHandler;
+import teamHTBP.vida.datapack.GuideBookGuideHandler;
+import teamHTBP.vida.datapack.GuideBookPageEventHandler;
+import teamHTBP.vida.datapack.GuideBookPageHandler;
 import teamHTBP.vida.gui.components.GuiGuidebookManager;
 import teamHTBP.vida.helper.guidebookHelper.components.IGuidebookComponent;
 

@@ -20,8 +20,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolType;
 import teamHTBP.vida.TileEntity.TileEntityElementCoreAltar;
-import teamHTBP.vida.helper.elementHelper.EnumElements;
-import teamHTBP.vida.helper.elementHelper.IElement;
+import teamHTBP.vida.core.element.EnumElements;
+import teamHTBP.vida.core.element.IElement;
 import teamHTBP.vida.item.ItemLoader;
 import teamHTBP.vida.particle.CubeParticleData;
 

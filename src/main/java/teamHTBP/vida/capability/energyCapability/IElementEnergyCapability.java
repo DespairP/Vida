@@ -1,6 +1,6 @@
 package teamHTBP.vida.capability.energyCapability;
 
-import teamHTBP.vida.helper.elementHelper.EnumElements;
+import teamHTBP.vida.core.element.EnumElements;
 
 /**
  * COPY FROM IEnergyStorage

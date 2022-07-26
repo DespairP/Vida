@@ -1,4 +1,4 @@
-package teamHTBP.vida.event.server.datapack;
+package teamHTBP.vida.datapack;
 
 import com.google.common.collect.MapMaker;
 import com.google.gson.Gson;

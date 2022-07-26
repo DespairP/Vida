@@ -1,4 +1,4 @@
-package teamHTBP.vida.event.server.datapack;
+package teamHTBP.vida.datapack;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

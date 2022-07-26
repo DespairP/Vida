@@ -1,9 +1,8 @@
-package teamHTBP.vida.helper.elementHelper;
+package teamHTBP.vida.core.element;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import net.minecraft.item.Item;
-import teamHTBP.vida.helper.elementHelper.IElement;
 
 /**
  * @author DustW

@@ -13,7 +13,7 @@ import teamHTBP.vida.gui.components.IGuiGuidebook;
 import teamHTBP.vida.gui.components.IGuidebookPageable;
 import teamHTBP.vida.helper.guidebookHelper.GuidebookHelper;
 import teamHTBP.vida.helper.renderHelper.RenderHelper;
-import teamHTBP.vida.helper.renderHelper.guiHelper.TextureSection;
+import teamHTBP.vida.helper.renderHelper.TextureSection;
 
 public abstract class AbstractGuiGuidebook extends Screen implements IGuiGuidebook {
     /**书渲染的x轴位置*/

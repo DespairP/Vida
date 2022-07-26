@@ -10,7 +10,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.block.VidaBlockLoader;
 import teamHTBP.vida.helper.RegisterItemBlock;
-import teamHTBP.vida.helper.elementHelper.EnumElements;
+import teamHTBP.vida.core.element.EnumElements;
 import teamHTBP.vida.item.armor.*;
 import teamHTBP.vida.item.environment.ItemVidaBranch;
 import teamHTBP.vida.item.function.*;
@@ -18,7 +18,7 @@ import teamHTBP.vida.item.potion.ItemCreativeElementPotion;
 import teamHTBP.vida.item.staff.*;
 import teamHTBP.vida.itemGroup.ItemGroupLoader;
 
-import static teamHTBP.vida.helper.elementHelper.EnumElements.*;
+import static teamHTBP.vida.core.element.EnumElements.*;
 
 //注册item的类
 public class ItemLoader {

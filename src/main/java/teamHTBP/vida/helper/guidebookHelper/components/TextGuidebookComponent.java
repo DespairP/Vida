@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TranslationTextComponent;
 import teamHTBP.vida.helper.renderHelper.RenderHelper;
-import teamHTBP.vida.helper.renderHelper.guiHelper.TextureSection;
+import teamHTBP.vida.helper.renderHelper.TextureSection;
 import teamHTBP.vida.utils.math.IntRange;
 
 import static net.minecraft.client.gui.AbstractGui.blit;
