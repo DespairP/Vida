@@ -76,16 +76,17 @@ public class RenderHelper {
                 (float) (sprite.getV0() + (sprite.getV1() - sprite.getV0()) * (1 - percent)), sprite.getV1());
     }
 
-    private static void innerBlit(PoseStack poseStack, int pX1, int pX2, int pY1, int pY2, int pBlitOffset, float pMinU, float pMaxU, float pMinV, float pMaxV) {
+    private static void innerBlit(PoseStack poseStack, float x1, float x2, float y1, float y2, float z,
+                                  float minU, float maxU, float minV, float maxV) {
         Matrix4f m4 = poseStack.last().pose();
 
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         BufferBuilder bufferbuilder = Tesselator.getInstance().getBuilder();
         bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-        bufferbuilder.vertex(m4, (float)pX1, (float)pY2, (float)pBlitOffset).uv(pMinU, pMaxV).endVertex();
-        bufferbuilder.vertex(m4, (float)pX2, (float)pY2, (float)pBlitOffset).uv(pMaxU, pMaxV).endVertex();
-        bufferbuilder.vertex(m4, (float)pX2, (float)pY1, (float)pBlitOffset).uv(pMaxU, pMinV).endVertex();
-        bufferbuilder.vertex(m4, (float)pX1, (float)pY1, (float)pBlitOffset).uv(pMinU, pMinV).endVertex();
+        bufferbuilder.vertex(m4, x1, y2, z).uv(minU, maxV).endVertex();
+        bufferbuilder.vertex(m4, x2, y2, z).uv(maxU, maxV).endVertex();
+        bufferbuilder.vertex(m4, x2, y1, z).uv(maxU, minV).endVertex();
+        bufferbuilder.vertex(m4, x1, y1, z).uv(minU, minV).endVertex();
         bufferbuilder.end();
         BufferUploader.end(bufferbuilder);
     }
