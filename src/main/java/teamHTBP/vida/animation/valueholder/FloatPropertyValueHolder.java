@@ -12,7 +12,7 @@ public class FloatPropertyValueHolder<O> extends PropertyValueHolder<O, Float> {
     }
 
     @Override
-    public void setValue(O target, float actualTick, int maxTick, TimeInterpolator<Float> interpolator) {
+    public void setValue(O target, float actualTick, int maxTick, TimeInterpolator interpolator) {
         float k1 = keyFrames[0];
         float k2 = keyFrames[1];
 

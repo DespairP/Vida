@@ -22,5 +22,5 @@ public abstract class PropertyValueHolder<O, V> {
      * @param maxTick       最大的 tick
      * @param interpolator  插值器
      */
-    public abstract void setValue(O target, float actualTick, int maxTick, TimeInterpolator<V> interpolator);
+    public abstract void setValue(O target, float actualTick, int maxTick, TimeInterpolator interpolator);
 }
