@@ -18,11 +18,11 @@ public class ItemArmorElementBoots extends ArmorItem {  //盔甲属于什么元�
     protected int element = 1;
 
     public ItemArmorElementBoots() {
-        super(ArmorMaterial.DIAMOND, EquipmentSlotType.FEET, new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterial.DIAMOND, EquipmentSlotType.FEET, new Properties().group(ItemGroupLoader.VIDA_ITEM_GROUP));
     }
 
     public ItemArmorElementBoots(int element) {
-        super(ArmorMaterial.DIAMOND, EquipmentSlotType.FEET, new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterial.DIAMOND, EquipmentSlotType.FEET, new Properties().group(ItemGroupLoader.VIDA_ITEM_GROUP));
         this.element = element;
     }
 

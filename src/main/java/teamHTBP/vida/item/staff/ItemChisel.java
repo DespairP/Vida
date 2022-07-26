@@ -5,7 +5,7 @@ import teamHTBP.vida.itemGroup.ItemGroupLoader;
 
 public class ItemChisel extends Item {
     public ItemChisel() {
-        super(new Properties().maxStackSize(1).group(ItemGroupLoader.vidaItemGroup));
+        super(new Properties().maxStackSize(1).group(ItemGroupLoader.VIDA_ITEM_GROUP));
     }
 
 

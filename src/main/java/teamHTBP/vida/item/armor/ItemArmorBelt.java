@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
  */
 public class ItemArmorBelt extends ArmorItem {
     public ItemArmorBelt() {
-        super(new ArmorMaterialBelt(), EquipmentSlotType.LEGS, new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(new ArmorMaterialBelt(), EquipmentSlotType.LEGS, new Properties().group(ItemGroupLoader.VIDA_ITEM_GROUP));
     }
 
     @Override

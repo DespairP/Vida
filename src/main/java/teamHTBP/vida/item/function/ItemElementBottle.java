@@ -5,6 +5,6 @@ import teamHTBP.vida.itemGroup.ItemGroupLoader;
 
 public class ItemElementBottle extends Item {
     public ItemElementBottle() {
-        super(new Properties().group(ItemGroupLoader.vidaItemGroup).maxStackSize(3));
+        super(new Properties().group(ItemGroupLoader.VIDA_ITEM_GROUP).maxStackSize(3));
     }
 }

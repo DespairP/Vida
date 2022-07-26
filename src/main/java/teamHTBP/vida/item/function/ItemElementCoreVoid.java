@@ -22,7 +22,7 @@ import java.util.List;
 
 public class ItemElementCoreVoid extends Item {
     public ItemElementCoreVoid() {
-        super(new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(new Properties().group(ItemGroupLoader.VIDA_ITEM_GROUP));
     }
 
     @SubscribeEvent

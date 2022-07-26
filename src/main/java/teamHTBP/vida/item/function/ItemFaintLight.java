@@ -26,11 +26,11 @@ public class ItemFaintLight extends Item {
     public int element = 1;
 
     public ItemFaintLight() {
-        super(new Properties().maxStackSize(1).group(ItemGroupLoader.vidaItemGroup));
+        super(new Properties().maxStackSize(1).group(ItemGroupLoader.VIDA_ITEM_GROUP));
     }
 
     public ItemFaintLight(int element) {
-        super(new Properties().maxStackSize(1).group(ItemGroupLoader.vidaItemGroup));
+        super(new Properties().maxStackSize(1).group(ItemGroupLoader.VIDA_ITEM_GROUP));
         this.element = element;
     }
 

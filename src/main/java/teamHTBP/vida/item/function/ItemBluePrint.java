@@ -11,7 +11,7 @@ public class ItemBluePrint extends Item {
     private int rarity = 1; //稀有度
 
     public ItemBluePrint(int rarity) {
-        super(new Properties().group(ItemGroupLoader.vidaItemGroup).maxStackSize(1));
+        super(new Properties().group(ItemGroupLoader.VIDA_ITEM_GROUP).maxStackSize(1));
         this.rarity = rarity;
     }
 

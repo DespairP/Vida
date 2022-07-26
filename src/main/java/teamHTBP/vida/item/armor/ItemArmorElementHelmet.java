@@ -20,11 +20,11 @@ public class ItemArmorElementHelmet extends ArmorItem {
     protected int element = 1;
 
     public ItemArmorElementHelmet() {
-        super(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD, new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD, new Properties().group(ItemGroupLoader.VIDA_ITEM_GROUP));
     }
 
     public ItemArmorElementHelmet(int element) {
-        super(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD, new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD, new Properties().group(ItemGroupLoader.VIDA_ITEM_GROUP));
         this.element = element;
     }
 

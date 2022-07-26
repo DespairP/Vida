@@ -19,11 +19,11 @@ public class ItemArmorElementChestplates extends ArmorItem {
     protected int element = 1;
 
     public ItemArmorElementChestplates() {
-        super(ArmorMaterial.DIAMOND, EquipmentSlotType.CHEST, new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterial.DIAMOND, EquipmentSlotType.CHEST, new Properties().group(ItemGroupLoader.VIDA_ITEM_GROUP));
     }
 
     public ItemArmorElementChestplates(int element) {
-        super(ArmorMaterial.DIAMOND, EquipmentSlotType.CHEST, new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterial.DIAMOND, EquipmentSlotType.CHEST, new Properties().group(ItemGroupLoader.VIDA_ITEM_GROUP));
         this.element = element;
     }
 

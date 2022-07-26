@@ -18,11 +18,11 @@ public class ItemArmorElementLeggings extends ArmorItem {
     public int element = 1;
 
     public ItemArmorElementLeggings() {
-        super(ArmorMaterial.DIAMOND, EquipmentSlotType.LEGS, new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterial.DIAMOND, EquipmentSlotType.LEGS, new Properties().group(ItemGroupLoader.VIDA_ITEM_GROUP));
     }
 
     public ItemArmorElementLeggings(int element) {
-        super(ArmorMaterial.DIAMOND, EquipmentSlotType.LEGS, new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterial.DIAMOND, EquipmentSlotType.LEGS, new Properties().group(ItemGroupLoader.VIDA_ITEM_GROUP));
         this.element = element;
     }
 

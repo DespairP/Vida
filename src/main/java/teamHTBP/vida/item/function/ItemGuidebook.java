@@ -13,7 +13,7 @@ import teamHTBP.vida.itemGroup.ItemGroupLoader;
 
 public class ItemGuidebook extends Item {
     public ItemGuidebook() {
-        super(new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(new Properties().group(ItemGroupLoader.VIDA_ITEM_GROUP));
     }
 
     @Override

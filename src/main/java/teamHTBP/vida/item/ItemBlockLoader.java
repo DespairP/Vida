@@ -40,7 +40,7 @@ public class ItemBlockLoader {
         init();
         // 依次进行注册
         REGISTRY_BLOCK_LIST.forEach((key,block) -> {
-            Item.Properties properties = new Item.Properties().group(ItemGroupLoader.vidaItemGroup);
+            Item.Properties properties = new Item.Properties().group(ItemGroupLoader.VIDA_ITEM_GROUP);
             ResourceLocation registerName = Optional.ofNullable(block.get().getRegistryName()).orElse(block.getId());
             BlockItem blockItem  = new BlockItem(block.get(),properties);
             blockItem.setRegistryName(registerName);

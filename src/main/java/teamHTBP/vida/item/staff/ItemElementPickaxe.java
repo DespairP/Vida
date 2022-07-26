@@ -33,7 +33,7 @@ public class ItemElementPickaxe extends ToolItem implements IElementLevelTools {
     private EnumElements element = EnumElements.VOID;
 
     public ItemElementPickaxe(EnumElements element) {
-        super(1, -2.8f, new ElementItemTier(), EFFECTIVE_ON, new Properties().group(ItemGroupLoader.vidaItemGroup).addToolType(net.minecraftforge.common.ToolType.PICKAXE, new ElementItemTier().getHarvestLevel()));
+        super(1, -2.8f, new ElementItemTier(), EFFECTIVE_ON, new Properties().group(ItemGroupLoader.VIDA_ITEM_GROUP).addToolType(net.minecraftforge.common.ToolType.PICKAXE, new ElementItemTier().getHarvestLevel()));
         this.element = element;
     }
 

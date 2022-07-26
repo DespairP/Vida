@@ -23,7 +23,7 @@ public class ItemElementSword extends SwordItem {
     public int element = 0;
 
     public ItemElementSword(int element) {
-        super(new ElementItemTier(), 3, -2.4f, new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(new ElementItemTier(), 3, -2.4f, new Properties().group(ItemGroupLoader.VIDA_ITEM_GROUP));
         this.element = element;
     }
 

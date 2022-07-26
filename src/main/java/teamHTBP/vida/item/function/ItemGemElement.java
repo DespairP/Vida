@@ -5,6 +5,6 @@ import teamHTBP.vida.itemGroup.ItemGroupLoader;
 
 public class ItemGemElement extends Item {
     public ItemGemElement() {
-        super(new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(new Properties().group(ItemGroupLoader.VIDA_ITEM_GROUP));
     }
 }

@@ -6,6 +6,6 @@ import teamHTBP.vida.itemGroup.ItemGroupLoader;
 public class TestItem extends Item {
 
     public TestItem() {
-        super(new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(new Properties().group(ItemGroupLoader.VIDA_ITEM_GROUP));
     }
 }

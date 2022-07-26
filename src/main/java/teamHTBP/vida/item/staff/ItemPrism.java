@@ -5,6 +5,6 @@ import teamHTBP.vida.itemGroup.ItemGroupLoader;
 
 public class ItemPrism extends Item {
     public ItemPrism() {
-        super(new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(new Properties().group(ItemGroupLoader.VIDA_ITEM_GROUP));
     }
 }

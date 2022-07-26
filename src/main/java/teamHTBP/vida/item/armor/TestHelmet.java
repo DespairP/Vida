@@ -16,7 +16,7 @@ import javax.annotation.Nullable;
 
 public class TestHelmet extends ArmorItem {
     public TestHelmet() {
-        super(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD, new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterial.DIAMOND, EquipmentSlotType.HEAD, new Properties().group(ItemGroupLoader.VIDA_ITEM_GROUP));
     }
 
 

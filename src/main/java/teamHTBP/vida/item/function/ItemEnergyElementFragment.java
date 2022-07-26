@@ -5,6 +5,6 @@ import teamHTBP.vida.itemGroup.ItemGroupLoader;
 
 public class ItemEnergyElementFragment extends Item {
     public ItemEnergyElementFragment() {
-        super(new Properties().group(ItemGroupLoader.vidaItemGroup).maxStackSize(16));
+        super(new Properties().group(ItemGroupLoader.VIDA_ITEM_GROUP).maxStackSize(16));
     }
 }

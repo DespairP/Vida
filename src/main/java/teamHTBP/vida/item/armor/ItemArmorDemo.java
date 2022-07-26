@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
 public class ItemArmorDemo extends ArmorItem {
 
     public ItemArmorDemo(EquipmentSlotType slot) {
-        super(ArmorMaterial.DIAMOND, slot, new Properties().group(ItemGroupLoader.vidaItemGroup));
+        super(ArmorMaterial.DIAMOND, slot, new Properties().group(ItemGroupLoader.VIDA_ITEM_GROUP));
     }
 
     @Nullable
