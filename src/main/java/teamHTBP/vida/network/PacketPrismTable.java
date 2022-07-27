@@ -4,7 +4,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.network.NetworkEvent;
-import teamHTBP.vida.TileEntity.TileEntityPrismTable;
+import teamHTBP.vida.common.TileEntity.TileEntityPrismTable;
 
 import java.util.function.Supplier;
 

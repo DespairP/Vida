@@ -8,7 +8,7 @@ import net.minecraft.data.IDataProvider;
 import net.minecraft.item.Items;
 import teamHTBP.vida.core.element.ElementPotential;
 import teamHTBP.vida.core.element.EnumElements;
-import teamHTBP.vida.item.ItemLoader;
+import teamHTBP.vida.common.item.ItemLoader;
 import teamHTBP.vida.utils.json.JsonUtils;
 
 import java.io.IOException;

@@ -3,11 +3,11 @@ package teamHTBP.vida.helper.guidebookHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import teamHTBP.vida.datapack.GuideBookGuideEventHandler;
-import teamHTBP.vida.datapack.GuideBookGuideHandler;
-import teamHTBP.vida.datapack.GuideBookPageEventHandler;
-import teamHTBP.vida.datapack.GuideBookPageHandler;
-import teamHTBP.vida.gui.components.GuiGuidebookManager;
+import teamHTBP.vida.datapack.guidebook.GuideBookGuideEventHandler;
+import teamHTBP.vida.datapack.guidebook.GuideBookGuideHandler;
+import teamHTBP.vida.datapack.guidebook.GuideBookPageEventHandler;
+import teamHTBP.vida.datapack.guidebook.GuideBookPageHandler;
+import teamHTBP.vida.client.gui.components.GuiGuidebookManager;
 import teamHTBP.vida.helper.guidebookHelper.components.IGuidebookComponent;
 
 import java.util.LinkedHashMap;

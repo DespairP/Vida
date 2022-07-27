@@ -9,8 +9,8 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.gui.ForgeIngameGui;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import teamHTBP.vida.gui.HUD.ElementLevelToolsExpHUD;
-import teamHTBP.vida.item.staff.IElementLevelTools;
+import teamHTBP.vida.client.gui.HUD.ElementLevelToolsExpHUD;
+import teamHTBP.vida.common.item.staff.IElementLevelTools;
 
 import java.util.Optional;
 

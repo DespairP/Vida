@@ -5,9 +5,9 @@ import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.core.element.EnumElements;
-import teamHTBP.vida.item.ItemLoader;
-import teamHTBP.vida.recipe.RecipeSerializers;
-import teamHTBP.vida.recipe.recipe.AltarRecipe;
+import teamHTBP.vida.common.item.ItemLoader;
+import teamHTBP.vida.common.recipe.RecipeSerializers;
+import teamHTBP.vida.common.recipe.recipe.AltarRecipe;
 
 /**
  * @author DustW

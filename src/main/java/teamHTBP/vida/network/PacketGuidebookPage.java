@@ -9,8 +9,8 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import teamHTBP.vida.datapack.GuideBookPageEventHandler;
-import teamHTBP.vida.datapack.GuideBookPageHandler;
+import teamHTBP.vida.datapack.guidebook.GuideBookPageEventHandler;
+import teamHTBP.vida.datapack.guidebook.GuideBookPageHandler;
 import teamHTBP.vida.helper.guidebookHelper.GuidebookSinglePage;
 
 import java.lang.reflect.Type;

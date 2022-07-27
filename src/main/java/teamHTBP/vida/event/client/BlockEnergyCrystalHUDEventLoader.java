@@ -12,9 +12,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import teamHTBP.vida.TileEntity.IElementCrystal;
-import teamHTBP.vida.block.function.BlockElementCrystal;
-import teamHTBP.vida.gui.HUD.ElementCrystalHUD;
+import teamHTBP.vida.common.TileEntity.IElementCrystal;
+import teamHTBP.vida.common.block.function.BlockElementCrystal;
+import teamHTBP.vida.client.gui.HUD.ElementCrystalHUD;
 
 /**
  * 用于渲染元素武器与工具HUD的事件侦听

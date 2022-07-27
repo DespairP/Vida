@@ -8,7 +8,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import teamHTBP.vida.datapack.GuideBookGuideEventHandler;
+import teamHTBP.vida.datapack.guidebook.GuideBookGuideEventHandler;
 import teamHTBP.vida.helper.guidebookHelper.Guide;
 
 import java.util.LinkedHashMap;

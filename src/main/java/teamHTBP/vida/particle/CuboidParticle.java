@@ -12,6 +12,12 @@ import net.minecraft.util.math.vector.Vector3f;
 
 import java.util.Random;
 
+/**
+ * 正方体形状粒子:
+ * {@link CuboidParticleData} 生成粒子时需要的额外数据;
+ * {@link CuboidParticleFactory} 生成粒子工厂;
+ * {@link CuboidParticleType} 提供一系列编码器;
+ **/
 public class CuboidParticle extends SpriteTexturedParticle {
     private final float parAlpha = 0;
     private float spinSpeed = 1;

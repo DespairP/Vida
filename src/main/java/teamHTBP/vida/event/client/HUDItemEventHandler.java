@@ -9,11 +9,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import teamHTBP.vida.gui.HUD.BottleHUD;
-import teamHTBP.vida.gui.HUD.ElementSwordHUD;
-import teamHTBP.vida.input.KeyBoardBottle;
-import teamHTBP.vida.item.armor.ItemArmorElementLegginsWithBottles;
-import teamHTBP.vida.item.staff.ItemElementSword;
+import teamHTBP.vida.client.gui.HUD.BottleHUD;
+import teamHTBP.vida.client.gui.HUD.ElementSwordHUD;
+import teamHTBP.vida.common.input.KeyBoardBottle;
+import teamHTBP.vida.common.item.armor.ItemArmorElementLegginsWithBottles;
+import teamHTBP.vida.common.item.staff.ItemElementSword;
 import teamHTBP.vida.utils.math.IntRange;
 
 /**

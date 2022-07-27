@@ -6,7 +6,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import teamHTBP.vida.gui.HUD.MessageHUD;
+import teamHTBP.vida.client.gui.HUD.MessageHUD;
 
 import java.util.LinkedList;
 

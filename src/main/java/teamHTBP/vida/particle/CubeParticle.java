@@ -13,9 +13,10 @@ import net.minecraft.util.math.vector.Vector3f;
 import java.util.Random;
 
 /**
- * 尝试一下3D粒子
- *
- * @Version 0.0.1
+ * 方块形状粒子:
+ * {@link CubeParticleData} 生成粒子时需要的额外数据;
+ * {@link CubeParticleFactory} 生成粒子工厂;
+ * {@link CubeParticleType} 提供一系列编码器;
  **/
 public class CubeParticle extends SpriteTexturedParticle {
 

@@ -8,7 +8,7 @@ import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.PotionUtils;
 import net.minecraftforge.fml.network.NetworkEvent;
-import teamHTBP.vida.item.armor.ItemArmorElementLegginsWithBottles;
+import teamHTBP.vida.common.item.armor.ItemArmorElementLegginsWithBottles;
 
 import java.util.List;
 import java.util.function.Supplier;

@@ -1,0 +1,87 @@
+package teamHTBP.vida.common.block.function;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalBlock;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.StateContainer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.IBlockReader;
+import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
+import net.minecraftforge.fml.network.NetworkHooks;
+import teamHTBP.vida.common.TileEntity.TileEntityPrismTable;
+
+import javax.annotation.Nullable;
+
+public class BlockPrismTable extends Block {
+    public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+    private final VoxelShape SHAPE = Block.makeCuboidShape(0, 0, 0, 16, 13, 16);
+
+
+    public BlockPrismTable() {
+        super(Properties.create(Material.WOOD).hardnessAndResistance(3.0f, 3.0f).notSolid().harvestTool(ToolType.PICKAXE));
+    }
+
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+        return new TileEntityPrismTable();
+    }
+
+    @Override
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (!worldIn.isRemote && handIn == Hand.MAIN_HAND) {
+            TileEntityPrismTable tileEntityPrismTable = (TileEntityPrismTable) worldIn.getTileEntity(pos);
+            NetworkHooks.openGui((ServerPlayerEntity) player, tileEntityPrismTable, (PacketBuffer packerBuffer) -> {
+                packerBuffer.writeBlockPos(tileEntityPrismTable.getPos());
+            });
+        }
+        return ActionResultType.SUCCESS;
+    }
+
+    @Override
+    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+        TileEntityPrismTable tileEntityPrismTable = (TileEntityPrismTable) worldIn.getTileEntity(pos);
+        if (tileEntityPrismTable != null) {
+            worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityPrismTable.getSlot().getStackInSlot(0)));
+            worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityPrismTable.getSlot().getStackInSlot(1)));
+            worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), tileEntityPrismTable.getSlot().getStackInSlot(2)));
+        }
+        super.onBlockHarvested(worldIn, pos, state, player);
+    }
+
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        return SHAPE;
+    }
+
+    @Override
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+        builder.add(FACING);
+        super.fillStateContainer(builder);
+    }
+
+    @Nullable
+    public BlockState getStateForPlacement(BlockItemUseContext context) {
+        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+    }
+
+
+}

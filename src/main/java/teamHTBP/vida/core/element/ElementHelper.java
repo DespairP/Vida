@@ -4,10 +4,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.biome.Biome;
-import teamHTBP.vida.capability.skillSystem.ISkill;
-import teamHTBP.vida.capability.skillSystem.SkillCategory;
-import teamHTBP.vida.capability.skillSystem.SkillHelper;
-import teamHTBP.vida.datapack.ElementPotentialEventListener;
+import teamHTBP.vida.common.capability.skillSystem.ISkill;
+import teamHTBP.vida.common.capability.skillSystem.SkillCategory;
+import teamHTBP.vida.common.capability.skillSystem.SkillHelper;
+import teamHTBP.vida.datapack.elementPotential.ElementPotentialEventListener;
 
 import java.util.*;
 import java.util.stream.Collectors;

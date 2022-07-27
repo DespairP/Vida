@@ -6,17 +6,17 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import teamHTBP.vida.TileEntity.TileEntityLoader;
-import teamHTBP.vida.block.VidaBlockLoader;
-import teamHTBP.vida.entity.EntityLoader;
+import teamHTBP.vida.common.TileEntity.TileEntityLoader;
+import teamHTBP.vida.common.block.VidaBlockLoader;
+import teamHTBP.vida.common.entity.EntityLoader;
 import teamHTBP.vida.event.client.VidaClientEventHandler;
 import teamHTBP.vida.event.server.BlockEventLoaderServer;
-import teamHTBP.vida.gui.GUI.ContainerTypeLoader;
-import teamHTBP.vida.item.ItemLoader;
-import teamHTBP.vida.item.function.ItemElementCoreVoid;
+import teamHTBP.vida.client.gui.GUI.ContainerTypeLoader;
+import teamHTBP.vida.common.item.ItemLoader;
+import teamHTBP.vida.common.item.function.ItemElementCoreVoid;
 import teamHTBP.vida.particle.ParticleLoader;
-import teamHTBP.vida.recipe.RecipeManager;
-import teamHTBP.vida.worldGen.GenLoader;
+import teamHTBP.vida.common.recipe.RecipeManager;
+import teamHTBP.vida.common.worldGen.GenLoader;
 
 
 /**

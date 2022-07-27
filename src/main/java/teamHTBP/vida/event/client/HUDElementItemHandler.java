@@ -10,8 +10,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import teamHTBP.vida.gui.HUD.ElementLevelToolsHUD;
-import teamHTBP.vida.item.staff.IElementLevelTools;
+import teamHTBP.vida.client.gui.HUD.ElementLevelToolsHUD;
+import teamHTBP.vida.common.item.staff.IElementLevelTools;
 
 import java.util.LinkedList;
 import java.util.Optional;

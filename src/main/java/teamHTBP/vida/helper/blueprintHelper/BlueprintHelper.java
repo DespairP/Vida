@@ -3,7 +3,7 @@ package teamHTBP.vida.helper.blueprintHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.capability.blueprintCapability.Blueprint;
+import teamHTBP.vida.common.capability.blueprintCapability.Blueprint;
 
 import java.util.LinkedHashMap;
 import java.util.Optional;

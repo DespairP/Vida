@@ -13,15 +13,15 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import teamHTBP.vida.TileEntity.TileEntityCollector;
-import teamHTBP.vida.TileEntity.TileEntityElementCoreAltar;
-import teamHTBP.vida.TileEntity.TileEntityPurfiedCauldron;
-import teamHTBP.vida.block.function.BlockCollecter;
-import teamHTBP.vida.block.function.BlockElementCoreAltar;
-import teamHTBP.vida.block.function.BlockPurfiedCauldron;
-import teamHTBP.vida.gui.HUD.CollectorHUD;
-import teamHTBP.vida.gui.HUD.ElementCoreAltarHUD;
-import teamHTBP.vida.gui.HUD.PurfiedCauldronHUD;
+import teamHTBP.vida.common.TileEntity.TileEntityCollector;
+import teamHTBP.vida.common.TileEntity.TileEntityElementCoreAltar;
+import teamHTBP.vida.common.TileEntity.TileEntityPurfiedCauldron;
+import teamHTBP.vida.common.block.function.BlockCollecter;
+import teamHTBP.vida.common.block.function.BlockElementCoreAltar;
+import teamHTBP.vida.common.block.function.BlockPurfiedCauldron;
+import teamHTBP.vida.client.gui.HUD.CollectorHUD;
+import teamHTBP.vida.client.gui.HUD.ElementCoreAltarHUD;
+import teamHTBP.vida.client.gui.HUD.PurfiedCauldronHUD;
 
 
 /**
