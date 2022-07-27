@@ -10,7 +10,7 @@ import net.minecraftforge.client.gui.ForgeIngameGui;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import teamHTBP.vida.client.gui.HUD.ElementLevelToolsExpHUD;
-import teamHTBP.vida.common.item.staff.IElementLevelTools;
+import teamHTBP.vida.api.item.IElementLevelTools;
 
 import java.util.Optional;
 

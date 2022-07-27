@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import teamHTBP.vida.core.element.IElement;
+import teamHTBP.vida.api.core.element.IElement;
 import teamHTBP.vida.utils.json.serializer.IElementSerializer;
 import teamHTBP.vida.utils.json.serializer.IngredientSerializer;
 import teamHTBP.vida.utils.json.serializer.ItemSerializer;

@@ -1,6 +1,7 @@
 package teamHTBP.vida.core.element;
 
 import net.minecraft.util.ResourceLocation;
+import teamHTBP.vida.api.core.element.IElement;
 
 import java.util.HashMap;
 import java.util.Map;

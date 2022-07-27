@@ -19,6 +19,8 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import teamHTBP.vida.api.core.element.IElement;
+import teamHTBP.vida.api.item.IElementLevelTools;
 import teamHTBP.vida.core.element.EnumElements;
 import teamHTBP.vida.common.item.ItemLoader;
 import teamHTBP.vida.common.itemGroup.ItemGroupLoader;
@@ -99,7 +101,7 @@ public class ItemElementPickaxe extends ToolItem implements IElementLevelTools {
     }
 
     @Override
-    public EnumElements getItemElement() {
+    public IElement getElement() {
         return element;
     }
 }

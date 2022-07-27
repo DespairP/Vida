@@ -13,7 +13,7 @@ import net.minecraft.util.NonNullList;
 import teamHTBP.vida.common.block.VidaBlockLoader;
 import teamHTBP.vida.core.element.ElementHelper;
 import teamHTBP.vida.core.element.EnumElements;
-import teamHTBP.vida.core.element.IElement;
+import teamHTBP.vida.api.core.element.IElement;
 import teamHTBP.vida.common.item.function.ItemElementCore;
 import teamHTBP.vida.common.recipe.RecipeManager;
 import teamHTBP.vida.common.recipe.recipe.AltarRecipe;

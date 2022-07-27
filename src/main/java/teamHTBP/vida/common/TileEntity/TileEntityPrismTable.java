@@ -19,7 +19,7 @@ import teamHTBP.vida.common.TileEntity.SlotNumberArray.PrismTableArray;
 import teamHTBP.vida.client.gui.GUI.ContainerPrismTable;
 import teamHTBP.vida.core.element.ElementHelper;
 import teamHTBP.vida.core.element.EnumElements;
-import teamHTBP.vida.core.element.IElement;
+import teamHTBP.vida.api.core.element.IElement;
 import teamHTBP.vida.common.item.ItemLoader;
 import teamHTBP.vida.common.item.function.ItemEnergyElementFragment;
 

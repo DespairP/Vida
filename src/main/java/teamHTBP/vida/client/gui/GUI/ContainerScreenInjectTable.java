@@ -22,7 +22,7 @@ import teamHTBP.vida.common.capability.skillSystem.SkillSurface;
 import teamHTBP.vida.client.gui.GUI.Slot.AbstractSkillSlot;
 import teamHTBP.vida.client.gui.GUI.Slot.NormalSkillSlot;
 import teamHTBP.vida.core.element.EnumElements;
-import teamHTBP.vida.common.item.staff.IElementTools;
+import teamHTBP.vida.api.item.IElementTools;
 import teamHTBP.vida.common.item.staff.ItemElementPickaxe;
 import teamHTBP.vida.common.item.staff.ItemElementSword;
 

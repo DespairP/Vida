@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.client.gui.HUD.ElementLevelToolsHUD;
-import teamHTBP.vida.common.item.staff.IElementLevelTools;
+import teamHTBP.vida.api.item.IElementLevelTools;
 
 import java.util.LinkedList;
 import java.util.Optional;

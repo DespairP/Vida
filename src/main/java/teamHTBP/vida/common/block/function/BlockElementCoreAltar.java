@@ -21,7 +21,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolType;
 import teamHTBP.vida.common.TileEntity.TileEntityElementCoreAltar;
 import teamHTBP.vida.core.element.EnumElements;
-import teamHTBP.vida.core.element.IElement;
+import teamHTBP.vida.api.core.element.IElement;
 import teamHTBP.vida.common.item.ItemLoader;
 import teamHTBP.vida.common.particle.CubeParticleData;
 

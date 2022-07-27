@@ -1,7 +1,8 @@
 package teamHTBP.vida.api.item;
 
+import teamHTBP.vida.api.core.element.IElementHolder;
 import teamHTBP.vida.core.element.EnumElements;
 
-public interface IElementItem {
-    public EnumElements getItemElement();
+/**元素物品接口*/
+public interface IElementItem extends IElementHolder {
 }

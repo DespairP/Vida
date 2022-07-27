@@ -16,7 +16,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.core.element.ElementManager;
 import teamHTBP.vida.core.element.EnumElements;
-import teamHTBP.vida.core.element.IElement;
+import teamHTBP.vida.api.core.element.IElement;
 
 import java.util.Optional;
 

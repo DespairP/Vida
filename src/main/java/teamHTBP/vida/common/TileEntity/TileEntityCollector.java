@@ -9,7 +9,7 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import teamHTBP.vida.core.element.ElementHelper;
 import teamHTBP.vida.core.element.EnumElements;
-import teamHTBP.vida.core.element.IElement;
+import teamHTBP.vida.api.core.element.IElement;
 import teamHTBP.vida.common.item.ItemLoader;
 
 import javax.annotation.Nullable;

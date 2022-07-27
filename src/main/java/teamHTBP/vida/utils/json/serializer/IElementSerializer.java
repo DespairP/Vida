@@ -2,7 +2,7 @@ package teamHTBP.vida.utils.json.serializer;
 
 import com.google.gson.*;
 import teamHTBP.vida.core.element.ElementManager;
-import teamHTBP.vida.core.element.IElement;
+import teamHTBP.vida.api.core.element.IElement;
 
 import java.lang.reflect.Type;
 

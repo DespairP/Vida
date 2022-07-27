@@ -7,7 +7,7 @@ import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.common.item.staff.IElementLevelTools;
+import teamHTBP.vida.api.item.IElementLevelTools;
 import teamHTBP.vida.utils.color.RGBAColor;
 import teamHTBP.vida.utils.math.IntRange;
 

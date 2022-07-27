@@ -12,7 +12,7 @@ import teamHTBP.vida.common.entity.EntityFaintLight;
 import teamHTBP.vida.common.entity.EntityLoader;
 import teamHTBP.vida.core.element.ElementHelper;
 import teamHTBP.vida.core.element.EnumElements;
-import teamHTBP.vida.core.element.IElement;
+import teamHTBP.vida.api.core.element.IElement;
 import teamHTBP.vida.common.item.potion.ItemCreativeElementPotion;
 
 import javax.annotation.Nullable;

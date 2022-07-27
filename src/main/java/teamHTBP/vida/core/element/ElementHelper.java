@@ -4,6 +4,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.biome.Biome;
+import teamHTBP.vida.api.core.element.IElement;
 import teamHTBP.vida.common.capability.skillSystem.ISkill;
 import teamHTBP.vida.common.capability.skillSystem.SkillCategory;
 import teamHTBP.vida.common.capability.skillSystem.SkillHelper;

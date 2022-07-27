@@ -21,7 +21,7 @@ import net.minecraftforge.common.PlantType;
 import teamHTBP.vida.core.element.Allelopathy;
 import teamHTBP.vida.core.element.ElementHelper;
 import teamHTBP.vida.core.element.EnumElements;
-import teamHTBP.vida.core.element.IElement;
+import teamHTBP.vida.api.core.element.IElement;
 
 import java.util.Random;
 

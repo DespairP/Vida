@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.event.client.HUDElementItemHandler;
 import teamHTBP.vida.core.element.EnumElements;
-import teamHTBP.vida.common.item.staff.IElementLevelTools;
+import teamHTBP.vida.api.item.IElementLevelTools;
 import teamHTBP.vida.utils.color.RGBAColor;
 import teamHTBP.vida.utils.math.IntRange;
 

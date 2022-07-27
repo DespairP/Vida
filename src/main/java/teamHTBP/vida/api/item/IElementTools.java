@@ -1,4 +1,4 @@
-package teamHTBP.vida.common.item.staff;
+package teamHTBP.vida.api.item;
 
 import teamHTBP.vida.api.item.IElementItem;
 

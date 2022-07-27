@@ -1,9 +1,10 @@
-package teamHTBP.vida.core.element;
+package teamHTBP.vida.api.core.element;
 
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
+import teamHTBP.vida.core.element.Allelopathy;
 import teamHTBP.vida.utils.color.RGBAColor;
 
 import java.util.List;

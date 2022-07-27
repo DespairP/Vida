@@ -5,6 +5,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import teamHTBP.vida.Vida;
+import teamHTBP.vida.api.core.element.IElement;
 import teamHTBP.vida.utils.color.RGBAColor;
 
 import java.util.ArrayList;

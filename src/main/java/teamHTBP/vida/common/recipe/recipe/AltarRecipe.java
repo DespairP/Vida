@@ -14,7 +14,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.RecipeMatcher;
 import teamHTBP.vida.common.TileEntity.TileEntityElementCoreAltar;
-import teamHTBP.vida.core.element.IElement;
+import teamHTBP.vida.api.core.element.IElement;
 import teamHTBP.vida.common.item.ItemLoader;
 import teamHTBP.vida.common.recipe.RecipeSerializers;
 import teamHTBP.vida.common.recipe.RecipeTypes;

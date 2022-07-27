@@ -3,6 +3,7 @@ package teamHTBP.vida.core.element;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import net.minecraft.item.Item;
+import teamHTBP.vida.api.core.element.IElement;
 
 /**
  * @author DustW

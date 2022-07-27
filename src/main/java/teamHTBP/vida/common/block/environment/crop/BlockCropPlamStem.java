@@ -5,7 +5,7 @@ import net.minecraft.particles.RedstoneParticleData;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import teamHTBP.vida.core.element.IElement;
+import teamHTBP.vida.api.core.element.IElement;
 import teamHTBP.vida.common.item.ItemLoader;
 
 import java.util.Random;
