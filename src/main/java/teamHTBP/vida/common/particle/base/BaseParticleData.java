@@ -1,4 +1,4 @@
-package teamHTBP.vida.particle.base;
+package teamHTBP.vida.common.particle.base;
 
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -9,7 +9,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleType;
 import net.minecraft.world.World;
-import teamHTBP.vida.particle.ParticleFactoryLoader;
+import teamHTBP.vida.common.particle.ParticleFactoryLoader;
 
 import java.util.Locale;
 

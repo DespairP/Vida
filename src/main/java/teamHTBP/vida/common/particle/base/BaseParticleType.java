@@ -1,4 +1,4 @@
-package teamHTBP.vida.particle.base;
+package teamHTBP.vida.common.particle.base;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.client.particle.Particle;

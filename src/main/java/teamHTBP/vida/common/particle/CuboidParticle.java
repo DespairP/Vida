@@ -1,4 +1,4 @@
-package teamHTBP.vida.particle;
+package teamHTBP.vida.common.particle;
 
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.particle.IParticleRenderType;

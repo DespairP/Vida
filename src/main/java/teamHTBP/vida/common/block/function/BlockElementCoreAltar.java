@@ -23,7 +23,7 @@ import teamHTBP.vida.common.TileEntity.TileEntityElementCoreAltar;
 import teamHTBP.vida.core.element.EnumElements;
 import teamHTBP.vida.core.element.IElement;
 import teamHTBP.vida.common.item.ItemLoader;
-import teamHTBP.vida.particle.CubeParticleData;
+import teamHTBP.vida.common.particle.CubeParticleData;
 
 import javax.annotation.Nullable;
 import java.util.Random;

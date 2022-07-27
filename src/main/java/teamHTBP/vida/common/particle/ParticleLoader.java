@@ -1,12 +1,12 @@
-package teamHTBP.vida.particle;
+package teamHTBP.vida.common.particle;
 
 import net.minecraft.particles.ParticleType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.particle.base.BaseParticleData;
-import teamHTBP.vida.particle.base.BaseParticleType;
+import teamHTBP.vida.common.particle.base.BaseParticleData;
+import teamHTBP.vida.common.particle.base.BaseParticleType;
 
 /**
  * 注册ParticleType

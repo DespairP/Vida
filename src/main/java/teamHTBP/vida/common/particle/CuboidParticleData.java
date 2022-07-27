@@ -1,4 +1,4 @@
-package teamHTBP.vida.particle;
+package teamHTBP.vida.common.particle;
 
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;

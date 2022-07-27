@@ -1,12 +1,12 @@
-package teamHTBP.vida.particle.base;
+package teamHTBP.vida.common.particle.base;
 
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.ResourceLocation;
-import teamHTBP.vida.particle.CuboidParticle;
-import teamHTBP.vida.particle.ElementFireParticle;
-import teamHTBP.vida.particle.LeafParticle;
-import teamHTBP.vida.particle.TrailParticle;
+import teamHTBP.vida.common.particle.CuboidParticle;
+import teamHTBP.vida.common.particle.ElementFireParticle;
+import teamHTBP.vida.common.particle.LeafParticle;
+import teamHTBP.vida.common.particle.TrailParticle;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

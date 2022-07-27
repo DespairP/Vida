@@ -1,12 +1,12 @@
-package teamHTBP.vida.particle;
+package teamHTBP.vida.common.particle;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import teamHTBP.vida.particle.base.BaseParticleFactory;
-import teamHTBP.vida.particle.base.BaseVidaParticleType;
+import teamHTBP.vida.common.particle.base.BaseParticleFactory;
+import teamHTBP.vida.common.particle.base.BaseVidaParticleType;
 
 
 /**
@@ -16,7 +16,7 @@ import teamHTBP.vida.particle.base.BaseVidaParticleType;
  *
  * ParticleType是工厂的Key<br/>
  *
- * - ParticleType {@link teamHTBP.vida.particle.base.BaseParticleType}<br/>
+ * - ParticleType {@link teamHTBP.vida.common.particle.base.BaseParticleType}<br/>
  * */
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ParticleFactoryLoader {

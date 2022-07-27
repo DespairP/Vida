@@ -25,7 +25,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import teamHTBP.vida.common.TileEntity.TileEntityPurfiedCauldron;
 import teamHTBP.vida.core.element.EnumElements;
-import teamHTBP.vida.particle.CubeParticleData;
+import teamHTBP.vida.common.particle.CubeParticleData;
 
 import javax.annotation.Nullable;
 import java.util.Random;

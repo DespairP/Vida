@@ -1,4 +1,4 @@
-package teamHTBP.vida.particle;
+package teamHTBP.vida.common.particle;
 
 import net.minecraft.client.particle.IParticleRenderType;
 import net.minecraft.client.particle.SpriteTexturedParticle;

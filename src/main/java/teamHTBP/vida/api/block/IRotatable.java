@@ -1,4 +1,4 @@
-package teamHTBP.vida.common.block.base;
+package teamHTBP.vida.api.block;
 
 /**
  * 用于修饰可被凿子旋转的方块

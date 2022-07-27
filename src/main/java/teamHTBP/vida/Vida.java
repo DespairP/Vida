@@ -14,7 +14,7 @@ import teamHTBP.vida.event.server.BlockEventLoaderServer;
 import teamHTBP.vida.client.gui.GUI.ContainerTypeLoader;
 import teamHTBP.vida.common.item.ItemLoader;
 import teamHTBP.vida.common.item.function.ItemElementCoreVoid;
-import teamHTBP.vida.particle.ParticleLoader;
+import teamHTBP.vida.common.particle.ParticleLoader;
 import teamHTBP.vida.common.recipe.RecipeManager;
 import teamHTBP.vida.common.worldGen.GenLoader;
 

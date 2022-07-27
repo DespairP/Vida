@@ -1,4 +1,4 @@
-package teamHTBP.vida.particle.base;
+package teamHTBP.vida.common.particle.base;
 
 import net.minecraft.client.particle.IAnimatedSprite;
 import net.minecraft.client.particle.IParticleFactory;
