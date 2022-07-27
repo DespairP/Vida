@@ -1,4 +1,4 @@
-package teamHTBP.vida.client.gui.screen.guidebook;
+package teamHTBP.vida.client.screen.guidebook;
 
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;

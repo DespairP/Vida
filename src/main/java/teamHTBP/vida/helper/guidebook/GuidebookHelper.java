@@ -5,7 +5,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import teamHTBP.vida.common.datapack.guidebook.GuideBookGuideHandler;
 import teamHTBP.vida.common.datapack.guidebook.GuideBookPageHandler;
-import teamHTBP.vida.client.gui.screen.guidebook.GuidebookManager;
+import teamHTBP.vida.client.screen.guidebook.GuidebookManager;
 import teamHTBP.vida.helper.guidebook.components.IGuidebookComponent;
 
 import java.util.LinkedHashMap;

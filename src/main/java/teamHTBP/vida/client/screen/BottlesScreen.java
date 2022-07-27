@@ -1,4 +1,4 @@
-package teamHTBP.vida.client.gui.screen;
+package teamHTBP.vida.client.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -6,7 +6,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.client.gui.screen.base.VidaBaseScreen;
+import teamHTBP.vida.client.screen.base.VidaBaseScreen;
 import teamHTBP.vida.common.menu.BottlesMenu;
 
 public class BottlesScreen extends VidaBaseScreen<BottlesMenu> {

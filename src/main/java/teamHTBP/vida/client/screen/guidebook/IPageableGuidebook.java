@@ -1,4 +1,4 @@
-package teamHTBP.vida.client.gui.screen.guidebook;
+package teamHTBP.vida.client.screen.guidebook;
 
 public interface IPageableGuidebook {
     /**

@@ -1,4 +1,4 @@
-package teamHTBP.vida.client.gui.screen.base;
+package teamHTBP.vida.client.screen.base;
 
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;

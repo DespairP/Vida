@@ -1,4 +1,4 @@
-package teamHTBP.vida.client.gui.screen.guidebook;
+package teamHTBP.vida.client.screen.guidebook;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;

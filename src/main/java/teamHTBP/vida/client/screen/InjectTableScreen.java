@@ -1,4 +1,4 @@
-package teamHTBP.vida.client.gui.screen;
+package teamHTBP.vida.client.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -18,7 +18,7 @@ import teamHTBP.vida.Vida;
 import teamHTBP.vida.common.capability.skill.ISkill;
 import teamHTBP.vida.common.capability.skill.SkillHelper;
 import teamHTBP.vida.common.capability.skill.SkillSurface;
-import teamHTBP.vida.client.gui.screen.base.VidaBaseScreen;
+import teamHTBP.vida.client.screen.base.VidaBaseScreen;
 import teamHTBP.vida.common.menu.InjectTableMenu;
 import teamHTBP.vida.common.menu.slot.AbstractSkillSlot;
 import teamHTBP.vida.common.menu.slot.NormalSkillSlot;

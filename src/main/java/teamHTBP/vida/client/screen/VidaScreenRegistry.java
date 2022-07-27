@@ -1,4 +1,4 @@
-package teamHTBP.vida.client.gui.screen;
+package teamHTBP.vida.client.screen;
 
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
