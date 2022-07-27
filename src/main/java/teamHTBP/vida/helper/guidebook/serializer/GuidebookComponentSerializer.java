@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.helper.guidebook.GuidebookHelper;
 import teamHTBP.vida.helper.guidebook.components.IGuidebookComponent;
 import teamHTBP.vida.helper.guidebook.components.TextGuidebookComponent;
-import teamHTBP.vida.utils.json.serializer.ItemStackSerializer;
+import teamHTBP.vida.helper.json.serializer.ItemStackSerializer;
 
 import java.lang.reflect.Type;
 

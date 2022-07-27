@@ -29,12 +29,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.ForgeHooksClient;
-import teamHTBP.vida.helper.render.TextureSection;
-import teamHTBP.vida.utils.color.RGBAColor;
-import teamHTBP.vida.utils.math.FloatRange;
+import teamHTBP.vida.helper.client.render.TextureSection;
+import teamHTBP.vida.helper.color.ARGBColor;
+import teamHTBP.vida.helper.math.FloatRange;
 
 import static net.minecraft.client.gui.GuiComponent.blit;
-import static teamHTBP.vida.helper.render.RenderHelper.renderTextWithTranslationKeyCenter;
+import static teamHTBP.vida.helper.client.render.RenderHelper.renderTextWithTranslationKeyCenter;
 
 /**模型组件*/
 public class ModelGuidebookComponent implements IGuidebookComponent {
@@ -193,9 +193,9 @@ public class ModelGuidebookComponent implements IGuidebookComponent {
     public void renderName(PoseStack matrixStack, float partialTicks){
         String key = I18n.get(renderStack.getDescriptionId());
         int bottomY = (y + componentSection.h()) - 10;
-        RGBAColor color = new RGBAColor(0,0,0,(int)(alpha.get() * 256));
         //渲染文字
-        renderTextWithTranslationKeyCenter(matrixStack, key, getWidth(), x, bottomY, color.toHex());
+        renderTextWithTranslationKeyCenter(matrixStack, key, getWidth(), x, bottomY,
+                ARGBColor.argb(0, 0, 0, (int) (alpha.get() * 255)));
     }
 
     /**创建组件*/

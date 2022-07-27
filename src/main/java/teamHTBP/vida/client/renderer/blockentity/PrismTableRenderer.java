@@ -11,12 +11,12 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import teamHTBP.vida.blockentity.TileEntityPrismTable;
+import teamHTBP.vida.common.blockentity.PrismTableBlockEntity;
 import teamHTBP.vida.client.renderer.blockentity.base.VidaBaseBlockEntityRenderer;
 
 import java.util.Random;
 
-public class PrismTableRenderer extends VidaBaseBlockEntityRenderer<TileEntityPrismTable> {
+public class PrismTableRenderer extends VidaBaseBlockEntityRenderer<PrismTableBlockEntity> {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     Random random = new Random();
 
@@ -26,7 +26,7 @@ public class PrismTableRenderer extends VidaBaseBlockEntityRenderer<TileEntityPr
 
 
     @Override
-    public void render(TileEntityPrismTable tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
+    public void render(PrismTableBlockEntity tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
         //System.out.println(tileEntityIn.isFire);
         if (tileEntityIn.isGem) {
             if (tileEntityIn.getSlot().getItem(0) != ItemStack.EMPTY && !tileEntityIn.getSlot().getItem(0).isEmpty()) {

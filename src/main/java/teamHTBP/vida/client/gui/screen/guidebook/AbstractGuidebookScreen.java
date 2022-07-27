@@ -7,8 +7,8 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import teamHTBP.vida.helper.guidebook.GuidebookHelper;
-import teamHTBP.vida.helper.render.RenderHelper;
-import teamHTBP.vida.helper.render.TextureSection;
+import teamHTBP.vida.helper.client.render.RenderHelper;
+import teamHTBP.vida.helper.client.render.TextureSection;
 
 public abstract class AbstractGuidebookScreen extends Screen implements IGuidebookScreen {
     /**书渲染的x轴位置*/

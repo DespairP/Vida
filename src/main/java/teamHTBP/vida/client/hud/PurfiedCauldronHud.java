@@ -6,43 +6,43 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.resources.ResourceLocation;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.blockentity.TileEntityPurifiedCauldron;
+import teamHTBP.vida.common.blockentity.PurifiedCauldronBlockEntity;
 
 public class PurfiedCauldronHud extends GuiComponent {
     private final int width;
     private final int height;
     private final Minecraft minecraft;
     private final ResourceLocation HUD = new ResourceLocation(Vida.MOD_ID, "textures/gui/hud.png");
-    private final TileEntityPurifiedCauldron tileEntityPurifiedCauldron;
+    private final PurifiedCauldronBlockEntity purifiedCauldronBlockEntity;
 
-    public PurfiedCauldronHud(TileEntityPurifiedCauldron tileEntityPurifiedCauldron) {
+    public PurfiedCauldronHud(PurifiedCauldronBlockEntity purifiedCauldronBlockEntity) {
         width = Minecraft.getInstance().getWindow().getGuiScaledWidth();
         height = Minecraft.getInstance().getWindow().getGuiScaledHeight();
         minecraft = Minecraft.getInstance();
-        this.tileEntityPurifiedCauldron = tileEntityPurifiedCauldron;
+        this.purifiedCauldronBlockEntity = purifiedCauldronBlockEntity;
     }
 
     public void render(PoseStack matrixStack) {
-        if (tileEntityPurifiedCauldron == null) return;
+        if (purifiedCauldronBlockEntity == null) return;
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, HUD);
         int screenWidth = this.width / 2 - 6;
         int screenHeight = this.height / 2 - 20;
         blit(matrixStack, screenWidth, screenHeight, 0, 25, 16, 14, 10, 64, 64);
         blit(matrixStack, screenWidth + 3, screenHeight - 10, 0, 28, 6, 8, 5, 64, 64);
-        if (tileEntityPurifiedCauldron.isWater) {
+        if (purifiedCauldronBlockEntity.isWater) {
             blit(matrixStack, screenWidth + 20, screenHeight, 0, 52, 2, 7, 12, 64, 64);
         } else {
             blit(matrixStack, screenWidth + 20, screenHeight, 0, 52, 34, 7, 12, 64, 64);
         }
-        if (tileEntityPurifiedCauldron.isFire) {
+        if (purifiedCauldronBlockEntity.isFire) {
             blit(matrixStack, screenWidth + 20, screenHeight - 15, 0, 51, 18, 12, 12, 64, 64);
         } else {
             blit(matrixStack, screenWidth + 20, screenHeight - 15, 0, 51, 50, 12, 12, 64, 64);
         }
-        if (!tileEntityPurifiedCauldron.meltItem.isEmpty()) {
+        if (!purifiedCauldronBlockEntity.meltItem.isEmpty()) {
             blit(matrixStack, screenWidth + 3, screenHeight - 6, 0, 28, 11, 8, 5, 64, 64);
-            Minecraft.getInstance().getItemRenderer().renderGuiItem(tileEntityPurifiedCauldron.meltItem, screenWidth - 1, screenHeight - 27);
+            Minecraft.getInstance().getItemRenderer().renderGuiItem(purifiedCauldronBlockEntity.meltItem, screenWidth - 1, screenHeight - 27);
 
         }
     }

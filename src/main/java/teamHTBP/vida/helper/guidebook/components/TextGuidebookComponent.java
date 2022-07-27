@@ -8,9 +8,9 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
-import teamHTBP.vida.helper.render.RenderHelper;
-import teamHTBP.vida.helper.render.TextureSection;
-import teamHTBP.vida.utils.math.IntRange;
+import teamHTBP.vida.helper.client.render.RenderHelper;
+import teamHTBP.vida.helper.client.render.TextureSection;
+import teamHTBP.vida.helper.math.IntRange;
 
 import static net.minecraft.client.gui.GuiComponent.blit;
 

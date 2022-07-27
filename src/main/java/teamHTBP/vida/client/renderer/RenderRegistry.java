@@ -12,8 +12,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.block.VidaBlockRegistry;
-import teamHTBP.vida.blockentity.TileEntityLoader;
+import teamHTBP.vida.common.block.VidaBlockLoader;
+import teamHTBP.vida.common.blockentity.VidaBlockEntityLoader;
 import teamHTBP.vida.client.renderer.blockentity.*;
 import teamHTBP.vida.client.renderer.blockentity.crystal.*;
 
@@ -54,42 +54,42 @@ public class RenderRegistry {
 
     @SubscribeEvent
     public static void onRenderTypeSetup(FMLClientSetupEvent event) {
-        ItemBlockRenderTypes.setRenderLayer(VidaBlockRegistry.saplingVida.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(VidaBlockRegistry.CROP_CRISMCREST.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(VidaBlockRegistry.CROP_SWEETCYANREED.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(VidaBlockRegistry.CROP_SULLENHYDRANGEA.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(VidaBlockRegistry.CROP_NITRITETHORNS.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(VidaBlockRegistry.CROP_PLAMSTEM.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(VidaBlockRegistry.CROP_HEARTOFWAL.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(VidaBlockRegistry.purfiedCauldron.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(VidaBlockRegistry.CORE_ALTAR.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(VidaBlockRegistry.prismTable.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(VidaBlockRegistry.steleLife.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(VidaBlockLoader.saplingVida.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(VidaBlockLoader.CROP_CRISMCREST.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(VidaBlockLoader.CROP_SWEETCYANREED.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(VidaBlockLoader.CROP_SULLENHYDRANGEA.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(VidaBlockLoader.CROP_NITRITETHORNS.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(VidaBlockLoader.CROP_PLAMSTEM.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(VidaBlockLoader.CROP_HEARTOFWAL.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(VidaBlockLoader.purfiedCauldron.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(VidaBlockLoader.CORE_ALTAR.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(VidaBlockLoader.prismTable.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(VidaBlockLoader.steleLife.get(), RenderType.translucent());
     }
 
     @SubscribeEvent
     public static void onClientEvent(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer(TileEntityLoader.TileEntityPurfiedCauldron.get(), PurfiedCauldronRenderer::new);
+        event.registerBlockEntityRenderer(VidaBlockEntityLoader.TileEntityPurfiedCauldron.get(), PurfiedCauldronRenderer::new);
 
-        event.registerBlockEntityRenderer(TileEntityLoader.TileEntityGemShower.get(), (GemShowerRenderer::new));
+        event.registerBlockEntityRenderer(VidaBlockEntityLoader.TileEntityGemShower.get(), (GemShowerRenderer::new));
 
-        event.registerBlockEntityRenderer(TileEntityLoader.TileEntityElementCoreAltar.get(), (ElementCoreAltarRenderer::new));
+        event.registerBlockEntityRenderer(VidaBlockEntityLoader.TileEntityElementCoreAltar.get(), (ElementCoreAltarRenderer::new));
 
-        event.registerBlockEntityRenderer(TileEntityLoader.TileEntityPrismTable.get(), (PrismTableRenderer::new));
+        event.registerBlockEntityRenderer(VidaBlockEntityLoader.TileEntityPrismTable.get(), (PrismTableRenderer::new));
 
-        event.registerBlockEntityRenderer(TileEntityLoader.TileEntityCollector.get(), (CollectorRenderer::new));
+        event.registerBlockEntityRenderer(VidaBlockEntityLoader.TileEntityCollector.get(), (CollectorRenderer::new));
 
-        event.registerBlockEntityRenderer(TileEntityLoader.TileEntityCrystalGold.get(), (GoldCrystalRenderer::new));
+        event.registerBlockEntityRenderer(VidaBlockEntityLoader.TileEntityCrystalGold.get(), (GoldCrystalRenderer::new));
 
-        event.registerBlockEntityRenderer(TileEntityLoader.TileEntityCrystalWood.get(), (WoodCrystalRenderer::new));
+        event.registerBlockEntityRenderer(VidaBlockEntityLoader.TileEntityCrystalWood.get(), (WoodCrystalRenderer::new));
 
-        event.registerBlockEntityRenderer(TileEntityLoader.TileEntityCrystalAqua.get(), (AquaCrystalRenderer::new));
+        event.registerBlockEntityRenderer(VidaBlockEntityLoader.TileEntityCrystalAqua.get(), (AquaCrystalRenderer::new));
 
-        event.registerBlockEntityRenderer(TileEntityLoader.TileEntityCrystalFire.get(), (FireCrystalRenderer::new));
+        event.registerBlockEntityRenderer(VidaBlockEntityLoader.TileEntityCrystalFire.get(), (FireCrystalRenderer::new));
 
-        event.registerBlockEntityRenderer(TileEntityLoader.TileEntityCrystalEarth.get(), (EarthCrystalRenderer::new));
+        event.registerBlockEntityRenderer(VidaBlockEntityLoader.TileEntityCrystalEarth.get(), (EarthCrystalRenderer::new));
 
-        event.registerBlockEntityRenderer(TileEntityLoader.TileEntityInjectTable.get(), (InjectTableRenderer::new));
+        event.registerBlockEntityRenderer(VidaBlockEntityLoader.TileEntityInjectTable.get(), (InjectTableRenderer::new));
 
 
     }

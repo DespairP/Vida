@@ -9,12 +9,12 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.item.ItemStack;
-import teamHTBP.vida.blockentity.TileEntityElementCoreAltar;
+import teamHTBP.vida.common.blockentity.ElementCoreAltarBlockEntity;
 import teamHTBP.vida.client.renderer.blockentity.base.VidaBaseBlockEntityRenderer;
 
 import java.util.Random;
 
-public class ElementCoreAltarRenderer extends VidaBaseBlockEntityRenderer<TileEntityElementCoreAltar> {
+public class ElementCoreAltarRenderer extends VidaBaseBlockEntityRenderer<ElementCoreAltarBlockEntity> {
     int[] randomRotationY = {0, 0, 0, 0};
     int[] randomRotationZ = {0, 0, 0, 0};
     Random rand = new Random();
@@ -24,7 +24,7 @@ public class ElementCoreAltarRenderer extends VidaBaseBlockEntityRenderer<TileEn
     }
 
     @Override
-    public void render(TileEntityElementCoreAltar tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
+    public void render(ElementCoreAltarBlockEntity tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
 
         if (tileEntityIn.coreItem != ItemStack.EMPTY || !tileEntityIn.coreItem.isEmpty()) {
             matrixStackIn.pushPose();

@@ -17,8 +17,8 @@ import net.minecraft.resources.ResourceLocation;
 import teamHTBP.vida.client.model.LayerRegistryHandler;
 import teamHTBP.vida.client.renderer.RenderRegistry;
 import teamHTBP.vida.client.model.entity.EntityModelFaintLight;
-import teamHTBP.vida.entity.FaintLight;
-import teamHTBP.vida.element.EnumElements;
+import teamHTBP.vida.common.entity.FaintLight;
+import teamHTBP.vida.core.element.EnumElements;
 
 public class EntityRenderFaintLight extends EntityRenderer<FaintLight> {
     private final EntityModel<FaintLight> model;

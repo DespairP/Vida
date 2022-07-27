@@ -7,7 +7,7 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.world.entity.player.Player;
 import teamHTBP.vida.client.model.AutoRegModel;
-import teamHTBP.vida.utils.ModelHelper;
+import teamHTBP.vida.helper.client.ModelHelper;
 
 @AutoRegModel
 public class ArmorModelAquaBoots extends AbstractModelElementBoots<Player> {

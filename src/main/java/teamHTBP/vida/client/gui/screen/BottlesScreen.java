@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.client.gui.screen.base.VidaBaseScreen;
-import teamHTBP.vida.menu.BottlesMenu;
+import teamHTBP.vida.common.menu.BottlesMenu;
 
 public class BottlesScreen extends VidaBaseScreen<BottlesMenu> {
     ResourceLocation Gui = new ResourceLocation(Vida.MOD_ID, "textures/gui/bottles_gui.png");

@@ -9,28 +9,28 @@ import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import teamHTBP.vida.utils.json.JsonUtils;
+import teamHTBP.vida.helper.json.JsonUtils;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.function.Supplier;
 
-import static teamHTBP.vida.block.VidaBlockRegistry.CORE_ALTAR;
-import static teamHTBP.vida.block.VidaBlockRegistry.GEM_STAND;
-import static teamHTBP.vida.block.VidaBlockRegistry.aquaElementOre;
-import static teamHTBP.vida.block.VidaBlockRegistry.collector;
-import static teamHTBP.vida.block.VidaBlockRegistry.earthElementOre;
-import static teamHTBP.vida.block.VidaBlockRegistry.fireElementOre;
-import static teamHTBP.vida.block.VidaBlockRegistry.goldElementOre;
-import static teamHTBP.vida.block.VidaBlockRegistry.leavesVida;
-import static teamHTBP.vida.block.VidaBlockRegistry.logVida;
-import static teamHTBP.vida.block.VidaBlockRegistry.oreReactionMachine;
-import static teamHTBP.vida.block.VidaBlockRegistry.prismTable;
-import static teamHTBP.vida.block.VidaBlockRegistry.purfiedCauldron;
-import static teamHTBP.vida.block.VidaBlockRegistry.woodElementOre;
-import static teamHTBP.vida.block.VidaBlockRegistry.*;
-import static teamHTBP.vida.item.VidaItemRegistry.*;
+import static teamHTBP.vida.common.block.VidaBlockLoader.CORE_ALTAR;
+import static teamHTBP.vida.common.block.VidaBlockLoader.GEM_STAND;
+import static teamHTBP.vida.common.block.VidaBlockLoader.aquaElementOre;
+import static teamHTBP.vida.common.block.VidaBlockLoader.collector;
+import static teamHTBP.vida.common.block.VidaBlockLoader.earthElementOre;
+import static teamHTBP.vida.common.block.VidaBlockLoader.fireElementOre;
+import static teamHTBP.vida.common.block.VidaBlockLoader.goldElementOre;
+import static teamHTBP.vida.common.block.VidaBlockLoader.leavesVida;
+import static teamHTBP.vida.common.block.VidaBlockLoader.logVida;
+import static teamHTBP.vida.common.block.VidaBlockLoader.oreReactionMachine;
+import static teamHTBP.vida.common.block.VidaBlockLoader.prismTable;
+import static teamHTBP.vida.common.block.VidaBlockLoader.purfiedCauldron;
+import static teamHTBP.vida.common.block.VidaBlockLoader.woodElementOre;
+import static teamHTBP.vida.common.block.VidaBlockLoader.*;
+import static teamHTBP.vida.common.item.VidaItemLoader.*;
 
 /**
  * @author DustW

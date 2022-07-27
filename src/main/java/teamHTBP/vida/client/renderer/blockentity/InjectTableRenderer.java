@@ -15,13 +15,13 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.SwordItem;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.blockentity.TileEntityInjectTable;
+import teamHTBP.vida.common.blockentity.InjectTableBlockEntity;
 import teamHTBP.vida.client.model.LayerRegistryHandler;
 import teamHTBP.vida.client.model.blockentity.InjectTableModel;
 import teamHTBP.vida.client.event.listener.ClientTickHandler;
 import teamHTBP.vida.client.renderer.blockentity.base.VidaBaseBlockEntityRenderer;
 
-public class InjectTableRenderer extends VidaBaseBlockEntityRenderer<TileEntityInjectTable> {
+public class InjectTableRenderer extends VidaBaseBlockEntityRenderer<InjectTableBlockEntity> {
     public static final ResourceLocation TEXTURE = new ResourceLocation(Vida.MOD_ID, "textures/tileentity/injecttable.png");
     public static InjectTableModel MODEL;
 
@@ -42,7 +42,7 @@ public class InjectTableRenderer extends VidaBaseBlockEntityRenderer<TileEntityI
     }
 
     @Override
-    public void render(TileEntityInjectTable tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
+    public void render(InjectTableBlockEntity tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
         VertexConsumer iVertexBuilder = bufferIn.getBuffer(RenderType.entityTranslucent(TEXTURE));
 
         matrixStackIn.pushPose();

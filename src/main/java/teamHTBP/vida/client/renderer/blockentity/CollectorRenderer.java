@@ -8,17 +8,17 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.item.ItemStack;
-import teamHTBP.vida.blockentity.TileEntityCollector;
+import teamHTBP.vida.common.blockentity.CollectorBlockEntity;
 import teamHTBP.vida.client.renderer.blockentity.base.VidaBaseBlockEntityRenderer;
 
-public class CollectorRenderer extends VidaBaseBlockEntityRenderer<TileEntityCollector> {
+public class CollectorRenderer extends VidaBaseBlockEntityRenderer<CollectorBlockEntity> {
 
     public CollectorRenderer(BlockEntityRendererProvider.Context context) {
         super(context);
     }
 
     @Override
-    public void render(TileEntityCollector tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
+    public void render(CollectorBlockEntity tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
         if (tileEntityIn.coreItem != ItemStack.EMPTY && !tileEntityIn.coreItem.isEmpty()) {
             ItemStack stack = tileEntityIn.coreItem;
             matrixStackIn.pushPose();

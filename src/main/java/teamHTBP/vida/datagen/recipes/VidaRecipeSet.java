@@ -3,8 +3,8 @@ package teamHTBP.vida.datagen.recipes;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import teamHTBP.vida.recipe.base.BaseRecipe;
-import teamHTBP.vida.utils.json.JsonUtils;
+import teamHTBP.vida.common.recipe.base.BaseRecipe;
+import teamHTBP.vida.helper.json.JsonUtils;
 
 import java.util.HashMap;
 import java.util.Map;

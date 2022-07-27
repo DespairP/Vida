@@ -23,12 +23,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.NotNull;
-import teamHTBP.vida.blockentity.TileEntityPurifiedCauldron;
+import teamHTBP.vida.common.blockentity.PurifiedCauldronBlockEntity;
 import teamHTBP.vida.client.renderer.blockentity.base.VidaBaseBlockEntityRenderer;
-import teamHTBP.vida.element.EnumElements;
-import teamHTBP.vida.element.IElement;
+import teamHTBP.vida.core.element.EnumElements;
+import teamHTBP.vida.api.core.element.IElement;
 
-public class PurfiedCauldronRenderer extends VidaBaseBlockEntityRenderer<TileEntityPurifiedCauldron> {
+public class PurfiedCauldronRenderer extends VidaBaseBlockEntityRenderer<PurifiedCauldronBlockEntity> {
     private float floating = 0; //物品悬浮增量
     private float rPlus = 0; //r变色增量
     private float gPlus = 0; //b变色增量
@@ -48,7 +48,7 @@ public class PurfiedCauldronRenderer extends VidaBaseBlockEntityRenderer<TileEnt
     }
 
     @Override
-    public void render(TileEntityPurifiedCauldron tileEntityIn, float partialTicks, @NotNull PoseStack poseStack, @NotNull MultiBufferSource source, int combinedLightIn, int combinedOverlayIn) {
+    public void render(PurifiedCauldronBlockEntity tileEntityIn, float partialTicks, @NotNull PoseStack poseStack, @NotNull MultiBufferSource source, int combinedLightIn, int combinedOverlayIn) {
         Minecraft mc = Minecraft.getInstance();
 
         if (tileEntityIn.isWater) {
@@ -139,7 +139,7 @@ public class PurfiedCauldronRenderer extends VidaBaseBlockEntityRenderer<TileEnt
         }
     }
 
-    private boolean changeColor(TileEntityPurifiedCauldron tileEntityIn, float r, float g, float b) {
+    private boolean changeColor(PurifiedCauldronBlockEntity tileEntityIn, float r, float g, float b) {
         IElement element = tileEntityIn.element;
         if (!(element instanceof EnumElements)) {
             return false;

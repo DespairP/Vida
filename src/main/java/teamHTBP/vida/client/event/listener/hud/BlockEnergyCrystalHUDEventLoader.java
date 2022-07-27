@@ -12,8 +12,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import teamHTBP.vida.block.function.crystal.ElementCrystalBlock;
-import teamHTBP.vida.blockentity.crystal.IElementCrystal;
+import teamHTBP.vida.common.block.function.crystal.ElementCrystalBlock;
+import teamHTBP.vida.common.blockentity.crystal.IElementCrystal;
 import teamHTBP.vida.client.hud.ElementCrystalHud;
 
 /**

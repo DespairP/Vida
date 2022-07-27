@@ -14,7 +14,7 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.item.armor.ItemArmorElementLegginsWithBottles;
+import teamHTBP.vida.common.item.armor.ItemArmorElementLegginsWithBottles;
 
 import java.util.List;
 

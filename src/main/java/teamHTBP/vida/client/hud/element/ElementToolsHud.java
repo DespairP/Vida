@@ -1,11 +1,11 @@
 package teamHTBP.vida.client.hud.element;
 
 import net.minecraft.world.item.ItemStack;
-import teamHTBP.vida.animation.TimeInterpolator;
-import teamHTBP.vida.animation.animator.Animator;
-import teamHTBP.vida.animation.valueholder.FloatPropertyValueHolder;
+import teamHTBP.vida.helper.animation.TimeInterpolator;
+import teamHTBP.vida.helper.animation.animator.Animator;
+import teamHTBP.vida.helper.animation.valueholder.FloatPropertyValueHolder;
 import teamHTBP.vida.client.hud.Hud;
-import teamHTBP.vida.item.staff.IElementLevelTools;
+import teamHTBP.vida.api.common.item.tool.IElementLevelTools;
 
 /**
  * @author DustW

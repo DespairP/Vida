@@ -9,7 +9,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import teamHTBP.vida.client.model.AutoRegModel;
-import teamHTBP.vida.utils.ModelHelper;
+import teamHTBP.vida.helper.client.ModelHelper;
 
 @OnlyIn(Dist.CLIENT)
 @AutoRegModel

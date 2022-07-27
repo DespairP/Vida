@@ -6,7 +6,7 @@ import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import teamHTBP.vida.client.model.AutoRegModel;
-import teamHTBP.vida.utils.ModelHelper;
+import teamHTBP.vida.helper.client.ModelHelper;
 
 @AutoRegModel
 public class ArmorModelEarthChestplates extends AbstractModelElementChestplates {

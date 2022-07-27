@@ -4,12 +4,11 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FastColor;
 import net.minecraftforge.client.gui.ForgeIngameGui;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.item.staff.IElementLevelTools;
-import teamHTBP.vida.utils.color.RGBAColor;
-import teamHTBP.vida.utils.math.IntRange;
+import teamHTBP.vida.api.common.item.tool.IElementLevelTools;
+import teamHTBP.vida.helper.color.ARGBColor;
+import teamHTBP.vida.helper.math.IntRange;
 
 public class ElementLevelToolsExpHud extends ElementToolsHud {
     private static final ResourceLocation VIDA_ICONS = new ResourceLocation(Vida.MOD_ID, "textures/gui/vida_icons.png");
@@ -24,15 +23,12 @@ public class ElementLevelToolsExpHud extends ElementToolsHud {
 
         //渲染工具经验
         if (alpha > 0 && lastStack.getItem() instanceof IElementLevelTools item) {
-            RGBAColor color = item.getElement().getElementRGBAColor();
+            ARGBColor color = item.getElement().getColor().toARGB();
 
-            if (color == null) {
-                return;
-            }
+            int r = color.getR();
+            int g = color.getG();
+            int b = color.getB();
 
-            int r = color.getRed();
-            int g = color.getGreen();
-            int b = color.getBlue();
             float alpha = this.alpha / 100F;
 
             RenderSystem.setShaderTexture(0, VIDA_ICONS);
@@ -61,11 +57,14 @@ public class ElementLevelToolsExpHud extends ElementToolsHud {
                 String s = "" + level;
                 int i1 = (width - mc.font.width(s)) / 2 + 20;
                 int j1 = height - 31 - 4;
-                mc.font.draw(poseStack, s, (float) (i1 + 1), (float) j1, RGBAColor.getColorCodeFromRGBA(0, 0, 0, a));
-                mc.font.draw(poseStack, s, (float) (i1 - 1), (float) j1, RGBAColor.getColorCodeFromRGBA(0, 0, 0, a));
-                mc.font.draw(poseStack, s, (float) i1, (float) (j1 + 1), RGBAColor.getColorCodeFromRGBA(0, 0, 0, a));
-                mc.font.draw(poseStack, s, (float) i1, (float) (j1 - 1), RGBAColor.getColorCodeFromRGBA(0, 0, 0, a));
-                mc.font.draw(poseStack, s, (float) i1, (float) j1, FastColor.ARGB32.color(a, r, g, b));
+
+                int argb = ARGBColor.argb(a, 0, 0, 0);
+
+                mc.font.draw(poseStack, s, (float) (i1 + 1), (float) j1, argb);
+                mc.font.draw(poseStack, s, (float) (i1 - 1), (float) j1, argb);
+                mc.font.draw(poseStack, s, (float) i1, (float) (j1 + 1), argb);
+                mc.font.draw(poseStack, s, (float) i1, (float) (j1 - 1), argb);
+                mc.font.draw(poseStack, s, (float) i1, (float) j1, ARGBColor.argb(a, r, g, b));
             }
         }
     }

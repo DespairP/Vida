@@ -10,18 +10,18 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.blockentity.TileEntityPrismTable;
+import teamHTBP.vida.common.blockentity.PrismTableBlockEntity;
 import teamHTBP.vida.client.gui.screen.base.VidaBaseScreen;
-import teamHTBP.vida.menu.PrismTableMenu;
-import teamHTBP.vida.network.PacketManager;
-import teamHTBP.vida.network.PrismTablePacket;
+import teamHTBP.vida.common.menu.PrismTableMenu;
+import teamHTBP.vida.network.VidaPacketManager;
+import teamHTBP.vida.network.client.PrismTablePacket;
 
 public class PrismTableScreen extends VidaBaseScreen<PrismTableMenu> {
     static final ResourceLocation GUI = new ResourceLocation(Vida.MOD_ID, "textures/gui/prismtable_gui.png");
     Button1 button1 = new Button1(this.leftPos + 85, this.topPos + 60);
     Button2 button2 = new Button2(this.leftPos + 75, this.topPos + 15);
     MirrorButton mirrorButton = new MirrorButton(0, 0);
-    TileEntityPrismTable tileEntityPrismTable;
+    PrismTableBlockEntity prismTableBlockEntity;
     private int fireAnimationX = 0;
     private int fireAnimationY = 166;
 
@@ -29,17 +29,17 @@ public class PrismTableScreen extends VidaBaseScreen<PrismTableMenu> {
         super(screenContainer, inv, titleIn);
         this.imageWidth = 176;
         this.imageHeight = 166;
-        this.tileEntityPrismTable = this.getMenu().tileEntityPrismTable;
+        this.prismTableBlockEntity = this.getMenu().prismTableBlockEntity;
     }
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         if (button == 0) {
             if (mouseX > this.leftPos + 9 && mouseX < this.leftPos + 9 + 16 && mouseY > this.topPos + 59 && mouseY < this.topPos + 59 + 16) {
-                PacketManager.INSTANCE.sendToServer(new PrismTablePacket(this.button1.x + 3 - this.leftPos,
-                        this.button2.y + 3 - this.topPos, tileEntityPrismTable.getBlockPos().getX(),
-                        tileEntityPrismTable.getBlockPos().getY(),
-                        this.tileEntityPrismTable.getBlockPos().getZ()));
+                VidaPacketManager.INSTANCE.sendToServer(new PrismTablePacket(this.button1.x + 3 - this.leftPos,
+                        this.button2.y + 3 - this.topPos, prismTableBlockEntity.getBlockPos().getX(),
+                        prismTableBlockEntity.getBlockPos().getY(),
+                        this.prismTableBlockEntity.getBlockPos().getZ()));
             }
         }
         return super.mouseClicked(mouseX, mouseY, button);
@@ -58,10 +58,10 @@ public class PrismTableScreen extends VidaBaseScreen<PrismTableMenu> {
     }
 
     protected void drawFire(PoseStack matrixStack, int x, int y) {
-        if (tileEntityPrismTable.isGem) {
+        if (prismTableBlockEntity.isGem) {
             matrixStack.pushPose();
-            x += tileEntityPrismTable.array.get(0);
-            y += tileEntityPrismTable.array.get(1);
+            x += prismTableBlockEntity.array.get(0);
+            y += prismTableBlockEntity.array.get(1);
             int offset1 = Math.abs(this.button1.x + 3 - x - 6);
             int offset2 = Math.abs(this.button2.y + 3 - y - 17);
             if (offset1 < 15 && offset2 < 15) {
@@ -83,7 +83,7 @@ public class PrismTableScreen extends VidaBaseScreen<PrismTableMenu> {
     }
 
     protected void drawMirror(PoseStack matrixStack, int i, int j) {
-        if (this.tileEntityPrismTable != null && this.tileEntityPrismTable.isMirror) {
+        if (this.prismTableBlockEntity != null && this.prismTableBlockEntity.isMirror) {
             blit(matrixStack, this.button1.x - 4, this.button2.y - 10, 0, 176, 0, 16, 16, 256, 256);
         }
     }

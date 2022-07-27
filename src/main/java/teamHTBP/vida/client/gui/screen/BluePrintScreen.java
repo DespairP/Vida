@@ -8,8 +8,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.client.gui.screen.base.VidaBaseScreen;
-import teamHTBP.vida.menu.BluePrintMenu;
-import teamHTBP.vida.menu.slot.BluePrintSlot;
+import teamHTBP.vida.common.menu.BluePrintMenu;
+import teamHTBP.vida.common.menu.slot.BluePrintSlot;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;

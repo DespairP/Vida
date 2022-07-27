@@ -9,10 +9,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.gui.ForgeIngameGui;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.client.atlas.VidaAtlasManager;
-import teamHTBP.vida.element.IElement;
-import teamHTBP.vida.helper.render.RenderHelper;
-import teamHTBP.vida.item.staff.IElementLevelTools;
-import teamHTBP.vida.utils.color.RGBAColor;
+import teamHTBP.vida.api.common.item.tool.IElementLevelTools;
+import teamHTBP.vida.api.core.element.IElement;
+import teamHTBP.vida.helper.client.render.RenderHelper;
+import teamHTBP.vida.helper.color.ARGBColor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -72,7 +72,7 @@ public class ElementLevelToolsHud extends ElementToolsHud {
 
             if (a > 10) {
                 GuiComponent.drawCenteredString(poseStack, mc.font, level + "", renderX + 16, renderY + 10,
-                        RGBAColor.getColorCodeFromRGBA(126, 186, 137, a));
+                        ARGBColor.argb(a, 126, 186, 137));
             }
         }
     }

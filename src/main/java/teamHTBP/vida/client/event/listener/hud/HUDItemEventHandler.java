@@ -9,9 +9,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import teamHTBP.vida.client.hud.BottleHud;
-import teamHTBP.vida.input.BottleKeys;
-import teamHTBP.vida.item.armor.ItemArmorElementLegginsWithBottles;
-import teamHTBP.vida.utils.math.IntRange;
+import teamHTBP.vida.client.input.BottleKeys;
+import teamHTBP.vida.common.item.armor.ItemArmorElementLegginsWithBottles;
+import teamHTBP.vida.helper.math.IntRange;
 
 /**
  * 当玩家使用

@@ -5,7 +5,7 @@ import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.block.VidaBlockRegistry;
+import teamHTBP.vida.common.block.VidaBlockLoader;
 
 /**
  * @author DustW
@@ -19,29 +19,29 @@ public class VidaBlockTagProvider extends BlockTagsProvider {
     @Override
     protected void addTags() {
         tag(BlockTags.NEEDS_IRON_TOOL)
-                .add(VidaBlockRegistry.CORE_ALTAR.get())
-                .add(VidaBlockRegistry.injectionTable.get());
+                .add(VidaBlockLoader.CORE_ALTAR.get())
+                .add(VidaBlockLoader.injectionTable.get());
 
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(VidaBlockRegistry.DEEPSEA_BRICKS_CORNER.get())
-                .add(VidaBlockRegistry.DEEPSEA_PILLAR_0.get())
-                .add(VidaBlockRegistry.DEEPSEA_PILLAR_1.get())
-                .add(VidaBlockRegistry.DEEPSEA_PILLAR_2.get())
-                .add(VidaBlockRegistry.DEEPSEA_BRICKS_STRAIGHT.get())
-                .add(VidaBlockRegistry.DIM_BRICKS.get())
-                .add(VidaBlockRegistry.DIM_BRICKS_DECO_0.get())
-                .add(VidaBlockRegistry.DIM_BRICKS_DECO_1.get())
-                .add(VidaBlockRegistry.GEM_STAND.get())
-                .add(VidaBlockRegistry.DEEPSEA_STONE.get())
-                .add(VidaBlockRegistry.prismTable.get())
-                .add(VidaBlockRegistry.CORE_ALTAR.get())
-                .add(VidaBlockRegistry.injectionTable.get());
+                .add(VidaBlockLoader.DEEPSEA_BRICKS_CORNER.get())
+                .add(VidaBlockLoader.DEEPSEA_PILLAR_0.get())
+                .add(VidaBlockLoader.DEEPSEA_PILLAR_1.get())
+                .add(VidaBlockLoader.DEEPSEA_PILLAR_2.get())
+                .add(VidaBlockLoader.DEEPSEA_BRICKS_STRAIGHT.get())
+                .add(VidaBlockLoader.DIM_BRICKS.get())
+                .add(VidaBlockLoader.DIM_BRICKS_DECO_0.get())
+                .add(VidaBlockLoader.DIM_BRICKS_DECO_1.get())
+                .add(VidaBlockLoader.GEM_STAND.get())
+                .add(VidaBlockLoader.DEEPSEA_STONE.get())
+                .add(VidaBlockLoader.prismTable.get())
+                .add(VidaBlockLoader.CORE_ALTAR.get())
+                .add(VidaBlockLoader.injectionTable.get());
 
         tag(BlockTags.FENCES)
-                .add(VidaBlockRegistry.PLANK_VIDA_FENCE.get());
+                .add(VidaBlockLoader.PLANK_VIDA_FENCE.get());
 
         tag(BlockTags.WOODEN_FENCES)
-                .add(VidaBlockRegistry.PLANK_VIDA_FENCE.get());
+                .add(VidaBlockLoader.PLANK_VIDA_FENCE.get());
     }
 
     @Override

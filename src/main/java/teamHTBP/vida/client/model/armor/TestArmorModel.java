@@ -13,7 +13,7 @@ import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import teamHTBP.vida.client.model.AutoRegModel;
-import teamHTBP.vida.utils.ModelHelper;
+import teamHTBP.vida.helper.client.ModelHelper;
 
 /**
  * PlayerModel - Either Mojang or a mod author (Taken From Memory)

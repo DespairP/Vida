@@ -10,8 +10,8 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import teamHTBP.vida.client.model.AutoRegModel;
-import teamHTBP.vida.entity.FaintLight;
-import teamHTBP.vida.utils.ModelHelper;
+import teamHTBP.vida.common.entity.FaintLight;
+import teamHTBP.vida.helper.client.ModelHelper;
 
 @OnlyIn(Dist.CLIENT)
 @AutoRegModel

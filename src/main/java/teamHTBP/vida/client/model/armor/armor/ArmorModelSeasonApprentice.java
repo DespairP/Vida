@@ -7,7 +7,7 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
-import teamHTBP.vida.utils.ModelHelper;
+import teamHTBP.vida.helper.client.ModelHelper;
 
 public class ArmorModelSeasonApprentice extends AbstractModelElementArmor<Player> {
 

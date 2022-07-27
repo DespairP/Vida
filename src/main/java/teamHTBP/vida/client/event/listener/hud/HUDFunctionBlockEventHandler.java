@@ -13,12 +13,12 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import teamHTBP.vida.block.function.CollecterBlock;
-import teamHTBP.vida.block.function.ElementCoreAltarBlock;
-import teamHTBP.vida.block.function.PurifiedCauldronBlock;
-import teamHTBP.vida.blockentity.TileEntityCollector;
-import teamHTBP.vida.blockentity.TileEntityElementCoreAltar;
-import teamHTBP.vida.blockentity.TileEntityPurifiedCauldron;
+import teamHTBP.vida.common.block.function.CollecterBlock;
+import teamHTBP.vida.common.block.function.ElementCoreAltarBlock;
+import teamHTBP.vida.common.block.function.PurifiedCauldronBlock;
+import teamHTBP.vida.common.blockentity.CollectorBlockEntity;
+import teamHTBP.vida.common.blockentity.ElementCoreAltarBlockEntity;
+import teamHTBP.vida.common.blockentity.PurifiedCauldronBlockEntity;
 import teamHTBP.vida.client.hud.CollectorHud;
 import teamHTBP.vida.client.hud.ElementCoreAltarHud;
 import teamHTBP.vida.client.hud.PurfiedCauldronHud;
@@ -55,9 +55,9 @@ public class HUDFunctionBlockEventHandler extends HudHandler {
 
         //渲染纯净坩埚HUD
         if (block instanceof PurifiedCauldronBlock) {
-            TileEntityPurifiedCauldron tileEntityPurifiedCauldron = (TileEntityPurifiedCauldron) player.level.getBlockEntity(lookingPos);
-            if (tileEntityPurifiedCauldron != null) {
-                PurfiedCauldronHud purfiedCauldronHUD = new PurfiedCauldronHud(tileEntityPurifiedCauldron);
+            PurifiedCauldronBlockEntity purifiedCauldronBlockEntity = (PurifiedCauldronBlockEntity) player.level.getBlockEntity(lookingPos);
+            if (purifiedCauldronBlockEntity != null) {
+                PurfiedCauldronHud purfiedCauldronHUD = new PurfiedCauldronHud(purifiedCauldronBlockEntity);
                 setupShader();
                 purfiedCauldronHUD.render(event.getMatrixStack());
             }
@@ -66,8 +66,8 @@ public class HUDFunctionBlockEventHandler extends HudHandler {
 
         //渲染元素祭坛HUD
         if (block instanceof ElementCoreAltarBlock) {
-            TileEntityElementCoreAltar tileEntityElementCoreAltar = (TileEntityElementCoreAltar) player.level.getBlockEntity(lookingPos);
-            ElementCoreAltarHud elementCoreAltarHUD = new ElementCoreAltarHud(tileEntityElementCoreAltar);
+            ElementCoreAltarBlockEntity elementCoreAltarBlockEntity = (ElementCoreAltarBlockEntity) player.level.getBlockEntity(lookingPos);
+            ElementCoreAltarHud elementCoreAltarHUD = new ElementCoreAltarHud(elementCoreAltarBlockEntity);
             setupShader();
             elementCoreAltarHUD.render(matrixStack);
             return;
@@ -75,8 +75,8 @@ public class HUDFunctionBlockEventHandler extends HudHandler {
 
         //渲染收集器HUD
         if (block instanceof CollecterBlock) {
-            TileEntityCollector tileEntityCollector = (TileEntityCollector) player.level.getBlockEntity(lookingPos);
-            CollectorHud collectorHUD = new CollectorHud(tileEntityCollector);
+            CollectorBlockEntity collectorBlockEntity = (CollectorBlockEntity) player.level.getBlockEntity(lookingPos);
+            CollectorHud collectorHUD = new CollectorHud(collectorBlockEntity);
             setupShader();
             collectorHUD.render(matrixStack);
             return;

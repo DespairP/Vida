@@ -6,10 +6,10 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
 import net.minecraft.world.item.Items;
-import teamHTBP.vida.datapack.element.ElementPotential;
-import teamHTBP.vida.element.EnumElements;
-import teamHTBP.vida.item.VidaItemRegistry;
-import teamHTBP.vida.utils.json.JsonUtils;
+import teamHTBP.vida.common.datapack.element.ElementPotential;
+import teamHTBP.vida.core.element.EnumElements;
+import teamHTBP.vida.common.item.VidaItemLoader;
+import teamHTBP.vida.helper.json.JsonUtils;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -102,23 +102,23 @@ public class ElementPotentialProvider implements DataProvider {
         list.add(new ElementPotential(Items.RED_SAND, EnumElements.EARTH, 50, "red_sand"));  //红砂
         list.add(new ElementPotential(Items.RED_SANDSTONE, EnumElements.EARTH, 200, "red_sandstone"));  //红砂岩
 
-        list.add(new ElementPotential(VidaItemRegistry.goldEnergyGemFragment.get(), EnumElements.GOLD, 500, "ARTIFICIAL_ELEMENTGEM_GOLD"));
-        list.add(new ElementPotential(VidaItemRegistry.woodEnergyGemFragment.get(), EnumElements.WOOD, 500, "ARTIFICIAL_ELEMENTGEM_WOOD"));
-        list.add(new ElementPotential(VidaItemRegistry.aquaEnergyGemFragment.get(), EnumElements.AQUA, 500, "ARTIFICIAL_ELEMENTGEM_AQUA"));
-        list.add(new ElementPotential(VidaItemRegistry.fireEnergyGemFragment.get(), EnumElements.FIRE, 500, "ARTIFICIAL_ELEMENTGEM_FIRE"));
-        list.add(new ElementPotential(VidaItemRegistry.earthEnergyGemFragment.get(), EnumElements.EARTH, 500, "ARTIFICIAL_ELEMENTGEM_EARTH"));
+        list.add(new ElementPotential(VidaItemLoader.goldEnergyGemFragment.get(), EnumElements.GOLD, 500, "ARTIFICIAL_ELEMENTGEM_GOLD"));
+        list.add(new ElementPotential(VidaItemLoader.woodEnergyGemFragment.get(), EnumElements.WOOD, 500, "ARTIFICIAL_ELEMENTGEM_WOOD"));
+        list.add(new ElementPotential(VidaItemLoader.aquaEnergyGemFragment.get(), EnumElements.AQUA, 500, "ARTIFICIAL_ELEMENTGEM_AQUA"));
+        list.add(new ElementPotential(VidaItemLoader.fireEnergyGemFragment.get(), EnumElements.FIRE, 500, "ARTIFICIAL_ELEMENTGEM_FIRE"));
+        list.add(new ElementPotential(VidaItemLoader.earthEnergyGemFragment.get(), EnumElements.EARTH, 500, "ARTIFICIAL_ELEMENTGEM_EARTH"));
 
-        list.add(new ElementPotential(VidaItemRegistry.ELEMENTCORE_GOLD.get(), EnumElements.GOLD, 10000, "goldelementcore"));
-        list.add(new ElementPotential(VidaItemRegistry.ELEMENTCORE_WOOD.get(), EnumElements.WOOD, 10000, "woodelementcore"));
-        list.add(new ElementPotential(VidaItemRegistry.ELEMENTCORE_AQUA.get(), EnumElements.AQUA, 10000, "ELEMENTCORE_AQUA"));
-        list.add(new ElementPotential(VidaItemRegistry.ELEMENTCORE_FIRE.get(), EnumElements.FIRE, 10000, "ELEMENTCORE_FIRE"));
-        list.add(new ElementPotential(VidaItemRegistry.ELEMENTCORE_EARTH.get(), EnumElements.EARTH, 10000, "ELEMENTCORE_EARTH"));
+        list.add(new ElementPotential(VidaItemLoader.ELEMENTCORE_GOLD.get(), EnumElements.GOLD, 10000, "goldelementcore"));
+        list.add(new ElementPotential(VidaItemLoader.ELEMENTCORE_WOOD.get(), EnumElements.WOOD, 10000, "woodelementcore"));
+        list.add(new ElementPotential(VidaItemLoader.ELEMENTCORE_AQUA.get(), EnumElements.AQUA, 10000, "ELEMENTCORE_AQUA"));
+        list.add(new ElementPotential(VidaItemLoader.ELEMENTCORE_FIRE.get(), EnumElements.FIRE, 10000, "ELEMENTCORE_FIRE"));
+        list.add(new ElementPotential(VidaItemLoader.ELEMENTCORE_EARTH.get(), EnumElements.EARTH, 10000, "ELEMENTCORE_EARTH"));
 
-        list.add(new ElementPotential(VidaItemRegistry.CREATIVE_ELEMENTPOTION_GOLD.get(), EnumElements.GOLD, 500000, "CREATIVE_ELEMENTPOTION_GOLD"));
-        list.add(new ElementPotential(VidaItemRegistry.CREATIVE_ELEMENTPOTION_WOOD.get(), EnumElements.WOOD, 500000, "CREATIVE_ELEMENTPOTION_WOOD"));
-        list.add(new ElementPotential(VidaItemRegistry.CREATIVE_ELEMENTPOTION_AQUA.get(), EnumElements.AQUA, 500000, "CREATIVE_ELEMENTPOTION_AQUA"));
-        list.add(new ElementPotential(VidaItemRegistry.CREATIVE_ELEMENTPOTION_FIRE.get(), EnumElements.FIRE, 500000, "CREATIVE_ELEMENTPOTION_FIRE"));
-        list.add(new ElementPotential(VidaItemRegistry.CREATIVE_ELEMENTPOTION_EARTH.get(), EnumElements.EARTH, 500000, "CREATIVE_ELEMENTPOTION_EARTH"));
+        list.add(new ElementPotential(VidaItemLoader.CREATIVE_ELEMENTPOTION_GOLD.get(), EnumElements.GOLD, 500000, "CREATIVE_ELEMENTPOTION_GOLD"));
+        list.add(new ElementPotential(VidaItemLoader.CREATIVE_ELEMENTPOTION_WOOD.get(), EnumElements.WOOD, 500000, "CREATIVE_ELEMENTPOTION_WOOD"));
+        list.add(new ElementPotential(VidaItemLoader.CREATIVE_ELEMENTPOTION_AQUA.get(), EnumElements.AQUA, 500000, "CREATIVE_ELEMENTPOTION_AQUA"));
+        list.add(new ElementPotential(VidaItemLoader.CREATIVE_ELEMENTPOTION_FIRE.get(), EnumElements.FIRE, 500000, "CREATIVE_ELEMENTPOTION_FIRE"));
+        list.add(new ElementPotential(VidaItemLoader.CREATIVE_ELEMENTPOTION_EARTH.get(), EnumElements.EARTH, 500000, "CREATIVE_ELEMENTPOTION_EARTH"));
     }
     
     @Override

@@ -6,9 +6,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.resources.ResourceLocation;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.blockentity.crystal.IElementCrystal;
-import teamHTBP.vida.element.EnumElements;
-import teamHTBP.vida.element.IElement;
+import teamHTBP.vida.common.blockentity.crystal.IElementCrystal;
+import teamHTBP.vida.core.element.EnumElements;
+import teamHTBP.vida.api.core.element.IElement;
 
 public class ElementCrystalHud extends GuiComponent {
     private final int width;

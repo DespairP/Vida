@@ -12,11 +12,11 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
-import teamHTBP.vida.blockentity.crystal.BaseCrystalBlockEntity;
+import teamHTBP.vida.common.blockentity.crystal.BaseCrystalBlockEntity;
 import teamHTBP.vida.client.renderer.RenderRegistry;
 import teamHTBP.vida.client.renderer.blockentity.base.VidaBaseBlockEntityRenderer;
-import teamHTBP.vida.element.EnumElements;
-import teamHTBP.vida.element.IElement;
+import teamHTBP.vida.core.element.EnumElements;
+import teamHTBP.vida.api.core.element.IElement;
 
 import java.util.Map;
 

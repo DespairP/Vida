@@ -12,12 +12,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import teamHTBP.vida.blockentity.TileEntityGemShower;
+import teamHTBP.vida.common.blockentity.GemShowerBlockEntity;
 import teamHTBP.vida.client.renderer.RenderRegistry;
 import teamHTBP.vida.client.renderer.blockentity.base.VidaBaseBlockEntityRenderer;
-import teamHTBP.vida.item.VidaItemRegistry;
+import teamHTBP.vida.common.item.VidaItemLoader;
 
-public class GemShowerRenderer extends VidaBaseBlockEntityRenderer<TileEntityGemShower> {
+public class GemShowerRenderer extends VidaBaseBlockEntityRenderer<GemShowerBlockEntity> {
     float r = 1, g = 1, b = 1, a = 1;
     double height = 0.0f;
 
@@ -27,7 +27,7 @@ public class GemShowerRenderer extends VidaBaseBlockEntityRenderer<TileEntityGem
 
 
     @Override
-    public void render(TileEntityGemShower tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
+    public void render(GemShowerBlockEntity tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
         if (!tileEntityIn.gemItem.isEmpty()) {
             TextureAtlasSprite textureAtlasSprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(this.getGemResource(tileEntityIn.gemItem));
             double floatHeight = Math.sin(height) * 0.1;
@@ -114,13 +114,13 @@ public class GemShowerRenderer extends VidaBaseBlockEntityRenderer<TileEntityGem
 
     public ResourceLocation getGemResource(ItemStack itemStack) {
         Item putGemItem = itemStack.getItem();
-        if (putGemItem == VidaItemRegistry.ELEMENTGEM_FIRE.get()) {
+        if (putGemItem == VidaItemLoader.ELEMENTGEM_FIRE.get()) {
             return RenderRegistry.firegemLocation;
-        } else if (putGemItem == VidaItemRegistry.ELEMENTGEM_GOLD.get()) {
+        } else if (putGemItem == VidaItemLoader.ELEMENTGEM_GOLD.get()) {
             return RenderRegistry.goldgemLocation;
-        } else if (putGemItem == VidaItemRegistry.ELEMENTGEM_WOOD.get()) {
+        } else if (putGemItem == VidaItemLoader.ELEMENTGEM_WOOD.get()) {
             return RenderRegistry.woodgemLocation;
-        } else if (putGemItem == VidaItemRegistry.ELEMENTGEM_AQUA.get()) {
+        } else if (putGemItem == VidaItemLoader.ELEMENTGEM_AQUA.get()) {
             return RenderRegistry.aquagemLocation;
         } else {
             return RenderRegistry.earthgemLocation;
@@ -129,13 +129,13 @@ public class GemShowerRenderer extends VidaBaseBlockEntityRenderer<TileEntityGem
 
     public ResourceLocation getlogoResource(ItemStack itemStack) {
         Item putGemItem = itemStack.getItem();
-        if (putGemItem == VidaItemRegistry.ELEMENTGEM_FIRE.get()) {
+        if (putGemItem == VidaItemLoader.ELEMENTGEM_FIRE.get()) {
             return RenderRegistry.firelogoLocation;
-        } else if (putGemItem == VidaItemRegistry.ELEMENTGEM_GOLD.get()) {
+        } else if (putGemItem == VidaItemLoader.ELEMENTGEM_GOLD.get()) {
             return RenderRegistry.goldlogoLocation;
-        } else if (putGemItem == VidaItemRegistry.ELEMENTGEM_WOOD.get()) {
+        } else if (putGemItem == VidaItemLoader.ELEMENTGEM_WOOD.get()) {
             return RenderRegistry.woodlogoLocation;
-        } else if (putGemItem == VidaItemRegistry.ELEMENTGEM_AQUA.get()) {
+        } else if (putGemItem == VidaItemLoader.ELEMENTGEM_AQUA.get()) {
             return RenderRegistry.aqualogoLocation;
         } else {
             return RenderRegistry.earthlogoLocation;

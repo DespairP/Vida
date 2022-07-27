@@ -7,7 +7,7 @@ import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.blockentity.TileEntityElementCoreAltar;
+import teamHTBP.vida.common.blockentity.ElementCoreAltarBlockEntity;
 
 public class ElementCoreAltarHud extends GuiComponent {
     private final int width;
@@ -15,29 +15,29 @@ public class ElementCoreAltarHud extends GuiComponent {
     private final Minecraft minecraft;
     private final ResourceLocation HUD = new ResourceLocation(Vida.MOD_ID, "textures/gui/altar_hud.png");
     private final ResourceLocation HUDHELPER = new ResourceLocation(Vida.MOD_ID, "textures/gui/altar_hud.png");
-    private final TileEntityElementCoreAltar tileEntityElementCoreAltar;
+    private final ElementCoreAltarBlockEntity elementCoreAltarBlockEntity;
 
-    public ElementCoreAltarHud(TileEntityElementCoreAltar tileEntityElementCoreAltar) {
+    public ElementCoreAltarHud(ElementCoreAltarBlockEntity elementCoreAltarBlockEntity) {
         width = Minecraft.getInstance().getWindow().getGuiScaledWidth();
         height = Minecraft.getInstance().getWindow().getGuiScaledHeight();
         minecraft = Minecraft.getInstance();
-        this.tileEntityElementCoreAltar = tileEntityElementCoreAltar;
+        this.elementCoreAltarBlockEntity = elementCoreAltarBlockEntity;
     }
 
     public void render(PoseStack matrixStack) {
-        if (tileEntityElementCoreAltar == null) return;
+        if (elementCoreAltarBlockEntity == null) return;
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, HUD);
         int screenWidth = this.width / 2 - 28;
         int screenHeight = this.height / 2 - 66;
         blit(matrixStack, screenWidth, screenHeight, 0, 0, 0, 56, 56, 80, 80);
         blit(matrixStack, screenWidth + 4, screenHeight + 80, 0, 0, 75, 48, 4, 80, 80);
-        float length = (tileEntityElementCoreAltar.progress / 30000.0f) * 48.0f;
+        float length = (elementCoreAltarBlockEntity.progress / 30000.0f) * 48.0f;
         blit(matrixStack, screenWidth + 4, screenHeight + 80, 0, 0, 71, (int) length, 4, 80, 80);
         //绘制四个方向的物品
         for (int i = 0; i < 4; i++) {
             GuiPosition position = GuiPosition.values()[i];
-            ItemStack stack = tileEntityElementCoreAltar.getStack(i);
+            ItemStack stack = elementCoreAltarBlockEntity.getStack(i);
             if (stack != ItemStack.EMPTY && !stack.isEmpty()) {
                 switch (position) {
                     case LEFT:
@@ -57,7 +57,7 @@ public class ElementCoreAltarHud extends GuiComponent {
             }
         }
         //绘制核心
-        ItemStack stack = tileEntityElementCoreAltar.coreItem;
+        ItemStack stack = elementCoreAltarBlockEntity.coreItem;
         Minecraft.getInstance().getItemRenderer().renderGuiItem(stack, screenWidth + 20, screenHeight + 20);
     }
 
