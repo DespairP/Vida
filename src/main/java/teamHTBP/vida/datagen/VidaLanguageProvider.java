@@ -193,6 +193,8 @@ public class VidaLanguageProvider implements DataProvider {
         block(DIM_BRICKS_DECO_0, "Decorated Dimrock Brick 1", "饰纹黯淡石砖");
         block(DIM_BRICKS_DECO_1, "Decorated Dimrock Brick 2", "饰纹黯淡石砖");
 
+        block(LUSH_PLANKS_DECO, "Lush Planks", "朽木方块");
+
         addEntry("block.vida.dimrockbrickdeco2", "Decorated Dimrock Brick 3", "饰纹黯淡石砖");
         addEntry("block.vida.silentforestbrick_0", "", "寂森石砖");
         addEntry("block.vida.silentforestbrick_1", "", "饰纹寂森石砖");
