@@ -7,7 +7,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import teamHTBP.vida.api.core.element.IElement;
-import teamHTBP.vida.helper.color.ColorHelper;
+import teamHTBP.vida.helper.color.ARGBColor;
 import teamHTBP.vida.helper.color.VidaColor;
 
 import java.util.Random;
@@ -19,7 +19,7 @@ public class ParticleElementCropBlock extends AbstractElementCropsBlock {
     /**种子*/
     private final ItemLike provider;
     /***/
-    private final VidaColor color;
+    private final ARGBColor color;
     protected boolean isMutations = false;
 
 
@@ -29,12 +29,12 @@ public class ParticleElementCropBlock extends AbstractElementCropsBlock {
      * @param stage    最大生长数
      * @param element  所属元素
      * @param provider 所提供的itemseed
-     * @param helper   粒子颜色，使用ColorHelper来表现rgb
+     * @param color   粒子颜色，使用ColorHelper来表现rgb
      */
-    public ParticleElementCropBlock(int stage, IElement element, ItemLike provider, VidaColor helper) {
+    public ParticleElementCropBlock(int stage, IElement element, ItemLike provider, VidaColor color) {
         super(stage, element);
         this.provider = provider;
-        this.color = helper;
+        this.color = color.toARGB();
     }
 
     /**
@@ -43,13 +43,13 @@ public class ParticleElementCropBlock extends AbstractElementCropsBlock {
      * @param stage       最大生长数
      * @param element     所属元素
      * @param provider    所提供的itemseed
-     * @param helper      粒子颜色，使用ColorHelper来表现rgb
+     * @param color      粒子颜色，使用ColorHelper来表现rgb
      * @param isMutations 是否可以变异
      */
-    public ParticleElementCropBlock(int stage, IElement element, ItemLike provider, VidaColor helper, boolean isMutations) {
+    public ParticleElementCropBlock(int stage, IElement element, ItemLike provider, VidaColor color, boolean isMutations) {
         super(stage, element);
         this.provider = provider;
-        this.color = helper;
+        this.color = color.toARGB();
         this.isMutations = isMutations;
     }
 
@@ -68,7 +68,10 @@ public class ParticleElementCropBlock extends AbstractElementCropsBlock {
             double offsetX = RANDOM.nextDouble() * 0.5D + 0.2D;
             double offsetZ = RANDOM.nextDouble() * 0.5D + 0.2D;
             //worldIn.addParticle(new CuboidParticleOptions(0,0.02D,0,128 - offsetColor,214 - offsetColor, 142 - offsetColor, 0.5f, 100), x + offsetX, y , z + offsetZ,0,0,0);
-            worldIn.addParticle(new DustParticleOptions(new Vector3f(color.r * 1.0F / 255.0F, color.g * 1.0F / 255.0F, color.b * 1.0F / 255.0F), 1), x + offsetX, y + 0.4f, z + offsetZ, 0, 0, 0);
+            worldIn.addParticle(new DustParticleOptions(new Vector3f(
+                    color.getR() * 1.0F / 255.0F,
+                    color.getG() * 1.0F / 255.0F,
+                    color.getB() * 1.0F / 255.0F), 1), x + offsetX, y + 0.4f, z + offsetZ, 0, 0, 0);
         }
     }
 }
