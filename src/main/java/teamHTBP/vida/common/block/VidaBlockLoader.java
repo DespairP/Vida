@@ -1,6 +1,9 @@
 package teamHTBP.vida.common.block;
 
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -208,4 +211,11 @@ public class VidaBlockLoader {
 
     @RegisterItemBlock
     public static RegistryObject<Block> PLANK_VIDA_DOOR = BLOCKS.register("plank_vida_door", DecoBlockFactory::door);
+
+    @RegisterItemBlock
+    public static RegistryObject<Block> TEXT_PLANT_1 = BLOCKS.register("text_plant_1", () -> new DecoBasicBlock(plant()));
+
+    static Block.Properties plant() {
+        return AbstractBlock.Properties.create(Material.PLANTS).notSolid().hardnessAndResistance(1).sound(SoundType.PLANT);
+    }
 }
