@@ -11,6 +11,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.Vida;
+import teamHTBP.vida.api.core.element.IElement;
 import teamHTBP.vida.event.client.HUDElementItemHandler;
 import teamHTBP.vida.core.element.EnumElements;
 import teamHTBP.vida.api.item.IElementLevelTools;
@@ -60,7 +61,15 @@ public class ElementLevelToolsHUD extends AbstractGui {
         RenderSystem.enableBlend();
         this.minecraft.getTextureManager().bindTexture(HUD);
         // 根据物品元素进行渲染
-        EnumElements element = item.getItemElement();
+        IElement element1 = item.getElement();
+        boolean isEnumElement = element1 instanceof EnumElements;
+
+        if (!isEnumElement) {
+            return;
+        }
+
+        EnumElements element = (EnumElements) element1;
+
         switch (element) {
             case GOLD:
                 blit(matrixStack, renderX, renderY, 0, 0, 0, 16, 16, 35, 119);

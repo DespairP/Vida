@@ -16,6 +16,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import teamHTBP.vida.Vida;
+import teamHTBP.vida.api.core.element.IElement;
 import teamHTBP.vida.common.capability.skillSystem.ISkill;
 import teamHTBP.vida.common.capability.skillSystem.SkillHelper;
 import teamHTBP.vida.common.capability.skillSystem.SkillSurface;
@@ -258,23 +259,26 @@ public class ContainerScreenInjectTable extends ContainerScreen<ContainerInjectT
         Item itemTool = stack.getItem();
         RenderSystem.color4f(1, (float) 1, 1, 0.6f + (float) gemLightnessRenew());
         if (itemTool instanceof IElementTools) {
-            EnumElements elementType = ((IElementTools) itemTool.getItem()).getItemElement();
-            switch (elementType) {
-                case GOLD:
-                    blit(matrixStack, this.guiLeft + backgroundXsize / 20, this.guiTop + 10, 0, 39, 241, 13, 13, 512, 512);
-                    break;
-                case WOOD:
-                    blit(matrixStack, this.guiLeft + backgroundXsize / 20, this.guiTop + 10, 0, 26, 241, 13, 13, 512, 512);
-                    break;
-                case AQUA:
-                    blit(matrixStack, this.guiLeft + backgroundXsize / 20, this.guiTop + 10, 0, 13, 241, 13, 13, 512, 512);
-                    break;
-                case FIRE:
-                    blit(matrixStack, this.guiLeft + backgroundXsize / 20, this.guiTop + 10, 0, 0, 241, 13, 13, 512, 512);
-                    break;
-                case EARTH:
-                    blit(matrixStack, this.guiLeft + backgroundXsize / 20, this.guiTop + 10, 0, 52, 241, 13, 13, 512, 512);
-                    break;
+            IElement elementType = ((IElementTools) itemTool.getItem()).getElement();
+            if (elementType instanceof EnumElements) {
+                EnumElements ee = ((EnumElements) elementType);
+                switch (ee) {
+                    case GOLD:
+                        blit(matrixStack, this.guiLeft + backgroundXsize / 20, this.guiTop + 10, 0, 39, 241, 13, 13, 512, 512);
+                        break;
+                    case WOOD:
+                        blit(matrixStack, this.guiLeft + backgroundXsize / 20, this.guiTop + 10, 0, 26, 241, 13, 13, 512, 512);
+                        break;
+                    case AQUA:
+                        blit(matrixStack, this.guiLeft + backgroundXsize / 20, this.guiTop + 10, 0, 13, 241, 13, 13, 512, 512);
+                        break;
+                    case FIRE:
+                        blit(matrixStack, this.guiLeft + backgroundXsize / 20, this.guiTop + 10, 0, 0, 241, 13, 13, 512, 512);
+                        break;
+                    case EARTH:
+                        blit(matrixStack, this.guiLeft + backgroundXsize / 20, this.guiTop + 10, 0, 52, 241, 13, 13, 512, 512);
+                        break;
+                }
             }
         }
     }

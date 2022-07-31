@@ -57,7 +57,7 @@ public class ElementLevelToolsExpHUD extends AbstractGui {
             return;
         }
         IElementLevelTools item = ((IElementLevelTools) itemStack.getItem());
-        RGBAColor toolElementColor = item.getItemElement().getElementRGBAColor();
+        RGBAColor toolElementColor = item.getElement().getElementRGBAColor();
         if(toolElementColor == null) {
             return;
         }

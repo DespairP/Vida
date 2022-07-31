@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import teamHTBP.vida.Vida;
+import teamHTBP.vida.api.core.element.IElement;
 import teamHTBP.vida.client.gui.IVidaHUD;
 import teamHTBP.vida.core.element.EnumElements;
 import teamHTBP.vida.common.item.staff.ItemElementPickaxe;
@@ -35,7 +36,16 @@ public class ElementPickaxeHUD extends AbstractGui implements IVidaHUD {
         RenderSystem.enableBlend();
         int screenWidth = 3;
         int screenHeight = (int) (this.height * 4.5F / 6.0F);
-        EnumElements pixel_element = ((ItemElementPickaxe) itemStack.getItem()).getItemElement();
+        IElement pixel_element1 = ((ItemElementPickaxe) itemStack.getItem()).getElement();
+
+        boolean isEnumElement = pixel_element1 instanceof EnumElements;
+
+        if (!isEnumElement) {
+            return;
+        }
+
+        EnumElements pixel_element = (EnumElements) pixel_element1;
+
         CompoundNBT nbt = itemStack.getOrCreateTag();
         int level = nbt.getInt("level");
         int exp = nbt.getInt("pickaxeEXP");
