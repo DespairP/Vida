@@ -1,0 +1,5 @@
+{
+  "loader": "forge:obj",
+  "model": "vida:models/block/indigo_iris.obj",
+  "flip-v": true
+}

@@ -1,5 +1,0 @@
-{
-  "loader": "forge:obj",
-  "model": "vida:models/block/text_plant_1.obj",
-  "flip-v": true
-}

@@ -64,7 +64,7 @@ public class RenderLoader {
         RenderTypeLookup.setRenderLayer(VidaBlockLoader.CORE_ALTAR.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(VidaBlockLoader.prismTable.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(VidaBlockLoader.steleLife.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(VidaBlockLoader.TEXT_PLANT_1.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VidaBlockLoader.INDIGO_IRIS.get(), RenderType.getCutout());
     }
 
     @SubscribeEvent
