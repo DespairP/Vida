@@ -203,4 +203,7 @@ public class VidaBlockLoader {
 
     @RegisterItemBlock
     public static RegistryObject<Block> PLANK_VIDA_FENCE = BLOCKS.register("plank_vida_fence", DecoBlockFactory::fence);
+
+    @RegisterItemBlock
+    public static RegistryObject<Block> INDIGO_IRIS = BLOCKS.register("indigo_iris", DecoBlockFactory::plant);
 }
