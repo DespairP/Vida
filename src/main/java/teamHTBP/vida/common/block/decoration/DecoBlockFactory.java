@@ -1,5 +1,6 @@
 package teamHTBP.vida.common.block.decoration;
 
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -11,6 +12,7 @@ import net.minecraft.block.material.Material;
  */
 public class DecoBlockFactory {
     private static final Block.Properties BASIC_PROPERTIES = Block.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(3.0F);
+    private static final Block.Properties PLANT_PROPERTIES = Block.Properties.create(Material.PLANTS).notSolid().zeroHardnessAndResistance().sound(SoundType.PLANT);
 
     public static Block yAxis(){
         return  new DecoWithYBlock(BASIC_PROPERTIES);
@@ -34,5 +36,9 @@ public class DecoBlockFactory {
 
     public static Block stairs(){
         return null;
+    }
+
+    public static Block plant(){
+        return new DecoBasicBlock(PLANT_PROPERTIES);
     }
 }

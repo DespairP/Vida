@@ -213,9 +213,6 @@ public class VidaBlockLoader {
     public static RegistryObject<Block> PLANK_VIDA_DOOR = BLOCKS.register("plank_vida_door", DecoBlockFactory::door);
 
     @RegisterItemBlock
-    public static RegistryObject<Block> INDIGO_IRIS = BLOCKS.register("indigo_iris", () -> new DecoBasicBlock(plant()));
+    public static RegistryObject<Block> INDIGO_IRIS = BLOCKS.register("indigo_iris", DecoBlockFactory::plant);
 
-    static Block.Properties plant() {
-        return AbstractBlock.Properties.create(Material.PLANTS).notSolid().hardnessAndResistance(1).sound(SoundType.PLANT);
-    }
 }
