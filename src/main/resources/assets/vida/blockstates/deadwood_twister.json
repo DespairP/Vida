@@ -1,5 +1,10 @@
 {
   "variants": {
-    "": { "model": "vida:block/deadwood_twister"}
+    "half=lower": {
+      "model": "vida:block/deadwood_twister"
+    },
+    "half=upper": {
+      "model": "vida:block/air"
+    }
   }
 }
