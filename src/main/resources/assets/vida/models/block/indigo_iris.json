@@ -1,5 +1,11 @@
 {
   "loader": "forge:obj",
   "model": "vida:models/block/indigo_iris.obj",
-  "flip-v": true
+  "flip-v": true,
+  "detectCullableFaces": false,
+  "diffuseLighting": false,
+  "ambientToFullbright": false,
+  "textures": {
+    "particle": "vida:model/indigo_iris"
+  }
 }
