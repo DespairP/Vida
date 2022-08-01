@@ -1,8 +1,6 @@
 package teamHTBP.vida.common.block.decoration;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 
 /**
@@ -40,5 +38,13 @@ public class DecoBlockFactory {
 
     public static Block plant(){
         return new DecoBasicBlock(PLANT_PROPERTIES);
+    }
+
+    public static Block doublePlant(){
+        return new DoublePlantBlock(PLANT_PROPERTIES);
+    }
+
+    public static Block log(){
+        return new RotatedPillarBlock(BASIC_PROPERTIES);
     }
 }
