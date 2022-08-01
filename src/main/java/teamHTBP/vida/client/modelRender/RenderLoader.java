@@ -65,6 +65,7 @@ public class RenderLoader {
         RenderTypeLookup.setRenderLayer(VidaBlockLoader.prismTable.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(VidaBlockLoader.steleLife.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(VidaBlockLoader.INDIGO_IRIS.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(VidaBlockLoader.DEADWOOD_TWISTER.get(), RenderType.getCutout());
     }
 
     @SubscribeEvent

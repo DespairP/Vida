@@ -212,7 +212,11 @@ public class VidaBlockLoader {
     @RegisterItemBlock
     public static RegistryObject<Block> PLANK_VIDA_DOOR = BLOCKS.register("plank_vida_door", DecoBlockFactory::door);
 
+    //plant
     @RegisterItemBlock
     public static RegistryObject<Block> INDIGO_IRIS = BLOCKS.register("indigo_iris", DecoBlockFactory::plant);
+
+    @RegisterItemBlock
+    public static RegistryObject<Block> DEADWOOD_TWISTER = BLOCKS.register("deadwood_twister", DecoBlockFactory::doublePlant);
 
 }
