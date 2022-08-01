@@ -2,7 +2,9 @@
   "loader": "forge:obj",
   "model": "vida:models/block/deadwood_twister.obj",
   "flip-v": true,
-  "ambientocclusion": true,
+  "detectCullableFaces": false,
+  "diffuseLighting": true,
+  "ambientToFullbright": true,
   "textures": {
     "particle": "vida:model/deadwood_twister"
   }
