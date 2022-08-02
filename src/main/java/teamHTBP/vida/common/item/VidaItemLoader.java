@@ -5,11 +5,13 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.common.block.VidaBlockLoader;
+import teamHTBP.vida.common.entity.VidaEntityLoader;
 import teamHTBP.vida.core.element.EnumElements;
 import teamHTBP.vida.helper.RegisterItemBlock;
 import teamHTBP.vida.common.item.armor.*;
@@ -179,6 +181,11 @@ public class VidaItemLoader {
 
     //注册书
     public final static RegistryObject<Item> GUIDE_BOOK = ITEMS.register("vida_guidebook", ItemGuidebook::new);
+
+    // 刷怪蛋
+    public static final RegistryObject<Item> ANCIENT_BELIEVER_SPAWN_EGG = ITEMS.register("ancient_believer_spawn_egg",
+            () -> new ForgeSpawnEggItem(VidaEntityLoader.ANCIENT_BELIEVER,
+                    0xFF000000, 0xFFFFFFFF, base()));
 
     public Item getItem(RegistryObject<Item> registryObject) {
         return registryObject != null ? registryObject.orElse(Items.AIR) : Items.AIR;

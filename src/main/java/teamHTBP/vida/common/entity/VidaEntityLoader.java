@@ -15,6 +15,11 @@ public class VidaEntityLoader {
                     .sized(0.3F, 0.3F)
                     .build("faintlight"));
 
+    public static final RegistryObject<EntityType<AncientBeliever>> ANCIENT_BELIEVER =
+            ENTITY_TYPES.register("ancient_believer", () -> EntityType.Builder.of(AncientBeliever::new, MobCategory.MONSTER)
+                    .sized(1, 2)
+                    .build("ancient_believer"));
+
     static <T extends Entity> RegistryObject<EntityType<T>> registerMisc(String name, EntityType.EntityFactory<T> factory) {
         return ENTITY_TYPES.register(name, () -> EntityType.Builder
                 .of(factory, MobCategory.MISC)

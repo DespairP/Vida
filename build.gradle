@@ -118,7 +118,10 @@ repositories {
         name "ModMaven"
         url "https://modmaven.k-4u.nl"
     }
+    maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
 }
+
+boolean onRunData = false
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.18.2-40.1.60'
@@ -130,13 +133,21 @@ dependencies {
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
-    // excel 处理库
-    library 'org.apache.poi:poi:5.2.2'
-    library 'org.apache.poi:poi-ooxml:5.2.2'
+    implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.18:3.0.27')
 
-    //jarJar(group: 'org.apache.poi', name: 'poi', version: '*') {
-    //    jarJar.pin(it, '5.2.2')
-    //}
+    jarJar(group: 'software.bernie.geckolib', name: 'geckolib-forge-1.18', version: '[3.0.27, )') {
+        jarJar.pin(it, '3.0.27')
+    }
+
+    if (onRunData) {
+        // excel 处理库
+        library 'org.apache.poi:poi:5.2.2'
+        library 'org.apache.poi:poi-ooxml:5.2.2'
+    }
+    else {
+        compileOnly 'org.apache.poi:poi:5.2.2'
+        compileOnly 'org.apache.poi:poi-ooxml:5.2.2'
+    }
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
