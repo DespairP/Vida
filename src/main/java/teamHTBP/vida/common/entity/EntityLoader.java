@@ -10,9 +10,15 @@ import teamHTBP.vida.Vida;
 
 public class EntityLoader {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES, Vida.MOD_ID);
-    public static RegistryObject<EntityType<EntityFaintLight>> faintLight = ENTITY_TYPES.register("faintlight", () -> {
-        return EntityType.Builder.create((EntityType<EntityFaintLight> entityType, World world) -> {
-            return new EntityFaintLight(entityType, world);
-        }, EntityClassification.MISC).size(0.3F, 0.3F).build("faintlight");
-    });
+    public static RegistryObject<EntityType<EntityFaintLight>> faintLight =
+            ENTITY_TYPES.register("faintlight", () ->
+                 EntityType.Builder.create((EntityType.IFactory<EntityFaintLight>) EntityFaintLight::new, EntityClassification.MISC)
+                         .size(0.3F, 0.3F)
+                         .build("faintlight"));
+    public static final RegistryObject<EntityType<AncientBeliever>> ANCIENT_BELIEVER =
+            ENTITY_TYPES.register("ancient_believer", () ->
+                    EntityType.Builder.create((EntityType.IFactory<AncientBeliever>) AncientBeliever::new, EntityClassification.MONSTER)
+                            .size(1.0F, 2.0F)
+                            .build("ancient_believer"));
+
 }
