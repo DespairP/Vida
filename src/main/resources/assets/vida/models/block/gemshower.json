@@ -1,5 +1,7 @@
 {
 	"loader": "forge:obj",
 	"model": "vida:models/block/gemshower.obj",
-	"flip-v": true
+	"flip-v": true,
+	"detectCullableFaces": false,
+	"diffuseLighting": false
 }
