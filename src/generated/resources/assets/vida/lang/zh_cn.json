@@ -142,5 +142,9 @@
   "key.category.vida": "'生命'键位设置",
   "skill.vida.luck.name": "幸运",
   "skill.vida.requiredSkill.anno": "需要解锁的技能：",
-  "skill.vida.luck.desc": "在击杀时有几率增加伤害 \n *随着等级增加伤害会增强"
+  "skill.vida.luck.desc": "在击杀时有几率增加伤害 \n *随着等级增加伤害会增强",
+  "prismtable": "棱镜台",
+  "purfiedcauldron": "纯净之锅",
+  "collector": "元素收集器",
+  "elementcorealter": "元素核心祭坛"
 }

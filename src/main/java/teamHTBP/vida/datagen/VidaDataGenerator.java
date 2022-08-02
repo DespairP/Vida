@@ -1,5 +1,7 @@
 package teamHTBP.vida.datagen;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -11,6 +13,7 @@ import teamHTBP.vida.Vida;
  * @author DustW
  **/
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = Vida.MOD_ID)
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class VidaDataGenerator {
     @SubscribeEvent
     public static void onEvent(GatherDataEvent event) {

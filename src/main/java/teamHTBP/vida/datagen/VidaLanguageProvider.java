@@ -9,6 +9,8 @@ import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import teamHTBP.vida.datagen.processor.ExcelDataProcessor;
 import teamHTBP.vida.helper.json.JsonUtils;
 
 import java.io.IOException;
@@ -223,7 +225,35 @@ public class VidaLanguageProvider implements DataProvider {
         addEntry("skill.vida.luck.name", "Luck", "幸运");
         addEntry("skill.vida.requiredSkill.anno", "required Skills", "需要解锁的技能：");
         addEntry("skill.vida.luck.desc", "", "在击杀时有几率增加伤害 \n *随着等级增加伤害会增强");
+
+        List<TransEntry> transEntries = fromExcel();
+
+        for (TransEntry transEntry : transEntries) {
+            addEntry(transEntry.key, transEntry.enUs, transEntry.zhCn);
+        }
     }
+
+    public List<TransEntry> fromExcel() {
+        try {
+            List<TransEntry> entries = new ArrayList<>();
+
+            ExcelDataProcessor.processor(ExcelDataProcessor.excel("Vida翻译情况.xlsx"),
+                    List.of(
+                            "游戏内Id命名",
+                            "中文名称",
+                            "英文翻译名称"
+                    ),
+                    array -> entries.add(new TransEntry(array[0], array[1], array[2])));
+
+            return entries;
+        } catch (IOException | InvalidFormatException e) {
+            e.printStackTrace();
+        }
+
+        return List.of();
+    }
+
+    public record TransEntry(String key, String zhCn, String enUs) { }
 
     @Override
     public void run(HashCache cache) throws IOException {

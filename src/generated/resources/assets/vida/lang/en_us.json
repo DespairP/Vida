@@ -142,5 +142,9 @@
   "key.category.vida": "Vida Settings",
   "skill.vida.luck.name": "Luck",
   "skill.vida.requiredSkill.anno": "required Skills",
-  "skill.vida.luck.desc": ""
+  "skill.vida.luck.desc": "",
+  "prismtable": "Prism Table",
+  "purfiedcauldron": "Purfication Cauldron",
+  "collector": "Elements Collector",
+  "elementcorealter": "Element Core Altar"
 }

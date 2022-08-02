@@ -26,6 +26,8 @@ java {
     toolchain.languageVersion = JavaLanguageVersion.of(17)
 }
 
+jarJar.enable()
+
 minecraft {
     mappings channel: 'parchment', version: "2022.07.03-1.18.2"
     
@@ -86,6 +88,17 @@ minecraft {
     }
 }
 
+configurations {
+    library
+    implementation.extendsFrom library
+}
+
+minecraft.runs.all {
+    lazyToken('minecraft_classpath') {
+        configurations.library.copyRecursive().resolve().collect { it.absolutePath }.join(File.pathSeparator)
+    }
+}
+
 mixin {
     add sourceSets.main, "vida.refmap.json"
 
@@ -116,6 +129,14 @@ dependencies {
 
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    // excel 处理库
+    library 'org.apache.poi:poi:5.2.2'
+    library 'org.apache.poi:poi-ooxml:5.2.2'
+
+    //jarJar(group: 'org.apache.poi', name: 'poi', version: '*') {
+    //    jarJar.pin(it, '5.2.2')
+    //}
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
