@@ -1,7 +1,9 @@
 package teamHTBP.vida.common.entity;
 
+import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -12,6 +14,7 @@ import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeMod;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
@@ -26,7 +29,7 @@ import javax.annotation.Nullable;
 /**
  * @author DustW
  */
-public class AncientBeliever extends MonsterEntity implements IAnimatable, IAnimationTickable {
+public class AncientBeliever extends CreatureEntity implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
 
     public AncientBeliever(EntityType<AncientBeliever> pEntityType, World world) {
@@ -44,7 +47,9 @@ public class AncientBeliever extends MonsterEntity implements IAnimatable, IAnim
         return AttributeModifierMap.createMutableAttribute()
                 .createMutableAttribute(Attributes.MAX_HEALTH, 20.0D)
                 .createMutableAttribute(Attributes.FOLLOW_RANGE,10.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.2F);
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.2F)
+                .createMutableAttribute(ForgeMod.ENTITY_GRAVITY.get(), 1D)
+                .createMutableAttribute(Attributes.ARMOR,1.0D);
     }
 
     @Override
@@ -61,11 +66,6 @@ public class AncientBeliever extends MonsterEntity implements IAnimatable, IAnim
     @Override
     public AnimationFactory getFactory() {
         return factory;
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
     }
 
     @Override
