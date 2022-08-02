@@ -36,7 +36,7 @@ public class Vida {
         VidaBlockLoader.BLOCKS.register(bus);
         VidaItemLoader.ITEMS.register(bus);
         VidaParticleTypeLoader.PARTICLE.register(bus);
-        VidaBlockEntityLoader.TILE_ENTITY_DEFERRED_REGISTER.register(bus);
+        VidaBlockEntityLoader.BLOCK_ENTITIES.register(bus);
         VidaEntityLoader.ENTITY_TYPES.register(bus);
         VidaMenuTypeLoader.MENU_TYPE.register(bus);
         VidaRecipeTypeLoader.TYPES.register(bus);

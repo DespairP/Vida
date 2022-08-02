@@ -16,13 +16,13 @@ import lombok.EqualsAndHashCode;
 @AllArgsConstructor
 @Data
 public class ARGBColor extends VidaColor {
-    public static final VidaColor BLACK       = ARGBColor.of(255, 0, 0, 0);
-    public static final VidaColor DARK_BLUE   = ARGBColor.of(35, 202, 249);
-    public static final VidaColor DARK_RED    = ARGBColor.of(255, 71, 71);
-    public static final VidaColor DARK_BROWN  = ARGBColor.of(249, 212, 0);
-    public static final VidaColor CYAN_GREEN  = ARGBColor.of(35, 202, 249);
-    public static final VidaColor PURPLE      = ARGBColor.of(247, 81, 236);
-    public static final VidaColor LIGHT_BROWN = ARGBColor.of(255, 200, 145);
+    public static final ARGBColor BLACK       = ARGBColor.of(255, 0, 0, 0);
+    public static final ARGBColor DARK_BLUE   = ARGBColor.of(35, 202, 249);
+    public static final ARGBColor DARK_RED    = ARGBColor.of(255, 71, 71);
+    public static final ARGBColor DARK_BROWN  = ARGBColor.of(249, 212, 0);
+    public static final ARGBColor CYAN_GREEN  = ARGBColor.of(35, 202, 249);
+    public static final ARGBColor PURPLE      = ARGBColor.of(247, 81, 236);
+    public static final ARGBColor LIGHT_BROWN = ARGBColor.of(255, 200, 145);
 
     /** 0~255 */
     private final int a, r, g, b;

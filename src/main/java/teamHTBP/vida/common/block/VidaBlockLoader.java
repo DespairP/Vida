@@ -142,6 +142,8 @@ public class VidaBlockLoader {
     /**宝石展示架*/
     @RegisterItemBlock
     public static RegistryObject<Block> GEM_STAND = BLOCKS.register("gemshower", GemShowerBlock::new);
+    @RegisterItemBlock
+    public static final RegistryObject<Block> GEMS_TABLE = BLOCKS.register("gems_table", GemsTableBlock::new);
     /**核心祭坛*/
     @RegisterItemBlock
     public static RegistryObject<Block> CORE_ALTAR = BLOCKS.register("elementcorealtar", ElementCoreAltarBlock::new);

@@ -24,8 +24,8 @@ import java.util.List;
  * @author DustW
  **/
 public abstract class VidaBaseBlockEntity extends BlockEntity implements ITickableBlockEntity {
-    public VidaBaseBlockEntity(BlockEntityType<?> pType, BlockPos pWorldPosition, BlockState pBlockState) {
-        super(pType, pWorldPosition, pBlockState);
+    protected VidaBaseBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
     }
 
     @Nullable

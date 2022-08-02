@@ -91,7 +91,7 @@ public class RenderRegistry {
 
         event.registerBlockEntityRenderer(VidaBlockEntityLoader.TileEntityInjectTable.get(), (InjectTableRenderer::new));
 
-
+        event.registerBlockEntityRenderer(VidaBlockEntityLoader.GEMS_TABLE.get(), GemsTableRenderer::new);
     }
 
     @SubscribeEvent
