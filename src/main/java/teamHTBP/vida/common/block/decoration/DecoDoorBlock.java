@@ -7,4 +7,6 @@ public class DecoDoorBlock extends DoorBlock {
     public DecoDoorBlock(Properties builder) {
         super(builder);
     }
+
+
 }

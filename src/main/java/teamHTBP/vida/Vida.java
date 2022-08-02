@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import teamHTBP.vida.common.TileEntity.TileEntityLoader;
 import teamHTBP.vida.common.block.VidaBlockLoader;
 import teamHTBP.vida.common.entity.EntityLoader;
+import teamHTBP.vida.common.worldGen.BiomeLoader;
 import teamHTBP.vida.event.client.VidaClientEventHandler;
 import teamHTBP.vida.event.server.BlockEventLoaderServer;
 import teamHTBP.vida.client.gui.GUI.ContainerTypeLoader;
@@ -36,6 +37,7 @@ public class Vida {
         VidaBlockLoader.BLOCKS.register(bus);
         ParticleLoader.PARTICLE.register(bus);
         GenLoader.FEATURES.register(bus);
+        BiomeLoader.BIOMES.register(bus);
         TileEntityLoader.TILE_ENTITY_DEFERRED_REGISTER.register(bus);
         EntityLoader.ENTITY_TYPES.register(bus);
         ContainerTypeLoader.CONTAINER_TYPES.register(bus);
