@@ -24,8 +24,8 @@ public class DecoBlockFactory {
 
     private static final BlockBehaviour.Properties PLANT_PROPERTIES = BlockBehaviour.Properties
             .of(Material.PLANT)
-            .noOcclusion()
             .instabreak()
+            .noCollission()
             .sound(SoundType.GRASS);
 
     public static Block yAxis(){
