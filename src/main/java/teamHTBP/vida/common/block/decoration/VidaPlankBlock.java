@@ -1,13 +1,12 @@
-package teamHTBP.vida.common.block.deco;
+package teamHTBP.vida.common.block.decoration;
+
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -17,20 +16,17 @@ import net.minecraft.world.phys.BlockHitResult;
 import teamHTBP.vida.api.common.block.IDecoBlock;
 import teamHTBP.vida.common.item.VidaItemLoader;
 
-public class DeepStoneBrickPillarBlock extends RotatedPillarBlock implements IDecoBlock {
+public class VidaPlankBlock extends Block implements IDecoBlock {
     private static final IntegerProperty STATE = IntegerProperty.create("type", 0, 2);
 
-    public DeepStoneBrickPillarBlock() {
-        super(Properties.of(Material.STONE));
+    public VidaPlankBlock() {
+        super(Block.Properties.of(Material.WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f));
+        //this.setDefaultState(this.getStateContainer().getBaseState().with(STATE, 0));
     }
 
-    /**
-     * state是柱子的品种
-     */
-    public DeepStoneBrickPillarBlock(int state) {
-        super(Properties.of(Material.STONE).strength(2.0f, 6.0f)
-                .sound(SoundType.STONE));
-        this.registerDefaultState(this.getStateDefinition().any().setValue(STATE, state).setValue(AXIS, Direction.Axis.Y));
+    public VidaPlankBlock(int state) {
+        super(Block.Properties.of(Material.WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(STATE, state));
     }
 
     @Override
@@ -38,20 +34,19 @@ public class DeepStoneBrickPillarBlock extends RotatedPillarBlock implements IDe
         if (!worldIn.isClientSide) {
             if (player.getInventory().getSelected().getItem() == VidaItemLoader.WAND_VIDA.get()) {
                 int stateInt = state.getValue(STATE);
-                Direction.Axis axis = state.getValue(AXIS);
                 stateInt = (stateInt >= 2 ? 0 : stateInt + 1);
-                BlockState newState = state.setValue(STATE, stateInt).setValue(AXIS, axis);
+                BlockState newState = state.setValue(STATE, stateInt);
                 worldIn.setBlockAndUpdate(pos, newState);
                 return InteractionResult.SUCCESS;
             }
-            return super.use(state, worldIn, pos, player, handIn, hit);
         }
-        return InteractionResult.SUCCESS;
+        return super.use(state, worldIn, pos, player, handIn, hit);
     }
 
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(STATE, AXIS);
+        builder.add(STATE);
+        super.createBlockStateDefinition(builder);
     }
 }

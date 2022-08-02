@@ -6,7 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.common.block.deco.*;
+import teamHTBP.vida.common.block.decoration.*;
 import teamHTBP.vida.common.block.environment.DeepStoneBlock;
 import teamHTBP.vida.common.block.environment.ElementOreBlock;
 import teamHTBP.vida.common.block.environment.VidaLeavesBlock;

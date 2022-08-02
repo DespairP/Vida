@@ -1,4 +1,4 @@
-package teamHTBP.vida.common.block.deco;
+package teamHTBP.vida.common.block.decoration;
 
 import teamHTBP.vida.api.common.block.IDecoBlock;
 import teamHTBP.vida.common.block.SingleWithYBlock;

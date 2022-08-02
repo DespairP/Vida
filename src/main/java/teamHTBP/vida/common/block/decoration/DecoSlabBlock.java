@@ -1,4 +1,4 @@
-package teamHTBP.vida.common.block.deco;
+package teamHTBP.vida.common.block.decoration;
 
 import net.minecraft.world.level.block.SlabBlock;
 import teamHTBP.vida.api.common.block.IDecoBlock;

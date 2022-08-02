@@ -1,4 +1,4 @@
-package teamHTBP.vida.common.block.deco;
+package teamHTBP.vida.common.block.decoration;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
