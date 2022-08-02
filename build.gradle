@@ -29,6 +29,9 @@ repositories {
         name "ModMaven"
         url "https://modmaven.k-4u.nl"
     }
+    maven {
+        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+    }
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
@@ -129,6 +132,7 @@ dependencies {
     // at runtime, use the full JEI jar
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
     // compile against the JEI API but do not include it at runtime
+    implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.16.5:3.0.83')
 
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'

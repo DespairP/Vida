@@ -6,6 +6,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import software.bernie.geckolib3.GeckoLib;
 import teamHTBP.vida.common.TileEntity.TileEntityLoader;
 import teamHTBP.vida.common.block.VidaBlockLoader;
 import teamHTBP.vida.common.entity.EntityLoader;
@@ -44,5 +45,6 @@ public class Vida {
         MinecraftForge.EVENT_BUS.register(ItemElementCoreVoid.class);
         MinecraftForge.EVENT_BUS.register(BlockEventLoaderServer.class);
         RecipeManager.register(bus);
+        GeckoLib.initialize();
     }
 }
