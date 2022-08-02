@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "half=lower": {
+      "loader": "forge:obj",
+      "model": "vida:models/block/deadwood_twister.obj",
+      "flip-v": true
+    },
+    "half=upper": {
+      "model": "vida:block/air"
+    }
+  }
+}
