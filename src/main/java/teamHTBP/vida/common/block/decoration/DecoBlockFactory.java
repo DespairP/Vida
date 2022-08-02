@@ -21,7 +21,7 @@ public class DecoBlockFactory {
             .of(Material.STONE)
             .sound(SoundType.STONE)
             .strength(3.0F);
-    
+
     private static final BlockBehaviour.Properties PLANT_PROPERTIES = BlockBehaviour.Properties
             .of(Material.PLANT)
             .noOcclusion()

@@ -65,6 +65,8 @@ public class RenderRegistry {
         ItemBlockRenderTypes.setRenderLayer(VidaBlockLoader.CORE_ALTAR.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(VidaBlockLoader.prismTable.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(VidaBlockLoader.steleLife.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(VidaBlockLoader.INDIGO_IRIS.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(VidaBlockLoader.DEADWOOD_TWISTER.get(), RenderType.cutout());
     }
 
     @SubscribeEvent
