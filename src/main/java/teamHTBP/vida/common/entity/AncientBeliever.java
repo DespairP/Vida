@@ -5,10 +5,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -32,9 +29,13 @@ public class AncientBeliever extends PathfinderMob implements IAnimatable, IAnim
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new FloatGoal(this));
+        // nothing
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+        // jump
+        this.goalSelector.addGoal(0, new FloatGoal(this));
+        // look
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        // move look
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
     }
 
@@ -50,8 +51,17 @@ public class AncientBeliever extends PathfinderMob implements IAnimatable, IAnim
     }
 
     private <T extends IAnimatable> PlayState predicate(AnimationEvent<T> event) {
-        event.getController().setAnimation(new AnimationBuilder()
-                .addAnimation("animation.ancient_believer.standby", true));
+        var controller = event.getController();
+
+        if (goalSelector.getRunningGoals().anyMatch(g -> g.getFlags().contains(Goal.Flag.MOVE))) {
+            controller.setAnimation(new AnimationBuilder()
+                    .addAnimation("animation.ancient_believer.walk", true));
+        }
+        else {
+            controller.setAnimation(new AnimationBuilder()
+                    .addAnimation("animation.ancient_believer.standby", true));
+        }
+
         return PlayState.CONTINUE;
     }
 
