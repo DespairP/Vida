@@ -11,6 +11,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
@@ -103,8 +104,12 @@ public class AncientBeliever extends PathfinderMob implements IAnimatable, IAnim
         return entityData.get(flag);
     }
 
+    boolean moving() {
+        return has(GOAL_FLAG_MOVE) && !position().equals(new Vec3(xOld, yOld, zOld));
+    }
+
     private <T extends IAnimatable> PlayState standbyPredicate(AnimationEvent<T> event) {
-        if (has(GOAL_FLAG_MOVE) || has(GOAL_FLAG_JUMP)) {
+        if (moving() || has(GOAL_FLAG_JUMP)) {
             return PlayState.STOP;
         }
         else {
@@ -115,7 +120,7 @@ public class AncientBeliever extends PathfinderMob implements IAnimatable, IAnim
     }
 
     private <T extends IAnimatable> PlayState walkPredicate(AnimationEvent<T> event) {
-        if (has(GOAL_FLAG_MOVE)) {
+        if (moving()) {
             event.getController().setAnimation(new AnimationBuilder()
                     .addAnimation("animation.ancient_believer.walk", true));
             return PlayState.CONTINUE;
