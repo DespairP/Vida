@@ -47,22 +47,37 @@ public class AncientBeliever extends PathfinderMob implements IAnimatable, IAnim
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "controller", 5, this::predicate));
+        data.addAnimationController(new AnimationController<>(this, "standby_controller",
+                5, this::standbyPredicate));
+
+        data.addAnimationController(new AnimationController<>(this, "walk_controller",
+                5, this::walkPredicate));
     }
 
-    private <T extends IAnimatable> PlayState predicate(AnimationEvent<T> event) {
-        var controller = event.getController();
+    boolean has(Goal.Flag flag) {
+        return goalSelector.getRunningGoals().anyMatch(g -> g.getFlags().contains(flag));
+    }
 
-        if (goalSelector.getRunningGoals().anyMatch(g -> g.getFlags().contains(Goal.Flag.MOVE))) {
-            controller.setAnimation(new AnimationBuilder()
-                    .addAnimation("animation.ancient_believer.walk", true));
+    private <T extends IAnimatable> PlayState standbyPredicate(AnimationEvent<T> event) {
+        if (has(Goal.Flag.MOVE) || has(Goal.Flag.JUMP)) {
+            return PlayState.STOP;
         }
         else {
-            controller.setAnimation(new AnimationBuilder()
+            event.getController().setAnimation(new AnimationBuilder()
                     .addAnimation("animation.ancient_believer.standby", true));
+            return PlayState.CONTINUE;
         }
+    }
 
-        return PlayState.CONTINUE;
+    private <T extends IAnimatable> PlayState walkPredicate(AnimationEvent<T> event) {
+        if (has(Goal.Flag.MOVE)) {
+            event.getController().setAnimation(new AnimationBuilder()
+                    .addAnimation("animation.ancient_believer.walk", true));
+            return PlayState.CONTINUE;
+        }
+        else {
+            return PlayState.STOP;
+        }
     }
 
     @Override
