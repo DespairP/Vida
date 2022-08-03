@@ -6,7 +6,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 import teamHTBP.vida.Vida;
-import teamHTBP.vida.client.model.entity.AncientBelieverModel;
+import teamHTBP.vida.client.modelRender.entityModel.AncientBelieverModel;
 import teamHTBP.vida.common.entity.AncientBeliever;
 
 /**

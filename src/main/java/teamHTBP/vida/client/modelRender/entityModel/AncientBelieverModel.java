@@ -1,4 +1,4 @@
-package teamHTBP.vida.client.model.entity;
+package teamHTBP.vida.client.modelRender.entityModel;
 
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedTickingGeoModel;
