@@ -1,4 +1,4 @@
-package teamHTBP.vida.common.worldGen;
+package teamHTBP.vida.common.worldGen.biome;
 
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;

@@ -17,6 +17,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeMod;
@@ -72,15 +73,18 @@ public class AncientBeliever extends CreatureEntity implements IAnimatable, IAni
                 .createMutableAttribute(Attributes.MAX_HEALTH, 20.0D)
                 .createMutableAttribute(Attributes.FOLLOW_RANGE,10.0D)
                 .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.2F)
-                .createMutableAttribute(ForgeMod.ENTITY_GRAVITY.get(), 1D)
-                .createMutableAttribute(Attributes.ARMOR,1.0D);
+                .createMutableAttribute(Attributes.ARMOR,1.0D)
+                .createMutableAttribute(ForgeMod.ENTITY_GRAVITY.get(), 1.0D)
+                .createMutableAttribute(Attributes.ARMOR_TOUGHNESS, 1.0D)
+                .createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE,0.1D);
+
     }
 
     /**加入动画控制器*/
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "controller", 5, this::predicateStand));
-        data.addAnimationController(new AnimationController<>(this, "controller", 5, this::predicateMoving));
+        data.addAnimationController(new AnimationController<>(this, "stand_controller", 5, this::predicateStand));
+        data.addAnimationController(new AnimationController<>(this, "walk_controller", 5, this::predicateMoving));
     }
 
     /**注册生物变量*/
@@ -143,7 +147,7 @@ public class AncientBeliever extends CreatureEntity implements IAnimatable, IAni
 
     /**生物是否在移动*/
     private boolean isEntityMoving(){
-        return (this.dataManager.get(IS_MOVING) || this.dataManager.get(IS_JUMPING)) && !positionOffset().equals(new Vector3d(0,0,0));
+        return (this.dataManager.get(IS_MOVING) || this.dataManager.get(IS_JUMPING)) && !positionOffset().equals(new Vector3d(0, 0, 0));
     }
 
     /**nbt读取*/
