@@ -12,7 +12,7 @@ public class AncientBelieverModel extends AnimatedTickingGeoModel<AncientBelieve
 
     @Override
     public ResourceLocation getModelLocation(AncientBeliever object) {
-        return new ResourceLocation(Vida.MOD_ID, "geo/entity/ancient_believer.json");
+        return new ResourceLocation(Vida.MOD_ID, "geo/entity/ancient_believer.geo.json");
     }
 
     @Override

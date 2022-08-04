@@ -1,8 +1,11 @@
 package teamHTBP.vida.network;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import teamHTBP.vida.Vida;
 import teamHTBP.vida.network.client.BottlesPacket;
@@ -20,6 +23,18 @@ public class VidaPacketManager {
             PROTOCOL_VERSION::equals,
             PROTOCOL_VERSION::equals
     );
+
+    public static void sendToServer(Object message) {
+        INSTANCE.sendToServer(message);
+    }
+
+    public static void sendToPlayer(Object message, ServerPlayer player) {
+        INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), message);
+    }
+
+    public static void sendToEntity(Object message, Entity entity) {
+        INSTANCE.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> entity), message);
+    }
 
     static int id = 0;
 
