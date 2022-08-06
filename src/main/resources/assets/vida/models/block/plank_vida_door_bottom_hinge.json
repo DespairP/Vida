@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_rh",
+  "textures": {
+    "top": "vida:block/plank_vida_door_top",
+    "bottom": "vida:block/plank_vida_door_bottom"
+  }
+}
