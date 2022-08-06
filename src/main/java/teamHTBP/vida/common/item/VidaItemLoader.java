@@ -69,6 +69,8 @@ public class VidaItemLoader {
     public final static RegistryObject<Item> earthEnergyGemFragment = ITEMS.register("soul_fragment_earth", ItemEnergyElementFragment::new);
     //测试物品（PartyParrot）
     public static RegistryObject<Item> itemA = ITEMS.register("item_test", TestItem::new);
+    // 元素法杖
+    public static final RegistryObject<Item> ELEMENT_WAND = ITEMS.register("element_wand", () -> new ElementWandItem(base()));
     //生命法杖
     public static RegistryObject<Item> WAND_VIDA = ITEMS.register("wand_vida", ItemVidaWand::new);
     //生命树枝

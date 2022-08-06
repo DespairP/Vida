@@ -2,6 +2,7 @@ package teamHTBP.vida.common.entity.manager;
 
 import lombok.Getter;
 import net.minecraft.world.entity.PathfinderMob;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,8 +26,8 @@ public class FiniteStateManager<T extends PathfinderMob> {
         states.put(predicate, state);
     }
 
-    public boolean isActive(String state) {
-        return activeState.equals(state);
+    public boolean isActive(@NotNull String state) {
+        return state.equals(activeState);
     }
 
     public void refresh() {

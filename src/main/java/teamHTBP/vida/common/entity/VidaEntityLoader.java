@@ -7,6 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import teamHTBP.vida.Vida;
+import teamHTBP.vida.common.entity.projectile.ElementBallProjectile;
 
 public class VidaEntityLoader {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES, Vida.MOD_ID);
@@ -19,6 +20,9 @@ public class VidaEntityLoader {
             ENTITY_TYPES.register("ancient_believer", () -> EntityType.Builder.of(AncientBeliever::new, MobCategory.MONSTER)
                     .sized(1, 2)
                     .build("ancient_believer"));
+
+    public static final RegistryObject<EntityType<ElementBallProjectile>> ELEMENT_BALL =
+            registerMisc("element_ball", ElementBallProjectile::new);
 
     static <T extends Entity> RegistryObject<EntityType<T>> registerMisc(String name, EntityType.EntityFactory<T> factory) {
         return ENTITY_TYPES.register(name, () -> EntityType.Builder

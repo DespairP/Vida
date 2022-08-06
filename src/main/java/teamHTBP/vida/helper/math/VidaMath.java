@@ -1,13 +1,16 @@
 package teamHTBP.vida.helper.math;
 
 import com.mojang.math.Vector3f;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 /**
  * @author DustW
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class VidaMath {
-    public static float PI = (float) Math.PI;
-    public static float PI_O_2 = PI / 2;
+    public static final float PI = (float) Math.PI;
+    public static final float PI_O_2 = PI / 2;
 
     /**
      * 进行贝塞尔曲线插值
@@ -18,7 +21,7 @@ public class VidaMath {
      * @param t    0~1 时间
      * @return     插值结果
      */
-    Vector3f bezier3(Vector3f pos0, Vector3f pos1, Vector3f pos2, Vector3f pos3, double t) {
+    public static Vector3f bezier3(Vector3f pos0, Vector3f pos1, Vector3f pos2, Vector3f pos3, double t) {
         Vector3f pos0f = pos0.copy();
         pos0f.mul((float) Math.pow(1 - t, 3));
 
