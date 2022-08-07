@@ -10,10 +10,10 @@ import teamHTBP.vida.common.entity.manager.AttackManager;
 /**
  * @author DustW
  */
-public class AttackManagerAttackGoal extends MeleeAttackGoal {
+public class AttackManagerMeleeAttackGoal extends MeleeAttackGoal {
     AttackManager attackManager;
 
-    public <T extends PathfinderMob & AttackManagerEntity> AttackManagerAttackGoal(T pMob) {
+    public <T extends PathfinderMob & AttackManagerEntity> AttackManagerMeleeAttackGoal(T pMob) {
         super(pMob, 1, false);
     }
 
@@ -39,7 +39,7 @@ public class AttackManagerAttackGoal extends MeleeAttackGoal {
         if (pDistToEnemySqr <= d0 && isTimeToAttack() && !attackManager().isStarted()) {
             attackManager().start();
             this.resetAttackCooldown();
-            this.mob.swing(InteractionHand.MAIN_HAND);
+            mob.swing(InteractionHand.MAIN_HAND);
         }
         else if (pDistToEnemySqr > d0 && attackManager().isStarted()) {
             attackManager().stop();

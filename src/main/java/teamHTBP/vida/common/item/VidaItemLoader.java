@@ -187,7 +187,21 @@ public class VidaItemLoader {
     // 刷怪蛋
     public static final RegistryObject<Item> ANCIENT_BELIEVER_SPAWN_EGG = ITEMS.register("ancient_believer_spawn_egg",
             () -> new ForgeSpawnEggItem(VidaEntityLoader.ANCIENT_BELIEVER,
-                    0xFF000000, 0xFFFFFFFF, base()));
+                    0xFF000000, 0xFFFFFFFF, base()) {
+                @Override
+                public int getColor(int pTintIndex) {
+                    return 0xFF_FF_FF_FF;
+                }
+            });
+
+    public static final RegistryObject<Item> SILENT_BELIEVER_SPAWN_EGG = ITEMS.register("silent_believer_spawn_egg",
+            () -> new ForgeSpawnEggItem(VidaEntityLoader.SILENT_BELIEVER,
+                    0xFF000000, 0xFFFFFFFF, base()) {
+                @Override
+                public int getColor(int pTintIndex) {
+                    return 0xFF_FF_FF_FF;
+                }
+            });
 
     public Item getItem(RegistryObject<Item> registryObject) {
         return registryObject != null ? registryObject.orElse(Items.AIR) : Items.AIR;

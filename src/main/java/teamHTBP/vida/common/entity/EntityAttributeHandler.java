@@ -15,5 +15,6 @@ public class EntityAttributeHandler {
     @SubscribeEvent
     public static void onEvent(EntityAttributeCreationEvent event) {
         event.put(VidaEntityLoader.ANCIENT_BELIEVER.get(), AncientBeliever.createAttributes().build());
+        event.put(VidaEntityLoader.SILENT_BELIEVER.get(), SilentBeliever.createAttributes().build());
     }
 }

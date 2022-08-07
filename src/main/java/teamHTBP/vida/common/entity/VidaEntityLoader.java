@@ -21,6 +21,11 @@ public class VidaEntityLoader {
                     .sized(1, 2)
                     .build("ancient_believer"));
 
+    public static final RegistryObject<EntityType<SilentBeliever>> SILENT_BELIEVER =
+            ENTITY_TYPES.register("silent_believer", () -> EntityType.Builder.of(SilentBeliever::new, MobCategory.MONSTER)
+                    .sized(1, 2)
+                    .build("silent_believer"));
+
     public static final RegistryObject<EntityType<ElementBallProjectile>> ELEMENT_BALL =
             registerMisc("element_ball", ElementBallProjectile::new);
 
