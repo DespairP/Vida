@@ -145,6 +145,11 @@ public class ElementTailParticle extends AbstractTailParticle {
             else {
                 setShader();
                 RenderSystem.setShaderTexture(0, TAIL);
+                RenderSystem.setShaderColor(
+                        color.getR() / 256F,
+                        color.getG() / 256F,
+                        color.getB() / 256F,
+                        color.getA() / 256F);
             }
 
             RenderSystem.enableBlend();
