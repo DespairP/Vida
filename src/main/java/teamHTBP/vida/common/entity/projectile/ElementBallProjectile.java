@@ -1,6 +1,5 @@
 package teamHTBP.vida.common.entity.projectile;
 
-import com.mojang.math.Vector3f;
 import lombok.EqualsAndHashCode;
 import lombok.Setter;
 import net.minecraft.core.particles.ParticleTypes;
@@ -16,7 +15,8 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import teamHTBP.vida.common.entity.VidaEntityLoader;
-import teamHTBP.vida.helper.math.VidaMath;
+import teamHTBP.vida.helper.math.Vector3;
+import teamHTBP.vida.helper.math.curve.Bezier3Curve;
 
 import java.util.Comparator;
 import java.util.List;
@@ -90,7 +90,7 @@ public class ElementBallProjectile extends Projectile {
                     discard();
                 }
 
-                movePoints.setTargetPos(new Vector3f(target.position()));
+                movePoints.setTargetPos(new Vector3(target.position()));
 
                 setPos(movePoints.getPos());
 
@@ -162,20 +162,20 @@ public class ElementBallProjectile extends Projectile {
         static final float ROT = (float) Math.toRadians(30);
         static final float ROT_COS = Mth.cos(ROT);
 
-        Vector3f reachedPos;
-        Vector3f inertiaVec;
-        Vector3f tempPos;
+        Vector3 reachedPos;
+        Vector3 inertiaVec;
+        Vector3 tempPos;
         @Setter
-        Vector3f targetPos;
+        Vector3 targetPos;
 
         boolean started;
         int startedTick;
         int maxTick;
 
         public void start(Vec3 reachedPos, Vec3 inertiaVec, Vec3 targetPos, int maxTick) {
-            this.reachedPos = new Vector3f(reachedPos);
-            this.inertiaVec = new Vector3f(inertiaVec);
-            this.targetPos = new Vector3f(targetPos);
+            this.reachedPos = new Vector3(reachedPos);
+            this.inertiaVec = new Vector3(inertiaVec);
+            this.targetPos = new Vector3(targetPos);
             this.maxTick = maxTick;
 
             tempPos = this.targetPos;
@@ -209,7 +209,7 @@ public class ElementBallProjectile extends Projectile {
 
         public Vec3 getPos() {
             if (started())
-                return new Vec3(VidaMath.bezier3(reachedPos, inertiaVec, tempPos, targetPos, (float) startedTick / maxTick));
+                return Bezier3Curve.bezier3(reachedPos, inertiaVec, tempPos, targetPos, (float) startedTick / maxTick).vec3();
             return Vec3.ZERO;
         }
     }

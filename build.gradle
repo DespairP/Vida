@@ -119,6 +119,7 @@ repositories {
         url "https://modmaven.k-4u.nl"
     }
     maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+    maven {url "https://maven.firstdarkdev.xyz/snapshots"}
 }
 
 boolean onRunData = false
@@ -134,6 +135,9 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
     implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.18:3.0.27')
+
+    implementation fg.deobf("com.lowdragmc.shimmer:Shimmer-forge-1.18.2:0.1.9")
+    implementation fg.deobf("com.lowdragmc.ldlib:LowDragLib:1.18.2-0.6.5")
 
     jarJar(group: 'software.bernie.geckolib', name: 'geckolib-forge-1.18', version: '[3.0.27, )') {
         jarJar.pin(it, '3.0.27')
