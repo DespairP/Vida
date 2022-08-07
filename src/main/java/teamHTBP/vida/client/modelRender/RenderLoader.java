@@ -50,7 +50,7 @@ public class RenderLoader {
     public static ResourceLocation injectTable_top = new ResourceLocation(Vida.MOD_ID, "model/injectiontable_top");
     public static ResourceLocation injectTable_side = new ResourceLocation(Vida.MOD_ID, "model/injectiontable_side");
 
-
+    public static ResourceLocation TRAIL_PARTICLE = new ResourceLocation(Vida.MOD_ID,"");
     @SubscribeEvent
     public static void onRenderTypeSetup(FMLClientSetupEvent event) {
         RenderTypeLookup.setRenderLayer(VidaBlockLoader.saplingVida.get(), RenderType.getCutout());
@@ -118,8 +118,8 @@ public class RenderLoader {
     }
 
     @SubscribeEvent
-    public static void onAtlasEvent(TextureStitchEvent.Pre event) {
-        Vida.LOGGER.info("register Atlas");
+    public static void onLoadVidaBlockAtlasEvent(TextureStitchEvent.Pre event) {
+        Vida.LOGGER.info("register Vida BlockAtlas");
         ResourceLocation stitching = event.getMap().getTextureLocation();
         if (!stitching.equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE)) {
             return;
@@ -143,5 +143,10 @@ public class RenderLoader {
         event.addSprite(injectTable_side);
     }
 
+    @SubscribeEvent
+    public static void onLoadOtherAtlasEvent(TextureStitchEvent.Pre event) {
+        Vida.LOGGER.info("register Vida ParticleAtlas");
+        ResourceLocation stitching = event.getMap().getTextureLocation();
 
+    }
 }
