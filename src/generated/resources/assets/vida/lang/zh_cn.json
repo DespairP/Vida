@@ -66,6 +66,7 @@
   "item.vida.blueprint_epic": "史诗蓝图",
   "item.vida.blueprint_challenge": "挑战蓝图",
   "item.vida.blueprint_void": "虚空蓝图",
+  "item.vida.blueprintbelt": "图纸腰带",
   "item.vida.item_test": "From team party parrot",
   "item.vida.testaromor": "叶落头盔",
   "block.vida.logvida": "生命原木",
@@ -120,11 +121,11 @@
   "block.vida.lush_pillar_2": "饰纹苍黄木板",
   "block.vida.lush_pillar_3": "饰纹苍黄木板",
   "block.vida.lush_pillar_4": "饰纹苍黄木板",
-  "block.vida.goldelementcrystal": "闪金悬浮水晶",
-  "block.vida.woodelementcrystal": "朽木悬浮水晶",
-  "block.vida.aquaelementcrystal": "海蓝悬浮水晶",
-  "block.vida.fireelementcrystal": "烈焰悬浮水晶",
-  "block.vida.earthelementcrystal": "地核悬浮水晶",
+  "block.vida.gold_crystal": "闪金悬浮水晶",
+  "block.vida.wood_crystal": "朽木悬浮水晶",
+  "block.vida.aqua_crystal": "海蓝悬浮水晶",
+  "block.vida.fire_crystal": "烈焰悬浮水晶",
+  "block.vida.earth_crystal": "地核悬浮水晶",
   "block.vida.purfiedcauldron": "纯净之锅",
   "block.vida.prismtable": "棱镜台",
   "block.vida.orereactionmachine": "矿石反应机",
@@ -183,5 +184,6 @@
   "block.vida.crop_plamstem": "苍蓝草茎",
   "block.vida.crop_sullenhydrangea": "忧郁紫球草",
   "block.vida.crop_sweetcyanreed": "甘青芦苇",
-  "item.vida.ancient_believer_spawn_egg": "栖树遗灵生成物"
+  "item.vida.ancient_believer_spawn_egg": "栖树遗灵生成物",
+  "item.vida.silent_believer_spawn_egg": "栖树寂灵生成物"
 }
