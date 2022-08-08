@@ -1,10 +1,12 @@
 package teamHTBP.vida.common.particle;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.IParticleFactory;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import teamHTBP.vida.common.particle.base.BaseParticleData;
 import teamHTBP.vida.common.particle.base.BaseParticleFactory;
 import teamHTBP.vida.common.particle.base.BaseVidaParticleType;
 
