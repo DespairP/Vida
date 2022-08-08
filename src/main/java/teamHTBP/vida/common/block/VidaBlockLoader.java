@@ -156,12 +156,12 @@ public class VidaBlockLoader {
     public static RegistryObject<Block> blueprintDesigner = BLOCKS.register("blueprintdesigner", BlueprintDesignerBlock::new);
 
     //植物
-    public static RegistryObject<Block> CROP_CRISMCREST = BLOCKS.register("crop_crimsoncrest", () -> new ParticleElementCropBlock(5, EnumElements.FIRE, () -> VidaItemLoader.CROP_CRISMCREST.get(), ARGBColor.DARK_RED));
-    public static RegistryObject<Block> CROP_HEARTOFWAL = BLOCKS.register("crop_heartofwal", () -> new ParticleElementCropBlock(5, EnumElements.WOOD, () -> VidaItemLoader.CROP_HEARTOFWAL.get(), ARGBColor.LIGHT_BROWN));
-    public static RegistryObject<Block> CROP_NITRITETHORNS = BLOCKS.register("crop_nitritethorns", () -> new ParticleElementCropBlock(5, EnumElements.GOLD, () -> VidaItemLoader.CROP_NITRITETHORNS.get(), ARGBColor.DARK_BROWN));
-    public static RegistryObject<Block> CROP_PLAMSTEM = BLOCKS.register("crop_plamstem", () -> new ParticleElementCropBlock(5, EnumElements.AQUA, () -> VidaItemLoader.CROP_PLAMSTEM.get(), ARGBColor.DARK_BLUE));
-    public static RegistryObject<Block> CROP_SULLENHYDRANGEA = BLOCKS.register("crop_sullenhydrangea", () -> new ParticleElementCropBlock(5, EnumElements.AQUA, () -> VidaItemLoader.CROP_SULLENHYDRANGEA.get(), ARGBColor.PURPLE));
-    public static RegistryObject<Block> CROP_SWEETCYANREED = BLOCKS.register("crop_sweetcyanreed", () -> new ParticleElementCropBlock(5, EnumElements.WOOD, () -> VidaItemLoader.CROP_SWEETCYANREED.get(), ARGBColor.CYAN_GREEN));
+    public static RegistryObject<Block> CROP_CRISMCREST         = BLOCKS.register("crop_crimsoncrest", () -> new ParticleElementCropBlock(5, EnumElements.FIRE, () -> VidaItemLoader.CROP_CRISMCREST.get(), ARGBColor.DARK_RED));
+    public static RegistryObject<Block> CROP_HEARTOFWAL         = BLOCKS.register("crop_heartofwal", () -> new ParticleElementCropBlock(5, EnumElements.WOOD, () -> VidaItemLoader.CROP_HEARTOFWAL.get(), ARGBColor.LIGHT_BROWN));
+    public static RegistryObject<Block> CROP_NITRITETHORNS      = BLOCKS.register("crop_nitritethorns", () -> new ParticleElementCropBlock(5, EnumElements.GOLD, () -> VidaItemLoader.CROP_NITRITETHORNS.get(), ARGBColor.DARK_BROWN));
+    public static RegistryObject<Block> CROP_PLAMSTEM           = BLOCKS.register("crop_plamstem", () -> new ParticleElementCropBlock(5, EnumElements.AQUA, () -> VidaItemLoader.CROP_PLAMSTEM.get(), ARGBColor.DARK_BLUE));
+    public static RegistryObject<Block> CROP_SULLENHYDRANGEA    = BLOCKS.register("crop_sullenhydrangea", () -> new ParticleElementCropBlock(5, EnumElements.AQUA, () -> VidaItemLoader.CROP_SULLENHYDRANGEA.get(), ARGBColor.PURPLE));
+    public static RegistryObject<Block> CROP_SWEETCYANREED      = BLOCKS.register("crop_sweetcyanreed", () -> new ParticleElementCropBlock(5, EnumElements.WOOD, () -> VidaItemLoader.CROP_SWEETCYANREED.get(), ARGBColor.CYAN_GREEN));
 
     //这里添加新的方块
     //@RegisterItemBlock

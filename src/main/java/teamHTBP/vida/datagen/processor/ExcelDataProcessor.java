@@ -14,14 +14,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 
 /**
  * @author DustW
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ExcelDataProcessor {
-    public static void processor(File file, List<String> coNames, Consumer<String[]> consumer) throws IOException, InvalidFormatException {
+    /**
+     * 处理 excel 文件
+     * @param file     文件本身
+     * @param coNames  需要匹配的列名表
+     * @param consumer 对每条合格的数据进行处理
+     */
+    public static void processor(File file, List<String> coNames, BiConsumer<String, String[]> consumer) throws IOException, InvalidFormatException {
         try (XSSFWorkbook workbook = new XSSFWorkbook(file)) {
             for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
                 XSSFSheet sheet = workbook.getSheetAt(i);
@@ -34,7 +40,7 @@ public class ExcelDataProcessor {
 
                 List<Integer> cols = new ArrayList<>();
 
-                while (cells.hasNext()) {
+                while (cols.size() != coNames.size()) {
                     Cell cell = cells.next();
 
                     if (cell.getStringCellValue().isEmpty()) {
@@ -56,10 +62,10 @@ public class ExcelDataProcessor {
                     }
 
                     if (Arrays.stream(processorData).anyMatch(String::isEmpty)) {
-                        return;
+                        break;
                     }
 
-                    consumer.accept(processorData);
+                    consumer.accept(sheet.getSheetName(), processorData);
                 }
             }
         }

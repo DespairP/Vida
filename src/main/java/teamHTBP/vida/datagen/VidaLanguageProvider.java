@@ -10,6 +10,7 @@ import net.minecraft.data.HashCache;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import teamHTBP.vida.common.block.VidaBlockLoader;
 import teamHTBP.vida.datagen.processor.ExcelDataProcessor;
 import teamHTBP.vida.helper.json.JsonUtils;
 
@@ -56,6 +57,8 @@ public class VidaLanguageProvider implements DataProvider {
         item(prism, "Prism", "棱镜");
         item(elementBottle, "Element Bottle", "元素之瓶");
 
+        item(BLUEPRINT_BELT, "", "图纸腰带");
+
         item(ELEMENTCORE_VOID, "Pure Core", "空白核心");
         item(ELEMENTCORE_GOLD, "Core of Gold", "金之核心");
         item(ELEMENTCORE_WOOD, "Core of Wood", "木之核心");
@@ -81,55 +84,58 @@ public class VidaLanguageProvider implements DataProvider {
         item(ARMOR_AQUA_HELMET, "Shiny Metal Helmet", "闪金头盔");
         item(ARMOR_EARTH_HELMET, "Earthcore Helmet", "地核头盔");
 
-        item(ARMOR_GOLD_CHESTPLATES , "Burstflame Leggings", "烈焰腿甲");
-        item(ARMOR_WOOD_CHESTPLATES , "Aquamarine Leggings", "海洋腿甲");
-        item(ARMOR_AQUA_CHESTPLATES , "Greenwood Leggings", "朽木腿甲");
-        item(ARMOR_FIRE_CHESTPLATES , "Shiny Metal Leggings", "闪金腿甲");
+        item(ARMOR_GOLD_CHESTPLATES, "Burstflame Leggings", "烈焰腿甲");
+        item(ARMOR_WOOD_CHESTPLATES, "Aquamarine Leggings", "海洋腿甲");
+        item(ARMOR_AQUA_CHESTPLATES, "Greenwood Leggings", "朽木腿甲");
+        item(ARMOR_FIRE_CHESTPLATES, "Shiny Metal Leggings", "闪金腿甲");
         item(ARMOR_EARTH_CHESTPLATES, "Earthcore Leggings", "地核腿甲");
 
-        item(ARMOR_GOLD_LEGGINGS , "Burstflame Leggings with Element Bottles", "带有元素瓶的烈焰腿甲");
-        item(ARMOR_WOOD_LEGGINGS , "Aquamarine Leggings with Element Bottles", "带有元素瓶的海洋腿甲");
-        item(ARMOR_AQUA_LEGGINGS , "Greenwood Leggings with Element Bottles", "带有元素瓶的朽木腿甲");
-        item(ARMOR_FIRE_LEGGINGS , "Shiny Metal Leggings with Element Bottles", "带有元素瓶的闪金腿甲");
+        item(ARMOR_GOLD_LEGGINGS, "Burstflame Leggings with Element Bottles", "带有元素瓶的烈焰腿甲");
+        item(ARMOR_WOOD_LEGGINGS, "Aquamarine Leggings with Element Bottles", "带有元素瓶的海洋腿甲");
+        item(ARMOR_AQUA_LEGGINGS, "Greenwood Leggings with Element Bottles", "带有元素瓶的朽木腿甲");
+        item(ARMOR_FIRE_LEGGINGS, "Shiny Metal Leggings with Element Bottles", "带有元素瓶的闪金腿甲");
         item(ARMOR_EARTH_LEGGINGS, "Earthcore Leggings with Element Bottles", "带有元素瓶的地核腿甲");
 
-        item(ARMOR_GOLD_LEGGINGS_WITHBOTTLE , "Burstflame Chestplate", "烈焰胸甲");
-        item(ARMOR_WOOD_LEGGINGS_WITHBOTTLE , "Aquamarine Chestplate", "海洋胸甲");
-        item(ARMOR_AQUA_LEGGINGS_WITHBOTTLE , "Greenwood Chestplate", "朽木胸甲");
-        item(ARMOR_FIRE_LEGGINGS_WITHBOTTLE , "Shiny Metal Chestplate", "闪金胸甲");
+        item(ARMOR_GOLD_LEGGINGS_WITHBOTTLE, "Burstflame Chestplate", "烈焰胸甲");
+        item(ARMOR_WOOD_LEGGINGS_WITHBOTTLE, "Aquamarine Chestplate", "海洋胸甲");
+        item(ARMOR_AQUA_LEGGINGS_WITHBOTTLE, "Greenwood Chestplate", "朽木胸甲");
+        item(ARMOR_FIRE_LEGGINGS_WITHBOTTLE, "Shiny Metal Chestplate", "闪金胸甲");
         item(ARMOR_EARTH_LEGGINGS_WITHBOTTLE, "Earthcore Chestplate", "地核胸甲");
 
-        item(ARMOR_GOLD_BOOTS , "Burstflame Boots", "烈焰靴子");
-        item(ARMOR_WOOD_BOOTS , "Aquamarine Chestplate", "海洋靴子");
-        item(ARMOR_AQUA_BOOTS , "Greenwood Chestplate", "朽木靴子");
-        item(ARMOR_FIRE_BOOTS , "Shiny Metal Chestplate", "闪金靴子");
+        item(ARMOR_GOLD_BOOTS, "Burstflame Boots", "烈焰靴子");
+        item(ARMOR_WOOD_BOOTS, "Aquamarine Chestplate", "海洋靴子");
+        item(ARMOR_AQUA_BOOTS, "Greenwood Chestplate", "朽木靴子");
+        item(ARMOR_FIRE_BOOTS, "Shiny Metal Chestplate", "闪金靴子");
         item(ARMOR_EARTH_BOOTS, "Earthcore Chestplate", "地核靴子");
 
-        item(ARTIFICIAL_ELEMENTGEM_GOLD , "Gold Soul", "闪金之魂");
-        item(ARTIFICIAL_ELEMENTGEM_WOOD , "Wood Soul", "朽木之魂");
-        item(ARTIFICIAL_ELEMENTGEM_AQUA , "Aqua Soul", "海蓝之魂");
-        item(ARTIFICIAL_ELEMENTGEM_FIRE , "Fire Soul", "烈焰之魂");
+        item(ARTIFICIAL_ELEMENTGEM_GOLD, "Gold Soul", "闪金之魂");
+        item(ARTIFICIAL_ELEMENTGEM_WOOD, "Wood Soul", "朽木之魂");
+        item(ARTIFICIAL_ELEMENTGEM_AQUA, "Aqua Soul", "海蓝之魂");
+        item(ARTIFICIAL_ELEMENTGEM_FIRE, "Fire Soul", "烈焰之魂");
         item(ARTIFICIAL_ELEMENTGEM_EARTH, "Earth Soul", "地核之魂");
 
-        item(goldEnergyGemFragment , "Artificial Gem (Gold)", "人工制品宝石[金]");
-        item(woodEnergyGemFragment , "Artificial Gem (Wood)", "人工制品宝石[木]");
-        item(aquaEnergyGemFragment , "Artificial Gem (Aqua)", "人工制品宝石[水]");
-        item(fireEnergyGemFragment , "Artificial Gem (Fire)", "人工制品宝石[火]");
+        item(goldEnergyGemFragment, "Artificial Gem (Gold)", "人工制品宝石[金]");
+        item(woodEnergyGemFragment, "Artificial Gem (Wood)", "人工制品宝石[木]");
+        item(aquaEnergyGemFragment, "Artificial Gem (Aqua)", "人工制品宝石[水]");
+        item(fireEnergyGemFragment, "Artificial Gem (Fire)", "人工制品宝石[火]");
         item(earthEnergyGemFragment, "Artificial Gem (Earth)", "人工制品宝石[土]");
 
         item(ARMOR_TEST, "Leaf Helmet", "叶落头盔");
 
-        item(goldElementPickaxe , "Shiny Metal Pickaxe", "闪金镐");
-        item(woodElementPickaxe , "Greenwood Pickaxe", "朽木镐");
-        item(aquaElementPickaxe , "Aquamarine Pickaxe", "海蓝镐");
-        item(fireElementPickaxe , "Burstflame Pickaxe", "烈焰镐");
+        item(goldElementPickaxe, "Shiny Metal Pickaxe", "闪金镐");
+        item(woodElementPickaxe, "Greenwood Pickaxe", "朽木镐");
+        item(aquaElementPickaxe, "Aquamarine Pickaxe", "海蓝镐");
+        item(fireElementPickaxe, "Burstflame Pickaxe", "烈焰镐");
         item(earthElementPickaxe, "Earthcore Pickaxe", "地核镐");
 
-        item(goldElementSword , "Shiny Metal Sword", "闪金剑");
-        item(woodElementSword , "Greenwood Sword", "朽木剑");
-        item(aquaElementSword , "Aquamarine Sword", "海蓝剑");
-        item(fireElementSword , "Burstflame Sword", "烈焰剑");
+        item(goldElementSword, "Shiny Metal Sword", "闪金剑");
+        item(woodElementSword, "Greenwood Sword", "朽木剑");
+        item(aquaElementSword, "Aquamarine Sword", "海蓝剑");
+        item(fireElementSword, "Burstflame Sword", "烈焰剑");
         item(earthElementSword, "Earthcore Sword", "地核剑");
+
+        item(ANCIENT_BELIEVER_SPAWN_EGG, "", "栖树遗灵生成物");
+        item(SILENT_BELIEVER_SPAWN_EGG, "", "栖树寂灵生成物");
 
         // Blocks
 
@@ -140,11 +146,20 @@ public class VidaLanguageProvider implements DataProvider {
         block(plankVida_2, "Cracked Vida Planks", "裂纹生命木板");
         block(saplingVida, "Vida Sapling", "生命树苗");
 
-        block(goldElementOre , "Shiny Metal Ore", "闪金矿石");
-        block(woodElementOre , "Greenwood Ore", "朽木矿石");
-        block(aquaElementOre , "Aquamarine Ore", "海蓝矿石");
-        block(fireElementOre , "Volcano Ore", "火山矿石");
+        block(goldElementOre, "Shiny Metal Ore", "闪金矿石");
+        block(woodElementOre, "Greenwood Ore", "朽木矿石");
+        block(aquaElementOre, "Aquamarine Ore", "海蓝矿石");
+        block(fireElementOre, "Volcano Ore", "火山矿石");
         block(earthElementOre, "Earthcore Ore", "地核矿石");
+
+        block(INDIGO_IRIS, "", "靛青鸢尾");
+        block(DEADWOOD_TWISTER, "", "缠朽者");
+        block(VidaBlockLoader.CROP_CRISMCREST, "", "绯红王草");
+        block(VidaBlockLoader.CROP_HEARTOFWAL, "", "瓦树橙果");
+        block(VidaBlockLoader.CROP_NITRITETHORNS, "", "硝金荆棘");
+        block(VidaBlockLoader.CROP_PLAMSTEM, "", "苍蓝草茎");
+        block(VidaBlockLoader.CROP_SULLENHYDRANGEA, "", "忧郁紫球草");
+        block(VidaBlockLoader.CROP_SWEETCYANREED, "", "甘青芦苇");
 
         block(DEEPSEA_STONE, "Deepstone", "深潜石");
         block(DEEPSEA_BRICKS_CORNER, "Deepstone Brick Corner", "转角深潜石石砖");
@@ -178,10 +193,10 @@ public class VidaLanguageProvider implements DataProvider {
         addEntry("block.vida.platinumbrickdeco3", "Decorated Platinum Brick 3", "饰纹白金石砖");
         addEntry("block.vida.platinumbrickdeco4", "Decorated Platinum Brick 4", "饰纹白金石砖");
 
-        block(GOLD_CRYSTAL , "Shiny Metal Suspended crystal", "闪金悬浮水晶");
-        block(WOOD_CRYSTAL , "Greenwood Suspended crystal", "朽木悬浮水晶");
-        block(AQUA_CRYSTAL , "Aquamarine Suspended crystal", "海蓝悬浮水晶");
-        block(FIRE_CRYSTAL , "Burstflame Suspended crystal", "烈焰悬浮水晶");
+        block(GOLD_CRYSTAL, "Shiny Metal Suspended crystal", "闪金悬浮水晶");
+        block(WOOD_CRYSTAL, "Greenwood Suspended crystal", "朽木悬浮水晶");
+        block(AQUA_CRYSTAL, "Aquamarine Suspended crystal", "海蓝悬浮水晶");
+        block(FIRE_CRYSTAL, "Burstflame Suspended crystal", "烈焰悬浮水晶");
         block(EARTH_CRYSTAL, "Earthcore Suspended crystal", "地核悬浮水晶");
 
         block(purfiedCauldron, "Purification Cauldron", "纯净之锅");
@@ -243,7 +258,14 @@ public class VidaLanguageProvider implements DataProvider {
                             "中文名称",
                             "英文翻译名称"
                     ),
-                    array -> entries.add(new TransEntry(array[0], array[1], array[2])));
+                    (sheetName, array) -> {
+                        if (sheetName.equals("功能方块") || sheetName.equals("装饰方块") || sheetName.equals("植物")) {
+                            array[0] = "block.vida." + array[0];
+                        }
+                        else if (sheetName.equals("工具|武器")) {
+                            array[0] = "item.vida." + array[0];
+                        }
+                    });
 
             return entries;
         } catch (IOException | InvalidFormatException e) {
