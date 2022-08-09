@@ -37,5 +37,14 @@ public class TrailParticle extends AbstractTailParticle {
         if (this.maxAge - this.age < 30) {
             tails.remove(0);
         }
+        this.motionY -= 0.04D * (double)this.particleGravity;
+        this.move(this.motionX, this.motionY, this.motionZ);
+        this.motionX *= (double)0.98F;
+        this.motionY *= (double)0.98F;
+        this.motionZ *= (double)0.98F;
+        if (this.onGround) {
+            this.motionX *= (double) 0.7F;
+            this.motionZ *= (double) 0.7F;
+        }
     }
 }

@@ -9,6 +9,7 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.world.ClientWorld;
@@ -32,8 +33,8 @@ public abstract class AbstractTailParticle extends Particle {
         super(world, x, y, z, motionX, motionY, motionZ);
         this.tails = new LinkedList<>();
         this.frequency = 1;
-        this.maxAge = 200;
-        maxTail = 40;
+        this.maxAge = 100;
+        maxTail = 15;
     }
 
     @Override
@@ -41,7 +42,7 @@ public abstract class AbstractTailParticle extends Particle {
         Tessellator tesselator = Tessellator.getInstance();
         Minecraft.getInstance().textureManager.bindTexture(new ResourceLocation(Vida.MOD_ID, "textures/particle/trail.png"));
         BufferBuilder builder = tesselator.getBuffer();
-        builder.begin(GL11.GL_POLYGON, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
+        builder.begin(GL11.GL_TRIANGLES, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
 
         Vector3[] verts = new Vector3[tails.size() * 2];
         double x = (MathHelper.lerp(partialTicks, this.prevPosX, this.posX));
@@ -54,10 +55,6 @@ public abstract class AbstractTailParticle extends Particle {
             Vector3 tail = tails.get(i).copy();
             renderTail(verts, size - i, cameraPos, lastTail, tail, partialTicks);
             lastTail = tail;
-        }
-        for (int i = 0; i < verts.length; i++) {
-            Vector3 vector3d = verts[i];
-            verts[i] = vector3d.add(x, y, z);
         }
         for (int i = 0; i < (verts.length / 2) - 1; i++) {
             Vector3 currentU = verts[i * 2];
@@ -72,22 +69,17 @@ public abstract class AbstractTailParticle extends Particle {
 
             int j = this.getBrightnessForRender(partialTicks);
 
-            buffer.pos(currentD.x, currentD.y, currentD.z).tex(u1, v0).color(1,1,1,1).lightmap(j).endVertex();
-            buffer.pos(currentU.x, currentU.y, currentU.z).tex(u1, v1).color(1,1,1,1).lightmap(j).endVertex();
-            buffer.pos(nextD.x, nextD.y, nextD.z).tex(u0, v0).color(1,1,1,1).lightmap(j).endVertex();
-            buffer.pos(nextD.x, nextD.y, nextD.z).tex(u0, v0).color(1,1,1,1).lightmap(j).endVertex();
+            buffer.pos(currentD.x, currentD.y, currentD.z).tex(u1, v0).color(this.particleRed, this.particleGreen, this.particleBlue,1).lightmap(j).endVertex();
+            buffer.pos(currentU.x, currentU.y, currentU.z).tex(u1, v1).color(this.particleRed,this.particleGreen,this.particleBlue,1).lightmap(j).endVertex();
+            buffer.pos(nextD.x, nextD.y, nextD.z).tex(u0, v0).color(this.particleRed,this.particleGreen,this.particleBlue,1).lightmap(j).endVertex();
 
-            buffer.pos(nextD.x, nextD.y, nextD.z).tex(u0, v0).color(1,1,1,1).lightmap(15728880).endVertex();
-            buffer.pos(currentU.x, currentU.y, currentU.z).tex(u1, v1).color(1,1,1,1).lightmap(15728880).endVertex();
-            buffer.pos(nextU.x, nextU.y, nextU.z).tex(u0, v1).color(1,1,1,1).lightmap(15728880).endVertex();
-            buffer.pos(nextU.x, nextU.y, nextU.z).tex(u0, v1).color(1,1,1,1).lightmap(15728880).endVertex();
+            buffer.pos(nextD.x, nextD.y, nextD.z).tex(u0, v0).color(this.particleRed,this.particleGreen,this.particleBlue,1).lightmap(j).endVertex();
+            buffer.pos(currentU.x, currentU.y, currentU.z).tex(u1, v1).color(this.particleRed,this.particleGreen,this.particleBlue,1).lightmap(15728880).endVertex();
+            buffer.pos(nextU.x, nextU.y, nextU.z).tex(u0, v1).color(this.particleRed,this.particleGreen,this.particleBlue,1).lightmap(j).endVertex();
         }
 
         tesselator.draw();
     }
-
-
-
 
 
     @Override
@@ -97,11 +89,11 @@ public abstract class AbstractTailParticle extends Particle {
 
             @Override
             public void beginRender(BufferBuilder bufferBuilder, TextureManager textureManager) {
-                Minecraft.getInstance().textureManager.bindTexture(TAIL);
-                //RenderSystem.color4f(1,1,1,1);
-                RenderSystem.defaultBlendFunc();
                 RenderSystem.depthMask(true);
-                RenderSystem.enableCull();
+                textureManager.bindTexture(TAIL);
+                RenderSystem.enableBlend();
+                RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+                RenderSystem.alphaFunc(516, 0.003921569F);
 
             }
 
@@ -150,7 +142,6 @@ public abstract class AbstractTailParticle extends Particle {
     }
 
 
-
     protected float getMinU(int tail, float partialTicks) {
         return  1 - (tail + 1 + partialTicks) / (maxTail - 1f);
     }
@@ -167,24 +158,10 @@ public abstract class AbstractTailParticle extends Particle {
         return 1;
     }
 
-    protected final float getMinU(float pPartialTicks) {
-        return 0;
-    }
-
-    protected final float getMaxU(float pPartialTicks) {
-        return 1;
-    }
-
-    protected final float getMinV(float pPartialTicks) {
-        return 0;
-    }
-
-    protected final float getMaxV(float pPartialTicks) {
-        return 1;
-    }
-
+    /**粒子运动函数*/
     public abstract void update();
 
+    /**是否使用cull渲染*/
     @Override
     public boolean shouldCull() {
         return false;
