@@ -45,6 +45,15 @@ public class Animator {
         started = true;
     }
 
+    public void end() {
+        cancel();
+        ANIMATORS.remove(this);
+    }
+
+    public boolean fullTick() {
+        return existingTick == durationTick;
+    }
+
     public void setTick(int existingTick) {
         this.existingTick = existingTick;
     }

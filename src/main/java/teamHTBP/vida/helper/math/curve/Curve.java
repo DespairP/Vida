@@ -14,7 +14,7 @@ public abstract class Curve {
     public List<Vector3> getPoints(int size) {
         List<Vector3> points = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            points.add(getPoint(i * 1f / size));
+            points.add(getPoint((float) i / size));
         }
         return points;
     }

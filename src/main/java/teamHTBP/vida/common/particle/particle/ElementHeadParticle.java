@@ -1,16 +1,17 @@
 package teamHTBP.vida.common.particle.particle;
 
-import com.lowdragmc.lowdraglib.client.particle.impl.TextureParticle;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.resources.ResourceLocation;
 import teamHTBP.vida.Vida;
+import teamHTBP.vida.api.common.particle.AlphaParticle;
+import teamHTBP.vida.api.common.particle.SizeParticle;
 
 import java.util.function.Function;
 
 /**
  * @author DustW
  */
-public class ElementHeadParticle extends TextureParticle {
+public class ElementHeadParticle extends TextureParticle implements AlphaParticle, SizeParticle {
     private static final ResourceLocation TEXTURE = new ResourceLocation(Vida.MOD_ID, "textures/special/circle.png");
 
     private boolean glint;
@@ -55,5 +56,20 @@ public class ElementHeadParticle extends TextureParticle {
                 }
             }
         }
+    }
+
+    @Override
+    public float getAlpha() {
+        return alpha;
+    }
+
+    @Override
+    public float getSize() {
+        return quadSize;
+    }
+
+    @Override
+    public void setSize(float size) {
+        quadSize = size;
     }
 }

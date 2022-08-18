@@ -184,6 +184,8 @@ public class VidaItemLoader {
     //注册书
     public final static RegistryObject<Item> GUIDE_BOOK = ITEMS.register("vida_guidebook", ItemGuidebook::new);
 
+    public static final RegistryObject<Item> BARRAGE_CRYSTAL = ITEMS.register("barrage_crystal", () -> new BarrageCrystalItem(base()));
+
     // 刷怪蛋
     public static final RegistryObject<Item> ANCIENT_BELIEVER_SPAWN_EGG = ITEMS.register("ancient_believer_spawn_egg",
             () -> new ForgeSpawnEggItem(VidaEntityLoader.ANCIENT_BELIEVER,

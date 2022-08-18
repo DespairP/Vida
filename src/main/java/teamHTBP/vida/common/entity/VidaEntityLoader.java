@@ -7,6 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import teamHTBP.vida.Vida;
+import teamHTBP.vida.common.entity.projectile.BarrageShooter;
 import teamHTBP.vida.common.entity.projectile.ElementBallProjectile;
 
 public class VidaEntityLoader {
@@ -28,6 +29,9 @@ public class VidaEntityLoader {
 
     public static final RegistryObject<EntityType<ElementBallProjectile>> ELEMENT_BALL =
             registerMisc("element_ball", ElementBallProjectile::new);
+
+    public static final RegistryObject<EntityType<BarrageShooter>> BARRAGE_SHOOTER =
+            registerMisc("barrage_shooter", BarrageShooter::new);
 
     static <T extends Entity> RegistryObject<EntityType<T>> registerMisc(String name, EntityType.EntityFactory<T> factory) {
         return ENTITY_TYPES.register(name, () -> EntityType.Builder

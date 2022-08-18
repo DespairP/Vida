@@ -12,15 +12,17 @@ import net.minecraftforge.fml.common.Mod;
 public class AnimatorHandler {
     @SubscribeEvent
     public static void onEvent(TickEvent.ClientTickEvent event) {
-        for (Animator animator : Animator.ANIMATORS) {
-            animator.addExistingTick();
-        }
+        if (event.phase == TickEvent.Phase.START)
+            for (Animator animator : Animator.ANIMATORS) {
+                animator.addExistingTick();
+            }
     }
 
     @SubscribeEvent
     public static void onEvent(TickEvent.RenderTickEvent event) {
-        for (Animator animator : Animator.ANIMATORS) {
-            animator.run(event.renderTickTime);
-        }
+        if (event.phase == TickEvent.Phase.START)
+            for (Animator animator : Animator.ANIMATORS) {
+                animator.run(event.renderTickTime);
+            }
     }
 }
