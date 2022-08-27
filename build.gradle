@@ -18,15 +18,13 @@ apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
-version = '1.18-1.0-b1'
+version = '1.18-1.0-b2'
 group = 'teamHTBP' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 
 java {
     archivesBaseName = 'vida'
     toolchain.languageVersion = JavaLanguageVersion.of(17)
 }
-
-jarJar.enable()
 
 minecraft {
     mappings channel: 'parchment', version: "2022.07.03-1.18.2"
@@ -187,6 +185,12 @@ publishing {
             url "file:///${project.projectDir}/mcmodsrepo"
         }
     }
+}
+
+reobf.create('jarJar')
+
+build {
+    dependsOn 'jarJar'
 }
 
 tasks.withType(JavaCompile) {

@@ -1,0 +1,23 @@
+{
+  "vertex": "",
+  "fragment": "",
+  "samplers": [
+    {
+      "name": "",
+      "file": ""
+    }
+  ],
+  "attributes": [
+    ""
+  ],
+  "uniforms": [
+    {
+      "name": "",
+      "type": "int / float / matrix2x2 / matrix3x3 / matrix4x4",
+      "count": 0,
+      "values": [
+        0.1
+      ]
+    }
+  ]
+}
