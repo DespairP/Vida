@@ -212,6 +212,20 @@ public class VidaBlockLoader {
     @RegisterItemBlock
     public static RegistryObject<Block> PLANK_VIDA_DOOR = BLOCKS.register("plank_vida_door", DecoBlockFactory::door);
 
+    //tremble_magic_stone series - 寒颤魔石系列
+
+    @RegisterItemBlock
+    public static RegistryObject<Block> TREMBLE_MAGIC_STONE = BLOCKS.register("tremble_magic_stone", DecoBlockFactory::normal);
+
+    @RegisterItemBlock
+    public static RegistryObject<Block> TREMBLE_MAGIC_BRICK_0 = BLOCKS.register("tremble_magic_brick_0", DecoBlockFactory::normal);
+
+    @RegisterItemBlock
+    public static RegistryObject<Block> TREMBLE_MAGIC_BRICK_1 = BLOCKS.register("tremble_magic_brick_1", DecoBlockFactory::normal);
+
+    @RegisterItemBlock
+    public static RegistryObject<Block> TREMBLE_MAGIC_BRICK_SLAB = BLOCKS.register("tremble_magic_brick_slab", DecoBlockFactory::slab);
+
     //plant
     @RegisterItemBlock
     public static RegistryObject<Block> INDIGO_IRIS = BLOCKS.register("indigo_iris", DecoBlockFactory::plant);

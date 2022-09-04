@@ -1,0 +1,8 @@
+{
+  "parent": "block/slab_top",
+  "textures": {
+    "bottom": "vida:block/tremble_magic_brick_0",
+    "top": "vida:block/tremble_magic_brick_0",
+    "side": "vida:block/tremble_magic_brick_0"
+  }
+}
